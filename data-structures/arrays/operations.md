@@ -71,12 +71,18 @@ Deleting an element from an array involves removing an element and shifting the 
 
 #### Example: Deleting an element at a specific index:
 ```java
-int[] numbers = {10, 20, 30, 40, 50};
-int position = 2;
+int[] numbers = {1, 2, 3, 4, 5};
+        int position = 1;
+        int[] newArray = new int[numbers.length -1];
+        int newPosition = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            if(i != position) {
+                newArray[newPosition] = numbers[i];
+                newPosition++;
+            }
+        }
 
-for (int i = position; i < numbers.length - 1; i++) {
-    numbers[i] = numbers[i + 1];
-}
+        System.out.println(Arrays.toString(newArray));
 // Optionally reduce the size of the array or mark the last element as null/zero.
 ```
 
