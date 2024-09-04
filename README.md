@@ -130,8 +130,6 @@ Welcome to your comprehensive study guide for Java Data Structures and Algorithm
 ## Useful Resources
 
 - [Recommended Books](resources/books.md)
-- [Online Tutorials](resources/online-tutorials.md)
-- [Practice Problems](resources/practice-problems.md)
 
 ---
 
