@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 ---
 
 # 🛠️ Hash Table Functions in Java
@@ -42,16 +44,17 @@ Here’s an example of a simple hash function for strings:
 
 ```java
 public int hashFunction(String key, int tableSize) {
+    if (tableSize <= 0) throw new IllegalArgumentException("Capacity must be positive");
     int hashCode = 0;
     for (int i = 0; i < key.length(); i++) {
-        hashCode = (31 * hashCode + key.charAt(i)) % tableSize;
+        hashCode = (int) ((31L * hashCode + key.charAt(i)) % tableSize);
     }
-    return Math.abs(hashCode);
+    return hashCode;
 }
 ```
 
 In this example:
-- The hash code is calculated by iterating over each character in the string and multiplying the current hash code by 31 (a common choice in hash functions) before adding the character's ASCII value.
+- The hash code is calculated by iterating over each character in the string and multiplying the current hash code by 31 (a common choice in hash functions) before adding the character's UTF-16 code-unit value.
 - The result is then taken modulo `tableSize` to ensure the hash code fits within the bounds of the hash table array.
 
 ## 🚧 Collision Resolution Techniques
@@ -81,6 +84,7 @@ class HashTableWithChaining {
     }
 
     public HashTableWithChaining(int size) {
+        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
         numBuckets = size;
         bucketArray = new LinkedList[numBuckets];
         for (int i = 0; i < numBuckets; i++) {
@@ -90,7 +94,7 @@ class HashTableWithChaining {
 
     private int hashFunction(String key) {
         int hashCode = key.hashCode();
-        return Math.abs(hashCode % numBuckets);
+        return Math.floorMod(hashCode, numBuckets);
     }
 
     public void put(String key, int value) {
@@ -137,6 +141,7 @@ class HashTableWithOpenAddressing {
     private int numBuckets;
 
     public HashTableWithOpenAddressing(int size) {
+        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
         numBuckets = size;
         keys = new String[numBuckets];
         values = new int[numBuckets];
@@ -144,28 +149,31 @@ class HashTableWithOpenAddressing {
 
     private int hashFunction(String key) {
         int hashCode = key.hashCode();
-        return Math.abs(hashCode % numBuckets);
+        return Math.floorMod(hashCode, numBuckets);
     }
 
     public void put(String key, int value) {
         int bucketIndex = hashFunction(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets; probes++) {
+            if (keys[bucketIndex] == null) {
+                keys[bucketIndex] = key;
+                values[bucketIndex] = value;
+                return;
+            }
             if (keys[bucketIndex].equals(key)) {
                 values[bucketIndex] = value;
                 return;
             }
-            bucketIndex = (bucketIndex + 1) % numBuckets;
+            bucketIndex = (int) (((long) bucketIndex + 1) % numBuckets);
         }
-
-        keys[bucketIndex] = key;
-        values[bucketIndex] = value;
+        throw new IllegalStateException("No free bucket in the probe sequence");
     }
 
     public Integer get(String key) {
         int bucketIndex = hashFunction(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets && keys[bucketIndex] != null; probes++) {
             if (keys[bucketIndex].equals(key)) {
                 return values[bucketIndex];
             }
@@ -193,6 +201,7 @@ class ResizableHashTable {
     private int size;
 
     public ResizableHashTable(int initialSize) {
+        if (initialSize <= 0) throw new IllegalArgumentException("Capacity must be positive");
         numBuckets = initialSize;
         keys = new String[numBuckets];
         values = new int[numBuckets];
@@ -201,7 +210,7 @@ class ResizableHashTable {
 
     private int hashFunction(String key) {
         int hashCode = key.hashCode();
-        return Math.abs(hashCode % numBuckets);
+        return Math.floorMod(hashCode, numBuckets);
     }
 
     private void resize(int newSize) {
@@ -226,23 +235,26 @@ class ResizableHashTable {
 
         int bucketIndex = hashFunction(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets; probes++) {
+            if (keys[bucketIndex] == null) {
+                keys[bucketIndex] = key;
+                values[bucketIndex] = value;
+                size++;
+                return;
+            }
             if (keys[bucketIndex].equals(key)) {
                 values[bucketIndex] = value;
                 return;
             }
-            bucketIndex = (bucketIndex + 1) % numBuckets;
+            bucketIndex = (int) (((long) bucketIndex + 1) % numBuckets);
         }
-
-        keys[bucketIndex] = key;
-        values[bucketIndex] = value;
-        size++;
+        throw new IllegalStateException("No free bucket in the probe sequence");
     }
 
     public Integer get(String key) {
         int bucketIndex = hashFunction(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets && keys[bucketIndex] != null; probes++) {
             if (keys[bucketIndex].equals(key)) {
                 return values[bucketIndex];
             }

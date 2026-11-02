@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 
 ---
 
@@ -49,6 +51,7 @@ class HashTableChaining {
     }
 
     public HashTableChaining(int size) {
+        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
         numBuckets = size;
         bucketArray = new LinkedList[numBuckets];
         for (int i = 0; i < numBuckets; i++) {
@@ -58,7 +61,7 @@ class HashTableChaining {
 
     private int hashFunction(String key) {
         int hashCode = key.hashCode();
-        return Math.abs(hashCode % numBuckets);
+        return Math.floorMod(hashCode, numBuckets);
     }
 
     public void put(String key, int value) {
@@ -118,6 +121,7 @@ class HashTableLinearProbing {
     private int numBuckets;
 
     public HashTableLinearProbing(int size) {
+        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
         numBuckets = size;
         keys = new String[numBuckets];
         values = new int[numBuckets];
@@ -125,28 +129,31 @@ class HashTableLinearProbing {
 
     private int hashFunction(String key) {
         int hashCode = key.hashCode();
-        return Math.abs(hashCode % numBuckets);
+        return Math.floorMod(hashCode, numBuckets);
     }
 
     public void put(String key, int value) {
         int bucketIndex = hashFunction(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets; probes++) {
+            if (keys[bucketIndex] == null) {
+                keys[bucketIndex] = key;
+                values[bucketIndex] = value;
+                return;
+            }
             if (keys[bucketIndex].equals(key)) {
                 values[bucketIndex] = value;
                 return;
             }
-            bucketIndex = (bucketIndex + 1) % numBuckets;
+            bucketIndex = (int) (((long) bucketIndex + 1) % numBuckets);
         }
-
-        keys[bucketIndex] = key;
-        values[bucketIndex] = value;
+        throw new IllegalStateException("No free bucket in the probe sequence");
     }
 
     public Integer get(String key) {
         int bucketIndex = hashFunction(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets && keys[bucketIndex] != null; probes++) {
             if (keys[bucketIndex].equals(key)) {
                 return values[bucketIndex];
             }
@@ -176,7 +183,7 @@ In **quadratic probing**, the interval between probes is increased quadratically
 
 ##### C. Double Hashing
 
-**Double hashing** uses a second hash function to calculate the probe sequence. This approach minimizes clustering and spreads out the keys more uniformly.
+**Double hashing** uses a second hash function to calculate the probe sequence. The step must be coprime to the capacity so that the probe sequence can visit every bucket. The example chooses a coprime step and bounds the number of probes; a full table rejects a new key rather than looping forever.
 
 #### Example:
 ```java
@@ -186,6 +193,7 @@ class HashTableDoubleHashing {
     private int numBuckets;
 
     public HashTableDoubleHashing(int size) {
+        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
         numBuckets = size;
         keys = new String[numBuckets];
         values = new int[numBuckets];
@@ -193,38 +201,56 @@ class HashTableDoubleHashing {
 
     private int hashFunction(String key) {
         int hashCode = key.hashCode();
-        return Math.abs(hashCode % numBuckets);
+        return Math.floorMod(hashCode, numBuckets);
     }
 
     private int secondHashFunction(String key) {
-        return 7 - (Math.abs(key.hashCode()) % 7);
+        if (numBuckets == 1) return 1;
+        int step = 1 + Math.floorMod(key.hashCode(), numBuckets - 1);
+        // A coprime step visits every bucket, even for non-prime capacities.
+        while (gcd(step, numBuckets) != 1) {
+            step = step == numBuckets - 1 ? 1 : step + 1;
+        }
+        return step;
+    }
+
+    private int gcd(int a, int b) {
+        while (b != 0) {
+            int remainder = a % b;
+            a = b;
+            b = remainder;
+        }
+        return a;
     }
 
     public void put(String key, int value) {
         int bucketIndex = hashFunction(key);
         int stepSize = secondHashFunction(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets; probes++) {
+            if (keys[bucketIndex] == null) {
+                keys[bucketIndex] = key;
+                values[bucketIndex] = value;
+                return;
+            }
             if (keys[bucketIndex].equals(key)) {
                 values[bucketIndex] = value;
                 return;
             }
-            bucketIndex = (bucketIndex + stepSize) % numBuckets;
+            bucketIndex = (int) (((long) bucketIndex + stepSize) % numBuckets);
         }
-
-        keys[bucketIndex] = key;
-        values[bucketIndex] = value;
+        throw new IllegalStateException("No free bucket in the probe sequence");
     }
 
     public Integer get(String key) {
         int bucketIndex = hashFunction(key);
         int stepSize = secondHashFunction(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets && keys[bucketIndex] != null; probes++) {
             if (keys[bucketIndex].equals(key)) {
                 return values[bucketIndex];
             }
-            bucketIndex = (bucketIndex + stepSize) % numBuckets;
+            bucketIndex = (int) (((long) bucketIndex + stepSize) % numBuckets);
         }
         return null;
     }

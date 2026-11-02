@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 ---
 
 # ⚡ Quick Sort in Java
@@ -21,7 +23,7 @@
 
 ### Key Characteristics:
 - **Divide and Conquer**: Quick Sort recursively divides the array around a pivot element.
-- **In-Place Sorting**: Requires only a small, constant amount of additional storage.
+- **In-Place Partitioning**: Partitioning uses O(1) auxiliary storage, but recursive calls also consume stack space.
 - **Unstable**: Does not preserve the relative order of equal elements.
 
 ## 🔍 How Quick Sort Works
@@ -114,7 +116,7 @@ public class QuickSort {
   - **Average-Case**: O(n log n) – Typically occurs with random pivot selections.
   - **Worst-Case**: O(n²) – Occurs when the smallest or largest element is always chosen as the pivot, resulting in highly unbalanced partitions.
   
-- **Space Complexity**: O(log n) – In-place sorting algorithm, with the extra space mainly used for recursion stack.
+- **Auxiliary Space**: O(log n) for balanced partitions and O(n) in the worst case for the two-recursive-call implementation above. The maintained implementation recurses only into the smaller partition, bounding its stack to O(log n).
 
 ## ⚖️ Advantages and Disadvantages
 

@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../docs/catalog.md) for maintained source and tests. See the [migration guide](../docs/migration.md) for the relationship between notes and code.
+
 # Core Java Concepts
 
 This section covers the fundamental concepts of Java, providing a strong foundation for understanding more advanced topics, including data structures and algorithms.

@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 ---
 
 # ⚔️ Divide and Conquer in Java
@@ -108,7 +110,7 @@ Divide and Conquer is widely used in various fields and applications:
 1. **Handling Base Cases**: Ensure that base cases are correctly handled to avoid infinite recursion or incorrect results.
 2. **Efficient Combining**: Pay attention to the Combine step, as inefficient merging can negate the benefits of Divide and Conquer.
 3. **Avoiding Unnecessary Recursion**: Avoid unnecessary recursion by solving subproblems iteratively when possible.
-4. **Tail Recursion Optimization**: Utilize tail recursion optimization where applicable to improve performance.
+4. **Recursion Depth**: Java does not guarantee tail-call elimination. Use a loop for tail-recursive work or an explicit stack when depth can grow with the input.
 
 ## 🎓 Conclusion
 

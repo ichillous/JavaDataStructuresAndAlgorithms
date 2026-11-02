@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 ---
 
 # 🔄 Backtracking in Java
@@ -64,7 +66,7 @@ Given a partially filled `9 x 9` Sudoku grid, the goal is to complete the grid s
 
 ### Subset Sum Problem
 
-Given a set of integers and a target sum, determine if there is a subset whose sum is equal to the target. The backtracking algorithm explores all possible subsets and backtracks when the sum exceeds the target.
+Given a set of integers and a target sum, determine if there is a subset whose sum is equal to the target. The backtracking algorithm explores possible subsets. Pruning when the sum exceeds the target is valid only when all remaining elements are nonnegative; negative elements can reduce the sum later.
 
 ### Permutations
 
@@ -97,7 +99,7 @@ Backtracking is widely used in various fields and applications:
 ## ⚠️ Common Pitfalls and Best Practices
 
 1. **Ineffective Pruning**: Failing to prune the search space effectively can lead to significant inefficiencies. Always look for opportunities to eliminate impossible or suboptimal paths early.
-2. **Stack Overflow**: Backtracking algorithms rely on recursion, so deep recursion can lead to stack overflow. Consider iterative approaches or tail recursion optimizations where possible.
+2. **Stack Overflow**: Backtracking algorithms rely on recursion, so deep recursion can lead to stack overflow. Consider an explicit stack or iterative approach when depth can be large. Java does not guarantee tail-call elimination.
 3. **Test with Small Inputs**: Start by testing your algorithm on small inputs to ensure it works correctly before scaling up to larger problems.
 4. **Problem Formulation**: Carefully formulate the problem and identify constraints that can help in effective pruning of the search space.
 

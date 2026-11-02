@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 ---
 
 # 🛠️ Implementing Tries in Java
@@ -99,29 +101,33 @@ Deleting a word from the Trie is more complex as it may require removing nodes a
 #### Implementation:
 ```java
 public boolean delete(String word) {
-    return delete(root, word, 0);
-}
-
-private boolean delete(TrieNode node, String word, int depth) {
-    if (node == null) {
+    // The snippets in this note assume words contain only 'a' through 'z'.
+    if (!search(word)) {
         return false;
     }
+    prune(root, word, 0);
+    return true; // Reports removal, not whether the root can be pruned.
+}
 
+private boolean prune(TrieNode node, String word, int depth) {
     if (depth == word.length()) {
-        if (!node.isEndOfWord) {
+        node.isEndOfWord = false;
+    } else {
+        int index = word.charAt(depth) - 'a';
+        if (prune(node.children[index], word, depth + 1)) {
+            node.children[index] = null;
+        }
+    }
+
+    if (node.isEndOfWord) {
+        return false;
+    }
+    for (TrieNode child : node.children) {
+        if (child != null) {
             return false;
         }
-        node.isEndOfWord = false;
-        return node.children.length == 0;
     }
-
-    int index = word.charAt(depth) - 'a';
-    if (delete(node.children[index], word, depth + 1)) {
-        node.children[index] = null;
-        return !node.isEndOfWord && node.children.length == 0;
-    }
-
-    return false;
+    return true;
 }
 ```
 

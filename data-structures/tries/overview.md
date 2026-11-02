@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 ---
 
 # 🌳 Tries in Java
@@ -31,7 +33,7 @@ A **Trie** (pronounced "try") is a specialized tree-like data structure used to 
 - **Root**: The topmost node of the trie, representing an empty string.
 - **Edge**: A connection between two nodes that represents a character in the string.
 - **Prefix**: A substring that represents the initial part of a string.
-- **Leaf Node**: A node that marks the end of a complete word or string.
+- **Leaf Node**: A node with no children. A separate end-of-word flag marks complete words; a word can end at an internal node.
 - **Depth**: The length of the path from the root to a particular node.
 
 ## 🌲 Structure of a Trie
@@ -59,10 +61,10 @@ Consider the following words: "cat", "cap", "bat".
          root
         /    \
        c      b
+       |      |
+       a      a
       / \     |
-     a   a    a
-    /    \    |
-   t      p   t
+     t   p    t
 ```
 
 ## 🛠️ Basic Operations on Tries
@@ -138,31 +140,33 @@ Deletion involves removing a word from the trie. This can be tricky as removing 
 #### Example:
 ```java
 public boolean delete(String word) {
-    return delete(root, word, 0);
-}
-
-private boolean delete(TrieNode node, String word, int depth) {
-    if (node == null) {
+    // The snippets in this note assume words contain only 'a' through 'z'.
+    if (!search(word)) {
         return false;
     }
+    prune(root, word, 0);
+    return true; // Reports removal, not whether the root can be pruned.
+}
 
+private boolean prune(TrieNode node, String word, int depth) {
     if (depth == word.length()) {
-        if (!node.isEndOfWord) {
+        node.isEndOfWord = false;
+    } else {
+        int index = word.charAt(depth) - 'a';
+        if (prune(node.children[index], word, depth + 1)) {
+            node.children[index] = null;
+        }
+    }
+
+    if (node.isEndOfWord) {
+        return false;
+    }
+    for (TrieNode child : node.children) {
+        if (child != null) {
             return false;
         }
-        node.isEndOfWord = false;
-
-        return node.children.length == 0;
     }
-
-    int index = word.charAt(depth) - 'a';
-    if (delete(node.children[index], word, depth + 1)) {
-        node.children[index] = null;
-
-        return !node.isEndOfWord && node.children.length == 0;
-    }
-
-    return false;
+    return true;
 }
 ```
 

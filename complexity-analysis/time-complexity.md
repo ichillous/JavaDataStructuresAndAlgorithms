@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../docs/catalog.md) for maintained source and tests. See the [migration guide](../docs/migration.md) for the relationship between notes and code.
+
 # Time Complexity
 
 Time complexity is a crucial concept in algorithm analysis that helps us understand how the runtime of an algorithm grows as the input size increases. It provides a way to express the efficiency of algorithms in terms of the number of operations performed.

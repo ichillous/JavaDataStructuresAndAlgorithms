@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 ---
 
 # 🔍 Java Data Structures: Hash Tables
@@ -77,6 +79,7 @@ class HashTableChaining {
     }
 
     public HashTableChaining(int size) {
+        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
         numBuckets = size;
         bucketArray = new LinkedList[numBuckets];
 
@@ -87,7 +90,7 @@ class HashTableChaining {
 
     private int getBucketIndex(String key) {
         int hashCode = key.hashCode();
-        return Math.abs(hashCode % numBuckets);
+        return Math.floorMod(hashCode, numBuckets);
     }
 
     public void put(String key, int value) {
@@ -130,6 +133,7 @@ class HashTableOpenAddressing {
     private int numBuckets;
 
     public HashTableOpenAddressing(int size) {
+        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
         numBuckets = size;
         keys = new String[numBuckets];
         values = new int[numBuckets];
@@ -137,28 +141,31 @@ class HashTableOpenAddressing {
 
     private int getBucketIndex(String key) {
         int hashCode = key.hashCode();
-        return Math.abs(hashCode % numBuckets);
+        return Math.floorMod(hashCode, numBuckets);
     }
 
     public void put(String key, int value) {
         int bucketIndex = getBucketIndex(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets; probes++) {
+            if (keys[bucketIndex] == null) {
+                keys[bucketIndex] = key;
+                values[bucketIndex] = value;
+                return;
+            }
             if (keys[bucketIndex].equals(key)) {
                 values[bucketIndex] = value;
                 return;
             }
-            bucketIndex = (bucketIndex + 1) % numBuckets;
+            bucketIndex = (int) (((long) bucketIndex + 1) % numBuckets);
         }
-
-        keys[bucketIndex] = key;
-        values[bucketIndex] = value;
+        throw new IllegalStateException("No free bucket in the probe sequence");
     }
 
     public Integer get(String key) {
         int bucketIndex = getBucketIndex(key);
 
-        while (keys[bucketIndex] != null) {
+        for (int probes = 0; probes < numBuckets && keys[bucketIndex] != null; probes++) {
             if (keys[bucketIndex].equals(key)) {
                 return values[bucketIndex];
             }

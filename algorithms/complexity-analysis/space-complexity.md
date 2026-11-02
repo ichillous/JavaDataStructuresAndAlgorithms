@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 ---
 
 # 💾 Space Complexity in Java
@@ -160,7 +162,7 @@ Often, there is a trade-off between time and space complexity. Optimizing for ti
 
 ### Example:
 - **Merge Sort** uses O(n log n) time complexity but O(n) space complexity due to auxiliary arrays.
-- **In-Place Quick Sort** optimizes for space (O(log n) for recursion depth) but has the same time complexity (O(n log n)).
+- **In-Place Quick Sort** uses O(log n) stack space for balanced partitions but can use O(n) for the naive two-recursive-call version. Its worst-case time is O(n²). Recursing only into the smaller partition bounds stack usage to O(log n), even when partition work is quadratic.
 
 Choosing the right balance depends on the specific requirements and constraints of the system.
 
@@ -172,7 +174,7 @@ Choosing the right balance depends on the specific requirements and constraints 
 
 ### Best Practices:
 - **In-Place Algorithms**: Try to minimize space complexity by using in-place algorithms when possible (e.g., modifying the input array rather than creating a new one).
-- **Tail Recursion**: Where applicable, use tail recursion or convert recursive algorithms into iterative versions to reduce space complexity.
+- **Recursion in Java**: Tail-recursive Java methods still consume stack frames; tail-call elimination is not guaranteed. Convert them into loops to reduce auxiliary stack space.
 
 ## 🎓 Conclusion
 

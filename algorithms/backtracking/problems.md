@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+
 ---
 
 # 🧩 Common Backtracking Problems in Java
@@ -144,7 +146,7 @@ public class SudokuSolver {
 Given a set of integers and a target sum, determine if there is a subset whose sum is equal to the target.
 
 ### Backtracking Approach:
-Explore all subsets by including or excluding each element. If a subset's sum matches the target, the problem is solved.
+Explore all subsets by including or excluding each element. If a subset's sum matches the target, the problem is solved. This version permits negative elements: it must not prune merely because the remaining target becomes negative. A `long` remaining target avoids overflow when subtracting `int` elements.
 
 #### Implementation:
 ```java
@@ -153,9 +155,9 @@ public class SubsetSum {
         return isSubsetSum(set, target, 0);
     }
 
-    private boolean isSubsetSum(int[] set, int target, int index) {
+    private boolean isSubsetSum(int[] set, long target, int index) {
         if (target == 0) return true;
-        if (index == set.length || target < 0) return false;
+        if (index == set.length) return false;
         return isSubsetSum(set, target - set[index], index + 1) || isSubsetSum(set, target, index + 1);
     }
 
@@ -183,31 +185,36 @@ import java.util.List;
 
 public class Permutations {
     public List<List<Integer>> permute(int[] nums) {
+        int[] sorted = nums.clone();
+        java.util.Arrays.sort(sorted);
         List<List<Integer>> result = new ArrayList<>();
-        backtrack(nums, new ArrayList<>(), result);
+        backtrack(sorted, new boolean[sorted.length], new ArrayList<>(), result);
         return result;
     }
 
-    private void backtrack(int[] nums, List<Integer> current, List<List<Integer>> result) {
+    private void backtrack(int[] nums, boolean[] used,
+                           List<Integer> current, List<List<Integer>> result) {
         if (current.size() == nums.length) {
             result.add(new ArrayList<>(current));
             return;
         }
-        for (int num : nums) {
-            if (!current.contains(num)) {
-                current.add(num);
-                backtrack(nums, current, result);
-                current.remove(current.size() - 1);
+        for (int i = 0; i < nums.length; i++) {
+            // Equal values use their indices in order to avoid duplicate results.
+            if (used[i] || (i > 0 && nums[i] == nums[i - 1] && !used[i - 1])) {
+                continue;
             }
+            used[i] = true;
+            current.add(nums[i]);
+            backtrack(nums, used, current, result);
+            current.remove(current.size() - 1);
+            used[i] = false;
         }
     }
 
     public static void main(String[] args) {
         Permutations permutations = new Permutations();
-        int[] nums = {1, 2, 3};
-        List<List<Integer>> result = permutations.permute(nums);
-        for (List<Integer> perm : result) {
-            System.out.println(perm);
+        for (List<Integer> permutation : permutations.permute(new int[] {1, 1, 2})) {
+            System.out.println(permutation);
         }
     }
 }

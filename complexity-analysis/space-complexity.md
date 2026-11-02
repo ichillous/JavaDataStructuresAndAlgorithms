@@ -1,3 +1,5 @@
+> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../docs/catalog.md) for maintained source and tests. See the [migration guide](../docs/migration.md) for the relationship between notes and code.
+
 # Space Complexity
 
 Space complexity is a measure of the amount of memory an algorithm uses relative to the size of its input. It's crucial for understanding how efficiently an algorithm utilizes memory resources, especially when dealing with large datasets or memory-constrained environments.

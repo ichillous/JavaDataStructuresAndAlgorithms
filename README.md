@@ -1,140 +1,130 @@
-# 📚 Java Data Structures and Algorithms Study Guide
+# Java Data Structures and Algorithms
 
-Welcome to your comprehensive study guide for Java Data Structures and Algorithms. This repository serves as a centralized resource for notes, examples, and references to help you master these fundamental concepts.
+[![Java CI](https://github.com/ichillous/JavaDataStructuresAndAlgorithms/actions/workflows/ci.yml/badge.svg)](https://github.com/ichillous/JavaDataStructuresAndAlgorithms/actions/workflows/ci.yml)
+![Java 17+](https://img.shields.io/badge/Java-17%2B-blue)
+![Runtime dependencies: none](https://img.shields.io/badge/runtime_dependencies-none-green)
 
-## 📋 Table of Contents
+A hands-on Java learning library: readable implementations, executable examples,
+reference-model tests, and the reasoning behind each algorithm. Start with an
+invariant, trace a small example, then use the tests to challenge your understanding.
 
-1. [Java Fundamentals](#java-fundamentals)
-2. [Data Structures](#data-structures)
-   - [Arrays](#arrays)
-   - [Linked Lists](#linked-lists)
-   - [Stacks](#stacks)
-   - [Queues](#queues)
-   - [Hash Tables](#hash-tables)
-   - [Trees](#trees)
-   - [Graphs](#graphs)
-   - [Heaps](#heaps)
-   - [Tries](#tries)
-3. [Algorithms](#algorithms)
-   - [Sorting Algorithms](#sorting-algorithms)
-   - [Searching Algorithms](#searching-algorithms)
-   - [Dynamic Programming](#dynamic-programming)
-   - [Greedy Algorithms](#greedy-algorithms)
-   - [Backtracking](#backtracking)
-   - [Divide and Conquer](#divide-and-conquer)
-   - [Graph Algorithms](#graph-algorithms)
-4. [Complexity Analysis](#complexity-analysis)
-5. [Useful Resources](#useful-resources)
+This project grew from Isiah's original study notes. Those notes keep their original
+URLs; the compiled source and tests are the implementation reference.
 
-## Java Fundamentals
+## Run it
 
-- [Core Java Concepts](java-fundamentals/core-java-concepts.md)
+Install a **JDK 17 or newer** (a JRE alone cannot compile the project), then:
 
-## Data Structures
+```sh
+git clone https://github.com/ichillous/JavaDataStructuresAndAlgorithms.git
+cd JavaDataStructuresAndAlgorithms
+./mvnw clean verify
+java -jar target/java-data-structures-and-algorithms-1.0.0-SNAPSHOT.jar
+```
 
-### Arrays
+On Windows, use `mvnw.cmd clean verify`. Maven does not need to be installed: the
+wrapper downloads Maven 3.9.11 and verifies its pinned SHA-256 checksum. The first
+build needs internet access for the build tools and JUnit; examples run offline.
 
-- [Arrays Overview](data-structures/arrays/overview.md)
-- [Array Operations](data-structures/arrays/operations.md)
+`verify` compiles with Java 17 language/API compatibility and warnings treated as
+errors, runs all JUnit tests, validates Javadoc, packages the examples, and generates
+a JaCoCo coverage report. CI repeats it on Linux with JDK 17 and 21 and on Windows
+with JDK 21. There are no runtime dependencies; JUnit is a test dependency.
 
-### Linked Lists
+## Choose a starting point
 
-- [Linked List Overview](data-structures/linked-lists/overview.md)
-- [Singly Linked Lists](data-structures/linked-lists/singly.md)
-- [Doubly Linked Lists](data-structures/linked-lists/doubly.md)
+| Your goal | Start here |
+| --- | --- |
+| Learn the fundamentals in order | [Learning roadmap](docs/learning-roadmap.md) |
+| Find an implementation and its tests | [Implementation catalog](docs/catalog.md) |
+| Compare time, space, and assumptions | [Complexity reference](docs/complexity.md) |
+| Practice explaining and extending code | [Exercises](docs/exercises.md) |
+| Understand the original notes and changes | [Migration and audit](docs/migration.md) |
+| Add an implementation or regression test | [Contributing](CONTRIBUTING.md) |
 
-### Stacks
+## What's implemented
 
-- [Stacks Overview](data-structures/stacks/overview.md)
-- [Stack Implementation](data-structures/stacks/implementation.md)
+- **Collections:** dynamic array, doubly linked list, array stack, circular queue,
+  and a resizing hash map with separate chaining.
+- **Ordered and indexed structures:** unbalanced BST, AVL tree, min-heap, trie,
+  union-find, and Fenwick tree.
+- **Search and sorting:** linear/binary search, lower/upper bounds, insertion,
+  bubble, merge, three-way quicksort, and heapsort.
+- **Graphs:** BFS, iterative DFS, shortest unweighted paths, components,
+  topological sorting, Dijkstra, and Kruskal's minimum spanning forest.
+- **Problem-solving patterns:** KMP string matching, coin change, 0/1 knapsack,
+  longest common/increasing subsequences, edit distance, activity selection,
+  unique permutations, and N-queens.
 
-### Queues
+Each public API documents its input contract. Nulls are rejected; collection
+elements and map keys/values are non-null. Sorts mutate their input; snapshots
+and enumerated results are immutable. String algorithms use Java UTF-16 code
+units. Structures are intentionally not thread safe. See the
+[catalog](docs/catalog.md) for duplicate, empty-result, overflow, and indexing rules.
 
-- [Queues Overview](data-structures/queues/overview.md)
-- [Queue Implementation](data-structures/queues/implementation.md)
-- [Priority Queues](data-structures/queues/priority-queues.md)
+## A small example
 
-### Hash Tables
+The coin system `{1, 3, 4}` is a useful counterexample to greedy coin selection:
+choosing `4 + 1 + 1` uses three coins, while dynamic programming finds `3 + 3`.
 
-- [Hash Tables Overview](data-structures/hash-tables/overview.md)
-- [Hash Functions](data-structures/hash-tables/functions.md)
-- [Collision Resolution](data-structures/hash-tables/collision-resolution.md)
+```java
+import io.github.ichillous.dsa.algorithms.DynamicProgramming;
+import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import io.github.ichillous.dsa.graphs.WeightedGraph;
 
-### Trees
+int coins = DynamicProgramming.minimumCoins(new int[]{1, 3, 4}, 6); // 2
 
-- [Tree Overview](data-structures/trees/overview.md)
-- [Binary Trees](data-structures/trees/binary-trees.md)
-- [Binary Search Trees](data-structures/trees/binary-search-trees.md)
-- [AVL Trees](data-structures/trees/avl-trees.md)
+WeightedGraph roads = WeightedGraph.undirected(4)
+        .addEdge(0, 1, 8).addEdge(0, 2, 2)
+        .addEdge(2, 1, 1).addEdge(1, 3, 3);
+var routes = GraphAlgorithms.dijkstra(roads, 0);
+System.out.println(routes.pathTo(3));                   // [0, 2, 1, 3]
+System.out.println(routes.distanceTo(3).orElseThrow()); // 6
+```
 
-### Graphs
+These statements belong inside a method or JShell session. The
+[packaged showcase](src/main/java/io/github/ichillous/dsa/examples/AlgorithmShowcase.java)
+also demonstrates sorting, bounds, word frequencies, autocomplete, task dependencies,
+range sums, and overlapping string matches.
 
-- [Graph Overview](data-structures/graphs/overview.md)
-- [Graph Representation](data-structures/graphs/representation.md)
-- [Graph Traversal](data-structures/graphs/traversal.md)
+## How correctness is checked
 
-### Heaps
+Tests cover ordinary examples and invalid inputs, plus deterministic randomized
+comparisons against independent models: JDK collections, `Arrays.sort`, `String.indexOf`,
+brute-force small problem solvers, Floyd–Warshall shortest paths, and exhaustive
+spanning forests. Dedicated regressions cover hash collisions, duplicate values,
+queue wraparound, AVL rotations/deletion, deep trees/tries, and signed-long limits.
+Fixed seeds make failures reproducible. Coverage helps locate gaps; it is not a
+proof of correctness or a performance benchmark.
 
-- [Heap Overview](data-structures/heaps/overview.md)
-- [Heap Operations](data-structures/heaps/operations.md)
+```sh
+./mvnw test                              # all unit tests
+./mvnw -Dtest=AvlTreeTest test            # one test class
+python3 scripts/check_docs.py            # local file links; requires Python 3
+```
 
-### Tries
+After `verify`, open `target/site/jacoco/index.html` for coverage and
+`target/reports/apidocs/index.html` for generated API documentation.
 
-- [Trie Overview](data-structures/tries/overview.md)
-- [Trie Implementation](data-structures/tries/implementation.md)
+## Repository map
 
-## Algorithms
+```text
+src/main/java/io/github/ichillous/dsa/
+  collections/    arrays, lists, stacks, queues, hashing
+  structures/     trees, heaps, tries, union-find, range sums
+  algorithms/     search, sort, strings, DP, greedy, backtracking
+  graphs/         graph models and graph algorithms
+  examples/       runnable applications of the library
+src/test/java/    edge cases and deterministic reference-model tests
+docs/            roadmap, catalog, exercises, complexity, migration
+algorithms/      original explanatory notes (not compiled)
+data-structures/ original explanatory notes (not compiled)
+```
 
-### Sorting Algorithms
-
-- [Bubble Sort](algorithms/sorting/bubble-sort.md)
-- [Merge Sort](algorithms/sorting/merge-sort.md)
-- [Quick Sort](algorithms/sorting/quick-sort.md)
-- [Heap Sort](algorithms/sorting/heap-sort.md)
-
-### Searching Algorithms
-
-- [Linear Search](algorithms/searching/linear-search.md)
-- [Binary Search](algorithms/searching/binary-search.md)
-
-### Dynamic Programming
-
-- [Dynamic Programming Overview](algorithms/dynamic-programming/overview.md)
-- [Common Problems](algorithms/dynamic-programming/problems.md)
-
-### Greedy Algorithms
-
-- [Greedy Algorithms Overview](algorithms/greedy/overview.md)
-- [Common Problems](algorithms/greedy/problems.md)
-
-### Backtracking
-
-- [Backtracking Overview](algorithms/backtracking/overview.md)
-- [Common Problems](algorithms/backtracking/problems.md)
-
-### Divide and Conquer
-
-- [Divide and Conquer Overview](algorithms/divide-and-conquer/overview.md)
-- [Common Problems](algorithms/divide-and-conquer/problems.md)
-
-### Graph Algorithms
-
-- [BFS (Breadth-First Search)](algorithms/graph/bfs.md)
-- [DFS (Depth-First Search)](algorithms/graph/dfs.md)
-
-## Complexity Analysis
-
-- [Time Complexity](complexity-analysis/time-complexity.md)
-- [Space Complexity](complexity-analysis/space-complexity.md)
-
-## Useful Resources
-
-- [Recommended Books](resources/books.md)
-
----
-
-📝 **Note**: This guide is a living document. As you progress in your studies, feel free to add, modify, or reorganize content to best suit your learning style and needs.
-
-🚀 **Quick Tip**: Use the links in the table of contents to navigate quickly to your desired topic. Each topic links to a separate markdown file where you can add detailed notes, code snippets, and examples.
-
-Happy learning!
+The original [Java fundamentals](java-fundamentals/core-java-concepts.md),
+[data-structure notes](data-structures/arrays/overview.md),
+[algorithm notes](algorithms/searching/binary-search.md),
+[complexity notes](complexity-analysis/time-complexity.md), and
+[reading list](resources/books.md) remain available. Their banners distinguish
+explanatory fragments from the runnable library. This is an educational project;
+for application code, consider the standard Java collections first.
