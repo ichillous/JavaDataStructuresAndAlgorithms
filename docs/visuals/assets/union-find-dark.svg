@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1020" width="520" height="1020" role="img" aria-labelledby="title desc">
+<title id="title">10  Union-find components</title>
+<desc id="desc">Union operations on five indices produce components {0,1,2} and {3,4}. Parent arrows point toward roots 0 and 3, whose component sizes are three and two. Finding index 2 follows its link to root 0.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="union-find-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="union-find-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="union-find-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="union-find-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="union-find-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="union-find-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="union-find-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="union-find-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="union-find-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="union-find-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker></defs>
+<rect x="0" y="0" width="520" height="1020" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">10  Union-find components</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="28" y="155" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">1  Union (0,1), (1,2), (3,4)</text>
+<rect x="28" y="185" width="464" height="300" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<line x1="100.25377495670496" y1="358.01255199967585" x2="132.77799601662343" y2="300.4696993552047" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#union-find-blue-arrow)"/>
+<line x1="208.0656988030454" y1="359.03407149800296" x2="169.1193723191423" y2="299.3163708893515" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#union-find-blue-arrow)"/>
+<line x1="380.0" y1="354.0" x2="380.0" y2="305.0" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#union-find-blue-arrow)"/>
+<circle cx="150" cy="270" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="150" y="277" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">0</text>
+<text x="150" y="222" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="400">size 3</text>
+<circle cx="85" cy="385" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="85" y="392" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">1</text>
+<circle cx="225" cy="385" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="225" y="392" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<circle cx="380" cy="270" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="380" y="277" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="380" y="222" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="400">size 2</text>
+<circle cx="380" cy="385" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="380" y="392" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">4</text>
+<text x="50" y="465" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">components = 2</text>
+<text x="28" y="535" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">2  find(2) follows its parent</text>
+<line x1="161.0" y1="620.0" x2="315.0" y2="620.0" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#union-find-blue-arrow)"/>
+<circle cx="130" cy="620" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="130" y="627" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<circle cx="350" cy="620" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="350" y="627" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">0</text>
+<text x="130" y="680" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">index</text>
+<text x="350" y="680" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">root</text>
+<text x="45" y="745" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Union by size attaches the smaller tree.</text>
+<text x="45" y="772" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Find compresses paths to the root.</text>
+<rect x="28" y="855" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="886" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="915" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Connectivity is a partition: five</text>
+<text x="44" y="942" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">indices form two disjoint components.</text>
+</svg>

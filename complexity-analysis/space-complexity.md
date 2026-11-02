@@ -5,6 +5,12 @@ auxiliary working memory, retained data-structure capacity and returned output.
 The [maintained complexity table](../docs/complexity.md) states which category its
 bounds include; “O(1) extra space” does not mean the input itself occupies no memory.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../docs/visuals/assets/merge-recursion-dark.svg"><img src="../docs/visuals/assets/merge-recursion.svg" alt="Split into singletons, then merge sorted children bottom up." width="520"></picture>
+
+**Figure 14.** Distinguish the whole call tree from live storage: only a root-to-current-call path is on the recursive stack at once. [Visual index and step-throughs](../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Aliases are not copies
 
 Assigning an array reference creates an alias, not another array. Cloning creates

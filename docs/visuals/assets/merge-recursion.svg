@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 995" width="520" height="995" role="img" aria-labelledby="title desc">
+<title id="title">14  Merge sort: split and combine</title>
+<desc id="desc">Split into singletons, then merge sorted children bottom up.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="merge-recursion-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="merge-recursion-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="merge-recursion-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="merge-recursion-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="merge-recursion-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="merge-recursion-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="merge-recursion-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="merge-recursion-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="merge-recursion-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="merge-recursion-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker></defs>
+<rect x="0" y="0" width="520" height="995" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">14  Merge sort: split and combine</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Algorithm traces · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<text x="28" y="155" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Split until every child has one value.</text>
+<rect x="160" y="180" width="200" height="54" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="260.0" y="215" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[7, 2, 5, 1]</text>
+<line x1="220" y1="241" x2="140" y2="273" stroke="#2451b7" stroke-width="2.5" marker-end="url(#merge-recursion-blue-arrow)"/>
+<line x1="300" y1="241" x2="380" y2="273" stroke="#2451b7" stroke-width="2.5" marker-end="url(#merge-recursion-blue-arrow)"/>
+<rect x="50" y="280" width="180" height="54" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="140.0" y="315" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[7, 2]</text>
+<rect x="290" y="280" width="180" height="54" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="380.0" y="315" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[5, 1]</text>
+<line x1="140" y1="341" x2="80" y2="373" stroke="#2451b7" stroke-width="2.5" marker-end="url(#merge-recursion-blue-arrow)"/>
+<line x1="140" y1="341" x2="200" y2="373" stroke="#2451b7" stroke-width="2.5" marker-end="url(#merge-recursion-blue-arrow)"/>
+<line x1="380" y1="341" x2="320" y2="373" stroke="#2451b7" stroke-width="2.5" marker-end="url(#merge-recursion-blue-arrow)"/>
+<line x1="380" y1="341" x2="440" y2="373" stroke="#2451b7" stroke-width="2.5" marker-end="url(#merge-recursion-blue-arrow)"/>
+<rect x="50" y="380" width="60" height="54" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="80.0" y="415" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[7]</text>
+<rect x="170" y="380" width="60" height="54" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="200.0" y="415" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[2]</text>
+<rect x="290" y="380" width="60" height="54" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="320.0" y="415" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[5]</text>
+<rect x="410" y="380" width="60" height="54" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="440.0" y="415" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[1]</text>
+<line x1="28" y1="463" x2="492" y2="463" stroke="#8994a5" stroke-width="1"/>
+<text x="28" y="500" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Merge the sorted children bottom up.</text>
+<rect x="50" y="530" width="180" height="54" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="140.0" y="565" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[2, 7]</text>
+<rect x="290" y="530" width="180" height="54" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="380.0" y="565" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[1, 5]</text>
+<line x1="140" y1="591" x2="220" y2="633" stroke="#2451b7" stroke-width="2.5" marker-end="url(#merge-recursion-blue-arrow)"/>
+<line x1="380" y1="591" x2="300" y2="633" stroke="#2451b7" stroke-width="2.5" marker-end="url(#merge-recursion-blue-arrow)"/>
+<rect x="160" y="640" width="200" height="54" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="260.0" y="675" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">[1, 2, 5, 7]</text>
+<text x="28" y="740" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Always take the smaller front value.</text>
+<rect x="28" y="780" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="811" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="840" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Each parent merges two sorted children.</text>
+<text x="44" y="867" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">A level costs O(n) work, and there are</text>
+<text x="44" y="894" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">O(log n) levels: O(n log n) overall.</text>
+</svg>

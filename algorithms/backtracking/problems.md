@@ -5,6 +5,12 @@ choosing a search strategy. Maintained APIs live in
 [BacktrackingPuzzles](../../src/main/java/io/github/ichillous/dsa/algorithms/BacktrackingPuzzles.java);
 small complete enumerations are covered in the [overview](overview.md).
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/queens-backtracking-dark.svg"><img src="../../docs/visuals/assets/queens-backtracking.svg" alt="Trace failed placements before reaching the first valid board." width="520"></picture>
+
+**Figure 19.** The queens search illustrates choose, reject and undo. Sudoku applies the same pattern with row, column and box constraints. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Sudoku: preserve givens, propagate legal choices
 
 `solveSudoku` accepts a 9×9 `int[][]` with digits `1..9` and `0` for unknown cells.

@@ -4,6 +4,12 @@ Divide and conquer splits a problem into smaller instances, solves them, then
 combines their answers. The split alone is not enough: specify what each recursive
 call guarantees and why combining those guarantees solves the parent instance.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/merge-recursion-dark.svg"><img src="../../docs/visuals/assets/merge-recursion.svg" alt="Split into singletons, then merge sorted children bottom up." width="520"></picture>
+
+**Figure 14.** Split into singletons, then merge sorted children bottom up. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Example: a sorted interval
 
 For maintained [merge sort](../sorting/merge-sort.md), a call on `[from, to)`

@@ -12,6 +12,12 @@ doubly:  null <- A <-> B <-> C -> null
 
 For a singly linked list, following `next` visits later nodes. A doubly linked node also has `previous`; removing a known interior node can reconnect its two neighbors without searching for the predecessor.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/linked-unlink-dark.svg"><img src="../../docs/visuals/assets/linked-unlink.svg" alt="Bypass the middle node in both directions, then clear its links." width="520"></picture>
+
+**Figure 02.** Bypass the middle node in both directions, then clear its links. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Compare the choices
 
 | Operation | Singly, head and tail known | Doubly, head and tail known |

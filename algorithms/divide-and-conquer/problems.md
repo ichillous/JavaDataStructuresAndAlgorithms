@@ -5,6 +5,12 @@ shows three useful ways to avoid recomputing array work. All methods reject null
 and leave input unchanged. Choose the method by the invariant you can prove,
 rather than forcing every array problem into recursion.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/quick-partition-dark.svg"><img src="../../docs/visuals/assets/quick-partition.svg" alt="Gather duplicate pivot values into one finished equal region." width="520"></picture>
+
+**Figure 15.** Gather duplicate pivot values into one finished equal region. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Count inversions during a merge
 
 An inversion is a pair `i < j` with `a[i] > a[j]`. Recursively count pairs within

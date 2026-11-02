@@ -17,6 +17,12 @@ assert counts.get("pear") == 2;
 assert counts.get("missing") == null;
 ```
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/lru-recency-dark.svg"><img src="../../docs/visuals/assets/lru-recency.svg" alt="Promote a cache hit before deciding which entry to evict next." width="520"></picture>
+
+**Figure 06.** An LRU cache combines hashed lookup with an ordered recency list; a successful lookup changes the next eviction. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## The invariant and the resize
 
 Every key is stored in the bucket selected by its current hash and current capacity. Every bucket chain contains at most one mapping for an equality-equivalent key.

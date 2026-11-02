@@ -10,6 +10,12 @@ A useful design sequence is: define one state in a sentence, derive its recurren
 identify base cases, choose an order that satisfies dependencies, then decide what
 must be retained. Writing loops before the state often hides a different problem.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/coin-dp-dark.svg"><img src="../../docs/visuals/assets/coin-dp.svg" alt="Compare every final coin; the largest-first greedy choice loses." width="520"></picture>
+
+**Figure 16.** Compare every final coin; the largest-first greedy choice loses. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Worked example: unlimited coin change
 
 Let `best[a]` mean the minimum number of coins totaling exactly `a`.

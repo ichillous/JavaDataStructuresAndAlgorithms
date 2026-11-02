@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 980" width="520" height="980" role="img" aria-labelledby="title desc">
+<title id="title">08  Heap: array and tree</title>
+<desc id="desc">Bottom-up heapify turns 9,4,7,1,3,2 into the array 1,3,2,4,9,7. The matching complete binary tree labels every zero-based array slot and keeps every parent no greater than its children.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="heap-anatomy-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="heap-anatomy-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="heap-anatomy-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="heap-anatomy-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="heap-anatomy-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="heap-anatomy-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="heap-anatomy-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="heap-anatomy-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="heap-anatomy-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="heap-anatomy-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker></defs>
+<rect x="0" y="0" width="520" height="980" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">08  Heap: array and tree</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<text x="28" y="155" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">1  Heap array: zero-based slots</text>
+<text x="50" y="190" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Heapify 9, 4, 7, 1, 3, 2</text>
+<rect x="55" y="215" width="58" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="84.0" y="246" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<text x="84.0" y="289" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="125" y="215" width="58" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="154.0" y="246" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3</text>
+<text x="154.0" y="289" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="195" y="215" width="58" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="224.0" y="246" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<text x="224.0" y="289" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="265" y="215" width="58" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="294.0" y="246" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">4</text>
+<text x="294.0" y="289" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="335" y="215" width="58" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="364.0" y="246" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">9</text>
+<text x="364.0" y="289" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="405" y="215" width="58" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="434.0" y="246" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">7</text>
+<text x="434.0" y="289" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<text x="28" y="335" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">2  The same values form a complete tree</text>
+<line x1="236.18514033248135" y1="409.84571638959886" x2="166.88774478590815" y2="467.59354601174323" stroke="#8994a5" stroke-width="2.5" marker-end="url(#heap-anatomy-line-arrow)"/>
+<line x1="283.81485966751865" y1="409.84571638959886" x2="353.1122552140919" y2="467.59354601174323" stroke="#8994a5" stroke-width="2.5" marker-end="url(#heap-anatomy-line-arrow)"/>
+<line x1="124.05063158174667" y1="516.5822806970889" x2="98.00735143996343" y2="559.987747600061" stroke="#8994a5" stroke-width="2.5" marker-end="url(#heap-anatomy-line-arrow)"/>
+<line x1="155.94936841825333" y1="516.5822806970889" x2="181.99264856003657" y2="559.987747600061" stroke="#8994a5" stroke-width="2.5" marker-end="url(#heap-anatomy-line-arrow)"/>
+<line x1="366.1363785395013" y1="517.7272429209974" x2="345.6524758424985" y2="558.695048315003" stroke="#8994a5" stroke-width="2.5" marker-end="url(#heap-anatomy-line-arrow)"/>
+<circle cx="260" cy="390" r="27" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="260" y="397" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<text x="302" y="397" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">slot 0</text>
+<circle cx="140" cy="490" r="27" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="140" y="497" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">3</text>
+<text x="140" y="445" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 1</text>
+<circle cx="380" cy="490" r="27" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="380" y="497" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">2</text>
+<text x="380" y="445" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 2</text>
+<circle cx="80" cy="590" r="27" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="80" y="597" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">4</text>
+<text x="80" y="638" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 3</text>
+<circle cx="200" cy="590" r="27" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="200" y="597" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">9</text>
+<text x="200" y="638" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 4</text>
+<circle cx="330" cy="590" r="27" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="330" y="597" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">7</text>
+<text x="330" y="638" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 5</text>
+<text x="40" y="695" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Slot i has children 2i+1 and 2i+2.</text>
+<text x="40" y="740" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Removal order: 1, 2, 3, 4, 7, 9</text>
+<rect x="28" y="815" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="846" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="875" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">A heap puts the minimum at its root;</text>
+<text x="44" y="902" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">the array is not globally sorted.</text>
+</svg>

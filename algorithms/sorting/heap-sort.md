@@ -10,6 +10,12 @@ For a zero-based array, the children of index `i` are `2*i + 1` and `2*i + 2` wh
 those positions exist. A max-heap requires each parent to be at least as large as
 its children; siblings need not be ordered.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/heap-anatomy-dark.svg"><img src="../../docs/visuals/assets/heap-anatomy.svg" alt="Bottom-up heapify turns 9,4,7,1,3,2 into the array 1,3,2,4,9,7. The matching complete binary tree labels every zero-based array slot and keeps every parent no greater than its children." width="520"></picture>
+
+**Figure 08.** This is a min-heap for priority removal. In-place ascending heapsort instead builds a max-heap and moves each maximum to the array's end. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Two invariants
 
 1. While building bottom-up, the child subtrees of the current node are already

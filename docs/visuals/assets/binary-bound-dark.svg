@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 940" width="520" height="940" role="img" aria-labelledby="title desc">
+<title id="title">13  Binary search: lower bound</title>
+<desc id="desc">Half-open ranges find the first target among duplicate values.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="binary-bound-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="binary-bound-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="binary-bound-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="binary-bound-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="binary-bound-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="binary-bound-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="binary-bound-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="binary-bound-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="binary-bound-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="binary-bound-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker></defs>
+<rect x="0" y="0" width="520" height="940" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">13  Binary search: lower bound</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Algorithm traces · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="28" y="155" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Find the first value at least 2.</text>
+<rect x="57.0" y="180" width="70" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="92.0" y="211" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<text x="92.0" y="254" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="141.0" y="180" width="70" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="176.0" y="211" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<text x="176.0" y="254" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="225.0" y="180" width="70" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="260.0" y="211" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<text x="260.0" y="254" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="309.0" y="180" width="70" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="344.0" y="211" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<text x="344.0" y="254" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<rect x="393.0" y="180" width="70" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="428.0" y="211" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<text x="428.0" y="254" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<text x="28" y="285" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Uninspected positions: [low, high).</text>
+<rect x="28" y="310" width="464" height="88" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="44" y="340" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">1  [0, 5), mid = 2</text>
+<text x="44" y="372" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">a[2] = 2 ≥ 2  →  high = 2</text>
+<line x1="260" y1="404" x2="260" y2="413" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#binary-bound-blue-arrow)"/>
+<rect x="28" y="418" width="464" height="88" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="44" y="448" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">2  [0, 2), mid = 1</text>
+<text x="44" y="480" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">a[1] = 2 ≥ 2  →  high = 1</text>
+<line x1="260" y1="512" x2="260" y2="521" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#binary-bound-blue-arrow)"/>
+<rect x="28" y="526" width="464" height="88" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="44" y="556" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">3  [0, 1), mid = 0</text>
+<text x="44" y="588" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">a[0] = 1 &lt; 2  →  low = 1</text>
+<text x="28" y="670" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">Stop at [1, 1): return index 1.</text>
+<rect x="28" y="710" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="741" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="770" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Keep the first possible index inside</text>
+<text x="44" y="797" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">[low, high]. A value at least the</text>
+<text x="44" y="824" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">target moves high left, so duplicates</text>
+<text x="44" y="851" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">cannot hide the first match.</text>
+</svg>

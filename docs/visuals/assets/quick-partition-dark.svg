@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1100" width="520" height="1100" role="img" aria-labelledby="title desc">
+<title id="title">15  Quicksort: three-way partition</title>
+<desc id="desc">Gather duplicate pivot values into one finished equal region.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="quick-partition-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="quick-partition-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="quick-partition-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="quick-partition-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="quick-partition-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="quick-partition-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="quick-partition-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="quick-partition-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="quick-partition-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="quick-partition-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker></defs>
+<rect x="0" y="0" width="520" height="1100" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">15  Quicksort: three-way partition</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Algorithm traces · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="28" y="155" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Pivot = 3, the middle value.</text>
+<text x="28" y="200" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">1  Start: every value is unknown</text>
+<rect x="57.0" y="228" width="70" height="48" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="92.0" y="259" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="92.0" y="303" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">?</text>
+<rect x="141.0" y="228" width="70" height="48" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="176.0" y="259" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">1</text>
+<text x="176.0" y="303" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">?</text>
+<rect x="225.0" y="228" width="70" height="48" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="260.0" y="259" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="260.0" y="303" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">?</text>
+<rect x="309.0" y="228" width="70" height="48" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="344.0" y="259" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<text x="344.0" y="303" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">?</text>
+<rect x="393.0" y="228" width="70" height="48" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="428.0" y="259" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="428.0" y="303" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">?</text>
+<text x="28" y="344" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">less=0   scan=0   greater=4</text>
+<line x1="260" y1="358" x2="260" y2="380" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#quick-partition-blue-arrow)"/>
+<text x="28" y="410" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">2  Move the first smaller value left</text>
+<rect x="57.0" y="438" width="70" height="48" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="92.0" y="469" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">1</text>
+<text x="92.0" y="513" font-size="18" fill="#f4cf70" text-anchor="middle" font-weight="400">&lt;3</text>
+<rect x="141.0" y="438" width="70" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="176.0" y="469" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="176.0" y="513" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="400">=3</text>
+<rect x="225.0" y="438" width="70" height="48" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="260.0" y="469" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="260.0" y="513" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">?</text>
+<rect x="309.0" y="438" width="70" height="48" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="344.0" y="469" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<text x="344.0" y="513" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">?</text>
+<rect x="393.0" y="438" width="70" height="48" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="428.0" y="469" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="428.0" y="513" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">?</text>
+<text x="28" y="554" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">less=1   scan=2   greater=4</text>
+<line x1="260" y1="568" x2="260" y2="590" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#quick-partition-blue-arrow)"/>
+<text x="28" y="620" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">3  Finish: the unknown region is empty</text>
+<rect x="57.0" y="648" width="70" height="48" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="92.0" y="679" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">1</text>
+<text x="92.0" y="723" font-size="18" fill="#f4cf70" text-anchor="middle" font-weight="400">&lt;3</text>
+<rect x="141.0" y="648" width="70" height="48" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="176.0" y="679" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<text x="176.0" y="723" font-size="18" fill="#f4cf70" text-anchor="middle" font-weight="400">&lt;3</text>
+<rect x="225.0" y="648" width="70" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="260.0" y="679" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="260.0" y="723" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="400">=3</text>
+<rect x="309.0" y="648" width="70" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="344.0" y="679" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="344.0" y="723" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="400">=3</text>
+<rect x="393.0" y="648" width="70" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="428.0" y="679" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="428.0" y="723" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="400">=3</text>
+<text x="28" y="764" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">less=2   scan=5   greater=4</text>
+<text x="28" y="805" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">? means not scanned yet; labels name regions.</text>
+<text x="28" y="840" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">The &gt;3 region has 0 values in this input.</text>
+<rect x="28" y="885" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="916" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="945" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Only the smaller and greater regions</text>
+<text x="44" y="972" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">recurse. Equal keys already belong</text>
+<text x="44" y="999" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">together, so the equal region needs no</text>
+<text x="44" y="1026" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">further sorting.</text>
+</svg>

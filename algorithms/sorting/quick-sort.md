@@ -5,6 +5,12 @@ The maintained [implementation](../../src/main/java/io/github/ichillous/dsa/algo
 uses a deterministic middle-position pivot and groups equal values together.
 It mutates `int[]` in ascending order, rejects null and accepts empty arrays.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/quick-partition-dark.svg"><img src="../../docs/visuals/assets/quick-partition.svg" alt="Gather duplicate pivot values into one finished equal region." width="520"></picture>
+
+**Figure 15.** Gather duplicate pivot values into one finished equal region. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Four regions during partitioning
 
 ```text

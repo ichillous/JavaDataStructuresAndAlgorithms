@@ -5,6 +5,12 @@ input, workspace and output. Here, track which object owns each allocation and
 when a caller can safely retain it. These distinctions affect API behavior as
 well as the big-O description.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/merge-recursion-dark.svg"><img src="../../docs/visuals/assets/merge-recursion.svg" alt="Split into singletons, then merge sorted children bottom up." width="520"></picture>
+
+**Figure 14.** This call tree depicts operations across time, not simultaneous allocations. Live frames on one branch determine recursion-stack space. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Capacity is retained state
 
 `DynamicArray`, `ArrayStack` and `ArrayQueue` grow arrays geometrically. Removing

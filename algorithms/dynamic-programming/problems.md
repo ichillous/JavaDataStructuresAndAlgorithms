@@ -5,6 +5,12 @@ These examples use the maintained
 Inputs are not modified; null inputs are rejected. Distinguish a returned optimum
 value from a reconstructed solution: these methods return values or lengths.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/knapsack-state-dark.svg"><img src="../../docs/visuals/assets/knapsack-state.svg" alt="Sweep capacities backward so an item cannot reuse itself." width="520"></picture>
+
+**Figure 17.** Sweep capacities backward so an item cannot reuse itself. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## 0/1 knapsack: descending capacity matters
 
 `best[w]` is the maximum value achievable within capacity `w` after processed

@@ -2,6 +2,12 @@
 
 Read [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) alongside this trace. A complete-tree array has height O(log n), so repairing one root-to-leaf or leaf-to-root path gives logarithmic priority operations.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/heap-anatomy-dark.svg"><img src="../../docs/visuals/assets/heap-anatomy.svg" alt="Bottom-up heapify turns 9,4,7,1,3,2 into the array 1,3,2,4,9,7. The matching complete binary tree labels every zero-based array slot and keeps every parent no greater than its children." width="520"></picture>
+
+**Figure 08.** Bottom-up heapify turns 9,4,7,1,3,2 into the array 1,3,2,4,9,7. The matching complete binary tree labels every zero-based array slot and keeps every parent no greater than its children. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Bottom-up construction
 
 Starting with `[9, 4, 7, 1, 3, 2]`, the last internal node is at `n / 2 - 1 = 2`. Leaves are already heaps. Process internal nodes from right to left:

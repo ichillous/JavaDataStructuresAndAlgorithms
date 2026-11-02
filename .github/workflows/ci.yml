@@ -49,3 +49,10 @@ jobs:
       - name: Check local documentation links
         if: runner.os == 'Linux'
         run: python3 scripts/check_docs.py
+      - name: Verify reproducible diagrams and trace invariants
+        if: runner.os == 'Linux'
+        run: |
+          python3 scripts/generate_visuals.py --check
+          python3 -m unittest discover -s scripts/visuals -p 'test_*.py'
+          node --check docs/visuals/app.js
+          node --check docs/visuals/data/visual-data.js

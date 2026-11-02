@@ -2,6 +2,12 @@
 
 A tree is a connected acyclic graph; a rooted tree gives every non-root node one parent. Trees organize hierarchical data, but different tree structures optimize different operations. The word “tree” alone does not imply logarithmic search.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/segment-minimum-dark.svg"><img src="../../docs/visuals/assets/segment-minimum.svg" alt="An interval tree over 8,3,7,5 answers the minimum on [1,4) by combining leaf [1,2) with node [2,4). Replacing index 1 with 9 repairs its ancestors and changes the query answer from 3 to 5. Leaves use power-of-two padding with MAX_VALUE when needed." width="520"></picture>
+
+**Figure 12.** An interval tree over 8,3,7,5 answers the minimum on [1,4) by combining leaf [1,2) with node [2,4). Replacing index 1 with 9 repairs its ancestors and changes the query answer from 3 to 5. Leaves use power-of-two padding with MAX_VALUE when needed. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Compare the maintained structures
 
 | Structure | Defining invariant | Useful operation |

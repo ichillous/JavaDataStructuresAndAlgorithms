@@ -19,6 +19,12 @@ assert priorities.remove() == 30;
 
 [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) uses natural ordering, keeps duplicates and rejects nulls. Empty peek/removal throws `NoSuchElementException`. Build from a collection copies its values and uses O(n) bottom-up heapification.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/heap-anatomy-dark.svg"><img src="../../docs/visuals/assets/heap-anatomy.svg" alt="Bottom-up heapify turns 9,4,7,1,3,2 into the array 1,3,2,4,9,7. The matching complete binary tree labels every zero-based array slot and keeps every parent no greater than its children." width="520"></picture>
+
+**Figure 08.** A priority queue chooses a minimum, rather than the oldest arrival; array slots represent the complete heap shown below. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Reverse the ordering with the JDK
 
 The maintained heap has a deliberately small natural-order API. When an application needs a comparator, `java.util.PriorityQueue` supplies that feature directly.

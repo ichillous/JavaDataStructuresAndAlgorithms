@@ -2,6 +2,12 @@
 
 Traversal explores reachability while avoiding repeated work on cycles. [`GraphAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) provides BFS, iterative DFS, unweighted shortest paths, components, topological ordering and weighted algorithms. Results are immutable snapshots.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/dijkstra-path-dark.svg"><img src="../../docs/visuals/assets/dijkstra-path.svg" alt="Compare weighted routes from source 0 and distinguish unreachable vertex 4." width="520"></picture>
+
+**Figure 23.** Compare weighted routes from source 0 and distinguish unreachable vertex 4. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## BFS: discover before enqueueing
 
 BFS uses a FIFO queue. Mark a vertex when it is discovered and enqueued, so multiple neighbors cannot queue it repeatedly. The queue processes distance layers in increasing edge count.

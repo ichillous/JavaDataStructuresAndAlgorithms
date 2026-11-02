@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1240" width="520" height="1240" role="img" aria-labelledby="title desc">
+<title id="title">19  N-queens: reject and undo</title>
+<desc id="desc">Trace failed placements before reaching the first valid board.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="queens-backtracking-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="queens-backtracking-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="queens-backtracking-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="queens-backtracking-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="queens-backtracking-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="queens-backtracking-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="queens-backtracking-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="queens-backtracking-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="queens-backtracking-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="queens-backtracking-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker></defs>
+<rect x="0" y="0" width="520" height="1240" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">19  N-queens: reject and undo</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Algorithm traces · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="28" y="155" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">First solution on a 4 × 4 board</text>
+<text x="155.0" y="189" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<text x="225.0" y="189" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<text x="295.0" y="189" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<text x="365.0" y="189" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<text x="97.0" y="247.0" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="120.0" y="205" width="70" height="70" rx="0" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<rect x="190.0" y="205" width="70" height="70" rx="0" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="225.0" y="249.0" font-size="28" fill="#9cbcff" text-anchor="middle" font-weight="700">Q</text>
+<rect x="260.0" y="205" width="70" height="70" rx="0" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<rect x="330.0" y="205" width="70" height="70" rx="0" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="97.0" y="317.0" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="120.0" y="275" width="70" height="70" rx="0" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="190.0" y="275" width="70" height="70" rx="0" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<rect x="260.0" y="275" width="70" height="70" rx="0" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="330.0" y="275" width="70" height="70" rx="0" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="365.0" y="319.0" font-size="28" fill="#9cbcff" text-anchor="middle" font-weight="700">Q</text>
+<text x="97.0" y="387.0" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="120.0" y="345" width="70" height="70" rx="0" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="155.0" y="389.0" font-size="28" fill="#9cbcff" text-anchor="middle" font-weight="700">Q</text>
+<rect x="190.0" y="345" width="70" height="70" rx="0" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="260.0" y="345" width="70" height="70" rx="0" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<rect x="330.0" y="345" width="70" height="70" rx="0" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<text x="97.0" y="457.0" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<rect x="120.0" y="415" width="70" height="70" rx="0" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="190.0" y="415" width="70" height="70" rx="0" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<rect x="260.0" y="415" width="70" height="70" rx="0" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="295.0" y="459.0" font-size="28" fill="#9cbcff" text-anchor="middle" font-weight="700">Q</text>
+<rect x="330.0" y="415" width="70" height="70" rx="0" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="530" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Columns by row: [1, 3, 0, 2]</text>
+<rect x="28" y="565" width="464" height="140" rx="8" fill="#111827" stroke="#ffaaa1" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="44" y="601" font-size="20" fill="#ffaaa1" text-anchor="start" font-weight="700">Dead end after [0, 2]:</text>
+<text x="44" y="638" font-size="20" fill="#ffaaa1" text-anchor="start" font-weight="400">row 2: columns 0,2 are used;</text>
+<text x="44" y="675" font-size="20" fill="#ffaaa1" text-anchor="start" font-weight="400">columns 1,3 are on diagonals.</text>
+<text x="28" y="750" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">[0, 3, 1] also reaches a dead end.</text>
+<line x1="260" y1="774" x2="260" y2="796" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#queens-backtracking-blue-arrow)"/>
+<rect x="28" y="820" width="464" height="135" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="44" y="854" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Backtrack to row 0; try column 1.</text>
+<text x="44" y="892" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="400">[1] → [1, 3] → [1, 3, 0]</text>
+<text x="44" y="930" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">→ [1, 3, 0, 2]: first solution</text>
+<text x="28" y="998" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">Q = queen; 2 solutions in total.</text>
+<rect x="28" y="1035" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="1066" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="1095" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Place one queen per row. Reject used</text>
+<text x="44" y="1122" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">columns or diagonals; undo an</text>
+<text x="44" y="1149" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">unsuccessful choice before trying</text>
+<text x="44" y="1176" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">another.</text>
+</svg>

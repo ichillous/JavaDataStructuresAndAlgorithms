@@ -43,15 +43,30 @@ and shows cache eviction. It asks you to predict first and suggests the next exp
 Use `--help` for command syntax; invalid commands return status 2 with usage guidance.
 Running the JAR without arguments still runs the original showcase.
 
+For diagrams, browse the [visual index](docs/visuals/README.md), or open
+`docs/visuals/index.html` in a browser after cloning. It includes 26 diagrams with
+light/dark variants and five step-throughs. The committed assets need no build,
+package installation or account. For browsers that restrict local file pages,
+run `python3 -m http.server --bind 127.0.0.1 8000` and visit
+`http://127.0.0.1:8000/docs/visuals/`. [Preview images and visual checks](docs/visuals/verification.md)
+show the desktop/phone layouts and the scope of verification.
+
 | Your next step | Read or run |
 | --- | --- |
 | Learn in order | [Roadmap and checkpoints](docs/learning-roadmap.md) |
+| See diagrams and algorithm states | [Visual index](docs/visuals/README.md) and the local [interactive companion](docs/visuals/index.html) |
 | Browse all implementations and contracts | [Catalog](docs/catalog.md) |
 | Compare time, space and assumptions | [Complexity guide](docs/complexity.md) |
 | Practice independently | [Exercises](docs/exercises.md), then [worked solutions](docs/solutions.md) |
 | Understand validation and its limits | [Quality bar](docs/quality.md) and [validation evidence](docs/validation.md) |
 | Understand changes from the original notes | [Migration guide](docs/migration.md) |
 | Extend the library | [Contributing](CONTRIBUTING.md) |
+
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/visuals/assets/array-insertion-dark.svg"><img src="docs/visuals/assets/array-insertion.svg" alt="Shift the suffix before writing the new value into the live array." width="520"></picture>
+
+**Figure 01.** See the state change, then explore all diagrams and step-throughs in the visual index. [Visual index and step-throughs](docs/visuals/README.md).
+<!-- /visual:generated -->
 
 ## Topic map
 

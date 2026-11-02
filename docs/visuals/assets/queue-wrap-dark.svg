@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1025" width="520" height="1025" role="img" aria-labelledby="title desc">
+<title id="title">04  Queue wrap: slots versus order</title>
+<desc id="desc">The head moves around the buffer while FIFO order stays intact.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="queue-wrap-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="queue-wrap-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="queue-wrap-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="queue-wrap-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="queue-wrap-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="queue-wrap-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="queue-wrap-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="queue-wrap-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="queue-wrap-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="queue-wrap-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker></defs>
+<rect x="0" y="0" width="520" height="1025" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">04  Queue wrap: slots versus order</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Linear structures · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="28" y="151" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">1  Full buffer: capacity = 4</text>
+<rect x="60" y="183" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="104.0" y="214" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">10</text>
+<text x="104.0" y="257" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="164" y="183" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="208.0" y="214" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">20</text>
+<text x="208.0" y="257" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="268" y="183" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="312.0" y="214" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">30</text>
+<text x="312.0" y="257" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="372" y="183" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="416.0" y="214" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">40</text>
+<text x="416.0" y="257" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<text x="104" y="282" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="400">head = 0</text>
+<text x="28" y="329" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Dequeue 10, 20; enqueue 50, 60.</text>
+<text x="28" y="390" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">2  Physical slots after wrap</text>
+<rect x="60" y="420" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="104.0" y="451" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">50</text>
+<text x="104.0" y="494" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="164" y="420" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="208.0" y="451" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">60</text>
+<text x="208.0" y="494" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="268" y="420" width="88" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="312.0" y="451" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">30</text>
+<text x="312.0" y="494" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="372" y="420" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="416.0" y="451" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">40</text>
+<text x="416.0" y="494" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<line x1="312" y1="531" x2="312" y2="508" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#queue-wrap-blue-arrow)"/>
+<text x="312" y="551" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="400">head = 2</text>
+<path d="M 460 444 H 478 V 584 H 42 V 444 H 54" fill="none" stroke="#9cbcff" stroke-width="2" marker-end="url(#queue-wrap-blue-arrow)"/>
+<text x="260" y="618" font-size="18" fill="#eef2f8" text-anchor="middle" font-weight="400">Read slots 2 → 3 → 0 → 1</text>
+<text x="28" y="674" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">3  FIFO order: next out on the left</text>
+<rect x="60" y="704" width="88" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="104.0" y="735" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">30</text>
+<text x="104.0" y="778" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">offset 0</text>
+<rect x="164" y="704" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="208.0" y="735" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">40</text>
+<text x="208.0" y="778" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">offset 1</text>
+<rect x="268" y="704" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="312.0" y="735" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">50</text>
+<text x="312.0" y="778" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">offset 2</text>
+<rect x="372" y="704" width="88" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="416.0" y="735" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">60</text>
+<text x="416.0" y="778" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">offset 3</text>
+<text x="104" y="818" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="400">next out</text>
+<rect x="28" y="855" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="886" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="915" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">At logical offset i, use (head + i) %</text>
+<text x="44" y="942" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">capacity. Dequeue follows logical</text>
+<text x="44" y="969" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">order, never raw slot order.</text>
+</svg>

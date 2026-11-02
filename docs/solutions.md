@@ -5,6 +5,12 @@ For each task, predict the result, draw the state, then open the solution. Every
 Java block below is compiled and executed by the documentation test. These are
 small uses of the maintained library, not a second set of implementations.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="visuals/assets/union-find-dark.svg"><img src="visuals/assets/union-find.svg" alt="Union operations on five indices produce components {0,1,2} and {3,4}. Parent arrows point toward roots 0 and 3, whose component sizes are three and two. Finding index 2 follows its link to root 0." width="520"></picture>
+
+**Figure 10.** Use the component picture as a checkpoint, then predict each worked solution before revealing it. [Visual index and step-throughs](visuals/README.md).
+<!-- /visual:generated -->
+
 ## 1. Boundaries and duplicate values
 
 Find the number of occurrences of `2` in `[1,2,2,2,5]` without scanning the array.

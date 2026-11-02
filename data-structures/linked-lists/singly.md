@@ -2,6 +2,12 @@
 
 A singly linked node stores a value and a reference to its successor. The sequence begins at `head` and ends at the first null successor. Maintaining a `tail` makes append O(1), but there is still no backward link.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/linked-unlink-dark.svg"><img src="../../docs/visuals/assets/linked-unlink.svg" alt="Bypass the middle node in both directions, then clear its links." width="520"></picture>
+
+**Figure 02.** Contrast with a singly linked list: the doubly linked variant shown here repairs both directions; singly linked nodes keep only the forward link. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Trace removal
 
 ```text

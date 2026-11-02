@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1310" width="520" height="1310" role="img" aria-labelledby="title desc">
+<title id="title">09  Trie: preserve shared prefixes</title>
+<desc id="desc">The words car, cart and cat share a c-a prefix. Deleting car clears the r node&#x27;s word marker but preserves its t child for cart and the sibling t branch for cat.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="trie-pruning-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="trie-pruning-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="trie-pruning-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="trie-pruning-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="trie-pruning-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="trie-pruning-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="trie-pruning-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="trie-pruning-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="trie-pruning-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="trie-pruning-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker></defs>
+<rect x="0" y="0" width="520" height="1310" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">09  Trie: preserve shared prefixes</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="28" y="155" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">1  Blue nodes mark stored words</text>
+<rect x="28" y="180" width="464" height="425" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<line x1="260.0" y1="256.0" x2="260.0" y2="275.0" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<line x1="260.0" y1="341.0" x2="260.0" y2="360.0" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<line x1="238.7536943308453" y1="417.5741997734769" x2="203.98776446517468" y2="454.5130002557519" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<line x1="281.2463056691547" y1="417.5741997734769" x2="316.0122355348253" y2="454.5130002557519" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<line x1="180.0" y1="511.0" x2="180.0" y2="530.0" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<circle cx="260" cy="225" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="260" y="232" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">root</text>
+<circle cx="260" cy="310" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="260" y="317" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">c</text>
+<circle cx="260" cy="395" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="260" y="402" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">a</text>
+<circle cx="180" cy="480" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="180" y="487" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">r</text>
+<circle cx="340" cy="480" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="340" y="487" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">t</text>
+<circle cx="180" cy="565" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="180" y="572" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">t</text>
+<text x="105" y="487" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="400">car</text>
+<text x="385" y="487" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="400">cat</text>
+<text x="225" y="572" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="400">cart</text>
+<text x="28" y="660" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">2  Remove car; keep cart and cat</text>
+<rect x="28" y="690" width="464" height="425" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<line x1="260.0" y1="766.0" x2="260.0" y2="785.0" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<line x1="260.0" y1="851.0" x2="260.0" y2="870.0" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<line x1="238.7536943308453" y1="927.5741997734768" x2="203.98776446517468" y2="964.5130002557519" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<line x1="281.2463056691547" y1="927.5741997734768" x2="316.0122355348253" y2="964.5130002557519" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<line x1="180.0" y1="1021.0" x2="180.0" y2="1040.0" stroke="#8291aa" stroke-width="2.5" marker-end="url(#trie-pruning-line-arrow)"/>
+<circle cx="260" cy="735" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="260" y="742" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">root</text>
+<circle cx="260" cy="820" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="260" y="827" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">c</text>
+<circle cx="260" cy="905" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="260" y="912" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">a</text>
+<circle cx="180" cy="990" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="180" y="997" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">r</text>
+<circle cx="340" cy="990" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="340" y="997" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">t</text>
+<circle cx="180" cy="1075" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="180" y="1082" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">t</text>
+<text x="75" y="997" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">prefix</text>
+<text x="385" y="997" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="400">cat</text>
+<text x="225" y="1082" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="400">cart</text>
+<rect x="28" y="1145" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="1176" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="1205" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Deleting a word clears its end marker.</text>
+<text x="44" y="1232" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Keep nodes still needed by longer</text>
+<text x="44" y="1259" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">words.</text>
+</svg>

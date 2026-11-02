@@ -4,6 +4,12 @@
 
 This is a useful design lesson: a new behavioral contract does not always require a new storage engine. The stack exposes only the operations that preserve LIFO access.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/stack-lifo-dark.svg"><img src="../../docs/visuals/assets/stack-lifo.svg" alt="Push and pop share the top; the newest value leaves first." width="520"></picture>
+
+**Figure 03.** Push and pop share the top; the newest value leaves first. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Follow the top
 
 ```text

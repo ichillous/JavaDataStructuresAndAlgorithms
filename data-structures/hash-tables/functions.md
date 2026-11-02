@@ -14,6 +14,12 @@ assert Math.abs(Integer.MIN_VALUE) < 0; // abs cannot represent +2^31 as int.
 
 `Math.abs(hash) % capacity` can therefore produce a negative index. Java's `%` is a remainder operator and also permits negative results; `floorMod` expresses the bucket-index contract directly.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/hash-chaining-dark.svg"><img src="../../docs/visuals/assets/hash-chaining.svg" alt="Equal hash codes select one bucket; key equality still decides a match." width="520"></picture>
+
+**Figure 05.** Equal hash codes select one bucket; key equality still decides a match. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Observe a real collision
 
 ```java

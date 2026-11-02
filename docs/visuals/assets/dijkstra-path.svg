@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1070" width="520" height="1070" role="img" aria-labelledby="title desc">
+<title id="title">23  Dijkstra: distance and path</title>
+<desc id="desc">Compare weighted routes from source 0 and distinguish unreachable vertex 4.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="dijkstra-path-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="dijkstra-path-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="dijkstra-path-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="dijkstra-path-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="dijkstra-path-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="dijkstra-path-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="dijkstra-path-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="dijkstra-path-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="dijkstra-path-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="dijkstra-path-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker></defs>
+<rect x="0" y="0" width="520" height="1070" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">23  Dijkstra: distance and path</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<text x="28" y="153" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">DIRECTED · weights are labeled w=number</text>
+<line x1="122.0" y1="215.0" x2="385.0" y2="215.0" stroke="#8994a5" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#dijkstra-path-line-arrow)"/>
+<rect x="226.0" y="180" width="58" height="30" rx="4" fill="#ffffff" stroke="#ffffff" stroke-width="2"/>
+<text x="255" y="202" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">w=5</text>
+<line x1="90.0" y1="247.0" x2="90.0" y2="375.0" stroke="#2451b7" stroke-width="4" marker-end="url(#dijkstra-path-blue-arrow)"/>
+<rect x="61.0" y="298" width="58" height="30" rx="4" fill="#ffffff" stroke="#ffffff" stroke-width="2"/>
+<text x="90" y="320" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">w=1</text>
+<line x1="117.5496489028581" y1="393.72066201194747" x2="389.86757151249896" y2="232.80552592443243" stroke="#2451b7" stroke-width="4" marker-end="url(#dijkstra-path-blue-arrow)"/>
+<rect x="226.0" y="293" width="58" height="30" rx="4" fill="#ffffff" stroke="#ffffff" stroke-width="2"/>
+<text x="255" y="315" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">w=1</text>
+<line x1="420.0" y1="247.0" x2="420.0" y2="375.0" stroke="#2451b7" stroke-width="4" marker-end="url(#dijkstra-path-blue-arrow)"/>
+<rect x="391.0" y="298" width="58" height="30" rx="4" fill="#ffffff" stroke="#ffffff" stroke-width="2"/>
+<text x="420" y="320" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">w=2</text>
+<circle cx="90" cy="215" r="27" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="90" y="222" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">0</text>
+<circle cx="420" cy="215" r="27" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="420" y="222" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<circle cx="90" cy="410" r="27" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="90" y="417" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">2</text>
+<circle cx="420" cy="410" r="27" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="420" y="417" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">3</text>
+<circle cx="260" cy="490" r="27" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="260" y="497" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">4</text>
+<text x="260" y="540" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">unreachable</text>
+<text x="28" y="585" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Thick solid = path; dashed = alternative.</text>
+<text x="28" y="630" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Shortest distance from 0</text>
+<rect x="28" y="650" width="76" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="66.0" y="681" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<text x="66.0" y="724" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">v0</text>
+<rect x="120" y="650" width="76" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="158.0" y="681" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<text x="158.0" y="724" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">v1</text>
+<rect x="212" y="650" width="76" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="250.0" y="681" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<text x="250.0" y="724" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">v2</text>
+<rect x="304" y="650" width="76" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="342.0" y="681" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">4</text>
+<text x="342.0" y="724" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">v3</text>
+<rect x="396" y="650" width="76" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="434.0" y="681" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">none</text>
+<text x="434.0" y="724" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">v4</text>
+<text x="28" y="778" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Path: 0 → 2 → 1 → 3</text>
+<text x="28" y="817" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Cost: 1 + 1 + 2 = 4</text>
+<rect x="28" y="855" width="464" height="163" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="886" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="915" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Nonnegative weights let Dijkstra settle</text>
+<text x="44" y="942" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">the smallest tentative distance. Vertex</text>
+<text x="44" y="969" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">4 has no path; absence is not a numeric</text>
+<text x="44" y="996" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">distance.</text>
+</svg>

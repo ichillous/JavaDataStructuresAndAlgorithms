@@ -6,6 +6,12 @@ constant-time operation, and whether the bound is worst-case, best-case, expecte
 or amortized. The [maintained table](../docs/complexity.md) applies these choices
 to the actual source implementations.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../docs/visuals/assets/complexity-growth-dark.svg"><img src="../docs/visuals/assets/complexity-growth.svg" alt="Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings." width="520"></picture>
+
+**Figure 26.** Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings. [Visual index and step-throughs](../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Upper, lower and tight bounds
 
 `O(f(n))` is an asymptotic upper bound, `Ω(f(n))` a lower bound and `Θ(f(n))` a

@@ -2,6 +2,12 @@
 
 [`ArrayQueue`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayQueue.java) stores a head index and logical size separately from capacity. Element at logical offset `i` lives at `(head + i) % capacity`. The next enqueue writes at logical offset `size`.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/queue-wrap-dark.svg"><img src="../../docs/visuals/assets/queue-wrap.svg" alt="The head moves around the buffer while FIFO order stays intact." width="520"></picture>
+
+**Figure 04.** The head moves around the buffer while FIFO order stays intact. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Trace a wrapped buffer
 
 ```text

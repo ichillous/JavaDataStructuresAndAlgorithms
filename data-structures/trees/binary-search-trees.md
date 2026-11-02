@@ -4,6 +4,12 @@
 
 Null keys are rejected. `compareTo == 0` defines a duplicate, even if `equals` would distinguish the objects. Keep ordering-relevant fields stable while a key is stored.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/avl-rotation-dark.svg"><img src="../../docs/visuals/assets/avl-rotation.svg" alt="Inserting 30, 20 and 10 produces a left-heavy chain. A right rotation makes 20 the root with children 10 and 30, preserving in-order traversal and restoring height one." width="520"></picture>
+
+**Figure 07.** Both shapes satisfy BST order. AVL adds a height invariant and rotates the unbalanced shape into the balanced one. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Search and insertion
 
 ```text

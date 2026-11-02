@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1000" width="520" height="1000" role="img" aria-labelledby="title desc">
+<title id="title">07  AVL rotation</title>
+<desc id="desc">Inserting 30, 20 and 10 produces a left-heavy chain. A right rotation makes 20 the root with children 10 and 30, preserving in-order traversal and restoring height one.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="avl-rotation-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="avl-rotation-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="avl-rotation-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="avl-rotation-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="avl-rotation-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="avl-rotation-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="avl-rotation-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="avl-rotation-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="avl-rotation-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="avl-rotation-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker></defs>
+<rect x="0" y="0" width="520" height="1000" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">07  AVL rotation</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="28" y="155" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">1  Insert 30, 20, 10</text>
+<rect x="28" y="185" width="464" height="310" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<line x1="314.26209331970404" y1="258.0421185336622" x2="268.4137656067857" y2="308.98470488134916" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#avl-rotation-blue-arrow)"/>
+<line x1="224.26209331970406" y1="358.0421185336622" x2="178.41376560678574" y2="408.98470488134916" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#avl-rotation-blue-arrow)"/>
+<circle cx="335" cy="235" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="335" y="242" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">30</text>
+<circle cx="245" cy="335" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="245" y="342" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">20</text>
+<circle cx="155" cy="435" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="155" y="442" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">10</text>
+<text x="55" y="230" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">Left-heavy</text>
+<text x="55" y="270" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">height = 2</text>
+<text x="28" y="535" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">2  Rotate right at 30</text>
+<rect x="28" y="555" width="464" height="250" rx="8" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<line x1="238.07968978321702" y1="626.9203102167829" x2="174.74873734152916" y2="690.2512626584709" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#avl-rotation-blue-arrow)"/>
+<line x1="281.920310216783" y1="626.9203102167829" x2="345.25126265847086" y2="690.2512626584709" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#avl-rotation-blue-arrow)"/>
+<circle cx="260" cy="605" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="260" y="612" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">20</text>
+<circle cx="150" cy="715" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="150" y="722" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">10</text>
+<circle cx="370" cy="715" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="370" y="722" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">30</text>
+<text x="50" y="775" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">In-order: 10, 20, 30</text>
+<text x="460" y="775" font-size="20" fill="#9cbcff" text-anchor="end" font-weight="400">h = 1</text>
+<rect x="28" y="835" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="866" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="895" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Rotate links, preserve sorted order,</text>
+<text x="44" y="922" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">and restore the height balance.</text>
+</svg>

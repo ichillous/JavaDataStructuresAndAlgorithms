@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="An offline visual companion to Java Data Structures and Algorithms: labeled diagrams and five deterministic step-throughs.">
+  <title>Visual laboratory · Java DSA</title>
+  <link rel="stylesheet" href="app.css">
+  <script src="data/visual-data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#main" aria-label="Java DSA visual laboratory home"><span class="brand-mark" aria-hidden="true">[ ]</span><span>Java DSA<span class="brand-detail"> / visual laboratory</span></span></a>
+    <nav aria-label="Page navigation"><a href="#explore">Diagrams</a><a href="#step-through">Step through</a><a href="../../README.md" class="library-link">Repository guide <span aria-hidden="true">→</span></a></nav>
+    <div class="theme-control"><label for="theme">Appearance</label><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy"><p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> THE VISUAL COMPANION</p><h1 id="page-title">See the structure.<br><span>Understand the step.</span></h1><p class="hero-description">Follow the pointers. Watch the frontier move. Make the invariant visible before you write the code.</p><div class="hero-links"><a class="button primary" href="#step-through">Explore step by step <span aria-hidden="true">↓</span></a><a class="quiet-link" href="#explore">Browse the diagrams <span aria-hidden="true">↘</span></a></div></div>
+      <aside class="hero-note" aria-label="How to use this companion"><div class="note-top"><span class="eyebrow">A SMALL CHANGE, MADE VISIBLE</span><span class="note-number" aria-hidden="true">low → high</span></div><div id="hero-array" class="mini-array" aria-hidden="true"></div><p class="note-invariant">A match is a candidate.<br><strong>Keep searching to its left.</strong></p><p class="note-caption">Lower bound finds the first possible position, not just any matching value.</p><div class="note-footer"><span><strong id="figure-count">—</strong> diagrams</span><span><strong id="trace-count">5</strong> step-throughs</span><span>Works offline</span></div></aside>
+    </section>
+
+    <section id="step-through" class="section" aria-labelledby="trace-heading">
+      <div class="section-heading"><div><p class="eyebrow">01 / FOLLOW THE ALGORITHM</p><h2 id="trace-heading">One decision at a time.</h2></div><p>Pause on a state. Predict what changes.<br>Then take the next step.</p></div>
+      <div class="trace-shell">
+        <div class="trace-toolbar"><div class="algorithm-picker"><label for="algorithm">Choose an algorithm</label><select id="algorithm" aria-describedby="trace-description"></select></div><p id="trace-description"></p><a id="trace-lesson" class="text-link" href="../../docs/catalog.md">Read the lesson <span aria-hidden="true">→</span></a></div>
+        <div id="trace-workspace" class="trace-workspace" tabindex="0" aria-label="Algorithm state. Use left and right arrows to change steps.">
+          <div class="trace-canvas"><div class="canvas-heading"><span id="trace-type" class="eyebrow">ALGORITHM STATE</span><span class="canvas-badge">Conceptual trace</span></div><div id="state-visual" aria-label="Current algorithm state"></div><div id="state-legend" class="state-legend" aria-label="State legend"></div></div>
+          <aside class="trace-explanation"><div class="frame-position"><span class="eyebrow">CURRENT STEP</span><span id="frame-number" aria-live="polite" aria-atomic="true">—</span></div><h3 id="frame-title">Preparing the trace…</h3><p id="frame-explanation"></p><div class="key-idea"><span class="eyebrow">KEEP THIS IN MIND</span><p id="trace-key-idea"></p></div><p class="keyboard-tip">Focus the state and use <kbd>←</kbd> <kbd>→</kbd>. <kbd>Home</kbd> returns to the first step.</p></aside>
+        </div>
+        <div class="trace-controls"><div class="step-buttons"><button id="previous" class="button secondary" type="button"><span aria-hidden="true">←</span> Previous</button><button id="next" class="button primary" type="button">Next step <span aria-hidden="true">→</span></button><button id="reset" class="reset-button" type="button">Reset</button></div><div class="step-slider"><label for="step-position">Step</label><input id="step-position" type="range" min="0" max="1" value="0"><output id="step-output" for="step-position">—</output></div></div>
+      </div>
+    </section>
+
+    <section id="explore" class="section" aria-labelledby="gallery-heading">
+      <div class="section-heading"><div><p class="eyebrow">02 / EXPLORE THE STRUCTURES</p><h2 id="gallery-heading">A clearer mental model.</h2></div><p>Every figure has one job: show the invariant,<br>the data, and the change that matters.</p></div>
+      <div class="gallery-controls"><div class="search-field"><label for="search">Search diagrams</label><div class="search-input"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Try “tree”, “queue”, or “shortest path”…" autocomplete="off"></div></div><p id="results-count" role="status" aria-live="polite"></p></div>
+      <div id="category-filters" class="category-filters" role="group" aria-label="Filter diagrams by category"></div>
+      <div id="gallery" class="gallery"></div>
+      <div id="empty-state" class="empty-state" hidden><h3>No matching diagrams.</h3><p>Try another term or return to all categories.</p><button id="clear-filters" class="button secondary" type="button">Clear filters</button></div>
+    </section>
+    <noscript><p class="notice">Enable JavaScript to browse the diagrams and step-throughs. The <a href="../../docs/catalog.md">implementation catalog</a> and individual SVG assets remain readable without it.</p></noscript>
+    <p id="data-error" class="notice" hidden>The visual data file could not be loaded. Generate the visual assets with <code>python3 scripts/generate_visuals.py</code> from the repository root, then reopen this page.</p>
+  </main>
+  <footer class="site-footer"><p><strong>Understand it. Trace it. Build it.</strong><br>Part of Java Data Structures and Algorithms.</p><p>Static assets. Deterministic examples.<br>No accounts, installations, or network requests.</p><a href="#main">Back to top ↑</a></footer>
+
+  <dialog id="figure-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description"><div class="dialog-header"><div><p id="dialog-category" class="eyebrow"></p><h2 id="dialog-title"></h2></div><button id="close-dialog" class="close-button" type="button" aria-label="Close expanded figure">×</button></div><div class="dialog-image-wrap"><img id="dialog-image" alt=""></div><div class="dialog-copy"><p id="dialog-description"></p><p id="dialog-idea"></p><a id="dialog-lesson" class="text-link" href="../../docs/catalog.md">Read the lesson →</a></div></dialog>
+</body>
+</html>

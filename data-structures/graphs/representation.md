@@ -32,6 +32,12 @@ assert snapshot.equals(List.of(1));
 assert graph.neighbors(0).equals(List.of(1, 2));
 ```
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/scc-bridges-dark.svg"><img src="../../docs/visuals/assets/scc-bridges.svg" alt="Directed return paths form SCCs; undirected essential edges are bridges." width="520"></picture>
+
+**Figure 25.** Arrowheads and edge direction change reachability; the lower undirected panel answers a different connectivity question. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Build a reference matrix
 
 A small matrix is a useful independent test model for an adjacency implementation. This example constructs both representations from the same edge list and compares their meaning.

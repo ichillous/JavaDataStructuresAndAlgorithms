@@ -1,5 +1,25 @@
 # Validation evidence
 
+## Visual-layer verification (2026-11-02)
+
+The complete Java 17 build now passes **357 tests across 33 classes**, with zero
+failures, errors or skips: the prior 334 checks plus 23 public-API contracts for
+shared visual fixtures. All 99 executable Markdown blocks still pass. Production
+coverage remains 97.25% lines and 97.26% branches, with both enforced floors met.
+
+The visual layer adds 26 numbered figures (52 explicit light/dark SVGs), five
+step-throughs with 54 states, four captured desktop/phone previews and an offline
+visual index. Ten portable Python checks and deterministic regeneration pass.
+Actual Chromium review measured all 52 SVGs and 216 viewer state/layout combinations;
+final text bounds/collision and overflow reports contain no issues. Independent
+code, algorithm and image review found no remaining material visual findings.
+
+See [visual coverage and verification](visuals/verification.md) for exact families,
+previews, reproducibility, Emergent Mind provenance and browser limitations. The
+figure/trace values share canonical data with the Java API tests; no measured
+runtime or speedup is claimed. Local documentation file links resolve, and
+HTML/image/manifest references are checked separately by the visual suite.
+
 ## Baselines and scope
 
 The original commit `d926b0b` contained 47 Markdown files, no Java source tree,
@@ -12,7 +32,7 @@ See the [migration guide](migration.md) for compatibility and intentional change
 the [catalog](catalog.md) for API scope, and the [quality bar](quality.md) for what
 completion requires. Original topic URLs and Git history remain intact.
 
-## Local complete verification (2026-11-02)
+## Second-pass baseline verification (2026-11-02)
 
 Full `./mvnw clean verify` passed on Eclipse Temurin JDK 17.0.21:
 

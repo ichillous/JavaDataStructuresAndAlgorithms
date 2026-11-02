@@ -17,6 +17,12 @@ level order:A B C D     breadth first
 
 Preorder can serialize shape when absent children are represented. Postorder processes children before parents, useful for deleting subtrees or evaluating expression trees. Level order uses a FIFO queue. Inorder is sorted **only if the BST ordering invariant holds**.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/avl-rotation-dark.svg"><img src="../../docs/visuals/assets/avl-rotation.svg" alt="Inserting 30, 20 and 10 produces a left-heavy chain. A right rotation makes 20 the root with children 10 and 30, preserving in-order traversal and restoring height one." width="520"></picture>
+
+**Figure 07.** The same keys can occupy different shapes. This rotation changes shape while preserving inorder traversal. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Name the shapes precisely
 
 | Term | Meaning |

@@ -7,6 +7,12 @@ vertices are `0..V-1`, duplicate edges are ignored, neighbor order follows inser
 order, and directed edges are traversed only in their given direction. Invalid
 vertices and null graphs are rejected. Do not mutate a graph during a computation.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bfs-frontier-dark.svg"><img src="../../docs/visuals/assets/bfs-frontier.svg" alt="Follow the queue separately from discovery; isolate unreachable vertex 5." width="520"></picture>
+
+**Figure 22.** Follow the queue separately from discovery; isolate unreachable vertex 5. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Queue invariant: discovered once, processed by layer
 
 Mark a vertex when it is **enqueued**, not when it is dequeued. Its first discovery

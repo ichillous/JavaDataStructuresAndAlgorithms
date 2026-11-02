@@ -25,6 +25,12 @@ assert work.peek().equals("outer");
 
 [`ArrayStack`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayStack.java) rejects nulls. Empty `peek` and `pop` throw `NoSuchElementException`; `isEmpty` lets callers express an intentional drain loop.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/stack-lifo-dark.svg"><img src="../../docs/visuals/assets/stack-lifo.svg" alt="Push and pop share the top; the newest value leaves first." width="520"></picture>
+
+**Figure 03.** Push and pop share the top; the newest value leaves first. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Cost model
 
 The backing dynamic array grows geometrically. Push is O(1) amortized but O(n) on a growth event; peek and pop are O(1). Stored capacity is O(n) after growth relative to peak size, and `clear()` retains that capacity. Clearing live references takes O(n).

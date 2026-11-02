@@ -61,3 +61,15 @@ The complete build checks production line coverage >=90% and branch coverage
 invariant reasoning or review. Do not add trivial tests or weaken checks merely
 to inflate a percentage. The CLI must keep useful help and input errors, and both
 its packaged showcase and terminal lessons must run on supported platforms.
+
+## Diagrams and traces
+
+Edit visual definitions under `scripts/visuals/`, then regenerate with
+`python3 scripts/generate_visuals.py`. Do not hand-edit generated SVGs, data or
+marked lesson regions. Keep the canonical properties and Java visual-contract
+tests aligned; intermediate states must preserve the algorithm's invariants.
+Run the generator with `--check`, then
+`python3 -m unittest discover -s scripts/visuals -p 'test_*.py'`.
+Review actual light/dark figures and desktop/phone states after layout changes.
+Keep labels, arrows, alt text, captions and units meaningful. See the
+[visual design guide](docs/visuals/design.md) and [verification](docs/visuals/verification.md).

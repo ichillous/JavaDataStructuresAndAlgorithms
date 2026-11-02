@@ -11,6 +11,12 @@ Methods reject null, accept an empty array and never modify input.
 | `upperBound(a, x)` | First index with value greater than `x`, possibly `a.length` |
 | `binarySearch(a, x)` | First matching index, or `-1` |
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/binary-bound-dark.svg"><img src="../../docs/visuals/assets/binary-bound.svg" alt="Half-open ranges find the first target among duplicate values." width="520"></picture>
+
+**Figure 13.** Half-open ranges find the first target among duplicate values. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## The half-open invariant
 
 For lower bound, every position before `low` contains a value below the target;

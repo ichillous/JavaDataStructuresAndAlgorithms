@@ -4,6 +4,12 @@
 
 This bounds height by O(log n), giving O(log n) worst-case search, insertion and deletion. The tree remains a set: null keys are rejected, and `compareTo == 0` means duplicate.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/avl-rotation-dark.svg"><img src="../../docs/visuals/assets/avl-rotation.svg" alt="Inserting 30, 20 and 10 produces a left-heavy chain. A right rotation makes 20 the root with children 10 and 30, preserving in-order traversal and restoring height one." width="520"></picture>
+
+**Figure 07.** Inserting 30, 20 and 10 produces a left-heavy chain. A right rotation makes 20 the root with children 10 and 30, preserving in-order traversal and restoring height one. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## A rotation preserves sorted order
 
 Insert `30, 20, 10`. The root becomes left-heavy by two levels. A right rotation promotes 20:

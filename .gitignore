@@ -7,3 +7,5 @@
 .settings/
 .DS_Store
 *.class
+__pycache__/
+*.pyc

@@ -1,0 +1,27 @@
+{
+  "svg_variants": 52,
+  "tested_frame_states": 216,
+  "screenshots": [
+    "previews/desktop-light.png",
+    "previews/desktop-dark.png",
+    "previews/mobile-light.png",
+    "previews/mobile-dark.png"
+  ],
+  "issues": [],
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1050
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "review_mode": "Chromium over loopback HTTP; direct file URL navigation blocked by managed browser policy",
+  "date": "2026-11-02"
+}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1210" width="520" height="1210" role="img" aria-labelledby="title desc">
+<title id="title">25  SCCs and bridges differ</title>
+<desc id="desc">Directed return paths form SCCs; undirected essential edges are bridges.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="scc-bridges-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="scc-bridges-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="scc-bridges-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="scc-bridges-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="scc-bridges-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="scc-bridges-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="scc-bridges-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="scc-bridges-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="scc-bridges-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="scc-bridges-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker></defs>
+<rect x="0" y="0" width="520" height="1210" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">25  SCCs and bridges differ</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="28" y="153" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">A. DIRECTED: strong components</text>
+<rect x="40" y="180" width="265" height="124" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<rect x="190" y="350" width="290" height="124" rx="8" fill="#192333" stroke="#f4cf70" stroke-width="2"/>
+<path d="M 120 223 Q 167 180 215 223" fill="none" stroke="#9cbcff" stroke-width="2" marker-end="url(#scc-bridges-blue-arrow)"/>
+<path d="M 215 247 Q 167 290 120 247" fill="none" stroke="#9cbcff" stroke-width="2" marker-end="url(#scc-bridges-blue-arrow)"/>
+<line x1="245.0" y1="267.0" x2="245.0" y2="370.0" stroke="#8291aa" stroke-width="2" marker-end="url(#scc-bridges-line-arrow)"/>
+<path d="M 275 393 Q 332 350 390 393" fill="none" stroke="#9cbcff" stroke-width="2" marker-end="url(#scc-bridges-blue-arrow)"/>
+<path d="M 390 417 Q 332 460 275 417" fill="none" stroke="#9cbcff" stroke-width="2" marker-end="url(#scc-bridges-blue-arrow)"/>
+<circle cx="90" cy="235" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="90" y="242" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">0</text>
+<circle cx="245" cy="235" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="245" y="242" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">1</text>
+<circle cx="245" cy="405" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="245" y="412" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<circle cx="420" cy="405" r="27" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="420" y="412" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="54" y="291" font-size="18" fill="#9cbcff" text-anchor="start" font-weight="700">SCC [0, 1]</text>
+<text x="204" y="461" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">SCC [2, 3]</text>
+<text x="299" y="327" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">one-way</text>
+<text x="28" y="520" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Canonical groups: [0, 1], [2, 3]</text>
+<text x="28" y="558" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Across groups, 1 → 2 has no return path.</text>
+<line x1="28" y1="592" x2="492" y2="592" stroke="#8291aa" stroke-width="1"/>
+<text x="28" y="632" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">B. UNDIRECTED: an essential edge</text>
+<line x1="122.0" y1="705.0" x2="220.0" y2="705.0" stroke="#8291aa" stroke-width="2"/>
+<line x1="241.41811596061697" y1="733.9746859506838" x2="194.8551856680752" y2="833.3089372414396" stroke="#8291aa" stroke-width="2"/>
+<line x1="164.3116403317581" y1="837.1095828120144" x2="107.15914338713957" y2="735.5051437993592" stroke="#8291aa" stroke-width="2"/>
+<line x1="212.0" y1="865.0" x2="385.0" y2="865.0" stroke="#9cbcff" stroke-width="4" stroke-dasharray="7 5"/>
+<circle cx="90" cy="705" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="90" y="712" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">0</text>
+<circle cx="255" cy="705" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="255" y="712" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">1</text>
+<circle cx="180" cy="865" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="180" y="872" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<circle cx="420" cy="865" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="420" y="872" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="28" y="932" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="400">Dashed 2—3 is the only bridge.</text>
+<text x="28" y="970" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Removing it isolates vertex 3.</text>
+<rect x="28" y="1010" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="1041" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="1070" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">SCCs need directed return paths. A</text>
+<text x="44" y="1097" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">bridge is an undirected edge whose</text>
+<text x="44" y="1124" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">removal splits a connected component.</text>
+</svg>

@@ -11,6 +11,12 @@ compatible: one ending at 2 can precede one starting at 2. Integer-extreme
 endpoints are valid. Null collections/elements and empty/backward intervals are
 rejected. The method sorts a copy and returns an immutable schedule.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/activity-selection-dark.svg"><img src="../../docs/visuals/assets/activity-selection.svg" alt="Choose earliest finishing intervals; touching endpoints remain compatible." width="520"></picture>
+
+**Figure 20.** Choose earliest finishing intervals; touching endpoints remain compatible. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Choose the next activity that finishes first
 
 Among activities still compatible with the chosen prefix, take the one with the

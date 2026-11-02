@@ -2,6 +2,12 @@
 
 [`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java) stores a head, a tail, a size and nodes with two links. Values are non-null, order is stable, and indexed methods validate `[0, size)`. Empty endpoint removals throw `NoSuchElementException`.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/linked-unlink-dark.svg"><img src="../../docs/visuals/assets/linked-unlink.svg" alt="Bypass the middle node in both directions, then clear its links." width="520"></picture>
+
+**Figure 02.** Bypass the middle node in both directions, then clear its links. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## The local invariant
 
 If `x.next` is `y`, then `y.previous` must be `x`. The head has no predecessor and the tail has no successor. The empty list has neither endpoint; a one-element list has the same node at both endpoints.

@@ -6,6 +6,12 @@ uses explicit iterator frames rather than Java recursion. This preserves recursi
 neighbor-order behavior while avoiding a call-stack limit on a long chain.
 Null graphs and invalid source indices are rejected; input is unchanged.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/scc-bridges-dark.svg"><img src="../../docs/visuals/assets/scc-bridges.svg" alt="Directed return paths form SCCs; undirected essential edges are bridges." width="520"></picture>
+
+**Figure 25.** Directed return paths form SCCs; undirected essential edges are bridges. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Stack invariant
 
 Active frames represent a path of discovered vertices. Each frame remembers which

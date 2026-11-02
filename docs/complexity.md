@@ -4,6 +4,12 @@ These bounds describe the maintained code in the [catalog](catalog.md) and its e
 
 `C` is retained array capacity (which may exceed current size after removals), `n` is the number of stored elements or input values, `h` is tree height, `V` is the number of vertices, and `E` is the number of graph edges, counting parallel weighted edges. Space means additional working storage unless the table says stored space or includes output. Logarithmic bounds conventionally mean `log(n + 1)` for empty and singleton inputs.
 
+<!-- visual:generated -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="visuals/assets/complexity-growth-dark.svg"><img src="visuals/assets/complexity-growth.svg" alt="Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings." width="520"></picture>
+
+**Figure 26.** Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings. [Visual index and step-throughs](visuals/README.md).
+<!-- /visual:generated -->
+
 ## Data structures
 
 | Implementation / operation | Time | Space and assumptions |

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 1040" width="520" height="1040" role="img" aria-labelledby="title desc">
+<title id="title">26  Compare growth, not timings</title>
+<desc id="desc">Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="complexity-growth-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="complexity-growth-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="complexity-growth-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="complexity-growth-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="complexity-growth-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="complexity-growth-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="complexity-growth-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="complexity-growth-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="complexity-growth-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="complexity-growth-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker></defs>
+<rect x="0" y="0" width="520" height="1040" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">26  Compare growth, not timings</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Complexity · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="74" y="151" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Normalized work (log scale)</text>
+<line x1="74" y1="430.0" x2="466" y2="430.0" stroke="#8291aa" stroke-width="1"/>
+<text x="64" y="436.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">1</text>
+<line x1="74" y1="378.8" x2="466" y2="378.8" stroke="#8291aa" stroke-width="1"/>
+<text x="64" y="384.8" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">10</text>
+<line x1="74" y1="327.6" x2="466" y2="327.6" stroke="#8291aa" stroke-width="1"/>
+<text x="64" y="333.6" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">100</text>
+<line x1="74" y1="276.4" x2="466" y2="276.4" stroke="#8291aa" stroke-width="1"/>
+<text x="64" y="282.4" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">1000</text>
+<line x1="74" y1="225.2" x2="466" y2="225.2" stroke="#8291aa" stroke-width="1"/>
+<text x="64" y="231.2" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">10^4</text>
+<line x1="74" y1="174.0" x2="466" y2="174.0" stroke="#8291aa" stroke-width="1"/>
+<text x="64" y="180.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">10^5</text>
+<line x1="74" y1="174" x2="74" y2="430" stroke="#eef2f8" stroke-width="2"/>
+<line x1="74" y1="430" x2="466" y2="430" stroke="#eef2f8" stroke-width="2"/>
+<text x="74.0" y="458" font-size="18" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<text x="152.4" y="458" font-size="18" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<text x="256.93333333333334" y="458" font-size="18" fill="#eef2f8" text-anchor="middle" font-weight="400">8</text>
+<text x="361.46666666666664" y="458" font-size="18" fill="#eef2f8" text-anchor="middle" font-weight="400">12</text>
+<text x="466.0" y="458" font-size="18" fill="#eef2f8" text-anchor="middle" font-weight="400">16</text>
+<text x="270.0" y="490" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">Input size n (elements)</text>
+<path d="M 74.00 430.00 L 100.13 419.76 L 126.27 414.59 L 152.40 411.27 L 178.53 408.88 L 204.67 407.05 L 230.80 405.57 L 256.93 404.35 L 283.07 403.30 L 309.20 402.40 L 335.33 401.61 L 361.47 400.91 L 387.60 400.27 L 413.73 399.70 L 439.87 399.17 L 466.00 398.69" fill="none" stroke="#9cbcff" stroke-width="3"/>
+<path d="M 74.00 430.00 L 100.13 414.59 L 126.27 405.57 L 152.40 399.17 L 178.53 394.21 L 204.67 390.16 L 230.80 386.73 L 256.93 383.76 L 283.07 381.14 L 309.20 378.80 L 335.33 376.68 L 361.47 374.75 L 387.60 372.97 L 413.73 371.32 L 439.87 369.78 L 466.00 368.35" fill="none" stroke="#eef2f8" stroke-width="3"/>
+<path d="M 74.00 430.00 L 100.13 404.35 L 126.27 390.16 L 152.40 380.44 L 178.53 373.10 L 204.67 367.21 L 230.80 362.30 L 256.93 358.11 L 283.07 354.45 L 309.20 351.20 L 335.33 348.29 L 361.47 345.65 L 387.60 343.24 L 413.73 341.02 L 439.87 338.96 L 466.00 337.04" fill="none" stroke="#9cbcff" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M 74.00 430.00 L 100.13 399.17 L 126.27 381.14 L 152.40 368.35 L 178.53 358.43 L 204.67 350.32 L 230.80 343.46 L 256.93 337.52 L 283.07 332.29 L 309.20 327.60 L 335.33 323.36 L 361.47 319.49 L 387.60 315.93 L 413.73 312.64 L 439.87 309.57 L 466.00 306.70" fill="none" stroke="#ffaaa1" stroke-width="3"/>
+<path d="M 74.00 430.00 L 100.13 414.59 L 126.27 399.17 L 152.40 383.76 L 178.53 368.35 L 204.67 352.94 L 230.80 337.52 L 256.93 322.11 L 283.07 306.70 L 309.20 291.29 L 335.33 275.87 L 361.47 260.46 L 387.60 245.05 L 413.73 229.63 L 439.87 214.22 L 466.00 198.81" fill="none" stroke="#ffaaa1" stroke-width="3" stroke-dasharray="7 5"/>
+<line x1="42" y1="518" x2="90" y2="518" stroke="#9cbcff" stroke-width="3"/>
+<text x="106" y="524" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">log2(n+1)</text>
+<text x="472" y="524" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="400">4.1</text>
+<line x1="42" y1="557" x2="90" y2="557" stroke="#eef2f8" stroke-width="3"/>
+<text x="106" y="563" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">n</text>
+<text x="472" y="563" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="400">16.0</text>
+<line x1="42" y1="596" x2="90" y2="596" stroke="#9cbcff" stroke-width="3" stroke-dasharray="7 5"/>
+<text x="106" y="602" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">n log2(n+1)</text>
+<text x="472" y="602" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="400">65.4</text>
+<line x1="42" y1="635" x2="90" y2="635" stroke="#ffaaa1" stroke-width="3"/>
+<text x="106" y="641" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">n²</text>
+<text x="472" y="641" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="400">256.0</text>
+<line x1="42" y1="674" x2="90" y2="674" stroke="#ffaaa1" stroke-width="3" stroke-dasharray="7 5"/>
+<text x="106" y="680" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">2^(n-1)</text>
+<text x="472" y="680" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="400">32768.0</text>
+<text x="472" y="496" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">at n=16</text>
+<text x="30" y="744" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">All five functions equal 1 at n=1.</text>
+<text x="30" y="771" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Logarithmic y spacing compresses large</text>
+<text x="30" y="798" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">gaps; it does not make them small.</text>
+<rect x="28" y="840" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="871" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="900" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">These are chosen mathematical functions</text>
+<text x="44" y="927" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">in arbitrary work units. Big-O is a</text>
+<text x="44" y="954" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">bound, not a stopwatch or a speedup</text>
+<text x="44" y="981" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">claim.</text>
+</svg>
