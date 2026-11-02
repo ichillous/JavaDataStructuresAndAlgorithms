@@ -1,222 +1,76 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Array operations: move the right elements
 
+Use [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) to study resizable indexed storage. The implementation owns its backing array, preserves insertion order, rejects null elements and exposes only the live prefix through its iterator.
 
----
+## Insertion and removal invariants
 
-# 🛠️ Array Operations in Java
+To insert `X` at index 1 in `[A, B, C]`, first ensure capacity. Shift elements **right to left**, then write `X` and increase size.
 
-![Java Arrays Operations](https://img.shields.io/badge/Java-Array_Operations-blue?style=for-the-badge&logo=java)
+```text
+before         A B C _
+move C         A B C C
+move B         A B B C
+write X        A X B C
+```
 
-## 📋 Table of Contents
-- [Introduction](#-introduction)
-- [Basic Array Operations](#-basic-array-operations)
-  - [Traversing an Array](#-traversing-an-array)
-  - [Insertion](#-insertion)
-  - [Deletion](#-deletion)
-  - [Searching](#-searching)
-  - [Updating](#-updating)
-- [Advanced Array Operations](#-advanced-array-operations)
-  - [Array Rotation](#-array-rotation)
-  - [Array Reversal](#-array-reversal)
-  - [Merging Arrays](#-merging-arrays)
-  - [Splitting Arrays](#-splitting-arrays)
-  - [Array Resizing](#-array-resizing)
-- [Performance Considerations](#-performance-considerations)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
+Copying left to right would overwrite `C` before it could be moved. Removal goes in the opposite direction: shift the suffix left, reduce size, and clear the vacated last reference so removed objects can be collected.
 
-## 🌟 Introduction
-
-Array operations are essential in managing and manipulating data in Java. Mastering these operations enables efficient data handling, which is crucial for performance optimization and solving complex problems.
-
-## 📝 Basic Array Operations
-
-### 🔄 Traversing an Array
-
-Traversing an array means accessing each element sequentially.
-
-#### Using a for loop:
 ```java
-int[] numbers = {10, 20, 30, 40, 50};
-for (int i = 0; i < numbers.length; i++) {
-    System.out.println("Element at index " + i + ": " + numbers[i]);
+import io.github.ichillous.dsa.collections.DynamicArray;
+
+DynamicArray<Integer> values = new DynamicArray<>(1);
+values.add(10);
+values.add(30);
+values.add(1, 20);
+int removed = values.remove(0);
+int previous = values.set(1, 99);
+assert removed == 10;
+assert previous == 30;
+assert values.size() == 2;
+assert values.get(0) == 20 && values.get(1) == 99;
+```
+
+`set` replaces a value and returns the previous value; it does not change size. `remove(int)` removes by index, unlike the overloaded value-removal APIs on some JDK lists. `clear()` retains capacity for reuse.
+
+## Boundaries are part of the API
+
+```java
+import io.github.ichillous.dsa.collections.DynamicArray;
+
+DynamicArray<String> values = new DynamicArray<>();
+values.add(0, "first"); // Insertion at size is allowed.
+boolean rejected = false;
+try {
+    values.get(values.size()); // Reading at size is not allowed.
+} catch (IndexOutOfBoundsException expected) {
+    rejected = true;
 }
+assert rejected;
+assert values.size() == 1;
 ```
 
-#### Using an enhanced for loop (for-each):
+## Aggregates without shifting
+
+A [Fenwick tree](../../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java) stores sums of selected intervals. At internal one-based index `i`, the low set bit `i & -i` determines the interval length. A prefix query repeatedly removes that low bit; a point addition visits the ancestors covering that position.
+
 ```java
-int[] numbers = {10, 20, 30, 40, 50};
-for (int num : numbers) {
-    System.out.println("Element: " + num);
-}
+import io.github.ichillous.dsa.structures.FenwickTree;
+
+FenwickTree sums = new FenwickTree(new long[] {2, -1, 4, 3});
+assert sums.prefixSum(3) == 5;
+sums.add(1, 5); // The logical values are now [2, 4, 4, 3].
+assert sums.rangeSum(1, 3) == 8;
+assert sums.rangeSum(2, 2) == 0;
 ```
 
-### ➕ Insertion
+Fenwick construction costs O(n) time/space; updates and queries cost O(log n) time. Checked intermediate overflow throws `ArithmeticException`; an overflowing update leaves the tree unchanged. It supports additions, not an O(1) general-purpose `set`.
 
-Inserting an element in an array involves adding a new value at a specific position. Due to fixed-size nature, insertion may require shifting elements or creating a new array.
+Dynamic-array access/replacement is O(1), indexed shifting is O(n), and append is O(1) amortized with O(n) resize events. Iterators fail fast after structural changes; replacing an element is not structural. Fail-fast behavior detects mistakes and does not make concurrent mutation safe.
 
-#### Example: Inserting at a specific index:
-```java
-int[] numbers = {10, 20, 30, 40, 50};
-int position = 2;
-int newValue = 25;
+## Practice
 
-for (int i = numbers.length - 1; i > position; i--) {
-    numbers[i] = numbers[i - 1];
-}
-numbers[position] = newValue;
-```
+1. Draw every write when inserting at the front of a full array.
+2. Derive `[from, to)` sum as the difference of two prefix sums, including an empty range.
+3. Add a reference-array model test for random Fenwick additions and all valid ranges; separately test overflow atomicity.
 
-### ➖ Deletion
-
-Deleting an element from an array involves removing an element and shifting the subsequent elements to fill the gap.
-
-#### Example: Deleting an element at a specific index:
-```java
-int[] numbers = {1, 2, 3, 4, 5};
-        int position = 1;
-        int[] newArray = new int[numbers.length -1];
-        int newPosition = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            if(i != position) {
-                newArray[newPosition] = numbers[i];
-                newPosition++;
-            }
-        }
-
-        System.out.println(Arrays.toString(newArray));
-// Optionally reduce the size of the array or mark the last element as null/zero.
-```
-
-### 🔍 Searching
-
-Searching involves finding the index of a specific element.
-
-#### Example: Linear Search
-```java
-int[] numbers = {10, 20, 30, 40, 50};
-int target = 30;
-int index = -1;
-
-for (int i = 0; i < numbers.length; i++) {
-    if (numbers[i] == target) {
-        index = i;
-        break;
-    }
-}
-System.out.println("Element found at index: " + index);
-```
-
-### ✏️ Updating
-
-Updating an array element means modifying the value at a particular index.
-
-#### Example: Updating an element:
-```java
-int[] numbers = {10, 20, 30, 40, 50};
-int position = 2;
-int newValue = 35;
-
-numbers[position] = newValue;
-System.out.println("Updated element at index " + position + ": " + numbers[position]);
-```
-
-## 🚀 Advanced Array Operations
-
-### 🔄 Array Rotation
-
-Array rotation involves shifting the elements of the array in a circular manner.
-
-#### Example: Left rotation by one position:
-```java
-int[] numbers = {10, 20, 30, 40, 50};
-int temp = numbers[0];
-
-for (int i = 0; i < numbers.length - 1; i++) {
-    numbers[i] = numbers[i + 1];
-}
-numbers[numbers.length - 1] = temp;
-```
-
-### 🔄 Array Reversal
-
-Reversing an array involves swapping elements from both ends until you reach the middle.
-
-#### Example: Reversing an array:
-```java
-int[] numbers = {10, 20, 30, 40, 50};
-int start = 0;
-int end = numbers.length - 1;
-
-while (start < end) {
-    int temp = numbers[start];
-    numbers[start] = numbers[end];
-    numbers[end] = temp;
-    start++;
-    end--;
-}
-```
-
-### ➕ Merging Arrays
-
-Merging arrays involves combining elements of two or more arrays into a single array.
-
-#### Example: Merging two arrays:
-```java
-int[] first = {1, 2, 3};
-int[] second = {4, 5, 6};
-int[] merged = new int[first.length + second.length];
-
-System.arraycopy(first, 0, merged, 0, first.length);
-System.arraycopy(second, 0, merged, first.length, second.length);
-```
-
-### ➗ Splitting Arrays
-
-Splitting an array involves dividing it into two or more sub-arrays.
-
-#### Example: Splitting an array into two:
-```java
-int[] numbers = {10, 20, 30, 40, 50};
-int splitIndex = 3;
-
-int[] firstPart = Arrays.copyOfRange(numbers, 0, splitIndex);
-int[] secondPart = Arrays.copyOfRange(numbers, splitIndex, numbers.length);
-```
-
-### 🔄 Array Resizing
-
-Since arrays in Java have a fixed size, resizing typically involves creating a new array with the desired size and copying the elements from the original array.
-
-#### Example: Resizing an array:
-```java
-int[] numbers = {10, 20, 30};
-int newSize = 5;
-int[] resized = Arrays.copyOf(numbers, newSize);
-// resized array is {10, 20, 30, 0, 0}
-```
-
-## ⚙️ Performance Considerations
-
-- **Time Complexity**: Most array operations (accessing, updating) are O(1), while others like insertion, deletion, or searching can be O(n).
-- **Space Complexity**: Arrays consume linear space O(n). Be mindful of memory usage, especially with large arrays.
-- **Copying and Resizing**: These operations involve additional space and time complexity.
-
-## ⚠️ Common Pitfalls and Best Practices
-
-1. **🚫 Array Index Out of Bounds**: Always ensure your indices are within valid ranges.
-2. **💾 Memory Management**: Large arrays can consume significant memory. Consider using `ArrayList` for dynamic sizing.
-3. **🔄 Shifting Elements**: Insertions and deletions require shifting elements, which can be costly in terms of performance.
-4. **🔍 Null Checks**: Be careful with arrays that may not have been initialized.
-5. **🔗 Use Utilities**: Leverage `java.util.Arrays` for operations like sorting, searching, and copying to avoid manual errors.
-
-## 🎓 Conclusion
-
-Understanding and effectively utilizing array operations in Java is essential for efficient data manipulation. By mastering these operations, you can tackle a wide range of problems, optimize performance, and write cleaner code.
-
-Key takeaways:
-- 🔄 Master both basic and advanced array operations.
-- ⚙️ Be aware of the performance implications of array operations.
-- 🚀 Practice regularly to build intuition and proficiency with arrays in Java.
-
----
+See the [worked solutions](../../docs/solutions.md), then compare [linked storage](../linked-lists/overview.md).

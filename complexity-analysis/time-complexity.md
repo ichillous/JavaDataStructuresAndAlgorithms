@@ -1,276 +1,81 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../docs/catalog.md) for maintained source and tests. See the [migration guide](../docs/migration.md) for the relationship between notes and code.
+# Time complexity: name the input and the case
 
-# Time Complexity
+A complexity statement describes how a count of operations grows with an input
+parameter. It is not a stopwatch result. State what `n` means, what counts as a
+constant-time operation, and whether the bound is worst-case, best-case, expected
+or amortized. The [maintained table](../docs/complexity.md) applies these choices
+to the actual source implementations.
 
-Time complexity is a crucial concept in algorithm analysis that helps us understand how the runtime of an algorithm grows as the input size increases. It provides a way to express the efficiency of algorithms in terms of the number of operations performed.
+## Upper, lower and tight bounds
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Big O Notation](#big-o-notation)
-- [Common Time Complexities](#common-time-complexities)
-- [Analyzing Time Complexity](#analyzing-time-complexity)
-- [Best, Average, and Worst Case](#best-average-and-worst-case)
-- [Examples in Java](#examples-in-java)
+`O(f(n))` is an asymptotic upper bound, `Ω(f(n))` a lower bound and `Θ(f(n))` a
+matching pair. Big O does not intrinsically mean “worst case”: specify the running
+cost function being bounded. A linear scan has constant best-case time for a
+first-position hit and linear worst-case time for absence.
 
-## Introduction
+```java
+import io.github.ichillous.dsa.algorithms.SearchAlgorithms;
 
-Time complexity describes the amount of time an algorithm takes to run as a function of the input size. It focuses on how the algorithm's performance scales with larger inputs, rather than the exact number of operations or time in seconds.
+int[] values = {8, 3, 5, 1};
+assert SearchAlgorithms.linearSearch(values, 8) == 0;
+assert SearchAlgorithms.linearSearch(values, 9) == -1;
+assert SearchAlgorithms.binarySearch(new int[] {1, 3, 5, 8}, 5) == 2;
+```
 
-## Big O Notation
+The scan performs at most `n` equality checks. Binary search shrinks an already
+sorted unknown interval by a constant factor, so it uses O(log(n + 1)) comparisons.
+Sorting or validating first must be included when it is part of the requested task.
 
-Big O notation is used to describe the upper bound of the time complexity. It provides a standardized way to express how the runtime grows in the worst-case scenario.
+## Count the actual iteration ranges
 
-Common Big O notations:
-- O(1): Constant time
-- O(log n): Logarithmic time
-- O(n): Linear time
-- O(n log n): Linearithmic time
-- O(n²): Quadratic time
-- O(2ⁿ): Exponential time
+For two full loops of length `n`, the count is `n²`. For a triangular loop, it is
+`1 + 2 + ... + n = n(n+1)/2`, still Θ(n²). The invariant is that the counter equals
+the number of innermost visits completed so far; the ranges determine the sum.
 
-## Common Time Complexities
+```java
+int n = 8;
+long squareVisits = 0L;
+long triangularVisits = 0L;
+for (int row = 0; row < n; row++) {
+    for (int column = 0; column < n; column++) {
+        squareVisits++;
+    }
+    for (int column = 0; column <= row; column++) {
+        triangularVisits++;
+    }
+}
+assert squareVisits == 64L;
+assert triangularVisits == 36L;
+```
 
-1. **Constant Time - O(1)**: The algorithm takes the same amount of time regardless of the input size.
-   Example: Accessing an array element by index.
+**Counterexample:** nested loops are not automatically quadratic. If the inner
+loop doubles a positive index until it reaches `n`, it performs O(log n) visits
+per outer iteration, giving O(n log n). If both indices move monotonically across
+the array and never restart, two nested-looking loops may total only O(n).
 
-2. **Logarithmic Time - O(log n)**: The runtime grows logarithmically with the input size.
-   Example: Binary search on a sorted array.
+## Four distinct qualifiers
 
-3. **Linear Time - O(n)**: The runtime grows linearly with the input size.
-   Example: Traversing an array or linked list.
+| Qualifier | Meaning | Example assumption |
+| --- | --- | --- |
+| Worst case | Upper bound for every valid input of the stated size | Unbalanced BST can have height `n` |
+| Best case | Cheapest valid input of that size | Early-exit bubble sort on sorted input |
+| Expected | Average under a stated probabilistic/distribution model | Hash chains stay short with suitable key distribution |
+| Amortized | Total bound over a sequence, without randomness | Geometric array growth gives O(1) append per operation amortized |
 
-4. **Linearithmic Time - O(n log n)**: Common in efficient sorting algorithms.
-   Example: Merge Sort, Quick Sort (average case).
+A single dynamic-array append can copy all existing elements. Amortized O(1) does
+not promise constant latency for that append. An adversarial hash distribution
+can make a lookup linear even when load factor is bounded.
 
-5. **Quadratic Time - O(n²)**: The runtime grows quadratically with the input size.
-   Example: Nested loops, simple sorting algorithms like Bubble Sort.
+Primitive comparisons and arithmetic are usually treated as O(1) in this library's
+RAM model. Comparing long strings or adding growing `BigInteger` values requires
+including their lengths. Amount-based DP is pseudopolynomial in its numeric
+amount, and enumeration may require output proportional to `n!`.
 
-6. **Exponential Time - O(2ⁿ)**: The runtime doubles with each addition to the input.
-   Example: Recursive calculation of Fibonacci numbers without memoization.
+## Practice
 
-## Analyzing Time Complexity
+1. Derive the exact counts in the two loops for general `n` before simplifying.
+2. Explain why checking sortedness inside every binary-search call costs O(n).
+3. Distinguish a typical quicksort partition shape from a randomized expected bound.
 
-To analyze time complexity:
-1. Identify the basic operations in the algorithm.
-2. Count how many times these operations are executed.
-3. Express this count as a function of the input size.
-4. Simplify the function to its dominant term.
-5. Express the result using Big O notation.
-
-# Time Complexity
-
-Time complexity is a crucial concept in algorithm analysis that helps us understand how the runtime of an algorithm grows as the input size increases. It provides a way to express the efficiency of algorithms in terms of the number of operations performed.
-
-## Table of Contents
-- [Introduction](#introduction)
-- [Big O Notation](#big-o-notation)
-- [Common Time Complexities](#common-time-complexities)
-- [Analyzing Time Complexity](#analyzing-time-complexity)
-- [Best, Average, and Worst Case](#best-average-and-worst-case)
-- [Examples in Java](#examples-in-java)
-
-## Introduction
-
-Time complexity describes the amount of time an algorithm takes to run as a function of the input size. It focuses on how the algorithm's performance scales with larger inputs, rather than the exact number of operations or time in seconds.
-
-## Big O Notation
-
-Big O notation is used to describe the upper bound of the time complexity. It provides a standardized way to express how the runtime grows in the worst-case scenario.
-
-Common Big O notations:
-- O(1): Constant time
-- O(log n): Logarithmic time
-- O(n): Linear time
-- O(n log n): Linearithmic time
-- O(n²): Quadratic time
-- O(2ⁿ): Exponential time
-
-## Common Time Complexities
-
-1. **Constant Time - O(1)**: The algorithm takes the same amount of time regardless of the input size.
-   Example: Accessing an array element by index.
-
-2. **Logarithmic Time - O(log n)**: The runtime grows logarithmically with the input size.
-   Example: Binary search on a sorted array.
-
-3. **Linear Time - O(n)**: The runtime grows linearly with the input size.
-   Example: Traversing an array or linked list.
-
-4. **Linearithmic Time - O(n log n)**: Common in efficient sorting algorithms.
-   Example: Merge Sort, Quick Sort (average case).
-
-5. **Quadratic Time - O(n²)**: The runtime grows quadratically with the input size.
-   Example: Nested loops, simple sorting algorithms like Bubble Sort.
-
-6. **Exponential Time - O(2ⁿ)**: The runtime doubles with each addition to the input.
-   Example: Recursive calculation of Fibonacci numbers without memoization.
-
-## Analyzing Time Complexity
-
-To analyze time complexity:
-1. Identify the basic operations in the algorithm.
-2. Count how many times these operations are executed.
-3. Express this count as a function of the input size.
-4. Simplify the function to its dominant term.
-5. Express the result using Big O notation.
-
-## Best, Average, and Worst Case
-
-- **Best Case**: The minimum time required for an algorithm (optimal input).
-- **Average Case**: The expected time for typical inputs.
-- **Worst Case**: The maximum time required (least optimal input).
-
-We usually focus on the worst-case scenario to ensure our algorithm performs well under all conditions.
-
-## Examples in Java
-
-Here are several examples of Java code with different time complexities, ranging from simple to complex:
-
-1. **Constant Time - O(1)**
-   ```java
-   public int getFirstElement(int[] array) {
-       return array[0];
-   }
-   ```
-
-2. **Linear Time - O(n)**
-   ```java
-   public boolean linearSearch(int[] array, int target) {
-       for (int element : array) {
-           if (element == target) {
-               return true;
-           }
-       }
-       return false;
-   }
-   ```
-
-3. **Logarithmic Time - O(log n)**
-   ```java
-   public int binarySearch(int[] sortedArray, int target) {
-       int left = 0;
-       int right = sortedArray.length - 1;
-       
-       while (left <= right) {
-           int mid = left + (right - left) / 2;
-           if (sortedArray[mid] == target) {
-               return mid;
-           }
-           if (sortedArray[mid] < target) {
-               left = mid + 1;
-           } else {
-               right = mid - 1;
-           }
-       }
-       return -1;
-   }
-   ```
-
-4. **Linearithmic Time - O(n log n)**
-   ```java
-   public void mergeSort(int[] arr, int left, int right) {
-       if (left < right) {
-           int mid = (left + right) / 2;
-           mergeSort(arr, left, mid);
-           mergeSort(arr, mid + 1, right);
-           merge(arr, left, mid, right);
-       }
-   }
-
-   private void merge(int[] arr, int left, int mid, int right) {
-       // Merge two sorted subarrays
-       // Implementation details omitted for brevity
-   }
-   ```
-
-5. **Quadratic Time - O(n²)**
-   ```java
-   public void bubbleSort(int[] array) {
-       int n = array.length;
-       for (int i = 0; i < n - 1; i++) {
-           for (int j = 0; j < n - i - 1; j++) {
-               if (array[j] > array[j + 1]) {
-                   // Swap elements
-                   int temp = array[j];
-                   array[j] = array[j + 1];
-                   array[j + 1] = temp;
-               }
-           }
-       }
-   }
-   ```
-
-6. **Exponential Time - O(2ⁿ)**
-   ```java
-   public int fibonacci(int n) {
-       if (n <= 1) {
-           return n;
-       }
-       return fibonacci(n - 1) + fibonacci(n - 2);
-   }
-   ```
-
-7. **Polynomial Time - O(n³)**
-   ```java
-   public void tripleNestedLoop(int n) {
-       for (int i = 0; i < n; i++) {
-           for (int j = 0; j < n; j++) {
-               for (int k = 0; k < n; k++) {
-                   System.out.println("i: " + i + ", j: " + j + ", k: " + k);
-               }
-           }
-       }
-   }
-   ```
-
-8. **Combination of Time Complexities**
-   ```java
-   public void combinedComplexity(int[] arr, int target) {
-       // O(n log n)
-       Arrays.sort(arr);
-       
-       // O(n)
-       for (int i = 0; i < arr.length; i++) {
-           // O(log n)
-           if (binarySearch(arr, target - arr[i]) != -1) {
-               System.out.println("Found pair: " + arr[i] + ", " + (target - arr[i]));
-               return;
-           }
-       }
-       System.out.println("No pair found");
-   }
-   
-   // Total time complexity: O(n log n) + O(n * log n) = O(n log n)
-   ```
-
-9. **Amortized Time Complexity - ArrayList's add operation**
-   ```java
-   public class DynamicArray<T> {
-       private Object[] array;
-       private int size;
-       private int capacity;
-
-       public DynamicArray() {
-           array = new Object[2];
-           size = 0;
-           capacity = 2;
-       }
-
-       // Amortized O(1) time complexity
-       public void add(T element) {
-           if (size == capacity) {
-               resize();
-           }
-           array[size++] = element;
-       }
-
-       private void resize() {
-           capacity *= 2;
-           Object[] newArray = new Object[capacity];
-           System.arraycopy(array, 0, newArray, 0, size);
-           array = newArray;
-       }
-   }
-   ```
-
-Understanding these examples and their time complexities helps in choosing the right algorithms and data structures for efficient problem-solving, especially when dealing with large datasets. It's important to consider not only the worst-case scenario but also the average case and how the algorithm behaves with different input sizes and patterns.
+Continue with [recurrences and amortization](../algorithms/complexity-analysis/time-complexity.md),
+then check the [solutions](../docs/solutions.md).

@@ -1,252 +1,71 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Doubly linked lists: repair both neighbors
 
----
+[`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java) stores a head, a tail, a size and nodes with two links. Values are non-null, order is stable, and indexed methods validate `[0, size)`. Empty endpoint removals throw `NoSuchElementException`.
 
-# 🔗 Doubly Linked List in Java
+## The local invariant
 
-![Java Doubly Linked List](https://img.shields.io/badge/Java-Doubly_Linked_List-purple?style=for-the-badge&logo=java)
+If `x.next` is `y`, then `y.previous` must be `x`. The head has no predecessor and the tail has no successor. The empty list has neither endpoint; a one-element list has the same node at both endpoints.
 
-## 📋 Table of Contents
-- [Introduction](#-introduction)
-- [Structure of a Doubly Linked List](#-structure-of-a-doubly-linked-list)
-- [Basic Operations](#-basic-operations)
-  - [Insertion](#-insertion)
-  - [Deletion](#-deletion)
-  - [Traversal](#-traversal)
-  - [Search](#-search)
-- [Advantages and Disadvantages](#-advantages-and-disadvantages)
-- [Use Cases](#-use-cases)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
+```text
+before:  A <-> B <-> C
+          \         /
+after:     A <-> C
 
-## 🌟 Introduction
-
-A **doubly linked list** is a type of linked list where each node contains references to both the next and previous nodes in the sequence. This allows traversal in both directions, making operations like insertion and deletion more versatile compared to a singly linked list.
-
-### Key Characteristics:
-- **Bidirectional Traversal**: Nodes can be traversed from both the head and the tail.
-- **Efficient Insertion/Deletion**: Operations at both ends of the list or in the middle are more efficient.
-- **Increased Memory Usage**: Requires more memory due to the additional reference (pointer) to the previous node.
-
-## 🛠️ Structure of a Doubly Linked List
-
-A doubly linked list consists of nodes where each node contains:
-1. **Data**: The value stored in the node.
-2. **Next**: A reference (or pointer) to the next node.
-3. **Previous**: A reference (or pointer) to the previous node.
-
-### Basic Node Structure:
-```java
-class Node {
-    int data;
-    Node next;
-    Node prev;
-
-    Node(int data) {
-        this.data = data;
-        this.next = null;
-        this.prev = null;
-    }
-}
+unlink B:
+  A.next becomes C
+  C.previous becomes A
 ```
 
-### Doubly Linked List Class:
-```java
-class DoublyLinkedList {
-    Node head;
+When a neighbor is absent, update the corresponding endpoint instead. Unlinking the only node therefore resets both head and tail. The implementation clears removed links so that an obsolete node does not unnecessarily retain the rest of the sequence.
 
-    // Methods for various operations (insertion, deletion, traversal, etc.)
-}
+```java
+import io.github.ichillous.dsa.collections.DoublyLinkedList;
+
+DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+list.addLast(10);
+list.addLast(20);
+list.addLast(30);
+int middle = list.remove(1);
+int front = list.removeFirst();
+int back = list.removeLast();
+assert middle == 20 && front == 10 && back == 30;
+assert list.isEmpty();
+list.addFirst(99);
+assert list.get(0) == 99 && list.size() == 1;
 ```
 
-## 🔧 Basic Operations
+## Traversal and iterator contracts
 
-### ➕ Insertion
+Index lookup starts from the nearer endpoint, taking O(min(i, n - 1 - i)) link steps. The implementation does not expose nodes, so `remove(index)` still includes this search. Once the node is found, unlinking is O(1).
 
-Insertion in a doubly linked list can occur at the beginning, end, or any specific position, with ease of linking nodes in both directions.
-
-#### Insertion at the Beginning:
 ```java
-class DoublyLinkedList {
-    Node head;
+import io.github.ichillous.dsa.collections.DoublyLinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
-    // Insert a new node at the beginning
-    public void insertAtBeginning(int data) {
-        Node newNode = new Node(data);
-        newNode.next = head;
-        if (head != null) {
-            head.prev = newNode;
-        }
-        head = newNode;
-    }
-}
+DoublyLinkedList<String> list = new DoublyLinkedList<>();
+list.addLast("old");
+list.addLast("tail");
+var iterator = list.iterator();
+list.set(0, "new"); // Replacement is not a structural change.
+assert iterator.next().equals("new");
+List<String> observed = new ArrayList<>();
+for (String value : list) observed.add(value);
+assert observed.equals(List.of("new", "tail"));
 ```
 
-#### Insertion at the End:
-```java
-class DoublyLinkedList {
-    Node head;
+Adding, removing or clearing invalidates existing iterators, which fail fast. Iterator `remove` is unsupported. Fail-fast detection is for misuse, not synchronization; these collections are not thread safe.
 
-    // Insert a new node at the end
-    public void insertAtEnd(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            return;
-        }
-        Node current = head;
-        while (current.next != null) {
-            current = current.next;
-        }
-        current.next = newNode;
-        newNode.prev = current;
-    }
-}
-```
+## Why this matters for an LRU cache
 
-### ➖ Deletion
+An LRU cache combines a key-to-node hash map with a doubly linked recency list. A lookup obtains the exact node; moving that node to the most-recent end is O(1). Searching this standalone list for a key on each hit would lose the expected O(1) cache operation bound. Read [`LruCache`](../../src/main/java/io/github/ichillous/dsa/collections/LruCache.java) for that composition.
 
-Deletion in a doubly linked list involves unlinking a node from both its previous and next nodes, making it more versatile than singly linked lists.
+Endpoint updates cost O(1); indexed operations cost O(n) worst case; full iteration and clear cost O(n). Nodes use O(n) stored space and endpoint changes use O(1) workspace.
 
-#### Deletion of a Node by Value:
-```java
-class DoublyLinkedList {
-    Node head;
+## Practice
 
-    // Delete a node with a specific value
-    public void deleteByValue(int key) {
-        Node current = head;
+1. Trace deleting the first, last and only node, naming every modified link or endpoint.
+2. Add a test that alternates removals from both ends until empty, then reuses the list.
+3. Model random operations with `LinkedList`; compare sequence, size and returned values after every operation.
 
-        // If the head node itself holds the key to be deleted
-        if (current != null && current.data == key) {
-            head = current.next;
-            if (head != null) {
-                head.prev = null;
-            }
-            return;
-        }
-
-        // Search for the key to be deleted
-        while (current != null && current.data != key) {
-            current = current.next;
-        }
-
-        // If key was not present in the list
-        if (current == null) return;
-
-        // Unlink the node from the list
-        if (current.next != null) {
-            current.next.prev = current.prev;
-        }
-        if (current.prev != null) {
-            current.prev.next = current.next;
-        }
-    }
-}
-```
-
-### 🔄 Traversal
-
-Traversal in a doubly linked list can be done in both forward and reverse directions.
-
-#### Forward Traversal:
-```java
-class DoublyLinkedList {
-    Node head;
-
-    // Traverse the list in forward direction
-    public void traverseForward() {
-        Node current = head;
-        while (current != null) {
-            System.out.println(current.data);
-            current = current.next;
-        }
-    }
-}
-```
-
-#### Reverse Traversal:
-```java
-class DoublyLinkedList {
-    Node head;
-
-    // Traverse the list in reverse direction
-    public void traverseBackward() {
-        Node current = head;
-        if (current == null) return;
-
-        // Move to the end of the list
-        while (current.next != null) {
-            current = current.next;
-        }
-
-        // Traverse backward
-        while (current != null) {
-            System.out.println(current.data);
-            current = current.prev;
-        }
-    }
-}
-```
-
-### 🔍 Search
-
-Searching in a doubly linked list is similar to a singly linked list but can be more flexible with bidirectional traversal.
-
-#### Example of Search:
-```java
-class DoublyLinkedList {
-    Node head;
-
-    // Search for a specific value in the list
-    public boolean search(int key) {
-        Node current = head;
-        while (current != null) {
-            if (current.data == key) {
-                return true;
-            }
-            current = current.next;
-        }
-        return false;
-    }
-}
-```
-
-## ⚖️ Advantages and Disadvantages
-
-### Advantages:
-- **Bidirectional Traversal**: Allows traversal in both directions, which is useful for certain algorithms.
-- **Efficient Insertion/Deletion**: Can easily insert or delete nodes from both ends or in the middle.
-- **More Flexible**: Suitable for complex data structures like queues, deques, and navigation systems.
-
-### Disadvantages:
-- **Increased Memory Usage**: Requires additional memory for the `prev` pointer.
-- **More Complex Implementation**: More pointers mean more complexity in managing the links.
-- **Slower Operations**: Additional overhead in maintaining two pointers can slow down operations slightly compared to singly linked lists.
-
-## 💡 Use Cases
-
-Doubly linked lists are useful in scenarios where:
-- **Bidirectional Navigation**: Required for data structures like deques or complex navigation systems.
-- **Frequent Insertions/Deletions**: Efficient for operations that involve both ends or mid-list modifications.
-- **Undo Operations**: Suitable for applications where you need to move backward and forward, like text editors.
-
-## ⚠️ Common Pitfalls and Best Practices
-
-1. **🚫 Null Pointer Issues**: Always check for null pointers when modifying the list, especially during insertion and deletion.
-2. **🔄 Infinite Loops**: Be careful to correctly update both `next` and `prev` pointers to avoid creating cycles.
-3. **📏 Memory Management**: Be mindful of the increased memory usage due to the additional `prev` pointer.
-4. **Efficiency**: Consider the trade-off between flexibility and memory/performance overhead.
-
-## 🎓 Conclusion
-
-Doubly linked lists provide enhanced flexibility with bidirectional traversal, making them ideal for certain applications where singly linked lists may fall short. While they come with increased complexity and memory usage, the advantages they offer often outweigh these drawbacks in appropriate use cases.
-
-Key takeaways:
-- **Bidirectional Flexibility**: Doubly linked lists allow both forward and backward traversal.
-- **Efficient Operations**: Ideal for scenarios that require frequent modifications from both ends.
-- **Versatile Application**: Useful in implementing deques, undo operations, and more complex data structures.
-
-With practice, you’ll be able to effectively implement and utilize doubly linked lists in your Java applications! 💻🚀
-
----
+Consult the [worked solutions](../../docs/solutions.md) for unlinking and cache-invariant reasoning.

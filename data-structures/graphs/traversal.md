@@ -1,181 +1,76 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Graph traversal: schedule each vertex deliberately
 
----
+Traversal explores reachability while avoiding repeated work on cycles. [`GraphAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) provides BFS, iterative DFS, unweighted shortest paths, components, topological ordering and weighted algorithms. Results are immutable snapshots.
 
-# 🔄 Graph Traversal in Java
+## BFS: discover before enqueueing
 
-![Java Graph Traversal](https://img.shields.io/badge/Java-Graph_Traversal-yellow?style=for-the-badge&logo=java)
+BFS uses a FIFO queue. Mark a vertex when it is discovered and enqueued, so multiple neighbors cannot queue it repeatedly. The queue processes distance layers in increasing edge count.
 
-## 📋 Table of Contents
-- [Introduction to Graph Traversal](#-introduction-to-graph-traversal)
-- [Depth-First Search (DFS)](#-depth-first-search-dfs)
-  - [Recursive Implementation](#-recursive-implementation)
-  - [Iterative Implementation using Stack](#-iterative-implementation-using-stack)
-- [Breadth-First Search (BFS)](#-breadth-first-search-bfs)
-  - [Iterative Implementation using Queue](#-iterative-implementation-using-queue)
-- [Comparison of DFS and BFS](#-comparison-of-dfs-and-bfs)
-- [Applications of Graph Traversal](#-applications-of-graph-traversal)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
-
-## 🌟 Introduction to Graph Traversal
-
-**Graph traversal** refers to the process of visiting all the vertices (and edges) in a graph in a systematic way. Traversal algorithms play a critical role in various graph-related operations, such as searching for a specific vertex, exploring connected components, and solving pathfinding problems. The two most common traversal methods are **Depth-First Search (DFS)** and **Breadth-First Search (BFS)**.
-
-## 🔍 Depth-First Search (DFS)
-
-**Depth-First Search (DFS)** is a graph traversal algorithm that explores as far as possible along each branch before backtracking. DFS can be implemented using recursion or an explicit stack.
-
-### Recursive Implementation
-
-DFS is naturally implemented using recursion, which implicitly uses a stack to backtrack once a branch is fully explored.
-
-#### Example:
-```java
-import java.util.*;
-
-class Graph {
-    private int vertices;
-    private LinkedList<Integer>[] adjacencyList;
-
-    public Graph(int vertices) {
-        this.vertices = vertices;
-        adjacencyList = new LinkedList[vertices];
-        for (int i = 0; i < vertices; i++) {
-            adjacencyList[i] = new LinkedList<>();
-        }
-    }
-
-    public void addEdge(int source, int destination) {
-        adjacencyList[source].add(destination);
-        // For undirected graph, add the reverse edge as well
-        adjacencyList[destination].add(source);
-    }
-
-    public void DFS(int vertex, boolean[] visited) {
-        visited[vertex] = true;
-        System.out.print(vertex + " ");
-
-        for (int adj : adjacencyList[vertex]) {
-            if (!visited[adj]) {
-                DFS(adj, visited);
-            }
-        }
-    }
-}
-
-public class DFSTest {
-    public static void main(String[] args) {
-        Graph graph = new Graph(5);
-
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 2);
-        graph.addEdge(1, 3);
-        graph.addEdge(2, 4);
-
-        boolean[] visited = new boolean[5];
-        System.out.println("Depth-First Search (DFS) traversal starting from vertex 0:");
-        graph.DFS(0, visited);
-    }
-}
+```text
+       0              BFS layers: {0}, {1,2}, {3,4}
+      / \
+     1   2            isolated vertex: 5
+     |   |
+     3---4
 ```
 
-### Iterative Implementation using Stack
-
-DFS can also be implemented iteratively using an explicit stack, which simulates the call stack used in the recursive implementation.
-
-#### Example:
 ```java
-public void DFSIterative(int startVertex) {
-    boolean[] visited = new boolean[vertices];
-    Stack<Integer> stack = new Stack<>();
+import io.github.ichillous.dsa.graphs.Graph;
+import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import java.util.List;
 
-    stack.push(startVertex);
-
-    while (!stack.isEmpty()) {
-        int vertex = stack.pop();
-
-        if (!visited[vertex]) {
-            visited[vertex] = true;
-            System.out.print(vertex + " ");
-        }
-
-        for (int adj : adjacencyList[vertex]) {
-            if (!visited[adj]) {
-                stack.push(adj);
-            }
-        }
-    }
-}
+Graph graph = Graph.undirected(6);
+graph.addEdge(0, 1).addEdge(0, 2).addEdge(1, 3).addEdge(2, 4).addEdge(3, 4);
+assert GraphAlgorithms.breadthFirst(graph, 0).equals(List.of(0, 1, 2, 3, 4));
+assert GraphAlgorithms.shortestPath(graph, 0, 4).equals(List.of(0, 2, 4));
+assert GraphAlgorithms.shortestPath(graph, 0, 5).isEmpty();
+assert GraphAlgorithms.shortestPath(graph, 2, 2).equals(List.of(2));
 ```
 
-## 🚀 Breadth-First Search (BFS)
+The predecessor assigned on first discovery records a shortest path. Reversing the chain from target to source reconstructs an endpoint-inclusive result. Unreachable targets return an empty list; source-to-source returns one vertex.
 
-**Breadth-First Search (BFS)** is a graph traversal algorithm that explores all the neighbors of a vertex before moving on to the next level of vertices. BFS is typically implemented using a queue.
+## DFS: preserve unfinished neighbor scans
 
-### Iterative Implementation using Queue
+DFS follows one branch before returning to alternatives. The maintained implementation uses explicit frames with neighbor iterators, reproducing recursive insertion-order traversal without recursive Java calls. Simply pushing every neighbor can produce a different order.
 
-BFS uses a queue to explore each level of vertices fully before proceeding to the next level.
-
-#### Example:
 ```java
-public void BFS(int startVertex) {
-    boolean[] visited = new boolean[vertices];
-    Queue<Integer> queue = new LinkedList<>();
+import io.github.ichillous.dsa.graphs.Graph;
+import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import java.util.List;
 
-    visited[startVertex] = true;
-    queue.add(startVertex);
-
-    while (!queue.isEmpty()) {
-        int vertex = queue.poll();
-        System.out.print(vertex + " ");
-
-        for (int adj : adjacencyList[vertex]) {
-            if (!visited[adj]) {
-                visited[adj] = true;
-                queue.add(adj);
-            }
-        }
-    }
-}
+Graph graph = Graph.undirected(6);
+graph.addEdge(0, 1).addEdge(0, 2).addEdge(1, 3).addEdge(2, 4).addEdge(3, 4);
+assert GraphAlgorithms.depthFirst(graph, 0).equals(List.of(0, 1, 3, 4, 2));
+assert GraphAlgorithms.connectedComponents(graph).equals(List.of(List.of(0, 1, 2, 3, 4), List.of(5)));
 ```
 
-## ⚖️ Comparison of DFS and BFS
+BFS and DFS both cost O(V + E) time; they do not optimize the same output. DFS paths need not have minimum edge count. Connected components starts another traversal for each unseen vertex, including isolated vertices; it accepts only undirected graphs.
 
-- **DFS**:
-  - **Use Cases**: Useful for exploring all paths, finding connected components, and solving puzzles like mazes.
-  - **Memory Usage**: Can be more memory-efficient in sparse graphs but may use more memory if the graph is deep and the recursion stack grows large.
-  - **Order of Exploration**: Explores one branch fully before moving to the next.
+## Weighted paths change the next-candidate rule
 
-- **BFS**:
-  - **Use Cases**: Ideal for finding the shortest path in unweighted graphs, level-order traversal, and situations where the nearest solution is desired.
-  - **Memory Usage**: Can be more memory-intensive, especially in wide graphs, as it stores all the nodes at the current level.
-  - **Order of Exploration**: Explores all neighbors at the current level before moving to the next level.
+BFS cannot minimize arbitrary weights. Dijkstra uses a priority queue of tentative distances, ignores superseded entries, and requires every weight to be nonnegative.
 
-## 💡 Applications of Graph Traversal
+```java
+import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import io.github.ichillous.dsa.graphs.WeightedGraph;
+import java.util.List;
 
-- **Pathfinding**: BFS is used to find the shortest path in unweighted graphs.
-- **Connected Components**: DFS can be used to identify all connected components in a graph.
-- **Topological Sorting**: DFS is often used in algorithms that require topological sorting of directed acyclic graphs (DAGs).
-- **Cycle Detection**: Both DFS and BFS can be used to detect cycles in a graph.
-- **Web Crawling**: Graph traversal algorithms are used to explore and index web pages.
+WeightedGraph graph = WeightedGraph.directed(5);
+graph.addEdge(0, 1, 5).addEdge(0, 2, 1).addEdge(2, 1, 1).addEdge(1, 3, 2);
+var paths = GraphAlgorithms.dijkstra(graph, 0);
+assert paths.distanceTo(3).orElseThrow() == 4;
+assert paths.pathTo(3).equals(List.of(0, 2, 1, 3));
+assert paths.distanceTo(4).isEmpty();
+```
 
-## ⚠️ Common Pitfalls and Best Practices
+A distance of `Long.MAX_VALUE` is representable; absence uses `OptionalLong.empty()`. Overflowing detours are ignored, but an unrepresentable reachable shortest distance throws. Dijkstra costs O(V + E log(E + 1)) here because the lazy heap can contain O(E) entries. Traversal and weighted-path working space is O(V + E), including adjacency snapshots.
 
-1. **Avoid Infinite Loops**: Ensure that you mark nodes as visited to prevent infinite loops, especially in graphs with cycles.
-2. **Choose the Right Traversal Method**: Select DFS or BFS based on the specific requirements of the problem you're solving.
-3. **Handle Disconnected Graphs**: When working with disconnected graphs, make sure to initiate traversal from all unvisited nodes to cover the entire graph.
-4. **Memory Management**: Be mindful of memory usage, particularly in large graphs, and consider iterative implementations when recursion depth is a concern.
+A topological order answers a different question: repeatedly remove directed vertices of indegree zero. Failing to remove all vertices proves a directed cycle. A cycle is acceptable for reachability but prevents a prerequisite order.
 
-## 🎓 Conclusion
+## Practice
 
-Graph traversal is a fundamental concept in graph theory and is essential for solving a wide range of problems in computer science. Whether you use DFS or BFS depends on the specific requirements of the task at hand, but both algorithms are powerful tools for exploring and analyzing graph structures.
+1. Explain the duplicate work caused by marking BFS vertices only when dequeued.
+2. Give a weighted graph where a one-edge path costs more than a two-edge path.
+3. Verify paths by checking endpoints, consecutive edges and distance, rather than requiring one arbitrary tie choice. Compare weighted distances to Floyd–Warshall on tiny graphs.
 
-Key takeaways:
-- **DFS**: Depth-first traversal is ideal for exploring all paths and solving complex puzzles.
-- **BFS**: Breadth-first traversal is optimal for finding the shortest path in unweighted graphs and exploring levels.
-- **Applications**: Graph traversal algorithms are widely used in pathfinding, network analysis, and problem-solving.
-
-By mastering graph traversal techniques, you'll be well-prepared to tackle complex algorithms and data structures in your Java applications! 💻🚀
-
----
+Check the [worked solutions](../../docs/solutions.md) and the focused [BFS](../../algorithms/graph/bfs.md) / [DFS](../../algorithms/graph/dfs.md) lessons.

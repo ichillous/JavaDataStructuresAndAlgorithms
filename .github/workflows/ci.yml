@@ -40,6 +40,12 @@ jobs:
         run: ./mvnw --batch-mode --no-transfer-progress clean verify
       - name: Run packaged examples
         run: java -jar target/java-data-structures-and-algorithms-1.0.0-SNAPSHOT.jar
+      - name: Run terminal lessons
+        shell: bash
+        run: |
+          for topic in binary-search negative-edges range-queries lru; do
+            java -jar target/java-data-structures-and-algorithms-1.0.0-SNAPSHOT.jar learn "$topic"
+          done
       - name: Check local documentation links
         if: runner.os == 'Linux'
         run: python3 scripts/check_docs.py

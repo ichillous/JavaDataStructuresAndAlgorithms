@@ -1,384 +1,73 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# AVL trees: restore balance locally
 
----
+[`AvlTree`](../../src/main/java/io/github/ichillous/dsa/structures/AvlTree.java) adds a height invariant to BST order: at every node, the heights of the left and right subtrees differ by at most one. Height is measured in edges, with an empty subtree at -1 and a leaf at 0.
 
-# ⚖️ AVL Trees in Java
+This bounds height by O(log n), giving O(log n) worst-case search, insertion and deletion. The tree remains a set: null keys are rejected, and `compareTo == 0` means duplicate.
 
-![Java AVL Trees](https://img.shields.io/badge/Java-AVL_Trees-blue?style=for-the-badge&logo=java)
+## A rotation preserves sorted order
 
-## 📋 Table of Contents
-- [Introduction to AVL Trees](#-introduction-to-avl-trees)
-- [Structure of an AVL Tree](#-structure-of-an-avl-tree)
-- [Properties of AVL Trees](#-properties-of-avl-trees)
-- [Balancing the Tree](#-balancing-the-tree)
-  - [Rotations](#-rotations)
-    - [Right Rotation (Single Rotation)](#-right-rotation-single-rotation)
-    - [Left Rotation (Single Rotation)](#-left-rotation-single-rotation)
-    - [Left-Right Rotation (Double Rotation)](#-left-right-rotation-double-rotation)
-    - [Right-Left Rotation (Double Rotation)](#-right-left-rotation-double-rotation)
-- [Basic Operations on AVL Trees](#-basic-operations-on-avl-trees)
-  - [Insertion](#-insertion)
-  - [Deletion](#-deletion)
-  - [Search](#-search)
-- [Traversal of AVL Trees](#-traversal-of-avl-trees)
-- [Applications of AVL Trees](#-applications-of-avl-trees)
-- [Advantages and Disadvantages](#-advantages-and-disadvantages)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
+Insert `30, 20, 10`. The root becomes left-heavy by two levels. A right rotation promotes 20:
 
-## 🌟 Introduction to AVL Trees
-
-An **AVL Tree** is a self-balancing binary search tree where the height difference between the left and right subtrees (balance factor) of any node is at most one. Named after its inventors, Adelson-Velsky and Landis, AVL trees maintain their balance through rotations, ensuring O(log n) time complexity for insertion, deletion, and search operations.
-
-### Key Characteristics:
-- **Self-Balancing**: Automatically balances itself during insertions and deletions.
-- **Efficient Search**: Guarantees O(log n) search time by maintaining balance.
-- **Rotations**: Uses rotations to maintain balance after operations that could unbalance the tree.
-
-## 🛠️ Structure of an AVL Tree
-
-An AVL Tree is a type of binary search tree with an additional property that ensures balance. Each node contains:
-1. **Data**: The value stored in the node.
-2. **Left Child**: A reference to the left child node.
-3. **Right Child**: A reference to the right child node.
-4. **Height**: The height of the node, used to maintain balance.
-
-### Basic Node Structure:
-```java
-class AVLTreeNode {
-    int value;
-    AVLTreeNode leftChild;
-    AVLTreeNode rightChild;
-    int height;
-
-    AVLTreeNode(int value) {
-        this.value = value;
-        leftChild = null;
-        rightChild = null;
-        height = 1; // New node is initially added at leaf
-    }
-}
+```text
+before:       30             after:       20
+             /                          /  \
+            20                         10  30
+           /
+          10
 ```
 
-## 🔑 Properties of AVL Trees
-
-- **Balance Factor**: For any node, the balance factor (height difference between left and right subtrees) must be -1, 0, or 1.
-- **Height**: The height of an AVL tree with `n` nodes is O(log n), ensuring efficient operations.
-- **Rotations**: AVL trees use rotations (single and double) to maintain balance after insertions and deletions.
-
-## ⚖️ Balancing the Tree
-
-### Rotations
-
-When the balance factor of a node becomes unbalanced (i.e., less than -1 or greater than 1), rotations are performed to restore balance.
-
-#### 1. Right Rotation (Single Rotation)
-
-A **right rotation** is performed when the left subtree is taller than the right subtree by more than one level, and the left subtree itself is balanced or left-heavy.
+The inorder sequence remains `10, 20, 30`. More generally, a rotation preserves the relative order of the subtrees transferred between nodes. Recompute the demoted node's height before the promoted node's height, because the latter depends on the former.
 
 ```java
-private AVLTreeNode rightRotate(AVLTreeNode y) {
-    AVLTreeNode x = y.leftChild;
-    AVLTreeNode T2 = x.rightChild;
+import io.github.ichillous.dsa.structures.AvlTree;
+import java.util.List;
 
-    // Perform rotation
-    x.rightChild = y;
-    y.leftChild = T2;
-
-    // Update heights
-    y.height = Math.max(height(y.leftChild), height(y.rightChild)) + 1;
-    x.height = Math.max(height(x.leftChild), height(x.rightChild)) + 1;
-
-    // Return new root
-    return x;
-}
+AvlTree<Integer> keys = new AvlTree<>();
+keys.add(30);
+keys.add(20);
+keys.add(10);
+assert keys.height() == 1;
+assert keys.inOrder().equals(List.of(10, 20, 30));
+assert keys.size() == 3;
 ```
 
-#### 2. Left Rotation (Single Rotation)
+## Four imbalance shapes
 
-A **left rotation** is performed when the right subtree is taller than the left subtree by more than one level, and the right subtree itself is balanced or right-heavy.
+Here “left-heavy child” and “right-heavy child” refer to subtree heights, rather than the most recently inserted key.
+
+| Heavy path from an unbalanced node | Repair |
+| --- | --- |
+| Left, then left | Right rotation |
+| Right, then right | Left rotation |
+| Left, then right | Left rotation on child, then right rotation |
+| Right, then left | Right rotation on child, then left rotation |
+
+Inserting `30, 10, 20` needs the double rotation: a single right rotation would not place the median key at the local root. The cases are small, but stale heights can make later choices wrong.
 
 ```java
-private AVLTreeNode leftRotate(AVLTreeNode x) {
-    AVLTreeNode y = x.rightChild;
-    AVLTreeNode T2 = y.leftChild;
+import io.github.ichillous.dsa.structures.AvlTree;
+import java.util.List;
 
-    // Perform rotation
-    y.leftChild = x;
-    x.rightChild = T2;
-
-    // Update heights
-    x.height = Math.max(height(x.leftChild), height(x.rightChild)) + 1;
-    y.height = Math.max(height(y.leftChild), height(y.rightChild)) + 1;
-
-    // Return new root
-    return y;
-}
+AvlTree<Integer> keys = new AvlTree<>();
+for (int value : new int[] {30, 10, 20}) keys.add(value);
+assert keys.height() == 1;
+assert keys.inOrder().equals(List.of(10, 20, 30));
+boolean removed = keys.remove(20);
+assert removed && keys.size() == 2;
+assert keys.inOrder().equals(List.of(10, 30));
+assert keys.height() == 1;
 ```
 
-#### 3. Left-Right Rotation (Double Rotation)
+## Deletion must rebalance too
 
-A **left-right rotation** is needed when the left subtree is taller, but the left child is right-heavy. This rotation is a combination of a left rotation on the left child followed by a right rotation on the root.
+Removing a key can shorten a subtree, making an ancestor unbalanced. Repair may have to continue to the root. A heavy child with equal-height children is a valid deletion case; deciding solely from the removed key misses that case. The implementation checks child balance factors and updates cached heights along the return path.
 
-```java
-private AVLTreeNode leftRightRotate(AVLTreeNode z) {
-    z.leftChild = leftRotate(z.leftChild);
-    return rightRotate(z);
-}
-```
+Search and updates cost O(log n) with O(log n) recursive stack for updates. Cached root height is O(1) to read. Stored nodes cost O(n); inorder traversal costs O(n) time and O(n) returned snapshot space. Rotations are O(1) local work, but an operation may repair multiple ancestors.
 
-#### 4. Right-Left Rotation (Double Rotation)
+## Practice
 
-A **right-left rotation** is needed when the right subtree is taller, but the right child is left-heavy. This rotation is a combination of a right rotation on the right child followed by a left rotation on the root.
+1. Draw the four insertion cases using three distinct keys; verify the same sorted result after each repair.
+2. Find a deletion where the heavy child has balance zero. Explain which single rotation preserves balance.
+3. Compare random operations with `TreeSet`, then independently validate every node's BST range, cached height and balance. Size and sorted output alone can miss stale-height defects.
 
-```java
-private AVLTreeNode rightLeftRotate(AVLTreeNode z) {
-    z.rightChild = rightRotate(z.rightChild);
-    return leftRotate(z);
-}
-```
-
-## 🛠️ Basic Operations on AVL Trees
-
-### ➕ Insertion
-
-Insertion in an AVL tree is similar to insertion in a binary search tree, followed by rebalancing the tree if necessary.
-
-#### Example:
-```java
-public AVLTreeNode insert(AVLTreeNode node, int value) {
-    // Perform the normal BST insertion
-    if (node == null) {
-        return new AVLTreeNode(value);
-    }
-
-    if (value < node.value) {
-        node.leftChild = insert(node.leftChild, value);
-    } else if (value > node.value) {
-        node.rightChild = insert(node.rightChild, value);
-    } else {
-        return node; // Duplicate values not allowed
-    }
-
-    // Update the height of the ancestor node
-    node.height = 1 + Math.max(height(node.leftChild), height(node.rightChild));
-
-    // Get the balance factor to check whether this node became unbalanced
-    int balance = getBalance(node);
-
-    // Left Left Case
-    if (balance > 1 && value < node.leftChild.value) {
-        return rightRotate(node);
-    }
-
-    // Right Right Case
-    if (balance < -1 && value > node.rightChild.value) {
-        return leftRotate(node);
-    }
-
-    // Left Right Case
-    if (balance > 1 && value > node.leftChild.value) {
-        return leftRightRotate(node);
-    }
-
-    // Right Left Case
-    if (balance < -1 && value < node.rightChild.value) {
-        return rightLeftRotate(node);
-    }
-
-    return node; // Return the unchanged node pointer
-}
-```
-
-### ➖ Deletion
-
-Deletion in an AVL tree involves removing the node and then rebalancing the tree if necessary.
-
-#### Example:
-```java
-public AVLTreeNode delete(AVLTreeNode root, int value) {
-    // Perform the normal BST deletion
-    if (root == null) {
-        return root;
-    }
-
-    if (value < root.value) {
-        root.leftChild = delete(root.leftChild, value);
-    } else if (value > root.value) {
-        root.rightChild = delete(root.rightChild, value);
-    } else {
-        // Node with only one child or no child
-        if ((root.leftChild == null) || (root.rightChild == null)) {
-            AVLTreeNode temp = root.leftChild != null ? root.leftChild : root.rightChild;
-
-            if (temp == null) {
-                root = null;
-            } else {
-                root = temp;
-            }
-        } else {
-            AVLTreeNode temp = findMinValueNode(root.rightChild);
-            root.value = temp.value;
-            root.rightChild = delete(root.rightChild, temp.value);
-        }
-    }
-
-    if (root == null) {
-        return root;
-    }
-
-    // Update the height of the current node
-    root.height = Math.max(height(root.leftChild), height(root.rightChild)) + 1;
-
-    // Get the balance factor to check whether this node became unbalanced
-    int balance = getBalance(root);
-
-    // Left Left Case
-    if (balance > 1 && getBalance(root.leftChild) >= 0) {
-        return rightRotate(root);
-    }
-
-    // Left Right Case
-    if (balance > 1 && getBalance(root.leftChild) < 0) {
-        return leftRightRotate(root);
-    }
-
-    // Right Right Case
-    if (balance < -1 && getBalance(root.rightChild) <= 0) {
-        return leftRotate(root);
-    }
-
-    //
-
- Right Left Case
-    if (balance < -1 && getBalance(root.rightChild) > 0) {
-        return rightLeftRotate(root);
-    }
-
-    return root;
-}
-
-private AVLTreeNode findMinValueNode(AVLTreeNode node) {
-    AVLTreeNode current = node;
-    while (current.leftChild != null) {
-        current = current.leftChild;
-    }
-    return current;
-}
-```
-
-### 🔍 Search
-
-Searching in an AVL tree is the same as in a binary search tree, taking advantage of the ordered structure to efficiently find elements.
-
-#### Example:
-```java
-public boolean search(AVLTreeNode root, int value) {
-    if (root == null) {
-        return false;
-    }
-
-    if (value < root.value) {
-        return search(root.leftChild, value);
-    } else if (value > root.value) {
-        return search(root.rightChild, value);
-    } else {
-        return true; // Value found
-    }
-}
-```
-
-## 🔄 Traversal of AVL Trees
-
-Traversal in an AVL tree follows the same methods as in a binary search tree, including inorder, preorder, postorder, and level order traversal.
-
-### A. Inorder Traversal
-```java
-void inorderTraversal(AVLTreeNode node) {
-    if (node != null) {
-        inorderTraversal(node.leftChild);
-        System.out.print(node.value + " ");
-        inorderTraversal(node.rightChild);
-    }
-}
-```
-
-### B. Preorder Traversal
-```java
-void preorderTraversal(AVLTreeNode node) {
-    if (node != null) {
-        System.out.print(node.value + " ");
-        preorderTraversal(node.leftChild);
-        preorderTraversal(node.rightChild);
-    }
-}
-```
-
-### C. Postorder Traversal
-```java
-void postorderTraversal(AVLTreeNode node) {
-    if (node != null) {
-        postorderTraversal(node.leftChild);
-        postorderTraversal(node.rightChild);
-        System.out.print(node.value + " ");
-    }
-}
-```
-
-### D. Level Order Traversal
-```java
-void levelOrderTraversal(AVLTreeNode root) {
-    if (root == null) return;
-
-    Queue<AVLTreeNode> queue = new LinkedList<>();
-    queue.add(root);
-
-    while (!queue.isEmpty()) {
-        AVLTreeNode node = queue.poll();
-        System.out.print(node.value + " ");
-
-        if (node.leftChild != null) queue.add(node.leftChild);
-        if (node.rightChild != null) queue.add(node.rightChild);
-    }
-}
-```
-
-## 💡 Applications of AVL Trees
-
-AVL trees are used in applications where self-balancing is crucial for maintaining efficient operations, such as:
-- **Databases**: Indexing large datasets where quick lookups and updates are needed.
-- **File Systems**: Managing file directories for quick access.
-- **Memory Management**: Managing memory allocation where balancing ensures efficient space utilization.
-- **Networking**: Routing tables in network devices for efficient data transmission.
-
-## ⚖️ Advantages and Disadvantages
-
-### Advantages:
-- **Self-Balancing**: Maintains balance automatically, ensuring O(log n) operations.
-- **Efficient Operations**: Provides efficient insertion, deletion, and search operations.
-- **Guaranteed Performance**: Ensures worst-case performance of O(log n) for all basic operations.
-
-### Disadvantages:
-- **Complexity**: Rotations and balancing logic make AVL trees more complex to implement compared to simple BSTs.
-- **Higher Insertion/Deletion Cost**: The need for rebalancing increases the cost of insertion and deletion operations compared to unbalanced BSTs.
-- **Memory Overhead**: Requires additional memory for storing the height of each node.
-
-## ⚠️ Common Pitfalls and Best Practices
-
-1. **Correct Rotation Handling**: Ensure rotations are correctly implemented to maintain the balance of the tree.
-2. **Edge Case Management**: Consider edge cases, such as deletions that require multiple rotations, to maintain tree balance.
-3. **Memory Management**: Be aware of the memory overhead associated with storing node heights.
-4. **Testing**: Thoroughly test AVL tree implementations with different scenarios to ensure correct balancing and performance.
-
-## 🎓 Conclusion
-
-AVL Trees are powerful self-balancing binary search trees that ensure efficient operations through automatic balancing. Understanding the structure, operations, and balancing techniques of AVL trees is crucial for implementing efficient data structures in applications requiring dynamic data management.
-
-Key takeaways:
-- **Self-Balancing**: AVL trees maintain balance automatically through rotations.
-- **Efficient Operations**: Provide consistent O(log n) time complexity for search, insertion, and deletion.
-- **Rotation Techniques**: Mastering rotation techniques is key to maintaining balance in AVL trees.
-
-By mastering AVL Trees, you'll be equipped to handle complex data structures and ensure efficient performance in your Java applications! 💻🚀
-
----
+Check the [worked solutions](../../docs/solutions.md). The [AVL tests](../../src/test/java/io/github/ichillous/dsa/structures/AvlTreeTest.java) include structural validation as well as observable set behavior.

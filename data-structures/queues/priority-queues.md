@@ -1,158 +1,53 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Priority queues: remove the best candidate
 
+A priority queue removes the smallest or largest key according to an ordering. It is useful when the next task depends on priority rather than arrival: Dijkstra's tentative distances, scheduling, event simulation and selecting the best `k` candidates.
 
----
+A heap guarantees that its root is minimal, not that its entire array is sorted. After every removal the next minimum becomes accessible; arbitrary iteration need not follow priority order.
 
-# 🏆 Priority Queues in Java
-
-![Java Priority Queues](https://img.shields.io/badge/Java-Priority_Queues-red?style=for-the-badge&logo=java)
-
-## 📋 Table of Contents
-- [Introduction to Priority Queues](#-introduction-to-priority-queues)
-- [How Priority Queues Work](#-how-priority-queues-work)
-- [Implementing Priority Queues in Java](#-implementing-priority-queues-in-java)
-  - [Using `PriorityQueue` Class](#-using-priorityqueue-class)
-  - [Custom Comparator for Complex Objects](#-custom-comparator-for-complex-objects)
-- [Applications of Priority Queues](#-applications-of-priority-queues)
-- [Pros and Cons of Priority Queues](#-pros-and-cons-of-priority-queues)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
-
-## 🌟 Introduction to Priority Queues
-
-A **priority queue** is a type of queue where each element is associated with a priority, and elements are dequeued based on their priority rather than their order in the queue. The element with the highest priority is removed first, making priority queues ideal for scenarios where certain tasks or data must be processed before others.
-
-### Key Characteristics:
-- **Priority-Based Ordering**: Elements are processed based on their priority rather than their insertion order.
-- **Dynamic Resizing**: Most implementations dynamically resize as needed.
-- **Flexible Prioritization**: Supports custom prioritization through comparators.
-
-## 🔧 How Priority Queues Work
-
-In a priority queue:
-- **Higher Priority Elements**: These elements are dequeued before lower-priority ones.
-- **Equal Priority Elements**: The order of dequeuing can vary based on the specific implementation, often handled as a FIFO among elements of the same priority.
-
-Internally, priority queues are often implemented using heaps (binary heaps in particular), which allow for efficient insertion and removal operations.
-
-## 🚀 Implementing Priority Queues in Java
-
-### Using `PriorityQueue` Class
-
-Java provides the `PriorityQueue` class in the `java.util` package, which implements a priority queue based on a binary heap.
-
-#### Basic Example:
 ```java
-import java.util.PriorityQueue;
+import io.github.ichillous.dsa.structures.BinaryMinHeap;
+import java.util.List;
 
-public class PriorityQueueExample {
-    public static void main(String[] args) {
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
-
-        // Adding elements
-        priorityQueue.add(15);
-        priorityQueue.add(10);
-        priorityQueue.add(30);
-        priorityQueue.add(25);
-
-        // Elements are dequeued in priority order (natural ordering, in this case)
-        while (!priorityQueue.isEmpty()) {
-            System.out.println(priorityQueue.poll()); // Outputs: 10, 15, 25, 30
-        }
-    }
-}
+BinaryMinHeap<Integer> priorities = new BinaryMinHeap<>(List.of(30, 10, 20, 10));
+assert priorities.peek() == 10;
+assert priorities.size() == 4;
+assert priorities.remove() == 10;
+assert priorities.remove() == 10;
+assert priorities.remove() == 20;
+assert priorities.remove() == 30;
 ```
 
-In the example above, the `PriorityQueue` orders integers in natural ascending order (lowest number has the highest priority).
+[`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) uses natural ordering, keeps duplicates and rejects nulls. Empty peek/removal throws `NoSuchElementException`. Build from a collection copies its values and uses O(n) bottom-up heapification.
 
-### Custom Comparator for Complex Objects
+## Reverse the ordering with the JDK
 
-When dealing with complex objects, you can define a custom comparator to specify how priorities are determined.
+The maintained heap has a deliberately small natural-order API. When an application needs a comparator, `java.util.PriorityQueue` supplies that feature directly.
 
-#### Example with Custom Comparator:
 ```java
-import java.util.PriorityQueue;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 
-class Task {
-    String name;
-    int priority;
-
-    public Task(String name, int priority) {
-        this.name = name;
-        this.priority = priority;
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "name='" + name + '\'' +
-                ", priority=" + priority +
-                '}';
-    }
-}
-
-public class CustomPriorityQueueExample {
-    public static void main(String[] args) {
-        // Custom comparator to prioritize tasks with higher priority values
-        PriorityQueue<Task> taskQueue = new PriorityQueue<>(new Comparator<Task>() {
-            @Override
-            public int compare(Task t1, Task t2) {
-                return Integer.compare(t2.priority, t1.priority); // Higher priority first
-            }
-        });
-
-        // Adding tasks
-        taskQueue.add(new Task("Task 1", 2));
-        taskQueue.add(new Task("Task 2", 1));
-        taskQueue.add(new Task("Task 3", 3));
-
-        // Dequeue tasks based on custom priority
-        while (!taskQueue.isEmpty()) {
-            System.out.println(taskQueue.poll()); 
-            // Outputs: Task{name='Task 3', priority=3}, Task{name='Task 1', priority=2}, Task{name='Task 2', priority=1}
-        }
-    }
-}
+PriorityQueue<Integer> largestFirst = new PriorityQueue<>(Comparator.reverseOrder());
+largestFirst.add(Integer.MIN_VALUE);
+largestFirst.add(7);
+largestFirst.add(Integer.MAX_VALUE);
+assert largestFirst.remove() == Integer.MAX_VALUE;
+assert largestFirst.remove() == 7;
+assert largestFirst.remove() == Integer.MIN_VALUE;
 ```
 
-In this example, the `PriorityQueue` processes tasks based on their priority value, with higher values having higher priority.
+Avoid comparators such as `(a, b) -> b - a`: subtraction can overflow and reverse the intended ordering. Use `Integer.compare`, comparator builders or `reverseOrder`. Equal priorities need an explicit secondary key if a deterministic tie policy matters; priority alone does not establish FIFO ties.
 
-## 💡 Applications of Priority Queues
+## Cost and a bounded-selection pattern
 
-Priority queues are used in various applications, including:
-- **Task Scheduling**: Managing tasks based on priority in operating systems and applications.
-- **Graph Algorithms**: Dijkstra's algorithm and A* search algorithm use priority queues to find the shortest path.
-- **Event Simulation**: Managing events that occur in a simulation where certain events must be processed before others.
-- **Load Balancing**: Distributing tasks among servers based on priority and availability.
+Peek is O(1); remove-min is O(log n); insertion is O(log n) amortized, with occasional O(n) backing-array growth. Stored space is O(n) relative to retained peak capacity. Sorting every time a value arrives would do much more work.
 
-## ⚖️ Pros and Cons of Priority Queues
+To keep the largest `k` values from a stream, maintain a **min** heap of at most `k` values. If a new value exceeds the minimum, replace that minimum. This costs O(n log k) time and O(k) stored space for positive `k`. A max heap would expose the value you want to keep, rather than the weakest retained candidate.
 
-### Pros:
-- **Efficient Priority Management**: Ideal for scenarios where certain tasks or data need to be processed before others.
-- **Dynamic Resizing**: Most implementations, like `PriorityQueue`, automatically resize to accommodate additional elements.
-- **Customizability**: Easily customizable for complex objects with user-defined comparators.
+## Practice
 
-### Cons:
-- **Inconsistent Order for Equal Priorities**: Elements with the same priority may not maintain their original order unless explicitly managed.
-- **Overhead**: The internal structure (usually a heap) can introduce overhead compared to simpler queue implementations.
+1. Explain why `[1, 4, 2, 9, 7, 3]` is a valid min heap but not a sorted array.
+2. Choose an ordering for equal-priority tasks and explain whether stability is required.
+3. Implement the largest-`k` pattern with `BinaryMinHeap`, comparing results with sorting a full copy of each small test stream.
 
-## ⚠️ Common Pitfalls and Best Practices
-
-1. **Comparator Logic**: Ensure that your comparator is correctly implemented to avoid unexpected behavior in priority determination.
-2. **Equal Priorities**: Be aware that elements with the same priority may not maintain FIFO order unless specifically managed.
-3. **Handling Complex Objects**: When dealing with complex objects, ensure that all relevant fields are considered in the comparator.
-4. **Memory Usage**: Be mindful of memory consumption, particularly in scenarios with large datasets or frequent dynamic resizing.
-
-## 🎓 Conclusion
-
-Priority queues are powerful tools for managing tasks and data based on priority, making them essential for a variety of applications, from task scheduling to complex algorithms like Dijkstra's. Understanding how to implement and utilize priority queues in Java is crucial for optimizing performance and managing resources effectively.
-
-Key takeaways:
-- **Priority-Based Processing**: Elements are processed based on their priority rather than insertion order.
-- **Custom Comparators**: Use custom comparators to define priorities for complex objects.
-- **Versatile Applications**: Priority queues are applicable in numerous fields, including algorithms, task scheduling, and load balancing.
-
-By mastering priority queues, you'll be equipped to handle complex prioritization tasks in your Java applications! 💻🚀
-
----
+Read [heap operations](../heaps/operations.md) and the [worked solutions](../../docs/solutions.md).

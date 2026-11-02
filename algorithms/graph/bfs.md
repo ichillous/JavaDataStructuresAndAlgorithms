@@ -1,162 +1,113 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Breadth-first search and choosing a distance model
 
+BFS finds vertices reachable from a source in increasing number of edges. The
+maintained [GraphAlgorithms](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java)
+uses the repository's fixed-vertex [Graph](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java):
+vertices are `0..V-1`, duplicate edges are ignored, neighbor order follows insertion
+order, and directed edges are traversed only in their given direction. Invalid
+vertices and null graphs are rejected. Do not mutate a graph during a computation.
 
----
+## Queue invariant: discovered once, processed by layer
 
-# 🌐 Breadth-First Search (BFS) in Java
+Mark a vertex when it is **enqueued**, not when it is dequeued. Its first discovery
+then gives a shortest unweighted path, and each vertex enters the queue at most
+once. Queue distances never decrease; processing layer `d` discovers layer `d+1`.
 
-![Java BFS](https://img.shields.io/badge/Java-BFS-green?style=for-the-badge&logo=java)
-
-## 📋 Table of Contents
-- [Introduction to Breadth-First Search](#-introduction-to-breadth-first-search)
-- [Key Concepts of BFS](#-key-concepts-of-bfs)
-  - [Graph Representation](#-graph-representation)
-  - [Queue Data Structure](#-queue-data-structure)
-- [How BFS Works](#-how-bfs-works)
-- [BFS Implementation](#-bfs-implementation)
-- [Applications of BFS](#-applications-of-bfs)
-- [Time and Space Complexity](#-time-and-space-complexity)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
-
-## 🌟 Introduction to Breadth-First Search
-
-**Breadth-First Search (BFS)** is an essential graph traversal algorithm that explores vertices of a graph in layers. Starting from a source node, BFS visits all nodes at the present "depth" level before moving on to nodes at the next depth level. BFS is particularly effective for finding the shortest path in unweighted graphs and is widely used in various applications, such as network routing and social networking sites.
-
-### Key Characteristics:
-- **Layered Exploration**: BFS explores the graph level by level, starting from the source node.
-- **Queue-Based**: BFS uses a queue to keep track of nodes to be explored.
-- **Shortest Path**: BFS guarantees the shortest path in an unweighted graph.
-
-## 🔑 Key Concepts of BFS
-
-### Graph Representation
-
-Graphs can be represented in several ways, such as adjacency matrices, adjacency lists, or edge lists. BFS is most commonly implemented using an adjacency list due to its efficient space usage.
-
-### Queue Data Structure
-
-BFS relies on a queue to manage the order of exploration. Nodes are dequeued for exploration and their neighbors are enqueued to be explored next. This ensures that BFS processes nodes in the correct breadth-first order.
-
-## 🚀 How BFS Works
-
-BFS starts at the source node and explores all its neighbors before moving on to the neighbors of those nodes. This process continues until all nodes have been explored or the target node is found.
-
-### Steps:
-1. **Initialization**: Start by adding the source node to the queue and marking it as visited.
-2. **Processing**: Dequeue the front node, process it, and enqueue all its unvisited neighbors.
-3. **Repeat**: Continue the process until the queue is empty or the target node is found.
-
-### Example:
-Consider the following graph:
-
-```
-    A
-   / \
-  B   C
- / \   \
-D   E   F
+```text
+edges: 0--1--3
+       |     |
+       2-----4       vertices 5 and 6 isolated
+queue after processing 0: [1, 2]
+queue after processing 1: [2, 3]
+queue after processing 2: [3, 4]
+BFS order: [0, 1, 2, 3, 4]
 ```
 
-Starting from node `A`, BFS explores nodes in the following order: `A`, `B`, `C`, `D`, `E`, `F`.
-
-## 💻 BFS Implementation
-
-### Implementation Example:
 ```java
-import java.util.*;
+import io.github.ichillous.dsa.graphs.Graph;
+import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import java.util.List;
 
-public class BFS {
-    public void bfs(Graph graph, int start) {
-        boolean[] visited = new boolean[graph.size()];
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(start);
-        visited[start] = true;
-
-        while (!queue.isEmpty()) {
-            int node = queue.poll();
-            System.out.print(node + " ");
-
-            for (int neighbor : graph.getNeighbors(node)) {
-                if (!visited[neighbor]) {
-                    queue.add(neighbor);
-                    visited[neighbor] = true;
-                }
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        Graph graph = new Graph(6);
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 2);
-        graph.addEdge(1, 3);
-        graph.addEdge(1, 4);
-        graph.addEdge(2, 5);
-
-        BFS bfs = new BFS();
-        System.out.print("BFS traversal starting from node 0: ");
-        bfs.bfs(graph, 0);
-    }
-}
-
-class Graph {
-    private final List<List<Integer>> adjacencyList;
-
-    public Graph(int nodes) {
-        adjacencyList = new ArrayList<>(nodes);
-        for (int i = 0; i < nodes; i++) {
-            adjacencyList.add(new ArrayList<>());
-        }
-    }
-
-    public void addEdge(int u, int v) {
-        adjacencyList.get(u).add(v);
-        adjacencyList.get(v).add(u); // If the graph is undirected
-    }
-
-    public List<Integer> getNeighbors(int node) {
-        return adjacencyList.get(node);
-    }
-
-    public int size() {
-        return adjacencyList.size();
-    }
-}
+var graph = Graph.undirected(7).addEdge(0, 1).addEdge(0, 2)
+        .addEdge(1, 3).addEdge(2, 4).addEdge(3, 4);
+assert GraphAlgorithms.breadthFirst(graph, 0).equals(List.of(0, 1, 2, 3, 4));
+assert GraphAlgorithms.shortestPath(graph, 0, 4).equals(List.of(0, 2, 4));
+assert GraphAlgorithms.shortestPath(graph, 0, 6).isEmpty();
+assert GraphAlgorithms.shortestPath(graph, 0, 0).equals(List.of(0));
+assert GraphAlgorithms.connectedComponents(graph).size() == 3;
 ```
 
-### Explanation:
-- **Graph Class**: Manages the graph using an adjacency list. `addEdge` adds an edge between two nodes, and `getNeighbors` returns the neighbors of a node.
-- **BFS Method**: Implements the BFS algorithm, starting from the given node and printing the order of traversal.
+The maintained BFS, unweighted path and undirected-component methods take
+O(V + E) time and O(V + E) auxiliary space including adjacency snapshots and
+results. A single-source traversal visits only the reachable portion, but its
+state arrays still include every vertex. An empty graph has no valid source.
 
-## 💡 Applications of BFS
+**Counterexample:** marking only on dequeue can enqueue the same vertex through
+several parents. Without additional care that increases work and can repeatedly
+overwrite parents. A disconnected vertex must remain unreachable, not be assigned
+a default distance of zero.
 
-- **Shortest Path in Unweighted Graphs**: BFS is used to find the shortest path between two nodes in an unweighted graph.
-- **Connected Components**: BFS can be used to identify connected components in a graph.
-- **Cycle Detection**: BFS can be employed to detect cycles in undirected graphs.
-- **Network Broadcasting**: BFS is used in network routing protocols to broadcast messages.
+## Weighted paths: BFS's objective changes
 
-## ⏱️ Time and Space Complexity
+A direct edge of weight 10 uses fewer edges than a two-edge route of total weight
+2. BFS optimizes the former count. For nonnegative weights, use Dijkstra:
 
-- **Time Complexity**: O(V + E), where V is the number of vertices and E is the number of edges. This complexity arises because BFS explores each vertex and edge once.
-- **Space Complexity**: O(V), primarily due to the storage required for the queue and the visited array.
+```java
+import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import io.github.ichillous.dsa.graphs.WeightedGraph;
+import java.util.List;
 
-## ⚠️ Common Pitfalls and Best Practices
+var weighted = WeightedGraph.directed(4)
+        .addEdge(0, 1, 10).addEdge(0, 2, 1).addEdge(2, 1, 1);
+var paths = GraphAlgorithms.dijkstra(weighted, 0);
+assert paths.distanceTo(1).orElseThrow() == 2L;
+assert paths.pathTo(1).equals(List.of(0, 2, 1));
+assert paths.distanceTo(3).isEmpty();
+```
 
-1. **Handling Directed Graphs**: Ensure that edges are correctly managed in directed graphs to avoid exploring nodes incorrectly.
-2. **Cycle Prevention**: Always mark nodes as visited to prevent infinite loops in cyclic graphs.
-3. **Queue Operations**: Be mindful of the queue operations' efficiency, as BFS relies heavily on enqueuing and dequeuing nodes.
-4. **Disconnected Graphs**: If the graph is disconnected, BFS will only traverse the connected component containing the start node. Consider running BFS from all nodes if full graph traversal is required.
+The maintained lazy-heap Dijkstra takes O(V + E log(E + 1)) time and O(V + E)
+space; weighted graphs permit parallel edges, so the heap can contain more than
+V entries. It rejects **every** negative edge, even in an unreachable component.
+Unreachable distances are empty; a reachable `Long.MAX_VALUE` is valid. Overflowing
+detours are ignored, but an unrepresentable final reachable shortest distance throws.
 
-## 🎓 Conclusion
+## Signed edges: Bellman–Ford
 
-Breadth-First Search (BFS) is a foundational algorithm for exploring graphs, providing a systematic way to traverse nodes level by level. It is particularly useful for finding the shortest path in unweighted graphs and identifying connected components.
+[AdvancedGraphAlgorithms](../../src/main/java/io/github/ichillous/dsa/graphs/AdvancedGraphAlgorithms.java)
+relaxes all directed adjacency edges repeatedly. Each finite label is the cost of
+an actual walk. After pass `k`, paths of at most `k` edges have been considered;
+in-place updates may also propagate longer paths. Without a reachable negative
+cycle, a shortest simple path uses at most `V-1` edges. A further improvement then
+proves that a source-reachable negative cycle exists.
 
-Key takeaways:
-- **Level-by-Level Exploration**: BFS explores nodes in a breadth-first manner, making it ideal for certain types of graph problems.
-- **Queue-Based Implementation**: The use of a queue ensures that BFS processes nodes in the correct order.
-- **Wide Applicability**: BFS is used in various applications, including network routing, shortest path finding, and connected component identification.
+```java
+import io.github.ichillous.dsa.graphs.AdvancedGraphAlgorithms;
+import io.github.ichillous.dsa.graphs.WeightedGraph;
+import java.util.List;
 
-By mastering BFS, you'll be well-equipped to solve a wide range of graph traversal problems in your Java applications! 💻🚀
+var signed = WeightedGraph.directed(4)
+        .addEdge(0, 1, 4).addEdge(0, 2, 5).addEdge(1, 2, -3);
+var paths = AdvancedGraphAlgorithms.bellmanFord(signed, 0);
+assert paths.distanceTo(2).orElseThrow() == 1L;
+assert paths.pathTo(2).equals(List.of(0, 1, 2));
+assert paths.distanceTo(3).isEmpty();
+```
 
----
+This implementation rejects the entire result for any source-reachable negative
+cycle; unreachable cycles are ignored. A reachable undirected negative edge
+already creates a negative closed walk. Relaxations use exact `BigInteger`
+arithmetic, and only final reachable distances must fit in `long`.
+There are O(VE) relaxations plus O(V + E) setup. With maximum intermediate bit
+length `B = O(64 + log(VE + 1))`, time is O(V + E + VEB) bit operations and
+auxiliary storage is O((V + E)B) bits including snapshots. These arithmetic costs
+should not be hidden behind a constant-time `long` assumption.
+
+## Practice
+
+1. Validate returned paths edge by edge and compare their lengths with a distance
+   oracle; do not demand one arbitrary tied path from every implementation.
+2. Construct a negative edge that breaks Dijkstra's settled-vertex argument.
+3. Add a negative cycle first outside and then inside the source's reachable set.
+   Explain why Bellman–Ford treats those cases differently.
+
+Use the [solutions](../../docs/solutions.md) and continue with [DFS](dfs.md).

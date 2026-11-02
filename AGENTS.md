@@ -1,6 +1,6 @@
 # Working in this repository
 
-This is a Java 17 educational library with historical Markdown study notes.
+This is a Java 17 educational library with executable Markdown lessons.
 
 - Keep implementations under `src/main/java/io/github/ichillous/dsa` and JUnit
   Jupiter tests under matching packages in `src/test/java`.
@@ -13,7 +13,10 @@ This is a Java 17 educational library with historical Markdown study notes.
   `python3 scripts/check_docs.py`. Compiler warnings are errors. Do not describe
   focused tests as a complete build.
 - Keep `README.md`, `docs/catalog.md`, and `docs/complexity.md` consistent with APIs.
-  Preserve existing note paths and historical-note banners; Markdown snippets
-  are explanatory and are not compiled by Maven.
+  Preserve existing topic paths. Every fenced Java block must contain optional
+  initial imports followed by executable statements and Java assertions checking
+  the result. The documentation test compiles these blocks with Java 17 and runs
+  them with assertions enabled. Do not add incomplete or duplicate implementations
+  in Markdown; link to maintained source. Earlier notes remain in Git history.
 - Do not commit generated `target/` content, IDE settings, credentials, or tool caches.
   Preserve existing history and inspect concurrent remote changes before pushing.

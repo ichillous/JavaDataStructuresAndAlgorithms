@@ -1,301 +1,61 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Collision resolution: never confuse a bucket with a key
 
+Collisions occur whenever different keys select the same bucket. A correct implementation must preserve all mappings and terminate an absent-key search. This repository maintains [separate chaining](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java); open addressing below is a design comparison, not a second untested implementation.
 
----
+## Chaining: search one bucket's list
 
-# 🔄 Collision Resolution in Hash Tables
+```text
+put Aa=1, BB=2       both have the same String hash
 
-![Java Collision Resolution](https://img.shields.io/badge/Java-Collision_Resolution-orange?style=for-the-badge&logo=java)
+bucket -> [BB, 2] -> [Aa, 1] -> null
 
-## 📋 Table of Contents
-- [Introduction to Collisions](#-introduction-to-collisions)
-- [Types of Collision Resolution Techniques](#-types-of-collision-resolution-techniques)
-  - [Chaining](#-chaining)
-  - [Open Addressing](#-open-addressing)
-    - [Linear Probing](#-linear-probing)
-    - [Quadratic Probing](#-quadratic-probing)
-    - [Double Hashing](#-double-hashing)
-- [Choosing the Right Collision Resolution Technique](#-choosing-the-right-collision-resolution-technique)
-- [Performance Considerations](#-performance-considerations)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
-
-## 🌟 Introduction to Collisions
-
-In hash tables, a **collision** occurs when two different keys hash to the same index in the array. Collisions are a natural consequence of using a finite-size array to store potentially infinite keys. Properly resolving these collisions is critical to maintaining the efficiency of a hash table.
-
-## 🔧 Types of Collision Resolution Techniques
-
-There are several techniques to resolve collisions, each with its own advantages and trade-offs. The most common methods are **chaining** and **open addressing**.
-
-### 1. Chaining
-
-**Chaining** is a collision resolution technique where each index of the hash table array points to a linked list (or another data structure) that stores all key-value pairs that hash to the same index.
-
-#### Example:
-```java
-import java.util.LinkedList;
-
-class HashTableChaining {
-    private LinkedList<Entry>[] bucketArray;
-    private int numBuckets;
-
-    class Entry {
-        String key;
-        int value;
-
-        Entry(String key, int value) {
-            this.key = key;
-            this.value = value;
-        }
-    }
-
-    public HashTableChaining(int size) {
-        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
-        numBuckets = size;
-        bucketArray = new LinkedList[numBuckets];
-        for (int i = 0; i < numBuckets; i++) {
-            bucketArray[i] = new LinkedList<>();
-        }
-    }
-
-    private int hashFunction(String key) {
-        int hashCode = key.hashCode();
-        return Math.floorMod(hashCode, numBuckets);
-    }
-
-    public void put(String key, int value) {
-        int bucketIndex = hashFunction(key);
-        LinkedList<Entry> bucket = bucketArray[bucketIndex];
-
-        for (Entry entry : bucket) {
-            if (entry.key.equals(key)) {
-                entry.value = value;
-                return;
-            }
-        }
-
-        bucket.add(new Entry(key, value));
-    }
-
-    public Integer get(String key) {
-        int bucketIndex = hashFunction(key);
-        LinkedList<Entry> bucket = bucketArray[bucketIndex];
-
-        for (Entry entry : bucket) {
-            if (entry.key.equals(key)) {
-                return entry.value;
-            }
-        }
-        return null;
-    }
-}
+remove Aa           preserve BB and terminate at null
+bucket -> [BB, 2] -> null
 ```
 
-#### Pros and Cons:
+The bucket list invariant is that each equality-equivalent key appears once. `put` searches for replacement first; otherwise it inserts a new mapping. Removing a chain head updates the bucket head; removing a later node updates its predecessor's next link.
 
-- **Pros**:
-  - **Simple Implementation**: Chaining is straightforward to implement.
-  - **No Wasted Space**: Memory is allocated only when needed.
-  - **Handles High Load Factors Well**: Performance degrades gracefully as the load factor increases.
-
-- **Cons**:
-  - **Extra Memory Overhead**: Requires additional memory for the linked lists.
-  - **Potential for Long Chains**: Poor hash function or high load factor can lead to long chains, slowing down operations.
-
-### 2. Open Addressing
-
-**Open addressing** is a collision resolution technique where all elements are stored within the hash table array itself. When a collision occurs, the algorithm searches for the next available slot in the array to place the key-value pair.
-
-#### Subtypes of Open Addressing:
-
-##### A. Linear Probing
-
-In **linear probing**, when a collision occurs, the algorithm checks the next slot in the array (i.e., index + 1, index + 2, etc.) until an empty slot is found.
-
-#### Example:
 ```java
-class HashTableLinearProbing {
-    private String[] keys;
-    private int[] values;
-    private int numBuckets;
+import io.github.ichillous.dsa.collections.ChainedHashMap;
 
-    public HashTableLinearProbing(int size) {
-        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
-        numBuckets = size;
-        keys = new String[numBuckets];
-        values = new int[numBuckets];
-    }
-
-    private int hashFunction(String key) {
-        int hashCode = key.hashCode();
-        return Math.floorMod(hashCode, numBuckets);
-    }
-
-    public void put(String key, int value) {
-        int bucketIndex = hashFunction(key);
-
-        for (int probes = 0; probes < numBuckets; probes++) {
-            if (keys[bucketIndex] == null) {
-                keys[bucketIndex] = key;
-                values[bucketIndex] = value;
-                return;
-            }
-            if (keys[bucketIndex].equals(key)) {
-                values[bucketIndex] = value;
-                return;
-            }
-            bucketIndex = (int) (((long) bucketIndex + 1) % numBuckets);
-        }
-        throw new IllegalStateException("No free bucket in the probe sequence");
-    }
-
-    public Integer get(String key) {
-        int bucketIndex = hashFunction(key);
-
-        for (int probes = 0; probes < numBuckets && keys[bucketIndex] != null; probes++) {
-            if (keys[bucketIndex].equals(key)) {
-                return values[bucketIndex];
-            }
-            bucketIndex = (bucketIndex + 1) % numBuckets;
-        }
-        return null;
-    }
-}
+ChainedHashMap<String, Integer> map = new ChainedHashMap<>(2);
+map.put("Aa", 1);
+map.put("BB", 2);
+Integer old = map.put("Aa", 3);
+Integer removed = map.remove("BB");
+assert old == 1 && removed == 2;
+assert map.get("Aa") == 3;
+assert !map.containsKey("BB");
+assert map.remove("absent") == null;
+assert map.size() == 1;
 ```
 
-- **Pros**:
-  - **Simple Implementation**: Easy to implement and understand.
-  - **No Extra Memory Overhead**: All elements are stored in the original array.
+With uniform distribution and load `α = n / buckets`, expected search work is O(1 + α). Maintaining α below a threshold gives expected O(1); a single chain of length n still gives O(n) worst case. Doubling and rehashing makes insertion expected amortized O(1). Stored space is O(n + capacity).
 
-- **Cons**:
-  - **Primary Clustering**: Continuous blocks of occupied slots can form, leading to longer probe sequences and degraded performance.
+## Open addressing: preserve the probe path
 
-##### B. Quadratic Probing
+An open-addressed table stores mappings in array slots and follows a repeatable probe sequence on collisions. Search must use exactly the same sequence as insertion.
 
-In **quadratic probing**, the interval between probes is increased quadratically (e.g., 1, 4, 9, 16, etc.). This reduces the clustering problem seen in linear probing.
+| Strategy | Probe idea | Important condition |
+| --- | --- | --- |
+| Linear | Advance one slot, wrapping around | Bound probes by capacity; clustering can grow |
+| Quadratic | Advance using a quadratic offset | Not every capacity/load combination guarantees a free slot is reachable |
+| Double hashing | Advance by a second hash-derived step | Step and capacity must be coprime to visit every slot |
 
-- **Pros**:
-  - **Reduces Clustering**: Lessens the chance of primary clustering, improving performance.
+For capacity 8 and step 2, the sequence from bucket 0 is `0, 2, 4, 6, 0, ...`; the odd slots are never visited. A table can therefore have free space and still loop forever if the implementation assumes it will eventually find a free slot. A positive step alone is insufficient.
 
-- **Cons**:
-  - **Secondary Clustering**: Elements that hash to the same initial index follow the same probe sequence, leading to clustering.
+Deletion needs special care. If a collision sends key B past key A, clearing A's slot to “never used” can make a later search stop before reaching B. A tombstone or a correct cluster-repair strategy distinguishes deleted slots from slots that end the search.
 
-##### C. Double Hashing
+## Why resizing is not just copying
 
-**Double hashing** uses a second hash function to calculate the probe sequence. The step must be coprime to the capacity so that the probe sequence can visit every bucket. The example chooses a coprime step and bounds the number of probes; a full table rejects a new key rather than looping forever.
+Whether chaining or probing is used, bucket positions depend on capacity. A new array with a different capacity requires rehashing entries. Copying the old slots into the same indices can make lookups follow a new route and miss them.
 
-#### Example:
-```java
-class HashTableDoubleHashing {
-    private String[] keys;
-    private int[] values;
-    private int numBuckets;
+The maintained chained map avoids tombstones and supports arbitrary positive initial bucket counts. It validates null keys and uses `floorMod` for every hash, including `Integer.MIN_VALUE`. These choices simplify invariants without promising collision-free behavior.
 
-    public HashTableDoubleHashing(int size) {
-        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
-        numBuckets = size;
-        keys = new String[numBuckets];
-        values = new int[numBuckets];
-    }
+## Practice
 
-    private int hashFunction(String key) {
-        int hashCode = key.hashCode();
-        return Math.floorMod(hashCode, numBuckets);
-    }
+1. Trace removal at the head, middle and tail of a three-entry collision chain.
+2. Explain why a full probing table must terminate an absent lookup even when no empty slot exists.
+3. Design tests for an open-addressing extension before implementing it: full tables, wraparound, deletion followed by lookup, and non-coprime double-hash steps.
 
-    private int secondHashFunction(String key) {
-        if (numBuckets == 1) return 1;
-        int step = 1 + Math.floorMod(key.hashCode(), numBuckets - 1);
-        // A coprime step visits every bucket, even for non-prime capacities.
-        while (gcd(step, numBuckets) != 1) {
-            step = step == numBuckets - 1 ? 1 : step + 1;
-        }
-        return step;
-    }
-
-    private int gcd(int a, int b) {
-        while (b != 0) {
-            int remainder = a % b;
-            a = b;
-            b = remainder;
-        }
-        return a;
-    }
-
-    public void put(String key, int value) {
-        int bucketIndex = hashFunction(key);
-        int stepSize = secondHashFunction(key);
-
-        for (int probes = 0; probes < numBuckets; probes++) {
-            if (keys[bucketIndex] == null) {
-                keys[bucketIndex] = key;
-                values[bucketIndex] = value;
-                return;
-            }
-            if (keys[bucketIndex].equals(key)) {
-                values[bucketIndex] = value;
-                return;
-            }
-            bucketIndex = (int) (((long) bucketIndex + stepSize) % numBuckets);
-        }
-        throw new IllegalStateException("No free bucket in the probe sequence");
-    }
-
-    public Integer get(String key) {
-        int bucketIndex = hashFunction(key);
-        int stepSize = secondHashFunction(key);
-
-        for (int probes = 0; probes < numBuckets && keys[bucketIndex] != null; probes++) {
-            if (keys[bucketIndex].equals(key)) {
-                return values[bucketIndex];
-            }
-            bucketIndex = (int) (((long) bucketIndex + stepSize) % numBuckets);
-        }
-        return null;
-    }
-}
-```
-
-- **Pros**:
-  - **Minimizes Clustering**: Provides a better distribution of keys across the array.
-  - **Improved Performance**: Reduces the chances of clustering, maintaining performance even as the load factor increases.
-
-- **Cons**:
-  - **More Complex Implementation**: Requires an additional hash function, complicating the implementation.
-
-## 🎯 Choosing the Right Collision Resolution Technique
-
-The choice of collision resolution technique depends on several factors:
-- **Memory Availability**: Chaining requires extra memory for linked lists, while open addressing keeps everything in a single array.
-- **Expected Load Factor**: High load factors may favor chaining, while low to moderate load factors can work well with open addressing.
-- **Ease of Implementation**: Linear probing is easier to implement than double hashing or quadratic probing.
-- **Clustering Concerns**: If primary clustering is a concern, quadratic probing or double hashing may be more suitable.
-
-## ⚖️ Performance Considerations
-
-- **Load Factor**: As the load factor increases, the performance of both chaining and open addressing degrades. Monitoring and managing the load factor is crucial.
-- **Clustering**: Primary clustering in linear probing can significantly slow down operations, while double hashing helps mitigate this issue.
-- **Memory Usage**: Chaining requires additional memory but handles collisions more gracefully, especially with higher load factors.
-
-## ⚠️ Common Pitfalls and Best Practices
-
-1. **Load Factor Management**: Regularly monitor and adjust the load factor to maintain performance.
-2. **Handling Deletion in Open Addressing**: Deleting an element in open addressing can be tricky because it can break the probe sequence. Consider using "tombstone" markers or rehashing the table after deletion.
-3
-
-. **Choosing the Right Hash Function**: A poor hash function can lead to excessive collisions, degrading performance.
-4. **Balancing Memory and Speed**: Choose a collision resolution technique that balances memory usage with speed based on your application’s needs.
-
-## 🎓 Conclusion
-
-Effective collision resolution is essential for maintaining the performance of hash tables in Java. Whether you choose chaining or open addressing (and its variants), understanding the trade-offs of each approach will help you design efficient and robust hash tables.
-
-Key takeaways:
-- **Chaining**: Simple and handles high load factors well, but requires extra memory.
-- **Open Addressing**: Memory efficient, but can suffer from clustering; techniques like double hashing can mitigate this.
-- **Load Factor Management**: Crucial for maintaining performance; consider resizing when necessary.
-
-By mastering these collision resolution techniques, you'll be well-prepared to implement high-performance hash tables in your Java applications! 💻🚀
-
----
+Check the [worked solutions](../../docs/solutions.md) for the chain and probe-path invariants.

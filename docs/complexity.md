@@ -1,6 +1,6 @@
 # Complexity for the maintained implementations
 
-These bounds describe the code in the [catalog](catalog.md), rather than every historical Markdown snippet. They use a RAM model: primitive arithmetic, array access and references cost O(1); user-supplied `compareTo`, `equals` and `hashCode` are assumed O(1). If a key comparison scans a long string, include that cost as well. Bounds describe growth, not a promise about milliseconds or allocation size on a particular JVM.
+These bounds describe the maintained code in the [catalog](catalog.md) and its executable lessons. Earlier standalone snippets remain only in Git history. They use a RAM model: primitive arithmetic, array access and references cost O(1); user-supplied `compareTo`, `equals` and `hashCode` are assumed O(1). If a key comparison scans a long string, include that cost as well. Bounds describe growth, not a promise about milliseconds or allocation size on a particular JVM.
 
 `C` is retained array capacity (which may exceed current size after removals), `n` is the number of stored elements or input values, `h` is tree height, `V` is the number of vertices, and `E` is the number of graph edges, counting parallel weighted edges. Space means additional working storage unless the table says stored space or includes output. Logarithmic bounds conventionally mean `log(n + 1)` for empty and singleton inputs.
 
@@ -24,6 +24,9 @@ These bounds describe the code in the [catalog](catalog.md), rather than every h
 | `Trie` add/contains/startsWith/remove | O(L log A) | `L` UTF-16 code units, at most `A` children per node, ordered `TreeMap` children; removal keeps O(L) path workspace |
 | `Trie` prefix enumeration | O(P log A + visited nodes + output characters) | Prefix length `P`; result limit bounds returned words, not the length of those words; includes output storage and iterative traversal workspace |
 | `UnionFind` find/union/connected/componentSize | O(α(n)) amortized | Path compression plus union by size; O(n) stored arrays; construction O(n); an individual find is not guaranteed O(1) |
+| `RingDeque` add at either end | O(1) amortized, O(n) on growth | O(C) retained circular array; remove/peek at either end O(1) |
+| `LruCache` get/remove, put | Expected O(1) lookup/removal; expected amortized O(1) put; O(capacity) worst | O(capacity) bounded stored map/nodes; user hashes/equality assumed O(1) |
+| `SegmentTree` range minimum, point set | O(log n) worst | O(n) stored tree and O(1) query workspace; O(n) construction |
 | `FenwickTree` point add, prefix/range sum | O(log n) worst | O(n) stored sums; construction O(n), query/update O(1) additional storage |
 
 A linked-list operation is O(1) only after the relevant node is known, or at an end for which the structure keeps a pointer. Finding an element by value or position is a separate cost. Likewise, an unbalanced BST is not automatically logarithmic because it is a tree.
@@ -42,7 +45,7 @@ A linked-list operation is O(1) only after the relevant node is known, or at an 
 | KMP first match | O(t + p) | O(p) prefix table for text length `t`, pattern length `p` |
 | KMP all matches | O(t + p + k) | O(p + k), including `k` returned indices; overlaps are included |
 
-The sorts mutate their input arrays. Stability describes the treatment of equal keys in the algorithm; primitive `int` values do not carry an identity that lets a test observe equal-key reordering. Three-way partitioning handles duplicate-heavy inputs well, but the deterministic pivot strategy does not provide a worst-case time guarantee. The historical quicksort note shows a different, naive recursion strategy and states its separate bounds.
+The sorts mutate their input arrays. Stability describes the treatment of equal keys in the algorithm; primitive `int` values do not carry an identity that lets a test observe equal-key reordering. Three-way partitioning handles duplicate-heavy inputs well, but the deterministic pivot strategy does not provide a worst-case O(n log n) time guarantee; its worst case remains O(n²). The quicksort lesson traces the maintained smaller-partition strategy; naive recursion on both partitions can instead consume O(n) stack space.
 
 Strings and trie paths use UTF-16 code units. A supplementary Unicode character occupies two units; a visible grapheme may occupy several. The APIs do not normalize Unicode or ignore case. KMP's empty pattern matches at zero for first-match search and at every boundary `0..text.length()` for all-match search.
 
@@ -55,16 +58,32 @@ Strings and trie paths use UTF-16 code units. A supplementary Unicode character 
 | Connected components | O(V + E) | O(V + E), including result; undirected graphs only |
 | Kahn topological ordering | O(V + E) | O(V + E); directed graphs only; rejects a cycle |
 | Dijkstra with a lazy binary heap | O(V + E log(E + 1)) | O(V + E); weighted multigraph can have more heap entries than vertices |
+| Bellman-Ford | O(VE) relaxations plus O(V+E) setup; O(V+E+VEB) bit operations with max integer bit length B | O((V+E)B) auxiliary bits; exact intermediate arithmetic, checked final long distances |
+| Iterative Kosaraju SCCs | O(V+E) | O(V+E); canonical ordering uses a linear vertex sweep |
+| Iterative lowlink bridges | O(V+E+b log(b+1)) | O(V+E), including snapshots and b sorted bridges |
 | Kruskal minimum spanning forest | O(V + E log(E + 1)) | O(V + E), including sorted edge copy and returned forest |
 
 Unweighted graphs ignore duplicate edges and preserve neighbor insertion order. Weighted graphs keep parallel edges and accept signed `long` weights; individual algorithms impose extra requirements. BFS minimizes the number of edges, not arbitrary total weight. Dijkstra rejects every negative edge, including one in an unreachable component. A reachable distance of `Long.MAX_VALUE` is valid; unreachable results use `OptionalLong.empty()`. Overflowing detours are ignored, but an unrepresentable reachable shortest distance causes `ArithmeticException`.
 
 Kruskal accepts negative edges, omits loops, and returns a forest for disconnected graphs. The result has `V - components` selected edges. The total is accumulated exactly and must fit in a `long` at the end; intermediate cancellation does not cause spurious overflow. These implementations return immutable result snapshots and use no recursive graph traversal.
 
+Bellman-Ford scans directed arcs (both orientations for undirected edges). No
+reachable negative cycle means a shortest path can be simple, using at most V-1
+edges; another relaxation signals a reachable negative cycle. Exact arithmetic
+prevents wrapping from changing that conclusion. Its maximum intermediate bit
+length B is O(64+log(VE+1)) for this bounded-pass implementation. SCCs/bridges use
+explicit frames, so deep paths do not consume the Java call stack. Sorting bridges
+is an intentional cost for canonical results.
+
 ## Dynamic programming, greedy choice and enumeration
 
 | Algorithm | Time | Auxiliary space / parameters |
 | --- | --- | --- |
+| Maximum subarray | O(n) | O(1) auxiliary/result; long sum, earliest start/end ties |
+| Sliding-window maximum | O(n) | O(w) deque plus O(n-w+1) output for width w; each index enters/leaves once |
+| Inversion count | O(n log(n+1)) | O(n) copied array and merge buffer, O(log n) stack; long result |
+| Signed subset-sum witness | Expected O(2^(n/2)+n) | O(2^(n/2)+n), including output; input capped at 30; two half enumerations with hashed sums |
+| Sudoku (fixed 9x9) | O(e*9^e) worst upper bound for e empty cells | O(e) recursion plus fixed board/masks; minimum-remaining-values ordering prunes but does not remove exponential worst cases |
 | Minimum coins | O((c + 1)(a + 1)) | O(a + 1), for `c` denominations and amount `a`; includes validation and table allocation; unlimited reuse of positive coins |
 | 0/1 knapsack | O((n + 1)(W + 1)) | O(W + 1), for `n` items and capacity `W`; each item may be used at most once, including a zero-weight item |
 | LCS length | O(mn + m + n) | O(min(m, n) + 1); lengths are UTF-16 units; empty-input handling and setup are included |
@@ -86,3 +105,12 @@ For DP, write the state meaning and loop-order invariant first. For greedy metho
 - **Auxiliary space** differs from total storage and output size. Include recursion frames, buffers, snapshots and returned values when they matter.
 
 Java integer arithmetic normally wraps. The maintained APIs state where they use a wider type or checked arithmetic. For example, Fenwick operations reject intermediate signed-`long` overflow and a failed update leaves the tree unchanged. Do not substitute subtraction for an ordering comparison on arbitrary integer values. Benchmarking would require a separate controlled harness; asymptotic bounds here are analytical claims, not measured speedups.
+
+Maximum-subarray sums fit in long because an int-indexed int array cannot contain
+enough int values to exceed that range; the same observation bounds inversion
+counts by n(n-1)/2. This does not justify using int accumulators. Sliding-window
+indices stay in increasing order while their values decrease; a removed smaller
+candidate can never win a future window containing the newer, larger candidate.
+Sudoku's private working copy is committed only after a full solution; validation
+and failed search leave the caller's board intact. It finds one solution, without
+claiming uniqueness.

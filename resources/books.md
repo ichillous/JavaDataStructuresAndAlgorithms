@@ -1,146 +1,62 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../docs/catalog.md) for maintained source and tests. See the [migration guide](../docs/migration.md) for the relationship between notes and code.
+# Reading companions and primary references
 
----
+Use a reference to answer a concrete question, then return to a small implementation
+and an independent test. Reading every book cover to cover is not a prerequisite
+for using this repository. The [roadmap](../docs/learning-roadmap.md) supplies a
+practical order, and the [catalog](../docs/catalog.md) identifies maintained APIs.
 
-# 📚 Recommended Books for Data Structures and Algorithms in Java
+## Choose a reference by the question
 
-![Java Books](https://img.shields.io/badge/Java-Books-yellow?style=for-the-badge&logo=java)
+| Reference | Useful purpose | Pair it with |
+| --- | --- | --- |
+| [Java 17 collections API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/package-summary.html) | Exact JDK contracts, types and documented behavior | Compare `ArrayDeque`, `TreeSet`, `HashMap` and `PriorityQueue` with the educational implementations |
+| [Introduction to Algorithms, fourth edition](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/), Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein | Formal invariants, recurrences and correctness arguments; algorithms are presented in pseudocode | Sorting proofs, amortized analysis, graph cuts and dynamic programming |
+| [The Algorithm Design Manual](https://www.algorist.com/), Steven Skiena | Recognizing problem structures and selecting algorithmic techniques | State a problem's feasible solutions and objective before selecting a technique |
 
-## 📋 Table of Contents
-- [Introduction](#-introduction)
-- [Top Books for Learning Data Structures and Algorithms](#-top-books-for-learning-data-structures-and-algorithms)
-  - [1. "Introduction to Algorithms" by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein](#1-introduction-to-algorithms-by-thomas-h-cormen-charles-e-leiserson-ronald-l-rivest-and-clifford-stein)
-  - [2. "Data Structures and Algorithms in Java" by Robert Lafore](#2-data-structures-and-algorithms-in-java-by-robert-lafore)
-  - [3. "Algorithms" by Robert Sedgewick and Kevin Wayne](#3-algorithms-by-robert-sedgewick-and-kevin-wayne)
-  - [4. "Cracking the Coding Interview" by Gayle Laakmann McDowell](#4-cracking-the-coding-interview-by-gayle-laakmann-mcdowell)
-  - [5. "The Algorithm Design Manual" by Steven S. Skiena](#5-the-algorithm-design-manual-by-steven-s-skiena)
-  - [6. "Java Structures: Data Structures in Java for the Principled Programmer" by Duane A. Bailey](#6-java-structures-data-structures-in-java-for-the-principled-programmer-by-duane-a-bailey)
-  - [7. "Thinking in Java" by Bruce Eckel](#7-thinking-in-java-by-bruce-eckel)
-- [Additional Recommendations](#-additional-recommendations)
-- [Conclusion](#-conclusion)
+These are companions with different purposes, not a performance ranking or a list
+of dependencies. Check an edition's own errata when working through a derivation.
+Avoid assuming that a book is Java-specific merely because a problem can be
+implemented in Java.
 
-## 🌟 Introduction
+## Read contracts rather than matching names
 
-Mastering data structures and algorithms is a crucial step in becoming an effective Java developer, especially when working with complex problem-solving tasks, optimizations, and software design. Books provide an in-depth, structured approach to learning these concepts, with exercises and examples that help solidify your understanding. Below is a curated list of books that cover everything from fundamental data structures to advanced algorithms in Java.
+A reference algorithm and an API with the same name can have different semantics.
+For duplicates, this repository's `binarySearch` promises the first matching index;
+JDK `Arrays.binarySearch` does not promise which equal element is found.
 
-## 📚 Top Books for Learning Data Structures and Algorithms
+```java
+import io.github.ichillous.dsa.algorithms.SearchAlgorithms;
+import java.util.Arrays;
 
-### 1. *"Introduction to Algorithms"* by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+int[] sorted = {1, 2, 2, 2, 5};
+int jdkResult = Arrays.binarySearch(sorted, 2);
+assert jdkResult >= 0 && sorted[jdkResult] == 2;
+assert SearchAlgorithms.binarySearch(sorted, 2) == 1;
+assert SearchAlgorithms.upperBound(sorted, 2) - SearchAlgorithms.lowerBound(sorted, 2) == 3;
+```
 
-![Introduction to Algorithms](https://img.shields.io/badge/Introduction_to_Algorithms-gray)
+The shared invariant is that a sorted search can discard a half only when its
+ordering excludes the answer. The first-match extension must keep searching toward
+the left boundary. Both are logarithmic queries on already sorted input, but a test
+requiring identical duplicate indices would compare incompatible contracts.
 
-Often referred to as the “CLRS” book, *"Introduction to Algorithms"* is considered a comprehensive guide to the field of algorithms. It provides in-depth explanations of algorithms with rigorous mathematical analysis and is ideal for anyone looking to develop a solid theoretical understanding.
+## A repeatable reading session
 
-- **Why this book?**
-  - Covers a broad range of algorithms and data structures.
-  - Detailed pseudocode for each algorithm.
-  - Suitable for beginners and advanced learners.
+1. State the input, output and preconditions in your own words.
+2. Trace a tiny example, including one empty, duplicate or boundary case.
+3. Identify the invariant or exchange argument that proves correctness.
+4. Derive time and live-space bounds, including output and numeric assumptions.
+5. Run the matching maintained example and test against a simpler reference model.
 
-- **Key Topics**: Sorting, Searching, Graph Algorithms, Dynamic Programming, Greedy Algorithms, Data Structures.
-- **Best For**: Those looking for a deep, theoretical approach.
+**Pitfall:** a short snippet that prints one plausible answer is not evidence that
+an implementation handles empty input, repeated values or overflow. Likewise,
+passing tests cannot prove an asymptotic claim; count operations and state the
+assumptions. The tested examples here establish behavior for their fixtures and
+are accompanied by broader implementation tests.
 
-### 2. *"Data Structures and Algorithms in Java"* by Robert Lafore
+## Practice
 
-![Data Structures and Algorithms in Java](https://img.shields.io/badge/Data_Structures_and_Algorithms_in_Java-lightblue)
-
-This book provides a clear and engaging introduction to data structures and algorithms in Java. With plenty of code examples and diagrams, it makes learning complex topics easy. Each chapter ends with exercises to test your understanding, making it a practical choice for Java learners.
-
-- **Why this book?**
-  - Straightforward and accessible writing style.
-  - Java-specific code examples.
-  - Visual aids like diagrams to clarify concepts.
-
-- **Key Topics**: Arrays, Linked Lists, Stacks, Queues, Trees, Sorting Algorithms, Graphs.
-- **Best For**: Beginners and intermediate Java developers.
-
-### 3. *"Algorithms"* by Robert Sedgewick and Kevin Wayne
-
-![Algorithms](https://img.shields.io/badge/Algorithms-darkblue)
-
-This book offers an in-depth look at the most important algorithms in use today, with detailed explanations and code in Java. *"Algorithms"* by Robert Sedgewick is known for its practical focus on performance, efficiency, and scalability, making it a must-read for developers who want to write optimized Java code.
-
-- **Why this book?**
-  - Focuses on practical algorithm design and optimization.
-  - Plenty of real-world Java code examples.
-  - Thorough analysis of algorithm performance.
-
-- **Key Topics**: Sorting, Searching, Graph Algorithms, String Processing, Geometric Algorithms.
-- **Best For**: Intermediate to advanced learners who want a practical approach.
-
-### 4. *"Cracking the Coding Interview"* by Gayle Laakmann McDowell
-
-![Cracking the Coding Interview](https://img.shields.io/badge/Cracking_the_Coding_Interview-green)
-
-While *"Cracking the Coding Interview"* is focused on interview preparation, it is an excellent resource for brushing up on data structures and algorithms in Java. This book provides 189 programming questions, with detailed solutions and explanations, specifically tailored to prepare you for technical interviews.
-
-- **Why this book?**
-  - Excellent for interview preparation with practical coding questions.
-  - Covers commonly asked data structure and algorithm questions.
-  - Detailed solutions in Java.
-
-- **Key Topics**: Arrays, Linked Lists, Stacks, Trees, Graphs, Dynamic Programming, Bit Manipulation.
-- **Best For**: Developers preparing for job interviews at top tech companies.
-
-### 5. *"The Algorithm Design Manual"* by Steven S. Skiena
-
-![The Algorithm Design Manual](https://img.shields.io/badge/The_Algorithm_Design_Manual-lightgray)
-
-*The Algorithm Design Manual* is a great resource for both students and professionals who want to understand the design and analysis of algorithms. It combines theoretical analysis with practical algorithm implementations, including plenty of sample code in Java.
-
-- **Why this book?**
-  - Focuses on practical problem-solving.
-  - Offers algorithm "war stories" from real-world projects.
-  - Detailed Java code for implementing algorithms.
-
-- **Key Topics**: Graph Algorithms, Sorting, Dynamic Programming, Data Structures, Optimization.
-- **Best For**: Those interested in both theory and real-world applications.
-
-### 6. *"Java Structures: Data Structures in Java for the Principled Programmer"* by Duane A. Bailey
-
-![Java Structures](https://img.shields.io/badge/Java_Structures-orange)
-
-This book provides a hands-on approach to data structures in Java. It is ideal for Java developers who want to understand how data structures are implemented under the hood and how to apply them effectively in real-world projects.
-
-- **Why this book?**
-  - A practical, Java-specific guide to data structures.
-  - Focuses on problem-solving using data structures.
-  - Well-explained code examples.
-
-- **Key Topics**: Lists, Trees, Hash Tables, Stacks, Queues, Maps, Sets.
-- **Best For**: Developers with basic Java knowledge who want to delve deeper into data structures.
-
-### 7. *"Thinking in Java"* by Bruce Eckel
-
-![Thinking in Java](https://img.shields.io/badge/Thinking_in_Java-brown)
-
-*Thinking in Java* by Bruce Eckel is a comprehensive guide to mastering Java. It focuses on object-oriented programming, design patterns, and Java’s core libraries, making it an essential book for both beginners and experienced Java developers. The book doesn’t solely focus on data structures and algorithms, but it provides a solid foundation in Java and the principles that underpin efficient code design.
-
-- **Why this book?**
-  - Provides deep insights into object-oriented programming and design patterns.
-  - Focuses on writing clean, effective, and efficient Java code.
-  - Covers core Java topics thoroughly.
-
-- **Key Topics**: Object-Oriented Programming, Java Collections, Multithreading, Exception Handling, Design Patterns.
-- **Best For**: Java developers looking to master the language and write well-structured, scalable code.
-
-## 📘 Additional Recommendations
-
-- **"Effective Java" by Joshua Bloch**: A must-read for Java developers, focusing on best practices for writing clean, efficient Java code.
-- **"Competitive Programming" by Steven Halim**: A great resource for those looking to apply their algorithmic knowledge to competitive programming.
-- **"Programming Pearls" by Jon Bentley**: Focuses on thinking about problem-solving and algorithmic design in a practical, approachable way.
-- **"Clean Code" by Robert C. Martin**: Teaches you how to write maintainable, efficient, and readable code, which is essential when implementing complex algorithms.
-
-## 🎓 Conclusion
-
-Whether you are just starting with data structures and algorithms or looking to deepen your understanding, the books listed above offer a wealth of knowledge that can help you become a better Java developer. From theoretical concepts to practical coding challenges, these resources provide a solid foundation in algorithm design and optimization.
-
-Key takeaways:
-- **Foundational Texts**: Books like *"Introduction to Algorithms"* and *"Algorithms"* offer deep insights into the theoretical underpinnings of algorithms.
-- **Java-Specific Resources**: Books such as *"Data Structures and Algorithms in Java"* and *"Java Structures"* provide practical code examples that you can apply in your Java projects.
-- **Interview Preparation**: *"Cracking the Coding Interview"* is an essential guide for developers preparing for technical interviews.
-
-By leveraging these books, you’ll build a strong foundation in data structures
-
-, algorithms, and Java programming, helping you tackle complex challenges with confidence! 📖💻🚀
-
----
+Pick one book or API page and compare its contract with a maintained method. Record
+one difference in representation, tie handling, mutation or numeric model. Then
+write a test that would reject the wrong interpretation. Use the
+[worked solutions](../docs/solutions.md) after drafting your own proof or oracle.

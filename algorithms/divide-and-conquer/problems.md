@@ -1,526 +1,96 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Array problems: combine, extend or discard
 
----
+The maintained [SequenceAlgorithms](../../src/main/java/io/github/ichillous/dsa/algorithms/SequenceAlgorithms.java)
+shows three useful ways to avoid recomputing array work. All methods reject null
+and leave input unchanged. Choose the method by the invariant you can prove,
+rather than forcing every array problem into recursion.
 
-# 🧩 Common Divide and Conquer Problems in Java
+## Count inversions during a merge
 
-![Java Divide and Conquer Problems](https://img.shields.io/badge/Java-Divide_and_Conquer_Problems-blue?style=for-the-badge&logo=java)
+An inversion is a pair `i < j` with `a[i] > a[j]`. Recursively count pairs within
+each half. During merging, when a right value is smaller than the current left
+value, it is smaller than **every remaining left value**. Add their count once.
+Equal values do not count as inversions.
 
-## 📋 Table of Contents
-- [Merge Sort](#-merge-sort)
-- [Quick Sort](#-quick-sort)
-- [Binary Search](#-binary-search)
-- [Maximum Subarray Problem (Kadane's Algorithm)](#-maximum-subarray-problem-kadanes-algorithm)
-- [Matrix Multiplication (Strassen's Algorithm)](#-matrix-multiplication-strassens-algorithm)
-- [Closest Pair of Points](#-closest-pair-of-points)
-- [Exponentiation by Squaring](#-exponentiation-by-squaring)
-- [Counting Inversions](#-counting-inversions)
-
-## 🔄 Merge Sort
-
-### Problem Statement:
-Sort an array of integers in ascending order.
-
-### Divide and Conquer Approach:
-Merge Sort divides the array into two halves, recursively sorts each half, and then merges the sorted halves to produce the final sorted array.
-
-#### Implementation:
-```java
-public class MergeSort {
-    public void mergeSort(int[] arr, int left, int right) {
-        if (left < right) {
-            int mid = (left + right) / 2;
-            mergeSort(arr, left, mid);
-            mergeSort(arr, mid + 1, right);
-            merge(arr, left, mid, right);
-        }
-    }
-
-    private void merge(int[] arr, int left, int mid, int right) {
-        int n1 = mid - left + 1;
-        int n2 = right - mid;
-
-        int[] leftArray = new int[n1];
-        int[] rightArray = new int[n2];
-
-        System.arraycopy(arr, left, leftArray, 0, n1);
-        System.arraycopy(arr, mid + 1, rightArray, 0, n2);
-
-        int i = 0, j = 0, k = left;
-        while (i < n1 && j < n2) {
-            if (leftArray[i] <= rightArray[j]) {
-                arr[k] = leftArray[i];
-                i++;
-            } else {
-                arr[k] = rightArray[j];
-                j++;
-            }
-            k++;
-        }
-
-        while (i < n1) {
-            arr[k] = leftArray[i];
-            i++;
-            k++;
-        }
-
-        while (j < n2) {
-            arr[k] = rightArray[j];
-            j++;
-            k++;
-        }
-    }
-
-    public static void main(String[] args) {
-        int[] arr = {12, 11, 13, 5, 6, 7};
-        MergeSort sorter = new MergeSort();
-        sorter.mergeSort(arr, 0, arr.length - 1);
-        System.out.println("Sorted array: " + Arrays.toString(arr));
-    }
-}
+```text
+merge left [2, 4] and right [1, 3, 5]
+emit 1: add 2 inversions, (2,1) and (4,1)
+emit 2: add 0
+emit 3: add 1 inversion, (4,3)
+total cross inversions = 3
 ```
 
-## ⚡ Quick Sort
-
-### Problem Statement:
-Sort an array of integers in ascending order.
-
-### Divide and Conquer Approach:
-Quick Sort selects a pivot element, partitions the array around the pivot, and then recursively sorts the partitions.
-
-#### Implementation:
 ```java
-public class QuickSort {
-    public void quickSort(int[] arr, int low, int high) {
-        if (low < high) {
-            int pi = partition(arr, low, high);
-            quickSort(arr, low, pi - 1);
-            quickSort(arr, pi + 1, high);
-        }
-    }
-
-    private int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = (low - 1);
-
-        for (int j = low; j < high; j++) {
-            if (arr[j] < pivot) {
-                i++;
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
-
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
-
-        return i + 1;
-    }
-
-    public static void main(String[] args) {
-        int[] arr = {10, 7, 8, 9, 1, 5};
-        QuickSort sorter = new QuickSort();
-        sorter.quickSort(arr, 0, arr.length - 1);
-        System.out.println("Sorted array: " + Arrays.toString(arr));
-    }
-}
-```
-
-## 🔍 Binary Search
-
-### Problem Statement:
-Given a sorted array of integers, find the index of a target value.
-
-### Divide and Conquer Approach:
-Binary Search repeatedly divides the array in half, narrowing down the search range until the target value is found or the search space is empty.
-
-#### Implementation:
-```java
-public class BinarySearch {
-    public int binarySearch(int[] arr, int target) {
-        int low = 0;
-        int high = arr.length - 1;
-
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-
-            if (arr[mid] == target) {
-                return mid;
-            }
-
-            if (arr[mid] < target) {
-                low = mid + 1;
-            } else {
-                high = mid - 1;
-            }
-        }
-
-        return -1;
-    }
-
-    public static void main(String[] args) {
-        BinarySearch searcher = new BinarySearch();
-        int[] arr = {2, 3, 4, 10, 40};
-        int target = 10;
-        int result = searcher.binarySearch(arr, target);
-        System.out.println("Element found at index: " + result);
-    }
-}
-```
-
-## 📈 Maximum Subarray Problem (Kadane's Algorithm)
-
-### Problem Statement:
-Find the contiguous subarray within a one-dimensional array of numbers that has the largest sum.
-
-### Divide and Conquer Approach:
-The problem can be solved by dividing the array into two halves, finding the maximum subarray sum for the left and right halves, and finding the maximum subarray that crosses the midpoint.
-
-#### Implementation:
-```java
-public class MaximumSubarray {
-    public int maxSubArray(int[] nums) {
-        return maxSubArray(nums, 0, nums.length - 1);
-    }
-
-    private int maxSubArray(int[] nums, int left, int right) {
-        if (left == right) return nums[left];
-
-        int mid = left + (right - left) / 2;
-
-        int leftSum = maxSubArray(nums, left, mid);
-        int rightSum = maxSubArray(nums, mid + 1, right);
-        int crossSum = maxCrossingSum(nums, left, mid, right);
-
-        return Math.max(Math.max(leftSum, rightSum), crossSum);
-    }
-
-    private int maxCrossingSum(int[] nums, int left, int mid, int right) {
-        int sum = 0;
-        int leftMax = Integer.MIN_VALUE;
-        for (int i = mid; i >= left; i--) {
-            sum += nums[i];
-            if (sum > leftMax) leftMax = sum;
-        }
-
-        sum = 0;
-        int rightMax = Integer.MIN_VALUE;
-        for (int i = mid + 1; i <= right; i++) {
-            sum += nums[i];
-            if (sum > rightMax) rightMax = sum;
-        }
-
-        return leftMax + rightMax;
-    }
-
-    public static void main(String[] args) {
-        MaximumSubarray solver = new MaximumSubarray();
-        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        System.out.println("Maximum subarray sum: " + solver.maxSubArray(nums));
-    }
-}
-```
-
-## 🔢 Matrix Multiplication (Strassen's Algorithm)
-
-### Problem Statement:
-Multiply two matrices more efficiently than the standard matrix multiplication method.
-
-### Divide and Conquer Approach:
-Strassen's Algorithm divides each matrix into four submatrices and recursively multiplies them, reducing the overall number of multiplications required.
-
-#### Simplified Implementation:
-```java
-public class StrassensMatrixMultiplication {
-    public int[][] multiply(int[][] A, int[][] B) {
-        int n = A.length;
-        int[][] C = new int[n][n];
-
-        if (n == 1) {
-            C[0][0] = A[0][0] * B[0][0];
-        } else {
-            int[][] A11 = new int[n / 2][n / 2];
-            int[][] A12 = new int[n / 2][n / 2];
-            int[][] A21 = new int[n / 2][n / 2];
-            int[][] A22 = new int[n / 2][n / 2];
-
-            int[][] B11 = new int[n / 2][n / 2];
-            int[][] B12 = new int[n / 2][n / 2];
-            int[][] B21 = new int[n / 2][n / 2];
-            int[][] B22 = new int[n / 2][n / 2];
-
-            // Dividing the matrices into quadrants
-            divide(A, A11, 0, 0);
-            divide(A, A12, 0, n / 2);
-            divide(A, A21, n / 2, 0);
-            divide(A, A22, n / 2, n / 2);
-
-            divide(B, B11, 0, 0);
-           
-
- divide(B, B12, 0, n / 2);
-            divide(B, B21, n / 2, 0);
-            divide(B, B22, n / 2, n / 2);
-
-            // Strassen's formula
-            int[][] M1 = multiply(add(A11, A22), add(B11, B22));
-            int[][] M2 = multiply(add(A21, A22), B11);
-            int[][] M3 = multiply(A11, subtract(B12, B22));
-            int[][] M4 = multiply(A22, subtract(B21, B11));
-            int[][] M5 = multiply(add(A11, A12), B22);
-            int[][] M6 = multiply(subtract(A21, A11), add(B11, B12));
-            int[][] M7 = multiply(subtract(A12, A22), add(B21, B22));
-
-            int[][] C11 = add(subtract(add(M1, M4), M5), M7);
-            int[][] C12 = add(M3, M5);
-            int[][] C21 = add(M2, M4);
-            int[][] C22 = add(subtract(add(M1, M3), M2), M6);
-
-            // Combining the result
-            combine(C11, C, 0, 0);
-            combine(C12, C, 0, n / 2);
-            combine(C21, C, n / 2, 0);
-            combine(C22, C, n / 2, n / 2);
-        }
-
-        return C;
-    }
-
-    private void divide(int[][] P, int[][] C, int iB, int jB) {
-        for (int i = 0, iC = iB; i < C.length; i++, iC++) {
-            for (int j = 0, jC = jB; j < C.length; j++, jC++) {
-                C[i][j] = P[iC][jC];
-            }
-        }
-    }
-
-    private void combine(int[][] C, int[][] P, int iB, int jB) {
-        for (int i = 0, iC = iB; i < C.length; i++, iC++) {
-            for (int j = 0, jC = jB; j < C.length; j++, jC++) {
-                P[iC][jC] = C[i][j];
-            }
-        }
-    }
-
-    private int[][] add(int[][] A, int[][] B) {
-        int n = A.length;
-        int[][] C = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                C[i][j] = A[i][j] + B[i][j];
-            }
-        }
-        return C;
-    }
-
-    private int[][] subtract(int[][] A, int[][] B) {
-        int n = A.length;
-        int[][] C = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                C[i][j] = A[i][j] - B[i][j];
-            }
-        }
-        return C;
-    }
-
-    public static void main(String[] args) {
-        StrassensMatrixMultiplication smm = new StrassensMatrixMultiplication();
-        int[][] A = {{1, 2}, {3, 4}};
-        int[][] B = {{5, 6}, {7, 8}};
-        int[][] C = smm.multiply(A, B);
-
-        System.out.println("Product of matrices:");
-        for (int[] row : C) {
-            System.out.println(Arrays.toString(row));
-        }
-    }
-}
-```
-
-## 🔍 Closest Pair of Points
-
-### Problem Statement:
-Given a set of points in a plane, find the pair of points with the smallest distance between them.
-
-### Divide and Conquer Approach:
-Divide the set of points into two halves, find the closest pairs in each half, and then find the closest pair that spans both halves.
-
-#### Implementation:
-```java
+import io.github.ichillous.dsa.algorithms.SequenceAlgorithms;
 import java.util.Arrays;
 
-public class ClosestPair {
-    public double closestPair(Point[] points) {
-        Arrays.sort(points, (a, b) -> Double.compare(a.x, b.x));
-        return closestPair(points, 0, points.length - 1);
-    }
-
-    private double closestPair(Point[] points, int left, int right) {
-        if (right - left <= 3) {
-            return bruteForce(points, left, right);
-        }
-
-        int mid = left + (right - left) / 2;
-        double d1 = closestPair(points, left, mid);
-        double d2 = closestPair(points, mid + 1, right);
-        double d = Math.min(d1, d2);
-
-        Point[] strip = new Point[right - left + 1];
-        int j = 0;
-        for (int i = left; i <= right; i++) {
-            if (Math.abs(points[i].x - points[mid].x) < d) {
-                strip[j++] = points[i];
-            }
-        }
-
-        Arrays.sort(strip, 0, j, (a, b) -> Double.compare(a.y, b.y));
-
-        for (int i = 0; i < j; i++) {
-            for (int k = i + 1; k < j && (strip[k].y - strip[i].y) < d; k++) {
-                d = Math.min(d, distance(strip[i], strip[k]));
-            }
-        }
-
-        return d;
-    }
-
-    private double bruteForce(Point[] points, int left, int right) {
-        double minDist = Double.MAX_VALUE;
-        for (int i = left; i < right; i++) {
-            for (int j = i + 1; j <= right; j++) {
-                minDist = Math.min(minDist, distance(points[i], points[j]));
-            }
-        }
-        return minDist;
-    }
-
-    private double distance(Point a, Point b) {
-        return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
-    }
-
-    public static void main(String[] args) {
-        ClosestPair cp = new ClosestPair();
-        Point[] points = {new Point(2, 3), new Point(12, 30), new Point(40, 50), new Point(5, 1), new Point(12, 10), new Point(3, 4)};
-        System.out.println("The smallest distance is " + cp.closestPair(points));
-    }
-}
-
-class Point {
-    double x, y;
-
-    Point(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-}
+int[] values = {2, 4, 1, 3, 5};
+assert SequenceAlgorithms.countInversions(values) == 3L;
+assert Arrays.equals(values, new int[] {2, 4, 1, 3, 5});
+assert SequenceAlgorithms.countInversions(new int[] {2, 2, 2}) == 0L;
+assert SequenceAlgorithms.countInversions(new int[0]) == 0L;
 ```
 
-## 📉 Exponentiation by Squaring
+The copied array, merge buffer and stack use O(n) auxiliary space; time is
+O(n log n). The `long` count matters: a descending array has `n(n-1)/2` inversions,
+which exceeds `int` for some valid Java array lengths.
 
-### Problem Statement:
-Efficiently compute the power of a number.
+## Maximum subarray: Kadane's extension invariant
 
-### Divide and Conquer Approach:
-Exponentiation by Squaring is a method to calculate `a^b` in O(log b) time by recursively dividing the exponentiation into smaller subproblems.
+Keep the greatest-sum nonempty range ending at the current index. A strictly
+negative preceding sum can only hurt a new range, so discard it. A zero preceding
+sum must be retained to honor the earliest-start tie policy. Track the best range
+seen anywhere as a separate state.
 
-#### Implementation:
+For `[-2, 1, -3, 4, -1, 2, 1, -5, 4]`, the sums of the best ranges ending at each
+position are `[-2, 1, -2, 4, 3, 5, 6, 1, 5]`; the global best is `[3, 7)` with sum 6.
+
 ```java
-public class ExponentiationBySquaring {
-    public long power(long base, long exponent) {
-        if (exponent == 0) return 1;
-        if (exponent % 2 == 0) {
-            return power(base * base, exponent / 2);
-        } else {
-            return base * power(base * base, (exponent - 1) / 2);
-        }
-    }
+import io.github.ichillous.dsa.algorithms.SequenceAlgorithms;
 
-    public static void main(String[] args) {
-        ExponentiationBySquaring exp = new ExponentiationBySquaring();
-        long base = 2;
-        long exponent = 10;
-        System.out.println(base + "^" + exponent + " = " + exp.power(base, exponent));
-    }
-}
+var best = SequenceAlgorithms.maximumSubarray(
+        new int[] {-2, 1, -3, 4, -1, 2, 1, -5, 4}).orElseThrow();
+assert best.startInclusive() == 3 && best.endExclusive() == 7 && best.sum() == 6L;
+var negative = SequenceAlgorithms.maximumSubarray(new int[] {-8, -3, -5}).orElseThrow();
+assert negative.startInclusive() == 1 && negative.endExclusive() == 2 && negative.sum() == -3L;
+var tied = SequenceAlgorithms.maximumSubarray(new int[] {0, 1}).orElseThrow();
+assert tied.startInclusive() == 0 && tied.endExclusive() == 2;
+assert SequenceAlgorithms.maximumSubarray(new int[0]).isEmpty();
 ```
 
-## 📊 Counting Inversions
+Time is O(n) and auxiliary space O(1). The result is an optional nonempty range;
+ties choose earliest start, then earliest end. Sums of any Java `int[]` fit in a
+`long`. Initializing the best answer to zero would incorrectly return an empty
+solution for all-negative input. A divide-and-conquer solution can also work,
+but combining left/right/crossing optima is unnecessary for this linear method.
 
-### Problem Statement:
-Given an array of integers, count the number of inversions required to sort the array.
+## Sliding-window maximum: keep only useful candidates
 
-### Divide and Conquer Approach:
-The problem can be solved by modifying the merge sort algorithm to count inversions while merging two halves of the array.
+A deque stores unexpired indices in decreasing value order. An index with a
+later value at least as large can be removed: every future window containing the
+earlier index also contains the later, better candidate. Expire old indices from
+the front; the front then identifies the current maximum.
 
-#### Implementation:
 ```java
-public class CountingInversions {
-    public int countInversions(int[] arr) {
-        return countInversions(arr, new int[arr.length], 0, arr.length - 1);
-    }
+import io.github.ichillous.dsa.algorithms.SequenceAlgorithms;
+import java.util.Arrays;
 
-    private int countInversions(int[] arr, int[] temp, int left, int right) {
-        if (left >= right) return 0;
-        
-        int mid = (left + right) / 2;
-        int invCount = 0;
-
-        invCount += countInversions(arr, temp, left, mid);
-        invCount += countInversions(arr, temp, mid + 1, right);
-        invCount += mergeAndCount(arr, temp, left, mid, right);
-
-        return invCount;
-    }
-
-    private int mergeAndCount(int[] arr, int[] temp, int left, int mid, int right) {
-        int i = left, j = mid + 1, k = left;
-        int invCount = 0;
-
-        while (i <= mid && j <= right) {
-            if (arr[i] <= arr[j]) {
-                temp[k++] = arr[i++];
-            } else {
-                temp[k++] = arr[j++];
-                invCount += (mid + 1) - i;
-            }
-        }
-
-        while (i <= mid) {
-            temp[k++] = arr[i++];
-        }
-
-        while (j <= right) {
-            temp[k++] = arr[j++];
-        }
-
-        System.arraycopy
-
-(temp, left, arr, left, right - left + 1);
-        
-        return invCount;
-    }
-
-    public static void main(String[] args) {
-        CountingInversions counter = new CountingInversions();
-        int[] arr = {2, 4, 1, 3, 5};
-        System.out.println("Number of inversions: " + counter.countInversions(arr));
-    }
-}
+int[] input = {1, 3, -1, -3, 5, 3, 6, 7};
+int[] maxima = SequenceAlgorithms.slidingWindowMaximum(input, 3);
+assert Arrays.equals(maxima, new int[] {3, 3, 5, 5, 6, 7});
+assert Arrays.equals(SequenceAlgorithms.slidingWindowMaximum(input, 1), input);
 ```
 
-## 🎓 Conclusion
+Require `1 <= window <= input.length`; empty input has no valid window. Each index
+enters and leaves the deque at most once, giving O(n) time despite nested loops.
+Auxiliary storage is O(window), plus O(n-window+1) output. Keeping values without
+indices loses the information needed to expire an old maximum correctly.
 
-The problems outlined in this section demonstrate the power and versatility of the Divide and Conquer technique in solving complex computational problems. By mastering these problems, you'll gain a deep understanding of how to effectively break down problems into smaller, more manageable components and solve them efficiently.
+## Practice
 
-Key takeaways:
-- **Merge Sort and Quick Sort**: Fundamental sorting algorithms that efficiently sort arrays using Divide and Conquer.
-- **Binary Search**: A classic example of applying Divide and Conquer to search problems.
-- **Maximum Subarray and Closest Pair of Points**: Demonstrate how Divide and Conquer can be applied to optimization problems.
-- **Matrix Multiplication and Exponentiation**: Show how Divide and Conquer can reduce computational complexity in mathematical problems.
+1. Count inversions by an independent quadratic pair scan on small arrays.
+2. Exhaustively enumerate nonempty subarrays and verify sums **and tie indices**.
+3. Compare deque results with a direct maximum scan for each window; include equal
+   values, negative values and windows of sizes 1 and `n`.
 
-By practicing these problems, you'll enhance your problem-solving skills and be well-prepared to tackle complex Divide and Conquer challenges in your Java applications! 💻🚀
-
----
+Use the [solutions](../../docs/solutions.md) to review the reference models.

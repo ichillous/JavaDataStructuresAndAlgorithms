@@ -1,173 +1,68 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Bubble sort, insertion sort and local order
 
----
+Adjacent exchanges make bubble sort useful for learning invariants, although
+quadratic worst-case work makes it a poor default for large arrays. The maintained
+[SortAlgorithms](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java)
+mutates `int[]` in ascending order, rejects null and accepts empty input.
 
-# 🔄 Bubble Sort in Java
+## Bubble-sort invariant and trace
 
-![Java Bubble Sort](https://img.shields.io/badge/Java-Bubble_Sort-blue?style=for-the-badge&logo=java)
+During a left-to-right pass, the largest value seen so far moves right. At the end
+of the pass, the maximum of the active prefix is at its final position. The suffix
+after `end` is therefore sorted and never needs another comparison.
 
-## 📋 Table of Contents
-- [Introduction to Bubble Sort](#-introduction-to-bubble-sort)
-- [How Bubble Sort Works](#-how-bubble-sort-works)
-- [Algorithm](#-algorithm)
-- [Implementation](#-implementation)
-  - [Optimized Bubble Sort](#-optimized-bubble-sort)
-- [Time and Space Complexity](#-time-and-space-complexity)
-- [Advantages and Disadvantages](#-advantages-and-disadvantages)
-- [Applications of Bubble Sort](#-applications-of-bubble-sort)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
-
-## 🌟 Introduction to Bubble Sort
-
-**Bubble Sort** is a simple comparison-based sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. This process is repeated until the list is sorted. While Bubble Sort is easy to understand and implement, it is not suitable for large datasets due to its poor time complexity.
-
-### Key Characteristics:
-- **Comparison-Based**: Bubble Sort compares adjacent elements.
-- **In-Place Sorting**: Requires only a constant amount of additional space.
-- **Stable**: Maintains the relative order of equal elements.
-
-## 🔍 How Bubble Sort Works
-
-Bubble Sort works by repeatedly stepping through the list to be sorted, comparing adjacent items, and swapping them if they are in the wrong order. The pass through the list is repeated until no swaps are needed, which indicates that the list is sorted.
-
-### Visualization:
-Consider the following unsorted array: `[5, 1, 4, 2, 8]`.
-
-1. **First Pass**:
-   - Compare `5` and `1`: Swap → `[1, 5, 4, 2, 8]`
-   - Compare `5` and `4`: Swap → `[1, 4, 5, 2, 8]`
-   - Compare `5` and `2`: Swap → `[1, 4, 2, 5, 8]`
-   - Compare `5` and `8`: No swap → `[1, 4, 2, 5, 8]`
-
-2. **Second Pass**:
-   - Compare `1` and `4`: No swap → `[1, 4, 2, 5, 8]`
-   - Compare `4` and `2`: Swap → `[1, 2, 4, 5, 8]`
-   - Compare `4` and `5`: No swap → `[1, 2, 4, 5, 8]`
-   - Compare `5` and `8`: No swap → `[1, 2, 4, 5, 8]`
-
-3. **Third Pass**:
-   - Compare `1` and `2`: No swap → `[1, 2, 4, 5, 8]`
-   - Compare `2` and `4`: No swap → `[1, 2, 4, 5, 8]`
-   - Compare `4` and `5`: No swap → `[1, 2, 4, 5, 8]`
-
-The array is now sorted.
-
-## 📝 Algorithm
-
-1. Start at the beginning of the array.
-2. Compare the first two elements.
-3. If the first element is greater than the second, swap them.
-4. Move to the next pair of elements and repeat steps 2 and 3.
-5. Continue this process until the end of the array.
-6. Repeat the entire process for the next pass, excluding the last sorted elements.
-7. Stop when no swaps are made during a pass, indicating that the array is sorted.
-
-## 💻 Implementation
-
-### Basic Implementation:
-```java
-public class BubbleSort {
-    public void bubbleSort(int[] arr) {
-        int n = arr.length;
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    // Swap arr[j] and arr[j + 1]
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        BubbleSort sorter = new BubbleSort();
-        int[] arr = {5, 1, 4, 2, 8};
-        sorter.bubbleSort(arr);
-        System.out.println("Sorted array: " + Arrays.toString(arr));
-    }
-}
+```text
+input                  [4, 1, 3, 2]
+after first pass       [1, 3, 2 | 4]
+after second pass      [1, 2 | 3, 4]
+third pass: no swaps    [1 | 2, 3, 4] -> stop
 ```
 
-### 🔄 Optimized Bubble Sort
+A pass with no swaps proves the active portion was already sorted. The maintained
+implementation exits early in that case.
 
-An optimized version of Bubble Sort can reduce the number of passes if the array becomes sorted before completing all the passes.
-
-#### Implementation:
 ```java
-public class OptimizedBubbleSort {
-    public void bubbleSort(int[] arr) {
-        int n = arr.length;
-        boolean swapped;
-        for (int i = 0; i < n - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < n - i - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    // Swap arr[j] and arr[j + 1]
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                    swapped = true;
-                }
-            }
-            // If no two elements were swapped by inner loop, then break
-            if (!swapped) break;
-        }
-    }
+import io.github.ichillous.dsa.algorithms.SortAlgorithms;
+import java.util.Arrays;
 
-    public static void main(String[] args) {
-        OptimizedBubbleSort sorter = new OptimizedBubbleSort();
-        int[] arr = {5, 1, 4, 2, 8};
-        sorter.bubbleSort(arr);
-        System.out.println("Sorted array: " + Arrays.toString(arr));
-    }
-}
+int[] values = {4, 1, 3, 2, 2};
+SortAlgorithms.bubbleSort(values);
+assert Arrays.equals(values, new int[] {1, 2, 2, 3, 4});
+int[] empty = {};
+SortAlgorithms.bubbleSort(empty);
+assert empty.length == 0;
 ```
 
-## ⏱️ Time and Space Complexity
+## Insertion sort uses a different invariant
 
-- **Time Complexity**:
-  - **Worst-Case**: O(n²) – occurs when the array is in reverse order.
-  - **Best-Case**: O(n) – occurs when the array is already sorted (with optimization).
-  - **Average-Case**: O(n²) – occurs for randomly ordered arrays.
-  
-- **Space Complexity**: O(1) – Bubble Sort is an in-place sorting algorithm, requiring no additional memory apart from a few variables for swapping.
+Before inserting element `i`, prefix `[0, i)` is sorted. Shift only larger values
+right, then place the saved value in the gap. On nearly sorted data, the number of
+shifts tracks the number of inversions rather than always taking quadratic work.
 
-## ⚖️ Advantages and Disadvantages
+```java
+import io.github.ichillous.dsa.algorithms.SortAlgorithms;
+import java.util.Arrays;
 
-### Advantages:
-- **Simple to Implement**: Bubble Sort is easy to understand and implement.
-- **Stable Sort**: Maintains the relative order of equal elements.
-- **In-Place Sorting**: Requires minimal additional memory.
+int[] nearlySorted = {1, 2, 4, 3, 5};
+SortAlgorithms.insertionSort(nearlySorted);
+assert Arrays.equals(nearlySorted, new int[] {1, 2, 3, 4, 5});
+```
 
-### Disadvantages:
-- **Inefficient for Large Datasets**: The O(n²) time complexity makes Bubble Sort unsuitable for large datasets.
-- **High Number of Comparisons and Swaps**: Even for moderately sized arrays, Bubble Sort performs a high number of comparisons and swaps.
+Both algorithms take O(n²) worst-case time, O(n) time on already sorted input and
+O(1) auxiliary space. Both are stable: equal keys are never swapped or shifted
+past one another. Stability is conceptual for primitive integers, whose equal
+values do not carry distinct identities.
 
-## 💡 Applications of Bubble Sort
+**Pitfall:** swapping on `>=` instead of `>` destroys that stability. Omitting the
+no-swap exit also removes bubble sort's linear best-case bound. A reverse-sorted
+array remains quadratic with or without early exit.
 
-While Bubble Sort is not commonly used in practice due to its inefficiency, it can be useful in the following scenarios:
-- **Educational Purposes**: Bubble Sort is often taught as an introductory sorting algorithm due to its simplicity.
-- **Small Datasets**: Bubble Sort can be used for small datasets where the overhead of more complex algorithms is unnecessary.
-- **Partially Sorted Arrays**: With the optimized version, Bubble Sort can perform well on arrays that are already or nearly sorted.
+## Practice
 
-## ⚠️ Common Pitfalls and Best Practices
+1. Count comparisons and swaps for `[3, 2, 1]`.
+2. Explain why insertion sort needs to save the current value before shifting.
+3. Compare all sorts with `Arrays.sort` on copies; check duplicate multiplicities,
+   not only whether the result is ordered.
 
-1. **Unoptimized Versions**: Always use the optimized version of Bubble Sort to avoid unnecessary comparisons and swaps.
-2. **Avoid Large Datasets**: Do not use Bubble Sort for large datasets, as its time complexity will lead to poor performance.
-3. **Edge Cases**: Consider edge cases like empty arrays or arrays with a single element.
-
-## 🎓 Conclusion
-
-Bubble Sort is a fundamental sorting algorithm that, while inefficient for large datasets, serves as a valuable educational tool for understanding the basics of sorting and algorithm design. By mastering Bubble Sort, you can gain insights into more complex sorting algorithms and improve your problem-solving skills in Java.
-
-Key takeaways:
-- **Simple but Inefficient**: Bubble Sort is easy to implement but has a high time complexity.
-- **In-Place and Stable**: Bubble Sort operates in-place and maintains the order of equal elements.
-- **Optimization**: The optimized version significantly reduces unnecessary passes when the array is already sorted.
-
-By understanding Bubble Sort, you'll build a strong foundation for learning more advanced sorting algorithms in Java! 💻🚀
-
----
+See [solutions](../../docs/solutions.md), then study
+[merge sort](merge-sort.md) for a different time/space tradeoff.

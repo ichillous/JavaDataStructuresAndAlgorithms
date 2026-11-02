@@ -1,157 +1,62 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Three-way quicksort with a bounded call stack
 
----
+Quicksort partitions around a pivot, then sorts the regions below and above it.
+The maintained [implementation](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java)
+uses a deterministic middle-position pivot and groups equal values together.
+It mutates `int[]` in ascending order, rejects null and accepts empty arrays.
 
-# ⚡ Quick Sort in Java
+## Four regions during partitioning
 
-![Java Quick Sort](https://img.shields.io/badge/Java-Quick_Sort-red?style=for-the-badge&logo=java)
-
-## 📋 Table of Contents
-- [Introduction to Quick Sort](#-introduction-to-quick-sort)
-- [How Quick Sort Works](#-how-quick-sort-works)
-- [Algorithm](#-algorithm)
-- [Implementation](#-implementation)
-- [Time and Space Complexity](#-time-and-space-complexity)
-- [Advantages and Disadvantages](#-advantages-and-disadvantages)
-- [Applications of Quick Sort](#-applications-of-quick-sort)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
-
-## 🌟 Introduction to Quick Sort
-
-**Quick Sort** is a highly efficient and widely used sorting algorithm that employs the divide-and-conquer strategy. It works by selecting a "pivot" element from the array and partitioning the other elements into two subarrays, according to whether they are less than or greater than the pivot. The subarrays are then recursively sorted. Quick Sort is often faster in practice than other O(n log n) algorithms like Merge Sort due to its in-place sorting and reduced overhead.
-
-### Key Characteristics:
-- **Divide and Conquer**: Quick Sort recursively divides the array around a pivot element.
-- **In-Place Partitioning**: Partitioning uses O(1) auxiliary storage, but recursive calls also consume stack space.
-- **Unstable**: Does not preserve the relative order of equal elements.
-
-## 🔍 How Quick Sort Works
-
-Quick Sort works by selecting a "pivot" element from the array and partitioning the other elements into two subarrays based on whether they are less than or greater than the pivot. The pivot is then placed in its correct position, and the process is recursively applied to the subarrays.
-
-### Visualization:
-Consider the following unsorted array: `[10, 7, 8, 9, 1, 5]`.
-
-1. **Select Pivot**:
-   - Choose the last element as the pivot: `5`.
-   
-2. **Partition**:
-   - Rearrange the array so that elements less than `5` are on the left, and elements greater than `5` are on the right: `[1, 5, 8, 9, 10, 7]`.
-   - `5` is now in its correct position.
-
-3. **Recursion**:
-   - Apply the same process to the subarrays `[1]` (left of `5`) and `[8, 9, 10, 7]` (right of `5`).
-
-4. **Final Sorted Array**:
-   - After recursively applying the steps, the array becomes `[1, 5, 7, 8, 9, 10]`.
-
-## 📝 Algorithm
-
-1. **Choose a Pivot**: Select an element as the pivot (commonly the last element).
-2. **Partition**: Rearrange the array so that elements less than the pivot are on its left, and elements greater than the pivot are on its right.
-3. **Recursion**: Recursively apply Quick Sort to the subarrays formed by dividing around the pivot.
-4. **Base Case**: The recursion ends when the subarray has zero or one element, as it is already sorted.
-
-### Partitioning Process:
-1. Select a pivot element.
-2. Move elements less than the pivot to its left.
-3. Move elements greater than the pivot to its right.
-4. Swap the pivot element to its correct position.
-
-## 💻 Implementation
-
-### Basic Implementation:
-```java
-public class QuickSort {
-    public void quickSort(int[] arr, int low, int high) {
-        if (low < high) {
-            int pi = partition(arr, low, high);
-
-            // Recursively sort elements before partition and after partition
-            quickSort(arr, low, pi - 1);
-            quickSort(arr, pi + 1, high);
-        }
-    }
-
-    private int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = (low - 1); // Index of smaller element
-
-        for (int j = low; j < high; j++) {
-            if (arr[j] < pivot) {
-                i++;
-                // Swap arr[i] and arr[j]
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
-
-        // Swap arr[i + 1] and arr[high] (or pivot)
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
-
-        return i + 1;
-    }
-
-    public static void main(String[] args) {
-        QuickSort sorter = new QuickSort();
-        int[] arr = {10, 7, 8, 9, 1, 5};
-        sorter.quickSort(arr, 0, arr.length - 1);
-        System.out.println("Sorted array: " + Arrays.toString(arr));
-    }
-}
+```text
+[ low ... less ) [ less ... scan ) [ scan ... greater ] ( greater ... high ]
+     < pivot          == pivot           unknown              > pivot
 ```
 
-### Explanation:
-- **quickSort**: Recursively sorts the array by dividing it around the pivot.
-- **partition**: Rearranges the array around the pivot so that elements less than the pivot come before it, and elements greater than the pivot come after it.
+When the scanned value is smaller, swap it into the first region and advance both
+`less` and `scan`. When it is larger, swap with `greater` and shrink the unknown
+region without advancing `scan`: the incoming value still needs inspection.
+An equal value only advances `scan`. Each step shrinks the unknown region.
 
-## ⏱️ Time and Space Complexity
+For `[3, 1, 3, 2, 3]` and pivot `3`, partitioning ends with a below-pivot region
+containing `1, 2`, an equal region containing three `3`s, and an empty upper
+region. Equal values need no further sorting.
 
-- **Time Complexity**:
-  - **Best-Case**: O(n log n) – Occurs when the pivot divides the array into two nearly equal subarrays.
-  - **Average-Case**: O(n log n) – Typically occurs with random pivot selections.
-  - **Worst-Case**: O(n²) – Occurs when the smallest or largest element is always chosen as the pivot, resulting in highly unbalanced partitions.
-  
-- **Auxiliary Space**: O(log n) for balanced partitions and O(n) in the worst case for the two-recursive-call implementation above. The maintained implementation recurses only into the smaller partition, bounding its stack to O(log n).
+```java
+import io.github.ichillous.dsa.algorithms.SortAlgorithms;
+import java.util.Arrays;
 
-## ⚖️ Advantages and Disadvantages
+int[] values = {3, 1, 3, 2, 3, Integer.MIN_VALUE, Integer.MAX_VALUE};
+int[] expected = values.clone();
+Arrays.sort(expected);
+SortAlgorithms.quickSort(values);
+assert Arrays.equals(values, expected);
+int[] equal = {7, 7, 7, 7};
+SortAlgorithms.quickSort(equal);
+assert Arrays.equals(equal, new int[] {7, 7, 7, 7});
+```
 
-### Advantages:
-- **Efficient**: Often faster than Merge Sort and Heap Sort in practice due to in-place sorting and reduced memory overhead.
-- **In-Place Sorting**: Requires only a small amount of additional memory.
-- **Average O(n log n)**: Provides good performance on average, making it suitable for most datasets.
+## Time and stack are separate questions
 
-### Disadvantages:
-- **Unstable**: Does not maintain the relative order of equal elements.
-- **Worst-Case O(n²)**: Can degrade to O(n²) time complexity if poor pivot choices are made.
-- **Recursive Algorithm**: Requires careful handling of stack depth for large arrays.
+Balanced partitions give O(n log n) time. Bad deterministic pivot choices can give
+O(n²) time; the implementation does not randomize and claims no worst-case
+O(n log n) time guarantee. All-equal input is handled in O(n) by one partition.
 
-## 💡 Applications of Quick Sort
+Only the smaller partition is recursive. The larger one is processed by a loop,
+so each nested call has at most half as many elements. This bounds auxiliary
+stack space to O(log n), even if the total partition work is quadratic. The sort
+is unstable because long-distance swaps can reorder equal keys.
 
-Quick Sort is widely used in various applications due to its efficiency:
-- **General-Purpose Sorting**: Suitable for most datasets, especially when average-case performance is acceptable.
-- **Database Systems**: Often used in database query processing for sorting records.
-- **Efficient Sorting**: Preferred in systems with limited memory, as it is an in-place sorting algorithm.
+**Pitfalls:** advancing `scan` after swapping in an unexamined value can leave an
+out-of-place element. Recursing on both partitions instead of looping over the
+larger one can require O(n) stack space on an unlucky input. Comparing arbitrary
+integers by subtraction can overflow; direct `<` and `>` comparisons are safe.
 
-## ⚠️ Common Pitfalls and Best Practices
+## Practice
 
-1. **Pivot Selection**: Use strategies like choosing the median of three elements or randomizing the pivot to avoid worst-case scenarios.
-2. **Avoid Deep Recursion**: For large arrays, ensure that the recursion depth is managed, possibly using an iterative version of Quick Sort or a hybrid approach with Insertion Sort.
-3. **Handle Edge Cases**: Test with edge cases like arrays with repeated elements, already sorted arrays, and arrays with all elements the same.
+1. Trace all four regions for `[2, 3, 1, 2]`.
+2. Explain why the equal region is excluded from both later subproblems.
+3. Compare maximum call depth with total comparison count; construct partition
+   sizes that show one can remain logarithmic while the other is quadratic.
 
-## 🎓 Conclusion
-
-Quick Sort is a powerful and versatile sorting algorithm that offers excellent average-case performance and is widely used in practice. By understanding how Quick Sort works and how to optimize it, you can implement an efficient sorting solution for a wide range of applications in Java.
-
-Key takeaways:
-- **Divide and Conquer**: Quick Sort divides the array around a pivot element, making it efficient for most datasets.
-- **In-Place and Efficient**: Requires minimal additional memory and is often faster than other O(n log n) algorithms.
-- **Optimize for Worst-Case**: By carefully selecting the pivot and managing recursion, Quick Sort can be optimized to avoid its worst-case behavior.
-
-By mastering Quick Sort, you'll be equipped to handle a wide range of sorting tasks in your Java applications! 💻🚀
-
----
+Use the [solutions](../../docs/solutions.md) and contrast the worst-case guarantee
+of [heapsort](heap-sort.md).

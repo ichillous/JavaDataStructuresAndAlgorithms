@@ -1,212 +1,65 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Tries: share prefixes, mark whole words separately
 
----
+A trie stores strings along labeled edges. Words with the same prefix share a path, making prefix lookup and autocomplete natural. Use a hash set for exact membership alone; consider a trie when prefixes are the central operation.
 
-# 🌳 Tries in Java
+```text
+root
+|-- c
+|   `-- a
+|       |-- r* -- t*
+|       `-- t*
+`-- d -- o -- g*
 
-![Java Tries](https://img.shields.io/badge/Java-Tries-blue?style=for-the-badge&logo=java)
+* marks a complete word: car, cart, cat, dog
+```
 
-## 📋 Table of Contents
-- [Introduction to Tries](#-introduction-to-tries)
-- [Trie Terminology](#-trie-terminology)
-- [Structure of a Trie](#-structure-of-a-trie)
-- [Basic Operations on Tries](#-basic-operations-on-tries)
-  - [Insertion](#-insertion)
-  - [Search](#-search)
-  - [Deletion](#-deletion)
-- [Advantages and Disadvantages of Tries](#-advantages-and-disadvantages-of-tries)
-- [Applications of Tries](#-applications-of-tries)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
+A word can end at an internal node: `car` ends before `cart` does. A leaf is a node with no children; it is not the definition of a word ending. The empty word, if stored, marks the root itself.
 
-## 🌟 Introduction to Tries
+[`Trie`](../../src/main/java/io/github/ichillous/dsa/structures/Trie.java) is a case-sensitive set of Java strings. It accepts the empty string and arbitrary UTF-16 code units, rejects nulls and does not normalize case or Unicode. Duplicate add returns false.
 
-A **Trie** (pronounced "try") is a specialized tree-like data structure used to store a dynamic set of strings, typically over a finite alphabet. Tries are also known as prefix trees because they are used to retrieve a key stored in a tree using the key's prefix. Tries are particularly effective for operations related to strings, such as autocomplete, spell checking, and searching for words in a dictionary.
-
-### Key Characteristics:
-- **Efficient String Matching**: Tries provide efficient search time for strings by leveraging common prefixes.
-- **Prefix-Based Storage**: Nodes in a trie represent characters, and paths from the root to a node represent prefixes of words.
-
-## 📚 Trie Terminology
-
-- **Node**: A fundamental unit in a trie that stores a character.
-- **Root**: The topmost node of the trie, representing an empty string.
-- **Edge**: A connection between two nodes that represents a character in the string.
-- **Prefix**: A substring that represents the initial part of a string.
-- **Leaf Node**: A node with no children. A separate end-of-word flag marks complete words; a word can end at an internal node.
-- **Depth**: The length of the path from the root to a particular node.
-
-## 🌲 Structure of a Trie
-
-A trie is a multi-way tree where each node represents a character of a string. The root is associated with an empty string, and each edge extending from a node represents a possible character in the string.
-
-### Basic Node Structure:
 ```java
-class TrieNode {
-    TrieNode[] children;
-    boolean isEndOfWord;
+import io.github.ichillous.dsa.structures.Trie;
+import java.util.List;
 
-    public TrieNode() {
-        children = new TrieNode[26]; // Assuming the trie stores lowercase English letters
-        isEndOfWord = false;
-    }
-}
+Trie words = new Trie();
+words.add("car");
+words.add("cart");
+words.add("cat");
+assert words.startsWith("ca");
+assert !words.contains("ca");
+assert words.contains("car");
+assert words.wordsWithPrefix("ca", 2).equals(List.of("car", "cart"));
 ```
 
-### Example Trie Structure:
+## The lookup invariant
 
-Consider the following words: "cat", "cap", "bat".
+After consuming the first i code units of a query, the current node represents exactly that prefix. A missing edge proves the query cannot be present. Reaching the final node proves prefix existence; exact membership additionally requires its word-ending flag.
 
-```
-         root
-        /    \
-       c      b
-       |      |
-       a      a
-      / \     |
-     t   p    t
-```
+The empty prefix always has a path: the root. Consequently, `startsWith("")` is true even in an empty trie, while `contains("")` becomes true only after adding the empty word.
 
-## 🛠️ Basic Operations on Tries
-
-### ➕ Insertion
-
-Insertion involves adding characters of a word to the trie, creating new nodes as needed. The last character of the word is marked to indicate the end of the word.
-
-#### Steps:
-1. Start from the root node.
-2. For each character in the word, check if a child node exists. If not, create a new node.
-3. Move to the child node and repeat the process.
-4. Mark the last node as the end of the word.
-
-#### Example:
 ```java
-class Trie {
-    private TrieNode root;
+import io.github.ichillous.dsa.structures.Trie;
 
-    public Trie() {
-        root = new TrieNode();
-    }
-
-    public void insert(String word) {
-        TrieNode node = root;
-        for (char c : word.toCharArray()) {
-            int index = c - 'a';
-            if (node.children[index] == null) {
-                node.children[index] = new TrieNode();
-            }
-            node = node.children[index];
-        }
-        node.isEndOfWord = true;
-    }
-}
+Trie words = new Trie();
+assert words.startsWith("") && !words.contains("");
+words.add("");
+words.add("Car");
+words.add("car");
+assert words.contains("");
+assert words.size() == 3;
+assert !words.contains("CAR");
 ```
 
-### 🔍 Search
+## Costs depend on child storage
 
-Searching involves traversing the trie according to the characters in the string. If the traversal ends at a node marked as the end of a word, the string is found.
+This implementation uses ordered `TreeMap` children, so lookup, insertion and removal cost O(L log A), where L is query length in UTF-16 code units and A bounds child count. It does not claim O(L) without the child-map assumption. Nodes and edge maps use space proportional to distinct stored prefixes; removal uses O(L) path workspace.
 
-#### Steps:
-1. Start from the root node.
-2. For each character in the string, move to the corresponding child node.
-3. If a node doesn't exist for a character, the word is not found.
-4. If all characters are found and the last node is marked as the end of the word, return true.
+Suggestions follow `String.compareTo` order and return an immutable snapshot with an explicit result limit. Traversal costs prefix lookup plus visited nodes and output characters. A result limit bounds the number of words, not their lengths or the depth of a long shared branch.
 
-#### Example:
-```java
-public boolean search(String word) {
-    TrieNode node = root;
-    for (char c : word.toCharArray()) {
-        int index = c - 'a';
-        if (node.children[index] == null) {
-            return false;
-        }
-        node = node.children[index];
-    }
-    return node.isEndOfWord;
-}
-```
+## Practice
 
-### ➖ Deletion
+1. Add `can` to the diagram and identify exactly which nodes are new.
+2. Explain why prefix membership and whole-word membership have different answers for `ca`.
+3. Compare random add/remove/contains operations with `HashSet`, and suggestions with a sorted filtered set under the same UTF-16/case policy.
 
-Deletion involves removing a word from the trie. This can be tricky as removing nodes may affect other words that share the same prefix.
-
-#### Steps:
-1. Start from the root node.
-2. Recursively delete characters from the end of the word back to the root.
-3. If a node has no other children and is not marked as the end of another word, delete the node.
-4. If a node is part of another word, only unmark the `isEndOfWord`.
-
-#### Example:
-```java
-public boolean delete(String word) {
-    // The snippets in this note assume words contain only 'a' through 'z'.
-    if (!search(word)) {
-        return false;
-    }
-    prune(root, word, 0);
-    return true; // Reports removal, not whether the root can be pruned.
-}
-
-private boolean prune(TrieNode node, String word, int depth) {
-    if (depth == word.length()) {
-        node.isEndOfWord = false;
-    } else {
-        int index = word.charAt(depth) - 'a';
-        if (prune(node.children[index], word, depth + 1)) {
-            node.children[index] = null;
-        }
-    }
-
-    if (node.isEndOfWord) {
-        return false;
-    }
-    for (TrieNode child : node.children) {
-        if (child != null) {
-            return false;
-        }
-    }
-    return true;
-}
-```
-
-## ⚖️ Advantages and Disadvantages of Tries
-
-### Advantages:
-- **Fast Search Operations**: Tries offer efficient search operations, often in O(m) time, where m is the length of the word.
-- **Prefix Matching**: Tries naturally support prefix-based searching, making them ideal for autocomplete and spell-checking applications.
-- **Space Optimization**: Tries can be more space-efficient than other data structures when storing a large set of strings with shared prefixes.
-
-### Disadvantages:
-- **Memory Usage**: Tries can consume a lot of memory, especially when storing a sparse set of words or when the alphabet is large.
-- **Complex Implementation**: Implementing and managing tries can be more complex compared to simpler data structures like arrays or linked lists.
-- **Overhead for Small Datasets**: For small datasets, the overhead of a trie may not be justified compared to a hash table or other structures.
-
-## 💡 Applications of Tries
-
-Tries are used in various applications, including:
-- **Autocomplete**: Predicting words based on a prefix entered by the user.
-- **Spell Checking**: Checking the validity of words and suggesting corrections.
-- **IP Routing**: Implementing IP routing tables where prefixes are matched against IP addresses.
-- **Dictionary Implementation**: Efficiently storing and searching a large dictionary of words.
-- **Longest Prefix Matching**: Finding the longest prefix of a given word from a set of words.
-
-## ⚠️ Common Pitfalls and Best Practices
-
-1. **Handling Case Sensitivity**: Ensure consistent handling of case sensitivity when storing and searching words in the trie.
-2. **Memory Management**: Be mindful of memory usage, particularly when dealing with large alphabets or sparse datasets.
-3. **Edge Cases**: Consider edge cases such as empty strings or very long strings when implementing trie operations.
-4. **Efficient Deletion**: Deleting words from a trie can be complex; ensure that the deletion process doesn't inadvertently remove prefixes shared by other words.
-
-## 🎓 Conclusion
-
-Tries are a powerful and efficient data structure for managing a large set of strings, particularly when prefix-based operations are needed. Understanding the structure, operations, and applications of tries will help you implement effective solutions for a wide range of problems in Java.
-
-Key takeaways:
-- **Efficient Prefix Matching**: Tries excel at operations involving prefixes, making them ideal for autocomplete and search applications.
-- **Fast Search**: Tries provide fast search times, particularly for strings with common prefixes.
-- **Memory Considerations**: While efficient for large datasets, tries can consume significant memory for sparse data.
-
-By mastering tries, you'll be well-equipped to handle advanced string-based algorithms and data structures in your Java applications! 💻🚀
-
----
+Continue with [deletion and suggestions](implementation.md) and the [worked solutions](../../docs/solutions.md).

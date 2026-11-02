@@ -21,6 +21,10 @@ public final class AlgorithmShowcase {
 
     /** Runs independent examples with no input files, network access, or runtime dependencies. */
     public static void main(String[] args) {
+        if (args.length > 0) {
+            LearningLab.main(args);
+            return;
+        }
         System.out.println("Java Data Structures and Algorithms | runnable examples");
 
         int[] scores = {42, 7, 19, 7, 88};

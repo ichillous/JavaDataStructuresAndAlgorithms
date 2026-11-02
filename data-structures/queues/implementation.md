@@ -1,309 +1,66 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Circular queues and deques
 
+[`ArrayQueue`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayQueue.java) stores a head index and logical size separately from capacity. Element at logical offset `i` lives at `(head + i) % capacity`. The next enqueue writes at logical offset `size`.
 
----
+## Trace a wrapped buffer
 
-# 🛠️ Implementing a Queue in Java
-
-![Java Queue Implementation](https://img.shields.io/badge/Java-Queue_Implementation-green?style=for-the-badge&logo=java)
-
-## 📋 Table of Contents
-- [Introduction](#-introduction)
-- [Array-Based Queue Implementation](#-array-based-queue-implementation)
-  - [Pros and Cons](#-pros-and-cons)
-- [Linked List-Based Queue Implementation](#-linked-list-based-queue-implementation)
-  - [Pros and Cons](#-pros-and-cons)
-- [Circular Queue Implementation](#-circular-queue-implementation)
-- [Priority Queue Implementation](#-priority-queue-implementation)
-- [Choosing the Right Implementation](#-choosing-the-right-implementation)
-- [Common Pitfalls](#-common-pitfalls)
-- [Conclusion](#-conclusion)
-
-## 🌟 Introduction
-
-Queues can be implemented in multiple ways in Java, each offering different benefits depending on the specific use case. This document will explore the implementations using arrays, linked lists, and more specialized forms such as circular queues and priority queues.
-
-## 📦 Array-Based Queue Implementation
-
-An array-based queue uses a fixed-size array to store the queue elements. This approach is simple and efficient but comes with the limitation of a fixed size, which may lead to either wasted space or overflow.
-
-### Basic Structure:
-```java
-class ArrayQueue {
-    private int[] queueArray;
-    private int frontIndex;
-    private int rearIndex;
-    private int maxSize;
-    private int currentSize;
-
-    public ArrayQueue(int size) {
-        maxSize = size;
-        queueArray = new int[maxSize];
-        frontIndex = 0;
-        rearIndex = -1;
-        currentSize = 0;
-    }
-
-    public void enqueue(int value) {
-        if (currentSize < maxSize) {
-            rearIndex = (rearIndex + 1) % maxSize;
-            queueArray[rearIndex] = value;
-            currentSize++;
-        } else {
-            System.out.println("Queue Overflow: Cannot enqueue, queue is full.");
-        }
-    }
-
-    public int dequeue() {
-        if (currentSize > 0) {
-            int dequeuedValue = queueArray[frontIndex];
-            frontIndex = (frontIndex + 1) % maxSize;
-            currentSize--;
-            return dequeuedValue;
-        } else {
-            System.out.println("Queue Underflow: Cannot dequeue, queue is empty.");
-            return -1;
-        }
-    }
-
-    public int peek() {
-        if (currentSize > 0) {
-            return queueArray[frontIndex];
-        } else {
-            System.out.println("Queue is empty.");
-            return -1;
-        }
-    }
-
-    public boolean isEmpty() {
-        return currentSize == 0;
-    }
-}
+```text
+capacity = 4
+operation       physical array      head   logical order
+enqueue A,B,C   [A B C _]              0    A B C
+dequeue A,B     [_ _ C _]              2    C
+enqueue D,E     [E _ C D]              2    C D E
+enqueue F       [E F C D]              2    C D E F
+enqueue G       [C D E F G _ _ _]      0    C D E F G
 ```
 
-### 💡 Pros and Cons
+Growth copies **logical** order into a new array starting at zero, then resets the head. Copying the old array's physical order would produce `E F C D`, which breaks FIFO behavior.
 
-#### Pros:
-- **Fast Access**: Direct indexing of elements ensures O(1) time complexity for enqueue, dequeue, and peek operations.
-- **Memory Efficiency**: No additional memory overhead for pointers, unlike linked lists.
-
-#### Cons:
-- **Fixed Size**: The queue size must be defined at the time of creation, which can lead to overflow if the capacity is exceeded.
-- **No Dynamic Resizing**: Once the queue is full, it cannot accept more elements without resizing the array, which involves copying to a new array.
-
-## 🔗 Linked List-Based Queue Implementation
-
-A linked list-based queue uses nodes where each node points to the next node. This allows the queue to dynamically resize as needed, accommodating a varying number of elements without the fixed-size limitation of arrays.
-
-### Basic Structure:
 ```java
-class QueueNode {
-    int value;
-    QueueNode nextNode;
+import io.github.ichillous.dsa.collections.ArrayQueue;
 
-    QueueNode(int value) {
-        this.value = value;
-        this.nextNode = null;
-    }
-}
-
-class LinkedListQueue {
-    private QueueNode frontNode;
-    private QueueNode rearNode;
-
-    public LinkedListQueue() {
-        frontNode = null;
-        rearNode = null;
-    }
-
-    public void enqueue(int value) {
-        QueueNode newNode = new QueueNode(value);
-        if (rearNode == null) {
-            frontNode = newNode;
-            rearNode = newNode;
-        } else {
-            rearNode.nextNode = newNode;
-            rearNode = newNode;
-        }
-    }
-
-    public int dequeue() {
-        if (frontNode == null) {
-            System.out.println("Queue Underflow: Cannot dequeue, queue is empty.");
-            return -1;
-        } else {
-            int dequeuedValue = frontNode.value;
-            frontNode = frontNode.nextNode;
-            if (frontNode == null) {
-                rearNode = null;  // If the queue becomes empty, rear should also be null
-            }
-            return dequeuedValue;
-        }
-    }
-
-    public int peek() {
-        if (frontNode == null) {
-            System.out.println("Queue is empty.");
-            return -1;
-        } else {
-            return frontNode.value;
-        }
-    }
-
-    public boolean isEmpty() {
-        return frontNode == null;
-    }
-}
+ArrayQueue<Integer> queue = new ArrayQueue<>(2);
+queue.enqueue(1);
+queue.enqueue(2);
+int first = queue.dequeue();
+queue.enqueue(3); // Reuses a slot before the head.
+queue.enqueue(4); // Grows while the buffer is wrapped.
+assert first == 1;
+assert queue.dequeue() == 2;
+assert queue.dequeue() == 3;
+assert queue.dequeue() == 4;
+assert queue.isEmpty();
 ```
 
-### 💡 Pros and Cons
+The invariant is `0 <= size <= capacity`; only the `size` positions starting at head are live. Dequeue clears the old head slot before advancing it. Index arithmetic uses a wider intermediate so `head + offset` cannot wrap into a negative Java `int`.
 
-#### Pros:
-- **Dynamic Size**: The queue can grow and shrink as needed, with no fixed size limitations.
-- **No Wasted Space**: Memory is allocated only as needed for each element.
+## Extend the same storage to both ends
 
-#### Cons:
-- **Memory Overhead**: Each element requires additional memory for the pointer to the next node.
-- **Potentially Slower Access**: Access time can be slightly slower due to the need to follow pointers, although this is generally O(1).
+[`RingDeque`](../../src/main/java/io/github/ichillous/dsa/collections/RingDeque.java) adds insertion and removal at either end. To insert at the front, move the head backward with wraparound; to insert at the back, use logical offset `size`.
 
-## 🔄 Circular Queue Implementation
-
-A circular queue is an enhancement of the regular array-based queue where the last position is connected back to the first position to form a circle. This helps in efficiently utilizing the array space.
-
-### Basic Structure:
 ```java
-class CircularQueue {
-    private int[] queueArray;
-    private int frontIndex;
-    private int rearIndex;
-    private int maxSize;
-    private int currentSize;
+import io.github.ichillous.dsa.collections.RingDeque;
 
-    public CircularQueue(int size) {
-        maxSize = size;
-        queueArray = new int[maxSize];
-        frontIndex = 0;
-        rearIndex = -1;
-        currentSize = 0;
-    }
-
-    public void enqueue(int value) {
-        if (currentSize < maxSize) {
-            rearIndex = (rearIndex + 1) % maxSize;
-            queueArray[rearIndex] = value;
-            currentSize++;
-        } else {
-            System.out.println("Queue Overflow: Cannot enqueue, queue is full.");
-        }
-    }
-
-    public int dequeue() {
-        if (currentSize > 0) {
-            int dequeuedValue = queueArray[frontIndex];
-            frontIndex = (frontIndex + 1) % maxSize;
-            currentSize--;
-            return dequeuedValue;
-        } else {
-            System.out.println("Queue Underflow: Cannot dequeue, queue is empty.");
-            return -1;
-        }
-    }
-
-    public int peek() {
-        if (currentSize > 0) {
-            return queueArray[frontIndex];
-        } else {
-            System.out.println("Queue is empty.");
-            return -1;
-        }
-    }
-
-    public boolean isEmpty() {
-        return currentSize == 0;
-    }
-}
+RingDeque<String> deque = new RingDeque<>(2);
+deque.addLast("middle");
+deque.addFirst("front");
+deque.addLast("back"); // Growth preserves both ends.
+assert deque.peekFirst().equals("front");
+assert deque.peekLast().equals("back");
+assert deque.removeFirst().equals("front");
+assert deque.removeLast().equals("back");
+assert deque.removeFirst().equals("middle");
+assert deque.isEmpty();
 ```
 
-### 💡 Pros and Cons
+Both types reject nulls and nonpositive capacities. Removing or peeking at an empty end throws `NoSuchElementException`. A deque is not a linked list: it has no per-element node allocation and does not provide arbitrary indexed insertion.
 
-#### Pros:
-- **Efficient Space Utilization**: Circular queues efficiently utilize array space by reusing positions left vacant by dequeued elements.
-- **Simple Implementation**: Easier to implement compared to dynamically resizing arrays.
+Adds at either supported end cost O(1) amortized, O(n) on growth; endpoint removal/peek costs O(1). Retained storage is O(capacity). Clearing releases references but retains storage for later reuse.
 
-#### Cons:
-- **Complex Implementation Logic**: The circular nature can complicate the implementation logic, particularly in managing front and rear indices.
+## Practice
 
-## 🏆 Priority Queue Implementation
+1. Recreate the trace using capacity 3; do not assume a power-of-two capacity.
+2. Drain from alternating ends, clear, then reuse the deque. Verify both endpoints after every operation.
+3. Use a seeded `ArrayDeque` model to exercise all six endpoint operations, emphasizing growth after wraparound.
 
-A priority queue is a specialized type of queue where each element is associated with a priority. Elements with higher priority are dequeued before those with lower priority, regardless of their order in the queue.
-
-### Basic Structure:
-```java
-import java.util.PriorityQueue;
-
-class PriorityQueueExample {
-    public static void main(String[] args) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-
-        pq.add(10);
-        pq.add(5);
-        pq.add(20);
-        pq.add(15);
-
-        while (!pq.isEmpty()) {
-            System.out.println(pq.poll());
-        }
-    }
-}
-```
-
-### 💡 Pros and Cons
-
-#### Pros:
-- **Priority-Based Dequeue**: Elements with higher priority are dequeued before others.
-- **Dynamic Resizing**: Most priority queue implementations in Java, such as `PriorityQueue`, automatically resize as needed.
-
-#### Cons:
-- **Inconsistent Order**: Elements with the same priority may not maintain their original order.
-- **Complexity**: Implementation can be more complex than simple FIFO queues.
-
-## 🔍 Choosing the Right Implementation
-
-### When to Use Array-Based Queue:
-- When the maximum size of the queue is known in advance.
-- When memory efficiency is crucial, and the overhead of pointers in a linked list is a concern.
-
-### When to Use Linked List-Based Queue:
-- When the size of the queue can vary significantly.
-- When queue operations are performed frequently, and there's a risk of overflow with a fixed-size array.
-
-### When to Use Circular Queue:
-- When optimizing space usage is critical, especially in systems with limited memory.
-- When a fixed-size queue is sufficient but you want to avoid the pitfalls of traditional array queues.
-
-### When to Use Priority Queue:
-- When elements need to be processed based on priority rather than order.
-- In scenarios like task scheduling, where certain tasks must be executed before others.
-
-## ⚠️ Common Pitfalls
-
-1. **Queue Overflow in Array-Based Implementations**: Always ensure the queue does not exceed its fixed size, or consider
-
- using dynamic resizing.
-2. **Null Pointer Exceptions in Linked List-Based Implementations**: Handle cases where the queue might be empty before dequeueing or peeking.
-3. **Circular Queue Logic Errors**: Ensure correct management of the front and rear indices to avoid logic errors in circular queue implementations.
-4. **Unintentional Priority Handling**: In priority queues, ensure that elements with the same priority are handled according to your specific requirements.
-
-## 🎓 Conclusion
-
-Each queue implementation in Java has its strengths and is suited for different scenarios. Array-based queues are simple and efficient but limited by their fixed size. Linked list-based queues offer dynamic sizing at the cost of memory overhead. Circular queues optimize space usage, while priority queues handle elements based on importance.
-
-Key takeaways:
-- **Array-Based Queues**: Best for fixed-size scenarios with known capacity.
-- **Linked List-Based Queues**: Ideal for dynamic sizing and frequent enqueue/dequeue operations.
-- **Circular Queues**: Efficient for fixed-size queues with optimal space utilization.
-- **Priority Queues**: Perfect for scenarios where element order is based on priority.
-
-With a solid understanding of these implementations, you'll be equipped to choose the right queue structure for your Java applications! 💻🚀
-
----
+Check the [worked solutions](../../docs/solutions.md) for logical-to-physical index reasoning.

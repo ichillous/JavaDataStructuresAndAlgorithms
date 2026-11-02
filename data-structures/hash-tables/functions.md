@@ -1,302 +1,53 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Hash functions and key contracts
 
----
+A hash code is a routing hint, not a unique identifier. Two equal keys must have equal hash codes; different keys may also have equal hash codes. The table must still compare keys for equality after locating a bucket.
 
-# 🛠️ Hash Table Functions in Java
-
-![Java Hash Table Functions](https://img.shields.io/badge/Java-Hash_Table_Functions-green?style=for-the-badge&logo=java)
-
-## 📋 Table of Contents
-- [Introduction](#-introduction)
-- [Hash Function](#-hash-function)
-  - [Designing a Good Hash Function](#-designing-a-good-hash-function)
-  - [Example of a Simple Hash Function](#-example-of-a-simple-hash-function)
-- [Collision Resolution Techniques](#-collision-resolution-techniques)
-  - [Chaining](#-chaining)
-  - [Open Addressing](#-open-addressing)
-- [Load Factor and Resizing](#-load-factor-and-resizing)
-- [Common Hash Table Operations](#-common-hash-table-operations)
-  - [Insertion](#-insertion)
-  - [Search](#-search)
-  - [Deletion](#-deletion)
-- [Best Practices](#-best-practices)
-- [Conclusion](#-conclusion)
-
-## 🌟 Introduction
-
-Hash tables are efficient data structures used to store and retrieve key-value pairs. The efficiency of a hash table largely depends on the hash function and collision resolution strategy employed. This document explores the key functions and concepts that make hash tables work effectively.
-
-## 🔑 Hash Function
-
-The **hash function** is the core component of a hash table. It takes a key as input and returns an integer, known as a hash code, which is used to determine the index in the hash table where the corresponding value is stored.
-
-### Designing a Good Hash Function
-
-A good hash function should:
-- **Be Deterministic**: The same key should always produce the same hash code.
-- **Distribute Uniformly**: Keys should be evenly distributed across the hash table to minimize collisions.
-- **Be Fast to Compute**: The hash function should be quick to execute to maintain the overall efficiency of the hash table.
-- **Minimize Collisions**: Although collisions are inevitable, a well-designed hash function reduces their likelihood.
-
-### Example of a Simple Hash Function
-
-Here’s an example of a simple hash function for strings:
+For a positive capacity `m`, [`ChainedHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java) uses `Math.floorMod(hashCode, m)`, producing an index in `[0, m)` even for negative hashes.
 
 ```java
-public int hashFunction(String key, int tableSize) {
-    if (tableSize <= 0) throw new IllegalArgumentException("Capacity must be positive");
-    int hashCode = 0;
-    for (int i = 0; i < key.length(); i++) {
-        hashCode = (int) ((31L * hashCode + key.charAt(i)) % tableSize);
-    }
-    return hashCode;
-}
+int capacity = 7;
+int hash = Integer.MIN_VALUE;
+int bucket = Math.floorMod(hash, capacity);
+assert bucket >= 0 && bucket < capacity;
+assert Math.abs(Integer.MIN_VALUE) < 0; // abs cannot represent +2^31 as int.
 ```
 
-In this example:
-- The hash code is calculated by iterating over each character in the string and multiplying the current hash code by 31 (a common choice in hash functions) before adding the character's UTF-16 code-unit value.
-- The result is then taken modulo `tableSize` to ensure the hash code fits within the bounds of the hash table array.
+`Math.abs(hash) % capacity` can therefore produce a negative index. Java's `%` is a remainder operator and also permits negative results; `floorMod` expresses the bucket-index contract directly.
 
-## 🚧 Collision Resolution Techniques
+## Observe a real collision
 
-Collisions occur when two keys produce the same hash code. To handle collisions, hash tables use various resolution techniques.
-
-### 1. Chaining
-
-In chaining, each index of the hash table array contains a linked list (or another data structure) that stores all the key-value pairs hashing to the same index.
-
-#### Example of Chaining:
 ```java
-import java.util.LinkedList;
+import io.github.ichillous.dsa.collections.ChainedHashMap;
 
-class HashTableWithChaining {
-    private LinkedList<Entry>[] bucketArray;
-    private int numBuckets;
-
-    class Entry {
-        String key;
-        int value;
-
-        Entry(String key, int value) {
-            this.key = key;
-            this.value = value;
-        }
-    }
-
-    public HashTableWithChaining(int size) {
-        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
-        numBuckets = size;
-        bucketArray = new LinkedList[numBuckets];
-        for (int i = 0; i < numBuckets; i++) {
-            bucketArray[i] = new LinkedList<>();
-        }
-    }
-
-    private int hashFunction(String key) {
-        int hashCode = key.hashCode();
-        return Math.floorMod(hashCode, numBuckets);
-    }
-
-    public void put(String key, int value) {
-        int bucketIndex = hashFunction(key);
-        LinkedList<Entry> bucket = bucketArray[bucketIndex];
-
-        for (Entry entry : bucket) {
-            if (entry.key.equals(key)) {
-                entry.value = value;
-                return;
-            }
-        }
-
-        bucket.add(new Entry(key, value));
-    }
-
-    public Integer get(String key) {
-        int bucketIndex = hashFunction(key);
-        LinkedList<Entry> bucket = bucketArray[bucketIndex];
-
-        for (Entry entry : bucket) {
-            if (entry.key.equals(key)) {
-                return entry.value;
-            }
-        }
-        return null;
-    }
-}
+String first = "Aa";
+String second = "BB";
+assert !first.equals(second);
+assert first.hashCode() == second.hashCode();
+ChainedHashMap<String, Integer> map = new ChainedHashMap<>();
+map.put(first, 10);
+map.put(second, 20);
+assert map.get(first) == 10 && map.get(second) == 20;
+assert map.size() == 2;
 ```
 
-### 2. Open Addressing
+A table that treats hash equality as key equality would overwrite the first value. Better hash distribution reduces the average chain length, but does not eliminate the need for collision resolution.
 
-In open addressing, when a collision occurs, the algorithm probes the hash table for the next available slot. Common strategies include:
+## Equality, stability and cost
 
-- **Linear Probing**: Check the next slot sequentially.
-- **Quadratic Probing**: Check slots at increasing intervals (e.g., 1, 4, 9, ...).
-- **Double Hashing**: Use a second hash function to determine the probe sequence.
+The key type determines both `equals` and `hashCode`. If two objects are logically equal, both methods must agree on that equivalence. If equality uses several fields, the hash should reflect the same logical identity. A hash function that always returns zero is legal but makes every lookup search the same bucket.
 
-#### Example of Linear Probing:
-```java
-class HashTableWithOpenAddressing {
-    private String[] keys;
-    private int[] values;
-    private int numBuckets;
+Keys must keep hash/equality-relevant state stable while present. For example, storing a mutable list as a key and then adding to it changes its content-based hash. A later lookup may search a different bucket even when given the very same object.
 
-    public HashTableWithOpenAddressing(int size) {
-        if (size <= 0) throw new IllegalArgumentException("Capacity must be positive");
-        numBuckets = size;
-        keys = new String[numBuckets];
-        values = new int[numBuckets];
-    }
+The standard O(1) expected hash-table claim assumes computing the hash and comparing a key are O(1). If the key is a long sequence and hashing scans it, include that scan. The table's bookkeeping cannot make an arbitrary user-defined hash function constant time.
 
-    private int hashFunction(String key) {
-        int hashCode = key.hashCode();
-        return Math.floorMod(hashCode, numBuckets);
-    }
+## Load is not distribution
 
-    public void put(String key, int value) {
-        int bucketIndex = hashFunction(key);
+Load factor is `entries / buckets`. Keeping it bounded limits average occupancy under good distribution. It cannot repair a key type that maps all values to the same hash. Doubling capacity changes the bucket calculation, so mappings must be redistributed.
 
-        for (int probes = 0; probes < numBuckets; probes++) {
-            if (keys[bucketIndex] == null) {
-                keys[bucketIndex] = key;
-                values[bucketIndex] = value;
-                return;
-            }
-            if (keys[bucketIndex].equals(key)) {
-                values[bucketIndex] = value;
-                return;
-            }
-            bucketIndex = (int) (((long) bucketIndex + 1) % numBuckets);
-        }
-        throw new IllegalStateException("No free bucket in the probe sequence");
-    }
+## Practice
 
-    public Integer get(String key) {
-        int bucketIndex = hashFunction(key);
+1. Calculate buckets for hash codes `-1`, `0`, `1`, `Integer.MIN_VALUE` at capacity 7.
+2. Explain why unequal objects may share a hash, but equal objects may not have different hashes.
+3. Extend collision tests with a key type returning a constant hash, then a minimum-integer hash. Check updates and removal after resizing, not only insertion.
 
-        for (int probes = 0; probes < numBuckets && keys[bucketIndex] != null; probes++) {
-            if (keys[bucketIndex].equals(key)) {
-                return values[bucketIndex];
-            }
-            bucketIndex = (bucketIndex + 1) % numBuckets;
-        }
-        return null;
-    }
-}
-```
-
-## 📊 Load Factor and Resizing
-
-The **load factor** of a hash table is the ratio of the number of elements to the number of buckets (array size). A high load factor increases the likelihood of collisions, while a low load factor can lead to inefficient use of memory.
-
-### Managing Load Factor:
-- **Resizing**: When the load factor exceeds a certain threshold (e.g., 0.75), the hash table should be resized to maintain performance.
-- **Rehashing**: After resizing, all existing keys must be rehashed to fit the new bucket array size.
-
-### Example:
-```java
-class ResizableHashTable {
-    private String[] keys;
-    private int[] values;
-    private int numBuckets;
-    private int size;
-
-    public ResizableHashTable(int initialSize) {
-        if (initialSize <= 0) throw new IllegalArgumentException("Capacity must be positive");
-        numBuckets = initialSize;
-        keys = new String[numBuckets];
-        values = new int[numBuckets];
-        size = 0;
-    }
-
-    private int hashFunction(String key) {
-        int hashCode = key.hashCode();
-        return Math.floorMod(hashCode, numBuckets);
-    }
-
-    private void resize(int newSize) {
-        String[] oldKeys = keys;
-        int[] oldValues = values;
-        numBuckets = newSize;
-        keys = new String[numBuckets];
-        values = new int[numBuckets];
-        size = 0;
-
-        for (int i = 0; i < oldKeys.length; i++) {
-            if (oldKeys[i] != null) {
-                put(oldKeys[i], oldValues[i]);
-            }
-        }
-    }
-
-    public void put(String key, int value) {
-        if ((1.0 * size) / numBuckets >= 0.75) {
-            resize(2 * numBuckets);
-        }
-
-        int bucketIndex = hashFunction(key);
-
-        for (int probes = 0; probes < numBuckets; probes++) {
-            if (keys[bucketIndex] == null) {
-                keys[bucketIndex] = key;
-                values[bucketIndex] = value;
-                size++;
-                return;
-            }
-            if (keys[bucketIndex].equals(key)) {
-                values[bucketIndex] = value;
-                return;
-            }
-            bucketIndex = (int) (((long) bucketIndex + 1) % numBuckets);
-        }
-        throw new IllegalStateException("No free bucket in the probe sequence");
-    }
-
-    public Integer get(String key) {
-        int bucketIndex = hashFunction(key);
-
-        for (int probes = 0; probes < numBuckets && keys[bucketIndex] != null; probes++) {
-            if (keys[bucketIndex].equals(key)) {
-                return values[bucketIndex];
-            }
-            bucketIndex = (bucketIndex + 1) % numBuckets;
-        }
-        return null;
-    }
-}
-```
-
-## 🛠️ Common Hash Table Operations
-
-### ➕ Insertion
-
-Insertion involves hashing the key, finding the appropriate index using the hash function, and placing the key-value pair in the hash table. If a collision occurs, the table uses its collision resolution strategy to find an alternative location.
-
-### 🔍 Search
-
-Search operations involve hashing the key to locate the correct bucket or slot. If the key is not found at the initial location, the collision resolution strategy is used to probe for the key.
-
-### ➖ Deletion
-
-Deletion requires locating the key using the same process as search, then removing the key-value pair from the hash table. If using open addressing, care must be taken to ensure the integrity of the probing sequence.
-
-## 🏆 Best Practices
-
-- **
-
-Choose a Good Hash Function**: Ensure your hash function distributes keys evenly and minimizes collisions.
-- **Monitor the Load Factor**: Keep an eye on the load factor and resize the hash table when necessary to maintain performance.
-- **Handle Collisions Efficiently**: Implement robust collision resolution techniques that suit your use case.
-- **Test with Real-World Data**: Ensure your hash table performs well under the conditions it will face in production.
-
-## 🎓 Conclusion
-
-Understanding the key functions and techniques behind hash tables is essential for leveraging their power in Java. A well-designed hash function, effective collision resolution strategy, and proper management of load factors are critical for maintaining the efficiency and performance of hash tables.
-
-Key takeaways:
-- **Hash Functions**: The cornerstone of hash tables; design them well.
-- **Collision Resolution**: Crucial for handling the inevitable collisions in any hash table.
-- **Load Factor**: Monitor and manage it to maintain optimal performance.
-
-By mastering these functions, you'll be well-equipped to implement and maintain efficient hash tables in your Java applications! 💻🚀
-
----
+See [collision resolution](collision-resolution.md) and the [worked solutions](../../docs/solutions.md).

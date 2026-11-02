@@ -1,6 +1,6 @@
 # Exercises with evidence
 
-Use the [catalog](catalog.md) to find source and corresponding tests. Complete each exercise by writing down a contract, providing a hand-worked example, implementing the change, adding a regression test and stating the time and space costs. The hints below describe a direction, not a required implementation.
+Use the [catalog](catalog.md) to find source and corresponding tests. Complete each exercise by writing down a contract, providing a hand-worked example, implementing the change, adding a regression test and stating the time and space costs. The hints below describe a direction, not a required implementation. Predict first; then compare with the [worked solutions and reasoning](solutions.md).
 
 | Exercise | Input or scenario | Success criteria and hint |
 | --- | --- | --- |
@@ -27,4 +27,15 @@ Use the [catalog](catalog.md) to find source and corresponding tests. Complete e
 
 Choose a structure and intentionally introduce one defect: skip resetting the queue head on clear, fail to decrement tree size, or remove a trie prefix with its descendants. Confirm that a relevant test detects it, then restore the correct implementation. This is a local learning exercise; do not commit intentionally broken code.
 
-For an extension, add a small, justified API such as a deque or a segment tree. Decide behavior before implementation: nulls, index boundaries, mutation, overflow and empty results. Add the extension to the catalog and explain when it is preferable to an existing JDK type. More classes alone do not make a stronger learning resource.
+For an extension, add a small, justified API such as a persistent structure or a lazy segment tree. Decide behavior before implementation: nulls, index boundaries, mutation, overflow and empty results. Add the extension to the catalog and explain when it is preferable to an existing JDK type. More classes alone do not make a stronger learning resource.
+
+## Deeper checkpoints
+
+- Compare a ring deque with `ArrayDeque` after both-end operations and wraparound growth.
+- Compare LRU eviction with an access-order `LinkedHashMap`; distinguish a miss, a hit and replacement.
+- Find all directed SCCs using an independent reachability matrix; remove each undirected edge to verify bridges.
+- Compare signed Bellman–Ford with exact-integer Floyd–Warshall on tiny graphs. Test a reachable negative cycle separately from an unreachable one, and distinguish it from finite-distance overflow.
+- Verify Kadane's maximum subarray against all intervals and its earliest-start/earliest-end tie policy; compare window maxima to direct scans.
+- Verify inversion counts by enumerating pairs, including equal values and a descending array whose answer exceeds int range.
+- Verify subset witnesses by their indices, not just values. For at most 30 inputs, the chosen inclusion mask is the smallest possible mask, with index zero as the least-significant bit.
+- Validate every solved Sudoku row, column, box and given independently. An invalid or unsolvable input must not leave partial mutations; aliased rows are malformed.

@@ -1,245 +1,78 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Graphs: model relationships explicitly
 
----
+A graph has vertices and edges. Vertices may be isolated; edges may be directed, weighted, repeated or self-loops. Decide these semantics before choosing an algorithm: a route map and a prerequisite graph use different contracts.
 
-# 🔗 Graphs in Java
+[`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) uses integer vertices `[0, vertexCount)`, an explicit directed/undirected factory, and insertion-ordered adjacency sets. Repeated unweighted edges are ignored. In an undirected graph, adding the reverse of an existing edge does not add a new logical edge.
 
-![Java Graphs](https://img.shields.io/badge/Java-Graphs-purple?style=for-the-badge&logo=java)
-
-## 📋 Table of Contents
-- [Introduction to Graphs](#-introduction-to-graphs)
-- [Graph Terminology](#-graph-terminology)
-- [Types of Graphs](#-types-of-graphs)
-  - [Directed vs. Undirected Graphs](#-directed-vs-undirected-graphs)
-  - [Weighted vs. Unweighted Graphs](#-weighted-vs-unweighted-graphs)
-  - [Cyclic vs. Acyclic Graphs](#-cyclic-vs-acyclic-graphs)
-  - [Connected vs. Disconnected Graphs](#-connected-vs-disconnected-graphs)
-- [Graph Representations](#-graph-representations)
-  - [Adjacency Matrix](#-adjacency-matrix)
-  - [Adjacency List](#-adjacency-list)
-- [Basic Operations on Graphs](#-basic-operations-on-graphs)
-  - [Insertion](#-insertion)
-  - [Deletion](#-deletion)
-  - [Search](#-search)
-- [Graph Traversal Algorithms](#-graph-traversal-algorithms)
-  - [Depth-First Search (DFS)](#-depth-first-search-dfs)
-  - [Breadth-First Search (BFS)](#-breadth-first-search-bfs)
-- [Applications of Graphs](#-applications-of-graphs)
-- [Advantages and Disadvantages](#-advantages-and-disadvantages)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
-
-## 🌟 Introduction to Graphs
-
-A **graph** is a non-linear data structure consisting of vertices (or nodes) connected by edges. Graphs are incredibly versatile and can represent various real-world relationships, such as social networks, transportation networks, and web page links. Due to their flexibility, graphs are fundamental in computer science and are widely used in algorithms and applications.
-
-### Key Characteristics:
-- **Vertices and Edges**: The fundamental components of a graph, representing entities and their connections.
-- **Non-linear Structure**: Unlike linear data structures, graphs can represent complex relationships.
-- **Versatile**: Applicable in numerous domains, from networking to artificial intelligence.
-
-## 📚 Graph Terminology
-
-- **Vertex (Node)**: The fundamental unit of a graph, representing an entity.
-- **Edge**: A connection between two vertices.
-- **Degree**: The number of edges connected to a vertex. In directed graphs, the in-degree and out-degree refer to the number of incoming and outgoing edges, respectively.
-- **Path**: A sequence of edges that connects two vertices.
-- **Cycle**: A path that starts and ends at the same vertex.
-- **Connected Graph**: A graph in which there is a path between every pair of vertices.
-- **Component**: A subgraph in which any two vertices are connected by paths, and which is connected to no additional vertices in the supergraph.
-
-## 🌲 Types of Graphs
-
-### 1. Directed vs. Undirected Graphs
-
-- **Directed Graph**: A graph where edges have a direction, meaning they go from one vertex to another (also called a digraph).
-- **Undirected Graph**: A graph where edges have no direction, meaning the connection between two vertices is bidirectional.
-
-### 2. Weighted vs. Unweighted Graphs
-
-- **Weighted Graph**: A graph where each edge has an associated weight, often representing cost, distance, or time.
-- **Unweighted Graph**: A graph where all edges are equal, with no weights associated.
-
-### 3. Cyclic vs. Acyclic Graphs
-
-- **Cyclic Graph**: A graph that contains at least one cycle.
-- **Acyclic Graph**: A graph with no cycles. If directed, it's called a Directed Acyclic Graph (DAG).
-
-### 4. Connected vs. Disconnected Graphs
-
-- **Connected Graph**: A graph in which there is a path between every pair of vertices.
-- **Disconnected Graph**: A graph that is not connected, meaning it has at least two vertices without a path between them.
-
-## 🛠️ Graph Representations
-
-Graphs can be represented in several ways, with the two most common being the adjacency matrix and adjacency list.
-
-### 1. Adjacency Matrix
-
-An **adjacency matrix** is a 2D array where each cell at position `(i, j)` indicates the presence (and optionally the weight) of an edge between vertices `i` and `j`.
-
-#### Example:
 ```java
-int[][] adjacencyMatrix = {
-    {0, 1, 0, 0},
-    {1, 0, 1, 1},
-    {0, 1, 0, 1},
-    {0, 1, 1, 0}
-};
+import io.github.ichillous.dsa.graphs.Graph;
+import java.util.List;
+
+Graph relationships = Graph.undirected(4);
+relationships.addEdge(0, 1).addEdge(0, 2).addEdge(1, 0);
+assert relationships.vertexCount() == 4; // Vertex 3 is isolated.
+assert relationships.edgeCount() == 2;
+assert relationships.neighbors(0).equals(List.of(1, 2));
+assert relationships.neighbors(3).isEmpty();
 ```
 
-### 2. Adjacency List
+## Pick the right question
 
-An **adjacency list** is an array of lists, where each list corresponds to a vertex and contains the vertices that are adjacent to it.
+| Question | Algorithm / restriction |
+| --- | --- |
+| Which vertices are reachable? | BFS or DFS; directed edges are followed in their direction |
+| Fewest edges from s to t? | BFS in an unweighted graph |
+| Which undirected components exist? | Connected-components traversal |
+| What prerequisite order is possible? | Topological sort of a directed acyclic graph |
+| Least total nonnegative edge weight? | Dijkstra |
+| Cheapest acyclic connections within every component? | Minimum spanning forest of an undirected weighted graph |
 
-#### Example:
+“Reachable from s” is not the same as “connected” in a directed graph. Strong and weak connectivity have separate meanings; the maintained `connectedComponents` API accepts only undirected input to avoid silently choosing one.
+
+## Weighted edges have their own representation
+
+[`WeightedGraph`](../../src/main/java/io/github/ichillous/dsa/graphs/WeightedGraph.java) keeps parallel edges, including identical ones, and accepts signed `long` weights. Its `edges()` returns each added undirected edge once; neighbor entries are oriented outward from the queried vertex.
+
 ```java
-import java.util.LinkedList;
+import io.github.ichillous.dsa.graphs.WeightedGraph;
 
-class Graph {
-    private int vertices;
-    private LinkedList<Integer>[] adjacencyList;
-
-    public Graph(int vertices) {
-        this.vertices = vertices;
-        adjacencyList = new LinkedList[vertices];
-        for (int i = 0; i < vertices; i++) {
-            adjacencyList[i] = new LinkedList<>();
-        }
-    }
-
-    public void addEdge(int source, int destination) {
-        adjacencyList[source].add(destination);
-        adjacencyList[destination].add(source); // For undirected graph
-    }
-}
+WeightedGraph routes = WeightedGraph.directed(3);
+routes.addEdge(0, 1, 5).addEdge(0, 1, 2).addEdge(1, 2, 4);
+assert routes.edgeCount() == 3;
+assert routes.neighbors(0).size() == 2;
+assert routes.neighbors(1).get(0).to() == 2;
+assert routes.neighbors(2).isEmpty();
 ```
 
-## 🛠️ Basic Operations on Graphs
+A representation may permit weights that an algorithm rejects. Dijkstra requires every edge to be nonnegative, even in an unreachable component; Kruskal's minimum spanning forest permits negative weights. Negative edges are not universally “invalid graph data.”
 
-### ➕ Insertion
+## Connectivity without storing every path
 
-Insertion in a graph involves adding a vertex or an edge. Adding a vertex is straightforward, while adding an edge involves updating the adjacency matrix or list.
+[`UnionFind`](../../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) maintains undirected component membership as connections are added. Union by size and path compression give O(α(V)) amortized operations with O(V) storage. It cannot reconstruct a path or delete an edge; those are different requirements.
 
-#### Example (Adding an Edge):
 ```java
-public void addEdge(int source, int destination) {
-    adjacencyList[source].add(destination);
-    adjacencyList[destination].add(source); // For undirected graph
-}
+import io.github.ichillous.dsa.structures.UnionFind;
+
+UnionFind components = new UnionFind(4);
+components.union(0, 1);
+components.union(1, 2);
+boolean mergedAgain = components.union(0, 2);
+assert components.connected(0, 2);
+assert !components.connected(0, 3);
+assert !mergedAgain && components.components() == 2;
+assert components.componentSize(1) == 3;
 ```
 
-### ➖ Deletion
+## Costs and ownership
 
-Deletion in a graph involves removing a vertex or an edge. Removing an edge requires updating the adjacency matrix or list, while removing a vertex may require restructuring the entire graph representation.
+Both adjacency representations store O(V + E) data. Adding an unweighted edge is O(1) expected; adding a weighted edge is O(1) amortized. `neighbors` returns an immutable snapshot in O(out-degree) time and space. Algorithms return detached immutable results, so later graph mutation does not update an old answer.
 
-#### Example (Removing an Edge):
-```java
-public void removeEdge(int source, int destination) {
-    adjacencyList[source].remove(Integer.valueOf(destination));
-    adjacencyList[destination].remove(Integer.valueOf(source)); // For undirected graph
-}
-```
+BFS, DFS, topological ordering and undirected components take O(V + E) time and space here, including snapshots. Dijkstra's lazy heap and Kruskal sorting take O(V + E log(E + 1)) time. Count parallel weighted edges in E; do not assume E is bounded by V² for a multigraph.
 
-### 🔍 Search
+## Practice
 
-Search operations in a graph typically involve finding a path between two vertices or checking for the existence of an edge.
+1. Model course prerequisites and decide edge direction before drawing a sample schedule.
+2. Give a directed graph where 0 reaches 1 but 1 cannot reach 0.
+3. Compare reachability on small random graphs with an independent adjacency-matrix reference, including isolated vertices and self-loops.
 
-#### Example (Checking for an Edge):
-```java
-public boolean hasEdge(int source, int destination) {
-    return adjacencyList[source].contains(destination);
-}
-```
-
-## 🚀 Graph Traversal Algorithms
-
-Traversal in a graph involves visiting all the vertices and edges in a specific order. The two most common traversal methods are Depth-First Search (DFS) and Breadth-First Search (BFS).
-
-### 1. Depth-First Search (DFS)
-
-DFS explores as far as possible along a branch before backtracking, using a stack or recursion.
-
-#### Example:
-```java
-public void DFS(int vertex, boolean[] visited) {
-    visited[vertex] = true;
-    System.out.print(vertex + " ");
-
-    for (int adj : adjacencyList[vertex]) {
-        if (!visited[adj]) {
-            DFS(adj, visited);
-        }
-    }
-}
-```
-
-### 2. Breadth-First Search (BFS)
-
-BFS explores all neighbors of a vertex before moving on to the next level of vertices, using a queue.
-
-#### Example:
-```java
-public void BFS(int startVertex) {
-    boolean[] visited = new boolean[vertices];
-    Queue<Integer> queue = new LinkedList<>();
-
-    visited[startVertex] = true;
-    queue.add(startVertex);
-
-    while (!queue.isEmpty()) {
-        int vertex = queue.poll();
-        System.out.print(vertex + " ");
-
-        for (int adj : adjacencyList[vertex]) {
-            if (!visited[adj]) {
-                visited[adj] = true;
-                queue.add(adj);
-            }
-        }
-    }
-}
-```
-
-## 💡 Applications of Graphs
-
-Graphs are used in numerous applications, including:
-- **Social Networks**: Modeling relationships between individuals.
-- **Transport Networks**: Representing routes and connections in a transportation system.
-- **Web Crawling**: Representing and navigating the structure of the internet.
-- **Networking**: Modeling and analyzing communication networks.
-- **Optimization Problems**: Solving problems like the shortest path, minimal spanning tree, and network flow.
-
-## ⚖️ Advantages and Disadvantages
-
-### Advantages:
-- **Versatility**: Can model a wide variety of relationships and structures.
-- **Powerful Algorithms**: Supports numerous algorithms for solving complex problems like shortest path and network flow.
-- **Scalability**: Can handle large, complex datasets effectively.
-
-### Disadvantages:
-- **Complexity**: Graph algorithms can be complex to implement and understand.
-- **Memory Usage**: Depending on the representation, graphs can consume a significant amount of memory, especially with dense graphs.
-- **Performance**: Some graph algorithms, especially those for NP-complete problems, can be computationally expensive.
-
-## ⚠️ Common Pitfalls and Best Practices
-
-1. **Choosing the Right Representation**: Use adjacency lists for sparse graphs and adjacency matrices for dense graphs.
-2. **Handling Cycles**
-
-: Be cautious with cycles, particularly in directed graphs, to avoid infinite loops in traversal algorithms.
-3. **Efficient Traversal**: Optimize traversal algorithms like DFS and BFS for performance, particularly in large graphs.
-4. **Memory Management**: Be mindful of memory usage, especially when working with large graphs.
-
-## 🎓 Conclusion
-
-Graphs are a powerful and flexible data structure in Java, capable of modeling complex relationships and structures. Understanding graph terminology, types, representations, and traversal algorithms is crucial for solving a wide range of problems in computer science.
-
-Key takeaways:
-- **Versatile Structure**: Graphs can represent a wide variety of relationships.
-- **Efficient Traversal**: DFS and BFS are foundational algorithms for exploring graphs.
-- **Application Domains**: Graphs are used in fields ranging from social networks to optimization problems.
-
-By mastering graphs, you'll be equipped to tackle complex data structures and algorithms in your Java applications! 💻🚀
-
----
+Continue with [representations](representation.md), [traversals and paths](traversal.md) and the [worked solutions](../../docs/solutions.md).

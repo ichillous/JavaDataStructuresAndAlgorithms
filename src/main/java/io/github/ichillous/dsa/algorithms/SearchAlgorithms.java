@@ -34,7 +34,7 @@ public final class SearchAlgorithms {
         Objects.requireNonNull(sorted, "sorted");
         int low = 0;
         int high = sorted.length;
-        // The answer stays within the half-open range [low, high].
+        // Values before low are < target; values at or after high are >= target.
         while (low < high) {
             int middle = low + (high - low) / 2;
             if (sorted[middle] < target) {

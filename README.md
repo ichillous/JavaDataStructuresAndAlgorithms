@@ -4,16 +4,17 @@
 ![Java 17+](https://img.shields.io/badge/Java-17%2B-blue)
 ![Runtime dependencies: none](https://img.shields.io/badge/runtime_dependencies-none-green)
 
-A hands-on Java learning library: readable implementations, executable examples,
-reference-model tests, and the reasoning behind each algorithm. Start with an
-invariant, trace a small example, then use the tests to challenge your understanding.
+Learn by predicting a result, tracing an invariant, and checking it against code.
+This repository combines 26 library classes, runnable terminal lessons, a progressive
+study path, and Markdown examples that compile and execute in the test suite.
 
-This project grew from Isiah's original study notes. Those notes keep their original
-URLs; the compiled source and tests are the implementation reference.
+Isiah's original topic URLs remain useful entry points. Their lessons now use the
+maintained library; earlier versions remain in Git history. There is one source of
+implementation truth, with tests and explanations beside it.
 
-## Run it
+## Start in five minutes
 
-Install a **JDK 17 or newer** (a JRE alone cannot compile the project), then:
+Install a **JDK 17 or newer**, then:
 
 ```sh
 git clone https://github.com/ichillous/JavaDataStructuresAndAlgorithms.git
@@ -22,109 +23,106 @@ cd JavaDataStructuresAndAlgorithms
 java -jar target/java-data-structures-and-algorithms-1.0.0-SNAPSHOT.jar
 ```
 
-On Windows, use `mvnw.cmd clean verify`. Maven does not need to be installed: the
-wrapper downloads Maven 3.9.11 and verifies its pinned SHA-256 checksum. The first
-build needs internet access for the build tools and JUnit; examples run offline.
+Windows: use `mvnw.cmd clean verify`. No global Maven installation is needed. The
+wrapper downloads Maven 3.9.11 and verifies its pinned SHA-256 checksum. First build
+requires internet; subsequent builds can reuse the cache, and the lessons run offline.
+There are no runtime dependencies. JUnit is used only for tests.
 
-`verify` compiles with Java 17 language/API compatibility and warnings treated as
-errors, runs all JUnit tests, validates Javadoc, packages the examples, and generates
-a JaCoCo coverage report. CI repeats it on Linux with JDK 17 and 21 and on Windows
-with JDK 21. There are no runtime dependencies; JUnit is a test dependency.
+## Run a lesson, then change the example
 
-## Choose a starting point
+```sh
+java -jar target/java-data-structures-and-algorithms-1.0.0-SNAPSHOT.jar learn list
+java -jar target/java-data-structures-and-algorithms-1.0.0-SNAPSHOT.jar learn binary-search 4
+java -jar target/java-data-structures-and-algorithms-1.0.0-SNAPSHOT.jar learn negative-edges
+java -jar target/java-data-structures-and-algorithms-1.0.0-SNAPSHOT.jar learn range-queries
+java -jar target/java-data-structures-and-algorithms-1.0.0-SNAPSHOT.jar learn lru
+```
 
-| Your goal | Start here |
+The lab traces search intervals, compares graph preconditions, updates range queries,
+and shows cache eviction. It asks you to predict first and suggests the next experiment.
+Use `--help` for command syntax; invalid commands return status 2 with usage guidance.
+Running the JAR without arguments still runs the original showcase.
+
+| Your next step | Read or run |
 | --- | --- |
-| Learn the fundamentals in order | [Learning roadmap](docs/learning-roadmap.md) |
-| Find an implementation and its tests | [Implementation catalog](docs/catalog.md) |
-| Compare time, space, and assumptions | [Complexity reference](docs/complexity.md) |
-| Practice explaining and extending code | [Exercises](docs/exercises.md) |
-| Understand the original notes and changes | [Migration and audit](docs/migration.md) |
-| Add an implementation or regression test | [Contributing](CONTRIBUTING.md) |
+| Learn in order | [Roadmap and checkpoints](docs/learning-roadmap.md) |
+| Browse all implementations and contracts | [Catalog](docs/catalog.md) |
+| Compare time, space and assumptions | [Complexity guide](docs/complexity.md) |
+| Practice independently | [Exercises](docs/exercises.md), then [worked solutions](docs/solutions.md) |
+| Understand validation and its limits | [Quality bar](docs/quality.md) and [validation evidence](docs/validation.md) |
+| Understand changes from the original notes | [Migration guide](docs/migration.md) |
+| Extend the library | [Contributing](CONTRIBUTING.md) |
 
-## What's implemented
+## Topic map
 
-- **Collections:** dynamic array, doubly linked list, array stack, circular queue,
-  and a resizing hash map with separate chaining.
-- **Ordered and indexed structures:** unbalanced BST, AVL tree, min-heap, trie,
-  union-find, and Fenwick tree.
-- **Search and sorting:** linear/binary search, lower/upper bounds, insertion,
-  bubble, merge, three-way quicksort, and heapsort.
-- **Graphs:** BFS, iterative DFS, shortest unweighted paths, components,
-  topological sorting, Dijkstra, and Kruskal's minimum spanning forest.
-- **Problem-solving patterns:** KMP string matching, coin change, 0/1 knapsack,
-  longest common/increasing subsequences, edit distance, activity selection,
-  unique permutations, and N-queens.
+| Topic | Lessons | Maintained implementations |
+| --- | --- | --- |
+| Linear storage | [Arrays](data-structures/arrays/overview.md), [lists](data-structures/linked-lists/overview.md), [stacks](data-structures/stacks/overview.md), [queues](data-structures/queues/overview.md) | Dynamic array, doubly linked list, stack, circular queue, ring deque |
+| Lookup and order | [Hashing](data-structures/hash-tables/overview.md), [trees](data-structures/trees/overview.md), [heaps](data-structures/heaps/overview.md), [tries](data-structures/tries/overview.md) | Chained map, LRU cache, BST, AVL, min-heap, trie, union-find, Fenwick and minimum segment trees |
+| Searching and sorting | [Linear](algorithms/searching/linear-search.md), [binary](algorithms/searching/binary-search.md), [merge](algorithms/sorting/merge-sort.md), [quick](algorithms/sorting/quick-sort.md), [heap](algorithms/sorting/heap-sort.md) | Search bounds, five sorts, inversion counting |
+| Graphs | [Representation](data-structures/graphs/representation.md), [BFS](algorithms/graph/bfs.md), [DFS](algorithms/graph/dfs.md) | Traversals, paths, topological order, Dijkstra, Bellman–Ford, Kruskal, SCCs and bridges |
+| Problem solving | [DP](algorithms/dynamic-programming/overview.md), [greedy](algorithms/greedy/overview.md), [backtracking](algorithms/backtracking/overview.md), [divide and conquer](algorithms/divide-and-conquer/overview.md) | Coin change, knapsack, LCS/LIS, edit distance, Kadane, sliding-window maximum, activity selection, KMP, permutations, queens, signed subset sum and Sudoku |
 
-Each public API documents its input contract. Nulls are rejected; collection
-elements and map keys/values are non-null. Sorts mutate their input; snapshots
-and enumerated results are immutable. String algorithms use Java UTF-16 code
-units. Structures are intentionally not thread safe. See the
-[catalog](docs/catalog.md) for duplicate, empty-result, overflow, and indexing rules.
+## An example you can trust and modify
 
-## A small example
-
-The coin system `{1, 3, 4}` is a useful counterexample to greedy coin selection:
-choosing `4 + 1 + 1` uses three coins, while dynamic programming finds `3 + 3`.
+Greedy largest-coin-first uses three coins for amount six with `[1,3,4]`; DP finds
+two. For a graph with negative edges, Bellman–Ford can find a finite route when no
+reachable negative cycle exists.
 
 ```java
 import io.github.ichillous.dsa.algorithms.DynamicProgramming;
-import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import io.github.ichillous.dsa.graphs.AdvancedGraphAlgorithms;
 import io.github.ichillous.dsa.graphs.WeightedGraph;
+import java.util.List;
 
-int coins = DynamicProgramming.minimumCoins(new int[]{1, 3, 4}, 6); // 2
-
-WeightedGraph roads = WeightedGraph.undirected(4)
-        .addEdge(0, 1, 8).addEdge(0, 2, 2)
-        .addEdge(2, 1, 1).addEdge(1, 3, 3);
-var routes = GraphAlgorithms.dijkstra(roads, 0);
-System.out.println(routes.pathTo(3));                   // [0, 2, 1, 3]
-System.out.println(routes.distanceTo(3).orElseThrow()); // 6
+assert DynamicProgramming.minimumCoins(new int[]{1, 3, 4}, 6) == 2;
+var graph = WeightedGraph.directed(3)
+    .addEdge(0, 1, 4).addEdge(0, 2, 5).addEdge(1, 2, -7);
+var routes = AdvancedGraphAlgorithms.bellmanFord(graph, 0);
+assert routes.pathTo(2).equals(List.of(0, 1, 2));
+assert routes.distanceTo(2).orElseThrow() == -3;
 ```
 
-These statements belong inside a method or JShell session. The
-[packaged showcase](src/main/java/io/github/ichillous/dsa/examples/AlgorithmShowcase.java)
-also demonstrates sorting, bounds, word frequencies, autocomplete, task dependencies,
-range sums, and overlapping string matches.
+Java blocks are imports plus statements, suitable for a method or JShell. The
+[documentation test](src/test/java/io/github/ichillous/dsa/documentation/DocumentedExamplesTest.java)
+wraps each block in a temporary class, compiles it for Java 17 with warnings as
+errors, and executes its assertions. A failing assertion probe verifies that
+assertions really are enabled. When copying a block into your own Java program,
+run it with `java -ea`; Java normally disables assertions and does not evaluate
+their expressions. Examples stay connected to the implementation.
 
-## How correctness is checked
-
-Tests cover ordinary examples and invalid inputs, plus deterministic randomized
-comparisons against independent models: JDK collections, `Arrays.sort`, `String.indexOf`,
-brute-force small problem solvers, Floyd–Warshall shortest paths, and exhaustive
-spanning forests. Dedicated regressions cover hash collisions, duplicate values,
-queue wraparound, AVL rotations/deletion, deep trees/tries, and signed-long limits.
-Fixed seeds make failures reproducible. Coverage helps locate gaps; it is not a
-proof of correctness or a performance benchmark.
+## Verification
 
 ```sh
-./mvnw test                              # all unit tests
-./mvnw -Dtest=AvlTreeTest test            # one test class
-python3 scripts/check_docs.py            # local file links; requires Python 3
+./mvnw clean verify                     # complete tests, docs, JAR and coverage checks
+./mvnw -Dtest=AvlTreeTest test           # focused development check
+./mvnw -Dtest=DocumentedExamplesTest test # execute the Markdown lessons
+python3 scripts/check_docs.py           # local file links; Python 3 required
 ```
 
-After `verify`, open `target/site/jacoco/index.html` for coverage and
-`target/reports/apidocs/index.html` for generated API documentation.
+Tests include edge cases and deterministic comparisons against JDK collections,
+brute-force small solvers, exact-integer shortest-path models, and connectivity
+oracles. CI runs the complete build, packaged showcase and terminal lessons on
+Linux JDK 17/21 and Windows JDK 21. Compiler warnings and Javadoc errors fail the
+build. Coverage floors are 90% of lines and 85% of branches across production
+code, including examples; coverage is evidence, not a proof of correctness.
 
-## Repository map
+Generated results: `target/surefire-reports/`, `target/reports/apidocs/index.html`,
+and `target/site/jacoco/index.html`. Generated files are ignored by Git.
 
-```text
-src/main/java/io/github/ichillous/dsa/
-  collections/    arrays, lists, stacks, queues, hashing
-  structures/     trees, heaps, tries, union-find, range sums
-  algorithms/     search, sort, strings, DP, greedy, backtracking
-  graphs/         graph models and graph algorithms
-  examples/       runnable applications of the library
-src/test/java/    edge cases and deterministic reference-model tests
-docs/            roadmap, catalog, exercises, complexity, migration
-algorithms/      original explanatory notes (not compiled)
-data-structures/ original explanatory notes (not compiled)
-```
+## Contracts to read before choosing an algorithm
 
-The original [Java fundamentals](java-fundamentals/core-java-concepts.md),
-[data-structure notes](data-structures/arrays/overview.md),
-[algorithm notes](algorithms/searching/binary-search.md),
-[complexity notes](complexity-analysis/time-complexity.md), and
-[reading list](resources/books.md) remain available. Their banners distinguish
-explanatory fragments from the runnable library. This is an educational project;
-for application code, consider the standard Java collections first.
+- Nulls are rejected; collection elements and map/cache keys/values are non-null.
+- Sorts mutate arrays; Sudoku mutates only after finding a complete solution.
+  Other algorithm inputs are preserved. Returned collection snapshots are immutable.
+- Bounds and ranges are documented; ranges are generally half open. Empty minima
+  and unreachable distances use optional values rather than numeric sentinels.
+- Ordered sets use natural-order equivalence. String positions are UTF-16 code
+  units; there is no implicit normalization or case folding.
+- Signed arithmetic and overflow rules differ by API. Exact Bellman–Ford work
+  distinguishes negative cycles, unreachable vertices and out-of-range finite distances.
+- Structures are not thread safe. Enumeration and subset search have explicit size
+  limits; pseudopolynomial DP can still exhaust memory on large numeric capacities.
+
+Use the [catalog](docs/catalog.md) for each exact contract. This is an educational
+library; standard Java collections are usually the starting point in application code.

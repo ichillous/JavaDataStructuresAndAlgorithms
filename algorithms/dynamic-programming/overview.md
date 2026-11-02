@@ -1,122 +1,66 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Dynamic programming starts with a state definition
 
----
+Dynamic programming replaces repeated subproblems with stored answers. Use it
+when a complete solution can be expressed through smaller states and those states
+recur. The maintained
+[DynamicProgramming](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java)
+contains bottom-up examples with explicit validation and no shared mutable state.
 
-# 🧠 Dynamic Programming in Java
+A useful design sequence is: define one state in a sentence, derive its recurrence,
+identify base cases, choose an order that satisfies dependencies, then decide what
+must be retained. Writing loops before the state often hides a different problem.
 
-![Java Dynamic Programming](https://img.shields.io/badge/Java-Dynamic_Programming-purple?style=for-the-badge&logo=java)
+## Worked example: unlimited coin change
 
-## 📋 Table of Contents
-- [Introduction to Dynamic Programming](#-introduction-to-dynamic-programming)
-- [Key Concepts of Dynamic Programming](#-key-concepts-of-dynamic-programming)
-  - [Overlapping Subproblems](#-overlapping-subproblems)
-  - [Optimal Substructure](#-optimal-substructure)
-- [Types of Dynamic Programming](#-types-of-dynamic-programming)
-  - [Top-Down Approach (Memoization)](#-top-down-approach-memoization)
-  - [Bottom-Up Approach (Tabulation)](#-bottom-up-approach-tabulation)
-- [Common Problems Solved by Dynamic Programming](#-common-problems-solved-by-dynamic-programming)
-  - [Fibonacci Sequence](#-fibonacci-sequence)
-  - [Knapsack Problem](#-knapsack-problem)
-  - [Longest Common Subsequence (LCS)](#-longest-common-subsequence-lcs)
-  - [Matrix Chain Multiplication](#-matrix-chain-multiplication)
-- [Advantages and Disadvantages](#-advantages-and-disadvantages)
-- [Applications of Dynamic Programming](#-applications-of-dynamic-programming)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
+Let `best[a]` mean the minimum number of coins totaling exactly `a`.
+`best[0] = 0`; unreachable amounts have an infinity sentinel. For positive coin
+value `c <= a`, a valid predecessor gives candidate `best[a-c] + 1`. Minimize over
+all denominations. Ascending amounts make every smaller dependency available.
 
-## 🌟 Introduction to Dynamic Programming
+For coins `[1, 3, 4]`:
 
-**Dynamic Programming (DP)** is a powerful algorithmic technique used to solve problems by breaking them down into simpler subproblems. It is particularly useful for optimization problems where a solution can be constructed efficiently by solving overlapping subproblems and combining their solutions. Dynamic Programming is a key concept in computer science and is used in a wide range of applications, from algorithm design to operations research.
+| Amount `a` | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `best[a]` | 0 | 1 | 2 | 1 | 1 | 2 | 2 |
+| One final choice | — | 1 | 1 | 3 | 4 | 1 | 3 |
 
-### Key Characteristics:
-- **Optimization**: DP is often used to find the optimal solution to a problem.
-- **Subproblem Overlap**: DP exploits the overlap of subproblems to avoid redundant computations.
-- **Memoization and Tabulation**: DP can be implemented using either a top-down (memoization) or bottom-up (tabulation) approach.
+The loop invariant is that every table entry below the current amount already
+contains its optimum. Any optimum for the current amount ends with some coin;
+removing it produces exactly one of the predecessor states considered.
 
-## 🔑 Key Concepts of Dynamic Programming
+```java
+import io.github.ichillous.dsa.algorithms.DynamicProgramming;
 
-### Overlapping Subproblems
+assert DynamicProgramming.minimumCoins(new int[] {1, 3, 4}, 6) == 2;
+assert DynamicProgramming.minimumCoins(new int[] {2, 4}, 3) == -1;
+assert DynamicProgramming.minimumCoins(new int[0], 0) == 0;
+```
 
-In many problems, the same subproblems are solved multiple times. Dynamic Programming avoids this by storing the results of these subproblems, so they do not need to be recalculated. This is the key difference between Dynamic Programming and other techniques like Divide and Conquer, where subproblems are independent of each other.
+Coins must be strictly positive; duplicates are permitted, each denomination may
+be reused, and amount must be nonnegative. Null is rejected. Input is unchanged.
+Validation/allocation included, time is O((c + 1)(a + 1)) and working space is
+O(a + 1), where `c` is the number of supplied denominations.
 
-### Optimal Substructure
+This is **pseudopolynomial**: storing the numeric amount needs O(log(a + 1)) bits,
+but the table has `a + 1` entries. A valid large amount can still exhaust memory.
 
-A problem has an optimal substructure if an optimal solution to the problem can be constructed from optimal solutions of its subproblems. This means that solving the smaller subproblems optimally leads directly to an optimal solution for the original problem.
+## Memoization versus tabulation
 
-## 📚 Types of Dynamic Programming
+Memoization discovers states through recursion and caches results. Tabulation
+visits states in a chosen dependency order. Both require a correct state identity;
+forgetting a parameter in a cache key can combine unrelated subproblems. Memoized
+recursion also retains call frames, and Java does not guarantee tail-call removal.
 
-### Top-Down Approach (Memoization)
+**Counterexample:** always choosing the largest coin picks `4 + 1 + 1` for amount
+6, while the table finds `3 + 3`. A plausible local rule is not a proof of global
+optimality. Conversely, DP is unnecessary when a simple greedy rule has a proof.
 
-In the top-down approach, the problem is solved by breaking it down recursively into subproblems, storing the results of these subproblems in a table (memoization) to avoid redundant calculations.
+## Practice
 
-#### Key Points:
-- **Recursive**: Uses recursion to solve subproblems.
-- **Memoization**: Stores results of subproblems to avoid repeated work.
-- **Example**: Computing Fibonacci numbers using a recursive function that stores already computed values.
+1. Fill the table for denominations `[2, 5]` through amount 7, marking unreachable
+   states rather than adding to an infinity sentinel.
+2. Explain which extra information would reconstruct the chosen coins.
+3. Change unlimited coin reuse to “each supplied coin once.” Which state or loop
+   direction changes? Continue with [0/1 knapsack](problems.md).
 
-### Bottom-Up Approach (Tabulation)
-
-In the bottom-up approach, the problem is solved by first solving all the subproblems iteratively and storing their results. The solution to the original problem is then built from the solutions to the subproblems.
-
-#### Key Points:
-- **Iterative**: Solves subproblems iteratively rather than recursively.
-- **Tabulation**: Fills a table with solutions to subproblems, starting with the smallest.
-- **Example**: Computing Fibonacci numbers by filling an array from the base cases up to the desired value.
-
-## 🎯 Common Problems Solved by Dynamic Programming
-
-### Fibonacci Sequence
-
-A classic example of a problem that can be solved using DP. The nth Fibonacci number is the sum of the (n-1)th and (n-2)th Fibonacci numbers.
-
-### Knapsack Problem
-
-Given a set of items, each with a weight and a value, determine the maximum value that can be obtained by selecting a subset of items such that their total weight does not exceed a given limit.
-
-### Longest Common Subsequence (LCS)
-
-Given two sequences, find the length of the longest subsequence present in both sequences. A subsequence is a sequence derived by deleting some or none of the elements without changing the order of the remaining elements.
-
-### Matrix Chain Multiplication
-
-Determine the most efficient way to multiply a given sequence of matrices. The problem is to find the optimal parenthesization of the matrix product.
-
-## ⚖️ Advantages and Disadvantages
-
-### Advantages:
-- **Efficiency**: DP can significantly reduce the time complexity of solving problems with overlapping subproblems.
-- **Optimization**: It is particularly powerful for solving optimization problems.
-- **Versatility**: DP can be applied to a wide range of problems, from combinatorial optimization to resource allocation.
-
-### Disadvantages:
-- **Complexity**: DP algorithms can be complex to design and understand, especially for beginners.
-- **Space Usage**: Depending on the problem, DP may require significant memory for storing subproblem solutions.
-- **Problem Identification**: Not all problems are suitable for DP; identifying when to use DP can be challenging.
-
-## 💡 Applications of Dynamic Programming
-
-Dynamic Programming is used in various fields and applications, including:
-- **Algorithm Design**: Many classical algorithms, such as Dijkstra's shortest path and Floyd-Warshall's algorithm, use DP techniques.
-- **Operations Research**: DP is used for resource allocation, scheduling, and inventory management.
-- **Bioinformatics**: DP is used in sequence alignment algorithms, such as Smith-Waterman and Needleman-Wunsch, for comparing DNA, RNA, or protein sequences.
-- **Computer Graphics**: DP is used in techniques like image compression and rendering optimizations.
-
-## ⚠️ Common Pitfalls and Best Practices
-
-1. **Overcomplicating the Problem**: Ensure that the problem is suited to DP before trying to apply it. Not every problem benefits from DP.
-2. **Memory Usage**: Be mindful of the memory requirements, especially for problems with a large number of subproblems.
-3. **Start with a Simple Example**: When learning DP, start with simple problems like the Fibonacci sequence or the Coin Change problem to build your understanding.
-4. **Understand Both Approaches**: Familiarize yourself with both top-down and bottom-up approaches, as some problems are more naturally suited to one over the other.
-
-## 🎓 Conclusion
-
-Dynamic Programming is a crucial technique in algorithm design, providing a powerful tool for solving complex problems efficiently. By understanding the key concepts and approaches of DP, you can tackle a wide range of optimization problems in Java.
-
-Key takeaways:
-- **Optimization and Efficiency**: DP is invaluable for optimizing solutions to problems with overlapping subproblems.
-- **Top-Down vs. Bottom-Up**: Both memoization and tabulation are important techniques within DP, each with its strengths.
-- **Wide Applicability**: DP is used in fields ranging from algorithm design to operations research and bioinformatics.
-
-By mastering Dynamic Programming, you'll enhance your ability to develop efficient solutions to challenging problems in your Java applications! 💻🚀
-
----
+Compare with the [solutions](../../docs/solutions.md) after deriving the recurrence.

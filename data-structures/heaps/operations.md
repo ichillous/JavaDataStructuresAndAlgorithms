@@ -1,296 +1,67 @@
-> **Historical study note.** These explanatory snippets are not compiled by the build. Use the [runnable implementation catalog](../../docs/catalog.md) for maintained source and tests. See the [migration guide](../../docs/migration.md) for the relationship between notes and code.
+# Heap operations: restore order along one path
 
----
+Read [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) alongside this trace. A complete-tree array has height O(log n), so repairing one root-to-leaf or leaf-to-root path gives logarithmic priority operations.
 
-# 🛠️ Heap Operations in Java
+## Bottom-up construction
 
-![Java Heap Operations](https://img.shields.io/badge/Java-Heap_Operations-blue?style=for-the-badge&logo=java)
+Starting with `[9, 4, 7, 1, 3, 2]`, the last internal node is at `n / 2 - 1 = 2`. Leaves are already heaps. Process internal nodes from right to left:
 
-## 📋 Table of Contents
-- [Introduction to Heap Operations](#-introduction-to-heap-operations)
-- [Insertion](#-insertion)
-  - [Algorithm and Implementation](#-algorithm-and-implementation)
-- [Deletion](#-deletion)
-  - [Algorithm and Implementation](#-algorithm-and-implementation)
-- [Heapify](#-heapify)
-  - [Algorithm and Implementation](#-algorithm-and-implementation)
-  - [Building a Heap from an Array](#-building-a-heap-from-an-array)
-- [Peek](#-peek)
-  - [Algorithm and Implementation](#-algorithm-and-implementation)
-- [Heap Sort](#-heap-sort)
-  - [Algorithm and Implementation](#-algorithm-and-implementation)
-- [Common Pitfalls and Best Practices](#-common-pitfalls-and-best-practices)
-- [Conclusion](#-conclusion)
+```text
+start            [9, 4, 7, 1, 3, 2]
+sift index 2     [9, 4, 2, 1, 3, 7]
+sift index 1     [9, 1, 2, 4, 3, 7]
+sift index 0     [1, 3, 2, 4, 9, 7]
+```
 
-## 🌟 Introduction to Heap Operations
+When a node is processed, both child subtrees are already heaps. Sifting its value downward therefore establishes the invariant for the entire subtree rooted there.
 
-Heaps are a crucial data structure in many algorithms, particularly in priority queues and sorting. The primary operations on a heap include **insertion**, **deletion**, **heapify**, **peek**, and **heap sort**. These operations allow the heap to maintain its properties and provide efficient access to the maximum or minimum element.
+Although one sift can cost O(log n), most nodes are near the leaves and move only a short distance. Summing work by subtree height gives O(n) construction. Inserting each value separately instead gives O(n log n) worst-case construction.
 
-## ➕ Insertion
-
-### Algorithm and Implementation
-
-Insertion in a heap involves adding the new element at the end of the tree (or array, if using an array representation) to maintain the complete binary tree property. The element is then "bubbled up" to restore the heap property.
-
-#### Steps:
-1. Add the new element at the end of the array (or tree).
-2. Compare the added element with its parent; if the heap property is violated, swap the elements.
-3. Repeat the process until the heap property is restored or the element reaches the root.
-
-#### Example:
 ```java
+import io.github.ichillous.dsa.structures.BinaryMinHeap;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
-class MinHeap {
-    private ArrayList<Integer> heap;
-
-    public MinHeap() {
-        heap = new ArrayList<>();
-    }
-
-    public void insert(int value) {
-        heap.add(value); // Add the new element at the end
-        int index = heap.size() - 1;
-        int parent = (index - 1) / 2;
-
-        // Bubble up the new element to restore the heap property
-        while (index > 0 && heap.get(index) < heap.get(parent)) {
-            Collections.swap(heap, index, parent);
-            index = parent;
-            parent = (index - 1) / 2;
-        }
-    }
-
-    public void printHeap() {
-        System.out.println(heap);
-    }
-}
-
-public class HeapInsertionExample {
-    public static void main(String[] args) {
-        MinHeap minHeap = new MinHeap();
-        minHeap.insert(10);
-        minHeap.insert(5);
-        minHeap.insert(3);
-        minHeap.insert(2);
-        minHeap.insert(8);
-
-        minHeap.printHeap(); // Output: [2, 5, 3, 10, 8]
-    }
-}
+BinaryMinHeap<Integer> heap = new BinaryMinHeap<>(List.of(9, 4, 7, 1, 3, 2));
+List<Integer> sorted = new ArrayList<>();
+while (!heap.isEmpty()) sorted.add(heap.remove());
+assert sorted.equals(List.of(1, 2, 3, 4, 7, 9));
+assert heap.isEmpty();
 ```
 
-## ➖ Deletion
+## Insert: sift up
 
-### Algorithm and Implementation
+Append at the next free array position to preserve completeness. While the new value is smaller than its parent, exchange them and continue upward. Comparing with arbitrary earlier array entries would not follow the tree and could damage another subtree.
 
-Deletion, typically the removal of the root element, involves replacing the root with the last element in the heap and then "bubbling down" this element to restore the heap property.
-
-#### Steps:
-1. Replace the root element with the last element in the array.
-2. Remove the last element.
-3. Compare the new root with its children; if the heap property is violated, swap it with the smaller (or larger, in a max heap) child.
-4. Repeat the process until the heap property is restored or the element becomes a leaf.
-
-#### Example:
 ```java
-public int delete() {
-    if (heap.isEmpty()) {
-        throw new NoSuchElementException("Heap is empty");
-    }
+import io.github.ichillous.dsa.structures.BinaryMinHeap;
+import java.util.List;
 
-    int root = heap.get(0);
-    int lastElement = heap.remove(heap.size() - 1);
-
-    if (!heap.isEmpty()) {
-        heap.set(0, lastElement);
-        heapifyDown(0);
-    }
-
-    return root;
-}
-
-private void heapifyDown(int index) {
-    int leftChild = 2 * index + 1;
-    int rightChild = 2 * index + 2;
-    int smallest = index;
-
-    if (leftChild < heap.size() && heap.get(leftChild) < heap.get(smallest)) {
-        smallest = leftChild;
-    }
-
-    if (rightChild < heap.size() && heap.get(rightChild) < heap.get(smallest)) {
-        smallest = rightChild;
-    }
-
-    if (smallest != index) {
-        Collections.swap(heap, index, smallest);
-        heapifyDown(smallest);
-    }
-}
+BinaryMinHeap<Integer> heap = new BinaryMinHeap<>(List.of(4, 9, 6));
+heap.add(2);
+heap.add(2);
+assert heap.size() == 5;
+assert heap.remove() == 2;
+assert heap.remove() == 2;
+assert heap.peek() == 4;
 ```
 
-## 🔄 Heapify
+## Remove: choose the smaller child
 
-### Algorithm and Implementation
+Replace the root with the final array value and remove that last slot. At each step, compare the replacement with the **smaller** child. If it is already no larger, stop; otherwise swap and continue.
 
-Heapify is the process of converting a binary tree into a heap by ensuring that all subtrees satisfy the heap property. This operation is essential when building a heap from an unsorted array.
+For heap `[1, 3, 2, 4, 9, 7]`, removing 1 first creates `[7, 3, 2, 4, 9]`. Swapping 7 with smaller child 2 produces `[2, 3, 7, 4, 9]`. Swapping with 3 instead would leave root 3 above child 2, violating min-heap order.
 
-#### Steps:
-1. Start from the last non-leaf node and move towards the root.
-2. For each node, compare it with its children and swap if the heap property is violated.
-3. Recursively heapify the affected subtree.
+The singleton case needs no sift: removing its final slot leaves an empty heap. Peek and remove then throw the documented empty-state exception, rather than returning a numeric sentinel that could also be a real value.
 
-#### Example:
-```java
-public void heapify(int index) {
-    int leftChild = 2 * index + 1;
-    int rightChild = 2 * index + 2;
-    int smallest = index;
+## Cost and ownership
 
-    if (leftChild < heap.size() && heap.get(leftChild) < heap.get(smallest)) {
-        smallest = leftChild;
-    }
+Bottom-up build uses O(n) time and O(n) copied storage. Peek is O(1); removal is O(log n). Insert is O(log n) amortized but may copy O(n) references during growth. Sift operations themselves use O(1) additional workspace. The heap keeps natural-order duplicates; order-equivalent objects do not have stable removal ties.
 
-    if (rightChild < heap.size() && heap.get(rightChild) < heap.get(smallest)) {
-        smallest = rightChild;
-    }
+## Practice
 
-    if (smallest != index) {
-        Collections.swap(heap, index, smallest);
-        heapify(smallest);
-    }
-}
-```
+1. Trace a sift-down that follows two levels, then one that stops immediately.
+2. Verify that modifying the constructor's input collection does not mutate the heap.
+3. Create an independent heap-order validator over a small reference array, then compare complete removal sequences with `Arrays.sort` or `PriorityQueue`.
 
-### Building a Heap from an Array
-
-To build a heap from an unsorted array, start heapifying from the last non-leaf node up to the root.
-
-#### Example:
-```java
-public void buildHeap(int[] array) {
-    for (int i = (array.length / 2) - 1; i >= 0; i--) {
-        heapify(array, array.length, i);
-    }
-}
-
-private void heapify(int[] array, int size, int index) {
-    int largest = index;
-    int leftChild = 2 * index + 1;
-    int rightChild = 2 * index + 2;
-
-    if (leftChild < size && array[leftChild] > array[largest]) {
-        largest = leftChild;
-    }
-
-    if (rightChild < size && array[rightChild] > array[largest]) {
-        largest = rightChild;
-    }
-
-    if (largest != index) {
-        int swap = array[index];
-        array[index] = array[largest];
-        array[largest] = swap;
-
-        heapify(array, size, largest);
-    }
-}
-```
-
-## 👀 Peek
-
-### Algorithm and Implementation
-
-The `peek` operation retrieves the root element of the heap without removing it. In a min heap, this is the smallest element, and in a max heap, this is the largest element.
-
-#### Example:
-```java
-public int peek() {
-    if (heap.isEmpty()) {
-        throw new NoSuchElementException("Heap is empty");
-    }
-    return heap.get(0);
-}
-```
-
-## 🔄 Heap Sort
-
-### Algorithm and Implementation
-
-**Heap Sort** is a comparison-based sorting algorithm that uses a heap data structure. The algorithm involves building a max heap (for ascending order) from the array, then repeatedly removing the largest element from the heap and placing it at the end of the array.
-
-#### Steps:
-1. Build a max heap from the unsorted array.
-2. Swap the root of the heap with the last element in the array.
-3. Reduce the heap size and heapify the root element.
-4. Repeat the process until the array is sorted.
-
-#### Example:
-```java
-public void heapSort(int[] array) {
-    int n = array.length;
-
-    // Build max heap
-    for (int i = n / 2 - 1; i >= 0; i--) {
-        heapify(array, n, i);
-    }
-
-    // One by one extract elements
-    for (int i = n - 1; i >= 0; i--) {
-        // Move current root to end
-        int temp = array[0];
-        array[0] = array[i];
-        array[i] = temp;
-
-        // Call max heapify on the reduced heap
-        heapify(array, i, 0);
-    }
-}
-
-private void heapify(int[] array, int size, int index) {
-    int largest = index;
-    int leftChild = 2 * index + 1;
-    int rightChild = 2 * index + 2;
-
-    if (leftChild < size && array[leftChild] > array[largest]) {
-        largest = leftChild;
-    }
-
-    if (rightChild < size && array[rightChild] > array[largest]) {
-        largest = rightChild;
-    }
-
-    if (largest != index) {
-        int swap = array[index];
-        array[index] = array[largest];
-        array[largest] = swap;
-
-        heapify(array, size, largest);
-    }
-}
-```
-
-## ⚠️ Common Pitfalls and Best Practices
-
-1. **Maintain the Heap Property**: Ensure that all operations (insertion, deletion, heapify) maintain
-
- the heap property.
-2. **Handle Edge Cases**: Consider edge cases like empty heaps and single-element heaps.
-3. **Choose the Right Heap Type**: Use min heaps for priority queues where the smallest element is prioritized, and max heaps where the largest element is.
-4. **Optimize Heapify**: When building a heap, use a bottom-up approach for efficient heapification.
-
-## 🎓 Conclusion
-
-Heap operations are fundamental to many algorithms and data structures, particularly in priority queues and sorting. By mastering heap operations like insertion, deletion, heapify, and heap sort, you'll be well-equipped to implement efficient algorithms in Java.
-
-Key takeaways:
-- **Insertion**: Add elements while maintaining the heap property.
-- **Deletion**: Remove the root element and restore the heap property.
-- **Heapify**: Convert a binary tree into a heap efficiently.
-- **Heap Sort**: Sort an array using the heap data structure.
-
-By mastering these operations, you'll enhance your ability to work with heaps in Java, enabling you to tackle a wide range of algorithmic challenges! 💻🚀
-
----
+See the [worked solutions](../../docs/solutions.md) for heapify's summation and boundary cases.
