@@ -15,10 +15,15 @@ import java.util.Objects;
  * <p><b>Hashing.</b> The element's {@code hashCode()} is mixed with SplitMix64
  * (constants {@code 0x9E3779B97F4A7C15}, {@code 0xBF58476D1CE4E5B9},
  * {@code 0x94D049BB133111EB}) into a 64-bit value whose low and high 32 bits are
- * {@code h1} and {@code h2} (both signed). The i-th bit index is
- * {@code floorMod(h1 + i * h2, bitCount)} (Kirsch-Mitzenmacher double hashing),
- * computed in {@code long} arithmetic so it cannot overflow. The mapping is fixed,
- * so behavior is reproducible across runs.
+ * {@code h1} and {@code h2} (both signed). The probe step is
+ * {@code step = 1 + floorMod(h2, bitCount - 1)} when {@code bitCount > 1} (0 when
+ * {@code bitCount == 1}), and the i-th bit index is
+ * {@code floorMod(h1 + i * step, bitCount)} (Kirsch-Mitzenmacher double hashing),
+ * computed in {@code long} arithmetic so it cannot overflow. Because the step lies in
+ * {@code [1, bitCount - 1]} it is never a multiple of {@code bitCount}, so the probes
+ * of one element never all collapse onto a single bit when {@code hashCount > 1}
+ * and {@code bitCount > 1}. (Using {@code h2} directly would collapse them for about
+ * one element in {@code bitCount}.) The mapping is fixed, so behavior is reproducible.
  *
  * <p><b>Limitation.</b> Only {@code hashCode()} is consulted, so distinct elements
  * with equal hash codes (for example {@code "Aa"} and {@code "BB"}) are
@@ -34,6 +39,8 @@ import java.util.Objects;
  */
 public final class BloomFilter<T> {
     private static final double LN2 = Math.log(2);
+    /** Largest accepted bit count (2^30 bits = 128 MiB), to fail fast instead of exhausting memory. */
+    private static final int MAX_BITS = 1 << 30;
 
     private final long[] words;
     private final int bitCount;
@@ -55,6 +62,9 @@ public final class BloomFilter<T> {
         if (hashCount < 1) {
             throw new IllegalArgumentException("hashCount must be at least 1: " + hashCount);
         }
+        if (bitCount > MAX_BITS) {
+            throw new IllegalArgumentException("bitCount exceeds " + MAX_BITS + ": " + bitCount);
+        }
         this.bitCount = bitCount;
         this.hashCount = hashCount;
         this.words = new long[(int) (((long) bitCount + 63) >>> 6)];
@@ -71,7 +81,7 @@ public final class BloomFilter<T> {
      * @param <T>               the element type
      * @return a new empty filter
      * @throws IllegalArgumentException if {@code n < 1}, {@code p} is not in (0, 1), or
-     *                                  the required bit count does not fit in an {@code int}
+     *                                  the required bit count exceeds 2^30
      */
     public static <T> BloomFilter<T> forExpectedInsertions(int n, double falsePositiveRate) {
         if (n < 1) {
@@ -82,8 +92,8 @@ public final class BloomFilter<T> {
                     "falsePositiveRate must be in (0, 1): " + falsePositiveRate);
         }
         double m = Math.ceil(-n * Math.log(falsePositiveRate) / (LN2 * LN2));
-        if (m > Integer.MAX_VALUE) {
-            throw new IllegalArgumentException("required bit count exceeds Integer.MAX_VALUE");
+        if (m > MAX_BITS) {
+            throw new IllegalArgumentException("required bit count exceeds " + MAX_BITS);
         }
         int bits = (int) m;
         int hashes = (int) Math.max(1, Math.round((double) bits / n * LN2));
@@ -100,9 +110,9 @@ public final class BloomFilter<T> {
         Objects.requireNonNull(element, "element");
         long mixed = mix(element.hashCode());
         long h1 = (int) mixed;
-        long h2 = (int) (mixed >>> 32);
+        long step = step(mixed);
         for (int i = 0; i < hashCount; i++) {
-            int bit = Math.floorMod(h1 + i * h2, bitCount);
+            int bit = bitAt(h1, step, i);
             words[bit >>> 6] |= 1L << (bit & 63);
         }
         insertions++;
@@ -119,9 +129,9 @@ public final class BloomFilter<T> {
         Objects.requireNonNull(element, "element");
         long mixed = mix(element.hashCode());
         long h1 = (int) mixed;
-        long h2 = (int) (mixed >>> 32);
+        long step = step(mixed);
         for (int i = 0; i < hashCount; i++) {
-            int bit = Math.floorMod(h1 + i * h2, bitCount);
+            int bit = bitAt(h1, step, i);
             if ((words[bit >>> 6] & (1L << (bit & 63))) == 0) {
                 return false;
             }
@@ -154,6 +164,28 @@ public final class BloomFilter<T> {
     public double estimatedFalsePositiveRate() {
         double exponent = -(double) hashCount * insertions / bitCount;
         return Math.pow(1 - Math.exp(exponent), hashCount);
+    }
+
+    private int bitAt(long h1, long step, int i) {
+        return Math.floorMod(h1 + i * step, bitCount);
+    }
+
+    /** Returns the k bit indices of an element; package-private so tests can check probe spread. */
+    int[] bitIndices(T element) {
+        Objects.requireNonNull(element, "element");
+        long mixed = mix(element.hashCode());
+        long h1 = (int) mixed;
+        long step = step(mixed);
+        int[] bits = new int[hashCount];
+        for (int i = 0; i < hashCount; i++) {
+            bits[i] = bitAt(h1, step, i);
+        }
+        return bits;
+    }
+
+    /** Probe step in [1, bitCount - 1], derived from the high half; 0 only when bitCount is 1. */
+    private long step(long mixed) {
+        return bitCount == 1 ? 0 : 1 + Math.floorMod((int) (mixed >>> 32), bitCount - 1);
     }
 
     /** SplitMix64 finalizer applied to a sign-extended hash code. */

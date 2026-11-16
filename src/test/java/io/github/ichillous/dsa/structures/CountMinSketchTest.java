@@ -109,6 +109,9 @@ class CountMinSketchTest {
         assertThrows(IllegalArgumentException.class, () -> CountMinSketch.withErrorBounds(1e-12, 0.5));
         assertThrows(IllegalArgumentException.class, () -> CountMinSketch.withErrorBounds(0.1, 0.0));
         assertThrows(IllegalArgumentException.class, () -> CountMinSketch.withErrorBounds(0.1, 1.0));
+        assertThrows(IllegalArgumentException.class, () -> new CountMinSketch<String>(1 << 20, 64));
+        assertThrows(IllegalArgumentException.class, () -> CountMinSketch.withErrorBounds(0.1, Double.MIN_VALUE));
+        assertThrows(IllegalArgumentException.class, () -> CountMinSketch.withErrorBounds(1e-9, 0.5));
         CountMinSketch<String> sketch = new CountMinSketch<>(4, 2);
         assertThrows(IllegalArgumentException.class, () -> sketch.add("x", -1));
         assertThrows(NullPointerException.class, () -> sketch.add(null));

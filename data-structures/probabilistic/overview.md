@@ -33,8 +33,11 @@ Taking the minimum over independent rows is what makes a large overestimate
 unlikely.
 
 Index `i` of a Bloom element comes from two 32-bit halves `h1`, `h2` of a
-SplitMix64-mixed `hashCode()`:
-`floorMod(h1 + i * h2, m)`. The Count-Min row hashes are SplitMix64 of
+SplitMix64-mixed `hashCode()`: `floorMod(h1 + i * step, m)` with
+`step = 1 + floorMod(h2, m - 1)`. The step is never a multiple of `m`, so the
+`k` probes of one element cannot all land on the same bit (using `h2` directly would
+collapse them for about one element in `m`). Both structures reject sizes above a
+fixed cap (2^30 bits, 2^25 counters) instead of exhausting memory. The Count-Min row hashes are SplitMix64 of
 `hashCode ^ rowSeed[i]` with fixed, documented seeds, so every result in this
 lesson is reproducible.
 

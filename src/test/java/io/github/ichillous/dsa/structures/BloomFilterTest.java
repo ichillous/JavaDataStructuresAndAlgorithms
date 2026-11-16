@@ -111,4 +111,30 @@ class BloomFilterTest {
         assertThrows(NullPointerException.class, () -> filter.add(null));
         assertThrows(NullPointerException.class, () -> filter.mightContain(null));
     }
+
+    @Test
+    void probesNeverCollapseOntoOneBit() {
+        Random random = new Random(SEED);
+        BloomFilter<Integer> filter = new BloomFilter<>(9586, 7);
+        for (int n = 0; n < 300_000; n++) {
+            int hash = random.nextInt();
+            int[] bits = filter.bitIndices(hash);
+            assertEquals(7, bits.length);
+            assertNotEquals(bits[0], bits[1], "seed " + SEED + " collapsed hash " + hash);
+        }
+        BloomFilter<Integer> small = new BloomFilter<>(2, 5);
+        for (int hash = -500; hash < 500; hash++) {
+            int[] bits = small.bitIndices(hash);
+            assertNotEquals(bits[0], bits[1], "m=2 hash " + hash);
+        }
+        int[] single = new BloomFilter<Integer>(1, 3).bitIndices(42);
+        assertArrayEquals(new int[] {0, 0, 0}, single);
+    }
+
+    @Test
+    void bloomRejectsOversizedFilters() {
+        assertThrows(IllegalArgumentException.class, () -> new BloomFilter<String>((1 << 30) + 1, 1));
+        assertThrows(IllegalArgumentException.class,
+                () -> BloomFilter.forExpectedInsertions(1_000_000_000, 0.01));
+    }
 }

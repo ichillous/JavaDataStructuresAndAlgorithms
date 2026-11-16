@@ -22,7 +22,8 @@ import java.util.Objects;
  * {@code hashCode()} share counts.
  *
  * <p><b>Contract.</b> Items must be non-null ({@link NullPointerException}); counts
- * must be non-negative ({@link IllegalArgumentException}); there is no removal.
+ * must be non-negative ({@link IllegalArgumentException}); there is no removal. The table is capped at
+ * 2^25 counters.
  * Overflow policy: if adding would overflow any counter or the total, an
  * {@link ArithmeticException} is thrown <em>before</em> anything is modified.
  * {@code add} and {@code estimate} take O(depth) time and O(1) extra space; storage is
@@ -31,6 +32,8 @@ import java.util.Objects;
  * @param <T> the item type
  */
 public final class CountMinSketch<T> {
+    /** Largest accepted {@code width * depth} (2^25 counters = 256 MiB), to fail fast instead of exhausting memory. */
+    private static final long MAX_CELLS = 1L << 25;
     private static final long SEED_BASE = 0x5EED5EED5EED5EEDL;
 
     private final int width;
@@ -53,6 +56,10 @@ public final class CountMinSketch<T> {
         if (depth < 1) {
             throw new IllegalArgumentException("depth must be at least 1: " + depth);
         }
+        if ((long) width * depth > MAX_CELLS) {
+            throw new IllegalArgumentException(
+                    "width * depth exceeds " + MAX_CELLS + ": " + width + " x " + depth);
+        }
         this.width = width;
         this.depth = depth;
         this.table = new long[depth][width];
@@ -71,8 +78,8 @@ public final class CountMinSketch<T> {
      * @param delta   failure probability, strictly between 0 and 1
      * @param <T>     the item type
      * @return a new empty sketch
-     * @throws IllegalArgumentException if a parameter is out of range or the width
-     *                                  does not fit in an {@code int}
+     * @throws IllegalArgumentException if a parameter is out of range or the table would exceed
+     *                                  2^25 counters
      */
     public static <T> CountMinSketch<T> withErrorBounds(double epsilon, double delta) {
         if (!(epsilon > 0)) {
@@ -82,11 +89,12 @@ public final class CountMinSketch<T> {
             throw new IllegalArgumentException("delta must be in (0, 1): " + delta);
         }
         double w = Math.ceil(Math.E / epsilon);
-        if (w > Integer.MAX_VALUE) {
-            throw new IllegalArgumentException("width exceeds Integer.MAX_VALUE for epsilon " + epsilon);
+        double d = Math.max(1, Math.ceil(Math.log(1 / delta)));
+        if (w * d > MAX_CELLS) {
+            throw new IllegalArgumentException(
+                    "table would exceed " + MAX_CELLS + " counters for epsilon " + epsilon + ", delta " + delta);
         }
-        int d = (int) Math.max(1, Math.ceil(Math.log(1 / delta)));
-        return new CountMinSketch<>((int) Math.max(1, w), d);
+        return new CountMinSketch<>((int) Math.max(1, w), (int) d);
     }
 
     /**
@@ -115,14 +123,13 @@ public final class CountMinSketch<T> {
         if (count < 0) {
             throw new IllegalArgumentException("count must be non-negative: " + count);
         }
+        // Every cell is a sum of a subset of the counts that were also added to total, and
+        // all counts are non-negative, so each cell <= total. If total + count does not
+        // overflow, no cell + count can, so this one check is enough to leave a failed
+        // add with no change.
         long newTotal = Math.addExact(total, count);
-        int[] columns = new int[depth];
         for (int row = 0; row < depth; row++) {
-            columns[row] = column(item, row);
-            Math.addExact(table[row][columns[row]], count);
-        }
-        for (int row = 0; row < depth; row++) {
-            table[row][columns[row]] += count;
+            table[row][column(item, row)] += count;
         }
         total = newTotal;
     }
