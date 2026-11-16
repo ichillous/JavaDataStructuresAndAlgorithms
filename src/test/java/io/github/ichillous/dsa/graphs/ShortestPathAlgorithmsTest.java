@@ -262,6 +262,16 @@ class ShortestPathAlgorithmsTest {
         assertEquals(List.of(0, 1, 3), route.path());
     }
 
+    @Test
+    void aStarPriorityAboveLongMaxStillFindsOptimalRoute() {
+        // f(1) = (MAX - 5) + 10 exceeds Long.MAX_VALUE, so it must order after the cheap route.
+        WeightedGraph graph = WeightedGraph.directed(4)
+                .addEdge(0, 1, Long.MAX_VALUE - 5).addEdge(0, 2, 3).addEdge(2, 3, 4);
+        Route route = ShortestPathAlgorithms.aStar(graph, 0, 3, v -> v == 1 ? 10 : 0).orElseThrow();
+        assertEquals(List.of(0, 2, 3), route.path());
+        assertEquals(7, route.distance());
+    }
+
     /** Edges are nonnegative base weights shifted by vertex potentials, so no negative cycle exists. */
     private static WeightedGraph signedWithoutNegativeCycles(Random random, int size) {
         long[] potential = new long[size];

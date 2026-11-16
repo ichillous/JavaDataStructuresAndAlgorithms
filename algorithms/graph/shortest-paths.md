@@ -149,8 +149,9 @@ Bellman–Ford, so an overflowing detour never produces a wrong answer. Only fin
 reachable distances must fit in `long`; otherwise `ArithmeticException`. A reachable
 `Long.MAX_VALUE` is valid. A\* follows Dijkstra's policy for `g`: overflowing detours
 are ignored, and `ArithmeticException` is thrown if the target is reachable but every
-route exceeds `long`. Its `f = g + h` saturates at `Long.MAX_VALUE`; the code compares
-the exact sum as an unsigned value, which orders identically without misordering ties.
+route exceeds `long`. Its priority `f = g + h` is the exact sum: because `0 <= g, h <= 2^63-1` it fits in
+an unsigned 64-bit value and is compared with `Long.compareUnsigned`, so distinct `f`
+values never tie, even above `Long.MAX_VALUE`.
 
 ## Counterexample: an inconsistent heuristic
 
@@ -172,5 +173,5 @@ silently treating it as 1 would return wrong distances.
    that source ignores it while Floyd–Warshall rejects the graph.
 
 Continue with the [catalog](../../docs/catalog.md) and the
-[complexity guide](../../docs/complexity.md). The [solutions](../../docs/solutions.md)
-describe the oracles used to test these methods.
+[complexity guide](../../docs/complexity.md). The oracle tests for these methods are in
+[ShortestPathAlgorithmsTest](../../src/test/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithmsTest.java).

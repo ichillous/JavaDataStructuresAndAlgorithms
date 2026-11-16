@@ -232,9 +232,10 @@ public final class ShortestPathAlgorithms {
      * <p>Invariant: with a consistent heuristic, f = g + h never decreases along
      * a path, so a vertex removed from the queue with its current g has its optimal
      * g and is never reopened. The queue orders by f, then by vertex number. f
-     * saturates at Long.MAX_VALUE; it is implemented as the exact sum compared as
-     * an unsigned 64-bit value (the sum of two nonnegative longs always fits),
-     * which orders identically to saturation but never misorders saturated ties.
+     * is the exact sum g + h: since 0 &lt;= g, h &lt;= 2^63-1 the sum fits in an
+     * unsigned 64-bit value and is compared with Long.compareUnsigned. Distinct
+     * f values therefore never tie, even above Long.MAX_VALUE, so the queue order
+     * does not depend on an artificial cap.
      * The g values follow Dijkstra's overflow policy: a detour exceeding long is
      * ignored. Returns empty when the target is unreachable; if the target is
      * reachable only through routes whose cost exceeds long, ArithmeticException is
