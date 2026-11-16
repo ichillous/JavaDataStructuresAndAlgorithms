@@ -1,0 +1,27 @@
+TASK 13 FRAGMENT: FlowNetwork and BipartiteMatching
+
+(a) CATALOG ROWS -- section: graphs table in docs/catalog.md (after the AdvancedGraphAlgorithms row)
+| [FlowNetwork](../src/main/java/io/github/ichillous/dsa/graphs/FlowNetwork.java) | Directed `long`-capacity network, parallel edges kept; Dinic `maxFlow(s, t)` with an iterative blocking flow returns the value, per-edge flows in insertion order and the minimal source side of a minimum cut. `source == sink` rejected; network not mutated; total uses `Math.addExact`. | [FlowNetworkTest](../src/test/java/io/github/ichillous/dsa/graphs/FlowNetworkTest.java) |
+| [BipartiteMatching](../src/main/java/io/github/ichillous/dsa/graphs/BipartiteMatching.java) | Hopcroft-Karp `maximumMatching(leftSize, rightSize, edges)`: duplicate edges ignored, out-of-range vertices throw `IndexOutOfBoundsException`, result sorted by left vertex, iterative augmentation. | [BipartiteMatchingTest](../src/test/java/io/github/ichillous/dsa/graphs/BipartiteMatchingTest.java) |
+
+(b) COMPLEXITY ROWS -- target table: the graph table in docs/complexity.md (columns: Algorithm / representation | Time | Auxiliary or stored space)
+| Dinic maximum flow and minimum cut | O(V^2 E); at most V-1 phases | O(V + E); iterative BFS and blocking flow; total checked with `Math.addExact` |
+| Hopcroft-Karp bipartite matching | O(E sqrt(V)) after an O(E log E) deduplicating sort | O(V + E); iterative augmenting-path search |
+
+(c) SOLUTION-FINDER ENTRIES
+- Problem: maximum throughput from a source to a sink through capacity-limited links
+  Technique: Dinic maximum flow
+  Link: [FlowNetwork](../src/main/java/io/github/ichillous/dsa/graphs/FlowNetwork.java)
+- Problem: cheapest set of edges whose removal disconnects s from t (minimum cut)
+  Technique: max-flow/min-cut, source side of the final residual graph
+  Link: [FlowNetwork](../src/main/java/io/github/ichillous/dsa/graphs/FlowNetwork.java)
+- Problem: assign each worker at most one task (maximum bipartite matching)
+  Technique: Hopcroft-Karp
+  Link: [BipartiteMatching](../src/main/java/io/github/ichillous/dsa/graphs/BipartiteMatching.java)
+
+(d) README TOPIC-MAP ADDITION
+Graphs row: add [Flows and matching](algorithms/graph/flows-and-matching.md) to the links and "Dinic max flow, min cut and Hopcroft-Karp matching" to the contents column.
+
+(e) EXERCISE ROWS (docs/exercises.md format: Topic | Input | Check)
+| Max-flow oracle | Random networks with at most 8 vertices, fixed seed, parallel edges and self-loops | Compare the flow value with the minimum capacity over every s-t vertex cut. Verify capacity, conservation and that the returned `sourceSide` has capacity equal to the value. |
+| Matching oracle | Random bipartite graphs with at most 7 vertices per side and duplicate edges | Compare the matching size with a bitmask brute force; check each vertex is used once and every pair is an input edge. |
