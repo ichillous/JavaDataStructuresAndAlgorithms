@@ -254,4 +254,16 @@ class DynamicProgrammingTest {
         }
         return position == candidate.length();
     }
+
+    @Test
+    void tableSizeGuardRejectsLengthsAboveSafeArrayLimit() {
+        assertThrows(IllegalArgumentException.class,
+                () -> DynamicProgramming.minimumCoins(new int[] {1}, Integer.MAX_VALUE - 1));
+        assertThrows(IllegalArgumentException.class,
+                () -> DynamicProgramming.minimumCoins(new int[] {1}, Integer.MAX_VALUE - 9 + 1));
+        assertThrows(IllegalArgumentException.class, () -> DynamicProgramming.knapsack01(
+                new int[0], new int[0], Integer.MAX_VALUE - 2));
+        assertThrows(IllegalArgumentException.class, () -> DynamicProgramming.knapsack01(
+                new int[0], new int[0], Integer.MAX_VALUE - 8));
+    }
 }

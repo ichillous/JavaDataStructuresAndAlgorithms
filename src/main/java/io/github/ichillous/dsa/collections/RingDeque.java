@@ -7,6 +7,8 @@ import java.util.Objects;
 /**
  * A deque whose elements occupy a contiguous logical sequence in a growing circular array.
  * Additions at either end take amortized O(1) time; removals and peeks take O(1) time.
+ * Capacity doubles when full, capped at {@code Integer.MAX_VALUE - 8}; beyond that an
+ * {@link OutOfMemoryError} is thrown, as with {@code ArrayList}.
  * Nulls are rejected. Storage is O(capacity), which is retained after removals or clear
  * and may exceed the current number of elements. This class is not thread safe.
  *
@@ -106,7 +108,7 @@ public final class RingDeque<T> {
 
     private void ensureSpace() {
         if (size == elements.length) {
-            Object[] grown = new Object[Math.multiplyExact(elements.length, 2)];
+            Object[] grown = new Object[ArrayGrowth.grow(elements.length, elements.length + 1)];
             for (int index = 0; index < size; index++) {
                 grown[index] = elements[physicalIndex(index)];
             }

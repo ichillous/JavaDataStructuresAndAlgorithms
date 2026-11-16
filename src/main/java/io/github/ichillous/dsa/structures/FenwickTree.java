@@ -1,13 +1,17 @@
 package io.github.ichillous.dsa.structures;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 /**
  * A binary indexed tree for point additions and half-open range sums.
  * Indexing is zero based at the API and one based internally. Construction takes
  * O(n) time and space; updates and prefix/range queries take O(log n) time.
- * Any intermediate signed-long overflow throws {@link ArithmeticException};
- * failed updates leave the tree unchanged. Not thread safe.
+ * A stored node sum that overflows a signed long makes construction or an update throw
+ * {@link ArithmeticException}, and a failed update leaves the tree unchanged. Queries are exact:
+ * {@code prefixSum} and {@code rangeSum} throw {@link ArithmeticException} only when the true
+ * requested sum is outside the signed-long range, never because a partial sum overflowed.
+ * Not thread safe.
  */
 public final class FenwickTree {
     private final long[] tree;
@@ -41,22 +45,49 @@ public final class FenwickTree {
         }
     }
 
-    /** Returns the sum over [0, endExclusive); an empty prefix sums to zero. */
+    /**
+     * Returns the exact sum over [0, endExclusive); an empty prefix sums to zero. Throws
+     * {@link ArithmeticException} if and only if the true sum is outside the signed-long range.
+     */
     public long prefixSum(int endExclusive) {
         Objects.checkFromToIndex(0, endExclusive, size());
-        long sum = 0;
-        for (int i = endExclusive; i > 0; i -= i & -i) {
-            sum = Math.addExact(sum, tree[i]);
-        }
-        return sum;
+        return exactSum(endExclusive, 0);
     }
 
-    /** Returns the sum over [fromInclusive, toExclusive). */
+    /**
+     * Returns the exact sum over [fromInclusive, toExclusive). Throws {@link ArithmeticException}
+     * if and only if the true sum is outside the signed-long range, even when a prefix sum used
+     * to compute it would overflow.
+     */
     public long rangeSum(int fromInclusive, int toExclusive) {
         Objects.checkFromToIndex(fromInclusive, toExclusive, size());
-        if (fromInclusive == toExclusive) {
-            return 0;
+        return exactSum(toExclusive, fromInclusive);
+    }
+
+    /**
+     * Returns prefix(upper) - prefix(lower) from the O(log n) contributing nodes. The fast path
+     * uses checked long arithmetic; if any intermediate step overflows, the nodes are re-added in
+     * a BigInteger and the final value is checked once, so only a true overflow escapes.
+     */
+    private long exactSum(int upper, int lower) {
+        try {
+            long sum = 0;
+            for (int i = upper; i > 0; i -= i & -i) {
+                sum = Math.addExact(sum, tree[i]);
+            }
+            for (int i = lower; i > 0; i -= i & -i) {
+                sum = Math.subtractExact(sum, tree[i]);
+            }
+            return sum;
+        } catch (ArithmeticException intermediateOverflow) {
+            BigInteger exact = BigInteger.ZERO;
+            for (int i = upper; i > 0; i -= i & -i) {
+                exact = exact.add(BigInteger.valueOf(tree[i]));
+            }
+            for (int i = lower; i > 0; i -= i & -i) {
+                exact = exact.subtract(BigInteger.valueOf(tree[i]));
+            }
+            return exact.longValueExact();
         }
-        return Math.subtractExact(prefixSum(toExclusive), prefixSum(fromInclusive));
     }
 }
