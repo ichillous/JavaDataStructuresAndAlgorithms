@@ -7,7 +7,8 @@ when the text is fixed and you will ask many questions about it: occurrences of
 arbitrary patterns, distinct substrings, or the longest repeated substring.
 Positions are UTF-16 code-unit indices, matching `StringAlgorithms.kmpFindAll`;
 no case folding or normalization happens. Both classes copy their input and
-never mutate it. Aho-Corasick rejects empty patterns and collapses duplicates.
+never mutate it. Aho-Corasick rejects empty patterns, collapses duplicates in the trie and
+accepts an empty pattern set (it then never matches).
 
 ## The invariants
 

@@ -80,6 +80,13 @@ class AhoCorasickTest {
     }
 
     @Test
+    void emptyPatternSetNeverMatches() {
+        AhoCorasick automaton = new AhoCorasick(List.of());
+        assertTrue(automaton.findAll("anything").isEmpty());
+        assertTrue(automaton.findAll("").isEmpty());
+    }
+
+    @Test
     void nestedPatternsReportEveryOverlap() {
         AhoCorasick automaton = new AhoCorasick(List.of("a", "aa", "aaa"));
         assertEquals(

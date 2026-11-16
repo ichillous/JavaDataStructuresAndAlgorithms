@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
-import java.util.TreeSet;
 
 /**
  * Multi-pattern exact string matching with an Aho-Corasick automaton.
  *
  * <p>Construction copies the patterns into a trie, so later changes to the caller's collection
- * have no effect. Duplicate patterns collapse to one; the empty pattern is rejected, because it
+ * have no effect. Duplicate patterns collapse to one in the trie, and an empty collection yields an
+ * automaton with no matches. The empty pattern is rejected, because it
  * would match at every boundary and has no useful start-and-pattern identity.
  * Positions are UTF-16 code-unit indices; no Unicode normalization or case folding occurs.
  * Instances are immutable after construction and safe to share between threads.
@@ -56,7 +56,8 @@ public final class AhoCorasick {
     /**
      * Builds the automaton.
      *
-     * @param patterns nonempty patterns; copied, and duplicates collapse
+     * @param patterns patterns, each nonempty; copied, duplicates collapse, and an empty
+     *     collection is allowed (every {@link #findAll} result is then empty)
      * @throws NullPointerException if the collection or any element is null
      * @throws IllegalArgumentException if any pattern is empty
      */
@@ -70,7 +71,7 @@ public final class AhoCorasick {
             }
         }
         newNode();
-        for (String pattern : new TreeSet<>(copy)) {
+        for (String pattern : copy) {
             int node = 0;
             for (int i = 0; i < pattern.length(); i++) {
                 char c = pattern.charAt(i);
