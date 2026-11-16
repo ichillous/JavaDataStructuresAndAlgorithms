@@ -75,15 +75,16 @@ public final class NumberTheory {
     /**
      * Extended Euclid: returns {@code (g, x, y)} with {@code a * x + b * y = g = gcd(a, b)} and
      * {@code g >= 0}. For {@code (0, 0)} the result is {@code (0, 1, 0)}. The coefficients are the
-     * ones the standard iteration produces; they are small (bounded by the other input divided by
-     * the gcd, up to sign) but not otherwise canonical.
+     * ones the standard iteration produces; they are small (at most the other input divided by
+     * the gcd in magnitude) but not otherwise canonical.
      *
      * <p>Invariant: after every step each of the two running remainders is an integer combination
      * of {@code a} and {@code b} with the coefficients tracked alongside it. All arithmetic is
      * checked. Time O(log(min(|a|, |b|))), auxiliary space O(1).
      *
-     * @throws ArithmeticException if the gcd is 2^63 or a coefficient does not fit in a
-     *     {@code long}
+     * @throws ArithmeticException only if the gcd is 2^63, that is for {@code (MIN_VALUE, 0)},
+     *     {@code (0, MIN_VALUE)} and {@code (MIN_VALUE, MIN_VALUE)}; every other input, including
+     *     {@code MIN_VALUE} with a nonzero partner, returns a valid triple
      */
     public static Bezout extendedGcd(long a, long b) {
         long oldR = a;
@@ -102,6 +103,14 @@ public final class NumberTheory {
             }
             long q = oldR / r;
             long nextR = oldR - Math.multiplyExact(q, r);
+            if (nextR == 0) {
+                // r is the gcd. Stopping here avoids the extra coefficient pair, which is
+                // +/- b/g or a/g and can be 2^63 even though the answer fits.
+                oldR = r;
+                oldS = s;
+                oldT = t;
+                break;
+            }
             long nextS = Math.subtractExact(oldS, Math.multiplyExact(q, s));
             long nextT = Math.subtractExact(oldT, Math.multiplyExact(q, t));
             oldR = r;
@@ -197,7 +206,7 @@ public final class NumberTheory {
                 }
             }
         }
-        List<Integer> primes = new ArrayList<>();
+        List<Integer> primes = new ArrayList<>(limit < 100 ? 25 : (int) (1.26 * limit / Math.log(limit)));
         for (int n = 2; n <= limit; n++) {
             if (!composite.get(n)) {
                 primes.add(n);
@@ -209,13 +218,14 @@ public final class NumberTheory {
     /**
      * Deterministic Miller-Rabin primality test, correct for every {@code long}: negative numbers,
      * 0 and 1 are not prime. The twelve bases 2 through 37 are known to give no false positive
-     * for any {@code n < 3.3 * 10^24}, which covers all 63-bit values. Small primes are checked
+     * for any {@code n < 3.18 * 10^23}, which is far above 2^64 and covers every {@code long}. Small primes are checked
      * by direct division first, so every base is smaller than the candidate.
      *
      * <p>Invariant: writing {@code n - 1 = d * 2^s} with {@code d} odd, an odd prime {@code n}
      * satisfies, for every base {@code a} not divisible by {@code n}, either {@code a^d = 1} or
      * {@code a^(d * 2^r) = -1 (mod n)} for some {@code r < s}; a base violating both proves
-     * {@code n} composite. Time O(log^2 n) bit operations per base at worst, auxiliary space O(1).
+     * {@code n} composite. Time O(log n) modular multiplications per base, each O(1) word operations or
+     * O(log n) when the product exceeds 63 bits; auxiliary space O(1).
      */
     public static boolean isPrime(long n) {
         if (n < 2) {

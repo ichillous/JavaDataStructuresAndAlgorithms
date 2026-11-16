@@ -92,30 +92,15 @@ class NumberTheoryTest {
         for (long[] pair : pairs(new Random(SEED + 1))) {
             String message = SEED_TEXT + pair[0] + "," + pair[1];
             BigInteger expectedGcd = big(pair[0]).gcd(big(pair[1]));
-            NumberTheory.Bezout bezout;
-            try {
-                bezout = NumberTheory.extendedGcd(pair[0], pair[1]);
-            } catch (ArithmeticException allowedOverflow) {
-                // Throwing is allowed (gcd 2^63 or an unrepresentable coefficient); wrapping is not.
+            if (expectedGcd.bitLength() > 63) {
+                assertThrows(ArithmeticException.class, () -> NumberTheory.extendedGcd(pair[0], pair[1]), message);
                 continue;
             }
+            NumberTheory.Bezout bezout = NumberTheory.extendedGcd(pair[0], pair[1]);
             assertEquals(expectedGcd, big(bezout.gcd()), message);
             BigInteger combination = big(pair[0]).multiply(big(bezout.x()))
                     .add(big(pair[1]).multiply(big(bezout.y())));
             assertEquals(expectedGcd, combination, message);
-        }
-        // The escape hatch stays narrow: inputs without MIN_VALUE never throw.
-        Random random = new Random(SEED + 11);
-        for (int i = 0; i < 5_000; i++) {
-            long a = randomValue(random);
-            long b = randomValue(random);
-            if (a == Long.MIN_VALUE || b == Long.MIN_VALUE) {
-                continue;
-            }
-            NumberTheory.Bezout bezout = NumberTheory.extendedGcd(a, b);
-            assertEquals(big(a).gcd(big(b)), big(bezout.gcd()), SEED_TEXT + a + "," + b);
-            assertEquals(big(bezout.gcd()),
-                    big(a).multiply(big(bezout.x())).add(big(b).multiply(big(bezout.y()))), SEED_TEXT + a + "," + b);
         }
     }
 
@@ -130,6 +115,17 @@ class NumberTheoryTest {
         assertEquals(BigInteger.ONE,
                 big(Long.MIN_VALUE).multiply(big(minusOne.x())).add(big(-1).multiply(big(minusOne.y()))));
         assertThrows(ArithmeticException.class, () -> NumberTheory.extendedGcd(Long.MIN_VALUE, 0));
+        assertThrows(ArithmeticException.class, () -> NumberTheory.extendedGcd(0, Long.MIN_VALUE));
+        assertThrows(ArithmeticException.class, () -> NumberTheory.extendedGcd(Long.MIN_VALUE, Long.MIN_VALUE));
+        for (long[] probe : new long[][] {{1, Long.MIN_VALUE}, {Long.MIN_VALUE, 1}, {3, Long.MIN_VALUE},
+            {Long.MIN_VALUE, 3}, {9, Long.MIN_VALUE}, {Long.MIN_VALUE, 9}, {Long.MAX_VALUE, Long.MIN_VALUE},
+            {Long.MIN_VALUE, Long.MAX_VALUE}, {-1, Long.MIN_VALUE}, {Long.MIN_VALUE, 2}, {Long.MIN_VALUE, 1L << 40}}) {
+            NumberTheory.Bezout r = NumberTheory.extendedGcd(probe[0], probe[1]);
+            BigInteger expected = big(probe[0]).gcd(big(probe[1]));
+            assertEquals(expected, big(r.gcd()), probe[0] + "," + probe[1]);
+            assertEquals(expected, big(probe[0]).multiply(big(r.x())).add(big(probe[1]).multiply(big(r.y()))),
+                    probe[0] + "," + probe[1]);
+        }
         assertThrows(IllegalArgumentException.class, () -> new NumberTheory.Bezout(-1, 0, 0));
     }
 
@@ -245,6 +241,13 @@ class NumberTheoryTest {
         for (long n = -5; n <= 20_000; n++) {
             assertEquals(n >= 2 && big(n).isProbablePrime(50), NumberTheory.isPrime(n), "n=" + n);
         }
+        // Two ~31-bit primes and large Carmichael numbers force mulMod's slow path in the witness loop.
+        for (long n : new long[] {2_147_483_647L * 2_147_483_629L, 2_147_483_647L * 2_147_483_647L,
+            561L * 1_000_003L, 295_297_618_561L, 3_215_031_751L * 3}) {
+            assertEquals(big(n).isProbablePrime(50), NumberTheory.isPrime(n), "n=" + n);
+        }
+        assertTrue(NumberTheory.isPrime(2_147_483_647L));
+        assertTrue(NumberTheory.isPrime(9_223_372_036_854_775_783L)); // largest prime below 2^63
         Random random = new Random(SEED + 4);
         for (int i = 0; i < 20_000; i++) {
             long n = switch (i % 3) {
@@ -286,6 +289,16 @@ class NumberTheoryTest {
         // The Pisano period of 10 is 60, so F(n) mod 10 depends only on n mod 60.
         long n = 1_000_000_000_000_000_000L;
         assertEquals(NumberTheory.fibonacciMod(n % 60, 10), NumberTheory.fibonacciMod(n, 10));
+        // Independent identity for large n and a large modulus: F(2k) = F(k) * (2 F(k+1) - F(k)).
+        long modulus = (1L << 62) + 1;
+        Random random = new Random(SEED + 5);
+        for (int i = 0; i < 200; i++) {
+            long k = random.nextLong() >>> (2 + random.nextInt(30));
+            BigInteger fk = big(NumberTheory.fibonacciMod(k, modulus));
+            BigInteger fk1 = big(NumberTheory.fibonacciMod(k + 1, modulus));
+            BigInteger expected = fk.multiply(fk1.shiftLeft(1).subtract(fk)).mod(big(modulus));
+            assertEquals(expected.longValueExact(), NumberTheory.fibonacciMod(2 * k, modulus), SEED_TEXT + "k=" + k);
+        }
         assertEquals(0, NumberTheory.fibonacciMod(Long.MAX_VALUE, 1));
         assertEquals(0, NumberTheory.fibonacciMod(0, 5));
         assertEquals(1, NumberTheory.fibonacciMod(1, 5));

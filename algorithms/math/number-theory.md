@@ -5,7 +5,7 @@ remainder, a divisor or a primality verdict. The maintained
 [NumberTheory](../../src/main/java/io/github/ichillous/dsa/algorithms/NumberTheory.java)
 works on `long` with one overflow rule: the answer is exact or the method throws
 `ArithmeticException`; nothing wraps. Modular operations are exact for every
-modulus up to `Long.MAX_VALUE`, including moduli above 2^31 where a plain
+modulus up to `Long.MAX_VALUE`, including moduli above about 3 * 10^9 where a plain
 `a * b % m` silently overflows.
 
 The JDK already has `BigInteger` (`gcd`, `modPow`, `modInverse`, `isProbablePrime`)
@@ -51,8 +51,8 @@ smaller prime factor.
 **Miller-Rabin.** Write `n - 1 = d * 2^s` with `d` odd. For an odd prime `n` and a
 base `a` not divisible by `n`, either `a^d = 1` or `a^(d*2^r) = -1` for some
 `r < s` (mod `n`). A base that breaks both proves `n` composite. The twelve bases
-2 through 37 are known to leave no composite below 3.3 * 10^24 undetected, so the
-test is deterministic for all 64-bit inputs, not probabilistic.
+2 through 37 are known to leave no composite below about 3.18 * 10^23 undetected, so the
+test is deterministic for all 64-bit inputs (2^64 is under 1.9 * 10^19), not probabilistic.
 
 **Fibonacci.** The matrix power `[[1,1],[1,0]]^n` equals
 `[[F(n+1), F(n)], [F(n), F(n-1)]]`. Square-and-multiply on the matrix needs
@@ -129,12 +129,15 @@ The same silent wrap would make a hand-written Miller-Rabin accept composites.
 condition at each squaring and catches it.
 
 **`Math.abs(Long.MIN_VALUE)` is negative.** A gcd that normalizes signs with
-`Math.abs` first returns a negative answer for `gcd(MIN_VALUE, 2)`. This
-implementation reduces with signed `%` and checks only the final result.
+`Math.abs` first still gets `gcd(MIN_VALUE, 2) = 2` right, but returns the negative
+`Long.MIN_VALUE` for `gcd(MIN_VALUE, 0)` and `gcd(MIN_VALUE, MIN_VALUE)`, because
+the true answer 2^63 does not fit. This implementation reduces with signed `%` and
+throws `ArithmeticException` in exactly those cases instead of returning a negative gcd.
 
 ```java
 import io.github.ichillous.dsa.algorithms.NumberTheory;
 
+assert Math.abs(Long.MIN_VALUE) < 0; // abs cannot negate MIN_VALUE
 long m = (1L << 62) + 1;
 long big = 1L << 62;
 assert big * big % m == 0; // the wrapped, wrong answer
