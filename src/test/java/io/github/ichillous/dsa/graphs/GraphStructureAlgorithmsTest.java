@@ -252,7 +252,7 @@ class GraphStructureAlgorithmsTest {
         Graph line = Graph.undirected(3).addEdge(1, 0).addEdge(1, 2);
         assertEquals(Optional.of(List.of(0, 1, 2)), GraphStructureAlgorithms.eulerianPath(line));
         Graph square = Graph.undirected(4).addEdge(1, 2).addEdge(2, 3).addEdge(3, 0).addEdge(0, 1);
-        assertEquals(Optional.of(List.of(0, 1, 2, 3, 0)), GraphStructureAlgorithms.eulerianPath(square));
+        assertEquals(Optional.of(List.of(0, 3, 2, 1, 0)), GraphStructureAlgorithms.eulerianPath(square));
     }
 
     @Test
@@ -570,6 +570,21 @@ class GraphStructureAlgorithmsTest {
                 GraphStructureAlgorithms.primMinimumSpanningForest(WeightedGraph.undirected(3));
         assertEquals(3, isolated.components());
         assertEquals(0, isolated.totalWeight());
+    }
+
+    @Test
+    void bipartitionRecordValidatesInvariants() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new GraphStructureAlgorithms.Bipartition(List.of(2, 1), List.of()));
+        assertThrows(IllegalArgumentException.class,
+                () -> new GraphStructureAlgorithms.Bipartition(List.of(), List.of(1, 1)));
+        assertThrows(IllegalArgumentException.class,
+                () -> new GraphStructureAlgorithms.Bipartition(List.of(0, 1), List.of(1, 2)));
+        List<Integer> source = new ArrayList<>(List.of(0, 2));
+        GraphStructureAlgorithms.Bipartition ok =
+                new GraphStructureAlgorithms.Bipartition(source, List.of(1));
+        source.add(9);
+        assertEquals(List.of(0, 2), ok.left());
     }
 
     @Test

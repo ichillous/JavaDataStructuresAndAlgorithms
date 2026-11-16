@@ -9,7 +9,7 @@ Section: "## Graphs" in docs/catalog.md (append after the AdvancedGraphAlgorithm
 Target table: the "Algorithm / representation | Time | Auxiliary or stored space" table in docs/complexity.md, after the Kruskal row.
 
 | Iterative articulation points, BFS bipartition and odd cycle, directed-cycle witness | O(V + E) | O(V + E), including adjacency snapshots |
-| Hierholzer Eulerian path | O(V + E log(E + 1)) | O(V + E); the log factor is the neighbor sort that makes the start and walk deterministic |
+| Hierholzer Eulerian path | O(V + E) expected | O(V + E); the walk is deterministic because Graph keeps neighbors in insertion order; the hash lookup pairing undirected edge entries makes the time expected |
 | Prim minimum spanning forest with a lazy binary heap | O(V + E log(E + 1)) | O(V + E); heap can hold up to 2E stale entries |
 
 (c) SOLUTION-FINDER ENTRIES

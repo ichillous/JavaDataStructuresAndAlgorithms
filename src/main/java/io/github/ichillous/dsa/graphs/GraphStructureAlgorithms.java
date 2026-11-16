@@ -7,7 +7,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.PriorityQueue;
@@ -33,10 +35,31 @@ public final class GraphStructureAlgorithms {
 
     /** A two-coloring of an undirected graph; both lists are ascending and immutable. */
     public record Bipartition(List<Integer> left, List<Integer> right) {
-        /** Defensively snapshots both sides. */
+        /**
+         * Defensively snapshots both sides.
+         *
+         * @throws IllegalArgumentException if a side is not strictly ascending or the
+         *     sides share a vertex
+         */
         public Bipartition {
             left = List.copyOf(left);
             right = List.copyOf(right);
+            requireStrictlyAscending(left, "left");
+            requireStrictlyAscending(right, "right");
+            java.util.Set<Integer> seen = new java.util.HashSet<>(left);
+            for (int vertex : right) {
+                if (seen.contains(vertex)) {
+                    throw new IllegalArgumentException("vertex on both sides: " + vertex);
+                }
+            }
+        }
+
+        private static void requireStrictlyAscending(List<Integer> side, String name) {
+            for (int i = 1; i < side.size(); i++) {
+                if (side.get(i - 1) >= side.get(i)) {
+                    throw new IllegalArgumentException(name + " must be strictly ascending");
+                }
+            }
         }
     }
 
@@ -251,8 +274,9 @@ public final class GraphStructureAlgorithms {
      *
      * <p>Start vertex: directed, the vertex with out-in = 1, otherwise the
      * smallest vertex with an edge; undirected, the smallest odd-degree vertex,
-     * otherwise the smallest vertex with an edge. At each vertex the smallest
-     * unused neighbor is followed first, so the result is deterministic.
+     * otherwise the smallest vertex with an edge. At each vertex the first unused
+     * neighbor in {@link Graph#neighbors} (insertion) order is followed, so the
+     * result is deterministic.
      *
      * <p>Self-loops: an undirected loop is one edge, appearing once in the
      * adjacency list, but adds 2 to its vertex's degree (parity unchanged) and is
@@ -260,7 +284,8 @@ public final class GraphStructureAlgorithms {
      * one out-edge and one in-edge.
      *
      * <p>Empty when the degree conditions fail or the edges are disconnected.
-     * Runs in O(V+E log(E+1)) time (neighbor sort) and O(V+E) auxiliary space.
+     * Runs in O(V+E) expected time (hash lookup pairs the two entries of an
+     * undirected edge) and O(V+E) auxiliary space.
      *
      * @param g the graph; not modified
      * @return the vertex sequence, or empty if no Euler path exists
@@ -272,37 +297,34 @@ public final class GraphStructureAlgorithms {
         if (g.edgeCount() == 0) {
             return Optional.of(List.of());
         }
-        // Per-vertex entries (neighbor, edgeId), ascending by neighbor.
+        // Per-vertex entries (neighbor, edgeId) in Graph's neighbor insertion order.
+        // An undirected edge shares one id between its two entries (a loop has one).
         int[][] to = new int[n][];
         int[][] id = new int[n][];
         int[] degree = new int[n]; // directed: out-degree; undirected: a loop counts 2
         int[] indegree = new int[n];
-        int[] fill = new int[n];
-        List<int[]> sorted = new ArrayList<>(n);
-        for (int v = 0; v < n; v++) {
-            int[] ns = g.neighbors(v).stream().mapToInt(Integer::intValue).sorted().toArray();
-            sorted.add(ns);
-            to[v] = new int[ns.length];
-            id[v] = new int[ns.length];
-        }
+        Map<Long, Integer> ids = new HashMap<>();
         int edgeId = 0;
         for (int v = 0; v < n; v++) {
-            for (int w : sorted.get(v)) {
+            List<Integer> neighbors = g.neighbors(v);
+            to[v] = new int[neighbors.size()];
+            id[v] = new int[neighbors.size()];
+            for (int i = 0; i < to[v].length; i++) {
+                int w = neighbors.get(i);
+                to[v][i] = w;
                 if (g.isDirected()) {
                     degree[v]++;
                     indegree[w]++;
-                    to[v][fill[v]] = w;
-                    id[v][fill[v]++] = edgeId++;
-                } else if (w >= v) {
-                    degree[v]++;
-                    degree[w]++;
-                    to[v][fill[v]] = w;
-                    id[v][fill[v]++] = edgeId;
-                    if (w != v) {
-                        to[w][fill[w]] = v;
-                        id[w][fill[w]++] = edgeId;
+                    id[v][i] = edgeId++;
+                } else {
+                    degree[v] += w == v ? 2 : 1;
+                    long key = (long) Math.min(v, w) * n + Math.max(v, w);
+                    Integer known = ids.get(key);
+                    if (known == null) {
+                        known = edgeId++;
+                        ids.put(key, known);
                     }
-                    edgeId++;
+                    id[v][i] = known;
                 }
             }
         }

@@ -48,7 +48,7 @@ finish 2: child of 1, low(2)=1 < disc(1)=2 -> 1 is not a cut
 articulation points: [2]
 
 directed 0->1, 1->2, 2->0, 2->3     out-in: 2 is +1, 3 is -1, others 0
-stack walk from 2 (smallest unused neighbor first): 2 0 1 2 3
+stack walk from 2 (first unused neighbor in insertion order): 2 0 1 2 3
 Euler path: [2, 0, 1, 2, 3]
 ```
 
@@ -94,10 +94,11 @@ assert GraphStructureAlgorithms.eulerianPath(loop).orElseThrow().equals(List.of(
 | `bipartition` | O(V + E) | O(V + E) | smallest vertex of each component is left; lists ascending |
 | `oddCycle` | O(V + E) | O(V + E) | first same-colored edge in BFS order |
 | `directedCycle` | O(V + E) | O(V + E) | DFS from ascending vertices, neighbors in insertion order; starts at the vertex the closing edge reaches |
-| `eulerianPath` | O(V + E log(E + 1)) | O(V + E) | start vertex by the degree rule; smallest unused neighbor first |
+| `eulerianPath` | O(V + E) expected | O(V + E) | start vertex by the degree rule; first unused neighbor in `Graph` insertion order |
 
-Space includes adjacency snapshots. The Euler sort of each neighbor list is what
-adds the logarithm. A graph with no edges has the Euler path `[]`, whatever its
+Space includes adjacency snapshots. The Euler walk is deterministic because `Graph`
+keeps neighbors in insertion order; the expected-time bound comes from a hash lookup that
+pairs the two adjacency entries of each undirected edge. A graph with no edges has the Euler path `[]`, whatever its
 vertex count; isolated vertices are otherwise ignored.
 
 ## Pitfalls
