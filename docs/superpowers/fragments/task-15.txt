@@ -1,0 +1,33 @@
+TASK 15 FRAGMENT: Z-function, verified Rabin-Karp, Manacher (StringAlgorithms additions)
+
+(a) CATALOG
+Section: "Algorithm utilities" in docs/catalog.md. REPLACE the existing StringAlgorithms row with:
+
+| [StringAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/StringAlgorithms.java) | KMP, Z-function and verified Rabin–Karp all-occurrence search (overlaps included; identical results), Z-array (`z[0] = length`) and Manacher longest palindromic substring as a half-open `Span` (earliest start on ties; `""` gives `Span(0,0)`). UTF-16 positions; empty pattern matches at every boundary `0..length`. | [StringAlgorithmsTest](../src/test/java/io/github/ichillous/dsa/algorithms/StringAlgorithmsTest.java) |
+
+(b) COMPLEXITY
+Target table: "Searching, sorting and strings" in docs/complexity.md. Add after the KMP all matches row:
+
+| Z-function / Z all matches | O(n) / O(t + p + k) | O(n) array / O(t + p + k) for the concatenation, its z-array and results; same results as KMP |
+| Rabin–Karp all matches | Expected O(t + p); worst O(t·p) | O(1) plus results; base 257, modulus 2^31 − 1, every hash hit verified so no false positives |
+| Manacher longest palindromic substring | O(n) | O(n); earliest start on ties |
+
+(c) SOLUTION FINDER
+Problem heading: "Find every occurrence of a pattern in a text"
+Technique: Z-function (zFindAll) or KMP; Rabin–Karp when a rolling hash with exact verification is wanted.
+Repo link: [StringAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/StringAlgorithms.java), lesson [pattern matching](../algorithms/strings/pattern-matching.md)
+
+Problem heading: "Longest palindromic substring"
+Technique: Manacher's algorithm (longestPalindromicSubstring), O(n).
+Repo link: [StringAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/StringAlgorithms.java)
+
+Problem heading: "Borders, periods and prefix overlaps of a string"
+Technique: Z-array (zFunction).
+Repo link: [StringAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/StringAlgorithms.java)
+
+(d) README TOPIC MAP
+Add to the "Problem solving" row (Covers cell), after "KMP,": "Z-function, Rabin–Karp, Manacher,". Add the link [pattern matching](algorithms/strings/pattern-matching.md) to that row's Topics cell.
+
+(e) EXERCISES
+| Verified rolling hash | Find two distinct equal-length strings with the same Rabin–Karp hash (base 257, modulus 2^31 − 1) by seeded random search | `rabinKarpFindAll` must not report the impostor; compare against `kmpFindAll`. Explain why verifying each hash hit makes the answer exact while only the running time is probabilistic. |
+| Palindrome ties | `"babad"`, `"cbbd"`, `"abc"`, `""` | Match a brute-force search that keeps the earliest start among equal lengths; `""` gives `Span(0, 0)`. Explain how Manacher reuses a mirror center inside the rightmost palindrome. |
