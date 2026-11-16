@@ -18,8 +18,11 @@ import java.util.Objects;
  * <p>Get, put, remove and frequency take expected O(1) time, assuming constant-time key
  * hashing/equality; the minimum frequency is maintained without scanning because it only
  * resets to 1 on insertion and advances by one when the minimum bucket empties on a promotion.
+ * The tracked minimum is exact whenever the cache is full; removal can leave it stale, which is
+ * safe because the next eviction needs a preceding insertion that resets it to 1.
  * Storage is O(capacity), including hash-table capacity retained after removals and clear.
- * Frequencies are capped at {@link Integer#MAX_VALUE} rather than overflowing. Keys and values
+ * Frequencies are capped at {@link Integer#MAX_VALUE} rather than overflowing; a hit on a
+ * saturated entry still refreshes its recency within the top bucket. Keys and values
  * must be non-null; keys must keep stable equality/hash codes while cached. Null return values
  * unambiguously mean absence. This class is not thread safe; even get changes cache state.
  *
@@ -88,6 +91,8 @@ public final class LfuCache<K, V> {
         if (node == null) {
             return null;
         }
+        // minFrequency may now be stale; safe, because eviction needs a full cache and any
+        // insertion after this removal resets minFrequency to 1 first.
         detach(node);
         return node.value;
     }
@@ -121,6 +126,18 @@ public final class LfuCache<K, V> {
         entries.clear();
         buckets.clear();
         minFrequency = 0;
+    }
+
+    /** Test hook: places an existing key directly at the given frequency (at least 1). */
+    void seedFrequency(K key, int frequency) {
+        Node<K, V> node = entries.get(key);
+        detach(node);
+        node.frequency = frequency;
+        attach(node);
+        minFrequency = Integer.MAX_VALUE;
+        for (int f : buckets.keySet()) {
+            minFrequency = Math.min(minFrequency, f);
+        }
     }
 
     private void touch(Node<K, V> node) {

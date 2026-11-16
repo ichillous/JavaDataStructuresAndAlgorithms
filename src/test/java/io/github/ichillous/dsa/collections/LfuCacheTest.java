@@ -107,6 +107,37 @@ class LfuCacheTest {
     }
 
     @Test
+    void frequencySaturatesAtMaxValueAndStillRefreshesRecency() {
+        LfuCache<Integer, Integer> cache = new LfuCache<>(3);
+        cache.put(1, 1);
+        cache.put(2, 2);
+        cache.put(3, 3);
+        cache.seedFrequency(1, Integer.MAX_VALUE - 1);
+        cache.seedFrequency(2, Integer.MAX_VALUE - 1);
+        assertEquals(1, cache.get(1));
+        assertEquals(Integer.MAX_VALUE, cache.frequency(1));
+        assertEquals(1, cache.get(1));
+        assertEquals(Integer.MAX_VALUE, cache.frequency(1));
+        assertEquals(1, cache.put(1, 10));
+        assertEquals(Integer.MAX_VALUE, cache.frequency(1));
+        assertEquals(2, cache.get(2));
+        assertEquals(2, cache.get(2));
+        assertEquals(Integer.MAX_VALUE, cache.frequency(2));
+        // Lower-frequency key 3 is the victim even though 1 and 2 are saturated.
+        assertNull(cache.put(4, 4));
+        assertNull(cache.get(3));
+        // Top bucket order is now 1, 2 (least to most recent); 4 joins it at saturation.
+        cache.seedFrequency(4, Integer.MAX_VALUE);
+        assertEquals(10, cache.get(1)); // A saturated hit refreshes recency: order 2, 4, 1.
+        assertEquals(Integer.MAX_VALUE, cache.frequency(1));
+        assertNull(cache.put(5, 5));
+        assertEquals(0, cache.frequency(2));
+        assertEquals(Integer.MAX_VALUE, cache.frequency(1));
+        assertEquals(Integer.MAX_VALUE, cache.frequency(4));
+        assertEquals(1, cache.frequency(5));
+    }
+
+    @Test
     void removalKeepsMinimumFrequencyCorrect() {
         LfuCache<Integer, Integer> cache = new LfuCache<>(3);
         cache.put(1, 1);

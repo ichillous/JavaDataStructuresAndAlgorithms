@@ -67,7 +67,7 @@ Frequencies saturate at `Integer.MAX_VALUE` instead of overflowing. Eviction and
 
 Counts never decay. With capacity 2, call `get` on key `A` a thousand times, then stop using it. Alternate new keys `B`, `C`, `D`: each new key is the lowest-frequency entry at the next insertion and is evicted by the following one, while `A` stays forever. A cache that must forget old popularity needs aging (for example periodic halving of counts), which this class deliberately omits.
 
-Also note that a new key is the next victim unless it is hit before the next insertion, so a burst of one-off keys cycles through a single slot.
+When every other entry has a higher count, a new key is the next victim unless it is hit before the next insertion, so a burst of one-off keys cycles through a single slot; otherwise older frequency-1 entries go first.
 
 ## When to use the JDK instead
 
