@@ -105,11 +105,30 @@ assert zeros == 0;
 
 ## Pitfalls
 
-**Modulo bias.** `Math.abs(random.nextInt()) % n` is not uniform. A 32-bit draw has
-2^32 outcomes, and unless `n` divides that, the first `2^32 mod n` residues occur
-one extra time. For `n = 3` the remainders 0 and 1 are slightly more likely than 2.
-`Math.abs(Integer.MIN_VALUE)` is also negative. `RandomGenerator.nextInt(bound)`
-rejects the uneven tail, which is why the library uses it for every bounded draw.
+**Modulo bias.** Reducing a uniform source with `% n` is not uniform unless `n`
+divides the number of source values `S`. Each residue `r` receives one preimage per
+full block of `n` values, and the first `S mod n` residues receive one more. Take a
+source of `S = 8` equally likely values and `n = 3`: residue 0 comes from
+`{0, 3, 6}`, residue 1 from `{1, 4, 7}`, residue 2 from `{2, 5}`, so the
+probabilities are 3/8, 3/8 and 2/8. A real example is `(random.nextInt() >>> 1) % n`, which has `S = 2^31` equally
+likely values, and `2^31 mod 3 = 2`, so residues 0 and 1 each get one extra
+preimage and residue 2 is slightly less likely. The skew is tiny for small `n` and
+grows with `n`. `RandomGenerator.nextInt(bound)` rejects the uneven tail instead,
+which is why the library uses it for every bounded draw.
+
+```java
+int sourceValues = 8;
+int n = 3;
+int[] preimages = new int[n];
+for (int v = 0; v < sourceValues; v++) {
+    preimages[v % n]++;
+}
+assert preimages[0] == 3 && preimages[1] == 3 && preimages[2] == 2;
+assert sourceValues % n == 2; // residues 0 and 1 get the extra preimage
+```
+
+A separate pitfall: `Math.abs(random.nextInt()) % n` also breaks because
+`Math.abs(Integer.MIN_VALUE)` is still negative, so the remainder can be negative.
 
 **The "swap with any position" shuffle.** Swapping position `i` with a uniform
 position in `[0, n)` for every `i` has `n^n` equally likely choice sequences, which
