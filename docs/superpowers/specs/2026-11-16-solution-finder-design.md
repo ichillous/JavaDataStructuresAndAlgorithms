@@ -261,8 +261,25 @@ batch ends green.
 - Results are records with validating compact constructors.
 - Nulls are rejected with `Objects.requireNonNull(x, "name")`.
 - Returned collections are immutable snapshots (`List.copyOf`).
-- Absent values use `Optional`, `OptionalInt` or `OptionalLong`, not sentinels. One
-  exception: `-1` is the existing "not found" for searches.
+- **How "absent" is returned** (designer's call, after the builder check found
+  that the existing code is mixed):
+  - **Map and cache operations** (`get`, `put`, `remove` on the new
+    `OpenAddressingHashMap`, `LfuCache` and `RedBlackTreeMap`) return `null` for
+    "absent", with non-null keys and values. This matches `java.util.Map` and the
+    existing `ChainedHashMap` and `LruCache`. The new classes then work as
+    drop-in alternatives, share model-test harnesses, and the finder can present
+    them side by side.
+  - **New queries with no map precedent** return `Optional`, `OptionalInt` or
+    `OptionalLong`. This matches `SegmentTree`, Dijkstra, subset sum and maximum
+    subarray. It covers:
+    - `floorKey` and `ceilingKey` on the ordered map
+    - reconstructions such as "chosen coins", returned as
+      `Optional<List<Integer>>`
+    - any new "may have no answer" result
+  - **Invalid arguments throw.** An out-of-range rank passed to `select` throws
+    `IndexOutOfBoundsException`.
+  - **Existing sentinels stay unchanged,** to avoid breaking the public API:
+    `minimumCoins` returns `-1` for impossible, and searches return `-1`.
 - Ranges are half-open.
 - Sums use `long`, with an explicit overflow policy (checked or documented).
 - Exponential algorithms have explicit input-size caps.
