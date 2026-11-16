@@ -233,9 +233,9 @@ public final class ShortestPathAlgorithms {
      * a path, so a vertex removed from the queue with its current g has its optimal
      * g and is never reopened. The queue orders by f, then by vertex number. f
      * is the exact sum g + h: since 0 &lt;= g, h &lt;= 2^63-1 the sum fits in an
-     * unsigned 64-bit value and is compared with Long.compareUnsigned. Distinct
-     * f values therefore never tie, even above Long.MAX_VALUE, so the queue order
-     * does not depend on an artificial cap.
+     * unsigned 64-bit value and is compared with Long.compareUnsigned. Capping f
+     * at Long.MAX_VALUE would tie entries that differ and let a vertex with a
+     * larger f expand before the target; exact ordering avoids that.
      * The g values follow Dijkstra's overflow policy: a detour exceeding long is
      * ignored. Returns empty when the target is unreachable; if the target is
      * reachable only through routes whose cost exceeds long, ArithmeticException is

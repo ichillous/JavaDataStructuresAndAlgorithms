@@ -263,13 +263,16 @@ class ShortestPathAlgorithmsTest {
     }
 
     @Test
-    void aStarPriorityAboveLongMaxStillFindsOptimalRoute() {
-        // f(1) = (MAX - 5) + 10 exceeds Long.MAX_VALUE, so it must order after the cheap route.
-        WeightedGraph graph = WeightedGraph.directed(4)
-                .addEdge(0, 1, Long.MAX_VALUE - 5).addEdge(0, 2, 3).addEdge(2, 3, 4);
-        Route route = ShortestPathAlgorithms.aStar(graph, 0, 3, v -> v == 1 ? 10 : 0).orElseThrow();
-        assertEquals(List.of(0, 2, 3), route.path());
-        assertEquals(7, route.distance());
+    void aStarOrdersPrioritiesAboveLongMaxExactly() {
+        // f(1) = (MAX - 5) + 10 > Long.MAX_VALUE, f(2) = MAX. Exact unsigned ordering pops the target
+        // first and returns without scanning the inconsistent edge 1 -> 2. A saturated f ties the two and
+        // the lower vertex number (1) expands first; a signed-wrapped f is negative and also pops 1 first.
+        // Either mistake scans 1 -> 2 and throws IllegalArgumentException.
+        WeightedGraph graph = WeightedGraph.directed(3)
+                .addEdge(0, 1, Long.MAX_VALUE - 5).addEdge(0, 2, Long.MAX_VALUE).addEdge(1, 2, 1);
+        Route route = ShortestPathAlgorithms.aStar(graph, 0, 2, v -> v == 1 ? 10 : 0).orElseThrow();
+        assertEquals(List.of(0, 2), route.path());
+        assertEquals(Long.MAX_VALUE, route.distance());
     }
 
     /** Edges are nonnegative base weights shifted by vertex potentials, so no negative cycle exists. */

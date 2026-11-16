@@ -150,8 +150,10 @@ reachable distances must fit in `long`; otherwise `ArithmeticException`. A reach
 `Long.MAX_VALUE` is valid. A\* follows Dijkstra's policy for `g`: overflowing detours
 are ignored, and `ArithmeticException` is thrown if the target is reachable but every
 route exceeds `long`. Its priority `f = g + h` is the exact sum: because `0 <= g, h <= 2^63-1` it fits in
-an unsigned 64-bit value and is compared with `Long.compareUnsigned`, so distinct `f`
-values never tie, even above `Long.MAX_VALUE`.
+an unsigned 64-bit value and is compared with `Long.compareUnsigned`. Capping `f` at
+`Long.MAX_VALUE` would tie entries that differ, letting a vertex with a larger `f`
+expand before the target; exact ordering keeps expansion order independent of
+that cap.
 
 ## Counterexample: an inconsistent heuristic
 
