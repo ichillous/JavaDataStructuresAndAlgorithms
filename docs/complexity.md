@@ -110,7 +110,7 @@ For DP, write the state meaning and loop-order invariant first. For greedy metho
 - **Amortized** bounds a sequence of operations without requiring randomness. One dynamic-array append can still copy the entire array.
 - **Auxiliary space** differs from total storage and output size. Include recursion frames, buffers, snapshots and returned values when they matter.
 
-Java integer arithmetic normally wraps. The maintained APIs state where they use a wider type or checked arithmetic. For example, Fenwick construction and updates reject a stored sum that overflows `long` (a failed update leaves the tree unchanged), while prefix and range queries are exact and throw only when the true sum overflows. Do not substitute subtraction for an ordering comparison on arbitrary integer values. Benchmarking would require a separate controlled harness; asymptotic bounds here are analytical claims, not measured speedups.
+Java integer arithmetic normally wraps. The maintained APIs state where they use a wider type or checked arithmetic. For example, Fenwick construction and updates throw if and only if a final node sum overflows `long` (a failed update leaves the tree unchanged), while prefix and range queries are exact and throw only when the true sum overflows. Do not substitute subtraction for an ordering comparison on arbitrary integer values. Benchmarking would require a separate controlled harness; asymptotic bounds here are analytical claims, not measured speedups.
 
 Maximum-subarray sums fit in long because an int-indexed int array cannot contain
 enough int values to exceed that range; the same observation bounds inversion

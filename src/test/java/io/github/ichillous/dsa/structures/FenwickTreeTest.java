@@ -96,6 +96,7 @@ class FenwickTreeTest {
         BigInteger max = BigInteger.valueOf(Long.MAX_VALUE);
         long[] extremes = {Long.MAX_VALUE, Long.MIN_VALUE, Long.MAX_VALUE - 1, Long.MIN_VALUE + 1, 0, 1, -1};
         int built = 0;
+        int rejected = 0;
         int thrown = 0;
         for (int trial = 0; trial < 400; trial++) {
             int length = random.nextInt(9);
@@ -104,12 +105,21 @@ class FenwickTreeTest {
                 values[i] = random.nextInt(3) == 0
                         ? extremes[random.nextInt(extremes.length)] : random.nextInt(21) - 10;
             }
-            FenwickTree tree;
-            try {
-                tree = new FenwickTree(values);
-            } catch (ArithmeticException constructionOverflow) {
+            boolean nodeOverflows = false;
+            for (int node = 1; node <= length; node++) {
+                BigInteger nodeSum = BigInteger.ZERO;
+                for (int i = node - (node & -node) + 1; i <= node; i++) {
+                    nodeSum = nodeSum.add(BigInteger.valueOf(values[i - 1]));
+                }
+                nodeOverflows |= nodeSum.compareTo(min) < 0 || nodeSum.compareTo(max) > 0;
+            }
+            String build = "seed " + seed + " trial " + trial + " construction";
+            if (nodeOverflows) {
+                assertThrows(ArithmeticException.class, () -> new FenwickTree(values), build);
+                rejected++;
                 continue;
             }
+            FenwickTree tree = new FenwickTree(values);
             built++;
             for (int from = 0; from <= length; from++) {
                 for (int to = from; to <= length; to++) {
@@ -140,6 +150,18 @@ class FenwickTreeTest {
                 }
             }
         }
-        assertTrue(built > 100 && thrown > 0, "model must exercise overflow, seed " + seed);
+        assertTrue(built > 100 && thrown > 0 && rejected > 0, "model must exercise overflow, seed " + seed);
+    }
+
+    @Test
+    void constructionRejectsOnlyOverflowingFinalNodeSums() {
+        FenwickTree cancelling = new FenwickTree(new long[]{Long.MAX_VALUE, 0, 1, -1});
+        assertEquals(Long.MAX_VALUE, cancelling.prefixSum(4));
+        assertEquals(Long.MAX_VALUE, cancelling.rangeSum(0, 4));
+        assertEquals(0, cancelling.rangeSum(2, 4));
+        assertEquals(1, cancelling.rangeSum(2, 3));
+        assertThrows(ArithmeticException.class, () -> new FenwickTree(new long[]{Long.MAX_VALUE, 1}));
+        assertThrows(ArithmeticException.class,
+                () -> new FenwickTree(new long[]{Long.MIN_VALUE, -1, 1}));
     }
 }

@@ -36,15 +36,15 @@ concurrency guarantee. Map keys must keep stable equality and hashes while store
 | [BinaryMinHeap](../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) | Natural-order `add/peek/remove`; duplicates retained; empty operations throw. `add`/`remove` are failure-atomic if `compareTo` throws. Collection constructor uses bottom-up heapify. | [BinaryMinHeapTest](../src/test/java/io/github/ichillous/dsa/structures/BinaryMinHeapTest.java) |
 | [Trie](../src/main/java/io/github/ichillous/dsa/structures/Trie.java) | `add/remove/contains/startsWith`, `wordsWithPrefix(prefix, limit)`. Case-sensitive UTF-16; empty word allowed; empty prefix always exists. | [TrieTest](../src/test/java/io/github/ichillous/dsa/structures/TrieTest.java) |
 | [UnionFind](../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) | `find/union/connected/componentSize/components`; compression and union by size. `union` reports whether components merged. | [UnionFindTest](../src/test/java/io/github/ichillous/dsa/structures/UnionFindTest.java) |
-| [FenwickTree](../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java) | Defensive `long[]` copy; zero-based point `add`, half-open `prefixSum(endExclusive)` / `rangeSum(from,to)`. Empty ranges sum to zero. Sums are exact: `ArithmeticException` only when the true sum is outside `long`. | [FenwickTreeTest](../src/test/java/io/github/ichillous/dsa/structures/FenwickTreeTest.java) |
+| [FenwickTree](../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java) | Defensive `long[]` copy; zero-based point `add`, half-open `prefixSum(endExclusive)` / `rangeSum(from,to)`. Empty ranges sum to zero. Construction and `add` throw `ArithmeticException` iff some final node sum leaves `long` range (a failed `add` changes nothing); `prefixSum`/`rangeSum` are exact and throw only when the true sum is outside `long`. | [FenwickTreeTest](../src/test/java/io/github/ichillous/dsa/structures/FenwickTreeTest.java) |
 | [SegmentTree](../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) | Defensive long-array copy, point set and half-open rangeMin; OptionalLong.empty for empty ranges, including on an empty tree. Long.MAX_VALUE is a valid minimum. | [SegmentTreeTest](../src/test/java/io/github/ichillous/dsa/structures/SegmentTreeTest.java) |
 
 BST/AVL use `compareTo == 0` for equivalence, reject null, and return false on
 duplicate insertion or absent deletion. Height counts edges (`-1` when empty).
 Keys must keep stable ordering while stored. `inOrder` returns an immutable snapshot.
 Trie results follow `String.compareTo`, perform no normalization, and reject
-negative limits. Union-find indices are `[0,size)`. Fenwick checks stored
-node sums, so construction or an update that overflows one throws and a failed update leaves
+negative limits. Union-find indices are `[0,size)`. Fenwick construction and
+`add` throw iff some final node sum leaves `long` range, and a failed update leaves
 the tree unchanged; queries throw only when the true requested sum overflows `long`.
 
 ## Algorithm utilities

@@ -1,14 +1,15 @@
 package io.github.ichillous.dsa.structures;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
  * A binary indexed tree for point additions and half-open range sums.
  * Indexing is zero based at the API and one based internally. Construction takes
  * O(n) time and space; updates and prefix/range queries take O(log n) time.
- * A stored node sum that overflows a signed long makes construction or an update throw
- * {@link ArithmeticException}, and a failed update leaves the tree unchanged. Queries are exact:
+ * Construction or an update throws {@link ArithmeticException} if and only if some final node
+ * sum would be outside the signed-long range, and a failed update leaves the tree unchanged. Queries are exact:
  * {@code prefixSum} and {@code rangeSum} throw {@link ArithmeticException} only when the true
  * requested sum is outside the signed-long range, never because a partial sum overflowed.
  * Not thread safe.
@@ -16,15 +17,37 @@ import java.util.Objects;
 public final class FenwickTree {
     private final long[] tree;
 
-    /** Creates a tree from a defensive copy of the values. */
+    /**
+     * Creates a tree from a defensive copy of the values in O(n) time.
+     *
+     * @throws ArithmeticException if and only if some final node sum (the exact sum of the values
+     *         in its range [i - lowbit(i) + 1, i], one based) is outside the signed-long range;
+     *         partial sums that cancel do not cause a failure
+     */
     public FenwickTree(long[] values) {
         Objects.requireNonNull(values, "values");
         tree = new long[Math.addExact(values.length, 1)];
-        for (int i = 1; i < tree.length; i++) {
-            tree[i] = Math.addExact(tree[i], values[i - 1]);
-            long parent = (long) i + (i & -i);
-            if (parent < tree.length) {
-                tree[(int) parent] = Math.addExact(tree[(int) parent], tree[i]);
+        try {
+            for (int i = 1; i < tree.length; i++) {
+                tree[i] = Math.addExact(tree[i], values[i - 1]);
+                long parent = (long) i + (i & -i);
+                if (parent < tree.length) {
+                    tree[(int) parent] = Math.addExact(tree[(int) parent], tree[i]);
+                }
+            }
+        } catch (ArithmeticException partialOverflow) {
+            // A partial accumulation overflowed; decide exactly using the true node sums.
+            BigInteger[] exact = new BigInteger[tree.length];
+            Arrays.fill(exact, BigInteger.ZERO);
+            for (int i = 1; i < tree.length; i++) {
+                exact[i] = exact[i].add(BigInteger.valueOf(values[i - 1]));
+                long parent = (long) i + (i & -i);
+                if (parent < tree.length) {
+                    exact[(int) parent] = exact[(int) parent].add(exact[i]);
+                }
+            }
+            for (int i = 1; i < tree.length; i++) {
+                tree[i] = exact[i].longValueExact();
             }
         }
     }
@@ -34,7 +57,14 @@ public final class FenwickTree {
         return tree.length - 1;
     }
 
-    /** Adds delta to one element. Validates every affected sum before mutation. */
+    /**
+     * Adds delta to one element in O(log n) time.
+     *
+     * @throws IndexOutOfBoundsException if the index is outside [0, size)
+     * @throws ArithmeticException if and only if some updated node value would leave the
+     *         signed-long range; every node is validated before any is changed, so a failed
+     *         update leaves the tree unchanged
+     */
     public void add(int index, long delta) {
         Objects.checkIndex(index, size());
         for (long i = (long) index + 1; i < tree.length; i += i & -i) {
