@@ -91,3 +91,101 @@ best possibilities by length and is not necessarily one actual subsequence.
 
 Use the [solutions](../../docs/solutions.md) and
 [complexity table](../../docs/complexity.md) to review the contracts.
+
+## Recovering the solution, not just its value
+
+The methods above return an optimum value. Five more return one optimal
+*solution*: `longestCommonSubsequence` (a string), `editScript` (a list of
+`EditStep`), `knapsack01Items` (ascending item indices),
+`minimumCoinsChoice` (coin values, ascending, as an `Optional`) and
+`longestIncreasingSubsequenceIndices` (ascending indices). Each one equals its
+value-only twin in size or total and follows a documented deterministic tie rule
+(see the Javadoc), because many optimal solutions usually exist.
+
+**Invariant.** Reconstruction walks the finished table from the goal state back to
+a base state, and at each state takes a step the table proves is optimal: the
+stored value there equals the predecessor's value plus that step's gain. The
+recovered path therefore reaches the stored optimum exactly.
+
+There are two ways to keep the path. **Parent pointers** store the chosen step
+beside each value (`minimumCoinsChoice` keeps the last coin per amount,
+`longestIncreasingSubsequenceIndices` keeps a predecessor index per element); the
+walk is trivial but each state carries extra data. **Re-deriving from the table**
+keeps only values and, while walking back, tests which neighbor explains the
+current cell (`longestCommonSubsequence` and `editScript` do this, and
+`knapsack01Items` records one bit per item and capacity). Re-deriving is where the
+tie rule lives: the order in which the neighbors are tested decides which optimum
+is returned.
+
+```text
+LCS of A="ABCBDAB", B="BDCABA" (length 4); walk back from (7,6)
+equal units are taken; else up if dp[i-1][j] >= dp[i][j-1], else left
+(7,6) B/A  up      -> (6,6)
+(6,6) A/A  take A  -> (5,5)
+(5,5) D/B  up      -> (4,5)
+(4,5) B/B  take B  -> (3,4)
+(3,4) C/A  left    -> (3,3)
+(3,3) C/C  take C  -> (2,2)
+(2,2) B/D  left    -> (2,1)
+(2,1) B/B  take B  -> (1,0)
+taken in reverse: A B C B  -> reading forward: "BCBA"
+```
+
+```java
+import io.github.ichillous.dsa.algorithms.DynamicProgramming;
+import java.util.List;
+import java.util.Optional;
+
+assert DynamicProgramming.longestCommonSubsequence("ABCBDAB", "BDCABA").equals("BCBA");
+
+List<DynamicProgramming.EditStep> script = DynamicProgramming.editScript("kitten", "sitting");
+long changes = script.stream()
+        .filter(step -> step.operation() != DynamicProgramming.EditOperation.MATCH).count();
+assert changes == DynamicProgramming.editDistance("kitten", "sitting") && changes == 3;
+
+assert DynamicProgramming.knapsack01Items(
+        new int[] {2, 3, 4}, new int[] {4, 5, 7}, 5).equals(List.of(0, 1));
+assert DynamicProgramming.minimumCoinsChoice(new int[] {1, 3, 4}, 6)
+        .equals(Optional.of(List.of(3, 3)));
+assert DynamicProgramming.minimumCoinsChoice(new int[] {2, 4}, 7).isEmpty();
+assert DynamicProgramming.minimumCoinsChoice(new int[0], 0).equals(Optional.of(List.of()));
+assert DynamicProgramming.longestIncreasingSubsequenceIndices(
+        new int[] {10, 9, 2, 5, 3, 7, 101, 18}).equals(List.of(2, 4, 5, 7));
+```
+
+`EditStep` indices are cursor positions before the step: `MATCH` and `SUBSTITUTE`
+consume one unit of each string, `DELETE` consumes a source unit, and `INSERT`
+emits a target unit. Replaying the script over the source yields the target.
+
+| Method | Time | Auxiliary space |
+| --- | --- | --- |
+| `longestCommonSubsequence` | O(mn) | O(mn) table kept for the walk back |
+| `editScript` | O(mn) | O(mn) table, plus O(m + n) steps |
+| `knapsack01Items` | O(nW) | O(W) longs plus n * (W + 1) bits, one row per item |
+| `minimumCoinsChoice` | O(amount * coins) | O(amount) |
+| `longestIncreasingSubsequenceIndices` | O(n log n) | O(n) |
+
+Reconstruction costs memory the value-only versions avoid: LCS and edit distance
+shrink to O(min(m, n)) by keeping two rows, but walking back needs every row.
+Hirschberg's divide-and-conquer recovers an optimal LCS or alignment in
+O(min(m, n)) extra space at about twice the time; it is **not implemented here**.
+Large inputs still use the same table-size guard and can exhaust memory.
+
+**Counterexample (ties are not unique):** `"ABCBDAB"` and `"BDCABA"` have
+several common subsequences of length 4, including `"BCBA"`, `"BDAB"` and
+`"BCAB"`. Another correct
+implementation may return a different one, so compare lengths or validity, never
+a pinned string, unless the tie rule is part of the contract. Likewise an LIS
+index list is one optimum, not the leftmost or the only one.
+
+### Practice
+
+1. Hand-trace `editScript("ab", "ba")`; list the other minimum scripts and say which
+   tie rule picks the returned one.
+2. For `knapsack01Items` with two items of equal weight and value, explain which one
+   is returned and why a later equal item is not preferred.
+3. Change the LCS tie test to `>` instead of `>=`. Which string does
+   `"ABCBDAB"` / `"BDCABA"` give now, and is its length still 4?
+
+See the [catalog](../../docs/catalog.md) and the
+[complexity guide](../../docs/complexity.md) for the contracts.
