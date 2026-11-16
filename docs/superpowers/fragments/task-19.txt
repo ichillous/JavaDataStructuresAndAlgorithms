@@ -1,0 +1,34 @@
+TASK 19 FRAGMENT: Number theory (NumberTheory)
+
+(a) CATALOG row (section "## Algorithm utilities" in docs/catalog.md; append after the SortAlgorithms row(s)):
+
+| [NumberTheory](../src/main/java/io/github/ichillous/dsa/algorithms/NumberTheory.java) | Exact-or-throw `long` arithmetic: `gcd` (nonnegative, `gcd(0,0)=0`, throws when the result is 2^63), checked `lcm`, `extendedGcd` (`Bezout` record, `a*x + b*y = gcd`), `modPow` and `modInverse` (empty when `gcd != 1`) exact for every modulus up to `Long.MAX_VALUE`, `primesUpTo` (sieve, limit at most 50,000,000), deterministic Miller-Rabin `isPrime` correct for every `long`, `fibonacciMod` by 2x2 matrix power. | [NumberTheoryTest](../src/test/java/io/github/ichillous/dsa/algorithms/NumberTheoryTest.java) |
+
+(b) COMPLEXITY rows (target table: "## Searching, sorting and strings" in docs/complexity.md; columns: Algorithm | Time | Auxiliary space / behavior):
+
+| gcd, lcm, extended gcd, modular inverse | O(log min(\|a\|, \|b\|)) | O(1); gcd of 2^63 and overflowing lcm throw `ArithmeticException` |
+| Modular exponentiation | O(log e) modular multiplies, each O(1) or O(log m) when the product exceeds 63 bits | O(1); exact for every modulus up to `Long.MAX_VALUE` |
+| Sieve of Eratosthenes | O(n log log n) | O(n) bits plus the result list; limit at most 50,000,000 |
+| Miller-Rabin `isPrime` (12 fixed bases) | O(log n) modular multiplies per base | O(1); deterministic for every `long` |
+| Fibonacci mod m by matrix power | O(log n) 2x2 products | O(1); exact for every positive `long` modulus |
+
+(c) SOLUTION-FINDER entries (lesson: algorithms/math/number-theory.md)
+
+- Problem heading: "Find the largest common divisor, or Bezout coefficients, of two integers"
+  Technique: Euclidean algorithm and extended Euclid. Repo link: [NumberTheory](../src/main/java/io/github/ichillous/dsa/algorithms/NumberTheory.java)
+  with lesson [number theory](../algorithms/math/number-theory.md).
+- Problem heading: "Compute a huge power or an inverse modulo m without overflow"
+  Technique: square-and-multiply with exact modular multiplication, and extended Euclid for the inverse. Repo link: same source and lesson.
+- Problem heading: "Is this 64-bit number prime, or which primes are below n?"
+  Technique: deterministic Miller-Rabin for one number, sieve of Eratosthenes for a range. Repo link: same source and lesson.
+- Problem heading: "Compute the n-th Fibonacci number modulo m for huge n"
+  Technique: 2x2 matrix exponentiation. Repo link: same source and lesson.
+
+(d) README topic-map addition (one new row in the topic map table, same three columns as the Problem solving row):
+
+| Number theory | [Number theory](algorithms/math/number-theory.md) | gcd and extended gcd, modular power and inverse, sieve, deterministic Miller-Rabin and Fibonacci mod m, all exact on `long` |
+
+(e) EXERCISE rows (docs/exercises.md format: Exercise | Input or scenario | Success criteria and hint):
+
+| Modular arithmetic at the limit | `modPow` and `modInverse` with moduli `Long.MAX_VALUE`, `2^62 + 1` and 97, random bases including negatives | Match `BigInteger.modPow` and `modInverse` exactly. Show that `a * b % m` gives a different answer for `m = 2^62 + 1`, `a = b = 2^62`. |
+| Primality against a reference | `isPrime` on 561, 41041, 3215031751, `2^61 - 1`, `Long.MAX_VALUE` and 20,000 seeded longs | Compare with `BigInteger.isProbablePrime(50)`; every Carmichael number and strong pseudoprime must be reported composite. Explain why a Fermat test alone fails. |
