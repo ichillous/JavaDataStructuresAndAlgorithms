@@ -1,0 +1,34 @@
+TASK 3 FRAGMENT: Selection (introselect, stable top-k, k-way merge, majority)
+
+(a) CATALOG ROWS
+Section: "## Algorithm utilities" (table columns: Source | Operations and contract | Tests)
+
+| [Selection](../src/main/java/io/github/ichillous/dsa/algorithms/Selection.java) | Zero-based k-th smallest `int` by introselect (copy; duplicates count separately; bad `k` throws `IndexOutOfBoundsException`); stable `smallestK` with a bounded heap (`k < 0` throws, `k >= n` returns all sorted); heap-based `mergeSorted` (ties by list index, unsorted list throws `IllegalArgumentException`); Boyer-Moore `majorityElement` (`OptionalInt`, count strictly above n/2). Collection elements must be non-null; results are immutable. | [SelectionTest](../src/test/java/io/github/ichillous/dsa/algorithms/SelectionTest.java) |
+
+(b) COMPLEXITY ROWS
+Target table: "## Searching, sorting and strings" in docs/complexity.md (columns: Algorithm | Time | Auxiliary space / behavior)
+
+| k-th smallest (introselect) | O(n) worst; expected O(n) with the median-of-three pivot | O(n) for the defensive copy, plus O(log n) recursion in the median-of-medians fallback; input unchanged |
+| Top-k smallest (bounded max-heap) | O(n log(k + 1)) | O(min(k, n)) plus the result; stable, equal elements keep encounter order |
+| K-way merge of sorted lists | O(N log(k + 1)) for N elements in k lists | O(k) plus the result; ties go to the lower list index; unsorted input throws |
+| Majority element (Boyer-Moore) | O(n) | O(1); needs a count strictly above n/2, otherwise empty |
+
+(c) SOLUTION-FINDER ENTRIES
+Link to write for each: [Selection](../src/main/java/io/github/ichillous/dsa/algorithms/Selection.java), lesson [selection](../algorithms/searching/selection.md)
+
+- Problem heading: "Find the k-th smallest element (median, percentile) of an unsorted array"
+  Technique: Quickselect with median-of-three pivot, three-way partition and a median-of-medians fallback (introselect): Selection.kthSmallest
+- Problem heading: "Return the k smallest or top-k items, keeping ties in original order"
+  Technique: Bounded max-heap of size k with an arrival-order tie-break: Selection.smallestK
+- Problem heading: "Merge k sorted lists into one sorted list"
+  Technique: K-way merge with a min-heap keyed by value then list index: Selection.mergeSorted
+- Problem heading: "Find the element that appears more than n/2 times"
+  Technique: Boyer-Moore majority vote plus a verification pass: Selection.majorityElement
+
+(d) README TOPIC-MAP ADDITION
+Add to the "Searching and sorting" row of the Topic map: lesson link "[selection](algorithms/searching/selection.md)" in the Lessons cell, and "k-th smallest, stable top-k, k-way merge, majority vote" appended to the Maintained implementations cell.
+
+(e) EXERCISE ROWS (docs/exercises.md columns: Exercise | Input or scenario | Success criteria and hint)
+
+| Selection versus sorting | `[7, 2, 9, 4, 4, 1]` with `k = 2`; then all-equal, ascending and organ-pipe arrays of 10,000 values | Match the sorted copy at every valid `k` and leave the input unchanged. Trace the three-way partition, and explain why a fixed pivot rule alone is quadratic in the worst case. |
+| Stable top-k and merge | Records `(key, id)` with repeated keys and `k = 0`, `k = n`, `k > n`; lists `[[1, 3, 5], [1, 2], [], [5]]` | Equal keys keep arrival order in `smallestK`; in `mergeSorted` the lower list index wins ties; compare with a stable sort of the concatenation. A list such as `[2, 1]` must be rejected. |
