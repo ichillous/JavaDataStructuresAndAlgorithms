@@ -1,0 +1,37 @@
+TASK 10 FRAGMENT: SparseTable and LazySegmentTree
+
+(a) CATALOG
+Section: "## Ordered, prefix, and indexed structures" in docs/catalog.md (table columns: Source | Operations and contract | Tests)
+Insert after the SegmentTree row:
+| [SparseTable](../src/main/java/io/github/ichillous/dsa/structures/SparseTable.java) | Immutable; defensive `long[]` copy; half-open `rangeMin(from,to)` in O(1) from two overlapping power-of-two blocks (valid because minimum is idempotent). OptionalLong.empty for empty ranges, including on an empty table. Long.MAX_VALUE is a valid minimum. No updates: build a new table for new data. | [SparseTableTest](../src/test/java/io/github/ichillous/dsa/structures/SparseTableTest.java) |
+| [LazySegmentTree](../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java) | Defensive `long[]` copy; half-open `rangeAdd(from,to,delta)` and exact `rangeSum(from,to)` with lazy pending additions. Empty ranges sum to zero; queries never modify the tree. `rangeAdd` throws `ArithmeticException` and changes nothing exactly when an element would leave `long` range; `rangeSum` throws exactly when the true sum does. Sums and pending additions are exact 128-bit values. | [LazySegmentTreeTest](../src/test/java/io/github/ichillous/dsa/structures/LazySegmentTreeTest.java) |
+Append to the paragraph below that table:
+A sparse table checks bounds like the segment tree and performs no arithmetic. The lazy segment tree validates bounds before its overflow check, and a rejected range addition leaves every element unchanged.
+
+(b) COMPLEXITY
+Target table: "## Data structures" in docs/complexity.md (columns: Implementation / operation | Time | Space and assumptions)
+Insert after the FenwickTree row:
+| `SparseTable` range minimum | O(1) worst | O(n log n) stored table, at most n(floor(log2 n) + 1) longs; construction O(n log n); immutable, so new data needs a rebuild |
+| `LazySegmentTree` range add, range sum | O(log n) worst | O(n) stored nodes, construction O(n); O(log n) recursion and temporary values per operation; exact 128-bit sums and pending additions, `ArithmeticException` only when an element or the requested sum leaves `long` range |
+
+(c) SOLUTION FINDER
+Family: "5. Range queries over arrays" in docs/solution-finder.md (columns: Option | Use when | Time / space | Java home | Watch out for)
+Lesson link to add with each Java home: [range queries](../data-structures/range-queries/overview.md)
+- Problem heading: "Range minimum (or maximum, gcd) over data that never changes"
+  Technique / option: sparse table
+  Java home: [SparseTable](../src/main/java/io/github/ichillous/dsa/structures/SparseTable.java)
+  Watch out for: only idempotent operations; sums would double-count the overlap.
+- Problem heading: "Add a value to a whole range and query range sums"
+  Technique / option: lazy segment tree (range add, range sum)
+  Java home: [LazySegmentTree](../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java)
+  Watch out for: pending additions can exceed `long` range even while every element fits.
+
+(d) README TOPIC MAP
+In the "Lookup and order" row of the Topic map in README.md:
+- Lessons cell: append ", [range queries](data-structures/range-queries/overview.md)"
+- Maintained implementations cell: replace "Fenwick and minimum segment trees" with
+  "Fenwick and minimum segment trees, sparse table, lazy range-add segment tree"
+
+(e) EXERCISES (docs/exercises.md columns: Exercise | Input or scenario | Success criteria and hint)
+| Sparse-table overlap | Build the rows for `[4, 6, 1, 5, 7, 3, 8]`, then answer every `[from, to)` with two blocks | Match a scan for every range, including empty ones (no value) and an all-`Long.MAX_VALUE` array. Store sums instead of minima and find the first range where overlapping blocks double-count. |
+| Lazy range additions | `[1, 2, 3, 4, 5]`: add `+2` on `[1, 4)`, then `+10` on `[2, 5)`, then query `[3, 4)`; separately, start at `Long.MIN_VALUE` and add `Long.MAX_VALUE` to the whole range twice | Compare every range sum with a `BigInteger` model after each step. Name the nodes holding pending additions. A rejected addition must change no element, and a sum must throw only when its true value leaves `long` range. |
