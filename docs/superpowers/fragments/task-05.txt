@@ -1,0 +1,30 @@
+TASK 5 FRAGMENT: ArrayPatterns
+
+(a) CATALOG
+Section: "## Algorithm utilities" in docs/catalog.md (table columns: Source | Operations and contract | Tests)
+Row:
+| [ArrayPatterns](../src/main/java/io/github/ichillous/dsa/algorithms/ArrayPatterns.java) | Two-pointer pair with sum (ascending input unchecked; smallest first index, then its largest partner); longest repeat-free UTF-16 window (earliest tie); next strictly greater indices; histogram area (`long`, heights at least 0); difference-array range adds (exact `long` results, 128-bit prefix, `ArithmeticException` on a final overflow); interval merge (touching merged) and minimum meeting rooms (touching compatible), reusing `GreedyAlgorithms.Interval`. | [ArrayPatternsTest](../src/test/java/io/github/ichillous/dsa/algorithms/ArrayPatternsTest.java) |
+
+(b) COMPLEXITY
+Target table: "## Searching, sorting and strings" in docs/complexity.md (columns: Algorithm | Time | Auxiliary space / behavior)
+Rows:
+| Two-pointer pair with sum | O(n) | O(1); ascending input is an unchecked precondition |
+| Longest repeat-free window | O(n) expected | O(distinct UTF-16 units); hash map of last positions |
+| Next greater indices, largest histogram rectangle | O(n) | O(n) monotonic stack; each index is pushed and popped once |
+| Difference-array range adds | O(n + u) for u updates | O(n); 128-bit prefix, exact `long` results or `ArithmeticException` |
+| Interval merge, minimum meeting rooms | O(n log n) | O(n); sorted copy, input unchanged |
+
+(c) SOLUTION FINDER
+- Problem: Pair of values in a sorted array with a given sum | Technique: two pointers | Link: [ArrayPatterns.pairWithSum](src/main/java/io/github/ichillous/dsa/algorithms/ArrayPatterns.java) | Lesson: algorithms/array-patterns/overview.md
+- Problem: Longest substring without repeating characters | Technique: variable sliding window with last-seen index | Link: ArrayPatterns.longestSubstringWithoutRepeats (same file)
+- Problem: Next greater element / largest rectangle in a histogram | Technique: monotonic stack | Link: ArrayPatterns.nextGreaterIndices, ArrayPatterns.largestRectangle (same file)
+- Problem: Many range additions, then read the array | Technique: difference array plus prefix sum | Link: ArrayPatterns.applyRangeAdds (same file)
+- Problem: Merge overlapping intervals; minimum meeting rooms | Technique: sort then sweep | Link: ArrayPatterns.mergeIntervals, ArrayPatterns.minimumMeetingRooms (same file)
+
+(d) README TOPIC MAP
+Add a row to the topic map table in README.md:
+| Array patterns | [Pointers, windows, stacks, differences and sweeps](algorithms/array-patterns/overview.md) | Two-pointer pair sum, repeat-free window, next greater, histogram area, difference arrays, interval merge and meeting rooms |
+
+(e) EXERCISES (docs/exercises.md format: Exercise | Input or scenario | Success criteria and hint)
+| Histogram stack | Heights `[2, 1, 5, 6, 2, 3]`, then `[Integer.MAX_VALUE, Integer.MAX_VALUE]` | Compare with an O(n²) scan over all ranges using the minimum height. The second case needs a `long` area; explain why each index is pushed and popped once. |
+| Difference-array overflow | Base `-Long.MAX_VALUE` with two `+Long.MAX_VALUE` adds over the same range | The prefix leaves `long` range but the final value fits. Compare with a `BigInteger` model and explain when the exact implementation must throw `ArithmeticException`. |
