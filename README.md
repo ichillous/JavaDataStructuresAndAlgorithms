@@ -53,6 +53,7 @@ show the desktop/phone layouts and the scope of verification.
 
 | Your next step | Read or run |
 | --- | --- |
+| Find every way to solve a problem | [Solution finder](docs/solution-finder.md) |
 | Learn in order | [Roadmap and checkpoints](docs/learning-roadmap.md) |
 | See diagrams and algorithm states | [Visual index](docs/visuals/README.md) and the local [interactive companion](docs/visuals/index.html) |
 | Browse all implementations and contracts | [Catalog](docs/catalog.md) |

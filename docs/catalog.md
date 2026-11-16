@@ -3,7 +3,9 @@
 Source lives in `io.github.ichillous.dsa`. Each row pairs an implementation with
 executable contracts. Run one with `./mvnw -Dtest=ClassNameTest test`; run
 `./mvnw clean verify` for the full build. See the [complexity reference](complexity.md)
-for bounds and assumptions.
+for bounds and assumptions. To start from a problem rather than a class, use the
+[solution finder](solution-finder.md), which also covers JDK classes and techniques
+not implemented here.
 
 ## Collections
 
