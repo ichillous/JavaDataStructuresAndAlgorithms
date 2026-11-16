@@ -1,0 +1,28 @@
+TASK 12 FRAGMENT: GraphStructureAlgorithms
+
+(a) CATALOG ROWS
+Section: "## Graphs" in docs/catalog.md (append after the AdvancedGraphAlgorithms row).
+
+| [GraphStructureAlgorithms](../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java) | Iterative articulation points, BFS bipartition with odd-cycle witness, directed-cycle witness, Hierholzer Eulerian path (directed or undirected; an undirected self-loop is one edge adding 2 to degree), Prim minimum spanning forest returning `GraphAlgorithms.SpanningForest`. | [GraphStructureAlgorithmsTest](../src/test/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithmsTest.java) |
+
+(b) COMPLEXITY ROWS
+Target table: the "Algorithm / representation | Time | Auxiliary or stored space" table in docs/complexity.md, after the Kruskal row.
+
+| Iterative articulation points, BFS bipartition and odd cycle, directed-cycle witness | O(V + E) | O(V + E), including adjacency snapshots |
+| Hierholzer Eulerian path | O(V + E) expected | O(V + E); the walk is deterministic because Graph keeps neighbors in insertion order; the hash lookup pairing undirected edge entries makes the time expected |
+| Prim minimum spanning forest with a lazy binary heap | O(V + E log(E + 1)) | O(V + E); heap can hold up to 2E stale entries |
+
+(c) SOLUTION-FINDER ENTRIES
+Link target for each: ../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java (lessons: algorithms/graph/graph-structure.md, algorithms/graph/minimum-spanning-trees.md)
+- Problem: Which vertices disconnect the network if removed? Technique: articulation points, iterative lowlink DFS (GraphStructureAlgorithms.articulationPoints).
+- Problem: Can I split the nodes into two groups with no edge inside a group, and if not, show me why? Technique: BFS two-coloring with an odd-cycle witness (bipartition, oddCycle).
+- Problem: Does this dependency graph have a cycle, and which one? Technique: iterative DFS with an on-path state (directedCycle).
+- Problem: Can I traverse every edge exactly once? Technique: degree check plus Hierholzer (eulerianPath).
+- Problem: Cheapest way to connect all nodes, growing outward from a start. Technique: Prim minimum spanning forest with a lazy heap (primMinimumSpanningForest).
+
+(d) README TOPIC-MAP ADDITION
+Row "Graphs" in the README topic map: append to the link cell `[graph structure](algorithms/graph/graph-structure.md), [minimum spanning trees](algorithms/graph/minimum-spanning-trees.md)` and to the description cell `articulation points, bipartite checks, cycle witnesses, Euler paths and Prim`.
+
+(e) EXERCISE ROWS (docs/exercises.md table format)
+| Cut vertices and bipartiteness | Graphs on at most ten vertices, including loops, isolated vertices and a bowtie | Compare `articulationPoints` with a remove-and-recount-components oracle. Compare `bipartition` with all 2^V colorings and validate an `oddCycle` witness edge by edge; exactly one of the two must be present. |
+| Euler path validation | Directed `0->1->2->0, 2->3`; undirected star `0-1, 0-2, 0-3`; an undirected loop at a vertex with one other edge | Check degree conditions and connectivity independently, then replay the returned path against an edge multiset. A loop adds 2 to degree but is a single edge. |
