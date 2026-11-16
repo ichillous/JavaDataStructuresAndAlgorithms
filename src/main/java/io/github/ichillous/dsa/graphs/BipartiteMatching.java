@@ -31,7 +31,9 @@ public final class BipartiteMatching {
      * <p>Invariant: the matching is valid after every augmentation, and a phase
      * augments along a maximal set of vertex-disjoint shortest augmenting paths,
      * so the shortest augmenting path length strictly grows and there are
-     * O(sqrt(V)) phases. A matching with no augmenting path is maximum (Berge).
+     * O(sqrt(V)) phases. The BFS stops at the first layer that reaches a free
+     * right vertex, and the DFS follows only layered edges and accepts a free
+     * right vertex only at that layer. A matching with no augmenting path is maximum (Berge).
      * The search is iterative; path length is not limited by the call stack.
      *
      * <p>Duplicate edges are ignored. Which maximum matching is returned is
@@ -91,11 +93,12 @@ public final class BipartiteMatching {
         int[] queue = new int[leftSize];
         int[] cursor = new int[leftSize];
         int[] stack = new int[leftSize];
-        while (layer(leftSize, start, adj, matchLeft, matchRight, dist, queue)) {
+        int shortest;
+        while ((shortest = layer(leftSize, start, adj, matchLeft, matchRight, dist, queue)) >= 0) {
             System.arraycopy(start, 0, cursor, 0, leftSize);
             for (int root = 0; root < leftSize; root++) {
                 if (matchLeft[root] == -1) {
-                    augment(root, start, adj, matchLeft, matchRight, dist, cursor, stack);
+                    augment(root, shortest, start, adj, matchLeft, matchRight, dist, cursor, stack);
                 }
             }
         }
@@ -109,8 +112,13 @@ public final class BipartiteMatching {
         return List.copyOf(result);
     }
 
-    /** BFS from free left vertices; returns whether some free right vertex is reachable. */
-    private static boolean layer(int leftSize, int[] start, int[] adj, int[] matchLeft,
+    /**
+     * BFS from all free left vertices. Returns the number of left-vertex layers D
+     * (0-based layer of the earliest left vertex adjacent to a free right vertex),
+     * i.e. the shortest augmenting path has D + 1 matched-edge hops, or -1 if no
+     * augmenting path exists. Expansion stops after layer D.
+     */
+    private static int layer(int leftSize, int[] start, int[] adj, int[] matchLeft,
             int[] matchRight, int[] dist, int[] queue) {
         int unreached = Integer.MAX_VALUE;
         int front = 0;
@@ -123,25 +131,32 @@ public final class BipartiteMatching {
                 dist[u] = unreached;
             }
         }
-        boolean found = false;
+        int shortest = unreached;
         while (front < back) {
             int u = queue[front++];
+            if (dist[u] > shortest) {
+                break; // deeper layers cannot start a shortest augmenting path
+            }
             for (int i = start[u]; i < start[u + 1]; i++) {
                 int w = matchRight[adj[i]];
                 if (w == -1) {
-                    found = true;
-                } else if (dist[w] == unreached) {
+                    shortest = dist[u]; // BFS order: the first hit is the minimum
+                } else if (dist[w] == unreached && dist[u] < shortest) {
                     dist[w] = dist[u] + 1;
                     queue[back++] = w;
                 }
             }
         }
-        return found;
+        return shortest == unreached ? -1 : shortest;
     }
 
-    /** Iterative DFS along layered alternating paths from a free left root. */
-    private static void augment(int root, int[] start, int[] adj, int[] matchLeft,
-            int[] matchRight, int[] dist, int[] cursor, int[] stack) {
+    /**
+     * Iterative DFS along layered alternating paths (dist increases by exactly one
+     * per step) from a free left root; a free right vertex is accepted only from a
+     * left vertex in layer {@code shortest}, so only shortest paths are augmented.
+     */
+    private static void augment(int root, int shortest, int[] start, int[] adj,
+            int[] matchLeft, int[] matchRight, int[] dist, int[] cursor, int[] stack) {
         int depth = 0;
         stack[depth++] = root;
         while (depth > 0) {
@@ -149,7 +164,7 @@ public final class BipartiteMatching {
             if (cursor[u] < start[u + 1]) {
                 int v = adj[cursor[u]];
                 int w = matchRight[v];
-                if (w == -1) {
+                if (w == -1 && dist[u] == shortest) {
                     // Flip the path: each stacked vertex takes the right vertex at its cursor.
                     for (int i = depth - 1; i >= 0; i--) {
                         int x = stack[i];
@@ -159,7 +174,7 @@ public final class BipartiteMatching {
                     }
                     return;
                 }
-                if (dist[w] == dist[u] + 1) {
+                if (w != -1 && dist[u] < shortest && dist[w] == dist[u] + 1) {
                     stack[depth++] = w;
                 } else {
                     cursor[u]++;

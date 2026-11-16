@@ -6,7 +6,7 @@ TASK 13 FRAGMENT: FlowNetwork and BipartiteMatching
 
 (b) COMPLEXITY ROWS -- target table: the graph table in docs/complexity.md (columns: Algorithm / representation | Time | Auxiliary or stored space)
 | Dinic maximum flow and minimum cut | O(V^2 E); at most V-1 phases | O(V + E); iterative BFS and blocking flow; total checked with `Math.addExact` |
-| Hopcroft-Karp bipartite matching | O(E sqrt(V)) after an O(E log E) deduplicating sort | O(V + E); iterative augmenting-path search |
+| Hopcroft-Karp bipartite matching | O(E sqrt(V)) after an O(E log E) deduplicating sort | O(V + E); iterative layered BFS (cut off at the shortest augmenting length) and DFS restricted to shortest augmenting paths |
 
 (c) SOLUTION-FINDER ENTRIES
 - Problem: maximum throughput from a source to a sink through capacity-limited links

@@ -77,8 +77,9 @@ to every left vertex, a capacity-1 edge from each left to each adjacent right ve
 and capacity-1 edges from every right vertex to a super-sink. Integral capacities give
 an integral maximum flow, whose saturated middle edges are a maximum matching.
 Hopcroft-Karp is Dinic's phase structure specialized to this unit network: each phase
-finds a maximal set of vertex-disjoint shortest augmenting paths, and the shortest
-path length grows each time, giving `O(sqrt(V))` phases. Duplicate input pairs are
+runs a BFS that stops at the first layer reaching a free right vertex, then a DFS over
+layered edges that augments only along shortest paths until a maximal set of
+vertex-disjoint ones is found. The shortest path length grows each phase, giving `O(sqrt(V))` phases. Duplicate input pairs are
 ignored, out-of-range vertices throw `IndexOutOfBoundsException`, and the result is
 sorted by left vertex. When several maximum matchings exist the one returned is
 deterministic but unspecified; test the size and validity, not one particular answer.
