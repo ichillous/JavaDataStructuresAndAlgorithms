@@ -437,7 +437,7 @@ public final class DynamicProgramming {
         return List.copyOf(indices);
     }
 
-    private static void checkArrayStateSize(int maximumState, String name) {
+    static void checkArrayStateSize(int maximumState, String name) {
         // The table has maximumState + 1 entries, which must not exceed Integer.MAX_VALUE - 8.
         if (maximumState < 0 || maximumState > Integer.MAX_VALUE - 9) {
             throw new IllegalArgumentException(name + " must be between 0 and Integer.MAX_VALUE - 9");

@@ -1,0 +1,39 @@
+TASK 18 FRAGMENT: DynamicProgrammingClassics, Huffman code lengths and canonical codes
+
+(a) CATALOG
+Section: "## Algorithm utilities" in docs/catalog.md (table columns: Source | Operations and contract | Tests)
+New row:
+| [DynamicProgrammingClassics](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) | Coin combinations (unordered, duplicates collapse, checked `long`); word break (shortest first word, recursively); longest palindromic subsequence length (UTF-16 units, O(n) space); matrix-chain order (`ChainOrder`, `"((A1A2)A3)"`, smallest-split ties, checked); Held-Karp travelling salesman (`Tour`, 1 to 16 cities, entries in [-2^47, 2^47]); weighted interval scheduling (`Schedule`, half-open, checked total). | [DynamicProgrammingClassicsTest](../src/test/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassicsTest.java) |
+Replacement for the existing GreedyAlgorithms row (same section):
+| [GreedyAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) | Maximum-cardinality activity selection. Positive-length half-open `Interval(start,end)`; touching endpoints allowed. Huffman code lengths (`long` frequencies, zero frequency gives length 0, a single used symbol gives 1, leaves-first tie rule, checked merge sums) and canonical prefix codes (Kraft-checked, `""` for unused). | [GreedyAlgorithmsTest](../src/test/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithmsTest.java) |
+
+(b) COMPLEXITY
+Target table: "## Dynamic programming, greedy choice and enumeration" in docs/complexity.md (columns: Algorithm | Time | Auxiliary space / parameters)
+Rows:
+| Coin combinations | O(d*amount) for d distinct coins | O(amount); checked `long` counts, `ArithmeticException` on overflow |
+| Word break | O(n*L) lookups, O(n*L^2) characters | O(n + dictionary); L is the longest word; shortest-first-word segmentation |
+| Longest palindromic subsequence | O(n^2) | O(n); two rolling rows |
+| Matrix-chain order | O(n^3) | O(n^2); checked products and sums, smallest-split ties |
+| Held-Karp travelling salesman | O(2^n * n^2), n at most 16 | 2^(n-1)*(n-1) longs plus a byte table (about 4 MB at n = 16); entries limited to [-2^47, 2^47] |
+| Weighted interval scheduling | O(n log n) | O(n); sorted copy, binary search for the last compatible interval, checked total |
+| Huffman code lengths | O(n log n) | O(n); priority queue, checked merge sums |
+| Canonical Huffman codes | O(n log n + sum of lengths) | O(sum of lengths) output; exact Kraft check |
+
+(c) SOLUTION FINDER
+- Problem: Count the ways to make an amount from coin denominations (order does not matter) | Technique: unbounded knapsack counting, coins outer loop | Link: [DynamicProgrammingClassics.countCoinCombinations](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) | Lesson: algorithms/dynamic-programming/classic-problems.md
+- Problem: Can a string be split into dictionary words, and how | Technique: suffix feasibility DP | Link: [DynamicProgrammingClassics.wordBreak](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
+- Problem: Longest palindromic subsequence | Technique: interval DP on (i, j) with two rolling rows | Link: [DynamicProgrammingClassics.longestPalindromicSubsequenceLength](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
+- Problem: Cheapest way to bracket a matrix product | Technique: interval DP over split points | Link: [DynamicProgrammingClassics.matrixChainOrder](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
+- Problem: Shortest closed tour through at most 16 cities | Technique: Held-Karp bitmask DP | Link: [DynamicProgrammingClassics.travelingSalesman](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
+- Problem: Choose non-overlapping jobs of maximum total weight | Technique: sort by end, DP with binary search for the last compatible job | Link: [DynamicProgrammingClassics.weightedIntervalScheduling](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
+- Problem: Shortest prefix code for given symbol frequencies | Technique: greedy merge of the two lightest nodes (Huffman) | Link: [GreedyAlgorithms.huffmanCodeLengths](src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) | Lesson: algorithms/greedy/huffman-coding.md
+- Problem: Rebuild prefix codes from code lengths | Technique: canonical code assignment | Link: [GreedyAlgorithms.canonicalCodes](src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java)
+
+(d) README TOPIC MAP
+Add two rows to the topic map table in README.md:
+| Classic dynamic programs | [Coins, word break, palindromes, matrix chain, TSP and weighted intervals](algorithms/dynamic-programming/classic-problems.md) | Coin combinations, word break, longest palindromic subsequence, matrix-chain order, Held-Karp, weighted interval scheduling |
+| Huffman coding | [Optimal prefix codes from frequencies](algorithms/greedy/huffman-coding.md) | Huffman code lengths, exchange argument, canonical codes |
+
+(e) EXERCISES (docs/exercises.md format: Exercise | Input or scenario | Success criteria and hint)
+| Coin loop order | Coins `[1, 2, 5]` with amount 5, then amount 3 with coins `[1, 2]` | Compare with brute-force enumeration of multisets. Swap the loops to count ordered sequences, show the answer changes from 2 to 3 for the second case, and explain why the coin loop must be outer. |
+| Huffman against brute force | Frequencies `[5, 9, 12, 13, 16, 45]`, then `[1, 1, 2, 4]` and `[0, 7, 0]` | Total cost must be 224 for the first case; compare with brute force over length vectors satisfying Kraft for at most six symbols. Check a single used symbol, all zeros, and that `canonicalCodes` output is prefix-free. |
