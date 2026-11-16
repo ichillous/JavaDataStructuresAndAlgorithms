@@ -1,5 +1,43 @@
 # Validation evidence
 
+## Breadth expansion verification (2026-11-16)
+
+The breadth expansion adds 21 public library classes (47 in `algorithms`, `collections`,
+`structures` and `graphs`, up from 26, plus two package-private helpers), 19 new lessons
+(65 topic pages in total) and a problem-first [solution finder](solution-finder.md). Full
+`./mvnw clean verify` passed on OpenJDK 21.0.12, compiling with `maven.compiler.release` 17:
+
+| Check | Result |
+| --- | --- |
+| Total JUnit invocations | **632 passed**, zero failures, errors or skips, across 53 test classes |
+| Executable Markdown | All **147 Java blocks** across 68 Markdown files compiled for Java 17 and executed with assertions enabled (148 `DocumentedExamplesTest` invocations, the extra one being the assertion probe) |
+| Production line coverage | **4,482 / 4,534 = 98.85%**, including runnable examples |
+| Production branch coverage | **2,474 / 2,512 = 98.49%**, including runnable examples |
+| Coverage floors | 90% lines and 85% branches enforced; both passed |
+| Compiler and Javadoc | `-Xlint:all -Werror` and Javadoc doclint `all,-missing` passed |
+| Packaged programs | Default showcase and the four terminal lessons (`binary-search`, `negative-edges`, `range-queries`, `lru`) exited with status 0 |
+| Local documentation | **895** file links resolve, including this page's own; 0 broken |
+| Visual layer | `generate_visuals.py --check` and the 10 Python visual tests passed |
+| Working-tree hygiene | `git diff --check` passed |
+
+Review process. An independent correctness review of the existing library came first
+and found four contract gaps, all fixed and listed in the [migration guide](migration.md):
+`FenwickTree` queries now return exact sums and construction rejects only overflowing
+final node sums; array-backed collections grow to `Integer.MAX_VALUE - 8` before failing;
+`DynamicProgramming` rejects oversized tables with `IllegalArgumentException`; and
+`BinaryMinHeap` updates are failure-atomic. Each of the 18 implementation tasks and the
+solution finder then had its own independent review, with fix rounds where findings
+required them. Final whole-branch code and documentation reviews followed, and their
+headline findings were fixed: the Rabin–Karp cost is stated everywhere as
+O(t + p + k·p) when spurious hits are rare and O(t·p) in the worst case, because its
+hash is fixed rather than randomized; a duplicate public range record was removed in
+favor of `StringAlgorithms.Span`; the documented DP tie rules are pinned by tests;
+`matrixChainOrder` throws only when the optimal cost itself overflows; `AhoCorasick`'s
+tables are final fields; and overstated or stale claims (Dinic's typical behavior, a
+witness for every negative answer, "earlier behavior is unchanged", "no probing map")
+were corrected. Passing tests is evidence, not a proof for all inputs or a benchmark
+result.
+
 ## Visual-layer verification (2026-11-02)
 
 The complete Java 17 build now passes **357 tests across 33 classes**, with zero
