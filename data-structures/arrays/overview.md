@@ -60,7 +60,7 @@ Zero initial capacity is valid; negative capacity is rejected. This library reje
 
 Geometric growth is essential to the amortized bound. Growing by exactly one slot on every append copies `1 + 2 + ... + n` elements, which is quadratic overall. Amortized O(1) does not mean each individual append is constant time.
 
-For repeated range sums with point additions, study [`FenwickTree`](../../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java). For range minimum with point replacement, use [`SegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java). Neither makes ordinary array insertion cheap.
+For repeated range sums with point additions, study [`FenwickTree`](../../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java). For range minimum with point replacement, use [`SegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java). Neither makes ordinary array insertion cheap. The [range-query lesson](../range-queries/overview.md) compares these with a static sparse table and a lazy range-add segment tree.
 
 ## Practice
 

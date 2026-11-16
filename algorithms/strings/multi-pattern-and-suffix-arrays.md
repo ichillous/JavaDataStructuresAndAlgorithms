@@ -120,5 +120,8 @@ FM-index. Both build on the same ideas but are outside this library.
 3. Explain why `distinctSubstrings` for `"aaaa"` is 4, and compute the count for
    `"abab"` by hand from the lcp array.
 
+For a single pattern (KMP, the Z-function, Rabin–Karp) or palindromes, see
+[pattern matching](pattern-matching.md).
+
 See the [catalog](../../docs/catalog.md) for the source and tests and the
 [complexity guide](../../docs/complexity.md) for the shared assumptions.

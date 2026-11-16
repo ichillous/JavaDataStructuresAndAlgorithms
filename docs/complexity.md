@@ -2,7 +2,7 @@
 
 These bounds describe the maintained code in the [catalog](catalog.md) and its executable lessons. Earlier standalone snippets remain only in Git history. They use a RAM model: primitive arithmetic, array access and references cost O(1); user-supplied `compareTo`, `equals` and `hashCode` are assumed O(1). If a key comparison scans a long string, include that cost as well. Bounds describe growth, not a promise about milliseconds or allocation size on a particular JVM.
 
-`C` is retained array capacity (which may exceed current size after removals), `n` is the number of stored elements or input values, `h` is tree height, `V` is the number of vertices, and `E` is the number of graph edges, counting parallel weighted edges. Space means additional working storage unless the table says stored space or includes output. Logarithmic bounds conventionally mean `log(n + 1)` for empty and singleton inputs.
+`C` is retained array capacity (which may exceed current size after removals), `n` is the number of stored elements or input values, `h` is tree height, `V` is the number of vertices, and `E` is the number of graph edges, counting parallel weighted edges. For strings, `t` is text length, `p` pattern length, `P` the total length of all patterns in a dictionary, and `k` the number of reported matches or hits. `r` is a value range and `m` a modulus. Space means additional working storage unless the table says stored space or includes output. Logarithmic bounds conventionally mean `log(n + 1)` for empty and singleton inputs.
 
 <!-- visual:generated -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="visuals/assets/complexity-growth-dark.svg"><img src="visuals/assets/complexity-growth.svg" alt="Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings." width="520"></picture>
@@ -23,8 +23,13 @@ These bounds describe the maintained code in the [catalog](catalog.md) and its e
 | `ArrayQueue` enqueue | O(1) amortized; O(n) on growth | O(C) stored circular buffer; dequeue/peek are O(1); no shifting on dequeue |
 | `ChainedHashMap` get/contains/remove | O(1) expected; O(n) worst | O(n + capacity) stored space; good hash distribution and bounded load are required for expected O(1) |
 | `ChainedHashMap` put | O(1) expected amortized; O(n) worst | Includes occasional rehashing; equal hashes can still produce a linear chain |
+| `OpenAddressingHashMap` get/contains/remove | O(1) expected; O(n) worst | O(capacity) stored arrays, no per-entry nodes; remove scans to the end of its cluster; expected O(1) needs good hashes and load at most 2/3 |
+| `OpenAddressingHashMap` put | O(1) expected amortized; O(n) worst | A resize allocates a table of twice the length (O(capacity) temporary space); constant hash codes form one cluster; the table never exceeds 2^30 slots |
 | `BinarySearchTree` add/remove/contains | O(h), up to O(n) worst | O(n) stored nodes; sorted insertions can produce a chain; the maintained traversal/update code uses iteration |
 | `AvlTree` add/remove/contains | O(log n) worst | O(n) stored nodes; recursive updates use O(log n) stack; rotations restore balance |
+| `RedBlackTreeMap` get/containsKey/put/remove | O(log n) worst | O(n) stored nodes, each with a color and a subtree size; height at most 2 log2(n + 1) - 1; put/remove recurse along one search path (O(log n) stack), get/containsKey are iterative |
+| `RedBlackTreeMap` first/last/floor/ceiling, rank/select/countInRange | O(log n) worst | O(1), iterative; rank adds skipped left-subtree sizes, countInRange is rank(to) - rank(from) and cannot overflow |
+| `RedBlackTreeMap` keys / height | O(n) | O(n) immutable snapshot plus O(log n) explicit stack / O(log n) recursion; height is not cached |
 | Tree inorder traversal | O(n) | O(n) result snapshot plus traversal workspace |
 | `BinaryMinHeap` add/remove minimum | O(log n) amortized (failure-atomic if `compareTo` throws); add can be O(n) on array growth | O(C) retained array space; peek O(1), bottom-up construction from a collection O(n) |
 | `Trie` add/contains/startsWith/remove | O(L log A) | `L` UTF-16 code units, at most `A` children per node, ordered `TreeMap` children; removal keeps O(L) path workspace |
@@ -32,10 +37,22 @@ These bounds describe the maintained code in the [catalog](catalog.md) and its e
 | `UnionFind` find/union/connected/componentSize | O(α(n)) amortized | Path compression plus union by size; O(n) stored arrays; construction O(n); an individual find is not guaranteed O(1) |
 | `RingDeque` add at either end | O(1) amortized, O(n) on growth | O(C) retained circular array; remove/peek at either end O(1) |
 | `LruCache` get/remove, put | Expected O(1) lookup/removal; expected amortized O(1) put; O(capacity) worst | O(capacity) bounded stored map/nodes; user hashes/equality assumed O(1) |
+| `LfuCache` get/remove/frequency, put | Expected O(1) per operation (key map, frequency buckets, tracked minimum frequency); put expected amortized O(1) for table resizing; O(capacity) worst | O(capacity) bounded stored map, nodes and buckets; user hashes/equality assumed O(1); counts saturate at `Integer.MAX_VALUE` |
 | `SegmentTree` range minimum, point set | O(log n) worst | O(n) stored tree and O(1) query workspace; O(n) construction |
 | `FenwickTree` point add, prefix/range sum | O(log n) worst; sums are exact and overflow only if the true sum does | O(n) stored sums; construction O(n), query/update O(1) additional storage |
+| `SparseTable` range minimum | O(1) worst | O(n log n) stored table, at most n(floor(log2 n) + 1) longs; construction O(n log n); immutable, so new data needs a rebuild |
+| `LazySegmentTree` range add, range sum | O(log n) worst | O(n) stored nodes, construction O(n); O(log n) recursion and temporary values per operation; exact 128-bit sums and pending additions, `ArithmeticException` only when an element or the requested sum leaves `long` range |
 
 A linked-list operation is O(1) only after the relevant node is known, or at an end for which the structure keeps a pointer. Finding an element by value or position is a separate cost. Likewise, an unbalanced BST is not automatically logarithmic because it is a tree.
+
+## Probabilistic structures
+
+| Implementation / operation | Time | Space and accuracy |
+| --- | --- | --- |
+| `BloomFilter` add/mightContain | O(k) worst, k hash indices | O(ceil(m/64)) stored longs, m at most 2^30 bits; O(1) additional; false positives only, near `p` at design load |
+| `CountMinSketch` add/estimate | O(depth) worst | O(width x depth) stored longs, at most 2^25; O(1) additional; overestimates only, within `epsilon x total` with probability `1 - delta` |
+
+These time bounds are deterministic worst cases. The probabilistic part is the **answer**: a Bloom filter has one-sided false positives and a Count-Min sketch one-sided overestimates, so a probability describes accuracy for a well-spread hash, not running time. The sizing formulas are in the [catalog](catalog.md).
 
 ## Searching, sorting and strings
 
@@ -46,6 +63,9 @@ A linked-list operation is O(1) only after the relevant node is known, or at an 
 | Insertion sort | O(n²) worst; O(n) already sorted | O(1); stable |
 | Bubble sort with early exit | O(n²) worst; O(n) already sorted | O(1); stable |
 | Merge sort | O(n log n) worst | O(n) temporary buffer plus O(log n) call stack; stable |
+| Counting sort | O(n + r), r = max - min + 1 at most 2^20 | O(r) count table; rejects a larger range without mutation |
+| LSD radix sort (4 x 8-bit passes) | O(n) | O(n) buffer; handles the full `int` range by flipping the sign bit |
+| Comparator merge sort | O(n log n) comparisons | O(n) buffer plus O(log n) call stack; stable; rejects null elements |
 | Three-way quicksort | O(n log n) on typical balanced partitions; O(n²) worst | O(log n) stack in this implementation, because only the smaller partition is recursive; unstable |
 | Heap sort | O(n log n) worst | O(1); unstable; heap construction itself is O(n) |
 | KMP first match | O(t + p) | O(p) prefix table for text length `t`, pattern length `p` |
@@ -54,6 +74,53 @@ A linked-list operation is O(1) only after the relevant node is known, or at an 
 The sorts mutate their input arrays. Stability describes the treatment of equal keys in the algorithm; primitive `int` values do not carry an identity that lets a test observe equal-key reordering. Three-way partitioning handles duplicate-heavy inputs well, but the deterministic pivot strategy does not provide a worst-case O(n log n) time guarantee; its worst case remains O(n²). The quicksort lesson traces the maintained smaller-partition strategy; naive recursion on both partitions can instead consume O(n) stack space.
 
 Strings and trie paths use UTF-16 code units. A supplementary Unicode character occupies two units; a visible grapheme may occupy several. The APIs do not normalize Unicode or ignore case. KMP's empty pattern matches at zero for first-match search and at every boundary `0..text.length()` for all-match search.
+
+## Array patterns and selection
+
+| Algorithm | Time | Auxiliary space / behavior |
+| --- | --- | --- |
+| Two-pointer pair with sum | O(n) | O(1); ascending input is an unchecked precondition |
+| Longest repeat-free window | O(n) expected | O(distinct UTF-16 units); hash map of last positions |
+| Next greater indices, largest histogram rectangle | O(n) | O(n) monotonic stack; each index is pushed and popped once |
+| Difference-array range adds | O(n + u) for u updates | O(n); 128-bit prefix, exact `long` results or `ArithmeticException` |
+| Interval merge, minimum meeting rooms | O(n log n) | O(n); sorted copy, input unchanged |
+| k-th smallest (introselect) | O(n) worst case: median-of-three rounds that shrink the segment to at most 3/4 cost at most 4n in total, and a failed round triggers a shrink-based median-of-medians fallback | O(n) for the defensive copy, plus O(log n) recursion in the median-of-medians fallback; input unchanged |
+| Top-k smallest (bounded max-heap) | O(n log(k + 1)) | O(min(k, n)) plus the result; stable, equal elements keep encounter order |
+| K-way merge of sorted lists | O(N log(k + 1)) for N elements in k lists | O(k) plus the result; ties go to the lower list index; unsorted input throws |
+| Majority element (Boyer-Moore) | O(n) | O(1); needs a count strictly above n/2, otherwise empty |
+
+Monotonic-stack and window methods are linear because every index enters and leaves a structure at most once. Quickselect alone is quadratic on adversarial input, which is why `kthSmallest` falls back to median-of-medians pivots; its linear bound is a worst-case claim, not an expected one. Selection methods never modify their input.
+
+## Strings and text indexes
+
+| Algorithm | Time | Auxiliary space / behavior |
+| --- | --- | --- |
+| Z-function / Z all matches | O(n) / O(t + p + k) | O(n) array / O(t + p + k) for the concatenation, its z-array and results; same results as KMP |
+| Rabin-Karp all matches | Expected O(t + p); worst O(t * p) | O(1) plus results; base 257, modulus 2^31 - 1, every hash hit verified so no false positives |
+| Manacher longest palindromic substring | O(n) | O(n); earliest start on ties |
+| Aho-Corasick build | O(P) expected for total pattern length `P` (hash-map children) | O(P) trie and links |
+| Aho-Corasick `findAll` | O(t + k) expected for text length `t` and `k` matches | O(t + k) including the result; overlaps are included |
+| Suffix array build (prefix doubling, radix sort) | O(n log n) | O(n + 65,536) counting table |
+| Kasai LCP | O(n) | O(n) |
+| Suffix array `occurrences` | O(p log n + k log k) for pattern length `p` and `k` hits | O(k); hits are sorted ascending |
+| Distinct substrings, longest repeated substring | O(n) over the LCP array | O(1) beyond the result |
+
+KMP, the Z-function and Rabin-Karp are listed with the other string searches above. Rabin-Karp's worst case occurs only when many windows share the pattern's hash; verification makes its answers exact. Aho-Corasick is expected rather than worst case only because trie children are hash-map entries. A multi-pattern search costs O(t + P + k), not one O(t + p) pass per pattern.
+
+## Number theory and sampling
+
+| Algorithm | Time | Auxiliary space / behavior |
+| --- | --- | --- |
+| gcd, lcm, extended gcd, modular inverse | O(log min(\|a\|, \|b\|)) | O(1); gcd of 2^63 and overflowing lcm throw `ArithmeticException` |
+| Modular exponentiation | O(log e) modular multiplies, each O(1) or O(log m) when the product exceeds 63 bits | O(1); exact for every modulus up to `Long.MAX_VALUE` |
+| Sieve of Eratosthenes | O(n log log n) | O(n) bits plus the result list; limit at most 50,000,000 |
+| Miller-Rabin `isPrime` (12 fixed bases) | O(log n) modular multiplies per base | O(1); deterministic for every `long` |
+| Fibonacci mod m by matrix power | O(log n) 2x2 products | O(1); exact for every positive `long` modulus |
+| Reservoir sample (`Sampling.reservoirSample`) | O(n), one random draw per item after the first `k` | O(min(k, n)); uniform over `k`-subsets, never needs `n` in advance |
+| Fisher-Yates shuffle (`Sampling.shuffle`) | O(n), `n - 1` random draws | O(1); in place; every order has probability `1/n!` given a uniform generator |
+| Alias table (`AliasTable`) | O(n) build; O(1) per `sample` | O(n) for normalized weights, cutoffs and aliases; immutable after construction |
+
+Number-theory methods are exact for every `long` or throw `ArithmeticException`. Miller-Rabin here is deterministic, not probabilistic. The randomized methods take the caller's `RandomGenerator`; their costs count random draws, and uniformity holds only as far as the supplied generator is uniform.
 
 ## Graphs
 
@@ -65,13 +132,27 @@ Strings and trie paths use UTF-16 code units. A supplementary Unicode character 
 | Kahn topological ordering | O(V + E) | O(V + E); directed graphs only; rejects a cycle |
 | Dijkstra with a lazy binary heap | O(V + E log(E + 1)) | O(V + E); weighted multigraph can have more heap entries than vertices |
 | Bellman-Ford | O(VE) relaxations plus O(V+E) setup; O(V+E+VEB) bit operations with max integer bit length B | O((V+E)B) auxiliary bits; exact intermediate arithmetic, checked final long distances |
+| 0-1 BFS | O(V + E) | O(V + E); weights must be 0 or 1 |
+| DAG shortest paths (topological DP) | O(V + E) exact arithmetic operations | O(V + E); directed acyclic only, signed weights, exact intermediates and checked final long distances |
+| A* with a consistent heuristic | O(V + E log(E + 1)) worst case plus heuristic evaluations | O(V + E); nonnegative weights, heuristic checked on scanned edges |
+| Floyd-Warshall | O(V^3) exact arithmetic operations | O(V^2); rejects any negative cycle, checked final long distances |
 | Iterative Kosaraju SCCs | O(V+E) | O(V+E); canonical ordering uses a linear vertex sweep |
 | Iterative lowlink bridges | O(V+E+b log(b+1)) | O(V+E), including snapshots and b sorted bridges |
 | Kruskal minimum spanning forest | O(V + E log(E + 1)) | O(V + E), including sorted edge copy and returned forest |
+| Iterative articulation points, BFS bipartition and odd cycle, directed-cycle witness | O(V + E) | O(V + E), including adjacency snapshots |
+| Hierholzer Eulerian path | O(V + E) expected | O(V + E); the walk is deterministic because Graph keeps neighbors in insertion order; the hash lookup pairing undirected edge entries makes the time expected |
+| Prim minimum spanning forest with a lazy binary heap | O(V + E log(E + 1)) | O(V + E); heap can hold up to 2E stale entries |
+| Dinic maximum flow and minimum cut | O(V^2 E); at most V-1 phases | O(V + E); iterative BFS and blocking flow; total checked with `Math.addExact` |
+| Hopcroft-Karp bipartite matching | O(E sqrt(V)) after an O(E log E) deduplicating sort | O(V + E); iterative layered BFS (cut off at the shortest augmenting length) and DFS restricted to shortest augmenting paths |
+| Binary-lifting LCA: build | O(V log V) | O(V log V); iterative BFS, undirected tree only |
+| Binary-lifting LCA: `lca`, `distance`, `kthAncestor` | O(log V) per query; `depth` is O(1) | O(1) extra per query |
+| Tree diameter path (double BFS) | O(V) | O(V), including adjacency snapshots and result |
 
 Unweighted graphs ignore duplicate edges and preserve neighbor insertion order. Weighted graphs keep parallel edges and accept signed `long` weights; individual algorithms impose extra requirements. BFS minimizes the number of edges, not arbitrary total weight. Dijkstra rejects every negative edge, including one in an unreachable component. A reachable distance of `Long.MAX_VALUE` is valid; unreachable results use `OptionalLong.empty()`. Overflowing detours are ignored, but an unrepresentable reachable shortest distance causes `ArithmeticException`.
 
 Kruskal accepts negative edges, omits loops, and returns a forest for disconnected graphs. The result has `V - components` selected edges. The total is accumulated exactly and must fit in a `long` at the end; intermediate cancellation does not cause spurious overflow. These implementations return immutable result snapshots and use no recursive graph traversal.
+
+The newer graph algorithms follow the same conventions. `ShortestPathAlgorithms` reports a violated precondition with `IllegalArgumentException` and an unrepresentable final distance with `ArithmeticException`; A* checks only the edges it scans, so an inconsistent heuristic is caught only where the search looks. Dinic's O(V^2 E) is a worst-case bound that is rarely approached. Tree queries accept only valid undirected trees. Every traversal is iterative, so a 100,000-vertex path does not exhaust the call stack.
 
 Bellman-Ford scans directed arcs (both orientations for undirected edges). No
 reachable negative cycle means a shortest path can be simple, using at most V-1
@@ -95,6 +176,18 @@ is an intentional cost for canonical results.
 | LCS length | O(mn + m + n) | O(min(m, n) + 1); lengths are UTF-16 units; empty-input handling and setup are included |
 | Edit distance | O(mn + m + n) | O(min(m, n) + 1); unit insertion, deletion and substitution costs |
 | Strictly increasing subsequence length | O(n log(n + 1)) | O(n); equal values do not extend a strictly increasing subsequence |
+| LCS string, edit script | O(mn) | O(mn) full table kept for the walk back (value-only versions use O(min(m, n))); Hirschberg would give O(min(m, n)) but is not implemented |
+| 0/1 knapsack item set | O((n + 1)(W + 1)) | O(W + 1) longs plus n * (W + 1) bits (one BitSet row per item); same `W` guard, large products can still run out of memory |
+| Minimum coins choice | O((c + 1)(a + 1)) | O(a + 1); stores the last coin per amount |
+| LIS indices | O(n log(n + 1)) | O(n); tail-index and predecessor arrays |
+| Coin combinations | O(d*amount) for d distinct coins | O(amount); checked `long` counts, `ArithmeticException` on overflow; same table-size guard as minimum coins |
+| Word break | O(n*L) lookups, O(n*L^2) characters | O(n + dictionary); L is the longest word; shortest-first-word segmentation |
+| Longest palindromic subsequence | O(n^2) | O(n); two rolling rows |
+| Matrix-chain order | O(n^3) | O(n^2); checked products and sums, smallest-split ties |
+| Held-Karp travelling salesman | O(2^n * n^2), n at most 16 | 2^(n-1)*(n-1) longs plus a byte table (about 4 MB at n = 16); entries limited to [-2^47, 2^47] |
+| Weighted interval scheduling | O(n log n) | O(n); sorted copy, binary search for the last compatible interval, checked total |
+| Huffman code lengths | O(n log n) | O(n); priority queue, checked merge sums |
+| Canonical Huffman codes | O(n log n + sum of lengths) | O(sum of lengths) output; exact Kraft check |
 | Earliest-finish activity selection | O(n log(n + 1)) | O(n), including sorted copy and output; nonempty half-open intervals, touching allowed |
 | Unique permutations | O(n · n!) upper bound | O(n + nk), including `k` returned permutations; input length limited to 9 |
 | N-Queens enumeration | O(n · n!) upper bound | O(n + nk), including `k` solutions represented as row-to-column lists; `n` limited to 0..12 |
@@ -108,9 +201,10 @@ For DP, write the state meaning and loop-order invariant first. For greedy metho
 - **Worst case** bounds one operation or run for every valid input of that size.
 - **Expected** relies on a probabilistic or distribution assumption; bad hash distributions remain possible.
 - **Amortized** bounds a sequence of operations without requiring randomness. One dynamic-array append can still copy the entire array.
+- **Randomized and probabilistic** results separate cost from accuracy. Rabin-Karp and Aho-Corasick are expected-time but exact; a Bloom filter and a Count-Min sketch run in worst-case time but give approximate answers with one-sided error; sampling routines cost one random draw per step and are only as uniform as the caller's generator.
 - **Auxiliary space** differs from total storage and output size. Include recursion frames, buffers, snapshots and returned values when they matter.
 
-Java integer arithmetic normally wraps. The maintained APIs state where they use a wider type or checked arithmetic. For example, Fenwick construction and updates throw if and only if a final node sum overflows `long` (a failed update leaves the tree unchanged), while prefix and range queries are exact and throw only when the true sum overflows. Do not substitute subtraction for an ordering comparison on arbitrary integer values. Benchmarking would require a separate controlled harness; asymptotic bounds here are analytical claims, not measured speedups.
+Java integer arithmetic normally wraps. The maintained APIs state where they use a wider type or checked arithmetic. For example, Fenwick construction and updates throw if and only if a final node sum overflows `long` (a failed update leaves the tree unchanged), while prefix and range queries are exact and throw only when the true sum overflows. `NumberTheory`, the difference-array adds, `LazySegmentTree`, `FlowNetwork`, the DAG, Floyd-Warshall and matrix-chain methods, and the Huffman merges all use exact or checked arithmetic and throw `ArithmeticException` rather than wrap. Do not substitute subtraction for an ordering comparison on arbitrary integer values. Benchmarking would require a separate controlled harness; asymptotic bounds here are analytical claims, not measured speedups.
 
 Maximum-subarray sums fit in long because an int-indexed int array cannot contain
 enough int values to exceed that range; the same observation bounds inversion

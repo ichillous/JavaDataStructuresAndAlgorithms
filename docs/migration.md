@@ -44,6 +44,24 @@ The Java 17 namespace and existing compiled APIs remain. The second pass adds
 with signed shortest paths, SCCs, bridges, window/sequence problems, signed subset
 witnesses and validated Sudoku. Their contracts are in the [catalog](catalog.md).
 
+## Breadth expansion
+
+A later pass widened the library without changing existing topic paths or public APIs. It
+adds 21 public classes (47 in the four library packages in total), with tests and executable lessons.
+Contracts are in the [catalog](catalog.md) and costs in the [complexity guide](complexity.md).
+
+| Area | New classes | New lessons |
+| --- | --- | --- |
+| `algorithms` | `Selection`, `ArrayPatterns`, `AhoCorasick`, `SuffixArray`, `DynamicProgrammingClassics`, `NumberTheory`, `Sampling`, `AliasTable` | [`array-patterns/overview.md`](../algorithms/array-patterns/overview.md), [`searching/selection.md`](../algorithms/searching/selection.md), [`strings/multi-pattern-and-suffix-arrays.md`](../algorithms/strings/multi-pattern-and-suffix-arrays.md), [`dynamic-programming/classic-problems.md`](../algorithms/dynamic-programming/classic-problems.md), [`math/number-theory.md`](../algorithms/math/number-theory.md), [`math/randomized-sampling.md`](../algorithms/math/randomized-sampling.md) |
+| `algorithms` additions | Counting, radix and Comparator merge sort in `SortAlgorithms`; Z-function, Rabin-Karp and Manacher in `StringAlgorithms`; reconstruction methods in `DynamicProgramming`; Huffman codes in `GreedyAlgorithms` | [`sorting/non-comparison-and-comparator-sorts.md`](../algorithms/sorting/non-comparison-and-comparator-sorts.md), [`strings/pattern-matching.md`](../algorithms/strings/pattern-matching.md), [`greedy/huffman-coding.md`](../algorithms/greedy/huffman-coding.md) |
+| `collections` | `OpenAddressingHashMap`, `LfuCache` | [`hash-tables/open-addressing.md`](../data-structures/hash-tables/open-addressing.md), [`hash-tables/lfu-cache.md`](../data-structures/hash-tables/lfu-cache.md) |
+| `structures` | `RedBlackTreeMap`, `SparseTable`, `LazySegmentTree`, `BloomFilter`, `CountMinSketch` | [`trees/red-black-trees.md`](../data-structures/trees/red-black-trees.md), [`range-queries/overview.md`](../data-structures/range-queries/overview.md), [`probabilistic/overview.md`](../data-structures/probabilistic/overview.md) |
+| `graphs` | `ShortestPathAlgorithms`, `GraphStructureAlgorithms`, `FlowNetwork`, `BipartiteMatching`, `LowestCommonAncestor`, `TreeAlgorithms` | [`graph/shortest-paths.md`](../algorithms/graph/shortest-paths.md), [`graph/graph-structure.md`](../algorithms/graph/graph-structure.md), [`graph/minimum-spanning-trees.md`](../algorithms/graph/minimum-spanning-trees.md), [`graph/flows-and-matching.md`](../algorithms/graph/flows-and-matching.md), [`graph/tree-queries.md`](../algorithms/graph/tree-queries.md) |
+
+New cross-cutting rules: randomized APIs take a caller-supplied `java.util.random.RandomGenerator`;
+probabilistic structures have one-sided errors and reject oversized tables; array growth is capped
+at `Integer.MAX_VALUE - 8` and DP tables beyond that size are rejected. Earlier behavior is unchanged.
+
 The no-argument packaged JAR still runs `AlgorithmShowcase`. Arguments now select
 `--help` or `learn TOPIC`; invalid commands return exit status 2 with usage guidance.
 Previously extra showcase arguments were ignored. The [README](../README.md)
@@ -63,7 +81,7 @@ independent review provide evidence; they are not a formal proof over all inputs
 There is no claimed performance multiplier or benchmark speedup.
 
 The library deliberately does not implement every historical topic: knight's tour,
-optimal BSTs, lazy segment propagation and Sudoku uniqueness remain possible
+optimal BSTs and Sudoku uniqueness remain possible
 extensions. Mutable structures remain unsynchronized; APIs do not implement every
 Java Collections Framework interface. Prefer the standard JDK types in application
 code when implementing a structure is not itself the learning goal.

@@ -14,11 +14,13 @@ A tree is a connected acyclic graph; a rooted tree gives every non-root node one
 | --- | --- | --- |
 | [`BinarySearchTree`](../../src/main/java/io/github/ichillous/dsa/structures/BinarySearchTree.java) | All left descendants compare smaller; all right descendants compare larger | Ordered membership and sorted traversal |
 | [`AvlTree`](../../src/main/java/io/github/ichillous/dsa/structures/AvlTree.java) | BST order plus subtree heights differing by at most one | O(log n) worst-case membership/update |
+| [`RedBlackTreeMap`](../../src/main/java/io/github/ichillous/dsa/structures/RedBlackTreeMap.java) | BST order, left-leaning red links, equal black height and subtree sizes ([lesson](red-black-trees.md)) | O(log n) worst-case map operations plus `rank`, `select` and range counts |
 | [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) | Complete shape; parent no larger than children | Minimum-priority access |
 | [`Trie`](../../src/main/java/io/github/ichillous/dsa/structures/Trie.java) | Edge labels spell shared string prefixes | Prefix lookup and suggestions |
 | [`SegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) | Each node stores the minimum of its covered interval | Range minimum with point replacement |
+| [`SparseTable`](../../src/main/java/io/github/ichillous/dsa/structures/SparseTable.java) and [`LazySegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java) | Immutable overlapping power-of-two minima; lazy pending additions on covered intervals ([range-query lesson](../range-queries/overview.md)) | O(1) static range minimum; range add with range sum |
 
-BST and AVL types behave as sets: `compareTo` defines equivalent keys, duplicate add returns false, and nulls are rejected. Heap duplicates are meaningful and retained. Trie words use their own whole-word marker; a word may end at an internal node.
+BST and AVL types behave as sets (`RedBlackTreeMap` is a map with the same `compareTo` equivalence): `compareTo` defines equivalent keys, duplicate add returns false, and nulls are rejected. Heap duplicates are meaningful and retained. Trie words use their own whole-word marker; a word may end at an internal node.
 
 ## Height is measured in edges here
 
@@ -65,4 +67,4 @@ Segment-tree build/storage is O(n), and point-set/range-min is O(log n). Half-op
 2. Draw a five-key BST with height 4, then a balanced one with the same inorder result.
 3. Compare random segment-tree updates/queries with a plain array scan, including empty ranges and extreme long values.
 
-Continue with [binary-tree terminology](binary-trees.md), [BST operations](binary-search-trees.md), [AVL balance](avl-trees.md) and the [worked solutions](../../docs/solutions.md).
+Continue with [binary-tree terminology](binary-trees.md), [BST operations](binary-search-trees.md), [AVL balance](avl-trees.md), [red-black trees](red-black-trees.md), [range queries](../range-queries/overview.md) and the [worked solutions](../../docs/solutions.md).

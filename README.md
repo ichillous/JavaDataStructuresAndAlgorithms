@@ -5,7 +5,7 @@
 ![Runtime dependencies: none](https://img.shields.io/badge/runtime_dependencies-none-green)
 
 Learn by predicting a result, tracing an invariant, and checking it against code.
-This repository combines 26 library classes, runnable terminal lessons, a progressive
+This repository combines 47 library classes, runnable terminal lessons, a progressive
 study path, and Markdown examples that compile and execute in the test suite.
 
 Isiah's original topic URLs remain useful entry points. Their lessons now use the
@@ -73,10 +73,17 @@ show the desktop/phone layouts and the scope of verification.
 | Topic | Lessons | Maintained implementations |
 | --- | --- | --- |
 | Linear storage | [Arrays](data-structures/arrays/overview.md), [lists](data-structures/linked-lists/overview.md), [stacks](data-structures/stacks/overview.md), [queues](data-structures/queues/overview.md) | Dynamic array, doubly linked list, stack, circular queue, ring deque |
-| Lookup and order | [Hashing](data-structures/hash-tables/overview.md), [trees](data-structures/trees/overview.md), [heaps](data-structures/heaps/overview.md), [tries](data-structures/tries/overview.md) | Chained map, LRU cache, BST, AVL, min-heap, trie, union-find, Fenwick and minimum segment trees |
-| Searching and sorting | [Linear](algorithms/searching/linear-search.md), [binary](algorithms/searching/binary-search.md), [merge](algorithms/sorting/merge-sort.md), [quick](algorithms/sorting/quick-sort.md), [heap](algorithms/sorting/heap-sort.md) | Search bounds, five sorts, inversion counting |
-| Graphs | [Representation](data-structures/graphs/representation.md), [BFS](algorithms/graph/bfs.md), [DFS](algorithms/graph/dfs.md) | Traversals, paths, topological order, Dijkstra, Bellman–Ford, Kruskal, SCCs and bridges |
-| Problem solving | [DP](algorithms/dynamic-programming/overview.md), [greedy](algorithms/greedy/overview.md), [backtracking](algorithms/backtracking/overview.md), [divide and conquer](algorithms/divide-and-conquer/overview.md) | Coin change, knapsack, LCS/LIS, edit distance, Kadane, sliding-window maximum, activity selection, KMP, permutations, queens, signed subset sum and Sudoku |
+| Lookup and order | [Hashing](data-structures/hash-tables/overview.md), [open addressing](data-structures/hash-tables/open-addressing.md), [LFU cache](data-structures/hash-tables/lfu-cache.md), [trees](data-structures/trees/overview.md), [red-black trees](data-structures/trees/red-black-trees.md), [heaps](data-structures/heaps/overview.md), [tries](data-structures/tries/overview.md), [range queries](data-structures/range-queries/overview.md) | Chained and linear-probing maps, LRU and LFU caches, BST, AVL, red-black ordered map with rank/select, min-heap, trie, union-find, Fenwick and minimum segment trees, sparse table, lazy range-add segment tree |
+| Searching and sorting | [Linear](algorithms/searching/linear-search.md), [binary](algorithms/searching/binary-search.md), [merge](algorithms/sorting/merge-sort.md), [quick](algorithms/sorting/quick-sort.md), [heap](algorithms/sorting/heap-sort.md), [counting, radix and Comparator sorts](algorithms/sorting/non-comparison-and-comparator-sorts.md) | Search bounds, five comparison sorts, counting and radix sort, a stable Comparator merge sort, inversion counting |
+| Patterns and selection | [Pointers, windows, stacks, differences and sweeps](algorithms/array-patterns/overview.md), [selection](algorithms/searching/selection.md) | Two-pointer pair sum, repeat-free window, next greater, histogram area, difference arrays, interval merge and meeting rooms; k-th smallest, stable top-k, k-way merge, majority vote |
+| Strings and text | [Pattern matching](algorithms/strings/pattern-matching.md), [multi-pattern search and suffix arrays](algorithms/strings/multi-pattern-and-suffix-arrays.md) | KMP, Z-function, Rabin–Karp, Manacher, Aho-Corasick, suffix arrays and LCP |
+| Graphs | [Representation](data-structures/graphs/representation.md), [BFS](algorithms/graph/bfs.md), [DFS](algorithms/graph/dfs.md), [shortest paths](algorithms/graph/shortest-paths.md), [graph structure](algorithms/graph/graph-structure.md), [minimum spanning trees](algorithms/graph/minimum-spanning-trees.md) | Traversals, paths, topological order, Dijkstra, Bellman–Ford, 0-1 BFS, DAG shortest paths, A* and Floyd–Warshall, Kruskal and Prim, SCCs and bridges, articulation points, bipartite checks, cycle witnesses and Euler paths |
+| Flows, matching and trees | [Flows and matching](algorithms/graph/flows-and-matching.md), [tree queries](algorithms/graph/tree-queries.md) | Dinic max flow and min cut, Hopcroft-Karp matching, binary-lifting LCA and tree diameter |
+| Problem solving | [DP](algorithms/dynamic-programming/overview.md), [greedy](algorithms/greedy/overview.md), [backtracking](algorithms/backtracking/overview.md), [divide and conquer](algorithms/divide-and-conquer/overview.md) | Coin change, knapsack, LCS/LIS, edit distance, reconstructed LCS strings, edit scripts, knapsack items, coin choices and LIS indices, Kadane, sliding-window maximum, activity selection, permutations, queens, signed subset sum and Sudoku |
+| Classic dynamic programs | [Coins, word break, palindromes, matrix chain, TSP and weighted intervals](algorithms/dynamic-programming/classic-problems.md) | Coin combinations, word break, longest palindromic subsequence, matrix-chain order, Held-Karp, weighted interval scheduling |
+| Huffman coding | [Optimal prefix codes from frequencies](algorithms/greedy/huffman-coding.md) | Huffman code lengths, exchange argument, canonical codes |
+| Math and randomness | [Number theory](algorithms/math/number-theory.md), [randomized sampling](algorithms/math/randomized-sampling.md) | gcd and extended gcd, modular power and inverse, sieve, deterministic Miller-Rabin and Fibonacci mod m, all exact on `long`; reservoir sampling, Fisher-Yates shuffle and the alias method, driven by a caller-supplied `RandomGenerator` |
+| Probabilistic | [Probabilistic structures](data-structures/probabilistic/overview.md) | Bloom filter (no false negatives) and Count-Min sketch (never undercounts) |
 
 ## An example you can trust and modify
 
@@ -128,8 +135,8 @@ and `target/site/jacoco/index.html`. Generated files are ignored by Git.
 ## Contracts to read before choosing an algorithm
 
 - Nulls are rejected; collection elements and map/cache keys/values are non-null.
-- Sorts mutate arrays; Sudoku mutates only after finding a complete solution.
-  Other algorithm inputs are preserved. Returned collection snapshots are immutable.
+- Sorts and `Sampling.shuffle` mutate arrays; Sudoku mutates only after finding a complete
+  solution. Other algorithm inputs are preserved. Returned collection snapshots are immutable.
 - Bounds and ranges are documented; ranges are generally half open. Empty minima
   and unreachable distances use optional values rather than numeric sentinels.
 - Ordered sets use natural-order equivalence. String positions are UTF-16 code
@@ -138,6 +145,16 @@ and `target/site/jacoco/index.html`. Generated files are ignored by Git.
   distinguishes negative cycles, unreachable vertices and out-of-range finite distances.
 - Structures are not thread safe. Enumeration and subset search have explicit size
   limits; pseudopolynomial DP can still exhaust memory on large numeric capacities.
+- Randomized APIs never create their own generator. They take a caller-supplied
+  `java.util.random.RandomGenerator`, so a seeded generator reproduces a run and a test can
+  fix its seed.
+- Probabilistic structures have one-sided errors: a Bloom filter has false positives but
+  no false negatives, and a Count-Min sketch never undercounts. Oversized tables are rejected
+  before allocation (Bloom bits at most 2^30, sketch width x depth at most 2^25).
+- Array-backed collections double their capacity up to `Integer.MAX_VALUE - 8` and then
+  throw `OutOfMemoryError`; DP tables beyond that size are rejected with
+  `IllegalArgumentException`. Number-theory, flow and DP arithmetic is exact or throws
+  `ArithmeticException`; it does not wrap.
 
 Use the [catalog](docs/catalog.md) for each exact contract. This is an educational
 library; standard Java collections are usually the starting point in application code.

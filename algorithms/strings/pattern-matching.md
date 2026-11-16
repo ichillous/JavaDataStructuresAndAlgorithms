@@ -122,5 +122,8 @@ unit rather than by code point.
 3. Trace Manacher's algorithm on `abaaba`. Which center gives the longest
    palindrome, and what is its half-open span?
 
+To search many patterns at once, or to index a fixed text for repeated queries, continue with
+[multi-pattern matching and suffix arrays](multi-pattern-and-suffix-arrays.md).
+
 Browse the [catalog](../../docs/catalog.md) and the
 [complexity guide](../../docs/complexity.md) for the assumptions behind these bounds.

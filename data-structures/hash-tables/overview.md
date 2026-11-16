@@ -55,6 +55,11 @@ assert cache.size() == 2;
 
 The map gives direct access to a node; the list lets the cache move that known node or evict an endpoint in O(1). LRU is a policy about **recency**, not insertion order or frequency. A fixed capacity must be positive, and the cache rejects nulls.
 
+## Other maintained implementations
+
+- [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) stores keys and values directly in power-of-two arrays, probes linearly, keeps its load at most 2/3 and deletes by backward shifting instead of tombstones. See the [open-addressing lesson](open-addressing.md).
+- [`LfuCache`](../../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) evicts the entry with the lowest use count, breaking ties by recency, in expected O(1) per operation. See the [LFU lesson](lfu-cache.md), which contrasts it with LRU.
+
 ## Costs and common mistakes
 
 With well-distributed hashes, lookup/removal is O(1) expected and insertion is O(1) expected amortized. Adversarial collisions can make an operation O(n); a resize is O(n). Stored map space is O(n + capacity). LRU operations are expected O(1) under the underlying hash-map assumptions and store O(capacity) entries.
