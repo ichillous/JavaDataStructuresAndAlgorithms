@@ -39,7 +39,11 @@ class SelectionTest {
             for (int k = 0; k < length; k++) {
                 String message = "seed=" + Long.toHexString(SEED) + " round=" + round + " k=" + k;
                 assertEquals(sorted[k], Selection.kthSmallest(values, k), message);
-                assertEquals(sorted[k], Selection.kthSmallestWithRoundLimit(values, k, 0), message);
+                assertEquals(sorted[k], Selection.kthSmallestWithForcedFallback(values, k, 0), message);
+                for (int cheap = 1; cheap <= 3; cheap++) {
+                    assertEquals(sorted[k], Selection.kthSmallestWithForcedFallback(values, k, cheap),
+                            message + " cheapRounds=" + cheap);
+                }
             }
             assertArrayEquals(original, values, "input mutated, round=" + round);
         }
@@ -69,7 +73,11 @@ class SelectionTest {
             int[] sorted = shape.clone();
             Arrays.sort(sorted);
             assertEquals(sorted[n / 2], Selection.kthSmallest(shape, n / 2));
-            assertEquals(sorted[n / 2], Selection.kthSmallestWithRoundLimit(shape, n / 2, 0));
+            assertEquals(sorted[n / 2], Selection.kthSmallestWithForcedFallback(shape, n / 2, 0));
+            for (int cheap = 1; cheap <= 3; cheap++) {
+                assertEquals(sorted[n / 2], Selection.kthSmallestWithForcedFallback(shape, n / 2, cheap));
+                assertEquals(sorted[1], Selection.kthSmallestWithForcedFallback(shape, 1, cheap));
+            }
             assertEquals(sorted[0], Selection.kthSmallest(shape, 0));
             assertEquals(sorted[n - 1], Selection.kthSmallest(shape, n - 1));
             assertArrayEquals(original, shape);
@@ -140,6 +148,13 @@ class SelectionTest {
         assertEquals(List.of(), Selection.mergeSorted(List.of(List.<Integer>of(), List.<Integer>of()),
                 Comparator.<Integer>naturalOrder()));
 
+        List<List<Tagged>> untouched = new ArrayList<>();
+        for (List<Tagged> list : lists) {
+            untouched.add(new ArrayList<>(list));
+        }
+        Selection.mergeSorted(lists, order);
+        assertEquals(untouched, lists);
+
         Random random = new Random(SEED);
         for (int round = 0; round < 300; round++) {
             int listCount = random.nextInt(6);
@@ -156,8 +171,13 @@ class SelectionTest {
                 concatenation.addAll(list);
             }
             List<Tagged> expected = concatenation.stream().sorted(order).toList();
+            List<List<Tagged>> snapshot = new ArrayList<>();
+            for (List<Tagged> list : generated) {
+                snapshot.add(new ArrayList<>(list));
+            }
             assertEquals(expected, Selection.mergeSorted(generated, order),
                     "seed=" + Long.toHexString(SEED) + " round=" + round);
+            assertEquals(snapshot, generated, "input lists mutated, round=" + round);
         }
 
         Comparator<Integer> natural = Comparator.naturalOrder();

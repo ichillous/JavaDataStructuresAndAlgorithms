@@ -28,11 +28,18 @@ part, the pivot value is the answer. Otherwise recurse into one part only.
 
 A fixed pivot rule alone is not enough. With a median-of-three pivot, crafted
 inputs make each round peel off only a handful of elements, so the work is
-n + (n - 1) + (n - 2) + ... = O(n²). `kthSmallest` is therefore introselect: when
-more than `2 * (32 - Integer.numberOfLeadingZeros(n))` rounds have passed it picks
-the pivot by median-of-medians (medians of groups of five, then their median).
-That pivot is guaranteed to discard a constant fraction of the range, giving O(n)
-worst case. The three-way partition also keeps all-equal input linear.
+n + (n - 1) + (n - 2) + ... = O(n²). `kthSmallest` is therefore introselect with a
+shrink-based trigger. After each median-of-three round it compares the segment that
+still contains `k` with the segment the round started from. If the new segment is
+longer than three quarters of the old one, the cheap pivot has failed, and the rest
+of the selection uses median-of-medians pivots (medians of groups of five, then
+their median), which discard a constant fraction of the segment every round.
+
+Why that is linear in the worst case: every successful cheap round leaves at most
+3/4 of the segment, so successful rounds cost at most n(1 + 3/4 + (3/4)^2 + ...) =
+4n in total. At most one cheap round fails, costing at most n more, and the
+median-of-medians phase on what remains is O(n). The three-way partition also keeps
+all-equal input linear.
 
 Trace of `[7, 2, 9, 4, 4, 1]` with `k = 2` (sorted: 1, 2, 4, 4, 7, 9):
 
@@ -76,7 +83,7 @@ assert Selection.majorityElement(new int[] {1, 2}).isEmpty();
 
 | Method | Time | Auxiliary space | Ties and edge cases |
 | --- | --- | --- | --- |
-| `kthSmallest(values, k)` | O(n) worst, expected O(n) on the cheap path | O(n) for the copy, O(log n) recursion in the fallback | Duplicates count separately; `k` outside `[0, n)` throws `IndexOutOfBoundsException`, so an empty array always throws |
+| `kthSmallest(values, k)` | O(n) worst case (cheap rounds total at most 4n, then median-of-medians) | O(n) for the copy, O(log n) recursion in the fallback | Duplicates count separately; `k` outside `[0, n)` throws `IndexOutOfBoundsException`, so an empty array always throws |
 | `smallestK(values, k, order)` | O(n log(k + 1)) | O(min(k, n)) plus the result | Equal elements keep encounter order (same as `sorted(order).limit(k)`); `k = 0` gives `[]`; `k >= n` gives all, sorted; `k < 0` throws `IllegalArgumentException` |
 | `mergeSorted(lists, order)` | O(N log(k + 1)) for N elements in k lists | O(k) plus the result | Equal elements: lower list index first, then earlier position; an unsorted list throws `IllegalArgumentException` when the out-of-order element is reached |
 | `majorityElement(values)` | O(n) | O(1) | Needs a count strictly above `n / 2`; empty input and a tie like `[1, 1, 2, 2]` give empty |

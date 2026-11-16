@@ -8,7 +8,7 @@ Section: "## Algorithm utilities" (table columns: Source | Operations and contra
 (b) COMPLEXITY ROWS
 Target table: "## Searching, sorting and strings" in docs/complexity.md (columns: Algorithm | Time | Auxiliary space / behavior)
 
-| k-th smallest (introselect) | O(n) worst; expected O(n) with the median-of-three pivot | O(n) for the defensive copy, plus O(log n) recursion in the median-of-medians fallback; input unchanged |
+| k-th smallest (introselect) | O(n) worst case: median-of-three rounds that shrink the segment to at most 3/4 total at most 4n, a failed round triggers a median-of-medians fallback | O(n) for the defensive copy, plus O(log n) recursion in the median-of-medians fallback; input unchanged |
 | Top-k smallest (bounded max-heap) | O(n log(k + 1)) | O(min(k, n)) plus the result; stable, equal elements keep encounter order |
 | K-way merge of sorted lists | O(N log(k + 1)) for N elements in k lists | O(k) plus the result; ties go to the lower list index; unsorted input throws |
 | Majority element (Boyer-Moore) | O(n) | O(1); needs a count strictly above n/2, otherwise empty |

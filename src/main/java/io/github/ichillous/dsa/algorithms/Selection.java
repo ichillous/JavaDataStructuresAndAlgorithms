@@ -26,13 +26,15 @@ public final class Selection {
      * partition. Invariant: after each partition the k-th element of the whole range lies in
      * the segment that contains index {@code k}, because everything left of that segment is
      * smaller and everything right of it is larger (or the segment of values equal to the
-     * pivot already contains {@code k}). Only that segment is searched next. If more than
-     * {@code 2 * (32 - Integer.numberOfLeadingZeros(n))} partition rounds are needed, which
-     * only adversarial inputs cause, the pivot is chosen by median-of-medians instead, which
-     * guarantees a constant fraction of the segment is discarded each round.
+     * pivot already contains {@code k}). Only that segment is searched next. Whenever a
+     * median-of-three round leaves a segment longer than three quarters of the one it started
+     * with, only adversarial inputs do this, the rest of the selection uses median-of-medians
+     * pivots, which discard a constant fraction of the segment every round.
      *
-     * <p>Time O(n) worst case (expected O(n) with the cheap pivot); auxiliary space O(n) for
-     * the copy plus O(log n) recursion in the fallback.
+     * <p>Time O(n) worst case: the cheap rounds that shrink the segment to at most 3/4 cost at
+     * most n (1 + 3/4 + (3/4)^2 + ...) = 4n, at most one cheap round fails to shrink it, and the
+     * median-of-medians phase is linear. Auxiliary space O(n) for the copy plus O(log n)
+     * recursion in the fallback.
      *
      * @param k zero-based rank, checked with {@link java.util.Objects#checkIndex}
      * @throws NullPointerException if {@code values} is null
@@ -42,25 +44,26 @@ public final class Selection {
     public static int kthSmallest(int[] values, int k) {
         Objects.requireNonNull(values, "values");
         Objects.checkIndex(k, values.length);
-        return select(values.clone(), 0, values.length - 1, k, roundLimit(values.length));
+        return select(values.clone(), 0, values.length - 1, k, Integer.MAX_VALUE);
     }
 
-    /** Test hook: like {@link #kthSmallest} with an explicit round limit; 0 forces the fallback. */
-    static int kthSmallestWithRoundLimit(int[] values, int k, int roundLimit) {
+    /**
+     * Test hook: like {@link #kthSmallest} but switches to median-of-medians pivots after
+     * {@code cheapRounds} median-of-three rounds, so 0 forces the fallback immediately.
+     */
+    static int kthSmallestWithForcedFallback(int[] values, int k, int cheapRounds) {
         Objects.checkIndex(k, values.length);
-        return select(values.clone(), 0, values.length - 1, k, roundLimit);
-    }
-
-    private static int roundLimit(int length) {
-        return 2 * (32 - Integer.numberOfLeadingZeros(length));
+        return select(values.clone(), 0, values.length - 1, k, cheapRounds);
     }
 
     /** Selects index k within the inclusive range [low, high] of a, permuting that range. */
-    private static int select(int[] a, int low, int high, int k, int roundLimit) {
-        int rounds = 0;
+    private static int select(int[] a, int low, int high, int k, int cheapRounds) {
+        int cheapLeft = cheapRounds;
         while (low < high) {
-            int pivot = rounds >= roundLimit ? medianOfMedians(a, low, high) : medianOfThree(a, low, high);
-            rounds++;
+            int before = high - low + 1;
+            boolean cheap = cheapLeft > 0;
+            int pivot = cheap ? medianOfThree(a, low, high) : medianOfMedians(a, low, high);
+            cheapLeft--;
             // Invariant: a[low..lt-1] < pivot, a[lt..i-1] == pivot, a[gt+1..high] > pivot.
             int lt = low;
             int gt = high;
@@ -80,6 +83,9 @@ public final class Selection {
                 low = gt + 1;
             } else {
                 return pivot;
+            }
+            if (cheap && (long) (high - low + 1) * 4 > (long) before * 3) {
+                cheapLeft = 0; // the cheap pivot failed to shrink the segment: stop trusting it
             }
         }
         return a[k];
