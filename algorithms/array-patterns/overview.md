@@ -40,7 +40,9 @@ left right sum  action
 Keep the last index of every UTF-16 unit. Extend the window one unit at a time;
 when the unit was last seen inside the window, move `start` to just after that
 earlier occurrence. The window `[start, i]` always holds distinct units. Update
-the best range only when strictly longer, so ties keep the earliest start.
+the best range only when strictly longer, so ties keep the earliest start. The
+result is a half-open `StringAlgorithms.Span`, the same type that
+`longestPalindromicSubstring` returns.
 
 `"abba"`:
 
@@ -110,9 +112,9 @@ start 15: end 10 <= 15 frees one, depth 1 then 2     answer 2
 ```java
 import io.github.ichillous.dsa.algorithms.ArrayPatterns;
 import io.github.ichillous.dsa.algorithms.ArrayPatterns.IndexPair;
-import io.github.ichillous.dsa.algorithms.ArrayPatterns.Range;
 import io.github.ichillous.dsa.algorithms.ArrayPatterns.RangeAdd;
 import io.github.ichillous.dsa.algorithms.GreedyAlgorithms.Interval;
+import io.github.ichillous.dsa.algorithms.StringAlgorithms.Span;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -122,8 +124,8 @@ assert ArrayPatterns.pairWithSum(new int[] {1, 2, 3, 4, 6}, 6)
 assert ArrayPatterns.pairWithSum(new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE},
         2L * Integer.MAX_VALUE).isPresent();
 
-assert ArrayPatterns.longestSubstringWithoutRepeats("abba").equals(new Range(0, 2));
-assert ArrayPatterns.longestSubstringWithoutRepeats("").equals(new Range(0, 0));
+assert ArrayPatterns.longestSubstringWithoutRepeats("abba").equals(new Span(0, 2));
+assert ArrayPatterns.longestSubstringWithoutRepeats("").equals(new Span(0, 0));
 
 assert Arrays.equals(ArrayPatterns.nextGreaterIndices(new int[] {2, 1, 2, 4, 3}),
         new int[] {3, 2, 3, -1, -1});

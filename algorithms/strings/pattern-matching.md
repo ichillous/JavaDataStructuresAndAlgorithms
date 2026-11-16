@@ -93,12 +93,14 @@ assert StringAlgorithms.longestPalindromicSubstring("")
 | --- | --- | --- |
 | `zFunction` | O(n) | O(n) result |
 | `zFindAll` | O(t + p + k) | O(t + p + k): the concatenation and its z-array |
-| `rabinKarpFindAll` | Expected O(t + p); worst O(t·p) | O(1) plus the k results |
+| `rabinKarpFindAll` | O(t + p + k·p) when spurious hits are rare; worst O(t·p) | O(1) plus the k results |
 | `longestPalindromicSubstring` | O(n) | O(n) |
 
-Rabin–Karp's worst case is real: for text `aaaa…` and pattern `aaa`, every window
-matches and is verified in full. With the fixed modulus, an adversary who knows it
-can also construct many distinct windows with equal hashes.
+Rabin–Karp verifies each of its k reported matches in O(p), so its cost depends on
+the input, not on chance. The worst case is real: for text `aaaa…` and pattern `aaa`,
+every window matches and is verified in full. The base 257 and modulus 2^31 − 1 are
+fixed, not randomized, so an adversary who knows them can also construct many
+distinct windows with equal hashes.
 
 ## Pitfall: trusting the hash
 

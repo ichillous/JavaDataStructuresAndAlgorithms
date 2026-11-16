@@ -51,9 +51,10 @@ public final class BloomFilter<T> {
      * Creates an empty filter with exactly {@code bitCount} bits and
      * {@code hashCount} indices per element.
      *
-     * @param bitCount  number of bits, at least 1
+     * @param bitCount  number of bits, from 1 to 2^30
      * @param hashCount indices per element, at least 1
-     * @throws IllegalArgumentException if either argument is below 1
+     * @throws IllegalArgumentException if either argument is below 1, or if
+     *                                  {@code bitCount} exceeds 2^30
      */
     public BloomFilter(int bitCount, int hashCount) {
         if (bitCount < 1) {

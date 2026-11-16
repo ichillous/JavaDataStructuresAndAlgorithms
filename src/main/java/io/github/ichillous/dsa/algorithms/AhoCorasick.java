@@ -50,8 +50,10 @@ public final class AhoCorasick {
 
     private final List<Map<Character, Integer>> children = new ArrayList<>();
     private final List<String> terminal = new ArrayList<>();
-    private int[] failure;
-    private int[] output;
+    // Final, like children and terminal, so the Java memory model's final-field guarantee covers
+    // every table and an instance is safe to share between threads even without safe publication.
+    private final int[] failure;
+    private final int[] output;
 
     /**
      * Builds the automaton.
@@ -84,6 +86,8 @@ public final class AhoCorasick {
             }
             terminal.set(node, pattern);
         }
+        failure = new int[children.size()];
+        output = new int[children.size()];
         buildLinks();
     }
 
@@ -93,10 +97,8 @@ public final class AhoCorasick {
         return children.size() - 1;
     }
 
+    /** Fills the preallocated {@code failure} and {@code output} tables breadth first. */
     private void buildLinks() {
-        int size = children.size();
-        failure = new int[size];
-        output = new int[size];
         Queue<Integer> queue = new ArrayDeque<>(children.get(0).values());
         while (!queue.isEmpty()) {
             int node = queue.remove();

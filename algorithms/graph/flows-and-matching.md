@@ -79,7 +79,10 @@ an integral maximum flow, whose saturated middle edges are a maximum matching.
 Hopcroft-Karp is Dinic's phase structure specialized to this unit network: each phase
 runs a BFS that stops at the first layer reaching a free right vertex, then a DFS over
 layered edges that augments only along shortest paths until a maximal set of
-vertex-disjoint ones is found. The shortest path length grows each phase, giving `O(sqrt(V))` phases. Duplicate input pairs are
+vertex-disjoint ones is found. The shortest augmenting path grows each phase. After
+√V phases every remaining augmenting path is longer than √V, and the vertex-disjoint
+augmenting paths that separate the current matching from a maximum one then number at
+most √V, so at most √V more phases follow: O(√V) phases in total. Duplicate input pairs are
 ignored, out-of-range vertices throw `IndexOutOfBoundsException`, and the result is
 sorted by left vertex. When several maximum matchings exist the one returned is
 deterministic but unspecified; test the size and validity, not one particular answer.
@@ -89,7 +92,7 @@ deterministic but unspecified; test the size and validity, not one particular an
 | Operation | Time | Auxiliary space |
 | --- | --- | --- |
 | `maxFlow` (Dinic) | O(V^2 E) | O(V + E) |
-| `maximumMatching` (Hopcroft-Karp) | O(E sqrt(V)) after an O(E log E) deduplicating sort | O(V + E) |
+| `maximumMatching` (Hopcroft-Karp) | O((V + E) sqrt(V)), i.e. O(E sqrt(V)) when no vertex is isolated, after an O(E log E) deduplicating sort | O(V + E) |
 
 Residuals never overflow: a backward arc's residual is the flow on its edge, which is
 bounded by that edge's capacity. The total value is accumulated with

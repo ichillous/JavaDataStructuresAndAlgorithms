@@ -58,7 +58,7 @@ The map gives direct access to a node; the list lets the cache move that known n
 ## Other maintained implementations
 
 - [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) stores keys and values directly in power-of-two arrays, probes linearly, keeps its load at most 2/3 and deletes by backward shifting instead of tombstones. See the [open-addressing lesson](open-addressing.md).
-- [`LfuCache`](../../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) evicts the entry with the lowest use count, breaking ties by recency, in expected O(1) per operation. See the [LFU lesson](lfu-cache.md), which contrasts it with LRU.
+- [`LfuCache`](../../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) evicts the entry with the lowest use count, breaking ties by recency, in expected O(1) `get` and `remove` and expected amortized O(1) `put`. See the [LFU lesson](lfu-cache.md), which contrasts it with LRU.
 
 ## Costs and common mistakes
 

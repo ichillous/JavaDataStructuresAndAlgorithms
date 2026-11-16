@@ -46,8 +46,10 @@ Answer these questions before picking a row:
   quoted from its specification is a guarantee.
 - Unless a row says otherwise, n is the number of items, k the number of results,
   V and E the numbers of vertices and edges.
-- Repository structures are not thread safe, and they reject null elements, keys
-  and values.
+- Mutable repository structures are not thread safe; the immutable ones
+  (SparseTable, AhoCorasick, SuffixArray, AliasTable, LowestCommonAncestor) can be
+  shared between threads once constructed. Repository structures reject null
+  elements, keys and values.
 
 ## Contents
 
@@ -217,7 +219,7 @@ assert List.copyOf(window.keySet()).equals(List.of(10, 20, 30));
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
 | Exact frequency map | The distinct items fit in memory | Expected O(1) per item; O(d) for d distinct items | JDK: `java.util.HashMap#merge`; `java.util.stream.Collectors#groupingBy` with `Collectors#counting` | The spec makes no guarantee about the type or mutability of the map `groupingBy` returns; pass a map factory such as `TreeMap::new` when you need sorted keys. |
-| Count-Min sketch | Approximate counts for a huge or unbounded key space | O(d) per update or query for d rows; O(w·d) counters | repo: [CountMinSketch](../src/main/java/io/github/ichillous/dsa/structures/CountMinSketch.java) ([lesson](../data-structures/probabilistic/overview.md)) | With nonnegative increments it overestimates only: an estimate is never below the true count. The error grows with the total count (at most `epsilon x total` with probability `1 - delta` for a fixed item), so rare items are estimated poorly. The repository sketch has no removal, caps the table at 2^25 counters, shares counts between items with equal `hashCode()`, and throws `ArithmeticException` before changing anything if a counter or the total would overflow. |
+| Count-Min sketch | Approximate counts for a huge or unbounded key space | O(d) per update or query for d rows; O(w·d) counters | repo: [CountMinSketch](../src/main/java/io/github/ichillous/dsa/structures/CountMinSketch.java) ([lesson](../data-structures/probabilistic/overview.md)) | With nonnegative increments it overestimates only: an estimate is never below the true count. The error grows with the total count (at most `epsilon * totalCount()` above the true count, with probability at least `1 - delta` for a fixed item), so rare items are estimated poorly. The repository sketch has no removal, caps the table at 2^25 counters, shares counts between items with equal `hashCode()`, and throws `ArithmeticException` before changing anything if a counter or the total would overflow. |
 | Misra–Gries frequent items | Find every item that occurs more than n/k times, in one pass with k − 1 counters | Expected amortized O(1) per item; O(k) | not implemented here | It returns candidates, not exact counts; a second pass must confirm them. Boyer–Moore majority vote is the k = 2 case. |
 | HyperLogLog | Estimate the number of distinct items in a stream | O(1) per item; m small registers (kilobytes) | not implemented here | An estimate only, with relative standard error about 1.04/√m; small cardinalities need a correction. Sketches with the same parameters merge. |
 
@@ -274,7 +276,7 @@ assert List.copyOf(counts.keySet()).equals(List.of(200, 404, 500));  // TreeMap:
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
 | Minimum meeting rooms (interval partitioning) | The fewest resources so that no two overlapping intervals share one | O(n log n); O(n) | repo: [ArrayPatterns.minimumMeetingRooms](../src/main/java/io/github/ichillous/dsa/algorithms/ArrayPatterns.java) ([lesson](../algorithms/array-patterns/overview.md)) | The answer equals the maximum overlap depth. The repository method sorts starts and ends separately and processes an end before a start at the same time, so [1, 2) and [2, 3) share a room. Empty input gives 0. |
-| Sweep line over endpoint events | Peak concurrency, total covered length, or any count that changes only at endpoints | O(n log n) to sort 2n events; O(n) | not implemented here (a JDK building block is `java.util.TreeMap#merge`, to sum changes per coordinate) | The order of events at equal coordinates decides whether touching intervals overlap. |
+| Sweep line over endpoint events | Peak concurrency, total covered length, or any count that changes only at endpoints | O(n log n) to sort 2n events; O(n) | not implemented here as a general API (the peak-overlap case is [ArrayPatterns.minimumMeetingRooms](../src/main/java/io/github/ichillous/dsa/algorithms/ArrayPatterns.java); a JDK building block is `java.util.TreeMap#merge`, to sum changes per coordinate) | The order of events at equal coordinates decides whether touching intervals overlap. |
 
 ### Choose a set of non-overlapping intervals
 
@@ -390,7 +392,7 @@ assert List.copyOf(cache.keySet()).equals(List.of("a", "c"));
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| LFU cache | Long-term popularity matters more than recency, such as hot keys behind a scan-heavy workload | Expected O(1) per operation with frequency buckets and a tracked minimum; O(capacity) | repo: [LfuCache](../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) ([lesson](../data-structures/hash-tables/lfu-cache.md)) | Items that were popular long ago can stay forever ("stale popularity"); decaying or windowed counts fix that. The repository cache evicts the lowest frequency and, among equal counts, the least recently used entry. An evicted or removed key forgets its history and restarts at frequency 1. Counts saturate at `Integer.MAX_VALUE`. Even `get` changes state, so the cache is not safe to share between threads. |
+| LFU cache | Long-term popularity matters more than recency, such as hot keys behind a scan-heavy workload | Expected O(1) `get` and `remove`, expected amortized O(1) `put`, with frequency buckets and a tracked minimum; O(capacity) | repo: [LfuCache](../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) ([lesson](../data-structures/hash-tables/lfu-cache.md)) | Items that were popular long ago can stay forever ("stale popularity"); decaying or windowed counts fix that. The repository cache evicts the lowest frequency and, among equal counts, the least recently used entry. An evicted or removed key forgets its history and restarts at frequency 1. Counts saturate at `Integer.MAX_VALUE`. Even `get` changes state, so the cache is not safe to share between threads. |
 
 ### Approximate LRU, time-based expiry and memory pressure
 
@@ -540,7 +542,7 @@ assert Arrays.stream(orders).map(Order::id).toList().equals(List.of("b", "d", "a
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Variable-size sliding window (longest substring without repeats) | Shrinking a valid window keeps it valid, as with "no repeated character" or "sum at most S" over nonnegative values | O(n) with an array over a small alphabet; expected O(n) with a hash map | repo: [ArrayPatterns.longestSubstringWithoutRepeats](../src/main/java/io/github/ichillous/dsa/algorithms/ArrayPatterns.java) ([lesson](../algorithms/array-patterns/overview.md)) | With negative values a sum condition is not monotone; use prefix sums with a hash map instead. The repository method works on UTF-16 code units (a supplementary character counts as two), returns the earliest longest window as a half-open `Range`, and gives `Range(0, 0)` for the empty string. |
+| Variable-size sliding window (longest substring without repeats) | Shrinking a valid window keeps it valid, as with "no repeated character" or "sum at most S" over nonnegative values | O(n) with an array over a small alphabet; expected O(n) with a hash map | repo: [ArrayPatterns.longestSubstringWithoutRepeats](../src/main/java/io/github/ichillous/dsa/algorithms/ArrayPatterns.java) ([lesson](../algorithms/array-patterns/overview.md)) | With negative values a sum condition is not monotone; use prefix sums with a hash map instead. The repository method works on UTF-16 code units (a supplementary character counts as two), returns the earliest longest window as a half-open `StringAlgorithms.Span`, and gives `Span(0, 0)` for the empty string. |
 | Prefix sums with a hash map | Count or find subarrays with a given sum, negative values allowed | Expected O(n); O(n) | JDK: `java.util.HashMap#merge` | Seed the map with prefix sum 0 seen once. Sum in `long`. |
 
 ### Find the contiguous subarray with the largest sum
@@ -729,7 +731,7 @@ assert !"Aa".equals("BB");                   // equal hashes, different strings
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Bipartite matching (Hopcroft–Karp) | The largest matching of workers to jobs, without costs | O(E·√V) after an O(E log E) sort that removes duplicate edges | repo: [BipartiteMatching.maximumMatching](../src/main/java/io/github/ichillous/dsa/graphs/BipartiteMatching.java) ([lesson](../algorithms/graph/flows-and-matching.md)) | Maximizes the number of pairs only; with costs, use the Hungarian algorithm or min-cost flow. The two sides are numbered separately from 0. The repository method ignores duplicate edges and returns one deterministic maximum matching; which one is not otherwise specified. |
+| Bipartite matching (Hopcroft–Karp) | The largest matching of workers to jobs, without costs | O((V + E)·√V), usually quoted as O(E·√V) when every vertex has an edge, after an O(E log E) sort that removes duplicate edges | repo: [BipartiteMatching.maximumMatching](../src/main/java/io/github/ichillous/dsa/graphs/BipartiteMatching.java) ([lesson](../algorithms/graph/flows-and-matching.md)) | Maximizes the number of pairs only; with costs, use the Hungarian algorithm or min-cost flow. The two sides are numbered separately from 0. The repository method ignores duplicate edges and returns one deterministic maximum matching; which one is not otherwise specified. |
 | Augmenting paths (Kuhn's algorithm) | Small graphs and the simplest code | O(V·E) | not implemented here | A recursive version overflows the stack on large graphs. |
 
 ### Assign items at the lowest total cost
@@ -796,13 +798,13 @@ iteratively: real trees can be paths 100,000 vertices deep.
 | Knapsack chosen items reconstruction | You need which items to pack | O(n·W); O(n·W) bits | repo: [DynamicProgramming.knapsack01Items](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java) ([lesson](../algorithms/dynamic-programming/problems.md)) | Record, per item and capacity, whether taking the item improved the value. The repository method records it only when strictly better, so zero- and negative-value items are omitted, and it returns ascending indices, preferring lower-indexed items among equal-value optima. |
 | Chosen coins reconstruction | You need the coins, not just their count | O(c·a); O(a) | repo: [DynamicProgramming.minimumCoinsChoice](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java) ([lesson](../algorithms/dynamic-programming/problems.md)) | Store the last coin used for each amount and walk back from the target. The repository method returns an empty `Optional` when the amount is unreachable, the coins in ascending order, and on ties the first listed coin wins. |
 | LIS sequence reconstruction | You need the subsequence, not just its length | O(n log n); O(n) | repo: [DynamicProgramming.longestIncreasingSubsequenceIndices](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java) ([lesson](../algorithms/dynamic-programming/problems.md)) | Keep a predecessor index for each element. The repository method returns the ascending indices of one strictly increasing optimum, not necessarily the lexicographically smallest. |
-| Hirschberg's algorithm | An LCS or alignment in linear space | O(mn); O(min(m, n)) | not implemented here | Divide and conquer around the middle row, roughly doubling the time. |
+| Hirschberg's algorithm | An LCS or alignment in linear space | O(mn); O(min(m, n)) working space plus the output (up to m + n steps for an edit script) | not implemented here | Divide and conquer around the middle row, roughly doubling the time. |
 
 ### Split a string into dictionary words
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Word break | Decide whether, and how, a string splits into dictionary words | O(n·L) substring checks for maximum word length L, each costing O(L); O(n) | repo: [DynamicProgrammingClassics.wordBreak](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) ([lesson](../algorithms/dynamic-programming/classic-problems.md)) | Store the dictionary in a `HashSet` and only try lengths up to the longest word. Return one segmentation. Listing all of them can take exponential time; counting them is the same DP, but the count overflows `long` quickly, so use checked or `BigInteger` arithmetic. The repository method returns an `Optional` list, the segmentation whose first word is shortest, and rejects an empty dictionary word. |
+| Word break | Decide whether, and how, a string splits into dictionary words | O(n·L) hash-set lookups for maximum word length L, each expected O(L); O(n) plus the dictionary set | repo: [DynamicProgrammingClassics.wordBreak](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) ([lesson](../algorithms/dynamic-programming/classic-problems.md)) | Store the dictionary in a `HashSet` and only try lengths up to the longest word. Return one segmentation. Listing all of them can take exponential time; counting them is the same DP, but the count overflows `long` quickly, so use checked or `BigInteger` arithmetic. The repository method returns an `Optional` list, the segmentation whose first word is shortest, and rejects an empty dictionary word. |
 
 ### Palindromes as subsequences
 
@@ -814,7 +816,7 @@ iteratively: real trees can be paths 100,000 vertices deep.
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Matrix-chain order | The cheapest order to multiply a chain of matrices, or any interval DP over a sequence | O(n³); O(n²) | repo: [DynamicProgrammingClassics.matrixChainOrder](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) ([lesson](../algorithms/dynamic-programming/classic-problems.md)) | Costs overflow `int` quickly; use `long` and checked arithmetic. The repository method returns the cost and a parenthesization, breaks ties at the smallest split, and throws `ArithmeticException` if any candidate cost exceeds `long`, even one that would not have been optimal. |
+| Matrix-chain order | The cheapest order to multiply a chain of matrices, or any interval DP over a sequence | O(n³); O(n²) | repo: [DynamicProgrammingClassics.matrixChainOrder](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) ([lesson](../algorithms/dynamic-programming/classic-problems.md)) | Costs overflow `int` quickly; use `long` and checked arithmetic. The repository method returns the cost and a parenthesization, breaks ties at the smallest split, and throws `ArithmeticException` only if the optimal cost exceeds `long`; a candidate that overflows simply loses, so the answer is exact whenever the optimum fits. |
 
 ### Visit every city once (small n)
 
@@ -1038,7 +1040,9 @@ assert deck.size() == 8;
 
 ## 24. Concurrency-aware JDK structures
 
-This repository's structures are not thread safe. These JDK types are the
+Mutable repository structures are not thread safe; the immutable ones
+(SparseTable, AhoCorasick, SuffixArray, AliasTable, LowestCommonAncestor) can be
+shared between threads once constructed. These JDK types are the
 starting point when several threads share data. The rows below quote their
 specifications; this repository does not implement them.
 

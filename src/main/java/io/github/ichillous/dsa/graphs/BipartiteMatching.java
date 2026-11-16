@@ -30,17 +30,19 @@ public final class BipartiteMatching {
      *
      * <p>Invariant: the matching is valid after every augmentation, and a phase
      * augments along a maximal set of vertex-disjoint shortest augmenting paths,
-     * so the shortest augmenting path length strictly grows and there are
-     * O(sqrt(V)) phases. The BFS stops at the first layer that reaches a free
-     * right vertex, and the DFS follows only layered edges and accepts a free
-     * right vertex only at that layer. A matching with no augmenting path is maximum (Berge).
+     * so the shortest augmenting path length strictly grows and, by the
+     * Hopcroft-Karp counting argument, there are O(sqrt(V)) phases. The BFS stops
+     * at the first layer that reaches a free right vertex, and the DFS follows only
+     * layered edges and accepts a free right vertex only at that layer. A matching
+     * with no augmenting path is maximum (Berge).
      * The search is iterative; path length is not limited by the call stack.
      *
      * <p>Duplicate edges are ignored. Which maximum matching is returned is
      * deterministic (free left vertices and edges are scanned in ascending order)
      * but not otherwise specified. The input collection is not mutated.
      *
-     * <p>Time O(E sqrt(V)) after an O(E log E) sort for deduplication; auxiliary
+     * <p>Time O((V + E) sqrt(V)), i.e. O(E sqrt(V)) when no vertex is isolated,
+     * after an O(E log E) sort for deduplication: each phase costs O(V + E). Auxiliary
      * space O(V + E).
      *
      * @param leftSize number of left vertices, at least zero

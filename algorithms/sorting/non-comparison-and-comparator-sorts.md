@@ -98,7 +98,8 @@ The four-letter words come out as `pear, kiwi, plum, date`, their original relat
 | `mergeSort(T[], Comparator)` | O(n log n) comparisons | O(n) buffer, O(log n) stack | Stable; null elements rejected |
 
 Counting sort is only a good choice when r is not much larger than n. Sorting two
-values that are 2^20 apart still allocates a 4 MiB table.
+values that are 2^20 - 1 apart (for example 0 and 1,048,575) still allocates a 4 MiB
+table; at 2^20 apart the method rejects the range.
 
 ## Stability and why a Comparator sort needs it
 

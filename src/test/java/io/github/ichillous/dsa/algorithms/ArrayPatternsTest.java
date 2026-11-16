@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.github.ichillous.dsa.algorithms.ArrayPatterns.IndexPair;
-import io.github.ichillous.dsa.algorithms.ArrayPatterns.Range;
 import io.github.ichillous.dsa.algorithms.ArrayPatterns.RangeAdd;
 import io.github.ichillous.dsa.algorithms.GreedyAlgorithms.Interval;
+import io.github.ichillous.dsa.algorithms.StringAlgorithms.Span;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,9 +27,6 @@ class ArrayPatternsTest {
         assertThrows(IllegalArgumentException.class, () -> new IndexPair(-1, 2));
         assertThrows(IllegalArgumentException.class, () -> new IndexPair(2, 2));
         assertEquals(1, new IndexPair(0, 1).second());
-        assertThrows(IllegalArgumentException.class, () -> new Range(-1, 0));
-        assertThrows(IllegalArgumentException.class, () -> new Range(2, 1));
-        assertEquals(3, new Range(3, 3).endExclusive());
         assertThrows(IllegalArgumentException.class, () -> new RangeAdd(-1, 0, 1));
         assertThrows(IllegalArgumentException.class, () -> new RangeAdd(2, 1, 1));
         assertEquals(7L, new RangeAdd(1, 1, 7L).delta());
@@ -77,15 +74,17 @@ class ArrayPatternsTest {
 
     @Test
     void longestSubstringWithoutRepeatsUsesEarliestTie() {
-        assertEquals(new Range(0, 3), ArrayPatterns.longestSubstringWithoutRepeats("abcabcbb"));
-        assertEquals(new Range(0, 1), ArrayPatterns.longestSubstringWithoutRepeats("bbbb"));
-        assertEquals(new Range(0, 0), ArrayPatterns.longestSubstringWithoutRepeats(""));
-        assertEquals(new Range(2, 5), ArrayPatterns.longestSubstringWithoutRepeats("pwwkew"));
-        assertEquals(new Range(0, 1), ArrayPatterns.longestSubstringWithoutRepeats("a"));
+        // The window is the same half-open Span type that longestPalindromicSubstring returns.
+        Span window = ArrayPatterns.longestSubstringWithoutRepeats("abcabcbb");
+        assertEquals(new Span(0, 3), window);
+        assertEquals(new Span(0, 1), ArrayPatterns.longestSubstringWithoutRepeats("bbbb"));
+        assertEquals(new Span(0, 0), ArrayPatterns.longestSubstringWithoutRepeats(""));
+        assertEquals(new Span(2, 5), ArrayPatterns.longestSubstringWithoutRepeats("pwwkew"));
+        assertEquals(new Span(0, 1), ArrayPatterns.longestSubstringWithoutRepeats("a"));
         // A repeat before the window start must not shrink the window: "abba" -> "ab" (0,2).
-        assertEquals(new Range(0, 2), ArrayPatterns.longestSubstringWithoutRepeats("abba"));
+        assertEquals(new Span(0, 2), ArrayPatterns.longestSubstringWithoutRepeats("abba"));
         // A supplementary character is two UTF-16 units, so the window is measured in units.
-        assertEquals(new Range(0, 3),
+        assertEquals(new Span(0, 3),
                 ArrayPatterns.longestSubstringWithoutRepeats("😀x\uD83D"));
 
         long seed = 0x2B1;
@@ -97,13 +96,13 @@ class ArrayPatternsTest {
                 builder.append("abc".charAt(random.nextInt(3)));
             }
             String text = builder.toString();
-            Range expected = new Range(0, 0);
+            Span expected = new Span(0, 0);
             for (int start = 0; start < text.length(); start++) {
                 for (int end = start + 1; end <= text.length(); end++) {
                     boolean distinct = text.substring(start, end).chars().distinct().count()
                             == end - start;
                     if (distinct && end - start > expected.endExclusive() - expected.startInclusive()) {
-                        expected = new Range(start, end);
+                        expected = new Span(start, end);
                     }
                 }
             }

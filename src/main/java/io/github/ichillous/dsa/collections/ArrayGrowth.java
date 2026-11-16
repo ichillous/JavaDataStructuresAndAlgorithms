@@ -1,9 +1,11 @@
 package io.github.ichillous.dsa.collections;
 
 /**
- * Capacity-growth policy shared by the array-backed collections, following the JDK's
- * {@code ArrayList} policy: grow to the larger of the required length and double the current
- * capacity, capped at {@link #MAX_ARRAY_LENGTH}. Not instantiable.
+ * Capacity-growth policy shared by the array-backed collections: grow to the larger of the
+ * required length and double the current capacity, capped at {@link #MAX_ARRAY_LENGTH}, and throw
+ * {@link OutOfMemoryError} for a requirement above the cap. The cap is hard. The JDK's
+ * {@code ArrayList} instead grows by half and treats {@code Integer.MAX_VALUE - 8} as a soft
+ * limit, still growing to an exact requirement up to {@code Integer.MAX_VALUE}. Not instantiable.
  */
 final class ArrayGrowth {
     /** The largest array length that is safe to request on common JVMs. */

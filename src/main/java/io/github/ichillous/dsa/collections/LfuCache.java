@@ -15,9 +15,10 @@ import java.util.Objects;
  * removals of other keys do not change any entry's frequency or relative order. An evicted or
  * removed key forgets its history: if reinserted it starts again at frequency 1.
  *
- * <p>Get, put, remove and frequency take expected O(1) time, assuming constant-time key
- * hashing/equality; the minimum frequency is maintained without scanning because it only
- * resets to 1 on insertion and advances by one when the minimum bucket empties on a promotion.
+ * <p>Get, remove and frequency take expected O(1) time and put takes expected amortized O(1)
+ * time (the key table can resize), assuming constant-time key hashing/equality; the minimum
+ * frequency is maintained without scanning because it only resets to 1 on insertion and
+ * advances by one when the minimum bucket empties on a promotion.
  * The tracked minimum is exact whenever the cache is full; removal can leave it stale, which is
  * safe because the next eviction needs a preceding insertion that resets it to 1.
  * Storage is O(capacity), including hash-table capacity retained after removals and clear.

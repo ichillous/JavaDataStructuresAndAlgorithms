@@ -19,8 +19,9 @@ public final class StringAlgorithms {
     private StringAlgorithms() {}
 
     /**
-     * A half-open range {@code [startInclusive, endExclusive)} of UTF-16 positions. The compact
-     * constructor throws {@link IllegalArgumentException} unless
+     * A half-open range {@code [startInclusive, endExclusive)} of UTF-16 positions, returned by
+     * {@link #longestPalindromicSubstring} and {@link ArrayPatterns#longestSubstringWithoutRepeats}.
+     * The compact constructor throws {@link IllegalArgumentException} unless
      * {@code 0 <= startInclusive <= endExclusive}.
      *
      * @param startInclusive first position, at least zero
@@ -157,9 +158,11 @@ public final class StringAlgorithms {
      * semantics as {@link #kmpFindAll}. A rolling polynomial hash with base 257 modulo the prime
      * 2^31 - 1 selects candidates; every candidate is then compared character by character, so a
      * hash collision never produces a false positive. Hash arithmetic uses {@code long} with
-     * operands below 2^31 and units below 2^16, so nothing overflows. Expected O(t + p) time;
-     * worst case O(t * p) when many windows collide or genuinely match (for example, all-equal
-     * text and pattern). O(1) extra space besides the result.
+     * operands below 2^31 and units below 2^16, so nothing overflows. O(t + p + k * p) time for
+     * k reported matches when spurious hash hits are rare; worst case O(t * p) when many windows
+     * genuinely match (for example, all-equal text and pattern) or collide. The base and modulus
+     * are fixed, not randomized, so the running time is input-dependent rather than expected, and
+     * crafted input can force the worst case. O(1) extra space besides the result.
      */
     public static List<Integer> rabinKarpFindAll(String text, String pattern) {
         Objects.requireNonNull(text, "text");

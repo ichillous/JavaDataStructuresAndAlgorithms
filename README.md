@@ -144,16 +144,19 @@ and `target/site/jacoco/index.html`. Generated files are ignored by Git.
   units; there is no implicit normalization or case folding.
 - Signed arithmetic and overflow rules differ by API. Exact Bellman–Ford work
   distinguishes negative cycles, unreachable vertices and out-of-range finite distances.
-- Structures are not thread safe. Enumeration and subset search have explicit size
+- Mutable repository structures are not thread safe; the immutable ones (SparseTable,
+  AhoCorasick, SuffixArray, AliasTable, LowestCommonAncestor) can be shared between
+  threads once constructed. Enumeration and subset search have explicit size
   limits; pseudopolynomial DP can still exhaust memory on large numeric capacities.
 - Randomized APIs never create their own generator. They take a caller-supplied
   `java.util.random.RandomGenerator`, so a seeded generator reproduces a run and a test can
   fix its seed.
 - Probabilistic structures have one-sided errors: a Bloom filter has false positives but
   no false negatives, and a Count-Min sketch never undercounts. Oversized tables are rejected
-  before allocation (Bloom bits at most 2^30, sketch width x depth at most 2^25).
+  before allocation (Bloom bits at most 2^30, sketch width · depth at most 2^25).
 - Array-backed collections double their capacity up to `Integer.MAX_VALUE - 8` and then
-  throw `OutOfMemoryError`; DP tables beyond that size are rejected with
+  throw `OutOfMemoryError`, except `OpenAddressingHashMap`, which stops at 2^30 slots and
+  throws `IllegalStateException`; DP tables beyond that size are rejected with
   `IllegalArgumentException`. Number-theory, flow and DP arithmetic is exact or throws
   `ArithmeticException`; it does not wrap.
 

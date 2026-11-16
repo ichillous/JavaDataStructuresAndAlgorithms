@@ -26,6 +26,9 @@ import java.util.Objects;
  * hashes, and about 1/2 (1 + 1/(1 - a)^2) probes for an unsuccessful search at load
  * {@code a}. Adversarial or constant hash codes make an operation O(n). Storage is
  * O(capacity) with no per-entry nodes; a resize needs O(capacity) temporary space.
+ * The table is capped at 2^30 slots, so it holds at most 715,827,882 mappings (two
+ * thirds of 2^30); adding a new key beyond that throws {@link IllegalStateException}
+ * and leaves the map unchanged.
  * Null keys and values are rejected, so null unambiguously means an absent mapping.
  * Keys must retain stable equals/hashCode behavior while stored. The map stores
  * references and never copies keys or values. This class is not thread-safe.
@@ -49,7 +52,7 @@ public final class OpenAddressingHashMap<K, V> {
 
     /**
      * Creates an empty map with at least the given positive slot count, rounded up
-     * to a power of two (minimum 2). The map grows automatically.
+     * to a power of two (minimum 2). The map grows automatically, up to 2^30 slots.
      *
      * @throws IllegalArgumentException if the count is not positive or exceeds 2^30
      */
@@ -63,7 +66,13 @@ public final class OpenAddressingHashMap<K, V> {
         allocate(Math.max(2, Integer.highestOneBit(initialCapacity - 1) << 1));
     }
 
-    /** Adds or replaces a mapping, returning its previous value or null if absent. */
+    /**
+     * Adds or replaces a mapping, returning its previous value or null if absent.
+     *
+     * @throws NullPointerException if the key or value is null
+     * @throws IllegalStateException if the key is new and the table would need more than
+     *     2^30 slots (it already holds 715,827,882 mappings); the map is left unchanged
+     */
     public V put(K key, V value) {
         Objects.requireNonNull(key, "key");
         Objects.requireNonNull(value, "value");

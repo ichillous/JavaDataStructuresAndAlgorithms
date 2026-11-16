@@ -101,7 +101,9 @@ substring of `"bbbab"` is `"bbb"` (3), a different and easier question.
 where `Ai` is `dimensions[i-1] x dimensions[i]`. Multiplying `p x q` by `q x r`
 costs `p*q*r`. The result lists the cost and a string such as `"((A1A2)A3)"`; a
 single matrix is `"A1"` with cost 0. Equal-cost splits go to the **smallest
-split `k`**. Every product and sum is checked.
+split `k`**. Every product and sum is checked: a candidate above `Long.MAX_VALUE`
+loses to every representable one, so the answer is exact whenever the optimum fits
+in a `long`, and `ArithmeticException` means the optimum itself does not.
 
 ```text
 dimensions [10, 30, 5, 60]
@@ -209,7 +211,7 @@ assert schedule.chosen().equals(List.of(b, d));
 | `countCoinCombinations` | O(distinct coins * amount) | O(amount) | `ArithmeticException` if a count exceeds `long` |
 | `wordBreak` | O(n * L) lookups, O(n * L^2) characters | O(n + dictionary) | none; lengths are `int` |
 | `longestPalindromicSubsequenceLength` | O(n^2) | O(n) | none |
-| `matrixChainOrder` | O(n^3) | O(n^2) | `ArithmeticException` on any candidate cost |
+| `matrixChainOrder` | O(n^3) | O(n^2) | `ArithmeticException` only if the optimal cost exceeds `long`; overflowing candidates lose |
 | `travelingSalesman` | O(2^n * n^2), `n <= 16` | about 4 MB at 16 cities plus a byte table | entries limited to +/-2^47, so no overflow |
 | `weightedIntervalScheduling` | O(n log n) | O(n) | `ArithmeticException` if the total exceeds `long` |
 

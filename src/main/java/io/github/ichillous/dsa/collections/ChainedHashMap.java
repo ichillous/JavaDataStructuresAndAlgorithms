@@ -8,10 +8,11 @@ import java.util.Objects;
  *
  * <p>Get, put and remove take expected amortized O(1) time with well-distributed
  * hashes; adversarial collisions can make an operation O(n). Storage is
- * O(n + capacity). The bucket count doubles on resize, capped at {@code Integer.MAX_VALUE - 8};
- * a larger requirement throws {@link OutOfMemoryError}, as with {@code ArrayList}. Null keys and values are rejected, so null unambiguously means
- * an absent mapping. Keys must retain stable equals/hashCode behavior while stored.
- * This class is not thread-safe.
+ * O(n + capacity). The bucket count doubles on resize, capped at
+ * {@code Integer.MAX_VALUE - 8}; a larger requirement throws {@link OutOfMemoryError}. The cap
+ * is hard, unlike {@code ArrayList}'s soft limit at the same length. Null keys and values are
+ * rejected, so null unambiguously means an absent mapping. Keys must retain stable
+ * equals/hashCode behavior while stored. This class is not thread-safe.
  *
  * @param <K> key type
  * @param <V> value type

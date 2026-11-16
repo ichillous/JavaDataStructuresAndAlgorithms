@@ -47,7 +47,8 @@ public final class CountMinSketch<T> {
      *
      * @param width cells per row, at least 1
      * @param depth number of rows, at least 1
-     * @throws IllegalArgumentException if either argument is below 1
+     * @throws IllegalArgumentException if either argument is below 1, or if
+     *                                  {@code width * depth} exceeds 2^25 counters
      */
     public CountMinSketch(int width, int depth) {
         if (width < 1) {

@@ -9,6 +9,7 @@ import io.github.ichillous.dsa.algorithms.DynamicProgrammingClassics.ChainOrder;
 import io.github.ichillous.dsa.algorithms.DynamicProgrammingClassics.Schedule;
 import io.github.ichillous.dsa.algorithms.DynamicProgrammingClassics.Tour;
 import io.github.ichillous.dsa.algorithms.DynamicProgrammingClassics.WeightedInterval;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -280,6 +281,103 @@ class DynamicProgrammingClassicsTest {
         // Even a single triple product of Integer.MAX_VALUE exceeds a long.
         assertThrows(ArithmeticException.class,
                 () -> DynamicProgrammingClassics.matrixChainOrder(new int[] {max, max, max, max}));
+    }
+
+    @Test
+    void matrixChainIsExactWhenOnlyNonOptimalCandidatesOverflow() {
+        int max = Integer.MAX_VALUE;
+        BigInteger big = BigInteger.valueOf(max);
+        // ((A1A2)A3) costs max*max*1 + max*1*max = 2 * max^2, which fits in a long.
+        // (A1(A2A3)) costs max*1*max + max*max*max, which does not, so it must simply lose.
+        long expected = big.multiply(big).shiftLeft(1).longValueExact();
+        int[] dimensions = {max, max, 1, max};
+        assertEquals(new ChainOrder(expected, "((A1A2)A3)"),
+                DynamicProgrammingClassics.matrixChainOrder(dimensions));
+        assertArrayEquals(new int[] {max, max, 1, max}, dimensions);
+        // 218,934,409 * 82,443,193 * 511 is exactly Long.MAX_VALUE, which is representable.
+        assertEquals(BigInteger.valueOf(Long.MAX_VALUE), BigInteger.valueOf(218_934_409L)
+                .multiply(BigInteger.valueOf(82_443_193L)).multiply(BigInteger.valueOf(511L)));
+        assertEquals(new ChainOrder(Long.MAX_VALUE, "(A1A2)"),
+                DynamicProgrammingClassics.matrixChainOrder(new int[] {218_934_409, 82_443_193, 511}));
+    }
+
+    @Test
+    void matrixChainMatchesExactModelOnExtremeDimensions() {
+        long seed = 0x3A8L;
+        Random random = new Random(seed);
+        int[] palette = {1, 2, 3, 46_341, 1 << 16, 1 << 20, Integer.MAX_VALUE - 1, Integer.MAX_VALUE};
+        BigInteger longMax = BigInteger.valueOf(Long.MAX_VALUE);
+        int exact = 0;
+        int overflow = 0;
+        int exactDespiteOverflowingCandidate = 0;
+        for (int trial = 0; trial < 3000; trial++) {
+            int[] dimensions = new int[2 + random.nextInt(6)];
+            for (int index = 0; index < dimensions.length; index++) {
+                dimensions[index] = palette[random.nextInt(palette.length)];
+            }
+            int[] copy = dimensions.clone();
+            String message = "seed " + seed + " trial " + trial + " dims " + Arrays.toString(copy);
+            ExactChain model = exactChain(dimensions);
+            if (model.best().compareTo(longMax) <= 0) {
+                ChainOrder order = DynamicProgrammingClassics.matrixChainOrder(dimensions);
+                assertEquals(new ChainOrder(model.best().longValueExact(), model.text()), order,
+                        message);
+                exact++;
+                if (model.worst().compareTo(longMax) > 0) {
+                    exactDespiteOverflowingCandidate++;
+                }
+            } else {
+                assertThrows(ArithmeticException.class,
+                        () -> DynamicProgrammingClassics.matrixChainOrder(dimensions), message);
+                overflow++;
+            }
+            assertArrayEquals(copy, dimensions, message);
+        }
+        assertTrue(exact > 0 && overflow > 0 && exactDespiteOverflowingCandidate > 0,
+                "seed " + seed + ": " + exact + " exact, " + overflow + " overflow, "
+                        + exactDespiteOverflowingCandidate + " exact despite an overflowing candidate");
+    }
+
+    /** Exact optimum (smallest split on ties), its parenthesization and the worst order's cost. */
+    private record ExactChain(BigInteger best, String text, BigInteger worst) {}
+
+    private static ExactChain exactChain(int[] dimensions) {
+        int n = dimensions.length - 1;
+        BigInteger[][] best = new BigInteger[n + 1][n + 1];
+        BigInteger[][] worst = new BigInteger[n + 1][n + 1];
+        int[][] split = new int[n + 1][n + 1];
+        for (int i = 1; i <= n; i++) {
+            best[i][i] = BigInteger.ZERO;
+            worst[i][i] = BigInteger.ZERO;
+        }
+        for (int length = 2; length <= n; length++) {
+            for (int i = 1; i + length - 1 <= n; i++) {
+                int j = i + length - 1;
+                for (int k = i; k < j; k++) {
+                    BigInteger product = BigInteger.valueOf(dimensions[i - 1])
+                            .multiply(BigInteger.valueOf(dimensions[k]))
+                            .multiply(BigInteger.valueOf(dimensions[j]));
+                    BigInteger low = best[i][k].add(best[k + 1][j]).add(product);
+                    BigInteger high = worst[i][k].add(worst[k + 1][j]).add(product);
+                    if (best[i][j] == null || low.compareTo(best[i][j]) < 0) {
+                        best[i][j] = low;
+                        split[i][j] = k;
+                    }
+                    if (worst[i][j] == null || high.compareTo(worst[i][j]) > 0) {
+                        worst[i][j] = high;
+                    }
+                }
+            }
+        }
+        return new ExactChain(best[1][n], chainText(split, 1, n), worst[1][n]);
+    }
+
+    private static String chainText(int[][] split, int from, int to) {
+        if (from == to) {
+            return "A" + from;
+        }
+        int k = split[from][to];
+        return "(" + chainText(split, from, k) + chainText(split, k + 1, to) + ")";
     }
 
     @Test

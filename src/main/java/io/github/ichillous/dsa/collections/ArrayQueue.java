@@ -9,7 +9,8 @@ import java.util.Objects;
  * Enqueue is amortized O(1); dequeue and peek are O(1); storage is O(capacity),
  * retained after elements are removed.
  * Capacity doubles when full, capped at {@code Integer.MAX_VALUE - 8}; beyond that an
- * {@link OutOfMemoryError} is thrown, as with {@code ArrayList}.
+ * {@link OutOfMemoryError} is thrown. The cap is hard, unlike {@code ArrayList}'s soft limit at
+ * the same length.
  * Null elements are rejected. This class is not thread-safe.
  *
  * @param <T> element type

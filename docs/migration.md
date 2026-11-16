@@ -60,7 +60,13 @@ Contracts are in the [catalog](catalog.md) and costs in the [complexity guide](c
 
 New cross-cutting rules: randomized APIs take a caller-supplied `java.util.random.RandomGenerator`;
 probabilistic structures have one-sided errors and reject oversized tables; array growth is capped
-at `Integer.MAX_VALUE - 8` and DP tables beyond that size are rejected. Earlier behavior is unchanged.
+at `Integer.MAX_VALUE - 8` and DP tables beyond that size are rejected. Existing APIs keep their
+signatures. A correctness review changed some edge-case behavior: `FenwickTree` queries now return
+exact sums instead of throwing on intermediate overflow, and construction rejects only overflowing
+final node sums; array-backed collections grow to `Integer.MAX_VALUE - 8` before throwing
+`OutOfMemoryError` (previously `ArithmeticException` at 2^30); `DynamicProgramming` rejects tables
+above `Integer.MAX_VALUE - 8` entries with `IllegalArgumentException`; and `BinaryMinHeap` updates
+are failure-atomic when `compareTo` throws.
 
 The no-argument packaged JAR still runs `AlgorithmShowcase`. Arguments now select
 `--help` or `learn TOPIC`; invalid commands return exit status 2 with usage guidance.
@@ -70,8 +76,8 @@ shows all lesson commands, including a parameterized binary-search trace.
 Terminology and behavior are now explicit: zero-based half-open ranges, optional
 empty minima/distances, UTF-16 string indices, signed-long overflow rules,
 immutable result snapshots and size limits for materialized/exponential searches.
-Sudoku is the intentional algorithm input-mutation exception: it copies a complete
-solution back only on success. It does not establish puzzle uniqueness.
+Sorts and `Sampling.shuffle` mutate their arrays by design; Sudoku is the one search that
+mutates its input, and it copies a complete solution back only on success. It does not establish puzzle uniqueness.
 
 ## What is and is not established
 

@@ -29,6 +29,9 @@ public final class DynamicProgrammingClassics {
     /** Largest absolute distance accepted by {@link #travelingSalesman(long[][])}: 2^47. */
     private static final long MAX_TSP_DISTANCE = 1L << 47;
 
+    /** Marks a matrix-chain cost above {@code Long.MAX_VALUE}; real costs are nonnegative. */
+    private static final long CHAIN_OVERFLOW = -1;
+
     private DynamicProgrammingClassics() {}
 
     /**
@@ -193,15 +196,19 @@ public final class DynamicProgrammingClassics {
      * costs go to the smallest split {@code k}, so the answer is deterministic. The string is
      * built iteratively, so deep chains cannot overflow the call stack.
      *
-     * <p>Overflow policy: every product and sum is checked; {@link ArithmeticException} is thrown
-     * if any candidate cost exceeds {@code Long.MAX_VALUE}, including candidates that would not
-     * have been optimal. Time O(n^3), space O(n^2). The input is not modified.
+     * <p>Overflow policy: every product and sum is checked. A candidate whose cost exceeds
+     * {@code Long.MAX_VALUE} is marked as overflowing (costs are nonnegative, so the mark cannot
+     * clash with a real cost) and loses to every representable candidate. The result is
+     * therefore exact whenever the optimal cost fits in a {@code long}, including a cost of
+     * exactly {@code Long.MAX_VALUE}, and {@link ArithmeticException} is thrown only when the
+     * optimal cost itself exceeds {@code Long.MAX_VALUE}. Time O(n^3), space O(n^2). The input
+     * is not modified.
      *
      * @param dimensions at least two positive dimensions
      * @return the optimal cost and parenthesization
      * @throws NullPointerException if {@code dimensions} is null
      * @throws IllegalArgumentException if fewer than two dimensions or a dimension is not positive
-     * @throws ArithmeticException if a cost overflows {@code long}
+     * @throws ArithmeticException if the optimal cost exceeds {@code Long.MAX_VALUE}
      */
     public static ChainOrder matrixChainOrder(int[] dimensions) {
         Objects.requireNonNull(dimensions, "dimensions");
@@ -219,24 +226,26 @@ public final class DynamicProgrammingClassics {
         for (int chain = 2; chain <= matrices; chain++) {
             for (int i = 1; i + chain - 1 <= matrices; i++) {
                 int j = i + chain - 1;
-                long best = Long.MAX_VALUE;
+                long best = CHAIN_OVERFLOW;
                 int bestSplit = i;
-                boolean found = false;
                 for (int k = i; k < j; k++) {
-                    long multiply = Math.multiplyExact(
-                            Math.multiplyExact((long) dimensions[i - 1], dimensions[k]),
-                            (long) dimensions[j]);
-                    long candidate =
-                            Math.addExact(Math.addExact(cost[i][k], cost[k + 1][j]), multiply);
-                    if (!found || candidate < best) {
+                    // The first factor is below 2^62, so only the second multiplication can overflow.
+                    long multiply = chainMultiply(
+                            (long) dimensions[i - 1] * dimensions[k], dimensions[j]);
+                    long candidate = chainAdd(chainAdd(cost[i][k], cost[k + 1][j]), multiply);
+                    // Strictly better only, so equal costs keep the smallest split; an
+                    // overflowing candidate never replaces anything.
+                    if (candidate != CHAIN_OVERFLOW && (best == CHAIN_OVERFLOW || candidate < best)) {
                         best = candidate;
                         bestSplit = k;
-                        found = true;
                     }
                 }
                 cost[i][j] = best;
                 split[i][j] = bestSplit;
             }
+        }
+        if (cost[1][matrices] == CHAIN_OVERFLOW) {
+            throw new ArithmeticException("the optimal matrix-chain cost exceeds Long.MAX_VALUE");
         }
         StringBuilder text = new StringBuilder();
         Deque<Object> work = new ArrayDeque<>();
@@ -259,6 +268,21 @@ public final class DynamicProgrammingClassics {
             }
         }
         return new ChainOrder(cost[1][matrices], text.toString());
+    }
+
+    /** Adds two nonnegative costs, or returns {@link #CHAIN_OVERFLOW} if either is or the sum is. */
+    private static long chainAdd(long first, long second) {
+        if (first == CHAIN_OVERFLOW || second == CHAIN_OVERFLOW) {
+            return CHAIN_OVERFLOW;
+        }
+        long sum = first + second; // two values up to 2^63 - 1 wrap to a negative sum
+        return sum < 0 ? CHAIN_OVERFLOW : sum;
+    }
+
+    /** Multiplies two nonnegative values, or returns {@link #CHAIN_OVERFLOW} past {@code long}. */
+    private static long chainMultiply(long first, long second) {
+        long low = first * second;
+        return Math.multiplyHigh(first, second) != 0 || low < 0 ? CHAIN_OVERFLOW : low;
     }
 
     /**

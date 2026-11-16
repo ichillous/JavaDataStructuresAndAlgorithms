@@ -31,16 +31,6 @@ public final class ArrayPatterns {
         }
     }
 
-    /** A half-open range {@code [startInclusive, endExclusive)} that may be empty. */
-    public record Range(int startInclusive, int endExclusive) {
-        /** Rejects a negative start or an end before the start. */
-        public Range {
-            if (startInclusive < 0 || startInclusive > endExclusive) {
-                throw new IllegalArgumentException("a range needs 0 <= start <= end");
-            }
-        }
-    }
-
     /** Adds {@code delta} to every index in {@code [fromInclusive, toExclusive)}; may be empty. */
     public record RangeAdd(int fromInclusive, int toExclusive, long delta) {
         /** Rejects a negative start or an end before the start. */
@@ -82,14 +72,15 @@ public final class ArrayPatterns {
 
     /**
      * Returns the longest window of {@code text} with no repeated UTF-16 code unit, as a
-     * half-open {@link Range}.
+     * half-open {@link StringAlgorithms.Span}, the same range type that
+     * {@link StringAlgorithms#longestPalindromicSubstring} returns.
      *
      * <p>Invariant: {@code [start, i]} holds distinct units; on a repeat, {@code start} jumps just
      * past the previous occurrence. Ties go to the earliest start. The empty string gives
-     * {@code Range(0, 0)}. Supplementary characters count as two units. O(n) expected time and
+     * {@code Span(0, 0)}. Supplementary characters count as two units. O(n) expected time and
      * O(min(n, distinct units)) space.
      */
-    public static Range longestSubstringWithoutRepeats(String text) {
+    public static StringAlgorithms.Span longestSubstringWithoutRepeats(String text) {
         Objects.requireNonNull(text, "text");
         Map<Character, Integer> lastSeen = new HashMap<>();
         int start = 0;
@@ -105,7 +96,7 @@ public final class ArrayPatterns {
                 bestLength = i - start + 1;
             }
         }
-        return new Range(bestStart, bestStart + bestLength);
+        return new StringAlgorithms.Span(bestStart, bestStart + bestLength);
     }
 
     /**

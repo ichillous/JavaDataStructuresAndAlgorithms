@@ -363,6 +363,47 @@ class DynamicProgrammingTest {
     }
 
     @Test
+    void editScriptTieRulePrefersDiagonalThenDeleteThenInsert() {
+        DynamicProgramming.EditOperation match = DynamicProgramming.EditOperation.MATCH;
+        DynamicProgramming.EditOperation substitute = DynamicProgramming.EditOperation.SUBSTITUTE;
+        DynamicProgramming.EditOperation insert = DynamicProgramming.EditOperation.INSERT;
+        DynamicProgramming.EditOperation delete = DynamicProgramming.EditOperation.DELETE;
+        // At the last cell DELETE and INSERT are both optimal; DELETE wins. Preferring INSERT
+        // would give [DELETE(0,0), MATCH(1,0), MATCH(2,1), INSERT(3,2)] instead.
+        assertEquals(List.of(new DynamicProgramming.EditStep(insert, 0, 0),
+                        new DynamicProgramming.EditStep(match, 0, 1),
+                        new DynamicProgramming.EditStep(match, 1, 2),
+                        new DynamicProgramming.EditStep(delete, 2, 3)),
+                DynamicProgramming.editScript("aba", "bab"));
+        // Diagonal, DELETE and INSERT are all optimal at both cells; the diagonal wins.
+        assertEquals(List.of(new DynamicProgramming.EditStep(substitute, 0, 0),
+                        new DynamicProgramming.EditStep(substitute, 1, 1)),
+                DynamicProgramming.editScript("ab", "ba"));
+    }
+
+    @Test
+    void knapsackItemsTieRulePrefersLowerIndexedItems() {
+        int[] weights = {1, 1};
+        int[] values = {5, 5};
+        // Either item alone is optimal; the lower index wins because item 1 is recorded only
+        // when it is strictly better than the best without it.
+        assertEquals(List.of(0), DynamicProgramming.knapsack01Items(weights, values, 1));
+        assertArrayEquals(new int[] {1, 1}, weights);
+        assertArrayEquals(new int[] {5, 5}, values);
+    }
+
+    @Test
+    void coinsChoiceTieRulePrefersFirstListedCoin() {
+        // Amount 6 needs two coins via 3 + 3, 4 + 2 or 2 + 4: the first listed last coin wins.
+        int[] threeFirst = {3, 4, 2};
+        assertEquals(Optional.of(List.of(3, 3)), DynamicProgramming.minimumCoinsChoice(threeFirst, 6));
+        assertArrayEquals(new int[] {3, 4, 2}, threeFirst);
+        int[] fourFirst = {4, 3, 2};
+        assertEquals(Optional.of(List.of(2, 4)), DynamicProgramming.minimumCoinsChoice(fourFirst, 6));
+        assertArrayEquals(new int[] {4, 3, 2}, fourFirst);
+    }
+
+    @Test
     void knapsackItemsAchieveOptimum() {
         int[] weights = {2, 3, 4};
         int[] values = {4, 5, 7};

@@ -70,8 +70,8 @@ assert tied.edges().get(0).to() == 1;   // equal weights: smaller target first
 | Kruskal | O(V + E log(E + 1)) | O(V + E) | equal weights keep input order |
 | Prim, lazy binary heap | O(V + E log(E + 1)) | O(V + E) | smaller weight, then smaller target vertex, then smaller source vertex |
 
-The lazy heap may hold up to `2E` entries because stale edges are skipped on
-removal rather than decreased in place. With a dense graph and an adjacency
+The lazy heap receives each edge at most once, so it holds at most E entries, some
+of them stale: they are skipped on removal rather than decreased in place. With a dense graph and an adjacency
 matrix, an array-scan Prim runs in O(V^2) without a heap, but this library uses
 adjacency lists. Prim edges are listed in selection order and oriented from the
 tree vertex to the newly reached vertex; Kruskal returns the edges in the original

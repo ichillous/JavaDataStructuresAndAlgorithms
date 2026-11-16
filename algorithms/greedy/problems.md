@@ -55,6 +55,8 @@ self-loops, rejects directed graphs and returns immutable snapshots. Time is
 O(V + E log(E + 1)); working storage including output is O(V + E). Total weight is
 accumulated exactly and must fit in `long` at completion. A disconnected graph has
 a minimum **forest**, not a spanning tree joining vertices with nonexistent edges.
+Prim's algorithm, which grows the forest from one vertex at a time, is compared with
+Kruskal in [minimum spanning trees](../graph/minimum-spanning-trees.md).
 
 ## Huffman merging as a JDK exercise
 
@@ -80,7 +82,9 @@ assert frequencies.element() == 100L;
 
 For `k` supplied frequencies, heap construction plus `k-1` merges costs O(k log k)
 time and O(k) storage. This example computes a weighted length, not actual codes;
-code construction requires recording tree children. It assumes the displayed
+code construction requires recording tree children. The maintained
+`GreedyAlgorithms.huffmanCodeLengths` and `canonicalCodes` record the tree and build the
+codes; see [Huffman coding](huffman-coding.md). It assumes the displayed
 positive frequencies and at least two symbols. Equal-weight choices can produce
 different equally good trees. Checked arithmetic exposes overflow instead of
 silently changing the objective.

@@ -50,7 +50,7 @@ A linked-list operation is O(1) only after the relevant node is known, or at an 
 | Implementation / operation | Time | Space and accuracy |
 | --- | --- | --- |
 | `BloomFilter` add/mightContain | O(k) worst, k hash indices | O(ceil(m/64)) stored longs, m at most 2^30 bits; O(1) additional; false positives only, near `p` at design load |
-| `CountMinSketch` add/estimate | O(depth) worst | O(width x depth) stored longs, at most 2^25; O(1) additional; overestimates only, within `epsilon x total` with probability `1 - delta` |
+| `CountMinSketch` add/estimate | O(depth) worst | O(width · depth) stored longs, at most 2^25; O(1) additional; overestimates only, within `epsilon * totalCount()` with probability at least `1 - delta` |
 
 These time bounds are deterministic worst cases. The probabilistic part is the **answer**: a Bloom filter has one-sided false positives and a Count-Min sketch one-sided overestimates, so a probability describes accuracy for a well-spread hash, not running time. The sizing formulas are in the [catalog](catalog.md).
 
@@ -96,7 +96,7 @@ Monotonic-stack and window methods are linear because every index enters and lea
 | Algorithm | Time | Auxiliary space / behavior |
 | --- | --- | --- |
 | Z-function / Z all matches | O(n) / O(t + p + k) | O(n) array / O(t + p + k) for the concatenation, its z-array and results; same results as KMP |
-| Rabin-Karp all matches | Expected O(t + p); worst O(t * p) | O(1) plus results; base 257, modulus 2^31 - 1, every hash hit verified so no false positives |
+| Rabin-Karp all matches | O(t + p + k·p) for k reported matches when spurious hash hits are rare; O(t·p) worst (many genuine matches, or input crafted against the fixed base and modulus) | O(1) plus results; fixed base 257 and modulus 2^31 - 1 (not randomized); every hash hit is verified, so there are no false positives |
 | Manacher longest palindromic substring | O(n) | O(n); earliest start on ties |
 | Aho-Corasick build | O(P) expected for total pattern length `P` (hash-map children) | O(P) trie and links |
 | Aho-Corasick `findAll` | O(t + k) expected for text length `t` and `k` matches | O(t + k) including the result; overlaps are included |
@@ -105,7 +105,7 @@ Monotonic-stack and window methods are linear because every index enters and lea
 | Suffix array `occurrences` | O(p log n + k log k) for pattern length `p` and `k` hits | O(k); hits are sorted ascending |
 | Distinct substrings, longest repeated substring | O(n) over the LCP array | O(1) beyond the result |
 
-KMP, the Z-function and Rabin-Karp are listed with the other string searches above. Rabin-Karp's worst case occurs only when many windows share the pattern's hash; verification makes its answers exact. Aho-Corasick is expected rather than worst case only because trie children are hash-map entries. A multi-pattern search costs O(t + P + k), not one O(t + p) pass per pattern.
+KMP, the Z-function and Rabin-Karp are listed with the other string searches above. Rabin-Karp verifies each hash hit in O(p), so k matches add O(k·p) to the O(t + p) rolling hash, and spurious hits add more; because the base and modulus are fixed, crafted input can force O(t·p). Verification makes its answers exact. Aho-Corasick is expected rather than worst case only because trie children are hash-map entries. A multi-pattern search costs O(t + P + k), not one O(t + p) pass per pattern.
 
 ## Number theory and sampling
 
@@ -141,9 +141,9 @@ Number-theory methods are exact for every `long` or throw `ArithmeticException`.
 | Kruskal minimum spanning forest | O(V + E log(E + 1)) | O(V + E), including sorted edge copy and returned forest |
 | Iterative articulation points, BFS bipartition and odd cycle, directed-cycle witness | O(V + E) | O(V + E), including adjacency snapshots |
 | Hierholzer Eulerian path | O(V + E) expected | O(V + E); the walk is deterministic because Graph keeps neighbors in insertion order; the hash lookup pairing undirected edge entries makes the time expected |
-| Prim minimum spanning forest with a lazy binary heap | O(V + E log(E + 1)) | O(V + E); heap can hold up to 2E stale entries |
+| Prim minimum spanning forest with a lazy binary heap | O(V + E log(E + 1)) | O(V + E); the heap receives each edge at most once, so it holds at most E entries, some of them stale |
 | Dinic maximum flow and minimum cut | O(V^2 E); at most V-1 phases | O(V + E); iterative BFS and blocking flow; total checked with `Math.addExact` |
-| Hopcroft-Karp bipartite matching | O(E sqrt(V)) after an O(E log E) deduplicating sort | O(V + E); iterative layered BFS (cut off at the shortest augmenting length) and DFS restricted to shortest augmenting paths |
+| Hopcroft-Karp bipartite matching | O((V + E) sqrt(V)), i.e. O(E sqrt(V)) when no vertex is isolated, after an O(E log E) deduplicating sort | O(V + E); iterative layered BFS (cut off at the shortest augmenting length) and DFS restricted to shortest augmenting paths |
 | Binary-lifting LCA: build | O(V log V) | O(V log V); iterative BFS, undirected tree only |
 | Binary-lifting LCA: `lca`, `distance`, `kthAncestor` | O(log V) per query; `depth` is O(1) | O(1) extra per query |
 | Tree diameter path (double BFS) | O(V) | O(V), including adjacency snapshots and result |
@@ -152,7 +152,7 @@ Unweighted graphs ignore duplicate edges and preserve neighbor insertion order. 
 
 Kruskal accepts negative edges, omits loops, and returns a forest for disconnected graphs. The result has `V - components` selected edges. The total is accumulated exactly and must fit in a `long` at the end; intermediate cancellation does not cause spurious overflow. These implementations return immutable result snapshots and use no recursive graph traversal.
 
-The newer graph algorithms follow the same conventions. `ShortestPathAlgorithms` reports a violated precondition with `IllegalArgumentException` and an unrepresentable final distance with `ArithmeticException`; A* checks only the edges it scans, so an inconsistent heuristic is caught only where the search looks. Dinic's O(V^2 E) is a worst-case bound that is rarely approached. Tree queries accept only valid undirected trees. Every traversal is iterative, so a 100,000-vertex path does not exhaust the call stack.
+The newer graph algorithms follow the same conventions. `ShortestPathAlgorithms` reports a violated precondition with `IllegalArgumentException` and an unrepresentable final distance with `ArithmeticException`; A* checks only the edges it scans, so an inconsistent heuristic is caught only where the search looks. Dinic's O(V^2 E) is a worst-case bound. Tighter bounds hold for special networks: with unit capacities it needs O(√E) phases (O(min(√E, V^(2/3))) when there are no parallel edges) of O(E) each, and on a unit-capacity bipartite-matching network O(E·√V). No claim is made about typical running time. Tree queries accept only valid undirected trees. Every traversal is iterative, so a 100,000-vertex path does not exhaust the call stack.
 
 Bellman-Ford scans directed arcs (both orientations for undirected edges). No
 reachable negative cycle means a shortest path can be simple, using at most V-1
@@ -176,14 +176,14 @@ is an intentional cost for canonical results.
 | LCS length | O(mn + m + n) | O(min(m, n) + 1); lengths are UTF-16 units; empty-input handling and setup are included |
 | Edit distance | O(mn + m + n) | O(min(m, n) + 1); unit insertion, deletion and substitution costs |
 | Strictly increasing subsequence length | O(n log(n + 1)) | O(n); equal values do not extend a strictly increasing subsequence |
-| LCS string, edit script | O(mn) | O(mn) full table kept for the walk back (value-only versions use O(min(m, n))); Hirschberg would give O(min(m, n)) but is not implemented |
+| LCS string, edit script | O(mn) | O(mn) full table kept for the walk back (value-only versions use O(min(m, n))); Hirschberg's divide and conquer would cut the working space to O(min(m, n)) (plus the output, up to m + n steps for an edit script) at roughly twice the time, but is not implemented |
 | 0/1 knapsack item set | O((n + 1)(W + 1)) | O(W + 1) longs plus n * (W + 1) bits (one BitSet row per item); same `W` guard, large products can still run out of memory |
 | Minimum coins choice | O((c + 1)(a + 1)) | O(a + 1); stores the last coin per amount |
 | LIS indices | O(n log(n + 1)) | O(n); tail-index and predecessor arrays |
 | Coin combinations | O(d*amount) for d distinct coins | O(amount); checked `long` counts, `ArithmeticException` on overflow; same table-size guard as minimum coins |
 | Word break | O(n*L) lookups, O(n*L^2) characters | O(n + dictionary); L is the longest word; shortest-first-word segmentation |
 | Longest palindromic subsequence | O(n^2) | O(n); two rolling rows |
-| Matrix-chain order | O(n^3) | O(n^2); checked products and sums, smallest-split ties |
+| Matrix-chain order | O(n^3) | O(n^2); checked products and sums, overflowing candidates lose, `ArithmeticException` only when the optimal cost exceeds `long`; smallest-split ties |
 | Held-Karp travelling salesman | O(2^n * n^2), n at most 16 | 2^(n-1)*(n-1) longs plus a byte table (about 4 MB at n = 16); entries limited to [-2^47, 2^47] |
 | Weighted interval scheduling | O(n log n) | O(n); sorted copy, binary search for the last compatible interval, checked total |
 | Huffman code lengths | O(n log n) | O(n); priority queue, checked merge sums |
@@ -201,7 +201,7 @@ For DP, write the state meaning and loop-order invariant first. For greedy metho
 - **Worst case** bounds one operation or run for every valid input of that size.
 - **Expected** relies on a probabilistic or distribution assumption; bad hash distributions remain possible.
 - **Amortized** bounds a sequence of operations without requiring randomness. One dynamic-array append can still copy the entire array.
-- **Randomized and probabilistic** results separate cost from accuracy. Rabin-Karp and Aho-Corasick are expected-time but exact; a Bloom filter and a Count-Min sketch run in worst-case time but give approximate answers with one-sided error; sampling routines cost one random draw per step and are only as uniform as the caller's generator.
+- **Randomized and probabilistic** results separate cost from accuracy. Aho-Corasick is expected-time (hash-map children) but exact; Rabin-Karp is exact, and its time depends on how many hash hits it must verify (this implementation is deterministic, not randomized); a Bloom filter and a Count-Min sketch run in worst-case time but give approximate answers with one-sided error; sampling routines cost one random draw per step and are only as uniform as the caller's generator.
 - **Auxiliary space** differs from total storage and output size. Include recursion frames, buffers, snapshots and returned values when they matter.
 
 Java integer arithmetic normally wraps. The maintained APIs state where they use a wider type or checked arithmetic. For example, Fenwick construction and updates throw if and only if a final node sum overflows `long` (a failed update leaves the tree unchanged), while prefix and range queries are exact and throw only when the true sum overflows. `NumberTheory`, the difference-array adds, `LazySegmentTree`, `FlowNetwork`, the DAG, Floyd-Warshall and matrix-chain methods, and the Huffman merges all use exact or checked arithmetic and throw `ArithmeticException` rather than wrap. Do not substitute subtraction for an ordering comparison on arbitrary integer values. Benchmarking would require a separate controlled harness; asymptotic bounds here are analytical claims, not measured speedups.

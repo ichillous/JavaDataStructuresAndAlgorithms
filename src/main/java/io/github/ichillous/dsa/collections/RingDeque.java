@@ -8,7 +8,8 @@ import java.util.Objects;
  * A deque whose elements occupy a contiguous logical sequence in a growing circular array.
  * Additions at either end take amortized O(1) time; removals and peeks take O(1) time.
  * Capacity doubles when full, capped at {@code Integer.MAX_VALUE - 8}; beyond that an
- * {@link OutOfMemoryError} is thrown, as with {@code ArrayList}.
+ * {@link OutOfMemoryError} is thrown. The cap is hard, unlike {@code ArrayList}'s soft limit at
+ * the same length.
  * Nulls are rejected. Storage is O(capacity), which is retained after removals or clear
  * and may exceed the current number of elements. This class is not thread safe.
  *

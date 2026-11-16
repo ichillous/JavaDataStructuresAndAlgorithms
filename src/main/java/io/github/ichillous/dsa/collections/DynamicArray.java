@@ -12,7 +12,8 @@ import java.util.Objects;
  * <p>Indexed access is O(1); appending is amortized O(1), while insertion and removal
  * at an arbitrary index are O(n). Space is O(capacity); capacity grows geometrically
  * and is retained after removal. Doubling is capped at {@code Integer.MAX_VALUE - 8}; a larger
- * requirement throws {@link OutOfMemoryError}, as with {@code ArrayList}. Iterators visit
+ * requirement throws {@link OutOfMemoryError}. The cap is hard, unlike {@code ArrayList}'s soft
+ * limit at the same length. Iterators visit
  * elements in index order and fail fast after structural changes. This class is not
  * thread-safe.
  *

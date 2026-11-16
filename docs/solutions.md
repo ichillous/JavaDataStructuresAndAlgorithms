@@ -416,9 +416,11 @@ delete Aa safely:    0:deleted  1:BB  2:never-used
 ```
 
 Changing slot zero to never-used would let BB's lookup stop too early. Tombstones
-or a proven cluster-repair scheme preserve the search path. The maintained map
-uses chaining and does not expose a probing API; this orbit is a design exercise,
-not another map implementation. Compare maintained map operations with `HashMap`
+or a cluster-repair scheme preserve the search path. The maintained
+[OpenAddressingHashMap](../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java)
+uses linear probing (step 1, coprime to every capacity) with backward-shift deletion, the
+cluster-repair scheme; see the [open-addressing lesson](../data-structures/hash-tables/open-addressing.md).
+This orbit exercise is about double hashing, which the library does not implement. Compare maintained map operations with `HashMap`
 using many distinct collision keys, replacement, absent removals and resizing.
 
 </details>

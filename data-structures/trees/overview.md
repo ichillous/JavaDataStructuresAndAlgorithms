@@ -20,7 +20,7 @@ A tree is a connected acyclic graph; a rooted tree gives every non-root node one
 | [`SegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) | Each node stores the minimum of its covered interval | Range minimum with point replacement |
 | [`SparseTable`](../../src/main/java/io/github/ichillous/dsa/structures/SparseTable.java) and [`LazySegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java) | Immutable overlapping power-of-two minima; lazy pending additions on covered intervals ([range-query lesson](../range-queries/overview.md)) | O(1) static range minimum; range add with range sum |
 
-BST and AVL types behave as sets (`RedBlackTreeMap` is a map with the same `compareTo` equivalence): `compareTo` defines equivalent keys, duplicate add returns false, and nulls are rejected. Heap duplicates are meaningful and retained. Trie words use their own whole-word marker; a word may end at an internal node.
+BST and AVL types behave as sets: `compareTo` defines equivalent keys, duplicate add returns false, and nulls are rejected. `RedBlackTreeMap` uses the same `compareTo` equivalence, but as a map: putting an equivalent key replaces the value and returns the previous one. Heap duplicates are meaningful and retained. Trie words use their own whole-word marker; a word may end at an internal node.
 
 ## Height is measured in edges here
 

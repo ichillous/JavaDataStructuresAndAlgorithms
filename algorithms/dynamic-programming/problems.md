@@ -168,7 +168,8 @@ emits a target unit. Replaying the script over the source yields the target.
 Reconstruction costs memory the value-only versions avoid: LCS and edit distance
 shrink to O(min(m, n)) by keeping two rows, but walking back needs every row.
 Hirschberg's divide-and-conquer recovers an optimal LCS or alignment in
-O(min(m, n)) extra space at about twice the time; it is **not implemented here**.
+O(min(m, n)) extra space (plus the output, up to m + n steps for an edit script)
+at about twice the time; it is **not implemented here**.
 Large inputs still use the same table-size guard and can exhaust memory.
 
 **Counterexample (ties are not unique):** `"ABCBDAB"` and `"BDCABA"` have

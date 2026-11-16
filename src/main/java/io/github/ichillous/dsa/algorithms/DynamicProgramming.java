@@ -174,6 +174,8 @@ public final class DynamicProgramming {
      * walked), which can exhaust memory ({@link OutOfMemoryError}) for very long strings.
      *
      * @throws NullPointerException if either argument is null
+     * @throws IllegalArgumentException if a table row of {@code b.length() + 1} entries would
+     *         exceed {@code Integer.MAX_VALUE - 8}
      */
     public static String longestCommonSubsequence(String a, String b) {
         Objects.requireNonNull(a, "a");
@@ -250,6 +252,8 @@ public final class DynamicProgramming {
      * O(mn) time and O(mn) auxiliary space, which can exhaust memory for very long strings.
      *
      * @throws NullPointerException if either argument is null
+     * @throws IllegalArgumentException if a table row of {@code target.length() + 1} entries
+     *         would exceed {@code Integer.MAX_VALUE - 8}
      */
     public static List<EditStep> editScript(String source, String target) {
         Objects.requireNonNull(source, "source");
