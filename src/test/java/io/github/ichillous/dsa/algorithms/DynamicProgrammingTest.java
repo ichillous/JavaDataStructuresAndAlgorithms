@@ -348,6 +348,8 @@ class DynamicProgrammingTest {
         assertThrows(UnsupportedOperationException.class, () -> script.add(script.get(0)));
         assertThrows(IllegalArgumentException.class,
                 () -> new DynamicProgramming.EditStep(DynamicProgramming.EditOperation.MATCH, -1, 0));
+        assertThrows(IllegalArgumentException.class,
+                () -> new DynamicProgramming.EditStep(DynamicProgramming.EditOperation.MATCH, 0, -1));
         assertThrows(NullPointerException.class, () -> new DynamicProgramming.EditStep(null, 0, 0));
         Random random = new Random(0xED17);
         for (int trial = 0; trial < 300; trial++) {
