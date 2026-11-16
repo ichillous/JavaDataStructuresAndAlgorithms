@@ -132,4 +132,4 @@ Lengths are at most the number of used symbols minus one. See the
 Look up the structures and algorithms in the
 [catalog](../../docs/catalog.md), the
 [complexity guide](../../docs/complexity.md) and the
-[greedy overview](overview.md).
+[greedy overview](overview.md). The [solution finder](../../docs/solution-finder.md#19-greedy) compares this technique with its alternatives.

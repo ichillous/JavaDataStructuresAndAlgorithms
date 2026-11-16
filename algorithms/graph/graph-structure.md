@@ -127,4 +127,4 @@ vertex count; isolated vertices are otherwise ignored.
 See the [catalog](../../docs/catalog.md) for the source and test links, the
 [complexity guide](../../docs/complexity.md) for the cost summary, and
 [depth-first search](dfs.md) for bridges and strongly connected components. For
-the spanning-forest counterpart see [minimum spanning trees](minimum-spanning-trees.md).
+the spanning-forest counterpart see [minimum spanning trees](minimum-spanning-trees.md). The [solution finder](../../docs/solution-finder.md#14-graph-traversal-and-structure) compares this technique with its alternatives.

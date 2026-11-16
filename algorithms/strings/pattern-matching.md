@@ -126,4 +126,4 @@ To search many patterns at once, or to index a fixed text for repeated queries, 
 [multi-pattern matching and suffix arrays](multi-pattern-and-suffix-arrays.md).
 
 Browse the [catalog](../../docs/catalog.md) and the
-[complexity guide](../../docs/complexity.md) for the assumptions behind these bounds.
+[complexity guide](../../docs/complexity.md) for the assumptions behind these bounds. The [solution finder](../../docs/solution-finder.md#13-string-matching-and-text) compares this technique with its alternatives.

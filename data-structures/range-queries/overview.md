@@ -210,4 +210,4 @@ instead.
 See the [catalog](../../docs/catalog.md) for source and tests, and the
 [complexity guide](../../docs/complexity.md) for the bounds. Related lessons:
 [Fenwick prefix blocks](../arrays/operations.md) and
-[segment-tree minima](../trees/overview.md).
+[segment-tree minima](../trees/overview.md). The [solution finder](../../docs/solution-finder.md#5-range-queries-over-arrays) compares this technique with its alternatives.

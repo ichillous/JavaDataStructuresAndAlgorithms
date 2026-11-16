@@ -66,4 +66,4 @@ predicate changes once, not merely because a problem involves numbers.
    capacity that completes a fixed workload; prove it is monotonic before coding.
 
 Check the [solutions](../../docs/solutions.md) and the
-[complexity guide](../../docs/complexity.md) for assumptions behind the bounds.
+[complexity guide](../../docs/complexity.md) for assumptions behind the bounds. The [solution finder](../../docs/solution-finder.md#9-searching) compares this technique with its alternatives.

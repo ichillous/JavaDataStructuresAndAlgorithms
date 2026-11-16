@@ -324,4 +324,4 @@ See the [catalog](../../docs/catalog.md) for source and tests, and the
 [red-black tests](../../src/test/java/io/github/ichillous/dsa/structures/RedBlackTreeMapTest.java)
 compare 30,000 seeded operations with `TreeMap` and check every invariant after each
 update. Related lessons: [binary search trees](binary-search-trees.md) and
-[AVL trees](avl-trees.md).
+[AVL trees](avl-trees.md). The [solution finder](../../docs/solution-finder.md#2-ordered-keys-and-nearest-key-queries) compares this technique with its alternatives.

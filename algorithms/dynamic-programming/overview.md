@@ -69,4 +69,4 @@ optimality. Conversely, DP is unnecessary when a simple greedy rule has a proof.
 3. Change unlimited coin reuse to “each supplied coin once.” Which state or loop
    direction changes? Continue with [0/1 knapsack](problems.md).
 
-Compare with the [solutions](../../docs/solutions.md) after deriving the recurrence.
+Compare with the [solutions](../../docs/solutions.md) after deriving the recurrence. The [solution finder](../../docs/solution-finder.md#18-dynamic-programming) compares this technique with its alternatives.

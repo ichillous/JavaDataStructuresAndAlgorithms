@@ -176,4 +176,4 @@ Touching intervals are merged by `mergeIntervals` but do not conflict in
    `minimumMeetingRooms`.
 
 See the [catalog](../../docs/catalog.md) for the source and tests and the
-[complexity guide](../../docs/complexity.md) for the cost assumptions.
+[complexity guide](../../docs/complexity.md) for the cost assumptions. The [solution finder](../../docs/solution-finder.md#12-array-and-sequence-patterns) compares this technique with its alternatives.

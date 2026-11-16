@@ -76,4 +76,4 @@ The implementation uses iteration for updates and traversal, avoiding deep recur
 2. Construct an input whose insertion order gives height n - 1; compare with median-first insertion.
 3. Compare random updates with `TreeSet`, checking size and inorder output after every operation. Include repeated root deletion and absent removals.
 
-See the [worked solutions](../../docs/solutions.md) for successor deletion and counterexamples to local-only ordering checks.
+See the [worked solutions](../../docs/solutions.md) for successor deletion and counterexamples to local-only ordering checks. The [solution finder](../../docs/solution-finder.md#2-ordered-keys-and-nearest-key-queries) compares this technique with its alternatives.

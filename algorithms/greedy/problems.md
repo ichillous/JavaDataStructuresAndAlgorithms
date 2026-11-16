@@ -92,4 +92,4 @@ silently changing the objective.
 3. Trace Huffman merges `5+9`, `12+13`, `14+16`, `25+30`, `45+55`; then record
    tree children to derive code lengths and confirm the same weighted total.
 
-The [solutions](../../docs/solutions.md) discuss independent oracles and proof scope.
+The [solutions](../../docs/solutions.md) discuss independent oracles and proof scope. The [solution finder](../../docs/solution-finder.md#19-greedy) compares this technique with its alternatives.

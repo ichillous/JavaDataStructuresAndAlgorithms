@@ -121,4 +121,4 @@ graph connected with `V` edges; the edge-count check is what rejects it.
    why the query is empty when `d` exceeds the vertex's own depth.
 
 Return to the [catalog](../../docs/catalog.md) or the
-[complexity guide](../../docs/complexity.md), or continue with [DFS](dfs.md).
+[complexity guide](../../docs/complexity.md), or continue with [DFS](dfs.md). The [solution finder](../../docs/solution-finder.md#17-trees-as-data) compares this technique with its alternatives.

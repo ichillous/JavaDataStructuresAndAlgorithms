@@ -67,4 +67,4 @@ Segment-tree build/storage is O(n), and point-set/range-min is O(log n). Half-op
 2. Draw a five-key BST with height 4, then a balanced one with the same inorder result.
 3. Compare random segment-tree updates/queries with a plain array scan, including empty ranges and extreme long values.
 
-Continue with [binary-tree terminology](binary-trees.md), [BST operations](binary-search-trees.md), [AVL balance](avl-trees.md), [red-black trees](red-black-trees.md), [range queries](../range-queries/overview.md) and the [worked solutions](../../docs/solutions.md).
+Continue with [binary-tree terminology](binary-trees.md), [BST operations](binary-search-trees.md), [AVL balance](avl-trees.md), [red-black trees](red-black-trees.md), [range queries](../range-queries/overview.md) and the [worked solutions](../../docs/solutions.md). The [solution finder](../../docs/solution-finder.md#5-range-queries-over-arrays) compares this technique with its alternatives.

@@ -147,4 +147,4 @@ membership with deletion) are related structures that are **not implemented here
    key.
 
 See the [catalog](../../docs/catalog.md) and the
-[complexity guide](../../docs/complexity.md) for the surrounding structures.
+[complexity guide](../../docs/complexity.md) for the surrounding structures. The [solution finder](../../docs/solution-finder.md#4-approximate-membership-and-counting) compares this technique with its alternatives.

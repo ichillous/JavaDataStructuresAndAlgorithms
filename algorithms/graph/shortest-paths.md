@@ -176,4 +176,4 @@ silently treating it as 1 would return wrong distances.
 
 Continue with the [catalog](../../docs/catalog.md) and the
 [complexity guide](../../docs/complexity.md). The oracle tests for these methods are in
-[ShortestPathAlgorithmsTest](../../src/test/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithmsTest.java).
+[ShortestPathAlgorithmsTest](../../src/test/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithmsTest.java). The [solution finder](../../docs/solution-finder.md#15-shortest-paths) compares this technique with its alternatives.

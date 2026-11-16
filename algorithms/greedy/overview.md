@@ -69,4 +69,4 @@ might beat several short cheap ones; earliest finish has no proof for total valu
    a DP subproblem that could solve the weighted version.
 
 See [solutions](../../docs/solutions.md) and
-[other greedy problems](problems.md) for where proof obligations change.
+[other greedy problems](problems.md) for where proof obligations change. The [solution finder](../../docs/solution-finder.md#19-greedy) compares this technique with its alternatives.

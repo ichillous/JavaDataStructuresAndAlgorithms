@@ -228,4 +228,4 @@ the longest dictionary word. See the
 
 Look up the structures and algorithms in the
 [catalog](../../docs/catalog.md) and the
-[complexity guide](../../docs/complexity.md).
+[complexity guide](../../docs/complexity.md). The [solution finder](../../docs/solution-finder.md#18-dynamic-programming) compares this technique with its alternatives.

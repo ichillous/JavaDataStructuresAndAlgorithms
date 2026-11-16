@@ -64,4 +64,4 @@ The maintained chained map avoids tombstones and supports arbitrary positive ini
 2. Explain why a full probing table must terminate an absent lookup even when no empty slot exists.
 3. Design tests for an open-addressing extension before implementing it: full tables, wraparound, deletion followed by lookup, and non-coprime double-hash steps.
 
-Check the [worked solutions](../../docs/solutions.md) for the chain and probe-path invariants.
+Check the [worked solutions](../../docs/solutions.md) for the chain and probe-path invariants. The [solution finder](../../docs/solution-finder.md#1-look-up-by-key) compares this technique with its alternatives.

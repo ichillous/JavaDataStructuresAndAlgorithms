@@ -99,4 +99,4 @@ indices loses the information needed to expire an old maximum correctly.
 3. Compare deque results with a direct maximum scan for each window; include equal
    values, negative values and windows of sizes 1 and `n`.
 
-Use the [solutions](../../docs/solutions.md) to review the reference models.
+Use the [solutions](../../docs/solutions.md) to review the reference models. The [solution finder](../../docs/solution-finder.md#12-array-and-sequence-patterns) compares this technique with its alternatives.

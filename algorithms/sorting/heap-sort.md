@@ -63,4 +63,4 @@ when a changing collection needs repeated minimum queries.
    stability, worst-case time and allocation from observed speed.
 
 See the [solutions](../../docs/solutions.md) and the
-[maintained complexity table](../../docs/complexity.md).
+[maintained complexity table](../../docs/complexity.md). The [solution finder](../../docs/solution-finder.md#11-sorting) compares this technique with its alternatives.

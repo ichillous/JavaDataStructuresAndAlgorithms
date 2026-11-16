@@ -72,4 +72,4 @@ A key must retain stable equality and hash behavior while stored. Mutating a fie
 2. Trace cache capacity 2 with `put A, put B, get A, put C`, then repeat with `put A` as an update.
 3. Compare random map operations with `HashMap` under the same null policy; compare LRU behavior with an access-order `LinkedHashMap` model.
 
-Continue with [hash functions](functions.md), [collision resolution](collision-resolution.md) and the [worked solutions](../../docs/solutions.md).
+Continue with [hash functions](functions.md), [collision resolution](collision-resolution.md) and the [worked solutions](../../docs/solutions.md). The [solution finder](../../docs/solution-finder.md#8-caching-and-eviction) compares this technique with its alternatives.

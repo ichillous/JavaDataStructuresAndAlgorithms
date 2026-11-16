@@ -79,4 +79,4 @@ Dynamic-array access/replacement is O(1), indexed shifting is O(n), and append i
 2. Derive `[from, to)` sum as the difference of two prefix sums, including an empty range.
 3. Add a reference-array model test for random Fenwick additions and all valid ranges; separately test overflow atomicity.
 
-See the [worked solutions](../../docs/solutions.md), then compare [linked storage](../linked-lists/overview.md).
+See the [worked solutions](../../docs/solutions.md), then compare [linked storage](../linked-lists/overview.md). The [solution finder](../../docs/solution-finder.md#5-range-queries-over-arrays) compares this technique with its alternatives.

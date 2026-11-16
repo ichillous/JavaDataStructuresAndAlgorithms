@@ -56,4 +56,4 @@ To keep the largest `k` values from a stream, maintain a **min** heap of at most
 2. Choose an ordering for equal-priority tasks and explain whether stability is required.
 3. Implement the largest-`k` pattern with `BinaryMinHeap`, comparing results with sorting a full copy of each small test stream.
 
-Read [heap operations](../heaps/operations.md) and the [worked solutions](../../docs/solutions.md).
+Read [heap operations](../heaps/operations.md) and the [worked solutions](../../docs/solutions.md). The [solution finder](../../docs/solution-finder.md#10-selection-and-top-k) compares this technique with its alternatives.

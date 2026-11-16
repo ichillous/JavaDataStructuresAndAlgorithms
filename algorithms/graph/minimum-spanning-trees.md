@@ -97,4 +97,4 @@ vertices need not be their shortest path (compare Dijkstra).
 
 See the [catalog](../../docs/catalog.md) for the source and test links, the
 [complexity guide](../../docs/complexity.md) for the cost summary, and
-[graph structure](graph-structure.md) for the related structural algorithms.
+[graph structure](graph-structure.md) for the related structural algorithms. The [solution finder](../../docs/solution-finder.md#16-spanning-trees-flows-and-matching) compares this technique with its alternatives.

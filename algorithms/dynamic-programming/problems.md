@@ -188,4 +188,4 @@ index list is one optimum, not the leftmost or the only one.
    `"ABCBDAB"` / `"BDCABA"` give now, and is its length still 4?
 
 See the [catalog](../../docs/catalog.md) and the
-[complexity guide](../../docs/complexity.md) for the contracts.
+[complexity guide](../../docs/complexity.md) for the contracts. The [solution finder](../../docs/solution-finder.md#18-dynamic-programming) compares this technique with its alternatives.

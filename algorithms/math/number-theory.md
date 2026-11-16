@@ -156,4 +156,4 @@ assert !NumberTheory.isPrime(561); // ... yet 561 is composite
    without a large exponent, then confirm with the method.
 
 See the [catalog](../../docs/catalog.md) for the source and tests and the
-[complexity guide](../../docs/complexity.md) for the bounds.
+[complexity guide](../../docs/complexity.md) for the bounds. The [solution finder](../../docs/solution-finder.md#22-math-and-number-theory) compares this technique with its alternatives.

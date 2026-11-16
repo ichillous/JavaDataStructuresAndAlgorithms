@@ -124,4 +124,4 @@ For a single pattern (KMP, the Z-function, Rabin–Karp) or palindromes, see
 [pattern matching](pattern-matching.md).
 
 See the [catalog](../../docs/catalog.md) for the source and tests and the
-[complexity guide](../../docs/complexity.md) for the shared assumptions.
+[complexity guide](../../docs/complexity.md) for the shared assumptions. The [solution finder](../../docs/solution-finder.md#13-string-matching-and-text) compares this technique with its alternatives.

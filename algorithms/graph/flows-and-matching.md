@@ -120,4 +120,4 @@ only maximizes the count of pairs.
    single already-used worker and trace the augmenting path that reassigns it.
 
 Continue with the [catalog](../../docs/catalog.md), the
-[complexity guide](../../docs/complexity.md) and [BFS](bfs.md).
+[complexity guide](../../docs/complexity.md) and [BFS](bfs.md). The [solution finder](../../docs/solution-finder.md#16-spanning-trees-flows-and-matching) compares this technique with its alternatives.

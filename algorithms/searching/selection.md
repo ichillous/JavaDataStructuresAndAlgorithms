@@ -116,4 +116,4 @@ throws rather than repairing the input.
 
 See the [catalog](../../docs/catalog.md) for the source and tests and the
 [complexity guide](../../docs/complexity.md) for the bounds. Related lessons:
-[binary search](binary-search.md) and [heap sort](../sorting/heap-sort.md).
+[binary search](binary-search.md) and [heap sort](../sorting/heap-sort.md). The [solution finder](../../docs/solution-finder.md#10-selection-and-top-k) compares this technique with its alternatives.

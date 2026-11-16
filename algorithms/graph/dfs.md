@@ -115,4 +115,4 @@ including result and adjacency snapshots is O(V + E).
 3. Remove each undirected edge in a tiny reference graph and recount components;
    compare this slow bridge oracle with the low-link result.
 
-See the [solutions](../../docs/solutions.md) for canonicalization and oracle details.
+See the [solutions](../../docs/solutions.md) for canonicalization and oracle details. The [solution finder](../../docs/solution-finder.md#14-graph-traversal-and-structure) compares this technique with its alternatives.

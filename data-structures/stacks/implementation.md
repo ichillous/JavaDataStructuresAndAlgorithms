@@ -75,4 +75,4 @@ The check is O(n) time and O(n) worst-case stack space. It scans each character 
 2. Extend the example to `[]` and `{}`; require matching types, not only equal counts.
 3. Test generated balanced strings against an independent recursive grammar or a simpler reference checker, keeping malformed counterexamples.
 
-See the [worked solutions](../../docs/solutions.md) for the mismatched-bracket argument and model-test approach.
+See the [worked solutions](../../docs/solutions.md) for the mismatched-bracket argument and model-test approach. The [solution finder](../../docs/solution-finder.md#7-stacks-queues-deques-and-priority) compares this technique with its alternatives.

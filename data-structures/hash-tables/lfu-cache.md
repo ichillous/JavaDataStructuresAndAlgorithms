@@ -79,4 +79,4 @@ If recency is the right policy, use `LinkedHashMap` in access order and override
 2. Explain why `minFrequency` can be reset to 1 on every insertion without breaking the eviction rule.
 3. Write a test comparing `LfuCache` against a list ordered by (frequency, last-use tick) under a fixed seed, and include removals and `clear`.
 
-See also the [catalog](../../docs/catalog.md), the [complexity guide](../../docs/complexity.md) and the [worked solutions](../../docs/solutions.md).
+See also the [catalog](../../docs/catalog.md), the [complexity guide](../../docs/complexity.md) and the [worked solutions](../../docs/solutions.md). The [solution finder](../../docs/solution-finder.md#8-caching-and-eviction) compares this technique with its alternatives.

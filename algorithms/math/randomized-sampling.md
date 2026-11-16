@@ -154,4 +154,4 @@ fixed seeds and tolerances of about 0.01 over 60,000 trials, never exact counts.
 See the [catalog](../../docs/catalog.md) for the source and tests and the
 [complexity guide](../../docs/complexity.md) for the bounds. Related lessons:
 [selection](../searching/selection.md) and
-[probabilistic structures](../../data-structures/probabilistic/overview.md).
+[probabilistic structures](../../data-structures/probabilistic/overview.md). The [solution finder](../../docs/solution-finder.md#23-randomization-and-streams) compares this technique with its alternatives.

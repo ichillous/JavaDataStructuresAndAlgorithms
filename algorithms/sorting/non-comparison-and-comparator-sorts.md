@@ -137,4 +137,4 @@ A comparator must also be consistent (a total preorder). The sort does not verif
    show what happens to the name order within a city if the second sort were not stable.
 
 See the [catalog](../../docs/catalog.md) and the
-[complexity guide](../../docs/complexity.md) for assumptions behind the bounds.
+[complexity guide](../../docs/complexity.md) for assumptions behind the bounds. The [solution finder](../../docs/solution-finder.md#11-sorting) compares this technique with its alternatives.

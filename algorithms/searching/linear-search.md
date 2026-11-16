@@ -74,4 +74,4 @@ The first `4` in the sorted array is not its original position.
 3. Compare KMP with a simple substring oracle on overlapping and empty patterns.
 
 Use the [exercise solutions and verification guide](../../docs/solutions.md) after
-writing your own trace. Continue with [binary-search boundaries](binary-search.md).
+writing your own trace. Continue with [binary-search boundaries](binary-search.md). The [solution finder](../../docs/solution-finder.md#9-searching) compares this technique with its alternatives.

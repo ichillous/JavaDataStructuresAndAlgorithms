@@ -63,4 +63,4 @@ Repeated removal emits sorted values, but merely inspecting the backing array wo
 2. Explain why choosing the larger child during a min-heap sift-down can leave a violation behind.
 3. Compare random add/remove/peek sequences with `PriorityQueue`, including duplicate and extreme integer values.
 
-Continue with [heap operations](operations.md), [priority queues](../queues/priority-queues.md) and the [worked solutions](../../docs/solutions.md).
+Continue with [heap operations](operations.md), [priority queues](../queues/priority-queues.md) and the [worked solutions](../../docs/solutions.md). The [solution finder](../../docs/solution-finder.md#7-stacks-queues-deques-and-priority) compares this technique with its alternatives.

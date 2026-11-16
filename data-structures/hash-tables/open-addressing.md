@@ -117,4 +117,4 @@ The tempting `remove` sets the found slot to empty and stops. With the trace abo
 2. Compute the expected probe count for an unsuccessful search at α = 3/4 and α = 0.9, and explain why the resize threshold is 2/3 rather than 0.9.
 3. Write a test that inserts and removes 10,000 different keys while the size never exceeds 5, then checks that every lookup still ends quickly. Explain why a tombstone design would need extra rehash logic for the same test.
 
-See the [catalog](../../docs/catalog.md) for the API and tests, and the [complexity guide](../../docs/complexity.md) for the cost table.
+See the [catalog](../../docs/catalog.md) for the API and tests, and the [complexity guide](../../docs/complexity.md) for the cost table. The [solution finder](../../docs/solution-finder.md#1-look-up-by-key) compares this technique with its alternatives.
