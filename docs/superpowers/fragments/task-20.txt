@@ -1,0 +1,35 @@
+TASK 20 FRAGMENT: Reservoir sampling, Fisher-Yates shuffle and the alias method
+
+(a) CATALOG rows (section "## Algorithm utilities", table Source | Operations and contract | Tests;
+    append after the BacktrackingPuzzles row)
+
+| [Sampling](../src/main/java/io/github/ichillous/dsa/algorithms/Sampling.java) | `reservoirSample(items, k, random)` (Algorithm R, uniform `min(k, n)` items, `k = 0` reads nothing, `n <= k` keeps encounter order, immutable result) and in-place Fisher-Yates `shuffle(int[], random)`. Randomness comes from the caller's `RandomGenerator`; bounded draws use `nextInt(bound)`. | [SamplingTest](../src/test/java/io/github/ichillous/dsa/algorithms/SamplingTest.java) |
+| [AliasTable](../src/main/java/io/github/ichillous/dsa/algorithms/AliasTable.java) | Vose's alias method: `new AliasTable(weights)` copies finite non-negative weights with a positive sum, `sample(random)` draws an index in O(1), `probability(i)` is the normalized weight, `size()`. Zero-weight indices are never drawn; rounding leftovers get cutoff 1. | [SamplingTest](../src/test/java/io/github/ichillous/dsa/algorithms/SamplingTest.java) |
+
+(b) COMPLEXITY rows (target table: the "Searching, sorting and strings" table in docs/complexity.md;
+    columns: Algorithm | Time | Auxiliary space / behavior)
+
+| Reservoir sample (`Sampling.reservoirSample`) | O(n), one random draw per item after the first `k` | O(min(k, n)); uniform over `k`-subsets, never needs `n` in advance |
+| Fisher-Yates shuffle (`Sampling.shuffle`) | O(n), `n - 1` random draws | O(1); in place; every order has probability `1/n!` given a uniform generator |
+| Alias table (`AliasTable`) | O(n) build; O(1) per `sample` | O(n) for normalized weights, cutoffs and aliases; immutable after construction |
+
+(c) SOLUTION-FINDER entries (lesson: algorithms/math/randomized-sampling.md)
+
+- Problem heading: "Pick k items uniformly at random from a stream of unknown length"
+  Technique: reservoir sampling (Algorithm R). Repo link: [Sampling](../src/main/java/io/github/ichillous/dsa/algorithms/Sampling.java)
+  with lesson [randomized sampling](../algorithms/math/randomized-sampling.md).
+- Problem heading: "Put an array in a uniformly random order"
+  Technique: Fisher-Yates shuffle with unbiased bounded draws. Repo link: [Sampling](../src/main/java/io/github/ichillous/dsa/algorithms/Sampling.java)
+  with lesson [randomized sampling](../algorithms/math/randomized-sampling.md).
+- Problem heading: "Draw many random indices with fixed, unequal weights"
+  Technique: alias method (Vose). Repo link: [AliasTable](../src/main/java/io/github/ichillous/dsa/algorithms/AliasTable.java)
+  with lesson [randomized sampling](../algorithms/math/randomized-sampling.md).
+
+(d) README topic-map addition (one new row in the topic map table, same three columns as the Lookup and order row)
+
+| Randomness | [Randomized sampling](algorithms/math/randomized-sampling.md) | Reservoir sampling, Fisher-Yates shuffle and the alias method, all driven by a caller-supplied `RandomGenerator` |
+
+(e) EXERCISE rows (docs/exercises.md format: Exercise | Input or scenario | Success criteria and hint)
+
+| Shuffle uniformity | Shuffle `{1, 2, 3}` 60000 times with `new SplittableRandom(0x5A3)` and count each of the six orders | Every order must be within 1/6 plus or minus 0.01. Then replace `nextInt(i + 1)` by `nextInt(n)` and show the counts become visibly uneven. Never assert exact counts. |
+| Weighted draws | Build an `AliasTable` for `[1, 0, 3]` and draw 60000 indices with a fixed seed | Frequencies near `[0.25, 0, 0.75]` within 0.01, and index 1 never appears. Rebuild the probabilities exactly from the table's cutoffs and aliases and compare with `probability(i)`. |
