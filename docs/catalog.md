@@ -9,7 +9,9 @@ for bounds and assumptions.
 
 All insertions reject null. Empty stack/queue/list-end operations throw
 `NoSuchElementException`; invalid indices throw `IndexOutOfBoundsException`.
-Growing arrays retain capacity after removals.
+Growing arrays retain capacity after removals. Capacity doubles when full, capped at
+`Integer.MAX_VALUE - 8`; only a requirement beyond that cap throws
+`OutOfMemoryError("Required array length too large")`, matching `ArrayList`.
 
 | Source | Operations and contract | Tests |
 | --- | --- | --- |
@@ -31,18 +33,19 @@ concurrency guarantee. Map keys must keep stable equality and hashes while store
 | --- | --- | --- |
 | [BinarySearchTree](../src/main/java/io/github/ichillous/dsa/structures/BinarySearchTree.java) | Iterative unbalanced ordered set: `add/remove/contains`, `inOrder`, `height`. | [BinarySearchTreeTest](../src/test/java/io/github/ichillous/dsa/structures/BinarySearchTreeTest.java) |
 | [AvlTree](../src/main/java/io/github/ichillous/dsa/structures/AvlTree.java) | Ordered set with rotations restoring balance after insertion/deletion. | [AvlTreeTest](../src/test/java/io/github/ichillous/dsa/structures/AvlTreeTest.java) |
-| [BinaryMinHeap](../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) | Natural-order `add/peek/remove`; duplicates retained; empty operations throw. Collection constructor uses bottom-up heapify. | [BinaryMinHeapTest](../src/test/java/io/github/ichillous/dsa/structures/BinaryMinHeapTest.java) |
+| [BinaryMinHeap](../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) | Natural-order `add/peek/remove`; duplicates retained; empty operations throw. `add`/`remove` are failure-atomic if `compareTo` throws. Collection constructor uses bottom-up heapify. | [BinaryMinHeapTest](../src/test/java/io/github/ichillous/dsa/structures/BinaryMinHeapTest.java) |
 | [Trie](../src/main/java/io/github/ichillous/dsa/structures/Trie.java) | `add/remove/contains/startsWith`, `wordsWithPrefix(prefix, limit)`. Case-sensitive UTF-16; empty word allowed; empty prefix always exists. | [TrieTest](../src/test/java/io/github/ichillous/dsa/structures/TrieTest.java) |
 | [UnionFind](../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) | `find/union/connected/componentSize/components`; compression and union by size. `union` reports whether components merged. | [UnionFindTest](../src/test/java/io/github/ichillous/dsa/structures/UnionFindTest.java) |
-| [FenwickTree](../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java) | Defensive `long[]` copy; zero-based point `add`, half-open `prefixSum(endExclusive)` / `rangeSum(from,to)`. Empty ranges sum to zero. | [FenwickTreeTest](../src/test/java/io/github/ichillous/dsa/structures/FenwickTreeTest.java) |
+| [FenwickTree](../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java) | Defensive `long[]` copy; zero-based point `add`, half-open `prefixSum(endExclusive)` / `rangeSum(from,to)`. Empty ranges sum to zero. Construction and `add` throw `ArithmeticException` iff some final node sum leaves `long` range (a failed `add` changes nothing); `prefixSum`/`rangeSum` are exact and throw only when the true sum is outside `long`. | [FenwickTreeTest](../src/test/java/io/github/ichillous/dsa/structures/FenwickTreeTest.java) |
 | [SegmentTree](../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) | Defensive long-array copy, point set and half-open rangeMin; OptionalLong.empty for empty ranges, including on an empty tree. Long.MAX_VALUE is a valid minimum. | [SegmentTreeTest](../src/test/java/io/github/ichillous/dsa/structures/SegmentTreeTest.java) |
 
 BST/AVL use `compareTo == 0` for equivalence, reject null, and return false on
 duplicate insertion or absent deletion. Height counts edges (`-1` when empty).
 Keys must keep stable ordering while stored. `inOrder` returns an immutable snapshot.
 Trie results follow `String.compareTo`, perform no normalization, and reject
-negative limits. Union-find indices are `[0,size)`. Fenwick checks intermediate
-signed-long overflow; a failed update leaves the tree unchanged.
+negative limits. Union-find indices are `[0,size)`. Fenwick construction and
+`add` throw iff some final node sum leaves `long` range, and a failed update leaves
+the tree unchanged; queries throw only when the true requested sum overflows `long`.
 
 ## Algorithm utilities
 
@@ -51,7 +54,7 @@ signed-long overflow; a failed update leaves the tree unchanged.
 | [SearchAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) | Linear/binary search, lower/upper bounds. Binary/bounds require ascending input, unchecked for efficiency. Search returns `-1` when absent; bounds return `[0,n]` insertion positions. | [SearchAlgorithmsTest](../src/test/java/io/github/ichillous/dsa/algorithms/SearchAlgorithmsTest.java) |
 | [SortAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) | Ascending in-place `int[]` insertion/bubble/merge/quick/heap sort. Merge/insertion/bubble stable; quick/heap unstable. | [SortAlgorithmsTest](../src/test/java/io/github/ichillous/dsa/algorithms/SortAlgorithmsTest.java) |
 | [StringAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/StringAlgorithms.java) | KMP first/all occurrences, overlaps included. UTF-16 positions; empty pattern matches at every boundary `0..length`. | [StringAlgorithmsTest](../src/test/java/io/github/ichillous/dsa/algorithms/StringAlgorithmsTest.java) |
-| [DynamicProgramming](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java) | Minimum coins (`-1` impossible, positive reusable denominations); 0/1 knapsack (`long` result, zero weights/negative values allowed); LCS length, strictly increasing LIS length, Levenshtein distance. | [DynamicProgrammingTest](../src/test/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingTest.java) |
+| [DynamicProgramming](../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java) | Minimum coins (`-1` impossible, positive reusable denominations); 0/1 knapsack (`long` result, zero weights/negative values allowed); LCS length, strictly increasing LIS length, Levenshtein distance. Coin amounts and knapsack capacities whose table would exceed `Integer.MAX_VALUE - 8` entries throw `IllegalArgumentException`; smaller large values can still exhaust memory. | [DynamicProgrammingTest](../src/test/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingTest.java) |
 | [GreedyAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) | Maximum-cardinality activity selection. Positive-length half-open `Interval(start,end)`; touching endpoints allowed. | [GreedyAlgorithmsTest](../src/test/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithmsTest.java) |
 | [Backtracking](../src/main/java/io/github/ichillous/dsa/algorithms/Backtracking.java) | Unique permutations (at most 9 values), N-queens (n in `0..12`, row-to-column solutions). Empty input has one empty solution; results immutable. | [BacktrackingTest](../src/test/java/io/github/ichillous/dsa/algorithms/BacktrackingTest.java) |
 | [SequenceAlgorithms](../src/main/java/io/github/ichillous/dsa/algorithms/SequenceAlgorithms.java) | Optional maximum nonempty subarray (long sum, ties earliest start then end); fixed-window maxima (1<=window<=n); long inversion count, equals not inverted. | [SequenceAlgorithmsTest](../src/test/java/io/github/ichillous/dsa/algorithms/SequenceAlgorithmsTest.java) |

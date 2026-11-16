@@ -15,7 +15,7 @@ These bounds describe the maintained code in the [catalog](catalog.md) and its e
 | Implementation / operation | Time | Space and assumptions |
 | --- | --- | --- |
 | `DynamicArray` get/set | O(1) worst | O(C) stored capacity; resizing uses temporary O(n) storage |
-| `DynamicArray` append | O(1) amortized; O(n) for a resize | Geometric capacity growth spreads copying over a sequence of appends |
+| `DynamicArray` append | O(1) amortized; O(n) for a resize | Geometric capacity growth spreads copying over a sequence of appends; doubling is capped at `Integer.MAX_VALUE - 8`, beyond which `OutOfMemoryError` is thrown |
 | `DynamicArray` indexed insertion/removal | O(n) worst | Shifting dominates; an insertion may also grow capacity |
 | `DoublyLinkedList` add/remove at either end | O(1) worst | O(n) stored nodes; this implementation has both head and tail |
 | `DoublyLinkedList` get/set/remove by index | O(n) worst | O(1 + min(index, n - 1 - index)) to find the node; local unlinking is O(1) |
@@ -26,14 +26,14 @@ These bounds describe the maintained code in the [catalog](catalog.md) and its e
 | `BinarySearchTree` add/remove/contains | O(h), up to O(n) worst | O(n) stored nodes; sorted insertions can produce a chain; the maintained traversal/update code uses iteration |
 | `AvlTree` add/remove/contains | O(log n) worst | O(n) stored nodes; recursive updates use O(log n) stack; rotations restore balance |
 | Tree inorder traversal | O(n) | O(n) result snapshot plus traversal workspace |
-| `BinaryMinHeap` add/remove minimum | O(log n) amortized; add can be O(n) on array growth | O(C) retained array space; peek O(1), bottom-up construction from a collection O(n) |
+| `BinaryMinHeap` add/remove minimum | O(log n) amortized (failure-atomic if `compareTo` throws); add can be O(n) on array growth | O(C) retained array space; peek O(1), bottom-up construction from a collection O(n) |
 | `Trie` add/contains/startsWith/remove | O(L log A) | `L` UTF-16 code units, at most `A` children per node, ordered `TreeMap` children; removal keeps O(L) path workspace |
 | `Trie` prefix enumeration | O(P log A + visited nodes + output characters) | Prefix length `P`; result limit bounds returned words, not the length of those words; includes output storage and iterative traversal workspace |
 | `UnionFind` find/union/connected/componentSize | O(α(n)) amortized | Path compression plus union by size; O(n) stored arrays; construction O(n); an individual find is not guaranteed O(1) |
 | `RingDeque` add at either end | O(1) amortized, O(n) on growth | O(C) retained circular array; remove/peek at either end O(1) |
 | `LruCache` get/remove, put | Expected O(1) lookup/removal; expected amortized O(1) put; O(capacity) worst | O(capacity) bounded stored map/nodes; user hashes/equality assumed O(1) |
 | `SegmentTree` range minimum, point set | O(log n) worst | O(n) stored tree and O(1) query workspace; O(n) construction |
-| `FenwickTree` point add, prefix/range sum | O(log n) worst | O(n) stored sums; construction O(n), query/update O(1) additional storage |
+| `FenwickTree` point add, prefix/range sum | O(log n) worst; sums are exact and overflow only if the true sum does | O(n) stored sums; construction O(n), query/update O(1) additional storage |
 
 A linked-list operation is O(1) only after the relevant node is known, or at an end for which the structure keeps a pointer. Finding an element by value or position is a separate cost. Likewise, an unbalanced BST is not automatically logarithmic because it is a tree.
 
@@ -90,8 +90,8 @@ is an intentional cost for canonical results.
 | Inversion count | O(n log(n+1)) | O(n) copied array and merge buffer, O(log n) stack; long result |
 | Signed subset-sum witness | Expected O(2^(n/2)+n) | O(2^(n/2)+n), including output; input capped at 30; two half enumerations with hashed sums |
 | Sudoku (fixed 9x9) | O(e*9^e) worst upper bound for e empty cells | O(e) recursion plus fixed board/masks; minimum-remaining-values ordering prunes but does not remove exponential worst cases |
-| Minimum coins | O((c + 1)(a + 1)) | O(a + 1), for `c` denominations and amount `a`; includes validation and table allocation; unlimited reuse of positive coins |
-| 0/1 knapsack | O((n + 1)(W + 1)) | O(W + 1), for `n` items and capacity `W`; each item may be used at most once, including a zero-weight item |
+| Minimum coins | O((c + 1)(a + 1)) | O(a + 1), for `c` denominations and amount `a`; includes validation and table allocation; unlimited reuse of positive coins; `a + 1 > Integer.MAX_VALUE - 8` is rejected, but smaller large `a` can still run out of memory |
+| 0/1 knapsack | O((n + 1)(W + 1)) | O(W + 1), for `n` items and capacity `W`; each item may be used at most once, including a zero-weight item; `W + 1 > Integer.MAX_VALUE - 8` is rejected, but smaller large `W` can still run out of memory |
 | LCS length | O(mn + m + n) | O(min(m, n) + 1); lengths are UTF-16 units; empty-input handling and setup are included |
 | Edit distance | O(mn + m + n) | O(min(m, n) + 1); unit insertion, deletion and substitution costs |
 | Strictly increasing subsequence length | O(n log(n + 1)) | O(n); equal values do not extend a strictly increasing subsequence |
@@ -110,7 +110,7 @@ For DP, write the state meaning and loop-order invariant first. For greedy metho
 - **Amortized** bounds a sequence of operations without requiring randomness. One dynamic-array append can still copy the entire array.
 - **Auxiliary space** differs from total storage and output size. Include recursion frames, buffers, snapshots and returned values when they matter.
 
-Java integer arithmetic normally wraps. The maintained APIs state where they use a wider type or checked arithmetic. For example, Fenwick operations reject intermediate signed-`long` overflow and a failed update leaves the tree unchanged. Do not substitute subtraction for an ordering comparison on arbitrary integer values. Benchmarking would require a separate controlled harness; asymptotic bounds here are analytical claims, not measured speedups.
+Java integer arithmetic normally wraps. The maintained APIs state where they use a wider type or checked arithmetic. For example, Fenwick construction and updates throw if and only if a final node sum overflows `long` (a failed update leaves the tree unchanged), while prefix and range queries are exact and throw only when the true sum overflows. Do not substitute subtraction for an ordering comparison on arbitrary integer values. Benchmarking would require a separate controlled harness; asymptotic bounds here are analytical claims, not measured speedups.
 
 Maximum-subarray sums fit in long because an int-indexed int array cannot contain
 enough int values to exceed that range; the same observation bounds inversion

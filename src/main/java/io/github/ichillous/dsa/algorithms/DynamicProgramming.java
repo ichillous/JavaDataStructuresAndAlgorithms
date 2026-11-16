@@ -13,7 +13,9 @@ public final class DynamicProgramming {
      * are allowed. O(amount * number of coins) time and O(amount) extra space.
      *
      * @throws IllegalArgumentException for nonpositive coins, negative amount, or an amount
-     *         that cannot be represented by an indexed DP array
+     *         whose table (amount + 1 entries) would exceed {@code Integer.MAX_VALUE - 8}.
+     *         Valid but large amounts are pseudopolynomial and can still exhaust memory
+     *         ({@link OutOfMemoryError}).
      */
     public static int minimumCoins(int[] coins, int amount) {
         Objects.requireNonNull(coins, "coins");
@@ -44,7 +46,9 @@ public final class DynamicProgramming {
      * O(number of items * capacity) time, O(capacity) extra space (plus O(number of items) validation).
      *
      * @throws IllegalArgumentException for mismatched lengths, negative weights/capacity, or a
-     *         capacity that cannot be represented by an indexed DP array
+     *         capacity whose table (capacity + 1 entries) would exceed
+     *         {@code Integer.MAX_VALUE - 8}. Valid but large capacities are pseudopolynomial and
+     *         can still exhaust memory ({@link OutOfMemoryError}).
      */
     public static long knapsack01(int[] weights, int[] values, int capacity) {
         Objects.requireNonNull(weights, "weights");
@@ -153,8 +157,9 @@ public final class DynamicProgramming {
     }
 
     private static void checkArrayStateSize(int maximumState, String name) {
-        if (maximumState < 0 || maximumState == Integer.MAX_VALUE) {
-            throw new IllegalArgumentException(name + " must be between 0 and Integer.MAX_VALUE - 1");
+        // The table has maximumState + 1 entries, which must not exceed Integer.MAX_VALUE - 8.
+        if (maximumState < 0 || maximumState > Integer.MAX_VALUE - 9) {
+            throw new IllegalArgumentException(name + " must be between 0 and Integer.MAX_VALUE - 9");
         }
     }
 }
