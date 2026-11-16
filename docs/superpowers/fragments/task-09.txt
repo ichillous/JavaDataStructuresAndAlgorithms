@@ -1,0 +1,32 @@
+TASK 9 FRAGMENT: Bloom filter and Count-Min sketch
+
+(a) CATALOG rows (section "## Ordered, prefix, and indexed structures", table Source | Operations and contract | Tests;
+    append after the SegmentTree row. A new short section "## Probabilistic structures" with the same three-column
+    table is an equally acceptable home if the integrator prefers one.)
+
+| [BloomFilter](../src/main/java/io/github/ichillous/dsa/structures/BloomFilter.java) | Fixed-size approximate set: `add`, `mightContain`, `insertions`, `estimatedFalsePositiveRate`; `forExpectedInsertions(n, p)` sizes `m = ceil(-n ln p / (ln 2)^2)`, `k = max(1, round(m/n ln 2))`. No false negatives, no deletion; elements with equal `hashCode` are indistinguishable; null rejected. | [BloomFilterTest](../src/test/java/io/github/ichillous/dsa/structures/BloomFilterTest.java) |
+| [CountMinSketch](../src/main/java/io/github/ichillous/dsa/structures/CountMinSketch.java) | Approximate frequency table: `add(item[, count])`, `estimate`, `totalCount`; `withErrorBounds(epsilon, delta)` gives `width = ceil(e/epsilon)`, `depth = ceil(ln(1/delta))`. Estimates never undercount; overflow throws `ArithmeticException` and leaves the sketch unchanged; negative counts rejected. | [CountMinSketchTest](../src/test/java/io/github/ichillous/dsa/structures/CountMinSketchTest.java) |
+
+(b) COMPLEXITY rows (target table: the structures table containing the `FenwickTree` row in docs/complexity.md;
+    columns: operation | time | space)
+
+| `BloomFilter` add/mightContain | O(k) worst, k hash indices | O(ceil(m/64)) stored longs; O(1) additional; false positives only, near `p` at design load |
+| `CountMinSketch` add/estimate | O(depth) worst | O(width x depth) stored longs; O(1) additional; overestimates only, within `epsilon x total` with probability `1 - delta` |
+
+(c) SOLUTION-FINDER entries (lesson: data-structures/probabilistic/overview.md)
+
+- Problem heading: "Have I probably seen this before, using far less memory than a set?"
+  Technique: Bloom filter. Repo link: [BloomFilter](../src/main/java/io/github/ichillous/dsa/structures/BloomFilter.java)
+  with lesson [probabilistic overview](../data-structures/probabilistic/overview.md).
+- Problem heading: "Approximately how often does each item occur in a stream?"
+  Technique: Count-Min sketch. Repo link: [CountMinSketch](../src/main/java/io/github/ichillous/dsa/structures/CountMinSketch.java)
+  with lesson [probabilistic overview](../data-structures/probabilistic/overview.md).
+
+(d) README topic-map addition (one new row in the topic map table, same three columns as the Lookup and order row)
+
+| Approximate answers | [Probabilistic structures](data-structures/probabilistic/overview.md) | Bloom filter (no false negatives) and Count-Min sketch (never undercounts) |
+
+(e) EXERCISE rows (docs/exercises.md format: Exercise | Input or scenario | Success criteria and hint)
+
+| Bloom filter false positives | Size a filter with `forExpectedInsertions(1000, 0.01)`, add 1000 seeded strings, then probe 100000 absent strings | Every added string must be reported present (no false negatives). Compare the observed false-positive rate with `estimatedFalsePositiveRate()`; do not assert an exact count. Explain why deletion is unsafe. |
+| Count-Min overestimates | Stream 50000 Zipf-like items into `withErrorBounds(0.01, 0.01)` | Compare with a `HashMap` of exact counts: `estimate` is never below the true count, and most items are within `epsilon x total`. A failed overflowing add must leave estimate and total unchanged. |
