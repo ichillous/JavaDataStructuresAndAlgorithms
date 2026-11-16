@@ -68,4 +68,4 @@ Suggestions follow `String.compareTo` order and return an immutable snapshot wit
 2. Explain why prefix membership and whole-word membership have different answers for `ca`.
 3. Compare random add/remove/contains operations with `HashSet`, and suggestions with a sorted filtered set under the same UTF-16/case policy.
 
-Continue with [deletion and suggestions](implementation.md) and the [worked solutions](../../docs/solutions.md).
+Continue with [deletion and suggestions](implementation.md) and the [worked solutions](../../docs/solutions.md). The [solution finder](../../docs/solution-finder.md#3-prefix-and-text-keys) compares this technique with its alternatives.

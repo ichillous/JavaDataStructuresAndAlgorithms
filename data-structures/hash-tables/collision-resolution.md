@@ -1,6 +1,6 @@
 # Collision resolution: never confuse a bucket with a key
 
-Collisions occur whenever different keys select the same bucket. A correct implementation must preserve all mappings and terminate an absent-key search. This repository maintains [separate chaining](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java); open addressing below is a design comparison, not a second untested implementation.
+Collisions occur whenever different keys select the same bucket. A correct implementation must preserve all mappings and terminate an absent-key search. This repository maintains [separate chaining](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java); open addressing is maintained too: [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) uses linear probing with backward-shift deletion, and the [open-addressing lesson](open-addressing.md) traces it. The probing comparison below stays a design comparison.
 
 <!-- visual:generated -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/hash-chaining-dark.svg"><img src="../../docs/visuals/assets/hash-chaining.svg" alt="Equal hash codes select one bucket; key equality still decides a match." width="520"></picture>
@@ -62,6 +62,6 @@ The maintained chained map avoids tombstones and supports arbitrary positive ini
 
 1. Trace removal at the head, middle and tail of a three-entry collision chain.
 2. Explain why a full probing table must terminate an absent lookup even when no empty slot exists.
-3. Design tests for an open-addressing extension before implementing it: full tables, wraparound, deletion followed by lookup, and non-coprime double-hash steps.
+3. Extend OpenAddressingHashMapTest with full-table growth, wraparound and deletion followed by lookup, then design tests for a double-hashing variant, including non-coprime steps.
 
-Check the [worked solutions](../../docs/solutions.md) for the chain and probe-path invariants.
+Check the [worked solutions](../../docs/solutions.md) for the chain and probe-path invariants. The [solution finder](../../docs/solution-finder.md#1-look-up-by-key) compares this technique with its alternatives.

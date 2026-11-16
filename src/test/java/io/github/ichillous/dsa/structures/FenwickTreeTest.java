@@ -2,6 +2,7 @@ package io.github.ichillous.dsa.structures;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,5 +71,97 @@ class FenwickTreeTest {
                 assertEquals(expected, tree.rangeSum(from, to));
             }
         }
+    }
+
+    @Test
+    void rangeSumIsExactWhenPrefixesOverflow() {
+        FenwickTree tree = new FenwickTree(new long[]{Long.MAX_VALUE, 0, 1});
+        assertEquals(1, tree.rangeSum(2, 3));
+        assertEquals(1, tree.rangeSum(1, 3));
+        assertEquals(Long.MAX_VALUE, tree.rangeSum(0, 2));
+        assertThrows(ArithmeticException.class, () -> tree.prefixSum(3));
+        assertThrows(ArithmeticException.class, () -> tree.rangeSum(0, 3));
+        FenwickTree cancelling = new FenwickTree(new long[]{Long.MAX_VALUE, -1, 1});
+        assertEquals(Long.MAX_VALUE, cancelling.rangeSum(0, 3));
+        FenwickTree low = new FenwickTree(new long[]{Long.MIN_VALUE, 0, -1});
+        assertEquals(-1, low.rangeSum(2, 3));
+        assertThrows(ArithmeticException.class, () -> low.rangeSum(0, 3));
+    }
+
+    @Test
+    void prefixAndRangeSumsMatchBigIntegerModel() {
+        long seed = 0xB16B00B5L;
+        Random random = new Random(seed);
+        BigInteger min = BigInteger.valueOf(Long.MIN_VALUE);
+        BigInteger max = BigInteger.valueOf(Long.MAX_VALUE);
+        long[] extremes = {Long.MAX_VALUE, Long.MIN_VALUE, Long.MAX_VALUE - 1, Long.MIN_VALUE + 1, 0, 1, -1};
+        int built = 0;
+        int rejected = 0;
+        int thrown = 0;
+        for (int trial = 0; trial < 400; trial++) {
+            int length = random.nextInt(9);
+            long[] values = new long[length];
+            for (int i = 0; i < length; i++) {
+                values[i] = random.nextInt(3) == 0
+                        ? extremes[random.nextInt(extremes.length)] : random.nextInt(21) - 10;
+            }
+            boolean nodeOverflows = false;
+            for (int node = 1; node <= length; node++) {
+                BigInteger nodeSum = BigInteger.ZERO;
+                for (int i = node - (node & -node) + 1; i <= node; i++) {
+                    nodeSum = nodeSum.add(BigInteger.valueOf(values[i - 1]));
+                }
+                nodeOverflows |= nodeSum.compareTo(min) < 0 || nodeSum.compareTo(max) > 0;
+            }
+            String build = "seed " + seed + " trial " + trial + " construction";
+            if (nodeOverflows) {
+                assertThrows(ArithmeticException.class, () -> new FenwickTree(values), build);
+                rejected++;
+                continue;
+            }
+            FenwickTree tree = new FenwickTree(values);
+            built++;
+            for (int from = 0; from <= length; from++) {
+                for (int to = from; to <= length; to++) {
+                    BigInteger exact = BigInteger.ZERO;
+                    for (int i = from; i < to; i++) {
+                        exact = exact.add(BigInteger.valueOf(values[i]));
+                    }
+                    String message = "seed " + seed + " trial " + trial + " [" + from + "," + to + ")";
+                    if (exact.compareTo(min) < 0 || exact.compareTo(max) > 0) {
+                        thrown++;
+                        final int f = from;
+                        final int t = to;
+                        assertThrows(ArithmeticException.class, () -> tree.rangeSum(f, t), message);
+                    } else {
+                        assertEquals(exact.longValueExact(), tree.rangeSum(from, to), message);
+                    }
+                }
+                BigInteger prefix = BigInteger.ZERO;
+                for (int i = 0; i < from; i++) {
+                    prefix = prefix.add(BigInteger.valueOf(values[i]));
+                }
+                String message = "seed " + seed + " trial " + trial + " prefix " + from;
+                if (prefix.compareTo(min) < 0 || prefix.compareTo(max) > 0) {
+                    final int end = from;
+                    assertThrows(ArithmeticException.class, () -> tree.prefixSum(end), message);
+                } else {
+                    assertEquals(prefix.longValueExact(), tree.prefixSum(from), message);
+                }
+            }
+        }
+        assertTrue(built > 100 && thrown > 0 && rejected > 0, "model must exercise overflow, seed " + seed);
+    }
+
+    @Test
+    void constructionRejectsOnlyOverflowingFinalNodeSums() {
+        FenwickTree cancelling = new FenwickTree(new long[]{Long.MAX_VALUE, 0, 1, -1});
+        assertEquals(Long.MAX_VALUE, cancelling.prefixSum(4));
+        assertEquals(Long.MAX_VALUE, cancelling.rangeSum(0, 4));
+        assertEquals(0, cancelling.rangeSum(2, 4));
+        assertEquals(1, cancelling.rangeSum(2, 3));
+        assertThrows(ArithmeticException.class, () -> new FenwickTree(new long[]{Long.MAX_VALUE, 1}));
+        assertThrows(ArithmeticException.class,
+                () -> new FenwickTree(new long[]{Long.MIN_VALUE, -1, 1}));
     }
 }

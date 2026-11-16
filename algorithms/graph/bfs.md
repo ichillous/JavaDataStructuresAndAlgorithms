@@ -116,4 +116,4 @@ should not be hidden behind a constant-time `long` assumption.
 3. Add a negative cycle first outside and then inside the source's reachable set.
    Explain why Bellman–Ford treats those cases differently.
 
-Use the [solutions](../../docs/solutions.md) and continue with [DFS](dfs.md).
+Use the [solutions](../../docs/solutions.md) and continue with [DFS](dfs.md). The [solution finder](../../docs/solution-finder.md#15-shortest-paths) compares this technique with its alternatives.

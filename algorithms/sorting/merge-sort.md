@@ -68,4 +68,4 @@ because recursive subproblems complete before their parent merge uses it.
    [divide-and-conquer problems](../divide-and-conquer/problems.md).
 
 Compare your reasoning with the [solutions](../../docs/solutions.md) and
-[space analysis](../../complexity-analysis/space-complexity.md).
+[space analysis](../../complexity-analysis/space-complexity.md). The [solution finder](../../docs/solution-finder.md#11-sorting) compares this technique with its alternatives.

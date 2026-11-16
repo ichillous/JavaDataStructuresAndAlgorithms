@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
@@ -95,5 +96,62 @@ class BinaryMinHeapTest {
             result.add(heap.remove());
         }
         return result;
+    }
+
+    private static final class Fragile implements Comparable<Fragile> {
+        static boolean failing;
+        final int key;
+
+        Fragile(int key) {
+            this.key = key;
+        }
+
+        @Override
+        public int compareTo(Fragile other) {
+            if (failing) {
+                throw new IllegalStateException("comparison failed");
+            }
+            return Integer.compare(key, other.key);
+        }
+    }
+
+    private static List<Integer> drainKeys(BinaryMinHeap<Fragile> heap) {
+        List<Integer> keys = new ArrayList<>();
+        while (!heap.isEmpty()) {
+            keys.add(heap.remove().key);
+        }
+        return keys;
+    }
+
+    @Test
+    void addAndRemoveAreFailureAtomicWhenCompareToThrows() {
+        for (int size = 1; size <= 12; size++) {
+            for (int newKey : new int[] {-5, 3, 100}) {
+                Fragile.failing = false;
+                BinaryMinHeap<Fragile> heap = new BinaryMinHeap<>();
+                List<Integer> expected = new ArrayList<>();
+                for (int i = 0; i < size; i++) {
+                    int key = (i * 7) % 11 + 1;
+                    heap.add(new Fragile(key));
+                    expected.add(key);
+                }
+                Collections.sort(expected);
+                Fragile candidate = new Fragile(newKey);
+                Fragile.failing = true;
+                try {
+                    // Adding to a nonempty heap always compares with the parent first.
+                    assertThrows(IllegalStateException.class, () -> heap.add(candidate));
+                    assertEquals(size, heap.size());
+                    if (size >= 3) {
+                        // With fewer than three elements remove needs no comparison.
+                        assertThrows(IllegalStateException.class, heap::remove);
+                        assertEquals(size, heap.size());
+                    }
+                } finally {
+                    Fragile.failing = false;
+                }
+                assertEquals(expected, drainKeys(heap), "size " + size + " key " + newKey);
+            }
+        }
     }
 }

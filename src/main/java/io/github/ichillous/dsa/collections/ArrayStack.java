@@ -5,7 +5,9 @@ import java.util.NoSuchElementException;
 /**
  * A last-in, first-out stack backed by a {@link DynamicArray}.
  * Push is amortized O(1); pop and peek are O(1); storage is O(capacity), retained
- * after elements are removed.
+ * after elements are removed. Capacity doubles when full, capped at
+ * {@code Integer.MAX_VALUE - 8}; a larger requirement throws {@link OutOfMemoryError}. The cap
+ * is hard, unlike {@code ArrayList}'s soft limit at the same length.
  * Null elements are rejected. This class is not thread-safe.
  *
  * @param <T> element type

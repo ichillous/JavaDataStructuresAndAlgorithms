@@ -78,4 +78,4 @@ problems. Forgetting to undo an occupied column also silently removes valid boar
 3. Explain why pruning a negative remaining sum is unsafe with signed inputs;
    continue with [puzzles and subset sum](problems.md).
 
-Check the [solutions](../../docs/solutions.md) after trying a small search tree.
+Check the [solutions](../../docs/solutions.md) after trying a small search tree. The [solution finder](../../docs/solution-finder.md#20-backtracking-and-search) compares this technique with its alternatives.

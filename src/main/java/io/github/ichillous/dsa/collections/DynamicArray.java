@@ -11,7 +11,9 @@ import java.util.Objects;
  *
  * <p>Indexed access is O(1); appending is amortized O(1), while insertion and removal
  * at an arbitrary index are O(n). Space is O(capacity); capacity grows geometrically
- * and is retained after removal. Iterators visit
+ * and is retained after removal. Doubling is capped at {@code Integer.MAX_VALUE - 8}; a larger
+ * requirement throws {@link OutOfMemoryError}. The cap is hard, unlike {@code ArrayList}'s soft
+ * limit at the same length. Iterators visit
  * elements in index order and fail fast after structural changes. This class is not
  * thread-safe.
  *
@@ -137,7 +139,7 @@ public final class DynamicArray<T> implements Iterable<T> {
 
     private void ensureCapacity() {
         if (size == elements.length) {
-            int capacity = elements.length == 0 ? 1 : Math.multiplyExact(elements.length, 2);
+            int capacity = ArrayGrowth.grow(elements.length, elements.length + 1);
             elements = Arrays.copyOf(elements, capacity);
         }
     }

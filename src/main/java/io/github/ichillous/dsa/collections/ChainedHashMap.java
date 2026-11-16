@@ -8,9 +8,11 @@ import java.util.Objects;
  *
  * <p>Get, put and remove take expected amortized O(1) time with well-distributed
  * hashes; adversarial collisions can make an operation O(n). Storage is
- * O(n + capacity). Null keys and values are rejected, so null unambiguously means
- * an absent mapping. Keys must retain stable equals/hashCode behavior while stored.
- * This class is not thread-safe.
+ * O(n + capacity). The bucket count doubles on resize, capped at
+ * {@code Integer.MAX_VALUE - 8}; a larger requirement throws {@link OutOfMemoryError}. The cap
+ * is hard, unlike {@code ArrayList}'s soft limit at the same length. Null keys and values are
+ * rejected, so null unambiguously means an absent mapping. Keys must retain stable
+ * equals/hashCode behavior while stored. This class is not thread-safe.
  *
  * @param <K> key type
  * @param <V> value type
@@ -109,7 +111,7 @@ public final class ChainedHashMap<K, V> {
     }
 
     private void resize() {
-        Node<K, V>[] grown = newBuckets(Math.multiplyExact(buckets.length, 2));
+        Node<K, V>[] grown = newBuckets(ArrayGrowth.grow(buckets.length, buckets.length + 1));
         for (Node<K, V> bucket : buckets) {
             Node<K, V> node = bucket;
             while (node != null) {

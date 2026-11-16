@@ -81,4 +81,4 @@ BFS, DFS, topological ordering and undirected components take O(V + E) time and 
 2. Give a directed graph where 0 reaches 1 but 1 cannot reach 0.
 3. Compare reachability on small random graphs with an independent adjacency-matrix reference, including isolated vertices and self-loops.
 
-Continue with [representations](representation.md), [traversals and paths](traversal.md) and the [worked solutions](../../docs/solutions.md).
+Continue with [representations](representation.md), [traversals and paths](traversal.md) and the [worked solutions](../../docs/solutions.md). The [solution finder](../../docs/solution-finder.md#14-graph-traversal-and-structure) compares this technique with its alternatives.

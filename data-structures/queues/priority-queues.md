@@ -48,7 +48,7 @@ Avoid comparators such as `(a, b) -> b - a`: subtraction can overflow and revers
 
 Peek is O(1); remove-min is O(log n); insertion is O(log n) amortized, with occasional O(n) backing-array growth. Stored space is O(n) relative to retained peak capacity. Sorting every time a value arrives would do much more work.
 
-To keep the largest `k` values from a stream, maintain a **min** heap of at most `k` values. If a new value exceeds the minimum, replace that minimum. This costs O(n log k) time and O(k) stored space for positive `k`. A max heap would expose the value you want to keep, rather than the weakest retained candidate.
+To keep the largest `k` values from a stream, maintain a **min** heap of at most `k` values. If a new value exceeds the minimum, replace that minimum. This costs O(n log k) time and O(k) stored space for positive `k`. A max heap would expose the value you want to keep, rather than the weakest retained candidate. The maintained `Selection.smallestK` implements this pattern (a bounded max heap keeps the smallest `k`; pass a reversed comparator for the largest); see [selection](../../algorithms/searching/selection.md).
 
 ## Practice
 
@@ -56,4 +56,4 @@ To keep the largest `k` values from a stream, maintain a **min** heap of at most
 2. Choose an ordering for equal-priority tasks and explain whether stability is required.
 3. Implement the largest-`k` pattern with `BinaryMinHeap`, comparing results with sorting a full copy of each small test stream.
 
-Read [heap operations](../heaps/operations.md) and the [worked solutions](../../docs/solutions.md).
+Read [heap operations](../heaps/operations.md) and the [worked solutions](../../docs/solutions.md). The [solution finder](../../docs/solution-finder.md#10-selection-and-top-k) compares this technique with its alternatives.

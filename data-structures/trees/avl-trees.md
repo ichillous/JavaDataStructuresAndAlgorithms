@@ -76,4 +76,4 @@ Search and updates cost O(log n) with O(log n) recursive stack for updates. Cach
 2. Find a deletion where the heavy child has balance zero. Explain which single rotation preserves balance.
 3. Compare random operations with `TreeSet`, then independently validate every node's BST range, cached height and balance. Size and sorted output alone can miss stale-height defects.
 
-Check the [worked solutions](../../docs/solutions.md). The [AVL tests](../../src/test/java/io/github/ichillous/dsa/structures/AvlTreeTest.java) include structural validation as well as observable set behavior.
+Check the [worked solutions](../../docs/solutions.md). The [AVL tests](../../src/test/java/io/github/ichillous/dsa/structures/AvlTreeTest.java) include structural validation as well as observable set behavior. The [solution finder](../../docs/solution-finder.md#2-ordered-keys-and-nearest-key-queries) compares this technique with its alternatives.

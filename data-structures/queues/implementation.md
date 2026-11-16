@@ -69,4 +69,4 @@ Adds at either supported end cost O(1) amortized, O(n) on growth; endpoint remov
 2. Drain from alternating ends, clear, then reuse the deque. Verify both endpoints after every operation.
 3. Use a seeded `ArrayDeque` model to exercise all six endpoint operations, emphasizing growth after wraparound.
 
-Check the [worked solutions](../../docs/solutions.md) for logical-to-physical index reasoning.
+Check the [worked solutions](../../docs/solutions.md) for logical-to-physical index reasoning. The [solution finder](../../docs/solution-finder.md#7-stacks-queues-deques-and-priority) compares this technique with its alternatives.

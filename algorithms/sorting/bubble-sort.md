@@ -71,4 +71,4 @@ array remains quadratic with or without early exit.
    not only whether the result is ordered.
 
 See [solutions](../../docs/solutions.md), then study
-[merge sort](merge-sort.md) for a different time/space tradeoff.
+[merge sort](merge-sort.md) for a different time/space tradeoff. The [solution finder](../../docs/solution-finder.md#11-sorting) compares this technique with its alternatives.

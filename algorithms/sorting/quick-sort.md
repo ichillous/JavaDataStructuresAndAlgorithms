@@ -65,4 +65,4 @@ integers by subtraction can overflow; direct `<` and `>` comparisons are safe.
    sizes that show one can remain logarithmic while the other is quadratic.
 
 Use the [solutions](../../docs/solutions.md) and contrast the worst-case guarantee
-of [heapsort](heap-sort.md).
+of [heapsort](heap-sort.md). The [solution finder](../../docs/solution-finder.md#11-sorting) compares this technique with its alternatives.

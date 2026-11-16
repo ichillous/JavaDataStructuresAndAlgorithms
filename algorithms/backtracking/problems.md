@@ -111,4 +111,4 @@ state spaces can be enormous; a compact example is not evidence of scalability.
    check both the selected indices and their sum, without requiring one arbitrary
    witness when several solutions exist.
 
-The [solutions](../../docs/solutions.md) explain failure atomicity and witness checks.
+The [solutions](../../docs/solutions.md) explain failure atomicity and witness checks. The [solution finder](../../docs/solution-finder.md#20-backtracking-and-search) compares this technique with its alternatives.

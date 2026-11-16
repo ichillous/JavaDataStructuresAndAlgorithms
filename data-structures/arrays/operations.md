@@ -69,7 +69,7 @@ assert sums.rangeSum(1, 3) == 8;
 assert sums.rangeSum(2, 2) == 0;
 ```
 
-Fenwick construction costs O(n) time/space; updates and queries cost O(log n) time. Checked intermediate overflow throws `ArithmeticException`; an overflowing update leaves the tree unchanged. It supports additions, not an O(1) general-purpose `set`.
+Fenwick construction costs O(n) time/space; updates and queries cost O(log n) time. Construction or an update throws `ArithmeticException` if and only if a final stored node sum overflows `long`, and an overflowing update leaves the tree unchanged. Queries are exact: they throw only when the true prefix or range sum is outside `long`, even if an intermediate prefix would overflow. It supports additions, not an O(1) general-purpose `set`.
 
 Dynamic-array access/replacement is O(1), indexed shifting is O(n), and append is O(1) amortized with O(n) resize events. Iterators fail fast after structural changes; replacing an element is not structural. Fail-fast behavior detects mistakes and does not make concurrent mutation safe.
 
@@ -79,4 +79,4 @@ Dynamic-array access/replacement is O(1), indexed shifting is O(n), and append i
 2. Derive `[from, to)` sum as the difference of two prefix sums, including an empty range.
 3. Add a reference-array model test for random Fenwick additions and all valid ranges; separately test overflow atomicity.
 
-See the [worked solutions](../../docs/solutions.md), then compare [linked storage](../linked-lists/overview.md).
+See the [worked solutions](../../docs/solutions.md), then compare [linked storage](../linked-lists/overview.md). The [solution finder](../../docs/solution-finder.md#5-range-queries-over-arrays) compares this technique with its alternatives.

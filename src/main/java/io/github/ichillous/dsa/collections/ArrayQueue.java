@@ -8,6 +8,9 @@ import java.util.Objects;
  * A first-in, first-out queue using a growing circular array.
  * Enqueue is amortized O(1); dequeue and peek are O(1); storage is O(capacity),
  * retained after elements are removed.
+ * Capacity doubles when full, capped at {@code Integer.MAX_VALUE - 8}; beyond that an
+ * {@link OutOfMemoryError} is thrown. The cap is hard, unlike {@code ArrayList}'s soft limit at
+ * the same length.
  * Null elements are rejected. This class is not thread-safe.
  *
  * @param <T> element type
@@ -81,7 +84,7 @@ public final class ArrayQueue<T> {
     }
 
     private void grow() {
-        Object[] grown = new Object[Math.multiplyExact(elements.length, 2)];
+        Object[] grown = new Object[ArrayGrowth.grow(elements.length, elements.length + 1)];
         for (int i = 0; i < size; i++) {
             grown[i] = elements[physicalIndex(i)];
         }
