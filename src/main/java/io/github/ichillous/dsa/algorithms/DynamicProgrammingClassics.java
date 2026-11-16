@@ -50,14 +50,15 @@ public final class DynamicProgrammingClassics {
      * @param amount target sum, at least 0
      * @return the number of combinations
      * @throws NullPointerException if {@code coins} is null
-     * @throws IllegalArgumentException if a coin is not positive or {@code amount} is negative
+     * @throws IllegalArgumentException if a coin is not positive, {@code amount} is negative, or
+     *     its table ({@code amount + 1} entries) would exceed {@code Integer.MAX_VALUE - 8}; valid
+     *     but large amounts are pseudopolynomial and can still exhaust memory
+     *     ({@link OutOfMemoryError})
      * @throws ArithmeticException if a count overflows {@code long}
      */
     public static long countCoinCombinations(int[] coins, int amount) {
         Objects.requireNonNull(coins, "coins");
-        if (amount < 0) {
-            throw new IllegalArgumentException("amount must be at least 0");
-        }
+        DynamicProgramming.checkArrayStateSize(amount, "amount");
         for (int coin : coins) {
             if (coin <= 0) {
                 throw new IllegalArgumentException("coins must be positive");

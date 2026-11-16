@@ -232,6 +232,21 @@ class GreedyAlgorithmsTest {
                 () -> GreedyAlgorithms.canonicalCodes(new int[] {1, 2, 2, 2}));
         assertThrows(IllegalArgumentException.class,
                 () -> GreedyAlgorithms.canonicalCodes(new int[] {1, -1}));
+        assertThrows(IllegalArgumentException.class,
+                () -> GreedyAlgorithms.canonicalCodes(new int[] {1, Integer.MAX_VALUE, 1, 1}));
+        assertEquals(List.of("0", "1"),
+                GreedyAlgorithms.canonicalCodes(new int[] {1, 1}));
+        assertEquals(List.of("0", "1" + "0".repeat(39)),
+                GreedyAlgorithms.canonicalCodes(new int[] {1, 40}));
+        int[] deep = new int[71];
+        for (int index = 0; index < 70; index++) {
+            deep[index] = index + 1;
+        }
+        deep[70] = 70;
+        List<String> deepCodes = GreedyAlgorithms.canonicalCodes(deep);
+        assertEquals("0", deepCodes.get(0));
+        assertEquals("1".repeat(69) + "0", deepCodes.get(69));
+        assertEquals("1".repeat(70), deepCodes.get(70));
         assertThrows(NullPointerException.class, () -> GreedyAlgorithms.canonicalCodes(null));
         assertThrows(UnsupportedOperationException.class,
                 () -> GreedyAlgorithms.canonicalCodes(new int[] {1}).add("x"));

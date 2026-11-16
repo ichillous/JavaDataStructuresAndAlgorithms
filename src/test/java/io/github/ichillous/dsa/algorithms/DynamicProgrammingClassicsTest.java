@@ -50,6 +50,17 @@ class DynamicProgrammingClassicsTest {
     }
 
     @Test
+    void coinCombinationsRejectOversizedTables() {
+        int[] coins = {1};
+        assertThrows(IllegalArgumentException.class, () -> DynamicProgrammingClassics
+                .countCoinCombinations(coins, Integer.MAX_VALUE));
+        assertThrows(IllegalArgumentException.class, () -> DynamicProgrammingClassics
+                .countCoinCombinations(coins, Integer.MAX_VALUE - 1));
+        assertThrows(IllegalArgumentException.class, () -> DynamicProgrammingClassics
+                .countCoinCombinations(coins, Integer.MAX_VALUE - 9 + 1));
+    }
+
+    @Test
     void coinCombinationsOverflowThrowsInsteadOfWrapping() {
         int[] coins = IntStream.rangeClosed(1, 60).toArray();
         assertThrows(ArithmeticException.class,
@@ -340,6 +351,14 @@ class DynamicProgrammingClassicsTest {
         // All tours cost 0: the smallest last city (1) closes the tour, so city 2 precedes it.
         assertEquals(new Tour(List.of(0, 2, 1), 0),
                 DynamicProgrammingClassics.travelingSalesman(new long[3][3]));
+    }
+
+    @Test
+    void heldKarpPredecessorTieGoesToTheSmallestCity() {
+        // All tours cost 0. The last city is 1; its predecessor tie among cities 2 and 3 goes to 2
+        // (smallest), whose own predecessor is 3.
+        assertEquals(new Tour(List.of(0, 3, 2, 1), 0),
+                DynamicProgrammingClassics.travelingSalesman(new long[4][4]));
     }
 
     @Test

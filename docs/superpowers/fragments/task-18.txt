@@ -21,13 +21,13 @@ Rows:
 
 (c) SOLUTION FINDER
 - Problem: Count the ways to make an amount from coin denominations (order does not matter) | Technique: unbounded knapsack counting, coins outer loop | Link: [DynamicProgrammingClassics.countCoinCombinations](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) | Lesson: algorithms/dynamic-programming/classic-problems.md
-- Problem: Can a string be split into dictionary words, and how | Technique: suffix feasibility DP | Link: DynamicProgrammingClassics.wordBreak (same file)
-- Problem: Longest palindromic subsequence | Technique: interval DP on (i, j) with two rolling rows | Link: DynamicProgrammingClassics.longestPalindromicSubsequenceLength (same file)
-- Problem: Cheapest way to bracket a matrix product | Technique: interval DP over split points | Link: DynamicProgrammingClassics.matrixChainOrder (same file)
-- Problem: Shortest closed tour through at most 16 cities | Technique: Held-Karp bitmask DP | Link: DynamicProgrammingClassics.travelingSalesman (same file)
-- Problem: Choose non-overlapping jobs of maximum total weight | Technique: sort by end, DP with binary search for the last compatible job | Link: DynamicProgrammingClassics.weightedIntervalScheduling (same file)
+- Problem: Can a string be split into dictionary words, and how | Technique: suffix feasibility DP | Link: [DynamicProgrammingClassics.wordBreak](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
+- Problem: Longest palindromic subsequence | Technique: interval DP on (i, j) with two rolling rows | Link: [DynamicProgrammingClassics.longestPalindromicSubsequenceLength](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
+- Problem: Cheapest way to bracket a matrix product | Technique: interval DP over split points | Link: [DynamicProgrammingClassics.matrixChainOrder](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
+- Problem: Shortest closed tour through at most 16 cities | Technique: Held-Karp bitmask DP | Link: [DynamicProgrammingClassics.travelingSalesman](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
+- Problem: Choose non-overlapping jobs of maximum total weight | Technique: sort by end, DP with binary search for the last compatible job | Link: [DynamicProgrammingClassics.weightedIntervalScheduling](src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java)
 - Problem: Shortest prefix code for given symbol frequencies | Technique: greedy merge of the two lightest nodes (Huffman) | Link: [GreedyAlgorithms.huffmanCodeLengths](src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) | Lesson: algorithms/greedy/huffman-coding.md
-- Problem: Rebuild prefix codes from code lengths | Technique: canonical code assignment | Link: GreedyAlgorithms.canonicalCodes (same file)
+- Problem: Rebuild prefix codes from code lengths | Technique: canonical code assignment | Link: [GreedyAlgorithms.canonicalCodes](src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java)
 
 (d) README TOPIC MAP
 Add two rows to the topic map table in README.md:

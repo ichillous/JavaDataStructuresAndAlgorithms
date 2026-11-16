@@ -128,7 +128,8 @@ public final class GreedyAlgorithms {
      * with integer arithmetic and violations throw {@link IllegalArgumentException}, as do negative
      * lengths. Incomplete codes (Kraft sum below 1) are accepted. The result is immutable and the
      * input is not modified. Time O(n log n + total code length), where the output size is the sum
-     * of all lengths; callers who pass very large lengths pay that memory.
+     * of all lengths, so a caller who passes very large lengths can exhaust memory
+     * ({@link OutOfMemoryError}).
      *
      * @param codeLengths the length of each symbol's code, at least 0
      * @return the canonical codes
@@ -137,7 +138,6 @@ public final class GreedyAlgorithms {
      */
     public static List<String> canonicalCodes(int[] codeLengths) {
         Objects.requireNonNull(codeLengths, "codeLengths");
-        int maxLength = 0;
         int used = 0;
         for (int length : codeLengths) {
             if (length < 0) {
@@ -146,20 +146,6 @@ public final class GreedyAlgorithms {
             if (length > 0) {
                 used++;
             }
-            maxLength = Math.max(maxLength, length);
-        }
-        // Kraft check: "open" counts the unused codewords at the current depth. Once it reaches
-        // the number of used symbols it can never go negative, so it is capped to avoid overflow.
-        int[] countAt = new int[maxLength + 1];
-        for (int length : codeLengths) {
-            countAt[length]++;
-        }
-        long open = 1;
-        for (int length = 1; length <= maxLength; length++) {
-            open = Math.min(open * 2 - countAt[length], used);
-            if (open < 0) {
-                throw new IllegalArgumentException("code lengths violate the Kraft inequality");
-            }
         }
         Integer[] order = new Integer[codeLengths.length];
         for (int symbol = 0; symbol < order.length; symbol++) {
@@ -167,6 +153,24 @@ public final class GreedyAlgorithms {
         }
         Arrays.sort(order, Comparator.<Integer>comparingInt(symbol -> codeLengths[symbol])
                 .thenComparingInt(symbol -> symbol));
+        // Kraft check over the sorted lengths: "open" counts free codewords at the current depth.
+        // It is capped at the number of used symbols (it can then never go negative), which also
+        // avoids overflow and needs no array indexed by length.
+        long open = 1;
+        int depth = 0;
+        for (int symbol : order) {
+            int length = codeLengths[symbol];
+            if (length == 0) {
+                continue;
+            }
+            int shift = length - depth;
+            open = shift >= 32 ? used : Math.min(open << shift, used);
+            open--;
+            depth = length;
+            if (open < 0) {
+                throw new IllegalArgumentException("code lengths violate the Kraft inequality");
+            }
+        }
         String[] codes = new String[codeLengths.length];
         char[] current = new char[0];
         boolean first = true;

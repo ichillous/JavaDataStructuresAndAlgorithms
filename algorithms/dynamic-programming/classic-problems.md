@@ -111,9 +111,9 @@ cost(1,3): k=1 -> 0 + 9000 + 10*30*60 = 27000
 answer 4500, "((A1A2)A3)"
 ```
 
-**Pitfall:** multiplying strictly left to right is not always optimal, and the
-order matters enormously. Here `(A1(A2A3))` costs 27000, six times more than
-`((A1A2)A3)`.
+**Pitfall:** multiplying strictly left to right is not always optimal. For
+`[30, 1, 40, 10, 25]` the left-to-right order `(((A1A2)A3)A4)` costs 20700, while
+the optimal order costs 1400, about fifteen times less.
 
 ## Held-Karp travelling salesman
 
