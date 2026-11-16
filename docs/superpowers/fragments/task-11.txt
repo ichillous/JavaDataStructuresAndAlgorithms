@@ -1,0 +1,20 @@
+(a) CATALOG - section "Graphs" table (| Source | Operations and contract | Tests |), append after the AdvancedGraphAlgorithms row:
+| [ShortestPathAlgorithms](../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java) | 0-1 BFS, DAG shortest paths with signed weights, A* with a heuristic checked for nonnegativity, zero at the target and consistency on scanned edges, and Floyd-Warshall all pairs with path reconstruction. Precondition violations throw `IllegalArgumentException` (weights outside 0/1, cycles, undirected DAG input, negative edges for A*, any negative cycle in Floyd-Warshall); DAG and Floyd-Warshall use exact arithmetic and throw `ArithmeticException` only if a final shortest distance is outside `long`. Empty `OptionalLong`/path for unreachable. | [ShortestPathAlgorithmsTest](../src/test/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithmsTest.java) |
+
+(b) COMPLEXITY - table "Algorithm / representation | Time | Auxiliary or stored space" (graphs), append after the Bellman-Ford row:
+| 0-1 BFS | O(V + E) | O(V + E); weights must be 0 or 1 |
+| DAG shortest paths (topological DP) | O(V + E) exact arithmetic operations | O(V + E); directed acyclic only, signed weights, exact intermediates and checked final long distances |
+| A* with a consistent heuristic | O(V + E log(E + 1)) worst case plus heuristic evaluations | O(V + E); nonnegative weights, heuristic checked on scanned edges |
+| Floyd-Warshall | O(V^3) exact arithmetic operations | O(V^2); rejects any negative cycle, checked final long distances |
+
+(c) SOLUTION FINDER entries:
+- Heading: Shortest path with only 0 and 1 edge costs (for example, flipping cells in a grid) -> Technique: 0-1 BFS. Link: [ShortestPathAlgorithms.zeroOneBfs](../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java), lesson ../algorithms/graph/shortest-paths.md
+- Heading: Longest path or critical path in a DAG -> Technique: negate weights and run DAG shortest paths. Link: [ShortestPathAlgorithms.dagShortestPaths](../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java)
+- Heading: Shortest route on a grid or map with a good distance estimate -> Technique: A* with a consistent heuristic. Link: [ShortestPathAlgorithms.aStar](../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java)
+- Heading: Distances between every pair of vertices in a small dense graph -> Technique: Floyd-Warshall. Link: [ShortestPathAlgorithms.floydWarshall](../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java)
+
+(d) README topic map: in the Graphs row, add the lesson link [Shortest paths](algorithms/graph/shortest-paths.md) to the Lessons cell and extend the Maintained implementations cell with ", 0-1 BFS, DAG shortest paths, A* and Floyd-Warshall".
+
+(e) EXERCISES rows (| Exercise | Input or scenario | Success criteria and hint |):
+| A* heuristic audit | A grid with blocked cells, Manhattan distance, then a heuristic that overestimates one cell | Distances equal Dijkstra's with the consistent heuristic; the overestimate must be rejected, and you should explain why a scanned-edge check cannot catch violations on edges never explored. |
+| Floyd-Warshall boundaries | Path `0 -> 1 -> 2` with weights `Long.MAX_VALUE` and `-1`, then `Long.MAX_VALUE` and `1` | The first gives `Long.MAX_VALUE - 1`; the second must throw rather than wrap. Add a negative cycle outside any single source's reach and explain why all-pairs rejects it. |
