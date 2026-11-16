@@ -167,6 +167,41 @@ class OpenAddressingHashMapTest {
         assertEquals(1_000, map.size());
     }
 
+    @Test
+    void resizingMakesNoEqualsCallsBeyondTheInitialLookup() {
+        OpenAddressingHashMap<Counted, Integer> map = new OpenAddressingHashMap<>(16);
+        for (int i = 0; i < 10; i++) {
+            map.put(new Counted(i), i);
+        }
+        Counted.equalsCalls = 0;
+        map.put(new Counted(10), 10); // 11 * 3 > 2 * 16, so this put resizes
+        // One lookup compares against the 10 colliding members; the resize adds none.
+        assertEquals(10, Counted.equalsCalls);
+        for (int i = 0; i <= 10; i++) {
+            assertEquals(i, map.get(new Counted(i)));
+        }
+    }
+
+    private static final class Counted {
+        private static int equalsCalls;
+        private final int id;
+
+        private Counted(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            equalsCalls++;
+            return other instanceof Counted counted && counted.id == id;
+        }
+
+        @Override
+        public int hashCode() {
+            return 7;
+        }
+    }
+
     private record Key(int id, int hash) {
         @Override
         public int hashCode() {

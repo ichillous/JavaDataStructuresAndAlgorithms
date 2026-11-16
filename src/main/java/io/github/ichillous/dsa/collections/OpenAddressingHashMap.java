@@ -76,7 +76,7 @@ public final class OpenAddressingHashMap<K, V> {
         }
         if ((size + 1L) * 3 > 2L * keys.length) {
             resize();
-            slot = find(key);
+            slot = emptySlot(key);
         }
         keys[slot] = key;
         values[slot] = value;
@@ -155,6 +155,16 @@ public final class OpenAddressingHashMap<K, V> {
         return slot;
     }
 
+    /** Returns the first empty slot on the key's probe path, without calling equals. */
+    private int emptySlot(Object key) {
+        int mask = keys.length - 1;
+        int slot = homeSlot(key);
+        while (keys[slot] != null) {
+            slot = (slot + 1) & mask;
+        }
+        return slot;
+    }
+
     private int homeSlot(Object key) {
         int h = key.hashCode();
         h ^= h >>> 16;
@@ -170,7 +180,7 @@ public final class OpenAddressingHashMap<K, V> {
         allocate(oldKeys.length << 1);
         for (int i = 0; i < oldKeys.length; i++) {
             if (oldKeys[i] != null) {
-                int slot = find(oldKeys[i]);
+                int slot = emptySlot(oldKeys[i]);
                 keys[slot] = oldKeys[i];
                 values[slot] = oldValues[i];
             }

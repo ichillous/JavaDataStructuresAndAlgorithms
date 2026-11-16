@@ -66,7 +66,7 @@ record Key(int id) {
     }
 }
 
-OpenAddressingHashMap<Key, String> map = new OpenAddressingHashMap<>(8);
+OpenAddressingHashMap<Key, String> map = new OpenAddressingHashMap<>(16); // 6 keys stay under the 2/3 limit: no resize
 for (int i = 0; i < 6; i++) {
     assert map.put(new Key(i), "v" + i) == null;
 }
@@ -105,7 +105,7 @@ Worst cases appear when many keys share a home slot or a cluster: a constant `ha
 
 ## Pitfall: clearing the slot only
 
-The tempting `remove` sets the found slot to empty and stops. With the trace above, clearing slot 5 leaves `B` in slot 6 with home 5. A later `get(B)` starts at slot 5, sees it empty and reports absent, although `B` is stored. The executable example would fail on `map.get(new Key(1))` if `remove` did that, because all six keys share one home slot.
+The tempting `remove` sets the found slot to empty and stops. With the trace above, clearing slot 5 leaves `B` in slot 6 with home 5. A later `get(B)` starts at slot 5, sees it empty and reports absent, although `B` is stored. In the executable example the table has 16 slots and never resizes, so the six keys occupy consecutive slots starting at their shared home slot, and `Key(0)` is the cluster head. If `remove(new Key(0))` only cleared its slot, `map.get(new Key(1))` would start at that now-empty home slot and report absent.
 
 ## OpenJDK implementation note
 
