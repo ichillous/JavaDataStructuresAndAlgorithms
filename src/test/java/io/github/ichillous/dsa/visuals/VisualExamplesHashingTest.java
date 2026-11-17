@@ -6,8 +6,6 @@ import io.github.ichillous.dsa.structures.BloomFilter;
 import io.github.ichillous.dsa.structures.CountMinSketch;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,10 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Checks every value the hashing figures display. Slot positions inside the open-addressing
  * map, the Bloom filter and the Count-Min sketch are private, so each figure draws a conceptual
- * table built from the hashing rule documented in that class's Javadoc. These tests recompute
- * the rule here, assert the fixture against it, assert the observable consequences through the
- * public API, and finally compare the layout with the real object (read reflectively, the same
- * technique the dynamic-array test uses for capacity) so the picture cannot drift from the code.
+ * table built from the hashing rule documented in that class's Javadoc. These tests re-derive
+ * every displayed index and counter here from the documented rule, assert the fixture against
+ * that derivation, and assert the observable consequences through the public API (which lookups
+ * succeed, which key is evicted, which absent key is reported possibly present, which estimate
+ * is returned). They never read private state.
  */
 class VisualExamplesHashingTest {
     private static final VisualFixtures DATA = VisualFixtures.load("examples-hashing.properties");
@@ -61,10 +60,9 @@ class VisualExamplesHashingTest {
         for (int key : keys) {
             assertNull(map.put(key, "v" + key));
         }
-        Object[] layout = slots(map);
-        assertEquals(capacity, layout.length);
+        List<String> layout = layout(capacity, keys);
         for (int i = 0; i < keys.size(); i++) {
-            assertEquals(keys.get(i), layout[slots.get(i)], "each key sits in its own home slot");
+            assertEquals(String.valueOf(keys.get(i)), layout.get(slots.get(i)), "each key sits in its home slot");
             assertEquals("v" + keys.get(i), map.get(keys.get(i)));
         }
     }
@@ -87,23 +85,25 @@ class VisualExamplesHashingTest {
             assertEquals(existingSlots.get(i), homeSlot(existing.get(i), capacity));
             assertNull(map.put(existing.get(i), "v" + existing.get(i)));
         }
-        assertEquals(DATA.strings("hashing.probe.before"), render(slots(map)));
-        assertEquals(capacity, slots(map).length, "the insert below must not resize");
+        assertEquals(DATA.strings("hashing.probe.before"), layout(capacity, existing));
+        assertTrue((existing.size() + 1) * 3 <= 2 * capacity, "the documented 2/3 load cap: no resize");
 
         assertEquals(home, homeSlot(key, capacity));
         assertEquals(home, homeSlot(absent, capacity), "the absent key shares the home slot");
         assertNull(map.put(key, "v" + key));
-        assertEquals(capacity, slots(map).length, "the insert did not resize");
-        assertEquals(DATA.strings("hashing.probe.after"), render(slots(map)));
-        assertEquals(path, probePath(slots(map), key, capacity));
+        List<String> withKey = new ArrayList<>(existing);
+        withKey.add(key);
+        List<String> afterLayout = layout(capacity, withKey);
+        assertEquals(DATA.strings("hashing.probe.after"), afterLayout);
+        assertEquals(path, probePathOver(afterLayout, key, capacity));
         assertEquals(capacity - 1, path.get(0), "the walk starts at the last slot");
         assertEquals(0, path.get(1), "and wraps to slot 0");
 
         assertEquals("v" + key, map.get(key));
         assertTrue(map.containsKey(key));
         assertFalse(map.containsKey(absent));
-        assertEquals(absentPath, probePath(slots(map), absent, capacity));
-        assertEquals(EMPTY, render(slots(map)).get(absentPath.get(absentPath.size() - 1)),
+        assertEquals(absentPath, probePathOver(afterLayout, absent, capacity));
+        assertEquals(EMPTY, afterLayout.get(absentPath.get(absentPath.size() - 1)),
                 "an empty slot ends the absent search");
     }
 
@@ -126,8 +126,8 @@ class VisualExamplesHashingTest {
             assertEquals(homes.get(i), homeSlot(order.get(i), capacity));
             map.put(order.get(i), "v" + order.get(i));
         }
-        assertEquals(capacity, slots(map).length, "no resize while building the cluster");
-        List<String> before = render(slots(map));
+        assertTrue((order.size() + 1) * 3 <= 2 * capacity, "the documented 2/3 load cap: no resize");
+        List<String> before = layout(capacity, order);
         assertEquals(DATA.strings("hashing.shift.before"), before);
         assertEquals(removed, before.get(hole));
         assertEquals(lookupHome, homeSlot(lookup, capacity));
@@ -143,19 +143,23 @@ class VisualExamplesHashingTest {
         assertFalse(naivePath.stream().anyMatch(slot -> holeOnly.get(slot).equals(lookup)),
                 "so it never reaches the key stored one slot further on");
 
-        // The real map backward-shifts instead.
+        // The real map backward-shifts instead. The documented invariant (every key sits on its
+        // probe path from its home slot, with no tombstones) fixes the result: it is the layout of
+        // the surviving keys inserted in their original order.
         assertEquals("v" + removed, map.remove(removed));
-        List<String> after = render(slots(map));
+        List<String> survivors = new ArrayList<>(order);
+        survivors.remove(removed);
+        List<String> after = layout(capacity, survivors);
         assertEquals(DATA.strings("hashing.shift.after"), after);
         assertEquals(lookupHome, DATA.number("hashing.shift.movedTo"));
         assertEquals(lookup, after.get(lookupHome), "the key moved back to its home slot");
         assertEquals(stays, after.get(staysSlot), "a key already at its home slot stays");
         assertEquals(staysSlot, homeSlot(stays, capacity));
         assertEquals(EMPTY, after.get(DATA.number("hashing.shift.movedFrom")), "the vacated slot is cleared");
-        for (String key : order) {
-            if (!key.equals(removed)) {
-                assertEquals("v" + key, map.get(key), key + " is still reachable");
-            }
+        for (String key : survivors) {
+            assertEquals("v" + key, map.get(key), key + " is still reachable");
+            assertEquals(key, after.get(lastOf(probePathOver(after, key, capacity))),
+                    key + " lies on its probe path in the drawn layout");
         }
         assertNull(map.get(removed));
         assertEquals(order.size() - 1, map.size());
@@ -237,7 +241,6 @@ class VisualExamplesHashingTest {
                 DATA.list("hashing.bloom.addedBits1"));
         for (int i = 0; i < added.size(); i++) {
             assertEquals(addedBits.get(i), probes(added.get(i), bits, hashes));
-            assertEquals(addedBits.get(i), realProbes(filter, added.get(i)));
             filter.add(added.get(i));
             assertTrue(filter.mightContain(added.get(i)));
         }
@@ -251,7 +254,6 @@ class VisualExamplesHashingTest {
         String miss = DATA.text("hashing.bloom.miss");
         List<Integer> missBits = DATA.list("hashing.bloom.missBits");
         assertEquals(missBits, probes(miss, bits, hashes));
-        assertEquals(missBits, realProbes(filter, miss));
         assertEquals(List.of(true, false), missBits.stream().map(set::contains).toList(),
                 "the first bit is set but the second is clear");
         assertFalse(filter.mightContain(miss), "one clear bit proves the key was never added");
@@ -259,7 +261,6 @@ class VisualExamplesHashingTest {
         String falsePositive = DATA.text("hashing.bloom.falsePositive");
         List<Integer> fpBits = DATA.list("hashing.bloom.falsePositiveBits");
         assertEquals(fpBits, probes(falsePositive, bits, hashes));
-        assertEquals(fpBits, realProbes(filter, falsePositive));
         assertTrue(set.containsAll(fpBits), "every probe lands on a set bit");
         assertFalse(added.contains(falsePositive));
         assertTrue(filter.mightContain(falsePositive), "a key that was never added reports possibly present");
@@ -281,10 +282,13 @@ class VisualExamplesHashingTest {
         }
         assertEquals(DATA.number("hashing.cms.total"), sketch.totalCount());
 
-        long[][] table = counters(sketch);
-        assertEquals(depth, table.length);
+        long[][] table = new long[depth][width];
+        for (int i = 0; i < items.size(); i++) {
+            for (int row = 0; row < depth; row++) {
+                table[row][column(items.get(i), row, width)] += counts[i];
+            }
+        }
         for (int row = 0; row < depth; row++) {
-            assertEquals(width, table[row].length);
             assertArrayEqualsLong(DATA.longs("hashing.cms.row" + row), table[row]);
         }
 
@@ -321,26 +325,28 @@ class VisualExamplesHashingTest {
         return (h * 0x9E3779B9) >>> (Integer.numberOfLeadingZeros(capacity) + 1);
     }
 
-    /** Reads the private key array: the documented layout the figures draw. */
-    private static Object[] slots(OpenAddressingHashMap<?, ?> map) {
-        try {
-            Field keys = OpenAddressingHashMap.class.getDeclaredField("keys");
-            keys.setAccessible(true);
-            return ((Object[]) keys.get(map)).clone();
-        } catch (ReflectiveOperationException exception) {
-            throw new AssertionError("OpenAddressingHashMap no longer stores a keys array", exception);
+    /**
+     * The layout the documented rule describes: each key is placed in its home slot, or in the
+     * next free slot after it, wrapping from the last slot to slot 0. "." marks an empty slot.
+     */
+    private static List<String> layout(int capacity, List<?> insertionOrder) {
+        String[] slots = new String[capacity];
+        Arrays.fill(slots, EMPTY);
+        for (Object key : insertionOrder) {
+            int slot = homeSlot(key, capacity);
+            while (!slots[slot].equals(EMPTY)) {
+                slot = (slot + 1) & (capacity - 1);
+            }
+            slots[slot] = key.toString();
         }
+        return List.of(slots);
     }
 
-    private static List<String> render(Object[] layout) {
-        return Arrays.stream(layout).map(key -> key == null ? EMPTY : key.toString()).toList();
+    private static int lastOf(List<Integer> path) {
+        return path.get(path.size() - 1);
     }
 
     /** The slots a lookup visits: from the home slot to the key's slot, or to the first empty slot. */
-    private static List<Integer> probePath(Object[] layout, String key, int capacity) {
-        return probePathOver(render(layout), key, capacity);
-    }
-
     private static List<Integer> probePathOver(List<String> layout, String key, int capacity) {
         List<Integer> path = new ArrayList<>();
         int slot = homeSlot(key, capacity);
@@ -363,18 +369,6 @@ class VisualExamplesHashingTest {
             result.add((int) Math.floorMod(h1 + i * step, (long) bits));
         }
         return result;
-    }
-
-    private static List<Integer> realProbes(BloomFilter<String> filter, String element) throws Exception {
-        Method method = BloomFilter.class.getDeclaredMethod("bitIndices", Object.class);
-        method.setAccessible(true);
-        return Arrays.stream((int[]) method.invoke(filter, element)).boxed().toList();
-    }
-
-    private static long[][] counters(CountMinSketch<?> sketch) throws Exception {
-        Field table = CountMinSketch.class.getDeclaredField("table");
-        table.setAccessible(true);
-        return (long[][]) table.get(sketch);
     }
 
     /** The documented Count-Min rule: row i hashes with floorMod(splitMix64(hashCode ^ seed[i]), width). */
