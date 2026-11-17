@@ -239,8 +239,8 @@ def trie_prefix_walk(c, fixtures):
             label, color, weight = f"{emitted[word]}  {word}", "green", "700"
         else:
             label, color, weight = word, "muted", "400"
-        if word == prefix:
-            c.text(x - radius - 8, y_node + 7, label, size=18, color=color, weight=weight, anchor="end")
+        if any(other != word and other.startswith(word) for other in words):
+            c.text(x + radius + 8, y_node + 7, label, size=18, color=color, weight=weight)
         else:
             c.text(x, y_node + radius + 24, label, size=18, color=color, weight=weight, anchor="middle")
     for word in words:
@@ -248,12 +248,12 @@ def trie_prefix_walk(c, fixtures):
             x, y_node = positions[word]
             c.text(x + radius + 8, y_node + 7, word, size=18, color="muted")
 
-    bottom = max(y for _, y in positions.values()) + radius + 52
+    bottom = max(y for _, y in positions.values()) + radius + 72
     y = c.step(bottom, 2, f"Stop after {limit} words")
     row_x = 28 + 10
     c.cell_row(row_x, y, result, cell=80, gap=8, height=40, states=["good"] * len(result))
     c.text(row_x, y + 74, "not reached: " + ", ".join(skipped), size=18, color="muted")
-    y = c.legend(y + 114, [("focus", "prefix path"), ("good", "emitted in order"),
+    y = c.legend(y + 114, [("focus", "prefix path"), ("good", "emitted"),
                            ("muted", "not visited")])
     c.note(y + 14, TRIE_IDEA)
 
@@ -382,8 +382,8 @@ def lazy_propagation(c, fixtures):
     bottom = top + 2 * gap + LAZY_R
     c.text(28, bottom + 30, f"{stored} stored + {delta} pending x {query_to - query_from} element = {answer}",
            size=18, color="blue", weight="700")
-    y = c.legend(bottom + 70, [("warn", "tagged: applied, children not"), ("muted", "stale below the tag"),
-                               ("focus", "read by the query")])
+    y = c.legend(bottom + 70, [("warn", "tagged node"), ("muted", "stale child"),
+                               ("focus", "queried")])
     c.note(y + 14, LAZY_IDEA)
 
 
@@ -478,13 +478,13 @@ def union_find_compression(c, fixtures):
         for node, parent in enumerate(parents):
             if node != parent:
                 color = "blue" if (node in on_path and parent in on_path) else "line"
-                c.edge(positions[node], positions[parent], radius=16,
+                c.edge(positions[node], positions[parent], radius=14,
                        color=color, directed=False)
         for node, (x, y_node) in positions.items():
-            c.node(x, y_node, node, radius=16, state=state_of(node))
-    bottom = top + 3 * gap + 16
+            c.node(x, y_node, node, radius=14, state=state_of(node))
+    bottom = top + 3 * gap + 14
     c.text(28, bottom + 32, " → ".join(map(str, path)), size=18, color="blue", weight="700")
-    c.text(274, bottom + 32, "  ".join(f"{node} → {after[node]}" for node in sorted(flattened)),
+    c.text(274, bottom + 32, ", ".join(f"{node} → {after[node]}" for node in sorted(flattened)),
            size=18, color="green", weight="700")
     y = c.legend(bottom + 76, [("focus", "on the find path / root"), ("good", "re-pointed at the root")])
     c.note(y + 14, UF_IDEA)
@@ -524,7 +524,7 @@ FIGURES = [
                         "and cat; the dog branch is never visited."),
         "lesson": "data-structures/tries/implementation.md",
         "keyIdea": TRIE_IDEA,
-        "height": 880,
+        "height": 864,
         "draw": trie_prefix_walk,
     },
     {
@@ -548,7 +548,7 @@ FIGURES = [
                         "rangeSum(3, 4) then reads the leaf's stored 4, adds the pending 5 and returns 9."),
         "lesson": "data-structures/range-queries/overview.md",
         "keyIdea": LAZY_IDEA,
-        "height": 900,
+        "height": 870,
         "draw": lazy_propagation,
     },
     {

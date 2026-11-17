@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 880" width="520" height="880" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 864" width="520" height="864" role="img" aria-labelledby="title desc">
 <title id="title">29  Trie prefix walk</title>
 <desc id="desc">For the words car, card, care, cart, cat and dog, wordsWithPrefix(&quot;ca&quot;, 3) walks the c and a nodes, then emits car, card and care in sorted order and stops before cart and cat; the dog branch is never visited.</desc>
 <style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
 <defs><marker id="trie-prefix-walk-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="trie-prefix-walk-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="trie-prefix-walk-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="trie-prefix-walk-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="trie-prefix-walk-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="trie-prefix-walk-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="trie-prefix-walk-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="trie-prefix-walk-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="trie-prefix-walk-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="trie-prefix-walk-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="trie-prefix-walk-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="trie-prefix-walk-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="trie-prefix-walk-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="trie-prefix-walk-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="trie-prefix-walk-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
-<rect x="0" y="0" width="520" height="880" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="0" y="0" width="520" height="864" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
 <text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">29  Trie prefix walk</text>
 <text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
 <line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
@@ -43,31 +43,31 @@
 <circle cx="285.0" cy="214" r="26" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
 <text x="285.0" y="221" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">root</text>
 <text x="242.0" y="326" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">prefix ca</text>
-<text x="135.0" y="438" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">1  car</text>
+<text x="163.0" y="401" font-size="18" fill="#1c6b3c" text-anchor="start" font-weight="700">1  car</text>
 <text x="60" y="498" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">2  card</text>
 <text x="135" y="498" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">3  care</text>
 <text x="210" y="498" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">cart</text>
 <text x="285" y="438" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">cat</text>
 <text x="388" y="401" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">dog</text>
-<circle cx="42" cy="519" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
-<text x="42" y="525" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
-<text x="66" y="526" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Stop after 3 words</text>
-<rect x="38" y="548" width="80" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
-<text x="78.0" y="575.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">car</text>
-<rect x="126" y="548" width="80" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
-<text x="166.0" y="575.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">card</text>
-<rect x="214" y="548" width="80" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
-<text x="254.0" y="575.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">care</text>
-<text x="38" y="622" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">not reached: cart, cat</text>
-<rect x="28" y="646" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
-<text x="62" y="662" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">prefix path</text>
-<rect x="181.632" y="646" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
-<text x="215.632" y="662" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">emitted in order</text>
-<rect x="28" y="678" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
-<text x="62" y="694" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">not visited</text>
-<rect x="28" y="718" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
-<text x="44" y="749" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
-<text x="44" y="778" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Walk the prefix once, then visit</text>
-<text x="44" y="805" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">children in sorted order until the</text>
-<text x="44" y="832" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">limit.</text>
+<circle cx="42" cy="539" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="545" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="546" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Stop after 3 words</text>
+<rect x="38" y="568" width="80" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="78.0" y="595.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">car</text>
+<rect x="126" y="568" width="80" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="166.0" y="595.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">card</text>
+<rect x="214" y="568" width="80" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="254.0" y="595.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">care</text>
+<text x="38" y="642" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">not reached: cart, cat</text>
+<rect x="28" y="666" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="682" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">prefix path</text>
+<rect x="181.632" y="666" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="215.632" y="682" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">emitted</text>
+<rect x="305.024" y="666" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="339.024" y="682" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">not visited</text>
+<rect x="28" y="706" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="737" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="766" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Walk the prefix once, then visit</text>
+<text x="44" y="793" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">children in sorted order until the</text>
+<text x="44" y="820" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">limit.</text>
 </svg>

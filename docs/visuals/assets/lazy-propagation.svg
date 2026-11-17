@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 900" width="520" height="900" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 870" width="520" height="870" role="img" aria-labelledby="title desc">
 <title id="title">31  Lazy range add</title>
 <desc id="desc">In a LazySegmentTree over 1, 2, 3, 4, rangeAdd(2, 4, 5) stops at the node covering [2, 4), raising its sum to 17 and leaving a pending +5 for its leaves. rangeSum(3, 4) then reads the leaf&#x27;s stored 4, adds the pending 5 and returns 9.</desc>
 <style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
 <defs><marker id="lazy-propagation-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="lazy-propagation-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="lazy-propagation-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="lazy-propagation-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="lazy-propagation-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="lazy-propagation-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="lazy-propagation-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="lazy-propagation-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="lazy-propagation-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="lazy-propagation-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="lazy-propagation-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="lazy-propagation-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="lazy-propagation-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="lazy-propagation-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="lazy-propagation-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
-<rect x="0" y="0" width="520" height="900" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="0" y="0" width="520" height="870" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
 <text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">31  Lazy range add</text>
 <text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
 <line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
@@ -64,13 +64,13 @@
 <text x="370" y="627" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">4</text>
 <text x="28" y="674" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">4 stored + 5 pending x 1 element = 9</text>
 <rect x="28" y="698" width="26" height="20" rx="4" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
-<text x="62" y="714" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">tagged: applied, children not</text>
-<rect x="28" y="730" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
-<text x="62" y="746" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">stale below the tag</text>
-<rect x="252.48" y="730" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
-<text x="286.48" y="746" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">read by the query</text>
-<rect x="28" y="770" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
-<text x="44" y="801" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
-<text x="44" y="830" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">A range add stops at a covering node</text>
-<text x="44" y="857" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">and leaves a pending value.</text>
+<text x="62" y="714" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">tagged node</text>
+<rect x="193.728" y="698" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="227.728" y="714" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">stale child</text>
+<rect x="341.312" y="698" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="375.312" y="714" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">queried</text>
+<rect x="28" y="738" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="769" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="798" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">A range add stops at a covering node</text>
+<text x="44" y="825" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">and leaves a pending value.</text>
 </svg>
