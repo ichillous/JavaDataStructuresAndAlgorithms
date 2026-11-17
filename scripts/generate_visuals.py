@@ -238,15 +238,17 @@ def _relative(target, start):
 
 
 def gallery_entry(lesson, text, figures_by_id):
-    """Title, first figure and verbatim "Use it when" cell of one lesson, or a reason it has none.
+    """Title, placed figure ids and verbatim "Use it when" cell of one lesson.
 
-    Returns ``(title, figure, cell)``; raises ValueError naming what the lesson lacks.
+    Returns ``(title, figure_ids, cell)`` with the ids in placement order; raises ValueError
+    naming what the lesson lacks.
     """
     regions = find_regions(lesson, text)
     if not regions:
         raise ValueError(f"{lesson} has no figure region; place one with '<!-- visual:generated FIGURE_ID -->'")
-    if regions[0].figure_id not in figures_by_id:
-        raise ValueError(f"{lesson}:{regions[0].start}: unknown figure id {regions[0].figure_id!r}")
+    for region in regions:
+        if region.figure_id not in figures_by_id:
+            raise ValueError(f"{lesson}:{region.start}: unknown figure id {region.figure_id!r}")
     lines = list(unfenced_lines(text))
     title = next((line[2:].strip() for _, line in lines if line.startswith("# ")), None)
     if not title:
@@ -264,11 +266,26 @@ def gallery_entry(lesson, text, figures_by_id):
         raise ValueError(f"{lesson} has no At a glance table ('| At a glance | |')")
     if not cell:
         raise ValueError(f"{lesson} has no '**Use it when**' row in its At a glance table")
-    return title, figures_by_id[regions[0].figure_id], cell
+    return title, [region.figure_id for region in regions], cell
 
 
-def gallery_body(name, folder, figures_by_id, root=ROOT):
-    """The Markdown that lists every lesson in the immediate subfolders of ``folder``."""
+def choose_thumbnail(figure_ids, used):
+    """The first placed figure not yet used as a thumbnail on the page, else the first one.
+
+    Records the choice in ``used``, so repeats happen only when a lesson has no figure of its own.
+    """
+    chosen = next((figure_id for figure_id in figure_ids if figure_id not in used), figure_ids[0])
+    used.add(chosen)
+    return chosen
+
+
+def gallery_body(name, folder, figures_by_id, root=ROOT, used=None):
+    """The Markdown that lists every lesson in the immediate subfolders of ``folder``.
+
+    ``used`` holds the figure ids already shown as thumbnails earlier on the same page; rows
+    are filled in gallery order and each takes a figure not yet shown when the lesson has one.
+    """
+    used = set() if used is None else used
     base = root / folder
     page = (root / name).parent
     loose = sorted(path.name for path in base.glob("*.md") if path.name != "README.md")
@@ -282,7 +299,8 @@ def gallery_body(name, folder, figures_by_id, root=ROOT):
         rows = [f"### {gallery_heading(directory.name)}", "", "| Figure | Lesson | Use it when |", "| :---: | :--- | :--- |"]
         for path in lessons:
             lesson = path.relative_to(root).as_posix()
-            title, figure, cell = gallery_entry(lesson, path.read_text(encoding="utf-8"), figures_by_id)
+            title, figure_ids, cell = gallery_entry(lesson, path.read_text(encoding="utf-8"), figures_by_id)
+            figure = figures_by_id[choose_thumbnail(figure_ids, used)]
             href = _relative(path, page)
             light = _relative(root / "docs/visuals" / figure["light"], page)
             dark = _relative(root / "docs/visuals" / figure["dark"], page)
@@ -306,7 +324,8 @@ def rewrite_galleries(name, text, figures_by_id, root=ROOT):
     galleries = find_galleries(name, text)
     figure_lines = [region.start for region in find_regions(name, text)]
     lines = text.split("\n")
-    for gallery in reversed(galleries):
+    used, bodies = set(), []
+    for gallery in galleries:  # document order, so thumbnails are chosen top to bottom
         inside = [line for line in figure_lines if gallery.start < line < gallery.end]
         if inside:
             raise ValueError(f"{name}:{inside[0]}: a figure region cannot sit inside the gallery opened on "
@@ -315,9 +334,10 @@ def rewrite_galleries(name, text, figures_by_id, root=ROOT):
         if not folder.is_dir() or gallery.folder.startswith("."):
             raise ValueError(f"{name}:{gallery.start}: unknown gallery folder {gallery.folder!r}")
         try:
-            body = gallery_body(name, gallery.folder, figures_by_id, root)
+            bodies.append(gallery_body(name, gallery.folder, figures_by_id, root, used))
         except ValueError as error:
             raise ValueError(f"{name}:{gallery.start}: gallery {gallery.folder!r}: {error}") from None
+    for gallery, body in reversed(list(zip(galleries, bodies))):
         lines[gallery.start:gallery.end - 1] = body.split("\n")
     return "\n".join(lines)
 
