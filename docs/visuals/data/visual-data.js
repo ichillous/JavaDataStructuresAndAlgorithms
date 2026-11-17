@@ -288,13 +288,79 @@ globalThis.DSA_VISUALS_DATA = {
       "dark": "assets/complexity-growth-dark.svg"
     },
     {
+      "id": "heap-sift-paths",
+      "title": "Heap sift paths",
+      "category": "Trees and ranges",
+      "description": "In the min heap 1, 3, 8, 4, 5, 9, add(7) appends at slot 6 and swaps up one level to slot 2, giving 1, 3, 7, 4, 5, 9, 8. remove() then takes out 1, moves 8 to the root and sifts it down two levels to slot 3, giving 3, 4, 7, 8, 5, 9.",
+      "lesson": "../../data-structures/heaps/operations.md",
+      "keyIdea": "Each repair follows one path of at most log2 n levels.",
+      "number": 27,
+      "light": "assets/heap-sift-paths.svg",
+      "dark": "assets/heap-sift-paths-dark.svg"
+    },
+    {
+      "id": "bounded-heap-topk",
+      "title": "Top k with a bounded heap",
+      "category": "Trees and ranges",
+      "description": "Selection.smallestK over the stream 8, 3, 9, 5, 2, 5, 1 with k = 3 fills the heap with 8, 3, 9, then evicts 9, evicts 8, drops the second 5 and evicts 5 for 1, ending with 1, 2, 3.",
+      "lesson": "../../data-structures/queues/priority-queues.md",
+      "keyIdea": "The root is the largest value kept; an arrival must beat it to get in.",
+      "number": 28,
+      "light": "assets/bounded-heap-topk.svg",
+      "dark": "assets/bounded-heap-topk-dark.svg"
+    },
+    {
+      "id": "trie-prefix-walk",
+      "title": "Trie prefix walk",
+      "category": "Trees and ranges",
+      "description": "For the words car, card, care, cart, cat and dog, wordsWithPrefix(\"ca\", 3) walks the c and a nodes, then emits car, card and care in sorted order and stops before cart and cat; the dog branch is never visited.",
+      "lesson": "../../data-structures/tries/implementation.md",
+      "keyIdea": "Walk the prefix once, then visit children in sorted order until the limit.",
+      "number": 29,
+      "light": "assets/trie-prefix-walk.svg",
+      "dark": "assets/trie-prefix-walk-dark.svg"
+    },
+    {
+      "id": "sparse-table-overlap",
+      "title": "Sparse table overlap",
+      "category": "Trees and ranges",
+      "description": "For the values 5, 2, 6, 4, 7, 3, 8, 1, rangeMin(1, 7) takes the minimum of the blocks [1, 5) and [3, 7), which overlap on indices 3 and 4, and gets 2. A sum of the same blocks would give 41 instead of 30.",
+      "lesson": "../../data-structures/range-queries/overview.md",
+      "keyIdea": "Minimum ignores the overlap of two blocks; a sum would count it twice.",
+      "number": 30,
+      "light": "assets/sparse-table-overlap.svg",
+      "dark": "assets/sparse-table-overlap-dark.svg"
+    },
+    {
+      "id": "lazy-propagation",
+      "title": "Lazy range add",
+      "category": "Trees and ranges",
+      "description": "In a LazySegmentTree over 1, 2, 3, 4, rangeAdd(2, 4, 5) stops at the node covering [2, 4), raising its sum to 17 and leaving a pending +5 for its leaves. rangeSum(3, 4) then reads the leaf's stored 4, adds the pending 5 and returns 9.",
+      "lesson": "../../data-structures/range-queries/overview.md",
+      "keyIdea": "A range add stops at a covering node and leaves a pending value.",
+      "number": 31,
+      "light": "assets/lazy-propagation.svg",
+      "dark": "assets/lazy-propagation-dark.svg"
+    },
+    {
+      "id": "union-find-compression",
+      "title": "Path compression",
+      "category": "Trees and ranges",
+      "description": "In a UnionFind over 9 indices, union(0, 5) hangs the size-4 root 4 under the size-5 root 0. Before find(7) the path is 7, 6, 4, 0; afterwards 7 and 6 point directly at 0.",
+      "lesson": "../../data-structures/union-find/overview.md",
+      "keyIdea": "Union by size keeps trees shallow; find re-points its path at the root.",
+      "number": 32,
+      "light": "assets/union-find-compression.svg",
+      "dark": "assets/union-find-compression-dark.svg"
+    },
+    {
       "id": "dynamic-array-growth",
       "title": "Appending to a full array",
       "category": "Linear structures",
       "description": "A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends.",
       "lesson": "../../data-structures/arrays/operations.md",
       "keyIdea": "Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.",
-      "number": 27,
+      "number": 33,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
     }

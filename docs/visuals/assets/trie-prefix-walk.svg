@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 880" width="520" height="880" role="img" aria-labelledby="title desc">
+<title id="title">29  Trie prefix walk</title>
+<desc id="desc">For the words car, card, care, cart, cat and dog, wordsWithPrefix(&quot;ca&quot;, 3) walks the c and a nodes, then emits car, card and care in sorted order and stops before cart and cat; the dog branch is never visited.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="trie-prefix-walk-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="trie-prefix-walk-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="trie-prefix-walk-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="trie-prefix-walk-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="trie-prefix-walk-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="trie-prefix-walk-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="trie-prefix-walk-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="trie-prefix-walk-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="trie-prefix-walk-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="trie-prefix-walk-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="trie-prefix-walk-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="trie-prefix-walk-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="trie-prefix-walk-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="trie-prefix-walk-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="trie-prefix-walk-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="880" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">29  Trie prefix walk</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">wordsWithPrefix(&quot;ca&quot;, 3)</text>
+<line x1="266.26" y1="228.99" x2="228.74" y2="259.01" stroke="#2451b7" stroke-width="2.5"/>
+<line x1="303.74" y1="228.99" x2="341.26" y2="259.01" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="210.0" y1="298.0" x2="210.0" y2="310.0" stroke="#2451b7" stroke-width="2.5"/>
+<line x1="360.0" y1="298.0" x2="360.0" y2="310.0" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="191.26" y1="348.99" x2="153.74" y2="379.01" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="228.74" y1="348.99" x2="266.26" y2="379.01" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="360.0" y1="358.0" x2="360.0" y2="370.0" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="116.26" y1="408.99" x2="78.74" y2="439.01" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="135.0" y1="418.0" x2="135.0" y2="430.0" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="153.74" y1="408.99" x2="191.26" y2="439.01" stroke="#8994a5" stroke-width="2.5"/>
+<circle cx="60" cy="454" r="20" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="60" y="461" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">d</text>
+<circle cx="135" cy="454" r="20" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="135" y="461" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">e</text>
+<circle cx="210" cy="454" r="20" fill="#ffffff" stroke="#8994a5" stroke-width="3" stroke-dasharray="6 5"/>
+<text x="210" y="461" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="700">t</text>
+<circle cx="135.0" cy="394" r="20" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="135.0" y="401" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">r</text>
+<circle cx="285" cy="394" r="20" fill="#ffffff" stroke="#8994a5" stroke-width="3" stroke-dasharray="6 5"/>
+<text x="285" y="401" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="700">t</text>
+<circle cx="210.0" cy="334" r="20" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="210.0" y="341" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<circle cx="210.0" cy="274" r="20" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="210.0" y="281" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">c</text>
+<circle cx="360" cy="394" r="20" fill="#ffffff" stroke="#8994a5" stroke-width="3" stroke-dasharray="6 5"/>
+<text x="360" y="401" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="700">g</text>
+<circle cx="360.0" cy="334" r="20" fill="#ffffff" stroke="#8994a5" stroke-width="3" stroke-dasharray="6 5"/>
+<text x="360.0" y="341" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="700">o</text>
+<circle cx="360.0" cy="274" r="20" fill="#ffffff" stroke="#8994a5" stroke-width="3" stroke-dasharray="6 5"/>
+<text x="360.0" y="281" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="700">d</text>
+<circle cx="285.0" cy="214" r="26" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="285.0" y="221" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">root</text>
+<text x="242.0" y="326" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">prefix ca</text>
+<text x="135.0" y="438" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">1  car</text>
+<text x="60" y="498" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">2  card</text>
+<text x="135" y="498" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">3  care</text>
+<text x="210" y="498" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">cart</text>
+<text x="285" y="438" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">cat</text>
+<text x="388" y="401" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">dog</text>
+<circle cx="42" cy="519" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="525" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="526" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Stop after 3 words</text>
+<rect x="38" y="548" width="80" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="78.0" y="575.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">car</text>
+<rect x="126" y="548" width="80" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="166.0" y="575.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">card</text>
+<rect x="214" y="548" width="80" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="254.0" y="575.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">care</text>
+<text x="38" y="622" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">not reached: cart, cat</text>
+<rect x="28" y="646" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="662" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">prefix path</text>
+<rect x="181.632" y="646" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="215.632" y="662" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">emitted in order</text>
+<rect x="28" y="678" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="62" y="694" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">not visited</text>
+<rect x="28" y="718" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="749" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="778" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Walk the prefix once, then visit</text>
+<text x="44" y="805" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">children in sorted order until the</text>
+<text x="44" y="832" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">limit.</text>
+</svg>
