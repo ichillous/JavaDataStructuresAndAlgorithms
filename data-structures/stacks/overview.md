@@ -2,6 +2,14 @@
 
 A stack is last in, first out: `push` adds a value at the top, `peek` observes it, and `pop` removes it. Use this discipline for nested work such as parentheses, expression evaluation, undo history or explicit traversal frames.
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | The most recent unfinished item must be handled first: nested brackets, undo history, explicit DFS or traversal frames. |
+| **Avoid it when** | Items must leave in arrival order, or you need to read or change items below the top. |
+| **Cost** | `push` O(1) amortized, `pop` and `peek` O(1); clear O(n). |
+| **In this repo** | [`ArrayStack`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayStack.java) |
+| **In the JDK** | `java.util.ArrayDeque` through `push`, `pop` and `peek` (the `Deque` interface). |
+
 ```text
 push A   push B   pop -> B
   A        B        A
@@ -42,6 +50,62 @@ A Java call stack also stores unfinished method invocations, but recursive calls
 “Use a stack to visit the nearest vertex first” is wrong: the most recently scheduled vertex comes first, not necessarily the vertex with fewest edges from the source. Use a FIFO queue for BFS and an explicit stack for DFS.
 
 For application code, `ArrayDeque` is the usual JDK stack choice. This repository's stack exists so that growth, bounds and empty-state behavior are inspectable.
+
+## In real Java
+
+The `java.util.Stack` class documents that the `Deque` interface and its implementations should be used in preference to it, so production code uses `ArrayDeque`. `push` adds at the front, so iteration starts at the top. The empty-stack behavior differs from this repository's `ArrayStack`: `pop` throws `NoSuchElementException`, but `peek` returns null.
+
+```java
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+Deque<Integer> stack = new ArrayDeque<>();
+stack.push(1);
+stack.push(2);
+stack.push(3);
+assert new ArrayList<>(stack).equals(List.of(3, 2, 1)); // Iteration starts at the top.
+assert stack.pop() == 3 && stack.pop() == 2 && stack.pop() == 1;
+assert stack.peek() == null; // ArrayStack.peek would throw here.
+boolean rejected = false;
+try {
+    stack.pop();
+} catch (NoSuchElementException expected) {
+    rejected = true;
+}
+assert rejected;
+```
+
+## Common mistakes
+
+1. **Using a stack for breadth-first order.** Pushing the neighbors `1` and `2` of vertex `0` pops `2` first, so the walk is depth-first. BFS needs a FIFO queue so that vertices leave in the order they were discovered.
+2. **Popping without checking.** Reading `)` as the first character of the balance check pops an empty stack and throws `NoSuchElementException`. An empty stack at a closer means the input closes something never opened, which the check must report instead of crashing.
+3. **Assuming `java.util.Stack` iterates like a stack.** After `push(1)`, `push(2)`, `push(3)` its iteration order is `[1, 2, 3]`, bottom first, because it is a `Vector`; an `ArrayDeque` used with `push` iterates `[3, 2, 1]`. Code that prints or copies the structure sees opposite orders.
+
+## Check yourself
+
+<details>
+<summary>Why does a counting check accept `([)]` while a stack check rejects it?</summary>
+
+Counts only compare how many openers and closers there are; both types balance. The stack requires each closer to match the most recent unmatched opener, and `)` meets `[` on top.
+
+</details>
+
+<details>
+<summary>What does `peek()` do on an empty `ArrayStack`, and on an empty `ArrayDeque`?</summary>
+
+`ArrayStack.peek()` throws `NoSuchElementException`; `ArrayDeque.peek()` returns null, while `ArrayDeque.pop()` throws.
+
+</details>
+
+<details>
+<summary>Why might an explicit stack be preferred over recursion for a very deep traversal?</summary>
+
+Each recursive call uses a JVM frame, and Java does not guarantee tail-call elimination, so depth is bounded by the thread's stack size. An explicit stack lives on the heap and grows with the pending work.
+
+</details>
 
 ## Practice
 
