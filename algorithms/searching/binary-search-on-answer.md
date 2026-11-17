@@ -46,11 +46,13 @@ total weight (16) always works, so the range is `[4, 17)`.
 
 Monotonicity has to be proved, not assumed. If capacity `c` ships everything in at most 3 days,
 so does any `c' > c`: take the same daily groups; each still fits within `c'`. The test
-"needs at most 3 days" is therefore false, then true. This argument is about any grouping, while
-the predicate counts the greedy loop's days; the two agree because greedy uses the fewest days
-for a fixed capacity: by induction, after each day greedy has shipped at least as many packages
-as any valid grouping has after the same number of days, since it only closes a day when the
-next package does not fit.
+"needs at most 3 days" is therefore false, then true.
+
+That argument is about any grouping, while the predicate counts the days the greedy loop uses.
+The two agree because greedy uses the fewest days for a fixed capacity. The invariant is:
+after day `k`, greedy has shipped at least as many packages, in order, as any valid grouping
+has after `k` days. It holds by induction, because greedy closes a day only when the next
+package does not fit.
 
 ```text
 low high mid  days needed  fits?  action

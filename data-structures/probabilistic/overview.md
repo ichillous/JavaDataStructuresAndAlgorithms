@@ -6,7 +6,7 @@
 | **Avoid&nbsp;it&nbsp;when** | You need exact answers, deletion, or counts of rare items in a short stream. If the distinct items fit in memory, a `HashSet` or `HashMap` is simpler and exact. |
 | **Cost** | O(k) per Bloom operation and O(depth) per sketch operation; space is fixed by the chosen size, not by the number of items. |
 | **In&nbsp;this&nbsp;repo** | [`BloomFilter`](../../src/main/java/io/github/ichillous/dsa/structures/BloomFilter.java), [`CountMinSketch`](../../src/main/java/io/github/ichillous/dsa/structures/CountMinSketch.java) |
-| **In&nbsp;the&nbsp;JDK** | No direct equivalent; the exact versions are `java.util.HashSet` and `java.util.HashMap#merge` (see [In real Java](#in-real-java)). `java.util.BitSet` is only a bit array, the storage a filter could be built on, not a membership test. |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; the exact versions are `java.util.HashSet` and `java.util.HashMap#merge` (see [In real Java](#in-real-java)). `java.util.BitSet` is an exact set of small non-negative `int` indices: the storage a Bloom filter could be built on, but it hashes nothing and cannot hold arbitrary elements. |
 
 Use these structures when exact answers cost too much memory and a small,
 one-sided, quantifiable error is acceptable. A Bloom filter answers "have I seen
