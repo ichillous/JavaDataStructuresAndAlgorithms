@@ -18,17 +18,17 @@ passed on OpenJDK 21.0.12, compiling with `maven.compiler.release` 17:
 | Coverage floors | 90% lines and 85% branches enforced; both passed |
 | Compiler and Javadoc | `-Xlint:all -Werror` and Javadoc doclint passed |
 | Packaged programs | The default showcase and `learn` with `binary-search 4`, `negative-edges`, `range-queries`, `lru` and `list` exited with status 0 |
-| Local documentation | **1,519** file links resolve; 0 broken [`python3 scripts/check_docs.py`] |
+| Local documentation | **1,521** file links resolve; 0 broken [`python3 scripts/check_docs.py`] |
 | Figures | **98 figures, 196 SVGs**, 0 stale generated files [`python3 scripts/generate_visuals.py --check`] |
 | Step-throughs | **13 traces with 118 states** [frames in `docs/visuals/data/visual-data.js`] |
 | Lessons | **69 lessons** and 2 landing pages under `algorithms/` and `data-structures/`, each with a figure region and an At a glance table |
-| Python visual tests | **66 passed** [`python3 -m unittest discover -s scripts/visuals -p 'test_*.py'`], including new coverage tests for figure placement, lesson figures and the rendered-review report |
+| Python visual tests | **73 passed** [`python3 -m unittest discover -s scripts/visuals -p 'test_*.py'`], including new coverage tests for figure placement, lesson figures, lesson reachability from the README and the roadmap, and the rendered-review report |
 | Rendered review | 196 SVG variants and 472 viewer state/layout checks (118 states at 1440px and 390px in both themes), 0 issues [`node scripts/visuals/browser_review.js --all --write --previews`]; details in [visual verification](visuals/verification.md) |
 | Working-tree hygiene | `git diff --check` passed |
 
-Integration fixes in this pass: nine figures named a lesson that no longer placed them,
-so their `lesson` now points at a page that does (and `dijkstra-path` is now also placed
-beside the Dijkstra section of the BFS lesson); the solution finder links the new lessons,
+Integration fixes in this pass: eight figures named a lesson that no longer placed them
+and were repointed at a page that does, and `dijkstra-path` was placed in its lesson,
+beside the Dijkstra section of the BFS lesson; the solution finder links the new lessons,
 `firstTrue` and the three chooser pages, points union-find, topological sort, insertion sort
 and Kruskal at their own lessons, gives open addressing the exact expected and amortized
 split, describes `Arrays.parallelSort` only through its Javadoc implementation notes, and

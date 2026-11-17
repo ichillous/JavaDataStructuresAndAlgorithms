@@ -55,7 +55,8 @@ loopback HTTP server and recorded the [browser report](data/browser-review.json)
   labels, the position read-out and the Next button: no issue;
 - the four previews below were recaptured.
 
-A separate scripted pass over the viewer clicked every category filter (each showed
+A separate one-off Playwright pass, written for this review and not kept in the
+repository, clicked every category filter (each showed
 exactly its stated count, and the twelve categories add up to 98), searched for
 "shortest path" (2 of 98 figures), searched for a nonsense word (the empty state
 appeared), cleared the filters (98 of 98) and found a non-empty state legend on all
@@ -87,19 +88,19 @@ python3 -m http.server --bind 127.0.0.1 8000
 Then visit `http://127.0.0.1:8000/docs/visuals/`. Serving the repository root also keeps
 relative lesson links reachable: all **263 unique targets** (the viewer page and its
 scripts and styles, the visual index, both SVGs of every figure, and every figure and
-trace lesson) returned HTTP 200 from such a server. A Maven build is not required to
-browse it.
+trace lesson) returned HTTP 200 from such a server, checked once with an ad hoc script
+that is likewise not part of the repository. A Maven build is not required to browse it.
 
 ## Reproducibility and semantic checks
 
 The standard-library generator reproduces SVGs, manifest, data script, visual index,
 lesson regions and landing-page galleries; `--check` reported 0 stale files. The Python
-suite (`python3 -m unittest discover -s scripts/visuals -p 'test_*.py'`, 66 tests)
+suite (`python3 -m unittest discover -s scripts/visuals -p 'test_*.py'`, 73 tests)
 covers exact regeneration, HTML and asset references, SVG accessibility, palette
 contrast, the layout guard, the galleries, the At a glance form of every lesson,
 figure placement and the rendered-review report, and recomputes trace invariants
-independently of the trace builders. Each figure family's `VisualExamples*Test` (16
-Java test classes) reads the same canonical properties and checks every displayed
+independently of the trace builders. Each figure family's `VisualExamples*Test` (15
+classes, plus `VisualFixturesTest` for the shared reader) reads the same canonical properties and checks every displayed
 value against the public API.
 
 See [repository validation](../validation.md) for the complete Java totals and the

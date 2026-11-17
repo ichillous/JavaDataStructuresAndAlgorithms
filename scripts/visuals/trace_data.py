@@ -255,7 +255,7 @@ def _dijkstra(f):
     return _trace('dijkstra', 'Dijkstra: improve, then settle', 'Graphs',
                   'Track tentative distances, relax directed weighted edges, and discard stale heap entries.',
                   'Choose the smallest tentative distance; a FIFO queue cannot replace this priority rule.',
-                  'data-structures/graphs/traversal.md', frames)
+                  'algorithms/graph/bfs.md', frames)
 
 
 def _coins(f):

@@ -176,12 +176,18 @@ with a full stop (`test_assets.py` enforces both):
 | **In&nbsp;the&nbsp;JDK** | A class or method as code, or "no direct equivalent" |
 ```
 
-A lesson then keeps its invariant, a worked `text` trace, an executable example and a
-costs table, and ends with **In real Java** (what to use in production, with one
-executable example), **Common mistakes** (each with the input that exposes it),
-**Practice** and **Check yourself**: three `<details>` blocks whose `<summary>` is the
-question, written with `<code>` rather than backticks, which can show literally inside a
-summary, with a blank line after `</summary>` and before `</details>`.
+The table's form (non-breaking labels, a full stop ending the first two cells) and the
+presence of at least one figure region are enforced by `scripts/visuals/test_assets.py`,
+which also requires every lesson to be linked from the root README or a landing page and
+from the learning roadmap. The rest is the expected shape rather than a tested rule. A
+lesson normally keeps its invariant, a worked `text` trace, an executable example and a
+costs table, and closes with **In real Java** (what to use in production, with one
+executable example), **Common mistakes** or a pitfall section (each mistake with the
+input that exposes it), **Practice** and **Check yourself**: three `<details>` blocks
+whose `<summary>` is the question, written with `<code>` rather than backticks, which
+show literally inside a summary, with a blank line after `</summary>` and before
+`</details>`. Chooser pages (a subfolder's `README.md`) and the two landing pages are
+indexes and may omit the closing sections.
 
 ### Landing-page galleries
 
@@ -191,8 +197,11 @@ closed by `<!-- /visual:gallery -->`, where `FOLDER` is the folder path from the
 repository root. The generator writes one table per immediate subfolder, with a
 `README.md` first and then the other lessons by file name; each row shows a thumbnail of
 the lesson's first figure not already used higher on the page, the lesson's `# ` title
-and its "Use it when" cell. A lesson placed directly in the gallery folder, or one
-without a figure, a title or an At a glance table, fails the build with its path. A new
+and its "Use it when" cell. A lesson placed directly in the gallery folder or more than one level below it, or one
+without a figure, a title or an At a glance table, fails the build with its path. So
+does a "Use it when" cell containing a link the generator cannot re-point from the
+landing page: write links there in the plain inline form (bracketed text followed by a relative path in
+parentheses), with no title, angle brackets, reference label or raw HTML. A new
 lesson therefore needs no landing-page edit: regenerate and it appears.
 
 ### Drawing primitives

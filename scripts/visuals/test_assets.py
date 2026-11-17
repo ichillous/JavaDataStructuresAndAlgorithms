@@ -371,6 +371,33 @@ def visual_data():
     return json.loads(text[text.index("{"):text.rindex("}") + 1])
 
 
+LANDING_PAGES = ("algorithms/README.md", "data-structures/README.md")
+PAGE_LINK = re.compile(r"\]\(([^)\s]+)\)")
+
+
+def lesson_pages():
+    """Every lesson under the two lesson folders; the two landing pages are indexes, not lessons."""
+    return sorted(path.relative_to(ROOT).as_posix()
+                  for folder in ("algorithms", "data-structures") for path in (ROOT / folder).rglob("*.md")
+                  if path.relative_to(ROOT).as_posix() not in LANDING_PAGES)
+
+
+def linked_pages(name, root=ROOT):
+    """Repository paths of the Markdown pages that ``name`` links, anchors removed."""
+    page = root / name
+    found = set()
+    for target in PAGE_LINK.findall(page.read_text(encoding="utf-8")):
+        target = target.split("#", 1)[0]
+        if not target.endswith(".md") or re.match(r"[a-z][a-z0-9+.-]*:", target):
+            continue
+        resolved = (page.parent / target).resolve()
+        try:
+            found.add(resolved.relative_to(root.resolve()).as_posix())
+        except ValueError:
+            continue
+    return found
+
+
 class CoverageTest(unittest.TestCase):
     """Every figure is placed, every lesson shows one, and the rendered review covers them all."""
 
@@ -408,6 +435,28 @@ class CoverageTest(unittest.TestCase):
                 self.assertTrue(any(self.generator.GLANCE_HEADER.match(line) for line in text.split("\n")),
                                 "no At a glance table")
 
+    def test_every_lesson_is_linked_from_the_readme_or_a_landing_page_and_from_the_roadmap(self):
+        lessons = lesson_pages()
+        self.assertGreaterEqual(len(lessons), 69)
+        front = linked_pages("README.md")
+        for landing in LANDING_PAGES:
+            self.assertIn(landing, front, "the README links each landing page")
+            front |= linked_pages(landing)
+        roadmap = linked_pages("docs/learning-roadmap.md")
+        self.assertEqual([], [lesson for lesson in lessons if lesson not in front],
+                         "lessons no reader can reach from the README or a landing page")
+        self.assertEqual([], [lesson for lesson in lessons if lesson not in roadmap],
+                         "lessons missing from docs/learning-roadmap.md")
+
+    def test_linked_pages_resolves_relative_links_and_ignores_anchors_and_urls(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "docs").mkdir()
+            (root / "docs/page.md").write_text(
+                "[a](../algorithms/x/a.md#part) [b](https://example.org/b.md) [c](sibling.md) [d](#top)\n",
+                encoding="utf-8")
+            self.assertEqual({"algorithms/x/a.md", "docs/sibling.md"}, linked_pages("docs/page.md", root))
+
     def test_rendered_review_covers_every_svg_and_trace_state_and_found_no_issue(self):
         report = json.loads((VISUALS / "data/browser-review.json").read_text(encoding="utf-8"))
         svgs = sorted((VISUALS / "assets").glob("*.svg"))
@@ -415,6 +464,8 @@ class CoverageTest(unittest.TestCase):
         self.assertEqual(len(svgs), report["svg_variants"])
         frames = sum(len(trace["frames"]) for trace in visual_data()["traces"])
         layouts = len(report["viewports"]) * len(report["themes"])
+        self.assertGreater(frames, 0)
+        self.assertEqual(4, len(report["screenshots"]))
         self.assertEqual(frames * layouts, report["tested_frame_states"],
                          "every trace frame is checked once per viewport and theme")
         self.assertEqual([], report["issues"])
@@ -423,7 +474,7 @@ class CoverageTest(unittest.TestCase):
 
 
 GALLERY_FOLDERS = ("algorithms", "data-structures")
-ROW_LINK =re.compile(r"\| \[(?P<title>(?:[^\]\\]|\\.)+)\]\((?P<href>[^)]+)\) \|")
+ROW_LINK = re.compile(r"\| \[(?P<title>(?:[^\]\\]|\\.)+)\]\((?P<href>[^)]+)\) \|")
 
 
 def gallery_lessons(folder):

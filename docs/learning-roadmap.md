@@ -17,8 +17,8 @@ Each session follows the same loop: predict an example by hand, read the impleme
 
 ## Lessons for each stage
 
-Read the lessons of a stage in this order; each links its source, tests and the matching
-[solution-finder](solution-finder.md) section. The [data-structures](../data-structures/README.md)
+Read the lessons of a stage in this order; each links the maintained source it explains,
+and most link the matching [solution-finder](solution-finder.md) section. The [data-structures](../data-structures/README.md)
 and [algorithms](../algorithms/README.md) landing pages list every lesson with a figure.
 
 | Stage | Lessons |

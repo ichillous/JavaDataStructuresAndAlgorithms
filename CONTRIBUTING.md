@@ -82,6 +82,9 @@ Keep labels, arrows, alt text, captions and units meaningful. See the
 
 A new lesson under `algorithms/` or `data-structures/` goes in a topic subfolder, opens with
 an At a glance table (labels written with `&nbsp;`, as in the existing lessons), places at
-least one figure, and ends with In real Java, Common mistakes, Practice and Check yourself.
+least one figure, and normally ends with In real Java, Common mistakes, Practice and Check
+yourself. Link it from the topic map in `README.md` and from its stage in
+`docs/learning-roadmap.md`; the visual test suite fails for a lesson no reader can reach.
 The generated gallery on the folder's landing page (`<!-- visual:gallery FOLDER -->`) then
-lists it after you regenerate; the "Lesson contract" in the design guide gives the details.
+lists it after you regenerate; the "Lesson contract" in the design guide says which parts
+are enforced by tests.

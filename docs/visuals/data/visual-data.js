@@ -2992,7 +2992,7 @@ globalThis.DSA_VISUALS_DATA = {
       "category": "Graphs",
       "description": "Track tentative distances, relax directed weighted edges, and discard stale heap entries.",
       "keyIdea": "Choose the smallest tentative distance; a FIFO queue cannot replace this priority rule.",
-      "lesson": "../../data-structures/graphs/traversal.md",
+      "lesson": "../../algorithms/graph/bfs.md",
       "frames": [
         {
           "title": "Initialize tentative distances",
