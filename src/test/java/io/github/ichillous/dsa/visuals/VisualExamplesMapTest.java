@@ -34,6 +34,8 @@ class VisualExamplesMapTest {
     void aRenamedMethodOrClassIsDetected() {
         assertTrue(publicMethods(resolve("DynamicArray")).contains("get"));
         assertFalse(publicMethods(resolve("DynamicArray")).contains("fetch"));
+        assertFalse(publicMethods(resolve("Trie")).contains("equals"), "Object methods do not count");
+        assertFalse(publicMethods(resolve("Trie")).contains("getClass"), "Object methods do not count");
         assertTrue(candidates("NoSuchStructure").isEmpty());
     }
 
@@ -75,6 +77,10 @@ class VisualExamplesMapTest {
     }
 
     private static List<String> publicMethods(Class<?> type) {
-        return Arrays.stream(type.getMethods()).map(Method::getName).toList();
+        // Methods declared by Object (equals, hashCode, toString, ...) say nothing about the class.
+        return Arrays.stream(type.getMethods())
+                .filter(method -> method.getDeclaringClass() != Object.class)
+                .map(Method::getName)
+                .toList();
     }
 }
