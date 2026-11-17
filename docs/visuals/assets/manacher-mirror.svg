@@ -9,7 +9,7 @@
 <line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
 <circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
 <text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
-<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Odd radii of cabacabad</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Odd radii under cabacabad</text>
 <path d="M 70 206 Q 70 198 78 198 H 207.0 Q 215.0 198 215.0 190 Q 215.0 198 223.0 198 H 352 Q 360 198 360 206" fill="none" stroke="#2451b7" stroke-width="2"/>
 <text x="215.0" y="182" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">palindrome [1, 7]</text>
 <rect x="28" y="210" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>

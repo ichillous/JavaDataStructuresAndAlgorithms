@@ -229,7 +229,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/z-box-dark.svg"><img src="assets/z-box.svg" alt="The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box." width="520"></picture>
 
-**Key idea:** Inside a Z-box, z[i] comes from its mirror; only the edge costs comparisons.
+**Key idea:** z[i] starts from its mirror's value; only units past the box edge extend it.
 
 ## 29. Rabin-Karp: hash, then verify
 
@@ -251,11 +251,19 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 [Strings: read the lesson](../../algorithms/strings/multi-pattern-and-suffix-arrays.md)
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/aho-corasick-links-dark.svg"><img src="assets/aho-corasick-links.svg" alt="The trie of he, she, his and hers has failure links, labelled beside their nodes, sh to h, she to he, his to s and hers to s; scanning ushers keeps s, sh, she, her, hers and reports she at 1, he at 2 and hers at 2." width="520"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/aho-corasick-links-dark.svg"><img src="assets/aho-corasick-links.svg" alt="The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root." width="520"></picture>
 
-**Key idea:** Failure links keep the scan moving forward: no text unit is read twice.
+**Key idea:** A failure link points at the longest suffix of a node that is still in the trie.
 
-## 32. Suffix array and a pattern range
+## 32. Aho-Corasick scan
+
+[Strings: read the lesson](../../algorithms/strings/multi-pattern-and-suffix-arrays.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/aho-corasick-scan-dark.svg"><img src="assets/aho-corasick-scan.svg" alt="Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2." width="520"></picture>
+
+**Key idea:** One state per text unit; links report every pattern that ends at that unit.
+
+## 33. Suffix array and a pattern range
 
 [Strings: read the lesson](../../algorithms/strings/multi-pattern-and-suffix-arrays.md)
 

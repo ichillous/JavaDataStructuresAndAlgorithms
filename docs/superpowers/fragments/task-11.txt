@@ -24,3 +24,5 @@ Wrong or unsupported statements fixed:
   inside the box, which must fail). Now "only a unit past right can extend that value".
 
 Not changed, noted for review: the Z-array lesson table and trace were already correct.
+
+Fix round 1: aho-corasick-links redrawn (trie alone plus an aligned failure-link list) and the scan moved to a new figure aho-corasick-scan, both placed in algorithms/strings/multi-pattern-and-suffix-arrays.md. At a glance cost row now says "expected" for Aho-Corasick.

@@ -14,7 +14,7 @@ accepts an empty pattern set (it then never matches).
 | --- | --- |
 | **Use it when** | Many fixed patterns must be found in one pass over a text (Aho–Corasick), or a fixed text will answer many substring questions: occurrences, distinct substrings, the longest repeated substring (suffix array). |
 | **Avoid it when** | There is one pattern (use `String.indexOf` or KMP), the pattern set changes often (the automaton is immutable), or the text changes (rebuild the suffix array). |
-| **Cost** | Aho–Corasick: O(P) build, O(t + k) search. Suffix array: O(n log n) build, O(p log n + k log k) per `occurrences` call. |
+| **Cost** | Aho–Corasick: O(P) expected build, O(t + k) expected search. Suffix array: O(n log n) build, O(p log n + k log k) per `occurrences` call. |
 | **In this repo** | [`AhoCorasick`](../../src/main/java/io/github/ichillous/dsa/algorithms/AhoCorasick.java) (`findAll`), [`SuffixArray`](../../src/main/java/io/github/ichillous/dsa/algorithms/SuffixArray.java) (`suffixes`, `lcp`, `occurrences`) |
 | **In the JDK** | `java.util.regex.Pattern` for a few alternatives; no direct equivalent for either structure |
 
@@ -29,6 +29,12 @@ A second link per node jumps to the nearest pattern ending on the failure chain,
 so every match is emitted exactly once. Links are built breadth first, so
 shallow nodes are final before deeper ones need them and long patterns cannot
 overflow the stack.
+
+<!-- visual:generated aho-corasick-links -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/aho-corasick-links-dark.svg"><img src="../../docs/visuals/assets/aho-corasick-links.svg" alt="The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root." width="520"></picture>
+
+**Figure 31.** The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 **Suffix array.** `suffixes()[r]` is the start of the r-th smallest suffix.
 Prefix doubling ranks suffixes by their first `k` characters, then by `2k`,
@@ -51,10 +57,10 @@ pos char  trie prefix kept  matches reported
 result ordered by start, then length: (1,she) (2,he) (2,hers)
 ```
 
-<!-- visual:generated aho-corasick-links -->
-<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/aho-corasick-links-dark.svg"><img src="../../docs/visuals/assets/aho-corasick-links.svg" alt="The trie of he, she, his and hers has failure links, labelled beside their nodes, sh to h, she to he, his to s and hers to s; scanning ushers keeps s, sh, she, her, hers and reports she at 1, he at 2 and hers at 2." width="520"></picture>
+<!-- visual:generated aho-corasick-scan -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/aho-corasick-scan-dark.svg"><img src="../../docs/visuals/assets/aho-corasick-scan.svg" alt="Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2." width="520"></picture>
 
-**Figure 31.** The trie of he, she, his and hers has failure links, labelled beside their nodes, sh to h, she to he, his to s and hers to s; scanning ushers keeps s, sh, she, her, hers and reports she at 1, he at 2 and hers at 2. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 32.** Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Suffix array of `banana`:
@@ -74,7 +80,7 @@ longest repeated    = "ana" (largest lcp, 3)
 <!-- visual:generated suffix-array-lcp -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/suffix-array-lcp-dark.svg"><img src="../../docs/visuals/assets/suffix-array-lcp.svg" alt="The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3." width="520"></picture>
 
-**Figure 32.** The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 33.** The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ```java

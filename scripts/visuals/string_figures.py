@@ -54,7 +54,7 @@ def _mirror_row(c, y, text, lo, hi, index, mirror, sentence):
 
 # ---------------------------------------------------------------------------------- z-box
 
-Z_IDEA = ("Inside a Z-box, z[i] comes from its mirror; only the edge costs comparisons.")
+Z_IDEA = "z[i] starts from its mirror's value; only units past the box edge extend it."
 
 
 def z_box(c, f):
@@ -68,7 +68,7 @@ def z_box(c, f):
     n = len(text)
 
     # 1. The Z-array; the match at `start` is the Z-box.
-    y = c.step(156, 1, f"Z-array of {text}")
+    y = c.step(156, 1, f"z-values under {text}")
     c.brace(_left(0), _right(end - start - 1), y + 20, f"prefix [0, {end - start})", color="green",
             above=True)
     box = ["focus" if start <= i < end else None for i in range(n)]
@@ -124,10 +124,14 @@ def rabin_karp_rolling(c, f):
         c.text(cols["result"], row + 24, "equal" if hit else "differs", weight="700" if hit else "400",
                color="gold" if hit else "muted")
     y = top + len(hashes) * 38
-    c.text(X, y + 24, "Each hash drops one unit and adds one: O(1).", size=18, color="muted")
+    out, inc = text[0], text[p]
+    c.text(X, y + 24, f"Slide 0 to 1: drop {out} ({ord(out)}), add {inc} ({ord(inc)}) in O(1):",
+           size=18, color="muted")
+    c.text(X, y + 50, f"H1 = (H0 - {ord(out)}*{base}^{p - 1})*{base} + {ord(inc)} mod M",
+           size=18, color="muted")
 
     # 2. Verify each hit.
-    y = c.step(y + 66, 2, "Compare the units of each hit")
+    y = c.step(y + 92, 2, "Compare the units of each hit")
     window = text[impostor:impostor + p]
     w = c.chip(X, y - 4, f"reject {impostor}", color="red")
     c.text(X + w + 10, y + 17, f"{window} has unit {mismatch} {window[mismatch]}, not {pattern[mismatch]}",
@@ -155,7 +159,7 @@ def manacher_mirror(c, f):
     n = len(text)
 
     # 1. Odd radii; the widest palindrome so far is the mirror box.
-    y = c.step(156, 1, f"Odd radii of {text}")
+    y = c.step(156, 1, f"Odd radii under {text}")
     c.brace(_left(left), _right(right), y + 20, f"palindrome [{left}, {right}]", color="blue", above=True)
     y = _chars(c, y + 32, text, states=["focus" if left <= i <= right else None for i in range(n)])
     y = c.cell_row(X, y + 4, [str(r) for r in radii], cell=CELL, gap=GAP, height=ROW_H,
@@ -177,7 +181,8 @@ def manacher_mirror(c, f):
 
 # ---------------------------------------------------------------------------- aho-corasick-links
 
-AC_IDEA = "Failure links keep the scan moving forward: no text unit is read twice."
+AC_IDEA = "A failure link points at the longest suffix of a node that is still in the trie."
+SCAN_IDEA = "One state per text unit; links report every pattern that ends at that unit."
 
 TRIE_X = {"": 260, "s": 80, "sh": 80, "she": 80, "h": 330, "he": 250, "her": 250, "hers": 250,
           "hi": 410, "his": 410}
@@ -185,42 +190,64 @@ TRIE_X = {"": 260, "s": 80, "sh": 80, "she": 80, "h": 330, "he": 250, "her": 250
 
 def aho_corasick_links(c, f):
     patterns = f["string.ac.patterns"].split(",")
-    text = f["string.ac.text"]
     nodes = f["string.ac.nodes"].split(",")
-    failure = dict(link.split(">") for link in f["string.ac.failure"].split(","))
-    kept = f["string.ac.kept"].split(",")
-    matches = [entry.split(":") for entry in f["string.ac.matches"].split(",")]
+    failure = [link.split(">") for link in f["string.ac.failure"].split(",")]
 
-    # 1. The trie and its failure links.
+    # 1. The trie alone.
     y = c.step(156, 1, f"Trie of {', '.join(patterns)}")
-    top, gap, radius = y + 30, 64, 27
+    top, gap, radius = y + 36, 60, 31
     pos = {name: (TRIE_X[name], top + len(name) * gap) for name in [""] + nodes}
     for name in nodes:
         c.edge(pos[name[:-1]], pos[name], color="line", radius=radius, directed=False)
     c.node(*pos[""], "root", radius=radius, state="muted")
     for name in nodes:
         c.node(*pos[name], name, radius=radius, state="good" if name in patterns else None)
-    for name, target in failure.items():
-        nx, ny = pos[name]
-        if name == "his":
-            c.chip(nx - 40, ny + radius + 6, f"link {target}", color="violet")
-        else:
-            c.chip(nx + radius + 8, ny - 15, f"link {target}", color="violet")
     y = top + 4 * gap + radius
 
-    # 2. Scan the text.
-    y = c.step(y + 28, 2, f"Scan {text}, keep the longest prefix")
-    c.cell_row(X, y, list(text), cell=60, gap=10)
-    y += 56
-    c.cell_row(X, y, kept, cell=60, gap=10, states=["good" if k in patterns else None for k in kept])
-    y += 82
-    left = X
-    for start, pattern in matches:
-        left += c.chip(left, y + 6, f"{pattern} at {start}", color="green") + 10
-    y += 40
+    # 2. The failure links as an aligned list.
+    y = c.step(y + 36, 2, "Failure links")
+    c.text(X, y + 8, "A link is the longest proper suffix of a node", size=18, color="muted")
+    c.text(X, y + 34, "that is also a trie prefix. All others: root.", size=18, color="muted")
+    row = y + 78
+    for index, (name, target) in enumerate(failure):
+        x = 56 + (index % 2) * 220
+        yy = row + (index // 2) * 36
+        c.text(x, yy, f"{name} → {target}", weight="700", color="violet")
+    y = row + 36
 
-    y = c.legend(y + 26, [("good", "pattern ends"), ("alt", "failure link; rest go to root")])
+    y = c.legend(y + 38, [("good", "a pattern ends here"), ("muted", "root")])
     c.note(y + 14, AC_IDEA)
+
+
+def aho_corasick_scan(c, f):
+    patterns = f["string.ac.patterns"].split(",")
+    text = f["string.ac.text"]
+    kept = f["string.ac.kept"].split(",")
+    matches = [(int(entry.split(":")[0]), entry.split(":")[1]) for entry in f["string.ac.matches"].split(",")]
+    n = len(text)
+
+    # 1. One state after each text unit.
+    y = c.step(156, 1, f"Scan {text}, keep one state")
+    y = c.cell_row(X, y, list(text), cell=60, gap=10, labels=[str(i) for i in range(n)])
+    y = c.cell_row(X, y + 6, kept, cell=60, gap=10,
+                   states=["good" if k in patterns else None for k in kept])
+    c.text(X, y + 24, "Second row: longest trie prefix that ends here.", size=18, color="muted")
+    y += 24
+
+    # 2. Matches reported at each unit.
+    y = c.step(y + 40, 2, "Report what ends at each unit")
+    row = y + 8
+    for start, pattern in matches:
+        end = start + len(pattern) - 1
+        c.chip(X, row, f"{pattern} at {start}", color="green")
+        state = kept[end]
+        how = f"state {state} ends it" if state == pattern else f"link {state} → {pattern}"
+        c.text(X + 150, row + 21, f"unit {end}: {how}", size=18)
+        row += 44
+    y = row
+
+    y = c.legend(y + 14, [("good", "state that is a pattern")])
+    c.note(y + 14, SCAN_IDEA)
 
 
 # --------------------------------------------------------------------------- suffix-array-lcp
@@ -242,11 +269,13 @@ def suffix_array_lcp(c, f):
     rows = [[suffixes[r], text[suffixes[r]:], lcp[r]] for r in range(n)]
     y = c.grid(96, y + 36, rows, cell_w=100, cell_h=38, row_labels=[f"rank {r}" for r in range(n)],
                col_labels=["start", "suffix", "lcp"])
+    c.text(X, y + 22, "lcp: common prefix with the rank above.", size=18, color="muted")
+    y += 22
 
     # 2. The pattern is a rank range.
     y = c.step(y + 44, 2, f"{pattern} is the rank range [{low}, {high})")
     row = y + 16
-    cell, gap = 72, 4
+    cell, gap = 77, 0
     values = [text[suffixes[r]:] for r in range(n)]
     states = ["good" if low <= r < high else None for r in range(n)]
     y = c.cell_row(X, row, values, cell=cell, gap=gap, states=states,
@@ -269,7 +298,7 @@ FIGURES = [
         "description": ("The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at "
                         "index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 "
                         "starts at 3 because z[4] = 7 overruns the box."),
-        "keyIdea": Z_IDEA, "lesson": "algorithms/strings/pattern-matching.md", "height": 890,
+        "keyIdea": Z_IDEA, "lesson": "algorithms/strings/pattern-matching.md", "height": 865,
         "draw": z_box,
     },
     {
@@ -277,7 +306,7 @@ FIGURES = [
         "description": ("Searching aeaecbagab for bagab slides a five-unit window; windows 0 and 5 "
                         "have the pattern's hash, window 0 (aeaec) is rejected at unit 0 and window "
                         "5 is reported."),
-        "keyIdea": RK_IDEA, "lesson": "algorithms/strings/pattern-matching.md", "height": 845,
+        "keyIdea": RK_IDEA, "lesson": "algorithms/strings/pattern-matching.md", "height": 870,
         "draw": rabin_karp_rolling,
     },
     {
@@ -291,17 +320,23 @@ FIGURES = [
     {
         "id": "aho-corasick-links", "title": "Aho-Corasick links",
         "category": CATEGORY,
-        "description": ("The trie of he, she, his and hers has failure links, labelled beside their nodes, sh to h, she to he, "
-                        "his to s and hers to s; scanning ushers keeps s, sh, she, her, hers and "
-                        "reports she at 1, he at 2 and hers at 2."),
+        "description": ("The trie of he, she, his and hers, then its failure links listed one per row: "
+                        "sh to h, she to he, his to s and hers to s; every other node links to the root."),
         "keyIdea": AC_IDEA, "lesson": "algorithms/strings/multi-pattern-and-suffix-arrays.md",
-        "height": 900, "draw": aho_corasick_links,
+        "height": 880, "draw": aho_corasick_links,
+    },
+    {
+        "id": "aho-corasick-scan", "title": "Aho-Corasick scan", "category": CATEGORY,
+        "description": ("Scanning ushers keeps the states root, s, sh, she, her and hers, and reports "
+                        "she at 1, he at 2 (through the link she to he) and hers at 2."),
+        "keyIdea": SCAN_IDEA, "lesson": "algorithms/strings/multi-pattern-and-suffix-arrays.md",
+        "height": 710, "draw": aho_corasick_scan,
     },
     {
         "id": "suffix-array-lcp", "title": "Suffix array and a pattern range", "category": CATEGORY,
         "description": ("The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; "
                         "the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3."),
         "keyIdea": SA_IDEA, "lesson": "algorithms/strings/multi-pattern-and-suffix-arrays.md",
-        "height": 850, "draw": suffix_array_lcp,
+        "height": 870, "draw": suffix_array_lcp,
     },
 ]

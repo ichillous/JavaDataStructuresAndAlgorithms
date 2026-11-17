@@ -302,7 +302,7 @@
       "title": "Z-array and the Z-box",
       "category": "Strings",
       "description": "The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box.",
-      "keyIdea": "Inside a Z-box, z[i] comes from its mirror; only the edge costs comparisons.",
+      "keyIdea": "z[i] starts from its mirror's value; only units past the box edge extend it.",
       "lesson": "../../algorithms/strings/pattern-matching.md",
       "number": 28,
       "light": "assets/z-box.svg",
@@ -334,12 +334,23 @@
       "id": "aho-corasick-links",
       "title": "Aho-Corasick links",
       "category": "Strings",
-      "description": "The trie of he, she, his and hers has failure links, labelled beside their nodes, sh to h, she to he, his to s and hers to s; scanning ushers keeps s, sh, she, her, hers and reports she at 1, he at 2 and hers at 2.",
-      "keyIdea": "Failure links keep the scan moving forward: no text unit is read twice.",
+      "description": "The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root.",
+      "keyIdea": "A failure link points at the longest suffix of a node that is still in the trie.",
       "lesson": "../../algorithms/strings/multi-pattern-and-suffix-arrays.md",
       "number": 31,
       "light": "assets/aho-corasick-links.svg",
       "dark": "assets/aho-corasick-links-dark.svg"
+    },
+    {
+      "id": "aho-corasick-scan",
+      "title": "Aho-Corasick scan",
+      "category": "Strings",
+      "description": "Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2.",
+      "keyIdea": "One state per text unit; links report every pattern that ends at that unit.",
+      "lesson": "../../algorithms/strings/multi-pattern-and-suffix-arrays.md",
+      "number": 32,
+      "light": "assets/aho-corasick-scan.svg",
+      "dark": "assets/aho-corasick-scan-dark.svg"
     },
     {
       "id": "suffix-array-lcp",
@@ -348,7 +359,7 @@
       "description": "The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3.",
       "keyIdea": "Suffixes sharing a prefix sit side by side: a lookup is one range.",
       "lesson": "../../algorithms/strings/multi-pattern-and-suffix-arrays.md",
-      "number": 32,
+      "number": 33,
       "light": "assets/suffix-array-lcp.svg",
       "dark": "assets/suffix-array-lcp-dark.svg"
     }

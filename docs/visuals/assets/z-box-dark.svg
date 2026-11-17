@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 890" width="520" height="890" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 865" width="520" height="865" role="img" aria-labelledby="title desc">
 <title id="title">28  Z-array and the Z-box</title>
 <desc id="desc">The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box.</desc>
 <style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
 <defs><marker id="z-box-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="z-box-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="z-box-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="z-box-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="z-box-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="z-box-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="z-box-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="z-box-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="z-box-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="z-box-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="z-box-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="z-box-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="z-box-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="z-box-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="z-box-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
-<rect x="0" y="0" width="520" height="890" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<rect x="0" y="0" width="520" height="865" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
 <text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">28  Z-array and the Z-box</text>
 <text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Strings · Worked example</text>
 <line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
 <circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
 <text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
-<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Z-array of aabxaabxaab</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">z-values under aabxaabxaab</text>
 <path d="M 28 206 Q 28 198 36 198 H 165.0 Q 173.0 198 173.0 190 Q 173.0 198 181.0 198 H 310 Q 318 198 318 206" fill="none" stroke="#86dca2" stroke-width="2"/>
 <text x="173.0" y="182" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">prefix [0, 7)</text>
 <rect x="28" y="210" width="38" height="38" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
@@ -149,9 +149,8 @@
 <text x="249.32799999999997" y="706" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">current index</text>
 <rect x="390.55999999999995" y="690" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
 <text x="424.55999999999995" y="706" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">mirror</text>
-<rect x="28" y="730" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<rect x="28" y="730" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
 <text x="44" y="761" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
-<text x="44" y="790" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Inside a Z-box, z[i] comes from its</text>
-<text x="44" y="817" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">mirror; only the edge costs</text>
-<text x="44" y="844" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">comparisons.</text>
+<text x="44" y="790" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">z[i] starts from its mirror&#x27;s value;</text>
+<text x="44" y="817" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">only units past the box edge extend it.</text>
 </svg>

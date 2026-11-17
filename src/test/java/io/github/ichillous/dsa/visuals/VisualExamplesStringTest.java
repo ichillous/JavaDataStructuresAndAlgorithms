@@ -79,6 +79,25 @@ class VisualExamplesStringTest {
     }
 
     @Test
+    void theShownRollingUpdateTurnsWindowZeroIntoWindowOne() {
+        String text = DATA.text("string.rk.text");
+        int length = DATA.text("string.rk.pattern").length();
+        long modulus = DATA.number("string.rk.modulus");
+        long base = DATA.number("string.rk.base");
+        long[] shown = DATA.longs("string.rk.windowHashes");
+
+        long high = 1;
+        for (int index = 1; index < length; index++) {
+            high = high * base % modulus;
+        }
+        long dropped = text.charAt(0) * high % modulus;
+        long rolled = ((shown[0] - dropped + modulus) % modulus * base + text.charAt(length)) % modulus;
+        assertEquals(shown[1], rolled, "H1 = (H0 - drop * base^(p-1)) * base + add, mod M");
+        assertEquals(97, (int) text.charAt(0), "the figure prints the dropped unit's code");
+        assertEquals(98, (int) text.charAt(length), "the figure prints the added unit's code");
+    }
+
+    @Test
     void theImpostorHitIsRejectedAndTheRealHitIsReported() {
         String text = DATA.text("string.rk.text");
         String pattern = DATA.text("string.rk.pattern");
