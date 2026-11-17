@@ -4153,6 +4153,4974 @@
           }
         }
       ]
+    },
+    {
+      "id": "insertion",
+      "title": "Insertion sort: grow a sorted prefix",
+      "category": "Sorting",
+      "description": "Insert each value into an already sorted prefix by shifting larger values right.",
+      "keyIdea": "The prefix is sorted after every insertion; shifting only strictly larger values keeps equal values stable.",
+      "lesson": "../../algorithms/sorting/bubble-sort.md",
+      "frames": [
+        {
+          "title": "A one-value prefix is sorted",
+          "explanation": "Index 0 alone is a sorted prefix of [4, 3, 5, 3, 1]. Each step inserts the next value into that prefix.",
+          "summary": "Index 0 alone is a sorted prefix of [4, 3, 5, 3, 1]. Each step inserts the next value into that prefix.",
+          "view": {
+            "type": "array",
+            "values": [
+              4,
+              3,
+              5,
+              3,
+              1
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "chosen",
+              "active",
+              "active",
+              "active",
+              "active"
+            ],
+            "range": [
+              0,
+              1
+            ],
+            "rangeLabel": "Sorted prefix [0, 1)",
+            "lanes": [],
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ],
+            "note": "Take the next value, shift larger sorted values right, drop it into the gap."
+          }
+        },
+        {
+          "title": "Lift 3 from index 1",
+          "explanation": "The prefix [0, 1) is sorted. Hold 3 aside and walk left past every value strictly greater than it.",
+          "summary": "The prefix [0, 1) is sorted. Hold 3 aside and walk left past every value strictly greater than it.",
+          "view": {
+            "type": "array",
+            "values": [
+              4,
+              3,
+              5,
+              3,
+              1
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "chosen",
+              "current",
+              "active",
+              "active",
+              "active"
+            ],
+            "range": [
+              0,
+              1
+            ],
+            "rangeLabel": "Sorted prefix [0, 1)",
+            "lanes": [
+              {
+                "label": "Key held aside",
+                "values": [
+                  3
+                ],
+                "states": [
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ],
+            "note": "Take the next value, shift larger sorted values right, drop it into the gap."
+          }
+        },
+        {
+          "title": "Insert 3 at index 0",
+          "explanation": "1 larger value moved one place right. The prefix [0, 2) is sorted again.",
+          "summary": "1 larger value moved one place right. The prefix [0, 2) is sorted again.",
+          "view": {
+            "type": "array",
+            "values": [
+              3,
+              4,
+              5,
+              3,
+              1
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "current",
+              "boundary",
+              "active",
+              "active",
+              "active"
+            ],
+            "range": [
+              0,
+              2
+            ],
+            "rangeLabel": "Sorted prefix [0, 2)",
+            "lanes": [],
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ],
+            "note": "Take the next value, shift larger sorted values right, drop it into the gap."
+          }
+        },
+        {
+          "title": "Lift 5 from index 2",
+          "explanation": "The prefix [0, 2) is sorted. Hold 5 aside and walk left past every value strictly greater than it.",
+          "summary": "The prefix [0, 2) is sorted. Hold 5 aside and walk left past every value strictly greater than it.",
+          "view": {
+            "type": "array",
+            "values": [
+              3,
+              4,
+              5,
+              3,
+              1
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "current",
+              "active",
+              "active"
+            ],
+            "range": [
+              0,
+              2
+            ],
+            "rangeLabel": "Sorted prefix [0, 2)",
+            "lanes": [
+              {
+                "label": "Key held aside",
+                "values": [
+                  5
+                ],
+                "states": [
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ],
+            "note": "Take the next value, shift larger sorted values right, drop it into the gap."
+          }
+        },
+        {
+          "title": "Insert 5 at index 2",
+          "explanation": "Nothing in the prefix is larger than 5, so it stays where it is. The prefix [0, 3) is sorted again.",
+          "summary": "Nothing in the prefix is larger than 5, so it stays where it is. The prefix [0, 3) is sorted again.",
+          "view": {
+            "type": "array",
+            "values": [
+              3,
+              4,
+              5,
+              3,
+              1
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "current",
+              "active",
+              "active"
+            ],
+            "range": [
+              0,
+              3
+            ],
+            "rangeLabel": "Sorted prefix [0, 3)",
+            "lanes": [],
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ],
+            "note": "Take the next value, shift larger sorted values right, drop it into the gap."
+          }
+        },
+        {
+          "title": "Lift 3 from index 3",
+          "explanation": "The prefix [0, 3) is sorted. Hold 3 aside and walk left past every value strictly greater than it.",
+          "summary": "The prefix [0, 3) is sorted. Hold 3 aside and walk left past every value strictly greater than it.",
+          "view": {
+            "type": "array",
+            "values": [
+              3,
+              4,
+              5,
+              3,
+              1
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "chosen",
+              "current",
+              "active"
+            ],
+            "range": [
+              0,
+              3
+            ],
+            "rangeLabel": "Sorted prefix [0, 3)",
+            "lanes": [
+              {
+                "label": "Key held aside",
+                "values": [
+                  3
+                ],
+                "states": [
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ],
+            "note": "Take the next value, shift larger sorted values right, drop it into the gap."
+          }
+        },
+        {
+          "title": "Insert 3 at index 1",
+          "explanation": "2 larger values moved one place right. It stops after an equal value, so equal values keep their original order. The prefix [0, 4) is sorted again.",
+          "summary": "2 larger values moved one place right. It stops after an equal value, so equal values keep their original order. The prefix [0, 4) is sorted again.",
+          "view": {
+            "type": "array",
+            "values": [
+              3,
+              3,
+              4,
+              5,
+              1
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "chosen",
+              "current",
+              "boundary",
+              "boundary",
+              "active"
+            ],
+            "range": [
+              0,
+              4
+            ],
+            "rangeLabel": "Sorted prefix [0, 4)",
+            "lanes": [],
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ],
+            "note": "Take the next value, shift larger sorted values right, drop it into the gap."
+          }
+        },
+        {
+          "title": "Lift 1 from index 4",
+          "explanation": "The prefix [0, 4) is sorted. Hold 1 aside and walk left past every value strictly greater than it.",
+          "summary": "The prefix [0, 4) is sorted. Hold 1 aside and walk left past every value strictly greater than it.",
+          "view": {
+            "type": "array",
+            "values": [
+              3,
+              3,
+              4,
+              5,
+              1
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "current"
+            ],
+            "range": [
+              0,
+              4
+            ],
+            "rangeLabel": "Sorted prefix [0, 4)",
+            "lanes": [
+              {
+                "label": "Key held aside",
+                "values": [
+                  1
+                ],
+                "states": [
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ],
+            "note": "Take the next value, shift larger sorted values right, drop it into the gap."
+          }
+        },
+        {
+          "title": "Insert 1 at index 0",
+          "explanation": "4 larger values moved one place right. The prefix [0, 5) is sorted again.",
+          "summary": "4 larger values moved one place right. The prefix [0, 5) is sorted again.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              3,
+              3,
+              4,
+              5
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "current",
+              "boundary",
+              "boundary",
+              "boundary",
+              "boundary"
+            ],
+            "range": [
+              0,
+              5
+            ],
+            "rangeLabel": "Sorted prefix [0, 5)",
+            "lanes": [],
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ],
+            "note": "Take the next value, shift larger sorted values right, drop it into the gap."
+          }
+        },
+        {
+          "title": "Every value is inserted",
+          "explanation": "The array is sorted: [1, 3, 3, 4, 5]. Equal values kept their original order.",
+          "summary": "The array is sorted: [1, 3, 3, 4, 5]. Equal values kept their original order.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              3,
+              3,
+              4,
+              5
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen"
+            ],
+            "range": [
+              0,
+              5
+            ],
+            "rangeLabel": "Sorted prefix [0, 5)",
+            "legend": [
+              [
+                "chosen",
+                "Sorted prefix"
+              ],
+              [
+                "current",
+                "Key being placed"
+              ],
+              [
+                "boundary",
+                "Shifted one place right"
+              ],
+              [
+                "active",
+                "Not yet inserted"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "quickselect",
+      "title": "Quickselect: partition one side",
+      "category": "Searching",
+      "description": "Find the k-th smallest value with a median-of-three pivot and a three-way partition, keeping only the part that holds index k.",
+      "keyIdea": "Unlike a full sort, each round discards parts; the answer index never leaves the active range.",
+      "lesson": "../../algorithms/searching/selection.md",
+      "frames": [
+        {
+          "title": "Look for index 1",
+          "explanation": "Rank k = 1 means the value that would sit at index 1 after sorting. Selection.kthSmallest uses a median-of-three pivot and a three-way partition, then keeps only the part that holds k. It also has a median-of-medians fallback for pivots that shrink the range too little; this small input never needs it.",
+          "summary": "Rank k = 1 means the value that would sit at index 1 after sorting. Selection.kthSmallest uses a median-of-three pivot and a three-way partition, then keeps only the part that holds k. It also has a median-of-medians fallback for pivots that shrink the range too little; this small input never needs it.",
+          "view": {
+            "type": "array",
+            "values": [
+              7,
+              2,
+              9,
+              4,
+              1,
+              8,
+              5
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active"
+            ],
+            "range": [
+              0,
+              7
+            ],
+            "rangeLabel": "Active range [0, 7)",
+            "markers": {
+              "k": 1
+            },
+            "legend": [
+              [
+                "active",
+                "Active range"
+              ],
+              [
+                "excluded",
+                "Outside the active range"
+              ],
+              [
+                "chosen",
+                "Answer (rank k)"
+              ]
+            ],
+            "note": "Find the value with zero-based rank k = 1: the one at index 1 once sorted."
+          }
+        },
+        {
+          "title": "Partition around 5",
+          "explanation": "The pivot is the median of 7, 4 and 5 (first, middle, last of [0, 7)). One pass groups values less than 5, equal to 5, and greater than 5: the equal band is indices 3 to 3.",
+          "summary": "The pivot is the median of 7, 4 and 5 (first, middle, last of [0, 7)). One pass groups values less than 5, equal to 5, and greater than 5: the equal band is indices 3 to 3.",
+          "view": {
+            "type": "array",
+            "values": [
+              2,
+              1,
+              4,
+              5,
+              8,
+              9,
+              7
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "boundary",
+              "boundary",
+              "boundary",
+              "current",
+              "active",
+              "active",
+              "active"
+            ],
+            "range": [
+              0,
+              7
+            ],
+            "rangeLabel": "Active range [0, 7)",
+            "markers": {
+              "k": 1
+            },
+            "legend": [
+              [
+                "boundary",
+                "Less than the pivot"
+              ],
+              [
+                "current",
+                "Equal to the pivot"
+              ],
+              [
+                "active",
+                "Greater than the pivot"
+              ],
+              [
+                "excluded",
+                "Outside the active range"
+              ]
+            ],
+            "note": "Find the value with zero-based rank k = 1: the one at index 1 once sorted."
+          }
+        },
+        {
+          "title": "Keep the part that holds k",
+          "explanation": "k = 1 is left of the equal band, so keep indices 0 to 2; the band and everything right of it are dropped. Index 1 is still inside the active range.",
+          "summary": "k = 1 is left of the equal band, so keep indices 0 to 2; the band and everything right of it are dropped. Index 1 is still inside the active range.",
+          "view": {
+            "type": "array",
+            "values": [
+              2,
+              1,
+              4,
+              5,
+              8,
+              9,
+              7
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "active",
+              "active",
+              "active",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded"
+            ],
+            "range": [
+              0,
+              3
+            ],
+            "rangeLabel": "Active range [0, 3)",
+            "markers": {
+              "k": 1
+            },
+            "legend": [
+              [
+                "active",
+                "Active range"
+              ],
+              [
+                "excluded",
+                "Outside the active range"
+              ],
+              [
+                "chosen",
+                "Answer (rank k)"
+              ]
+            ],
+            "note": "Find the value with zero-based rank k = 1: the one at index 1 once sorted."
+          }
+        },
+        {
+          "title": "Partition around 2",
+          "explanation": "The pivot is the median of 2, 1 and 4 (first, middle, last of [0, 3)). One pass groups values less than 2, equal to 2, and greater than 2: the equal band is indices 1 to 1.",
+          "summary": "The pivot is the median of 2, 1 and 4 (first, middle, last of [0, 3)). One pass groups values less than 2, equal to 2, and greater than 2: the equal band is indices 1 to 1.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              2,
+              4,
+              5,
+              8,
+              9,
+              7
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "boundary",
+              "current",
+              "active",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded"
+            ],
+            "range": [
+              0,
+              3
+            ],
+            "rangeLabel": "Active range [0, 3)",
+            "markers": {
+              "k": 1
+            },
+            "legend": [
+              [
+                "boundary",
+                "Less than the pivot"
+              ],
+              [
+                "current",
+                "Equal to the pivot"
+              ],
+              [
+                "active",
+                "Greater than the pivot"
+              ],
+              [
+                "excluded",
+                "Outside the active range"
+              ]
+            ],
+            "note": "Find the value with zero-based rank k = 1: the one at index 1 once sorted."
+          }
+        },
+        {
+          "title": "Index 1 is in the equal band",
+          "explanation": "Index 1 lies inside the band of values equal to 2, so 2 is the value of rank 1. The rest of the array is only partly ordered, which is all selection needs.",
+          "summary": "Index 1 lies inside the band of values equal to 2, so 2 is the value of rank 1. The rest of the array is only partly ordered, which is all selection needs.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              2,
+              4,
+              5,
+              8,
+              9,
+              7
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "chosen",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded"
+            ],
+            "range": [
+              1,
+              2
+            ],
+            "rangeLabel": "Active range [1, 2)",
+            "markers": {
+              "k": 1
+            },
+            "legend": [
+              [
+                "active",
+                "Active range"
+              ],
+              [
+                "excluded",
+                "Outside the active range"
+              ],
+              [
+                "chosen",
+                "Answer (rank k)"
+              ]
+            ],
+            "note": "Find the value with zero-based rank k = 1: the one at index 1 once sorted."
+          }
+        }
+      ]
+    },
+    {
+      "id": "radix",
+      "title": "Radix sort: one digit per pass",
+      "category": "Sorting",
+      "description": "Sort three-digit numbers with stable passes from the ones digit to the hundreds digit.",
+      "keyIdea": "Stability lets a more significant digit sort without undoing earlier work. The library's radixSort uses four 8-bit passes and flips the sign bit; decimal digits are shown here so the passes are readable.",
+      "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
+      "frames": [
+        {
+          "title": "Start with the unsorted numbers",
+          "explanation": "Least-significant-digit radix sort makes one stable pass per digit; after pass d the values are ordered by their last d digits. The library's radixSort uses four 8-bit passes and flips the sign bit; decimal digits are shown here so the passes are readable.",
+          "summary": "Least-significant-digit radix sort makes one stable pass per digit; after pass d the values are ordered by their last d digits. The library's radixSort uses four 8-bit passes and flips the sign bit; decimal digits are shown here so the passes are readable.",
+          "view": {
+            "type": "array",
+            "values": [
+              329,
+              457,
+              657,
+              839,
+              436,
+              720,
+              355
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active"
+            ],
+            "lanes": [],
+            "legend": [
+              [
+                "active",
+                "Waiting for the next pass"
+              ],
+              [
+                "current",
+                "Digit being read"
+              ],
+              [
+                "chosen",
+                "Ordered by the digits read so far"
+              ]
+            ],
+            "note": "Stable passes from the least significant digit; later passes never reorder ties."
+          }
+        },
+        {
+          "title": "Pass 1: read the ones digit",
+          "explanation": "Read the ones digit of every value. The next stable pass orders the values by that digit alone.",
+          "summary": "Read the ones digit of every value. The next stable pass orders the values by that digit alone.",
+          "view": {
+            "type": "array",
+            "values": [
+              329,
+              457,
+              657,
+              839,
+              436,
+              720,
+              355
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active"
+            ],
+            "lanes": [
+              {
+                "label": "Ones digit of each value",
+                "values": [
+                  9,
+                  7,
+                  7,
+                  9,
+                  6,
+                  0,
+                  5
+                ],
+                "states": [
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "active",
+                "Waiting for the next pass"
+              ],
+              [
+                "current",
+                "Digit being read"
+              ],
+              [
+                "chosen",
+                "Ordered by the digits read so far"
+              ]
+            ],
+            "note": "Stable passes from the least significant digit; later passes never reorder ties."
+          }
+        },
+        {
+          "title": "Pass 1: stable pass by the ones digit",
+          "explanation": "Values are now ordered by their last digit. Ties keep their earlier order (digit 7: [457, 657]; digit 9: [329, 839]).",
+          "summary": "Values are now ordered by their last digit. Ties keep their earlier order (digit 7: [457, 657]; digit 9: [329, 839]).",
+          "view": {
+            "type": "array",
+            "values": [
+              720,
+              355,
+              436,
+              457,
+              657,
+              329,
+              839
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen"
+            ],
+            "lanes": [
+              {
+                "label": "Ones digit of each value",
+                "values": [
+                  0,
+                  5,
+                  6,
+                  7,
+                  7,
+                  9,
+                  9
+                ],
+                "states": [
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "active",
+                "Waiting for the next pass"
+              ],
+              [
+                "current",
+                "Digit being read"
+              ],
+              [
+                "chosen",
+                "Ordered by the digits read so far"
+              ]
+            ],
+            "note": "Stable passes from the least significant digit; later passes never reorder ties."
+          }
+        },
+        {
+          "title": "Pass 2: read the tens digit",
+          "explanation": "Read the tens digit of every value. The next stable pass orders the values by that digit alone.",
+          "summary": "Read the tens digit of every value. The next stable pass orders the values by that digit alone.",
+          "view": {
+            "type": "array",
+            "values": [
+              720,
+              355,
+              436,
+              457,
+              657,
+              329,
+              839
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active"
+            ],
+            "lanes": [
+              {
+                "label": "Tens digit of each value",
+                "values": [
+                  2,
+                  5,
+                  3,
+                  5,
+                  5,
+                  2,
+                  3
+                ],
+                "states": [
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "active",
+                "Waiting for the next pass"
+              ],
+              [
+                "current",
+                "Digit being read"
+              ],
+              [
+                "chosen",
+                "Ordered by the digits read so far"
+              ]
+            ],
+            "note": "Stable passes from the least significant digit; later passes never reorder ties."
+          }
+        },
+        {
+          "title": "Pass 2: stable pass by the tens digit",
+          "explanation": "Values are now ordered by their last 2 digits. Ties keep their earlier order (digit 2: [720, 329]; digit 3: [436, 839]; digit 5: [355, 457, 657]).",
+          "summary": "Values are now ordered by their last 2 digits. Ties keep their earlier order (digit 2: [720, 329]; digit 3: [436, 839]; digit 5: [355, 457, 657]).",
+          "view": {
+            "type": "array",
+            "values": [
+              720,
+              329,
+              436,
+              839,
+              355,
+              457,
+              657
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen"
+            ],
+            "lanes": [
+              {
+                "label": "Tens digit of each value",
+                "values": [
+                  2,
+                  2,
+                  3,
+                  3,
+                  5,
+                  5,
+                  5
+                ],
+                "states": [
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "active",
+                "Waiting for the next pass"
+              ],
+              [
+                "current",
+                "Digit being read"
+              ],
+              [
+                "chosen",
+                "Ordered by the digits read so far"
+              ]
+            ],
+            "note": "Stable passes from the least significant digit; later passes never reorder ties."
+          }
+        },
+        {
+          "title": "Pass 3: read the hundreds digit",
+          "explanation": "Read the hundreds digit of every value. The next stable pass orders the values by that digit alone.",
+          "summary": "Read the hundreds digit of every value. The next stable pass orders the values by that digit alone.",
+          "view": {
+            "type": "array",
+            "values": [
+              720,
+              329,
+              436,
+              839,
+              355,
+              457,
+              657
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active"
+            ],
+            "lanes": [
+              {
+                "label": "Hundreds digit of each value",
+                "values": [
+                  7,
+                  3,
+                  4,
+                  8,
+                  3,
+                  4,
+                  6
+                ],
+                "states": [
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "active",
+                "Waiting for the next pass"
+              ],
+              [
+                "current",
+                "Digit being read"
+              ],
+              [
+                "chosen",
+                "Ordered by the digits read so far"
+              ]
+            ],
+            "note": "Stable passes from the least significant digit; later passes never reorder ties."
+          }
+        },
+        {
+          "title": "Pass 3: stable pass by the hundreds digit",
+          "explanation": "Values are now ordered by their last 3 digits. Ties keep their earlier order (digit 3: [329, 355]; digit 4: [436, 457]).",
+          "summary": "Values are now ordered by their last 3 digits. Ties keep their earlier order (digit 3: [329, 355]; digit 4: [436, 457]).",
+          "view": {
+            "type": "array",
+            "values": [
+              329,
+              355,
+              436,
+              457,
+              657,
+              720,
+              839
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen"
+            ],
+            "lanes": [
+              {
+                "label": "Hundreds digit of each value",
+                "values": [
+                  3,
+                  3,
+                  4,
+                  4,
+                  6,
+                  7,
+                  8
+                ],
+                "states": [
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current",
+                  "current"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "active",
+                "Waiting for the next pass"
+              ],
+              [
+                "current",
+                "Digit being read"
+              ],
+              [
+                "chosen",
+                "Ordered by the digits read so far"
+              ]
+            ],
+            "note": "Stable passes from the least significant digit; later passes never reorder ties."
+          }
+        },
+        {
+          "title": "Sorted by all three digits",
+          "explanation": "Three stable passes sorted the numbers: [329, 355, 436, 457, 657, 720, 839].",
+          "summary": "Three stable passes sorted the numbers: [329, 355, 436, 457, 657, 720, 839].",
+          "view": {
+            "type": "array",
+            "values": [
+              329,
+              355,
+              436,
+              457,
+              657,
+              720,
+              839
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen"
+            ],
+            "lanes": [],
+            "legend": [
+              [
+                "active",
+                "Waiting for the next pass"
+              ],
+              [
+                "current",
+                "Digit being read"
+              ],
+              [
+                "chosen",
+                "Ordered by the digits read so far"
+              ]
+            ],
+            "note": "Stable passes from the least significant digit; later passes never reorder ties."
+          }
+        }
+      ]
+    },
+    {
+      "id": "two-pointers",
+      "title": "Two pointers: pair with a target sum",
+      "category": "Array patterns",
+      "description": "Move pointers inward on a sorted array, discarding one end per comparison.",
+      "keyIdea": "Sorted order means each comparison rules out an entire index, so no valid pair is ever skipped.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "frames": [
+        {
+          "title": "Start at both ends",
+          "explanation": "Look for two values summing to 17. Start with the smallest and the largest value.",
+          "summary": "Look for two values summing to 17. Start with the smallest and the largest value.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              3,
+              4,
+              6,
+              8,
+              11,
+              15
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "current",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "current"
+            ],
+            "range": [
+              0,
+              7
+            ],
+            "rangeLabel": "Candidate indices [0, 6] inclusive",
+            "markers": {
+              "left": 0,
+              "right": 6
+            },
+            "legend": [
+              [
+                "current",
+                "Left / right pointer"
+              ],
+              [
+                "active",
+                "Still possible"
+              ],
+              [
+                "excluded",
+                "Cannot be in any answer"
+              ],
+              [
+                "chosen",
+                "Pair found"
+              ]
+            ],
+            "note": "Sorted values · target sum 17"
+          }
+        },
+        {
+          "title": "1 + 15 = 16",
+          "explanation": "16 is below 17. Even the largest remaining partner is too small for 1, so move left to 1.",
+          "summary": "16 is below 17. Even the largest remaining partner is too small for 1, so move left to 1.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              3,
+              4,
+              6,
+              8,
+              11,
+              15
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "current",
+              "active",
+              "active",
+              "active",
+              "active",
+              "active",
+              "current"
+            ],
+            "range": [
+              0,
+              7
+            ],
+            "rangeLabel": "Candidate indices [0, 6] inclusive",
+            "markers": {
+              "left": 0,
+              "right": 6
+            },
+            "legend": [
+              [
+                "current",
+                "Left / right pointer"
+              ],
+              [
+                "active",
+                "Still possible"
+              ],
+              [
+                "excluded",
+                "Cannot be in any answer"
+              ],
+              [
+                "chosen",
+                "Pair found"
+              ]
+            ],
+            "note": "Sorted values · target sum 17"
+          }
+        },
+        {
+          "title": "3 + 15 = 18",
+          "explanation": "18 is above 17. Even the smallest remaining partner is too large for 15, so move right to 5.",
+          "summary": "18 is above 17. Even the smallest remaining partner is too large for 15, so move right to 5.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              3,
+              4,
+              6,
+              8,
+              11,
+              15
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "current",
+              "active",
+              "active",
+              "active",
+              "active",
+              "current"
+            ],
+            "range": [
+              1,
+              7
+            ],
+            "rangeLabel": "Candidate indices [1, 6] inclusive",
+            "markers": {
+              "left": 1,
+              "right": 6
+            },
+            "legend": [
+              [
+                "current",
+                "Left / right pointer"
+              ],
+              [
+                "active",
+                "Still possible"
+              ],
+              [
+                "excluded",
+                "Cannot be in any answer"
+              ],
+              [
+                "chosen",
+                "Pair found"
+              ]
+            ],
+            "note": "Sorted values · target sum 17"
+          }
+        },
+        {
+          "title": "3 + 11 = 14",
+          "explanation": "14 is below 17. Even the largest remaining partner is too small for 3, so move left to 2.",
+          "summary": "14 is below 17. Even the largest remaining partner is too small for 3, so move left to 2.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              3,
+              4,
+              6,
+              8,
+              11,
+              15
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "current",
+              "active",
+              "active",
+              "active",
+              "current",
+              "excluded"
+            ],
+            "range": [
+              1,
+              6
+            ],
+            "rangeLabel": "Candidate indices [1, 5] inclusive",
+            "markers": {
+              "left": 1,
+              "right": 5
+            },
+            "legend": [
+              [
+                "current",
+                "Left / right pointer"
+              ],
+              [
+                "active",
+                "Still possible"
+              ],
+              [
+                "excluded",
+                "Cannot be in any answer"
+              ],
+              [
+                "chosen",
+                "Pair found"
+              ]
+            ],
+            "note": "Sorted values · target sum 17"
+          }
+        },
+        {
+          "title": "4 + 11 = 15",
+          "explanation": "15 is below 17. Even the largest remaining partner is too small for 4, so move left to 3.",
+          "summary": "15 is below 17. Even the largest remaining partner is too small for 4, so move left to 3.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              3,
+              4,
+              6,
+              8,
+              11,
+              15
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "current",
+              "active",
+              "active",
+              "current",
+              "excluded"
+            ],
+            "range": [
+              2,
+              6
+            ],
+            "rangeLabel": "Candidate indices [2, 5] inclusive",
+            "markers": {
+              "left": 2,
+              "right": 5
+            },
+            "legend": [
+              [
+                "current",
+                "Left / right pointer"
+              ],
+              [
+                "active",
+                "Still possible"
+              ],
+              [
+                "excluded",
+                "Cannot be in any answer"
+              ],
+              [
+                "chosen",
+                "Pair found"
+              ]
+            ],
+            "note": "Sorted values · target sum 17"
+          }
+        },
+        {
+          "title": "6 + 11 = 17",
+          "explanation": "The sum equals the target at indices 3 and 5. Every discarded index was ruled out by a sorted comparison, so no pair was skipped.",
+          "summary": "The sum equals the target at indices 3 and 5. Every discarded index was ruled out by a sorted comparison, so no pair was skipped.",
+          "view": {
+            "type": "array",
+            "values": [
+              1,
+              3,
+              4,
+              6,
+              8,
+              11,
+              15
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "excluded",
+              "chosen",
+              "active",
+              "chosen",
+              "excluded"
+            ],
+            "range": [
+              3,
+              6
+            ],
+            "rangeLabel": "Candidate indices [3, 5] inclusive",
+            "markers": {
+              "left": 3,
+              "right": 5
+            },
+            "legend": [
+              [
+                "current",
+                "Left / right pointer"
+              ],
+              [
+                "active",
+                "Still possible"
+              ],
+              [
+                "excluded",
+                "Cannot be in any answer"
+              ],
+              [
+                "chosen",
+                "Pair found"
+              ]
+            ],
+            "note": "Sorted values · target sum 17"
+          }
+        }
+      ]
+    },
+    {
+      "id": "window",
+      "title": "Sliding window: no repeated character",
+      "category": "Array patterns",
+      "description": "Slide a window over a string, jumping its left edge past a repeated character.",
+      "keyIdea": "The left edge only moves right, and the window never contains a repeat, so one pass is enough.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "frames": [
+        {
+          "title": "Start with an empty window",
+          "explanation": "Scan \"pwwkew\" once. The window always holds distinct characters; a repeat moves its left edge.",
+          "summary": "Scan \"pwwkew\" once. The window always holds distinct characters; a repeat moves its left edge.",
+          "view": {
+            "type": "array",
+            "values": [
+              "p",
+              "w",
+              "w",
+              "k",
+              "e",
+              "w"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "states": [
+              "unseen",
+              "unseen",
+              "unseen",
+              "unseen",
+              "unseen",
+              "unseen"
+            ],
+            "markers": {},
+            "lanes": [
+              {
+                "label": "Best window so far",
+                "values": [],
+                "states": []
+              }
+            ],
+            "legend": [
+              [
+                "current",
+                "Character just read"
+              ],
+              [
+                "active",
+                "Window (all distinct)"
+              ],
+              [
+                "excluded",
+                "Dropped from the window"
+              ],
+              [
+                "unseen",
+                "Not read yet"
+              ],
+              [
+                "chosen",
+                "Best window"
+              ]
+            ],
+            "note": "Window = characters from start to end, all distinct."
+          }
+        },
+        {
+          "title": "Read 'p' at index 0",
+          "explanation": "'p' is new, so the window grows. Length 1 is a new best.",
+          "summary": "'p' is new, so the window grows. Length 1 is a new best.",
+          "view": {
+            "type": "array",
+            "values": [
+              "p",
+              "w",
+              "w",
+              "k",
+              "e",
+              "w"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "states": [
+              "current",
+              "unseen",
+              "unseen",
+              "unseen",
+              "unseen",
+              "unseen"
+            ],
+            "markers": {
+              "start": 0,
+              "end": 0
+            },
+            "lanes": [
+              {
+                "label": "Best window so far",
+                "values": [
+                  "p"
+                ],
+                "states": [
+                  "chosen"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "current",
+                "Character just read"
+              ],
+              [
+                "active",
+                "Window (all distinct)"
+              ],
+              [
+                "excluded",
+                "Dropped from the window"
+              ],
+              [
+                "unseen",
+                "Not read yet"
+              ],
+              [
+                "chosen",
+                "Best window"
+              ]
+            ],
+            "note": "Window = characters from start to end, all distinct."
+          }
+        },
+        {
+          "title": "Read 'w' at index 1",
+          "explanation": "'w' is new, so the window grows. Length 2 is a new best.",
+          "summary": "'w' is new, so the window grows. Length 2 is a new best.",
+          "view": {
+            "type": "array",
+            "values": [
+              "p",
+              "w",
+              "w",
+              "k",
+              "e",
+              "w"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "states": [
+              "active",
+              "current",
+              "unseen",
+              "unseen",
+              "unseen",
+              "unseen"
+            ],
+            "markers": {
+              "start": 0,
+              "end": 1
+            },
+            "lanes": [
+              {
+                "label": "Best window so far",
+                "values": [
+                  "p",
+                  "w"
+                ],
+                "states": [
+                  "chosen",
+                  "chosen"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "current",
+                "Character just read"
+              ],
+              [
+                "active",
+                "Window (all distinct)"
+              ],
+              [
+                "excluded",
+                "Dropped from the window"
+              ],
+              [
+                "unseen",
+                "Not read yet"
+              ],
+              [
+                "chosen",
+                "Best window"
+              ]
+            ],
+            "note": "Window = characters from start to end, all distinct."
+          }
+        },
+        {
+          "title": "Read 'w' at index 2",
+          "explanation": "'w' already appears at index 1, inside the window, so start jumps to 2. Length 1 does not beat the best 2; ties keep the earlier window.",
+          "summary": "'w' already appears at index 1, inside the window, so start jumps to 2. Length 1 does not beat the best 2; ties keep the earlier window.",
+          "view": {
+            "type": "array",
+            "values": [
+              "p",
+              "w",
+              "w",
+              "k",
+              "e",
+              "w"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "current",
+              "unseen",
+              "unseen",
+              "unseen"
+            ],
+            "markers": {
+              "start": 2,
+              "end": 2
+            },
+            "lanes": [
+              {
+                "label": "Best window so far",
+                "values": [
+                  "p",
+                  "w"
+                ],
+                "states": [
+                  "chosen",
+                  "chosen"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "current",
+                "Character just read"
+              ],
+              [
+                "active",
+                "Window (all distinct)"
+              ],
+              [
+                "excluded",
+                "Dropped from the window"
+              ],
+              [
+                "unseen",
+                "Not read yet"
+              ],
+              [
+                "chosen",
+                "Best window"
+              ]
+            ],
+            "note": "Window = characters from start to end, all distinct."
+          }
+        },
+        {
+          "title": "Read 'k' at index 3",
+          "explanation": "'k' is new, so the window grows. Length 2 does not beat the best 2; ties keep the earlier window.",
+          "summary": "'k' is new, so the window grows. Length 2 does not beat the best 2; ties keep the earlier window.",
+          "view": {
+            "type": "array",
+            "values": [
+              "p",
+              "w",
+              "w",
+              "k",
+              "e",
+              "w"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "active",
+              "current",
+              "unseen",
+              "unseen"
+            ],
+            "markers": {
+              "start": 2,
+              "end": 3
+            },
+            "lanes": [
+              {
+                "label": "Best window so far",
+                "values": [
+                  "p",
+                  "w"
+                ],
+                "states": [
+                  "chosen",
+                  "chosen"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "current",
+                "Character just read"
+              ],
+              [
+                "active",
+                "Window (all distinct)"
+              ],
+              [
+                "excluded",
+                "Dropped from the window"
+              ],
+              [
+                "unseen",
+                "Not read yet"
+              ],
+              [
+                "chosen",
+                "Best window"
+              ]
+            ],
+            "note": "Window = characters from start to end, all distinct."
+          }
+        },
+        {
+          "title": "Read 'e' at index 4",
+          "explanation": "'e' is new, so the window grows. Length 3 is a new best.",
+          "summary": "'e' is new, so the window grows. Length 3 is a new best.",
+          "view": {
+            "type": "array",
+            "values": [
+              "p",
+              "w",
+              "w",
+              "k",
+              "e",
+              "w"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "active",
+              "active",
+              "current",
+              "unseen"
+            ],
+            "markers": {
+              "start": 2,
+              "end": 4
+            },
+            "lanes": [
+              {
+                "label": "Best window so far",
+                "values": [
+                  "w",
+                  "k",
+                  "e"
+                ],
+                "states": [
+                  "chosen",
+                  "chosen",
+                  "chosen"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "current",
+                "Character just read"
+              ],
+              [
+                "active",
+                "Window (all distinct)"
+              ],
+              [
+                "excluded",
+                "Dropped from the window"
+              ],
+              [
+                "unseen",
+                "Not read yet"
+              ],
+              [
+                "chosen",
+                "Best window"
+              ]
+            ],
+            "note": "Window = characters from start to end, all distinct."
+          }
+        },
+        {
+          "title": "Read 'w' at index 5",
+          "explanation": "'w' already appears at index 2, inside the window, so start jumps to 3. Length 3 does not beat the best 3; ties keep the earlier window.",
+          "summary": "'w' already appears at index 2, inside the window, so start jumps to 3. Length 3 does not beat the best 3; ties keep the earlier window.",
+          "view": {
+            "type": "array",
+            "values": [
+              "p",
+              "w",
+              "w",
+              "k",
+              "e",
+              "w"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "excluded",
+              "active",
+              "active",
+              "current"
+            ],
+            "markers": {
+              "start": 3,
+              "end": 5
+            },
+            "lanes": [
+              {
+                "label": "Best window so far",
+                "values": [
+                  "w",
+                  "k",
+                  "e"
+                ],
+                "states": [
+                  "chosen",
+                  "chosen",
+                  "chosen"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "current",
+                "Character just read"
+              ],
+              [
+                "active",
+                "Window (all distinct)"
+              ],
+              [
+                "excluded",
+                "Dropped from the window"
+              ],
+              [
+                "unseen",
+                "Not read yet"
+              ],
+              [
+                "chosen",
+                "Best window"
+              ]
+            ],
+            "note": "Window = characters from start to end, all distinct."
+          }
+        },
+        {
+          "title": "Longest window is \"wke\"",
+          "explanation": "Indices [2, 5) hold 3 distinct characters, the earliest window of that length.",
+          "summary": "Indices [2, 5) hold 3 distinct characters, the earliest window of that length.",
+          "view": {
+            "type": "array",
+            "values": [
+              "p",
+              "w",
+              "w",
+              "k",
+              "e",
+              "w"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "chosen",
+              "chosen",
+              "chosen",
+              "excluded"
+            ],
+            "markers": {},
+            "lanes": [
+              {
+                "label": "Best window so far",
+                "values": [
+                  "w",
+                  "k",
+                  "e"
+                ],
+                "states": [
+                  "chosen",
+                  "chosen",
+                  "chosen"
+                ]
+              }
+            ],
+            "legend": [
+              [
+                "chosen",
+                "Best window"
+              ],
+              [
+                "excluded",
+                "Outside the best window"
+              ]
+            ],
+            "note": "Window = characters from start to end, all distinct."
+          }
+        }
+      ]
+    },
+    {
+      "id": "z-function",
+      "title": "Z-function: reuse the matching window",
+      "category": "Strings",
+      "description": "Build the Z-array while reusing the rightmost prefix match instead of rescanning.",
+      "keyIdea": "Inside a known match window, earlier z values bound the new one, so characters are not compared twice.",
+      "lesson": "../../algorithms/strings/pattern-matching.md",
+      "frames": [
+        {
+          "title": "z[0] is the whole text",
+          "explanation": "By the repository convention z[0] = 7. Every other entry compares the text with its suffix.",
+          "summary": "By the repository convention z[0] = 7. Every other entry compares the text with its suffix.",
+          "view": {
+            "type": "array",
+            "values": [
+              "a",
+              "a",
+              "b",
+              "x",
+              "a",
+              "a",
+              "b"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded"
+            ],
+            "markers": {},
+            "legend": [
+              [
+                "current",
+                "Index being computed"
+              ],
+              [
+                "active",
+                "Matching window in force at this step"
+              ],
+              [
+                "excluded",
+                "Outside that window"
+              ],
+              [
+                "unseen",
+                "Z entry not computed yet"
+              ],
+              [
+                "chosen",
+                "Computed z value"
+              ]
+            ],
+            "lanes": [
+              {
+                "label": "Z-array: longest prefix match at each index (— = not computed)",
+                "values": [
+                  7,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ],
+                "states": [
+                  "chosen",
+                  "unseen",
+                  "unseen",
+                  "unseen",
+                  "unseen",
+                  "unseen",
+                  "unseen"
+                ]
+              }
+            ],
+            "note": "Text \"aabxaab\" · z[i] compares the text with its own suffix from index i."
+          }
+        },
+        {
+          "title": "Compute z[1] = 1",
+          "explanation": "Index 1 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; afterwards the window becomes [1, 2).",
+          "summary": "Index 1 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; afterwards the window becomes [1, 2).",
+          "view": {
+            "type": "array",
+            "values": [
+              "a",
+              "a",
+              "b",
+              "x",
+              "a",
+              "a",
+              "b"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "current",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded"
+            ],
+            "markers": {
+              "i": 1
+            },
+            "legend": [
+              [
+                "current",
+                "Index being computed"
+              ],
+              [
+                "active",
+                "Matching window in force at this step"
+              ],
+              [
+                "excluded",
+                "Outside that window"
+              ],
+              [
+                "unseen",
+                "Z entry not computed yet"
+              ],
+              [
+                "chosen",
+                "Computed z value"
+              ]
+            ],
+            "lanes": [
+              {
+                "label": "Z-array: longest prefix match at each index (— = not computed)",
+                "values": [
+                  7,
+                  1,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ],
+                "states": [
+                  "chosen",
+                  "current",
+                  "unseen",
+                  "unseen",
+                  "unseen",
+                  "unseen",
+                  "unseen"
+                ]
+              }
+            ],
+            "note": "Text \"aabxaab\" · z[i] compares the text with its own suffix from index i."
+          }
+        },
+        {
+          "title": "Compute z[2] = 0",
+          "explanation": "Index 2 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
+          "summary": "Index 2 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
+          "view": {
+            "type": "array",
+            "values": [
+              "a",
+              "a",
+              "b",
+              "x",
+              "a",
+              "a",
+              "b"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "active",
+              "current",
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded"
+            ],
+            "markers": {
+              "i": 2,
+              "window": 1
+            },
+            "legend": [
+              [
+                "current",
+                "Index being computed"
+              ],
+              [
+                "active",
+                "Matching window in force at this step"
+              ],
+              [
+                "excluded",
+                "Outside that window"
+              ],
+              [
+                "unseen",
+                "Z entry not computed yet"
+              ],
+              [
+                "chosen",
+                "Computed z value"
+              ]
+            ],
+            "lanes": [
+              {
+                "label": "Z-array: longest prefix match at each index (— = not computed)",
+                "values": [
+                  7,
+                  1,
+                  0,
+                  null,
+                  null,
+                  null,
+                  null
+                ],
+                "states": [
+                  "chosen",
+                  "chosen",
+                  "current",
+                  "unseen",
+                  "unseen",
+                  "unseen",
+                  "unseen"
+                ]
+              }
+            ],
+            "note": "Text \"aabxaab\" · z[i] compares the text with its own suffix from index i."
+          }
+        },
+        {
+          "title": "Compute z[3] = 0",
+          "explanation": "Index 3 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; afterwards the window becomes [3, 3).",
+          "summary": "Index 3 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; afterwards the window becomes [3, 3).",
+          "view": {
+            "type": "array",
+            "values": [
+              "a",
+              "a",
+              "b",
+              "x",
+              "a",
+              "a",
+              "b"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "active",
+              "excluded",
+              "current",
+              "excluded",
+              "excluded",
+              "excluded"
+            ],
+            "markers": {
+              "i": 3,
+              "window": 1
+            },
+            "legend": [
+              [
+                "current",
+                "Index being computed"
+              ],
+              [
+                "active",
+                "Matching window in force at this step"
+              ],
+              [
+                "excluded",
+                "Outside that window"
+              ],
+              [
+                "unseen",
+                "Z entry not computed yet"
+              ],
+              [
+                "chosen",
+                "Computed z value"
+              ]
+            ],
+            "lanes": [
+              {
+                "label": "Z-array: longest prefix match at each index (— = not computed)",
+                "values": [
+                  7,
+                  1,
+                  0,
+                  0,
+                  null,
+                  null,
+                  null
+                ],
+                "states": [
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "current",
+                  "unseen",
+                  "unseen",
+                  "unseen"
+                ]
+              }
+            ],
+            "note": "Text \"aabxaab\" · z[i] compares the text with its own suffix from index i."
+          }
+        },
+        {
+          "title": "Compute z[4] = 3",
+          "explanation": "Index 4 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"aab\" (3). The highlighted window is the one in force before this step; afterwards the window becomes [4, 7).",
+          "summary": "Index 4 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"aab\" (3). The highlighted window is the one in force before this step; afterwards the window becomes [4, 7).",
+          "view": {
+            "type": "array",
+            "values": [
+              "a",
+              "a",
+              "b",
+              "x",
+              "a",
+              "a",
+              "b"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded",
+              "current",
+              "excluded",
+              "excluded"
+            ],
+            "markers": {
+              "i": 4
+            },
+            "legend": [
+              [
+                "current",
+                "Index being computed"
+              ],
+              [
+                "active",
+                "Matching window in force at this step"
+              ],
+              [
+                "excluded",
+                "Outside that window"
+              ],
+              [
+                "unseen",
+                "Z entry not computed yet"
+              ],
+              [
+                "chosen",
+                "Computed z value"
+              ]
+            ],
+            "lanes": [
+              {
+                "label": "Z-array: longest prefix match at each index (— = not computed)",
+                "values": [
+                  7,
+                  1,
+                  0,
+                  0,
+                  3,
+                  null,
+                  null
+                ],
+                "states": [
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "current",
+                  "unseen",
+                  "unseen"
+                ]
+              }
+            ],
+            "note": "Text \"aabxaab\" · z[i] compares the text with its own suffix from index i."
+          }
+        },
+        {
+          "title": "Compute z[5] = 1",
+          "explanation": "Index 5 lies inside the window starting at 4, so it starts from z[1]: 1 character copied without rescanning, 0 compared fresh. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; it is unchanged.",
+          "summary": "Index 5 lies inside the window starting at 4, so it starts from z[1]: 1 character copied without rescanning, 0 compared fresh. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; it is unchanged.",
+          "view": {
+            "type": "array",
+            "values": [
+              "a",
+              "a",
+              "b",
+              "x",
+              "a",
+              "a",
+              "b"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded",
+              "active",
+              "current",
+              "active"
+            ],
+            "markers": {
+              "i": 5,
+              "window": 4
+            },
+            "legend": [
+              [
+                "current",
+                "Index being computed"
+              ],
+              [
+                "active",
+                "Matching window in force at this step"
+              ],
+              [
+                "excluded",
+                "Outside that window"
+              ],
+              [
+                "unseen",
+                "Z entry not computed yet"
+              ],
+              [
+                "chosen",
+                "Computed z value"
+              ]
+            ],
+            "lanes": [
+              {
+                "label": "Z-array: longest prefix match at each index (— = not computed)",
+                "values": [
+                  7,
+                  1,
+                  0,
+                  0,
+                  3,
+                  1,
+                  null
+                ],
+                "states": [
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "current",
+                  "unseen"
+                ]
+              }
+            ],
+            "note": "Text \"aabxaab\" · z[i] compares the text with its own suffix from index i."
+          }
+        },
+        {
+          "title": "Compute z[6] = 0",
+          "explanation": "Index 6 lies inside the window starting at 4, so it starts from z[2]: 0 characters copied without rescanning, 0 compared fresh. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
+          "summary": "Index 6 lies inside the window starting at 4, so it starts from z[2]: 0 characters copied without rescanning, 0 compared fresh. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
+          "view": {
+            "type": "array",
+            "values": [
+              "a",
+              "a",
+              "b",
+              "x",
+              "a",
+              "a",
+              "b"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "excluded",
+              "excluded",
+              "excluded",
+              "excluded",
+              "active",
+              "active",
+              "current"
+            ],
+            "markers": {
+              "i": 6,
+              "window": 4
+            },
+            "legend": [
+              [
+                "current",
+                "Index being computed"
+              ],
+              [
+                "active",
+                "Matching window in force at this step"
+              ],
+              [
+                "excluded",
+                "Outside that window"
+              ],
+              [
+                "unseen",
+                "Z entry not computed yet"
+              ],
+              [
+                "chosen",
+                "Computed z value"
+              ]
+            ],
+            "lanes": [
+              {
+                "label": "Z-array: longest prefix match at each index (— = not computed)",
+                "values": [
+                  7,
+                  1,
+                  0,
+                  0,
+                  3,
+                  1,
+                  0
+                ],
+                "states": [
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "current"
+                ]
+              }
+            ],
+            "note": "Text \"aabxaab\" · z[i] compares the text with its own suffix from index i."
+          }
+        },
+        {
+          "title": "The Z-array is complete",
+          "explanation": "z = [7, 1, 0, 0, 3, 1, 0]. Reusing the rightmost window keeps the total work linear.",
+          "summary": "z = [7, 1, 0, 0, 3, 1, 0]. Reusing the rightmost window keeps the total work linear.",
+          "view": {
+            "type": "array",
+            "values": [
+              "a",
+              "a",
+              "b",
+              "x",
+              "a",
+              "a",
+              "b"
+            ],
+            "labels": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "states": [
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen",
+              "chosen"
+            ],
+            "markers": {},
+            "legend": [
+              [
+                "current",
+                "Index being computed"
+              ],
+              [
+                "active",
+                "Matching window in force at this step"
+              ],
+              [
+                "excluded",
+                "Outside that window"
+              ],
+              [
+                "unseen",
+                "Z entry not computed yet"
+              ],
+              [
+                "chosen",
+                "Computed z value"
+              ]
+            ],
+            "lanes": [
+              {
+                "label": "Z-array: longest prefix match at each index (— = not computed)",
+                "values": [
+                  7,
+                  1,
+                  0,
+                  0,
+                  3,
+                  1,
+                  0
+                ],
+                "states": [
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen",
+                  "chosen"
+                ]
+              }
+            ],
+            "note": "Text \"aabxaab\" · z[i] compares the text with its own suffix from index i."
+          }
+        }
+      ]
+    },
+    {
+      "id": "dfs",
+      "title": "DFS: follow one path, then backtrack",
+      "category": "Graphs",
+      "description": "Follow an explicit stack that always holds the path from the source.",
+      "keyIdea": "Mark a vertex when it is first reached; the stack is exactly the open path back to the source.",
+      "lesson": "../../algorithms/graph/dfs.md",
+      "frames": [
+        {
+          "title": "Visit the source",
+          "explanation": "Mark 0 visited and push it. The stack always holds the path from the source to the vertex being explored.",
+          "summary": "Mark 0 visited and push it. The stack always holds the path from the source to the vertex being explored.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "current"
+              },
+              {
+                "id": 1,
+                "state": "unseen"
+              },
+              {
+                "id": 2,
+                "state": "unseen"
+              },
+              {
+                "id": 3,
+                "state": "unseen"
+              },
+              {
+                "id": 4,
+                "state": "unseen"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "default"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "default"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "default"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "default"
+              }
+            ],
+            "queue": [
+              0
+            ],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Descend from 0 to 1",
+          "explanation": "1 is the first unvisited neighbor of 0. Mark and push it, going as deep as possible before trying other branches.",
+          "summary": "1 is the first unvisited neighbor of 0. Mark and push it, going as deep as possible before trying other branches.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "frontier"
+              },
+              {
+                "id": 1,
+                "state": "current"
+              },
+              {
+                "id": 2,
+                "state": "unseen"
+              },
+              {
+                "id": 3,
+                "state": "unseen"
+              },
+              {
+                "id": 4,
+                "state": "unseen"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "current"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "default"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "default"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "default"
+              }
+            ],
+            "queue": [
+              0,
+              1
+            ],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Descend from 1 to 3",
+          "explanation": "3 is the first unvisited neighbor of 1. Mark and push it, going as deep as possible before trying other branches.",
+          "summary": "3 is the first unvisited neighbor of 1. Mark and push it, going as deep as possible before trying other branches.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "frontier"
+              },
+              {
+                "id": 1,
+                "state": "frontier"
+              },
+              {
+                "id": 2,
+                "state": "unseen"
+              },
+              {
+                "id": 3,
+                "state": "current"
+              },
+              {
+                "id": 4,
+                "state": "unseen"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "current"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "default"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "default"
+              }
+            ],
+            "queue": [
+              0,
+              1,
+              3
+            ],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1,
+              3
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Descend from 3 to 4",
+          "explanation": "4 is the first unvisited neighbor of 3. Mark and push it, going as deep as possible before trying other branches.",
+          "summary": "4 is the first unvisited neighbor of 3. Mark and push it, going as deep as possible before trying other branches.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "frontier"
+              },
+              {
+                "id": 1,
+                "state": "frontier"
+              },
+              {
+                "id": 2,
+                "state": "unseen"
+              },
+              {
+                "id": 3,
+                "state": "frontier"
+              },
+              {
+                "id": 4,
+                "state": "current"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "default"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "current"
+              }
+            ],
+            "queue": [
+              0,
+              1,
+              3,
+              4
+            ],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1,
+              3,
+              4
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Descend from 4 to 2",
+          "explanation": "2 is the first unvisited neighbor of 4. Mark and push it, going as deep as possible before trying other branches.",
+          "summary": "2 is the first unvisited neighbor of 4. Mark and push it, going as deep as possible before trying other branches.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "frontier"
+              },
+              {
+                "id": 1,
+                "state": "frontier"
+              },
+              {
+                "id": 2,
+                "state": "current"
+              },
+              {
+                "id": 3,
+                "state": "frontier"
+              },
+              {
+                "id": 4,
+                "state": "frontier"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "current"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "tree"
+              }
+            ],
+            "queue": [
+              0,
+              1,
+              3,
+              4,
+              2
+            ],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1,
+              3,
+              4,
+              2
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Backtrack from 2",
+          "explanation": "Every neighbor of 2 is visited, so pop it. Exploration resumes at 4.",
+          "summary": "Every neighbor of 2 is visited, so pop it. Exploration resumes at 4.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "frontier"
+              },
+              {
+                "id": 1,
+                "state": "frontier"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "frontier"
+              },
+              {
+                "id": 4,
+                "state": "current"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "tree"
+              }
+            ],
+            "queue": [
+              0,
+              1,
+              3,
+              4
+            ],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1,
+              3,
+              4,
+              2
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Backtrack from 4",
+          "explanation": "Every neighbor of 4 is visited, so pop it. Exploration resumes at 3.",
+          "summary": "Every neighbor of 4 is visited, so pop it. Exploration resumes at 3.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "frontier"
+              },
+              {
+                "id": 1,
+                "state": "frontier"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "current"
+              },
+              {
+                "id": 4,
+                "state": "done"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "tree"
+              }
+            ],
+            "queue": [
+              0,
+              1,
+              3
+            ],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1,
+              3,
+              4,
+              2
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Backtrack from 3",
+          "explanation": "Every neighbor of 3 is visited, so pop it. Exploration resumes at 1.",
+          "summary": "Every neighbor of 3 is visited, so pop it. Exploration resumes at 1.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "frontier"
+              },
+              {
+                "id": 1,
+                "state": "current"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "done"
+              },
+              {
+                "id": 4,
+                "state": "done"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "tree"
+              }
+            ],
+            "queue": [
+              0,
+              1
+            ],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1,
+              3,
+              4,
+              2
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Backtrack from 1",
+          "explanation": "Every neighbor of 1 is visited, so pop it. Exploration resumes at 0.",
+          "summary": "Every neighbor of 1 is visited, so pop it. Exploration resumes at 0.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "current"
+              },
+              {
+                "id": 1,
+                "state": "done"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "done"
+              },
+              {
+                "id": 4,
+                "state": "done"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "tree"
+              }
+            ],
+            "queue": [
+              0
+            ],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1,
+              3,
+              4,
+              2
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Backtrack from 0",
+          "explanation": "Every neighbor of 0 is visited, so pop it. The stack is empty.",
+          "summary": "Every neighbor of 0 is visited, so pop it. The stack is empty.",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "done"
+              },
+              {
+                "id": 1,
+                "state": "done"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "done"
+              },
+              {
+                "id": 4,
+                "state": "done"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "tree"
+              }
+            ],
+            "queue": [],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1,
+              3,
+              4,
+              2
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "The reachable component is complete",
+          "explanation": "Preorder: [0, 1, 3, 4, 2]. Unreachable from 0: [5].",
+          "summary": "Preorder: [0, 1, 3, 4, 2]. Unreachable from 0: [5].",
+          "view": {
+            "type": "graph",
+            "directed": false,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "done"
+              },
+              {
+                "id": 1,
+                "state": "done"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "done"
+              },
+              {
+                "id": 4,
+                "state": "done"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "state": "tree"
+              }
+            ],
+            "queue": [],
+            "queueLabel": "Stack (bottom → top, the open path)",
+            "order": [
+              0,
+              1,
+              3,
+              4,
+              2
+            ],
+            "distances": null,
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Top of the stack (being explored)"
+              ],
+              [
+                "frontier",
+                "On the stack (open path)"
+              ],
+              [
+                "done",
+                "Finished"
+              ],
+              [
+                "unseen",
+                "Not discovered"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "topological",
+      "title": "Topological sort: Kahn's algorithm",
+      "category": "Graphs",
+      "description": "Repeatedly emit a vertex with no unemitted predecessors from a directed acyclic graph.",
+      "keyIdea": "A vertex becomes ready only when every predecessor is emitted, so the order respects every edge.",
+      "lesson": "../../algorithms/graph/dfs.md",
+      "frames": [
+        {
+          "title": "Find the vertices with no predecessors",
+          "explanation": "Count incoming edges. Vertices [0, 2] have none, so they may come first. Kahn's algorithm repeatedly emits a ready vertex and removes its outgoing edges.",
+          "summary": "Count incoming edges. Vertices [0, 2] have none, so they may come first. Kahn's algorithm repeatedly emits a ready vertex and removes its outgoing edges.",
+          "view": {
+            "type": "graph",
+            "directed": true,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "frontier"
+              },
+              {
+                "id": 1,
+                "state": "unseen"
+              },
+              {
+                "id": 2,
+                "state": "frontier"
+              },
+              {
+                "id": 3,
+                "state": "unseen"
+              },
+              {
+                "id": 4,
+                "state": "unseen"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "default"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "default"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "default"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "state": "default"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "state": "default"
+              }
+            ],
+            "queue": [
+              0,
+              2
+            ],
+            "queueLabel": "Ready queue (front first)",
+            "order": [],
+            "distances": [
+              0,
+              2,
+              0,
+              1,
+              1,
+              2
+            ],
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Just emitted"
+              ],
+              [
+                "frontier",
+                "Ready: no unemitted predecessor"
+              ],
+              [
+                "done",
+                "Emitted / edge removed"
+              ],
+              [
+                "unseen",
+                "Still waiting on a predecessor"
+              ]
+            ],
+            "orderLabel": "Emitted order",
+            "tableLabel": "Unemitted predecessors per vertex"
+          }
+        },
+        {
+          "title": "Emit vertex 0",
+          "explanation": "All predecessors of 0 are already emitted. Remove its outgoing edges; no vertex became ready.",
+          "summary": "All predecessors of 0 are already emitted. Remove its outgoing edges; no vertex became ready.",
+          "view": {
+            "type": "graph",
+            "directed": true,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "current"
+              },
+              {
+                "id": 1,
+                "state": "unseen"
+              },
+              {
+                "id": 2,
+                "state": "frontier"
+              },
+              {
+                "id": 3,
+                "state": "unseen"
+              },
+              {
+                "id": 4,
+                "state": "unseen"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "state": "default"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "default"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "default"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "state": "default"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "state": "default"
+              }
+            ],
+            "queue": [
+              2
+            ],
+            "queueLabel": "Ready queue (front first)",
+            "order": [
+              0
+            ],
+            "distances": [
+              0,
+              1,
+              0,
+              1,
+              1,
+              2
+            ],
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Just emitted"
+              ],
+              [
+                "frontier",
+                "Ready: no unemitted predecessor"
+              ],
+              [
+                "done",
+                "Emitted / edge removed"
+              ],
+              [
+                "unseen",
+                "Still waiting on a predecessor"
+              ]
+            ],
+            "orderLabel": "Emitted order",
+            "tableLabel": "Unemitted predecessors per vertex"
+          }
+        },
+        {
+          "title": "Emit vertex 2",
+          "explanation": "All predecessors of 2 are already emitted. Remove its outgoing edges; vertices 1, 4 now have no unemitted predecessor and join the queue.",
+          "summary": "All predecessors of 2 are already emitted. Remove its outgoing edges; vertices 1, 4 now have no unemitted predecessor and join the queue.",
+          "view": {
+            "type": "graph",
+            "directed": true,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "done"
+              },
+              {
+                "id": 1,
+                "state": "frontier"
+              },
+              {
+                "id": 2,
+                "state": "current"
+              },
+              {
+                "id": 3,
+                "state": "unseen"
+              },
+              {
+                "id": 4,
+                "state": "frontier"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "default"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "state": "default"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "state": "default"
+              }
+            ],
+            "queue": [
+              1,
+              4
+            ],
+            "queueLabel": "Ready queue (front first)",
+            "order": [
+              0,
+              2
+            ],
+            "distances": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              2
+            ],
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Just emitted"
+              ],
+              [
+                "frontier",
+                "Ready: no unemitted predecessor"
+              ],
+              [
+                "done",
+                "Emitted / edge removed"
+              ],
+              [
+                "unseen",
+                "Still waiting on a predecessor"
+              ]
+            ],
+            "orderLabel": "Emitted order",
+            "tableLabel": "Unemitted predecessors per vertex"
+          }
+        },
+        {
+          "title": "Emit vertex 1",
+          "explanation": "All predecessors of 1 are already emitted. Remove its outgoing edges; vertex 3 now has no unemitted predecessor and joins the queue.",
+          "summary": "All predecessors of 1 are already emitted. Remove its outgoing edges; vertex 3 now has no unemitted predecessor and joins the queue.",
+          "view": {
+            "type": "graph",
+            "directed": true,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "done"
+              },
+              {
+                "id": 1,
+                "state": "current"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "frontier"
+              },
+              {
+                "id": 4,
+                "state": "frontier"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "state": "default"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "state": "default"
+              }
+            ],
+            "queue": [
+              4,
+              3
+            ],
+            "queueLabel": "Ready queue (front first)",
+            "order": [
+              0,
+              2,
+              1
+            ],
+            "distances": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Just emitted"
+              ],
+              [
+                "frontier",
+                "Ready: no unemitted predecessor"
+              ],
+              [
+                "done",
+                "Emitted / edge removed"
+              ],
+              [
+                "unseen",
+                "Still waiting on a predecessor"
+              ]
+            ],
+            "orderLabel": "Emitted order",
+            "tableLabel": "Unemitted predecessors per vertex"
+          }
+        },
+        {
+          "title": "Emit vertex 4",
+          "explanation": "All predecessors of 4 are already emitted. Remove its outgoing edges; no vertex became ready.",
+          "summary": "All predecessors of 4 are already emitted. Remove its outgoing edges; no vertex became ready.",
+          "view": {
+            "type": "graph",
+            "directed": true,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "done"
+              },
+              {
+                "id": 1,
+                "state": "done"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "frontier"
+              },
+              {
+                "id": 4,
+                "state": "current"
+              },
+              {
+                "id": 5,
+                "state": "unseen"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "state": "default"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "state": "tree"
+              }
+            ],
+            "queue": [
+              3
+            ],
+            "queueLabel": "Ready queue (front first)",
+            "order": [
+              0,
+              2,
+              1,
+              4
+            ],
+            "distances": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Just emitted"
+              ],
+              [
+                "frontier",
+                "Ready: no unemitted predecessor"
+              ],
+              [
+                "done",
+                "Emitted / edge removed"
+              ],
+              [
+                "unseen",
+                "Still waiting on a predecessor"
+              ]
+            ],
+            "orderLabel": "Emitted order",
+            "tableLabel": "Unemitted predecessors per vertex"
+          }
+        },
+        {
+          "title": "Emit vertex 3",
+          "explanation": "All predecessors of 3 are already emitted. Remove its outgoing edges; vertex 5 now has no unemitted predecessor and joins the queue.",
+          "summary": "All predecessors of 3 are already emitted. Remove its outgoing edges; vertex 5 now has no unemitted predecessor and joins the queue.",
+          "view": {
+            "type": "graph",
+            "directed": true,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "done"
+              },
+              {
+                "id": 1,
+                "state": "done"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "current"
+              },
+              {
+                "id": 4,
+                "state": "done"
+              },
+              {
+                "id": 5,
+                "state": "frontier"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "state": "tree"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "state": "tree"
+              }
+            ],
+            "queue": [
+              5
+            ],
+            "queueLabel": "Ready queue (front first)",
+            "order": [
+              0,
+              2,
+              1,
+              4,
+              3
+            ],
+            "distances": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Just emitted"
+              ],
+              [
+                "frontier",
+                "Ready: no unemitted predecessor"
+              ],
+              [
+                "done",
+                "Emitted / edge removed"
+              ],
+              [
+                "unseen",
+                "Still waiting on a predecessor"
+              ]
+            ],
+            "orderLabel": "Emitted order",
+            "tableLabel": "Unemitted predecessors per vertex"
+          }
+        },
+        {
+          "title": "Emit vertex 5",
+          "explanation": "All predecessors of 5 are already emitted. Remove its outgoing edges; no vertex became ready.",
+          "summary": "All predecessors of 5 are already emitted. Remove its outgoing edges; no vertex became ready.",
+          "view": {
+            "type": "graph",
+            "directed": true,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "done"
+              },
+              {
+                "id": 1,
+                "state": "done"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "done"
+              },
+              {
+                "id": 4,
+                "state": "done"
+              },
+              {
+                "id": 5,
+                "state": "current"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "state": "tree"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "state": "tree"
+              }
+            ],
+            "queue": [],
+            "queueLabel": "Ready queue (front first)",
+            "order": [
+              0,
+              2,
+              1,
+              4,
+              3,
+              5
+            ],
+            "distances": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Just emitted"
+              ],
+              [
+                "frontier",
+                "Ready: no unemitted predecessor"
+              ],
+              [
+                "done",
+                "Emitted / edge removed"
+              ],
+              [
+                "unseen",
+                "Still waiting on a predecessor"
+              ]
+            ],
+            "orderLabel": "Emitted order",
+            "tableLabel": "Unemitted predecessors per vertex"
+          }
+        },
+        {
+          "title": "Every vertex is emitted",
+          "explanation": "Order [0, 2, 1, 4, 3, 5]: each vertex appears after all of its predecessors. With a cycle, some vertices would never become ready.",
+          "summary": "Order [0, 2, 1, 4, 3, 5]: each vertex appears after all of its predecessors. With a cycle, some vertices would never become ready.",
+          "view": {
+            "type": "graph",
+            "directed": true,
+            "nodes": [
+              {
+                "id": 0,
+                "state": "done"
+              },
+              {
+                "id": 1,
+                "state": "done"
+              },
+              {
+                "id": 2,
+                "state": "done"
+              },
+              {
+                "id": 3,
+                "state": "done"
+              },
+              {
+                "id": 4,
+                "state": "done"
+              },
+              {
+                "id": 5,
+                "state": "done"
+              }
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 1,
+                "state": "tree"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "state": "tree"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "state": "tree"
+              },
+              {
+                "from": 3,
+                "to": 5,
+                "state": "tree"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "state": "tree"
+              }
+            ],
+            "queue": [],
+            "queueLabel": "Ready queue (front first)",
+            "order": [
+              0,
+              2,
+              1,
+              4,
+              3,
+              5
+            ],
+            "distances": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "path": [],
+            "legend": [
+              [
+                "current",
+                "Just emitted"
+              ],
+              [
+                "frontier",
+                "Ready: no unemitted predecessor"
+              ],
+              [
+                "done",
+                "Emitted / edge removed"
+              ],
+              [
+                "unseen",
+                "Still waiting on a predecessor"
+              ]
+            ],
+            "orderLabel": "Emitted order",
+            "tableLabel": "Unemitted predecessors per vertex"
+          }
+        }
+      ]
     }
   ]
 }
