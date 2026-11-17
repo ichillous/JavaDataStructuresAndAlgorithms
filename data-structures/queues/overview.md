@@ -88,14 +88,14 @@ assert rejected;
 ## Check yourself
 
 <details>
-<summary>Which value is at the front after `enqueue(1)`, `enqueue(2)`, `dequeue()`, `enqueue(3)`?</summary>
+<summary>Which value is at the front after <code>enqueue(1)</code>, <code>enqueue(2)</code>, <code>dequeue()</code>, <code>enqueue(3)</code>?</summary>
 
 The front is 2: it is the earliest enqueued value not yet removed. The queue holds 2 then 3.
 
 </details>
 
 <details>
-<summary>Why does `clear()` cost O(capacity) rather than O(size)?</summary>
+<summary>Why does <code>clear()</code> cost O(capacity) rather than O(size)?</summary>
 
 It nulls the whole retained buffer so no reference is kept, and the buffer may be larger than the number of live elements.
 

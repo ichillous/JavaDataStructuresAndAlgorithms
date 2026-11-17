@@ -90,14 +90,14 @@ This repository's lists, stacks and queues reject null, like `ArrayDeque`.
 ## Check yourself
 
 <details>
-<summary>Why is a `for (int i = 0; i < n; i++) list.get(i)` scan of a linked list quadratic?</summary>
+<summary>Why is a <code>for (int i = 0; i &lt; n; i++) list.get(i)</code> scan of a linked list quadratic?</summary>
 
 Each `get(i)` walks min(i, n - 1 - i) links from the nearer end, and those walks sum to about n squared over four. An iterator visits each node once, in O(n).
 
 </details>
 
 <details>
-<summary>In a doubly linked list of eight nodes, how does `get(5)` reach its node?</summary>
+<summary>In a doubly linked list of eight nodes, how does <code>get(5)</code> reach its node?</summary>
 
 Index 5 is not below 8 / 2, so the walk starts at the tail and follows 2 `previous` links (7, 6, then 5).
 

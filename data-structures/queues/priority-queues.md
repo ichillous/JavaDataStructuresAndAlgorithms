@@ -110,7 +110,7 @@ When it arrives, the kept values are 2, 3 and 5, so the root is 5, and the arriv
 </details>
 
 <details>
-<summary>What does a plain `PriorityQueue` give you for two tasks with equal priority?</summary>
+<summary>What does a plain <code>PriorityQueue</code> give you for two tasks with equal priority?</summary>
 
 No guaranteed order: ties are broken arbitrarily. Add a secondary key such as an arrival counter to the comparator when first-in-first-out matters.
 

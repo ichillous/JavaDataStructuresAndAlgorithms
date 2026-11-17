@@ -91,7 +91,7 @@ The “copy the next node into this node” trick does not implement general del
 ## Check yourself
 
 <details>
-<summary>To insert `15` between `10` and `20` while holding node `10`, which write comes first?</summary>
+<summary>To insert <code>15</code> between <code>10</code> and <code>20</code> while holding node <code>10</code>, which write comes first?</summary>
 
 `15.next = 10.next` comes first, so the link to `20` is saved in the new node; then `10.next = 15` redirects the predecessor. The reverse order loses the only reference to `20`.
 

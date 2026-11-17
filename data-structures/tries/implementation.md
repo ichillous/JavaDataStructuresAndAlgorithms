@@ -122,14 +122,14 @@ assert normalized.contains(Normalizer.normalize(decomposed, Normalizer.Form.NFC)
 ## Check yourself
 
 <details>
-<summary>Why does `remove` return false and change nothing for a stored prefix that is not a word?</summary>
+<summary>Why does <code>remove</code> return false and change nothing for a stored prefix that is not a word?</summary>
 
 Removal needs a marked endpoint. For `ca` in `{car, cart}` the node exists but is unmarked, so there is no word to remove, size must not change, and no node may be pruned.
 
 </details>
 
 <details>
-<summary>In the figure, why are `cart` and `cat` never visited when the limit is 3?</summary>
+<summary>In the figure, why are <code>cart</code> and <code>cat</code> never visited when the limit is 3?</summary>
 
 The walk emits `car`, `card` and `care` in sorted order and stops as soon as the result holds three words. The nodes for `cart` and `cat` come later in sorted order and are never reached.
 

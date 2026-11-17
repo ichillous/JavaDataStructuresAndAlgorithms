@@ -81,14 +81,14 @@ assert rejected;
 ## Check yourself
 
 <details>
-<summary>Why does a counting check accept `([)]` while a stack check rejects it?</summary>
+<summary>Why does a counting check accept <code>([)]</code> while a stack check rejects it?</summary>
 
 Counts only compare how many openers and closers there are; both types balance. The stack requires each closer to match the most recent unmatched opener, and `)` meets `[` on top.
 
 </details>
 
 <details>
-<summary>What does `peek()` do on an empty `ArrayStack`, and on an empty `ArrayDeque`?</summary>
+<summary>What does <code>peek()</code> do on an empty <code>ArrayStack</code>, and on an empty <code>ArrayDeque</code>?</summary>
 
 `ArrayStack.peek()` throws `NoSuchElementException`; `ArrayDeque.peek()` returns null, while `ArrayDeque.pop()` throws.
 

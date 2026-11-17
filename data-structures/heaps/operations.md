@@ -116,7 +116,7 @@ The child moved up becomes the parent of the other child, so it must be the smal
 </details>
 
 <details>
-<summary>In `[1, 3, 8, 4, 5, 9]`, which slot does `add(7)` end in, and which value moves down?</summary>
+<summary>In <code>[1, 3, 8, 4, 5, 9]</code>, which slot does <code>add(7)</code> end in, and which value moves down?</summary>
 
 The new 7 starts in slot 6, whose parent is slot 2 holding 8. Since 7 is smaller, they swap; slot 2's parent is 1, which is not larger, so 7 stops in slot 2 and 8 moves down to slot 6.
 

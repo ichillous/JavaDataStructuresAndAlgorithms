@@ -140,7 +140,7 @@ Both orders are valid depth-first traversals of the graph; the point is that the
 ## Check yourself
 
 <details>
-<summary>What do `breadthFirst(graph, 5)` and `shortestPath(graph, 0, 5)` return when vertex 5 is isolated?</summary>
+<summary>What do <code>breadthFirst(graph, 5)</code> and <code>shortestPath(graph, 0, 5)</code> return when vertex 5 is isolated?</summary>
 
 `breadthFirst(graph, 5)` returns `[5]`, the source alone. `shortestPath(graph, 0, 5)` returns an empty list because 5 is unreachable from 0.
 
@@ -154,7 +154,7 @@ Marking at enqueue guarantees each vertex enters the queue once and that its fir
 </details>
 
 <details>
-<summary>A graph has a directed cycle. Can `topologicalSort` return a partial order?</summary>
+<summary>A graph has a directed cycle. Can <code>topologicalSort</code> return a partial order?</summary>
 
 No. It throws `IllegalArgumentException` rather than return a misleading partial ordering; `GraphStructureAlgorithms.directedCycle` returns a cycle as evidence.
 

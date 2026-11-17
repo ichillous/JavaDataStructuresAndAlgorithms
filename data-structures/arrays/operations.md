@@ -143,14 +143,14 @@ Copying left to right overwrites each element before it has been moved. Moving t
 </details>
 
 <details>
-<summary>After 1,000 appends and then `clear()`, what are the size and the capacity of a `DynamicArray`?</summary>
+<summary>After 1,000 appends and then <code>clear()</code>, what are the size and the capacity of a <code>DynamicArray</code>?</summary>
 
 The size is 0, and the capacity is unchanged (1,024 when it started at 1), because `clear()` and removal retain the backing array.
 
 </details>
 
 <details>
-<summary>Is every `add` O(1)?</summary>
+<summary>Is every <code>add</code> O(1)?</summary>
 
 No. An append that finds the array full copies every live element, which is O(n). Spread over many appends the cost averages to O(1), which is what amortized means.
 
