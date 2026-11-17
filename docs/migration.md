@@ -79,6 +79,23 @@ immutable result snapshots and size limits for materialized/exponential searches
 Sorts and `Sampling.shuffle` mutate their arrays by design; Sudoku is the one search that
 mutates its input, and it copies a complete solution back only on success. It does not establish puzzle uniqueness.
 
+## Lessons and figures expansion
+
+A later pass rewrote the lessons under `algorithms/` and `data-structures/` in place and added
+figures and step-throughs. No topic path was removed or renamed, and no public API changed;
+the additions are:
+
+| Kind | Added |
+| --- | --- |
+| Landing pages | [`data-structures/README.md`](../data-structures/README.md) and [`algorithms/README.md`](../algorithms/README.md): a map figure, "Pick by problem" and a generated list of every lesson in the folder |
+| Chooser pages | [`sorting/README.md`](../algorithms/sorting/README.md), [`graph/README.md`](../algorithms/graph/README.md), [`dynamic-programming/README.md`](../algorithms/dynamic-programming/README.md) |
+| Lessons | [`sorting/insertion-sort.md`](../algorithms/sorting/insertion-sort.md), [`searching/binary-search-on-answer.md`](../algorithms/searching/binary-search-on-answer.md), [`graph/topological-sort.md`](../algorithms/graph/topological-sort.md), [`bit-manipulation/overview.md`](../algorithms/bit-manipulation/overview.md), [`union-find/overview.md`](../data-structures/union-find/overview.md) |
+| API | `SearchAlgorithms.firstTrue(long, long, LongPredicate)` (binary search on the answer) and `DynamicArray.capacity()` (backing-array length); see the [catalog](catalog.md) |
+
+Every lesson now opens with an "At a glance" table and has at least one figure; most also
+gained "In real Java", "Common mistakes" and "Check yourself" sections. Statements found
+wrong during the rewrite were corrected in place; earlier wording remains in Git history.
+
 ## What is and is not established
 
 The [quality bar](quality.md) and [validation evidence](validation.md) record exact
