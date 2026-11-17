@@ -347,6 +347,27 @@ class VisualExamplesOptimizationTest {
         assertEquals(DATA.number("optimization.huffman.cost"), mergedTotal);
     }
 
+    @Test
+    void huffmanTreeChildrenFollowTheDocumentedTieRule() {
+        long[] frequencies = DATA.longs("optimization.huffman.frequencies");
+        // Order by weight, then node id: leaves (symbol index) before internal nodes (creation order).
+        PriorityQueue<long[]> queue = new PriorityQueue<>(
+                (x, y) -> x[0] != y[0] ? Long.compare(x[0], y[0]) : Long.compare(x[1], y[1]));
+        for (int symbol = 0; symbol < frequencies.length; symbol++) {
+            queue.add(new long[] {frequencies[symbol], symbol});
+        }
+        List<String> children = new ArrayList<>();
+        int next = frequencies.length;
+        while (queue.size() > 1) {
+            long[] first = queue.remove();
+            long[] second = queue.remove();
+            children.add(next + "=" + first[1] + "+" + second[1]);
+            queue.add(new long[] {first[0] + second[0], next});
+            next++;
+        }
+        assertEquals(DATA.strings("optimization.huffman.children"), children);
+    }
+
     // ---- subset-sum-halves ----
 
     private static List<Integer> sums(int[] values) {

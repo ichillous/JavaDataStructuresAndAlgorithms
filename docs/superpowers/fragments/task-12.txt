@@ -12,7 +12,7 @@ Solution-finder rows that should now link a new lesson or API
 
 Roadmap and exercise additions
 - Learning roadmap: put the DP family guide first in the dynamic-programming step.
-- Exercises: "Name the family and state for each of: fewest jumps to the end of an array; longest palindromic subsequence; subset sum with a small target" (answers in the family guide's Practice section).
+- Exercises: "Name the family and state for each of: fewest jumps to the end of an array; longest palindromic subsequence; subset sum with a small target" (one-line answers are in the family guide's Practice items; the subset-sum case is the knapsack family).
 
 New figures (ids) for the visual index
 - lcs-traceback, edit-distance-grid, matrix-chain-splits, held-karp-masks, weighted-interval-choice, huffman-tree, subset-sum-halves (category Optimization).

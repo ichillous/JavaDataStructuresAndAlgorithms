@@ -423,6 +423,9 @@ def huffman_tree(c, fixtures):
                 depth[child] = depth[node] + 1
     lengths = [depth[i] for i in range(len(weights))]
     cost = sum(w * l for w, l in zip(weights, lengths))
+    shown = [f"{node}={nodes[node][1][0]}+{nodes[node][1][1]}" for node in range(len(weights), root + 1)]
+    if shown != fixtures[P + "huffman.children"].split(","):
+        raise ValueError("huffman tree children disagree with the fixture")
     if (merges != fixtures[P + "huffman.merges"].split(",") or lengths != ints(fixtures, P + "huffman.lengths")
             or cost != int(fixtures[P + "huffman.cost"])):
         raise ValueError("huffman figure disagrees with the fixture")

@@ -94,22 +94,22 @@ best possibilities by length and is not necessarily one actual subsequence.
 ## In real Java
 
 The JDK offers no LCS or knapsack, but the LIS tails array is a sorted prefix, so
-`Arrays.binarySearch` applies with one caution. Its contract says that when the
-range holds several elements equal to the key, there is no guarantee which index is
-found, and when the key is absent it returns `-(insertion point) - 1`. Strict LIS
-needs the *first* slot whose tail is `>=` the value, so convert a negative result
-to the insertion point and treat a hit as "replace this tail".
+`Arrays.binarySearch` finds the slot to replace. Because strict-LIS tails are
+strictly increasing, a hit is unique. The detail to remember is the miss: for an
+absent key the method returns `-(insertion point) - 1`, so the replacement slot is
+`-result - 1`. That slot is the first tail that is `>=` the value, or the current
+size when the value extends the longest subsequence.
 
 ```java
-import io.github.ichillous.dsa.algorithms.DynamicProgramming;
 import java.util.Arrays;
 
-int[] tails = {2, 5, 7, 7, 9};
+int[] tails = {2, 5, 7, 9}; // strictly increasing, as in strict LIS
 int hit = Arrays.binarySearch(tails, 0, tails.length, 7);
-assert hit == 2 || hit == 3; // either equal element may be reported
+assert hit == 2; // present: replace the tail at this index with the same value
 int miss = Arrays.binarySearch(tails, 0, tails.length, 6);
-assert miss == -3 && -miss - 1 == 2; // insertion point 2
-assert DynamicProgramming.longestIncreasingSubsequenceLength(tails) == 4;
+assert miss == -3 && -miss - 1 == 2; // absent: insertion point 2 replaces tail 7
+int beyond = Arrays.binarySearch(tails, 0, tails.length, 10);
+assert beyond == -5 && -beyond - 1 == tails.length; // larger than all: append
 ```
 
 ## Common mistakes

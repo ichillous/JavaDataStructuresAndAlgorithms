@@ -83,13 +83,17 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-assert Integer.MIN_VALUE - 1 > 0; // subtraction wraps: wrong order
-assert Integer.compare(Integer.MIN_VALUE, 1) < 0;
+Interval low = new Interval(Integer.MIN_VALUE, 1);
+Interval high = new Interval(0, 1);
+Comparator<Interval> bySubtraction = (x, y) -> x.start() - y.start();
+assert Integer.MIN_VALUE - 1 > 0; // subtraction wraps to a large positive number
+assert bySubtraction.compare(low, new Interval(1, 2)) > 0; // MIN_VALUE "sorts after" 1: wrong
+Comparator<Interval> byStart = Comparator.comparingInt(Interval::start);
+assert byStart.compare(low, new Interval(1, 2)) < 0; // Integer.compare is safe
 
-List<Interval> byEnd = new ArrayList<>(List.of(
-        new Interval(Integer.MIN_VALUE, 1), new Interval(0, 0 + 1), new Interval(1, 2)));
+List<Interval> byEnd = new ArrayList<>(List.of(low, high, new Interval(1, 2)));
 byEnd.sort(Comparator.comparingInt(Interval::end));
-assert byEnd.get(0).equals(new Interval(Integer.MIN_VALUE, 1));
+assert byEnd.get(0).equals(low); // stable: equal ends keep input order
 assert GreedyAlgorithms.selectActivities(byEnd).size() == 2;
 ```
 

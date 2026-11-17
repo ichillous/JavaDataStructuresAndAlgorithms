@@ -142,12 +142,14 @@ assert packedLength < input.length;
 Inflater inflater = new Inflater();
 inflater.setInput(packed, 0, packedLength);
 byte[] restored = new byte[input.length];
+int restoredLength;
 try {
-    assert inflater.inflate(restored) == input.length;
+    restoredLength = inflater.inflate(restored);
 } catch (DataFormatException e) {
     throw new AssertionError(e);
 }
 inflater.end();
+assert restoredLength == input.length;
 assert Arrays.equals(input, restored);
 ```
 

@@ -18,10 +18,10 @@ page maps each family to a maintained method; the
 
 | Family | State shape | Repo method | Cost | The question that reveals it |
 | --- | --- | --- | --- | --- |
-| Linear | One index or amount, `best[a]` | `minimumCoins`, `wordBreak` | O(c · a); O(n · L) lookups | "Does the answer for `a` follow from answers for smaller `a`?" |
+| Linear | One index or amount, `best[a]` | `minimumCoins`, `countCoinCombinations`, `wordBreak` | O(c · a); O(n · L) lookups | "Does the answer for `a` follow from answers for smaller `a`?" |
 | Grid (two sequences) | A prefix of each input, `(i, j)` | `editScript`, `longestCommonSubsequence` | O(mn) | "Compare two strings or sequences position by position?" |
 | Interval | A range `(i, j)` of one input | `matrixChainOrder`, `longestPalindromicSubsequenceLength` | O(n^3) and O(n^2) | "Is the best answer for a range found by splitting it in two?" |
-| Knapsack | Items processed so far and remaining capacity | `knapsack01`, `countCoinCombinations` | O(nW) | "Each item is taken or skipped under a budget?" |
+| Knapsack | Items processed so far and remaining capacity | `knapsack01` (0/1 items under a capacity) | O(nW) | "Each item is taken or skipped under a budget?" |
 | Subsequence | Best ending at or using the first `i` elements | `longestIncreasingSubsequenceLength` | O(n log n) | "Pick elements in order, not contiguous?" |
 | Bitmask | A set of visited items plus a last item | `travelingSalesman` | O(2^n n^2), n at most 16 | "Must every item be used once, and n is tiny?" |
 | Scheduling with binary search | The first `i` items sorted by end | `weightedIntervalScheduling` | O(n log n) | "Choose non-overlapping jobs with weights?" |
@@ -98,10 +98,15 @@ the state in one sentence, you have not picked a family yet.
 ## Practice
 
 1. Name the family and write the state for "the fewest jumps to reach the last
-   index of an array", then say which repo method has the same shape.
+   index of an array", then say which repo method has the same shape. (Linear:
+   `best[i]` is the fewest jumps to reach index `i`, the same shape as
+   `minimumCoins`.)
 2. Which family is "longest palindromic subsequence" and why is it not a grid over
-   two different strings?
-3. Why does a bitmask state need both the visited set and the last city?
+   two different strings? (Interval: the state `(i, j)` ranges over one string,
+   and the recurrence shrinks that range from both ends.)
+3. Why does a bitmask state need both the visited set and the last city? (The
+   next edge's cost depends on the last city, and which cities remain depends on
+   the set.)
 
 ## Check yourself
 
