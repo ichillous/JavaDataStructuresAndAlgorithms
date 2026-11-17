@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 812" width="520" height="812" role="img" aria-labelledby="title desc">
+<title id="title">33  A* with a good heuristic</title>
+<desc id="desc">A* on a 5 by 5 unit grid from cell 10 to cell 14 with the Manhattan heuristic: the route 10, 11, 12, 13, 14 has f = g + h equal to 4 everywhere, the heuristic was called for 13 of 25 cells, and with h = 0 it was called for 21.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="astar-heuristic-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="astar-heuristic-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="astar-heuristic-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="astar-heuristic-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="astar-heuristic-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="astar-heuristic-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="astar-heuristic-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="astar-heuristic-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="astar-heuristic-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="astar-heuristic-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="astar-heuristic-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="astar-heuristic-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="astar-heuristic-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="astar-heuristic-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="astar-heuristic-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="812" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">33  A* with a good heuristic</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Grid cells show h, the Manhattan distance</text>
+<text x="84" y="205.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400"></text>
+<rect x="96" y="182" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="152" y="182" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="208" y="182" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="264" y="182" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="320" y="182" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="84" y="239.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400"></text>
+<rect x="96" y="216" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="124.0" y="240.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">5</text>
+<rect x="152" y="216" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="180.0" y="240.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="208" y="216" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="236.0" y="240.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">3</text>
+<rect x="264" y="216" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="292.0" y="240.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">2</text>
+<rect x="320" y="216" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="84" y="273.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">start</text>
+<rect x="96" y="250" width="56" height="34" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="124.0" y="274.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">4</text>
+<rect x="152" y="250" width="56" height="34" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="180.0" y="274.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">3</text>
+<rect x="208" y="250" width="56" height="34" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="236.0" y="274.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">2</text>
+<rect x="264" y="250" width="56" height="34" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="292.0" y="274.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">1</text>
+<rect x="320" y="250" width="56" height="34" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="348.0" y="274.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">0</text>
+<text x="84" y="307.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400"></text>
+<rect x="96" y="284" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="124.0" y="308.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">5</text>
+<rect x="152" y="284" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="180.0" y="308.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="208" y="284" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="236.0" y="308.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">3</text>
+<rect x="264" y="284" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="292.0" y="308.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">2</text>
+<rect x="320" y="284" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="84" y="341.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400"></text>
+<rect x="96" y="318" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="152" y="318" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="208" y="318" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="264" y="318" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="320" y="318" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="386" y="278" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">target</text>
+<circle cx="42" cy="381" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="387" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="388" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Along the route, f = g + h stays 4</text>
+<text x="124.0" y="428" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">10</text>
+<text x="180.0" y="428" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">11</text>
+<text x="236.0" y="428" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">12</text>
+<text x="292.0" y="428" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">13</text>
+<text x="348.0" y="428" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">14</text>
+<text x="84" y="463.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">g</text>
+<rect x="96" y="440" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="124.0" y="464.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="152" y="440" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="180.0" y="464.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="208" y="440" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="236.0" y="464.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="264" y="440" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="292.0" y="464.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="320" y="440" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="348.0" y="464.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<text x="84" y="497.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">h</text>
+<rect x="96" y="474" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="124.0" y="498.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="152" y="474" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="180.0" y="498.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="208" y="474" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="236.0" y="498.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="264" y="474" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="292.0" y="498.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="320" y="474" width="56" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="348.0" y="498.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="84" y="531.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">f</text>
+<rect x="96" y="508" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="124.0" y="532.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="152" y="508" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="180.0" y="532.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="208" y="508" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="236.0" y="532.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="264" y="508" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="292.0" y="532.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="320" y="508" width="56" height="34" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="348.0" y="532.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<text x="84" y="428" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">cell</text>
+<circle cx="42" cy="571" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="577" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="578" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Cells the heuristic was called for</text>
+<rect x="44" y="600" width="225" height="30" rx="15" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="156.5" y="621" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">Manhattan h: 13 of 25</text>
+<rect x="279" y="600" width="155" height="30" rx="15" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="356.5" y="621" font-size="18" fill="#f4cf70" text-anchor="middle" font-weight="700">h = 0: 21 of 25</text>
+<rect x="28" y="640" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="656" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">route</text>
+<rect x="130.656" y="640" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="164.656" y="656" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">h evaluated</text>
+<rect x="289.472" y="640" width="26" height="20" rx="4" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="323.472" y="656" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">h never called</text>
+<rect x="28" y="680" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="711" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="740" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">A good heuristic keeps the search near</text>
+<text x="44" y="767" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">the route and skips far cells.</text>
+</svg>

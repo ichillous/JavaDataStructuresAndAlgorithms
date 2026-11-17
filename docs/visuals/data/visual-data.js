@@ -297,6 +297,83 @@ globalThis.DSA_VISUALS_DATA = {
       "number": 27,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
+    },
+    {
+      "id": "graph-representations",
+      "title": "Three ways to store a graph",
+      "category": "Graphs",
+      "description": "One directed graph with 4 vertices and the edges 0 to 1, 0 to 2, 2 to 1 and 2 to 3, shown as an adjacency list, a 4 by 4 adjacency matrix and an edge list, each with the cost of testing an edge and listing neighbors.",
+      "keyIdea": "Edge tests favor a matrix; neighbor scans favor an adjacency list.",
+      "lesson": "../../data-structures/graphs/representation.md",
+      "number": 28,
+      "light": "assets/graph-representations.svg",
+      "dark": "assets/graph-representations-dark.svg"
+    },
+    {
+      "id": "bfs-vs-dfs-order",
+      "title": "BFS and DFS visit order",
+      "category": "Graphs",
+      "description": "A 6-vertex undirected graph from source 0: breadthFirst visits 0, 1, 2, 3, 4, 5 in layers of distance 0, 1 and 2, while depthFirst visits 0, 1, 3, 4, 5, 2 by following one branch to its end.",
+      "keyIdea": "A queue visits whole layers; a stack follows one branch to its end.",
+      "lesson": "../../data-structures/graphs/traversal.md",
+      "number": 29,
+      "light": "assets/bfs-vs-dfs-order.svg",
+      "dark": "assets/bfs-vs-dfs-order-dark.svg"
+    },
+    {
+      "id": "topological-kahn",
+      "title": "Kahn's topological order",
+      "category": "Graphs",
+      "description": "Kahn's algorithm on a 5-vertex DAG whose in-degrees are 2, 1, 0, 0 and 2: it pops ready vertices 2, 3, 0, 1, 4, lowering in-degrees and refilling the ready queue, and outputs 2, 3, 0, 1, 4.",
+      "keyIdea": "A vertex is output once its in-degree is 0, so every edge points forward.",
+      "lesson": "../../algorithms/graph/topological-sort.md",
+      "number": 30,
+      "light": "assets/topological-kahn.svg",
+      "dark": "assets/topological-kahn-dark.svg"
+    },
+    {
+      "id": "shortest-path-chooser",
+      "title": "Shortest-path chooser",
+      "category": "Graphs",
+      "description": "A column of seven yes-or-no questions from all pairs, unweighted, 0-1 weights, DAG, negative weights and heuristic to nonnegative weights, each paired with the algorithm and the repository method that answers it.",
+      "keyIdea": "Use the most specific algorithm whose precondition your graph meets; each one exploits a fact the general one cannot assume.",
+      "lesson": "../../algorithms/graph/shortest-paths.md",
+      "number": 31,
+      "light": "assets/shortest-path-chooser.svg",
+      "dark": "assets/shortest-path-chooser-dark.svg"
+    },
+    {
+      "id": "zero-one-bfs-deque",
+      "title": "0-1 BFS and its deque",
+      "category": "Graphs",
+      "description": "0-1 BFS from vertex 0 on a 4-vertex directed graph: weight-0 targets are pushed to the front of the deque and weight-1 targets to the back, so vertex 1 is first queued at distance 1 and then improved to 0 through 0, 2, 3, 1.",
+      "keyIdea": "Zero-weight edges go to the deque's front, unit-weight edges to its back.",
+      "lesson": "../../algorithms/graph/shortest-paths.md",
+      "number": 32,
+      "light": "assets/zero-one-bfs-deque.svg",
+      "dark": "assets/zero-one-bfs-deque-dark.svg"
+    },
+    {
+      "id": "astar-heuristic",
+      "title": "A* with a good heuristic",
+      "category": "Graphs",
+      "description": "A* on a 5 by 5 unit grid from cell 10 to cell 14 with the Manhattan heuristic: the route 10, 11, 12, 13, 14 has f = g + h equal to 4 everywhere, the heuristic was called for 13 of 25 cells, and with h = 0 it was called for 21.",
+      "keyIdea": "A good heuristic keeps the search near the route and skips far cells.",
+      "lesson": "../../algorithms/graph/shortest-paths.md",
+      "number": 33,
+      "light": "assets/astar-heuristic.svg",
+      "dark": "assets/astar-heuristic-dark.svg"
+    },
+    {
+      "id": "floyd-warshall-via",
+      "title": "One Floyd-Warshall round",
+      "category": "Graphs",
+      "description": "A 4-vertex directed graph: allowing vertex 1 as a stop-over improves the distance matrix entry d[0][2] from 9 to 5 because d[0][1] + d[1][2] = 3 + 2, and no other entry changes.",
+      "keyIdea": "Round k asks whether going through vertex k beats the best route so far.",
+      "lesson": "../../algorithms/graph/shortest-paths.md",
+      "number": 34,
+      "light": "assets/floyd-warshall-via.svg",
+      "dark": "assets/floyd-warshall-via-dark.svg"
     }
   ],
   "traces": [

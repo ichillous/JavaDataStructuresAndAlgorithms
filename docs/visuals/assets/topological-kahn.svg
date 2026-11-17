@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 884" width="520" height="884" role="img" aria-labelledby="title desc">
+<title id="title">30  Kahn&#x27;s topological order</title>
+<desc id="desc">Kahn&#x27;s algorithm on a 5-vertex DAG whose in-degrees are 2, 1, 0, 0 and 2: it pops ready vertices 2, 3, 0, 1, 4, lowering in-degrees and refilling the ready queue, and outputs 2, 3, 0, 1, 4.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="topological-kahn-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="topological-kahn-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="topological-kahn-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="topological-kahn-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="topological-kahn-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="topological-kahn-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="topological-kahn-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="topological-kahn-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="topological-kahn-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="topological-kahn-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="topological-kahn-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="topological-kahn-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="topological-kahn-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="topological-kahn-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="topological-kahn-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="884" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">30  Kahn&#x27;s topological order</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">In-degrees at the start</text>
+<line x1="130.0" y1="218.0" x2="130.0" y2="234.0" stroke="#8994a5" stroke-width="2.5" marker-end="url(#topological-kahn-line-arrow)"/>
+<line x1="303.83" y1="199.95" x2="159.91" y2="254.63" stroke="#8994a5" stroke-width="2.5" marker-end="url(#topological-kahn-line-arrow)"/>
+<line x1="330.0" y1="218.0" x2="330.0" y2="234.0" stroke="#8994a5" stroke-width="2.5" marker-end="url(#topological-kahn-line-arrow)"/>
+<line x1="152.29" y1="282.94" x2="204.52" y2="322.64" stroke="#8994a5" stroke-width="2.5" marker-end="url(#topological-kahn-line-arrow)"/>
+<line x1="307.71" y1="282.94" x2="255.48" y2="322.64" stroke="#8994a5" stroke-width="2.5" marker-end="url(#topological-kahn-line-arrow)"/>
+<circle cx="130" cy="190" r="24" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="130" y="197" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">2</text>
+<text x="94" y="197" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">in 0</text>
+<circle cx="330" cy="190" r="24" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="330" y="197" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<text x="366" y="197" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">in 0</text>
+<circle cx="130" cy="266" r="24" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="130" y="273" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">0</text>
+<text x="94" y="273" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">in 2</text>
+<circle cx="330" cy="266" r="24" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="330" y="273" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<text x="366" y="273" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">in 1</text>
+<circle cx="230" cy="342" r="24" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="230" y="349" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">4</text>
+<text x="266" y="349" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">in 2</text>
+<circle cx="42" cy="398" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="404" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="405" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Pop a ready vertex, lower its targets</text>
+<text x="44" y="445" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">popped</text>
+<text x="130" y="445" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">in-degree drops</text>
+<text x="340" y="445" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">ready queue</text>
+<rect x="44" y="457" width="68" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="78.0" y="478" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">start</text>
+<text x="130" y="478" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">in-degree 0</text>
+<rect x="340" y="457" width="40" height="30" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="360.0" y="479.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">2</text>
+<rect x="386" y="457" width="40" height="30" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="406.0" y="479.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<rect x="44" y="493" width="75" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="81.5" y="514" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">pop 2</text>
+<text x="130" y="514" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">0: 2→1</text>
+<rect x="340" y="493" width="40" height="30" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="360.0" y="515.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<rect x="44" y="529" width="75" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="81.5" y="550" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">pop 3</text>
+<text x="130" y="550" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">0: 1→0, 1: 1→0</text>
+<rect x="340" y="529" width="40" height="30" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="360.0" y="551.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">0</text>
+<rect x="386" y="529" width="40" height="30" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="406.0" y="551.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">1</text>
+<rect x="44" y="565" width="76" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="82.0" y="586" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">pop 0</text>
+<text x="130" y="586" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">4: 2→1</text>
+<rect x="340" y="565" width="40" height="30" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="360.0" y="587.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">1</text>
+<rect x="44" y="601" width="72" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="80.0" y="622" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">pop 1</text>
+<text x="130" y="622" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">4: 1→0</text>
+<rect x="340" y="601" width="40" height="30" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="360.0" y="623.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">4</text>
+<rect x="44" y="637" width="76" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="82.0" y="658" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">pop 4</text>
+<text x="130" y="658" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">none</text>
+<text x="340" y="658" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">empty</text>
+<text x="28" y="695" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Output order: 2, 3, 0, 1, 4</text>
+<rect x="28" y="711" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="727" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">in-degree 0, ready</text>
+<rect x="28" y="751" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="782" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="811" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">A vertex is output once its in-degree</text>
+<text x="44" y="838" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">is 0, so every edge points forward.</text>
+</svg>

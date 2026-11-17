@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 852" width="520" height="852" role="img" aria-labelledby="title desc">
+<title id="title">34  One Floyd-Warshall round</title>
+<desc id="desc">A 4-vertex directed graph: allowing vertex 1 as a stop-over improves the distance matrix entry d[0][2] from 9 to 5 because d[0][1] + d[1][2] = 3 + 2, and no other entry changes.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="floyd-warshall-via-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="floyd-warshall-via-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="floyd-warshall-via-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="floyd-warshall-via-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="floyd-warshall-via-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="floyd-warshall-via-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="floyd-warshall-via-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="floyd-warshall-via-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="floyd-warshall-via-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="floyd-warshall-via-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="floyd-warshall-via-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="floyd-warshall-via-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="floyd-warshall-via-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="floyd-warshall-via-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="floyd-warshall-via-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="852" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">34  One Floyd-Warshall round</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Before: stop-overs {0} allowed</text>
+<text x="124.0" y="194" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<text x="180.0" y="194" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<text x="236.0" y="194" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<text x="292.0" y="194" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<text x="84" y="227.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">0</text>
+<rect x="96" y="206" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="124.0" y="228.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="152" y="206" width="56" height="30" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="180.0" y="228.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">3</text>
+<rect x="208" y="206" width="56" height="30" rx="3" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="236.0" y="228.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">9</text>
+<rect x="264" y="206" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="292.0" y="228.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<text x="84" y="257.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">1</text>
+<rect x="96" y="236" width="56" height="30" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="124.0" y="258.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">∞</text>
+<rect x="152" y="236" width="56" height="30" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="180.0" y="258.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">0</text>
+<rect x="208" y="236" width="56" height="30" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="236.0" y="258.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">2</text>
+<rect x="264" y="236" width="56" height="30" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="292.0" y="258.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">∞</text>
+<text x="84" y="287.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">2</text>
+<rect x="96" y="266" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="124.0" y="288.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<rect x="152" y="266" width="56" height="30" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="180.0" y="288.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">∞</text>
+<rect x="208" y="266" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="236.0" y="288.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="264" y="266" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="292.0" y="288.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<text x="84" y="317.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">3</text>
+<rect x="96" y="296" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="124.0" y="318.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<rect x="152" y="296" width="56" height="30" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="180.0" y="318.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">∞</text>
+<rect x="208" y="296" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="236.0" y="318.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<rect x="264" y="296" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="292.0" y="318.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<circle cx="42" cy="353" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="359" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="360" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Try vertex 1 as the stop-over</text>
+<text x="66" y="388" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">d[0][1] + d[1][2] = 3 + 2 = 5</text>
+<text x="66" y="418" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">5 &lt; 9, so d[0][2] becomes 5</text>
+<circle cx="42" cy="451" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="457" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="458" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">After: stop-overs {0, 1} allowed</text>
+<text x="124.0" y="496" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<text x="180.0" y="496" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<text x="236.0" y="496" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<text x="292.0" y="496" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<text x="84" y="529.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">0</text>
+<rect x="96" y="508" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="124.0" y="530.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="152" y="508" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="180.0" y="530.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="208" y="508" width="56" height="30" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="236.0" y="530.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">5</text>
+<rect x="264" y="508" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="292.0" y="530.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<text x="84" y="559.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">1</text>
+<rect x="96" y="538" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="124.0" y="560.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<rect x="152" y="538" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="180.0" y="560.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="208" y="538" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="236.0" y="560.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="264" y="538" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="292.0" y="560.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<text x="84" y="589.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">2</text>
+<rect x="96" y="568" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="124.0" y="590.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<rect x="152" y="568" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="180.0" y="590.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<rect x="208" y="568" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="236.0" y="590.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="264" y="568" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="292.0" y="590.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<text x="84" y="619.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">3</text>
+<rect x="96" y="598" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="124.0" y="620.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<rect x="152" y="598" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="180.0" y="620.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<rect x="208" y="598" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="236.0" y="620.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">∞</text>
+<rect x="264" y="598" width="56" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="292.0" y="620.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="28" y="648" width="26" height="20" rx="4" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="62" y="664" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">row 1 and column 1</text>
+<rect x="251.61599999999999" y="648" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="285.616" y="664" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">entry that can improve</text>
+<rect x="28" y="680" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="696" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">improved</text>
+<rect x="28" y="720" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="751" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="780" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Round k asks whether going through</text>
+<text x="44" y="807" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">vertex k beats the best route so far.</text>
+</svg>
