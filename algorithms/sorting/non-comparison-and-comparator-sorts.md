@@ -35,13 +35,13 @@ apply to them, but the trade is real. They need integer keys, and they pay in me
 <!-- visual:generated counting-sort-counts -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/counting-sort-counts-dark.svg"><img src="../../docs/visuals/assets/counting-sort-counts.svg" alt="For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6." width="520"></picture>
 
-**Figure 46.** For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 52.** For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 <!-- visual:generated radix-lsd-passes | Two stable passes, ones digit then tens digit, sort six numbers; radixSort does the same with 8-bit digits. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/radix-lsd-passes-dark.svg"><img src="../../docs/visuals/assets/radix-lsd-passes.svg" alt="Sorting 35, 21, 41, 15, 31, 25 by the ones digit gives 21, 41, 31, 35, 15, 25; a stable pass on the tens digit then gives 15, 21, 25, 31, 35, 41." width="520"></picture>
 
-**Figure 47.** Two stable passes, ones digit then tens digit, sort six numbers; radixSort does the same with 8-bit digits. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 53.** Two stable passes, ones digit then tens digit, sort six numbers; radixSort does the same with 8-bit digits. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## The invariants
@@ -126,7 +126,7 @@ table; at 2^20 apart the method rejects the range.
 <!-- visual:generated sort-stability -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/sort-stability-dark.svg"><img src="../../docs/visuals/assets/sort-stability.svg" alt="Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys." width="520"></picture>
 
-**Figure 48.** Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 54.** Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Sorting records by one key is usually one step of several: sort by name, then by city,

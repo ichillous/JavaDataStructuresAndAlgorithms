@@ -47,7 +47,7 @@ assert stack.peek() == 8 && stack.size() == 1;
 <!-- visual:generated stack-bracket-matching -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/stack-bracket-matching-dark.svg"><img src="../../docs/visuals/assets/stack-bracket-matching.svg" alt="An ArrayStack traces {[()]}: three pushes and three pops leave it empty. The same stack traced on ([)] holds ( and [ when the closer ) arrives, and the top [ does not match it, so the string is rejected at the third character." width="520"></picture>
 
-**Figure 37.** An ArrayStack traces {[()]}: three pushes and three pops leave it empty. The same stack traced on ([)] holds ( and [ when the closer ) arrives, and the top [ does not match it, so the string is rejected at the third character. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 43.** An ArrayStack traces {[()]}: three pushes and three pops leave it empty. The same stack traced on ([)] holds ( and [ when the closer ) arrives, and the top [ does not match it, so the string is rejected at the third character. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Every unmatched opening parenthesis is pending work. Reading `)` completes the most recent opening. An empty stack at that moment means the input closes something that was never opened. Here non-parenthesis characters are deliberately ignored.

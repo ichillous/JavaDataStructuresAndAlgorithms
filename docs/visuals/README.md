@@ -279,7 +279,55 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A sweep from any vertex ends at a diameter endpoint; sweep again from there.
 
-## 35. Appending to a full array
+## 35. Heap sift paths
+
+[Trees and ranges: read the lesson](../../data-structures/heaps/operations.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/heap-sift-paths-dark.svg"><img src="assets/heap-sift-paths.svg" alt="In the min heap 1, 3, 8, 4, 5, 9, add(7) appends at slot 6 and swaps up one level to slot 2, giving 1, 3, 7, 4, 5, 9, 8. remove() then takes out 1, moves 8 to the root and sifts it down two levels to slot 3, giving 3, 4, 7, 8, 5, 9." width="520"></picture>
+
+**Key idea:** Each repair follows one path of at most log2 n levels.
+
+## 36. Top k with a bounded heap
+
+[Trees and ranges: read the lesson](../../data-structures/queues/priority-queues.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/bounded-heap-topk-dark.svg"><img src="assets/bounded-heap-topk.svg" alt="Selection.smallestK over the stream 8, 3, 9, 5, 2, 5, 1 with k = 3 fills the heap with 8, 3, 9, then evicts 9, evicts 8, drops the second 5 and evicts 5 for 1, ending with 1, 2, 3." width="520"></picture>
+
+**Key idea:** The root is the largest value kept; an arrival must beat it to get in.
+
+## 37. Trie prefix walk
+
+[Trees and ranges: read the lesson](../../data-structures/tries/implementation.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/trie-prefix-walk-dark.svg"><img src="assets/trie-prefix-walk.svg" alt="For the words car, card, care, cart, cat and dog, wordsWithPrefix(&quot;ca&quot;, 3) walks the c and a nodes, then emits car, card and care in sorted order and stops before cart and cat; the dog branch is never visited." width="520"></picture>
+
+**Key idea:** Walk the prefix once, then visit children in sorted order until the limit.
+
+## 38. Sparse table overlap
+
+[Trees and ranges: read the lesson](../../data-structures/range-queries/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sparse-table-overlap-dark.svg"><img src="assets/sparse-table-overlap.svg" alt="For the values 5, 2, 6, 4, 7, 3, 8, 1, rangeMin(1, 7) takes the minimum of the blocks [1, 5) and [3, 7), which overlap on indices 3 and 4, and gets 2. A sum of the same blocks would give 41 instead of 30." width="520"></picture>
+
+**Key idea:** Minimum ignores the overlap of two blocks; a sum would count it twice.
+
+## 39. Lazy range add
+
+[Trees and ranges: read the lesson](../../data-structures/range-queries/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/lazy-propagation-dark.svg"><img src="assets/lazy-propagation.svg" alt="In a LazySegmentTree over 1, 2, 3, 4, rangeAdd(2, 4, 5) stops at the node covering [2, 4), raising its sum to 17 and leaving a pending +5 for its leaves. rangeSum(3, 4) then reads the leaf&#x27;s stored 4, adds the pending 5 and returns 9." width="520"></picture>
+
+**Key idea:** A range add stops at a covering node and leaves a pending value.
+
+## 40. Path compression
+
+[Trees and ranges: read the lesson](../../data-structures/union-find/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/union-find-compression-dark.svg"><img src="assets/union-find-compression.svg" alt="In a UnionFind over 9 indices, union(0, 5) hangs the size-4 root 4 under the size-5 root 0. Before find(7) the path is 7, 6, 4, 0; afterwards 7 and 6 point directly at 0." width="520"></picture>
+
+**Key idea:** Union by size keeps trees shallow; find re-points its path at the root.
+
+## 41. Appending to a full array
 
 [Linear structures: read the lesson](../../data-structures/arrays/operations.md)
 
@@ -287,7 +335,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.
 
-## 36. Insert after a known node
+## 42. Insert after a known node
 
 [Linear structures: read the lesson](../../data-structures/linked-lists/singly.md)
 
@@ -295,7 +343,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Link the new node onward first, then redirect the predecessor.
 
-## 37. Matching brackets with a stack
+## 43. Matching brackets with a stack
 
 [Linear structures: read the lesson](../../data-structures/stacks/implementation.md)
 
@@ -303,7 +351,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The stack holds exactly the unmatched openers; a closer must match the top.
 
-## 38. A deque at both ends
+## 44. A deque at both ends
 
 [Linear structures: read the lesson](../../data-structures/queues/implementation.md)
 
@@ -311,7 +359,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Both ends are indices on a circular buffer: addFirst steps the head back and wraps.
 
-## 39. Reaching index 5
+## 45. Reaching index 5
 
 [Linear structures: read the lesson](../../data-structures/arrays/overview.md)
 
@@ -319,7 +367,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** An array reaches any index in one jump; a list walks links from the nearer end.
 
-## 40. Four ways to walk a tree
+## 46. Four ways to walk a tree
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-trees.md)
 
@@ -327,7 +375,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Pre, in and post order differ only in when the root is read.
 
-## 41. Delete with two children
+## 47. Delete with two children
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-search-trees.md)
 
@@ -335,7 +383,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The successor's key replaces the deleted one; its old node is unlinked.
 
-## 42. Red links make 3-nodes
+## 48. Red links make 3-nodes
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -343,7 +391,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A red link and its black parent make one 3-node.
 
-## 43. Three local repairs
+## 49. Three local repairs
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -351,7 +399,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Rotations keep sorted order; a flip splits a 4-node.
 
-## 44. One insertion step
+## 50. One insertion step
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/insertion-sort.md)
 
@@ -359,7 +407,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.
 
-## 45. Heapsort phases
+## 51. Heapsort phases
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/heap-sort.md)
 
@@ -367,7 +415,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.
 
-## 46. Counting sort tally
+## 52. Counting sort tally
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -375,7 +423,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.
 
-## 47. Radix passes by digit
+## 53. Radix passes by digit
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -383,7 +431,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.
 
-## 48. Stable and unstable outcomes
+## 54. Stable and unstable outcomes
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 

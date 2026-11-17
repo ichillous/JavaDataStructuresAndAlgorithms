@@ -72,7 +72,7 @@ Each step of the figure below changes only the head or the tail index (slot numb
 <!-- visual:generated deque-both-ends | A four-slot RingDeque: addFirst moves the head back and wraps, addLast moves the tail forward, and removals reverse each move. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/deque-both-ends-dark.svg"><img src="../../docs/visuals/assets/deque-both-ends.svg" alt="A RingDeque with four slots receives addLast(20), addLast(30), addFirst(10) and addLast(40); addFirst moves the head from slot 0 back to slot 3, and the tail ends at slot 2. removeLast() returns 40 and removeFirst() returns 10, leaving 20 and 30." width="520"></picture>
 
-**Figure 38.** A four-slot RingDeque: addFirst moves the head back and wraps, addLast moves the tail forward, and removals reverse each move. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 44.** A four-slot RingDeque: addFirst moves the head back and wraps, addLast moves the tail forward, and removals reverse each move. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Both types reject nulls and nonpositive capacities. Removing or peeking at an empty end throws `NoSuchElementException`. A deque is not a linked list: it has no per-element node allocation and does not provide arbitrary indexed insertion.

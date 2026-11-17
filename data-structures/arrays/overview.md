@@ -55,7 +55,7 @@ Zero initial capacity is valid; negative capacity is rejected. This library reje
 <!-- visual:generated array-vs-list-access | An array reads any index in one jump; a doubly linked list follows links from the nearer end. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/array-vs-list-access-dark.svg"><img src="../../docs/visuals/assets/array-vs-list-access.svg" alt="In a DynamicArray of eight values, get(5) reads slot 5 in one jump. In a DoublyLinkedList of the same values it starts at the tail and follows 2 links, because 5 is in the back half; the hop counts for indices 0 to 7 are 0, 1, 2, 3, 3, 2, 1 and 0." width="520"></picture>
 
-**Figure 39.** An array reads any index in one jump; a doubly linked list follows links from the nearer end. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 45.** An array reads any index in one jump; a doubly linked list follows links from the nearer end. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 The array's one jump is why indexed reads are O(1): the address of slot `i` is computed, not searched for.
