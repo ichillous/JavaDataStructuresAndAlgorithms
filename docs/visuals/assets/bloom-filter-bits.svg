@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 870" width="520" height="870" role="img" aria-labelledby="title desc">
+<title id="title">31  Bloom filter bits</title>
+<desc id="desc">A 16-bit Bloom filter with two probes per key sets bits 8, 11, 1 and 3 for apple and pear. kiwi reads bits 8 and 7 and bit 7 is clear, a definite miss; plum reads bits 1 and 11, both set, a false positive.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="bloom-filter-bits-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="bloom-filter-bits-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="bloom-filter-bits-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="bloom-filter-bits-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="bloom-filter-bits-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="bloom-filter-bits-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="bloom-filter-bits-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="bloom-filter-bits-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="bloom-filter-bits-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="bloom-filter-bits-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="bloom-filter-bits-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="bloom-filter-bits-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="bloom-filter-bits-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="bloom-filter-bits-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="bloom-filter-bits-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="870" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">31  Bloom filter bits</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Hashing and sketches · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">add(apple) and add(pear) set bits</text>
+<rect x="29" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="42.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="42.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="58" y="184" width="26" height="40" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="71.0" y="211.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">1</text>
+<text x="71.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="87" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="100.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="100.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="116" y="184" width="26" height="40" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="129.0" y="211.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">1</text>
+<text x="129.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="145" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="158.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="158.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="174" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="187.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="187.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="203" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="216.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="216.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="232" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="245.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="245.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<rect x="261" y="184" width="26" height="40" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="274.0" y="211.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<text x="274.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<rect x="290" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="303.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="303.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">9</text>
+<rect x="319" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="332.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="332.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">10</text>
+<rect x="348" y="184" width="26" height="40" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="361.0" y="211.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<text x="361.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">11</text>
+<rect x="377" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="390.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="390.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">12</text>
+<rect x="406" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="419.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="419.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">13</text>
+<rect x="435" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="448.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="448.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">14</text>
+<rect x="464" y="184" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="477.0" y="211.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="477.0" y="250" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">15</text>
+<rect x="39" y="264" width="167" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="122.5" y="285" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">apple: bits 11, 8</text>
+<rect x="218" y="264" width="149" height="30" rx="15" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="292.5" y="285" font-size="18" fill="#6b3fb8" text-anchor="middle" font-weight="700">pear: bits 3, 1</text>
+<circle cx="42" cy="325" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="331" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="332" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">mightContain(kiwi) reads bits 8, 7</text>
+<rect x="29" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="42.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="42.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="58" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="71.0" y="387.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<text x="71.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="87" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="100.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="100.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="116" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="129.0" y="387.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<text x="129.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="145" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="158.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="158.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="174" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="187.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="187.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="203" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="216.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="216.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="232" y="360" width="26" height="40" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="245.0" y="387.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">0</text>
+<text x="245.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<rect x="261" y="360" width="26" height="40" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="274.0" y="387.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">1</text>
+<text x="274.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<rect x="290" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="303.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="303.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">9</text>
+<rect x="319" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="332.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="332.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">10</text>
+<rect x="348" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="361.0" y="387.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<text x="361.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">11</text>
+<rect x="377" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="390.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="390.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">12</text>
+<rect x="406" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="419.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="419.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">13</text>
+<rect x="435" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="448.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="448.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">14</text>
+<rect x="464" y="360" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="477.0" y="387.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="477.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">15</text>
+<text x="39" y="452" font-size="18" fill="#bd3026" text-anchor="start" font-weight="700">Bit 7 is 0, so kiwi was never added</text>
+<circle cx="42" cy="483" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="489" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="490" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">mightContain(plum) reads bits 1, 11</text>
+<rect x="29" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="42.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="42.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="58" y="518" width="26" height="40" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="71.0" y="545.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">1</text>
+<text x="71.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="87" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="100.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="100.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="116" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="129.0" y="545.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<text x="129.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="145" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="158.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="158.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="174" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="187.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="187.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="203" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="216.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="216.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="232" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="245.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="245.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<rect x="261" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="274.0" y="545.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<text x="274.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<rect x="290" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="303.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="303.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">9</text>
+<rect x="319" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="332.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="332.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">10</text>
+<rect x="348" y="518" width="26" height="40" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="361.0" y="545.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">1</text>
+<text x="361.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">11</text>
+<rect x="377" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="390.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="390.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">12</text>
+<rect x="406" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="419.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="419.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">13</text>
+<rect x="435" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="448.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="448.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">14</text>
+<rect x="464" y="518" width="26" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="477.0" y="545.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="477.0" y="584" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">15</text>
+<text x="39" y="610" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">Both are 1, yet plum was never added</text>
+<text x="39" y="638" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">pear set bit 1 and apple set bit 11</text>
+<rect x="28" y="664" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="680" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">set by apple</text>
+<rect x="192.86399999999998" y="664" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="226.86399999999998" y="680" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">set by pear</text>
+<rect x="349.08799999999997" y="664" width="26" height="20" rx="4" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="383.08799999999997" y="680" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">read as 1</text>
+<rect x="28" y="696" width="26" height="20" rx="4" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="62" y="712" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">read as 0</text>
+<rect x="166.944" y="696" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="200.944" y="712" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">clear bit</text>
+<rect x="28" y="736" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="767" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="796" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">One clear bit proves absence; all-set</text>
+<text x="44" y="823" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">bits mean only possibly present.</text>
+</svg>

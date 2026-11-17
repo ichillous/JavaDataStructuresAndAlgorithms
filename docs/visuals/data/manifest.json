@@ -287,13 +287,79 @@
       "dark": "assets/complexity-growth-dark.svg"
     },
     {
+      "id": "hash-index-spread",
+      "title": "From hash code to slot",
+      "category": "Hashing and sketches",
+      "description": "Integer keys 65536 and 131072 have hash codes 0x00010000 and 0x00020000, whose low four bits are both 0, so a plain mask sends both to slot 0. Spreading with h ^ (h >>> 16) and multiplying by 0x9E3779B9 gives slots 1 and 2 of 16.",
+      "lesson": "../../data-structures/hash-tables/functions.md",
+      "keyIdea": "Mixing lets high bits pick the slot, so such keys stop colliding.",
+      "number": 27,
+      "light": "assets/hash-index-spread.svg",
+      "dark": "assets/hash-index-spread-dark.svg"
+    },
+    {
+      "id": "open-addressing-probe",
+      "title": "Probing past a taken slot",
+      "category": "Hashing and sketches",
+      "description": "In an 8-slot table holding K, B and G, put(L) finds home slot 7 taken by G, wraps to slot 0 and stores L there; get(T), also homed at 7, visits slots 7, 0 and 1 and stops at the empty slot 1.",
+      "lesson": "../../data-structures/hash-tables/open-addressing.md",
+      "keyIdea": "A collision moves to the next slot and wraps past the end; a lookup retraces it to the first empty slot.",
+      "number": 28,
+      "light": "assets/open-addressing-probe.svg",
+      "dark": "assets/open-addressing-probe-dark.svg"
+    },
+    {
+      "id": "backward-shift-delete",
+      "title": "Backward-shift deletion",
+      "category": "Hashing and sketches",
+      "description": "In the cluster C, H, M, B at slots 3 to 6, clearing only H's slot 4 would hide M, which is stored at slot 5 but starts its search at slot 4. Backward-shift deletion moves M to slot 4, clears slot 5 and leaves B at its home slot 6.",
+      "lesson": "../../data-structures/hash-tables/open-addressing.md",
+      "keyIdea": "Shifting later keys back keeps every key reachable.",
+      "number": 29,
+      "light": "assets/backward-shift-delete.svg",
+      "dark": "assets/backward-shift-delete-dark.svg"
+    },
+    {
+      "id": "lfu-buckets",
+      "title": "LFU frequency buckets",
+      "category": "Hashing and sketches",
+      "description": "A capacity-3 LfuCache after put A, B, C and get C holds A and B in bucket 1 and C in bucket 2. get(B) moves B to the end of bucket 2, and put(D) then evicts A, the oldest key of bucket 1.",
+      "lesson": "../../data-structures/hash-tables/lfu-cache.md",
+      "keyIdea": "Hits lift keys; the oldest key in the lowest bucket is evicted.",
+      "number": 30,
+      "light": "assets/lfu-buckets.svg",
+      "dark": "assets/lfu-buckets-dark.svg"
+    },
+    {
+      "id": "bloom-filter-bits",
+      "title": "Bloom filter bits",
+      "category": "Hashing and sketches",
+      "description": "A 16-bit Bloom filter with two probes per key sets bits 8, 11, 1 and 3 for apple and pear. kiwi reads bits 8 and 7 and bit 7 is clear, a definite miss; plum reads bits 1 and 11, both set, a false positive.",
+      "lesson": "../../data-structures/probabilistic/overview.md",
+      "keyIdea": "One clear bit proves absence; all-set bits mean only possibly present.",
+      "number": 31,
+      "light": "assets/bloom-filter-bits.svg",
+      "dark": "assets/bloom-filter-bits-dark.svg"
+    },
+    {
+      "id": "count-min-rows",
+      "title": "Count-Min rows",
+      "category": "Hashing and sketches",
+      "description": "A Count-Min sketch of 3 rows by 8 columns after adding apple 3, pear 1, fig 2, plum 4 and kiwi 1. pear reads counters 2, 3 and 1 in its three rows, and the minimum, 1, is the estimate.",
+      "lesson": "../../data-structures/probabilistic/overview.md",
+      "keyIdea": "Rows only overcount, so a key's smallest counter is its estimate.",
+      "number": 32,
+      "light": "assets/count-min-rows.svg",
+      "dark": "assets/count-min-rows-dark.svg"
+    },
+    {
       "id": "dynamic-array-growth",
       "title": "Appending to a full array",
       "category": "Linear structures",
       "description": "A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends.",
       "lesson": "../../data-structures/arrays/operations.md",
       "keyIdea": "Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.",
-      "number": 27,
+      "number": 33,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
     }

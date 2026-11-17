@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 840" width="520" height="840" role="img" aria-labelledby="title desc">
+<title id="title">30  LFU frequency buckets</title>
+<desc id="desc">A capacity-3 LfuCache after put A, B, C and get C holds A and B in bucket 1 and C in bucket 2. get(B) moves B to the end of bucket 2, and put(D) then evicts A, the oldest key of bucket 1.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="lfu-buckets-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="lfu-buckets-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="lfu-buckets-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="lfu-buckets-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="lfu-buckets-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="lfu-buckets-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="lfu-buckets-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="lfu-buckets-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="lfu-buckets-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="lfu-buckets-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="lfu-buckets-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="lfu-buckets-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="lfu-buckets-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="lfu-buckets-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="lfu-buckets-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="840" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">30  LFU frequency buckets</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Hashing and sketches · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Capacity 3: put A, B, C, get C</text>
+<text x="30" y="211" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">freq 1</text>
+<rect x="110" y="182" width="56" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="138.0" y="211.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">A</text>
+<rect x="174" y="182" width="56" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="202.0" y="211.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">B</text>
+<text x="30" y="263" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">freq 2</text>
+<rect x="110" y="234" width="56" height="44" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="138.0" y="263.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">C</text>
+<text x="180" y="263" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">C was hit</text>
+<text x="30" y="302" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">Left is least recent, right is most recent</text>
+<circle cx="42" cy="333" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="339" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="340" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">get(B) lifts B to freq 2</text>
+<text x="30" y="395" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">freq 1</text>
+<rect x="110" y="366" width="56" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="138.0" y="395.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">A</text>
+<text x="30" y="447" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">freq 2</text>
+<rect x="110" y="418" width="56" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="138.0" y="447.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">C</text>
+<rect x="174" y="418" width="56" height="44" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="202.0" y="447.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">B</text>
+<text x="244" y="447" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">B was hit</text>
+<circle cx="42" cy="495" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="501" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="502" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">put(D) on a full cache</text>
+<text x="30" y="557" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">freq 1</text>
+<rect x="110" y="528" width="56" height="44" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="138.0" y="557.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">A</text>
+<rect x="174" y="528" width="56" height="44" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="202.0" y="557.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">D</text>
+<text x="244" y="557" font-size="18" fill="#bd3026" text-anchor="start" font-weight="700">A out, D in</text>
+<text x="30" y="609" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">freq 2</text>
+<rect x="110" y="580" width="56" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="138.0" y="609.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">C</text>
+<rect x="174" y="580" width="56" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="202.0" y="609.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">B</text>
+<text x="30" y="648" font-size="18" fill="#bd3026" text-anchor="start" font-weight="700">A is the oldest key of the lowest bucket</text>
+<rect x="28" y="666" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="682" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">just hit or added</text>
+<rect x="229.15200000000002" y="666" width="26" height="20" rx="4" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="263.15200000000004" y="682" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">evicted victim</text>
+<rect x="28" y="706" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="737" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="766" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Hits lift keys; the oldest key in the</text>
+<text x="44" y="793" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">lowest bucket is evicted.</text>
+</svg>

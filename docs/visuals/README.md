@@ -215,7 +215,55 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Theoretical normalized work; constants, machines and measured runtime are outside this comparison.
 
-## 27. Appending to a full array
+## 27. From hash code to slot
+
+[Hashing and sketches: read the lesson](../../data-structures/hash-tables/functions.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/hash-index-spread-dark.svg"><img src="assets/hash-index-spread.svg" alt="Integer keys 65536 and 131072 have hash codes 0x00010000 and 0x00020000, whose low four bits are both 0, so a plain mask sends both to slot 0. Spreading with h ^ (h &gt;&gt;&gt; 16) and multiplying by 0x9E3779B9 gives slots 1 and 2 of 16." width="520"></picture>
+
+**Key idea:** Mixing lets high bits pick the slot, so such keys stop colliding.
+
+## 28. Probing past a taken slot
+
+[Hashing and sketches: read the lesson](../../data-structures/hash-tables/open-addressing.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/open-addressing-probe-dark.svg"><img src="assets/open-addressing-probe.svg" alt="In an 8-slot table holding K, B and G, put(L) finds home slot 7 taken by G, wraps to slot 0 and stores L there; get(T), also homed at 7, visits slots 7, 0 and 1 and stops at the empty slot 1." width="520"></picture>
+
+**Key idea:** A collision moves to the next slot and wraps past the end; a lookup retraces it to the first empty slot.
+
+## 29. Backward-shift deletion
+
+[Hashing and sketches: read the lesson](../../data-structures/hash-tables/open-addressing.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/backward-shift-delete-dark.svg"><img src="assets/backward-shift-delete.svg" alt="In the cluster C, H, M, B at slots 3 to 6, clearing only H&#x27;s slot 4 would hide M, which is stored at slot 5 but starts its search at slot 4. Backward-shift deletion moves M to slot 4, clears slot 5 and leaves B at its home slot 6." width="520"></picture>
+
+**Key idea:** Shifting later keys back keeps every key reachable.
+
+## 30. LFU frequency buckets
+
+[Hashing and sketches: read the lesson](../../data-structures/hash-tables/lfu-cache.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/lfu-buckets-dark.svg"><img src="assets/lfu-buckets.svg" alt="A capacity-3 LfuCache after put A, B, C and get C holds A and B in bucket 1 and C in bucket 2. get(B) moves B to the end of bucket 2, and put(D) then evicts A, the oldest key of bucket 1." width="520"></picture>
+
+**Key idea:** Hits lift keys; the oldest key in the lowest bucket is evicted.
+
+## 31. Bloom filter bits
+
+[Hashing and sketches: read the lesson](../../data-structures/probabilistic/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/bloom-filter-bits-dark.svg"><img src="assets/bloom-filter-bits.svg" alt="A 16-bit Bloom filter with two probes per key sets bits 8, 11, 1 and 3 for apple and pear. kiwi reads bits 8 and 7 and bit 7 is clear, a definite miss; plum reads bits 1 and 11, both set, a false positive." width="520"></picture>
+
+**Key idea:** One clear bit proves absence; all-set bits mean only possibly present.
+
+## 32. Count-Min rows
+
+[Hashing and sketches: read the lesson](../../data-structures/probabilistic/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/count-min-rows-dark.svg"><img src="assets/count-min-rows.svg" alt="A Count-Min sketch of 3 rows by 8 columns after adding apple 3, pear 1, fig 2, plum 4 and kiwi 1. pear reads counters 2, 3 and 1 in its three rows, and the minimum, 1, is the estimate." width="520"></picture>
+
+**Key idea:** Rows only overcount, so a key's smallest counter is its estimate.
+
+## 33. Appending to a full array
 
 [Linear structures: read the lesson](../../data-structures/arrays/operations.md)
 
