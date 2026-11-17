@@ -46,7 +46,9 @@ DP states and graph results. Browser trace builders derive bounded steps from
 those inputs. Static checks verify SVGs, links, generated data and frame invariants;
 actual browser review checks text bounds, keyboard controls and narrow layouts.
 
-Do not edit generated SVGs, the manifest, visual data script, or visual index by
+The generator prints the current figure and SVG counts, and the
+[visual index](README.md) lists every figure with its lesson. Do not edit generated
+SVGs, the manifest, visual data script, visual index or gallery bodies by
 hand. Edit their source and regenerate. See [verification](verification.md) for
 the tested coverage, preview images and practical limits.
 
@@ -78,7 +80,8 @@ Read it before you start, and copy its structure.
 - **`FIGURES` entries** are dicts with the keys `id` (lowercase words joined by
   hyphens), `title`, `category`, `description` (the alt text: what is shown,
   concretely, in one or two sentences), `keyIdea` (one sentence), `lesson` (the
-  repository path of the main lesson), `height` and `draw`, plus an optional
+  repository path of the main lesson; that page must place the figure, which
+  `test_assets.py` checks), `height` and `draw`, plus an optional
   `subtitle` (default: `<category> · Worked example`). The gallery builds its
   category filters from the data, so a new category needs no viewer change.
 - **Fixtures.** `drawing.load_all_fixtures` reads `examples.properties`, then every
@@ -155,6 +158,42 @@ fenced code. The generator scans tracked and untracked, non-ignored Markdown, ex
 `docs/superpowers/`, hidden directories and this folder's generated `README.md`. An
 unknown id, a malformed marker, an unclosed region or a nested region fails the build
 and names the file and line. Never edit a region body by hand.
+
+### Lesson contract
+
+Every Markdown page under `algorithms/` and `data-structures/` places at least one figure
+and opens with an At a glance table directly under its first paragraph. Write the labels
+with non-breaking spaces so GitHub keeps each on one line, and end the first two cells
+with a full stop (`test_assets.py` enforces both):
+
+```text
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | One sentence ending with a full stop. |
+| **Avoid&nbsp;it&nbsp;when** | One sentence ending with a full stop. |
+| **Cost** | Time and extra space |
+| **In&nbsp;this&nbsp;repo** | A linked class or method |
+| **In&nbsp;the&nbsp;JDK** | A class or method as code, or "no direct equivalent" |
+```
+
+A lesson then keeps its invariant, a worked `text` trace, an executable example and a
+costs table, and ends with **In real Java** (what to use in production, with one
+executable example), **Common mistakes** (each with the input that exposes it),
+**Practice** and **Check yourself**: three `<details>` blocks whose `<summary>` is the
+question, written with `<code>` rather than backticks, which can show literally inside a
+summary, with a blank line after `</summary>` and before `</details>`.
+
+### Landing-page galleries
+
+`data-structures/README.md` and `algorithms/README.md` list every lesson of their folder
+in a generated gallery region, a marker alone on its line, `<!-- visual:gallery FOLDER -->`,
+closed by `<!-- /visual:gallery -->`, where `FOLDER` is the folder path from the
+repository root. The generator writes one table per immediate subfolder, with a
+`README.md` first and then the other lessons by file name; each row shows a thumbnail of
+the lesson's first figure not already used higher on the page, the lesson's `# ` title
+and its "Use it when" cell. A lesson placed directly in the gallery folder, or one
+without a figure, a title or an At a glance table, fails the build with its path. A new
+lesson therefore needs no landing-page edit: regenerate and it appears.
 
 ### Drawing primitives
 
