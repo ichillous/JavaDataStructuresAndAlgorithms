@@ -85,7 +85,7 @@ Re-rooting changes depths and answers, so choose the root deliberately.
 
 ## Diameter by two BFS sweeps
 
-`diameterPath` runs BFS from vertex 0, takes a farthest vertex `u`, runs BFS from
+`diameterPath` runs [BFS](bfs.md) from vertex 0, takes a farthest vertex `u`, runs BFS from
 `u`, and takes a farthest vertex `v`. The path `u..v` is a longest path.
 
 <!-- visual:generated tree-diameter -->

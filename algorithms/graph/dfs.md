@@ -55,6 +55,7 @@ DFS costs O(V + E) time and O(V + E) auxiliary space including adjacency snapsho
 `topologicalSort` is a separate Kahn indegree algorithm with the same bounds. It
 requires a directed acyclic graph and rejects cycles. A discovery list is not a
 topological order: reversing discovery order does not generally fix it either.
+[Topological sort](topological-sort.md) teaches Kahn's algorithm.
 
 **Counterexample:** DFS can first reach a destination along a long branch even
 when a direct source edge exists. Use [BFS](bfs.md) for a minimum-edge path.

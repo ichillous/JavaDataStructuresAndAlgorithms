@@ -129,7 +129,7 @@ vertex count; isolated vertices are otherwise ignored.
 
 ## Pitfalls
 
-- A single odd-degree vertex count is not enough. Two disjoint cycles have all
+- The degree count alone is not enough. Two disjoint cycles have all
   degrees even but no Euler path, because the edges are not connected. The
   implementation checks the degree rule first and then that the walk consumed
   `E` edges.

@@ -9,7 +9,8 @@ vertices `0..V-1`, `long` weights, parallel edges and self-loops allowed. Unreac
 vertices have empty distances and paths. Null graphs are rejected, bad vertices throw
 `IndexOutOfBoundsException`, and a violated precondition throws
 `IllegalArgumentException`. Inputs are never mutated; results are detached snapshots.
-Read [DFS](dfs.md) for the topological-order idea used by the DAG method.
+Read [DFS](dfs.md) for the topological-order idea used by the DAG method and
+[Topological sort](topological-sort.md) for how such an order is computed.
 
 | At a glance | |
 | --- | --- |
@@ -214,7 +215,7 @@ silently treating it as 1 would return wrong distances.
 
 ## In real Java
 
-`ArrayDeque` is the JDK deque for 0-1 BFS: `addFirst` and `addLast` give the two push ends and `null` elements are rejected. `PriorityQueue` has no decrease-key operation, and its `remove(Object)` takes linear time, so Dijkstra-style code adds a cheaper duplicate entry and skips stale ones when they are polled, which is what the lazy heap in this repository does.
+`ArrayDeque` is the JDK deque for 0-1 BFS: `addFirst` and `addLast` give the two push ends and `null` elements are rejected. `PriorityQueue` has no decrease-key operation, and its `remove(Object)` takes linear time (OpenJDK implementation note), so Dijkstra-style code adds a cheaper duplicate entry and skips stale ones when they are polled, which is what the lazy heap in this repository does.
 
 ```java
 import java.util.ArrayDeque;

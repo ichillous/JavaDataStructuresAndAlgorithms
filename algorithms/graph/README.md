@@ -29,7 +29,7 @@ throws `IllegalArgumentException`.
 | What can I reach, and in what order (level by level)? | `GraphAlgorithms.breadthFirst` | any `Graph` | O(V + E) | [BFS](bfs.md) |
 | What can I reach by going deep first? | `GraphAlgorithms.depthFirst` | any `Graph` | O(V + E) | [DFS](dfs.md) |
 | Fewest edges between two vertices? | `GraphAlgorithms.shortestPath` | any `Graph` | O(V + E) | [BFS](bfs.md) |
-| Which tasks can run before which (a valid order)? | `GraphAlgorithms.topologicalSort` | directed, acyclic | O(V + E) | no lesson link yet |
+| Which tasks can run before which (a valid order)? | `GraphAlgorithms.topologicalSort` | directed, acyclic | O(V + E) | [Topological sort](topological-sort.md) |
 | Cheapest path, nonnegative weights? | `GraphAlgorithms.dijkstra` | `WeightedGraph`, weights >= 0 | O(V + E log(E + 1)) | [BFS](bfs.md) |
 | Cheapest path with negative weights? | `AdvancedGraphAlgorithms.bellmanFord` | `WeightedGraph`, no negative cycle | O(VE) relaxations | [BFS](bfs.md) |
 | Cheapest path on a DAG, with 0 or 1 weights, with a heuristic, or between all pairs? | `ShortestPathAlgorithms` (`dagShortestPaths`, `zeroOneBfs`, `aStar`, `floydWarshall`) | see the decision table | see the lesson | [Shortest paths](shortest-paths.md) |
