@@ -1,0 +1,30 @@
+TASK 9 FRAGMENT: searching and selection
+
+README topic map (row "Searching and sorting"): add after the binary lesson link
+  [binary search on the answer](algorithms/searching/binary-search-on-answer.md)
+and to the right-hand column: "firstTrue over a monotone predicate".
+
+docs/catalog.md, SearchAlgorithms row: append
+  "`firstTrue(low, highExclusive, LongPredicate)` returns the smallest value in the half-open range
+  for which a monotone (false then true) predicate holds, or `highExclusive`; the monotone
+  precondition is unchecked; `low > highExclusive` throws `IllegalArgumentException`, a null predicate
+  `NullPointerException`; the midpoint cannot overflow for any `long` bounds."
+
+docs/complexity.md: add a row (searching section)
+  firstTrue(low, highExclusive, predicate) | O(log(high - low)) predicate calls (at most 64) | O(1) | predicate must be monotone
+
+docs/solution-finder.md, section 9 Searching: add a row
+  Binary search on the answer | The answer is the smallest value in a range that passes a monotone yes/no test | O(log(range)) tests; O(1) | repo: SearchAlgorithms.firstTrue (lesson: algorithms/searching/binary-search-on-answer.md) | The test must flip from false to true once; "exactly k" style tests do not. The result equals the exclusive upper bound when nothing passes.
+  and link the existing "Binary search" row to the new lesson as well.
+
+Roadmap / exercises: add "binary search on the answer: minimum ship capacity, integer square root,
+  smallest divisor within a threshold" (the three Practice items of the new lesson).
+
+Wrong statements fixed:
+  linear-search.md: "The first 4 in the sorted array is not its original position." was false for the
+  example [9, 4, 4, 2] (4 is at index 1 before and after sorting). Replaced with the 9, which moves
+  from index 0 to index 3.
+
+Figures: kmp-overlap removed from linear-search.md (Task 11 places it in the strings lesson).
+  New: linear-scan-first-match, predicate-boundary, quickselect-shrink, kway-merge-heap.
+  Placed: binary-bound stays in binary-search.md.
