@@ -387,13 +387,57 @@ globalThis.DSA_VISUALS_DATA = {
       "dark": "assets/dynamic-array-growth-dark.svg"
     },
     {
+      "id": "singly-insert-after",
+      "title": "Insert after a known node",
+      "category": "Linear structures",
+      "description": "In the chain 10, 20, 30, inserting 15 after 10 takes two link writes: 15.next = 10.next, then 10.next = 15, giving 10, 15, 20, 30. Writing 10.next = 15 first makes 15.next point at 15 itself and leaves 20 and 30 unreachable.",
+      "lesson": "../../data-structures/linked-lists/singly.md",
+      "keyIdea": "Link the new node onward first, then redirect the predecessor.",
+      "number": 36,
+      "light": "assets/singly-insert-after.svg",
+      "dark": "assets/singly-insert-after-dark.svg"
+    },
+    {
+      "id": "stack-bracket-matching",
+      "title": "Matching brackets with a stack",
+      "category": "Linear structures",
+      "description": "An ArrayStack traces {[()]}: three pushes and three pops leave it empty. The same stack traced on ([)] holds ( and [ when the closer ) arrives, and the top [ does not match it, so the string is rejected at the third character.",
+      "lesson": "../../data-structures/stacks/implementation.md",
+      "keyIdea": "The stack holds exactly the unmatched openers; a closer must match the top.",
+      "number": 37,
+      "light": "assets/stack-bracket-matching.svg",
+      "dark": "assets/stack-bracket-matching-dark.svg"
+    },
+    {
+      "id": "deque-both-ends",
+      "title": "A deque at both ends",
+      "category": "Linear structures",
+      "description": "A RingDeque with four slots receives addLast(20), addLast(30), addFirst(10) and addLast(40); addFirst moves the head from slot 0 back to slot 3, and the tail ends at slot 2. removeLast() returns 40 and removeFirst() returns 10, leaving 20 and 30.",
+      "lesson": "../../data-structures/queues/implementation.md",
+      "keyIdea": "Both ends are indices on a circular buffer: addFirst steps the head back and wraps.",
+      "number": 38,
+      "light": "assets/deque-both-ends.svg",
+      "dark": "assets/deque-both-ends-dark.svg"
+    },
+    {
+      "id": "array-vs-list-access",
+      "title": "Reaching index 5",
+      "category": "Linear structures",
+      "description": "In a DynamicArray of eight values, get(5) reads slot 5 in one jump. In a DoublyLinkedList of the same values it starts at the tail and follows 2 links, because 5 is in the back half; the hop counts for indices 0 to 7 are 0, 1, 2, 3, 3, 2, 1 and 0.",
+      "lesson": "../../data-structures/arrays/overview.md",
+      "keyIdea": "An array reaches any index in one jump; a list walks links from the nearer end.",
+      "number": 39,
+      "light": "assets/array-vs-list-access.svg",
+      "dark": "assets/array-vs-list-access-dark.svg"
+    },
+    {
       "id": "tree-traversals",
       "title": "Four ways to walk a tree",
       "category": "Trees and ranges",
       "description": "A binary search tree built from 8, 3, 10, 1, 6, 14, 4 and 7 has root 8, leaves 1, 4, 7 and 14, and height 3. Pre-order reads 8 3 1 6 4 7 10 14, in-order reads the keys sorted, post-order ends at the root 8, and level order reads one depth at a time.",
       "lesson": "../../data-structures/trees/binary-trees.md",
       "keyIdea": "Pre, in and post order differ only in when the root is read.",
-      "number": 36,
+      "number": 40,
       "light": "assets/tree-traversals.svg",
       "dark": "assets/tree-traversals-dark.svg"
     },
@@ -404,7 +448,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1.",
       "lesson": "../../data-structures/trees/binary-search-trees.md",
       "keyIdea": "The successor's key replaces the deleted one; its old node is unlinked.",
-      "number": 37,
+      "number": 41,
       "light": "assets/bst-delete-successor.svg",
       "dark": "assets/bst-delete-successor-dark.svg"
     },
@@ -415,7 +459,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "After put 1 to 5, a RedBlackTreeMap has black root 4 with red left child 2, black children 1 and 3 under 2, and black 5. Read as a 2-3 tree it is the 3-node [2 4] over the 2-nodes [1], [3] and [5]; the height is 2 as a binary tree and 1 as a 2-3 tree.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "A red link and its black parent make one 3-node.",
-      "number": 38,
+      "number": 42,
       "light": "assets/red-black-23-nodes.svg",
       "dark": "assets/red-black-23-nodes-dark.svg"
     },
@@ -426,7 +470,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "Rotations keep sorted order; a flip splits a 4-node.",
-      "number": 39,
+      "number": 43,
       "light": "assets/red-black-fixups.svg",
       "dark": "assets/red-black-fixups-dark.svg"
     },
@@ -437,7 +481,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1.",
       "lesson": "../../algorithms/sorting/insertion-sort.md",
       "keyIdea": "Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.",
-      "number": 40,
+      "number": 44,
       "light": "assets/insertion-sort-shift.svg",
       "dark": "assets/insertion-sort-shift-dark.svg"
     },
@@ -448,7 +492,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Heapsort on 3, 1, 6, 5, 2, 4 builds the max-heap 6, 5, 4, 1, 2, 3, then moves 6 and 5 to the end, giving 5, 3, 4, 1, 2, 6 and 4, 3, 2, 1, 5, 6, until 1 to 6 is sorted.",
       "lesson": "../../algorithms/sorting/heap-sort.md",
       "keyIdea": "Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.",
-      "number": 41,
+      "number": 45,
       "light": "assets/heapsort-phases.svg",
       "dark": "assets/heapsort-phases-dark.svg"
     },
@@ -459,7 +503,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.",
-      "number": 42,
+      "number": 46,
       "light": "assets/counting-sort-counts.svg",
       "dark": "assets/counting-sort-counts-dark.svg"
     },
@@ -470,7 +514,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Sorting 35, 21, 41, 15, 31, 25 by the ones digit gives 21, 41, 31, 35, 15, 25; a stable pass on the tens digit then gives 15, 21, 25, 31, 35, 41.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.",
-      "number": 43,
+      "number": 47,
       "light": "assets/radix-lsd-passes.svg",
       "dark": "assets/radix-lsd-passes-dark.svg"
     },
@@ -481,7 +525,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "A stable sort keeps equal keys in their input order; an unstable sort may reorder them, losing any earlier ordering by tag.",
-      "number": 44,
+      "number": 48,
       "light": "assets/sort-stability.svg",
       "dark": "assets/sort-stability-dark.svg"
     }

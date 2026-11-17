@@ -12,6 +12,65 @@ import org.junit.jupiter.api.Test;
 
 class DynamicArrayTest {
     @Test
+    void capacityReportsBackingLengthAndDoublesWhenFull() {
+        assertEquals(8, new DynamicArray<String>().capacity());
+        assertEquals(0, new DynamicArray<String>(0).capacity());
+        DynamicArray<Integer> array = new DynamicArray<>(4);
+        for (int value = 1; value <= 4; value++) {
+            array.add(value);
+        }
+        assertEquals(4, array.capacity(), "a full array has not grown yet");
+        array.add(5);
+        assertEquals(8, array.capacity());
+        for (int value = 6; value <= 9; value++) {
+            array.add(value);
+        }
+        assertEquals(16, array.capacity());
+        assertTrue(array.capacity() >= array.size());
+    }
+
+    @Test
+    void capacityNeverShrinksAndGrowsFromZeroThroughOne() {
+        DynamicArray<Integer> array = new DynamicArray<>(0);
+        array.add(1);
+        assertEquals(1, array.capacity());
+        array.add(2);
+        assertEquals(2, array.capacity());
+        array.add(3);
+        assertEquals(4, array.capacity());
+        array.remove(0);
+        array.remove(0);
+        array.remove(0);
+        assertEquals(4, array.capacity(), "removal retains capacity");
+        array.clear();
+        assertEquals(4, array.capacity(), "clear retains capacity");
+        array.add(0, 9);
+        assertEquals(4, array.capacity(), "an insertion at the front with spare room does not grow");
+    }
+
+    @Test
+    void capacityMatchesAnObservableGrowthModelOverSeededOperations() {
+        Random random = new Random(20261117L);
+        DynamicArray<Integer> array = new DynamicArray<>(3);
+        int expected = 3;
+        int size = 0;
+        for (int step = 0; step < 500; step++) {
+            if (size > 0 && random.nextInt(3) == 0) {
+                array.remove(random.nextInt(size));
+                size--;
+            } else {
+                if (size == expected) {
+                    expected = Math.max(2 * expected, expected + 1);
+                }
+                array.add(random.nextInt(size + 1), step);
+                size++;
+            }
+            assertEquals(size, array.size(), "seed 20261117, step " + step);
+            assertEquals(expected, array.capacity(), "seed 20261117, step " + step);
+        }
+    }
+
+    @Test
     void growsFromZeroAndInsertsAtBothBoundaries() {
         DynamicArray<String> array = new DynamicArray<>(0);
         array.add("b");

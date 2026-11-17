@@ -1,0 +1,51 @@
+TASK 2 FRAGMENT: linear structures (arrays, linked lists, stacks, queues)
+Stem: linear_more. Branch of the worktree agent; merged by Task 16.
+
+NEW API
+- io.github.ichillous.dsa.collections.DynamicArray#capacity()  (public int, O(1), never shrinks)
+
+CATALOG ROW (docs/catalog.md, replace the DynamicArray row's feature text)
+| [DynamicArray](../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) | Indexed `add/get/set/remove`, `clear`, `capacity()` (backing length, never shrinks), iteration. Insert permits `index == size`; access does not. | [DynamicArrayTest](../src/test/java/io/github/ichillous/dsa/collections/DynamicArrayTest.java) |
+
+COMPLEXITY ROW (docs/complexity.md, add after the DynamicArray get/set row)
+| `DynamicArray` capacity | O(1) worst | Returns the backing array length; capacity is retained after removal and `clear()` |
+
+README TOPIC MAP
+- Row "Linear storage": no new topics or paths. Optionally add to the algorithm column
+  "singly linked insertion order, bracket matching trace, ring-deque head/tail wrap, array versus list access".
+- New figures in the gallery (generated): singly-insert-after, stack-bracket-matching,
+  deque-both-ends, array-vs-list-access (category "Linear structures").
+
+SOLUTION-FINDER ROWS
+- Section 7 (stacks, queues, deques and priority): link data-structures/stacks/implementation.md for
+  multi-type bracket matching (it now has a figure and a JDK ArrayDeque version), and
+  data-structures/queues/implementation.md for ring-deque both-end behavior.
+- No new lesson was added, so no new rows are required.
+
+ROADMAP AND EXERCISES
+- Exercise idea: implement a singly linked list with insertAfter and cycle detection, then show that the
+  wrong write order is caught by the cycle test (the library ships no singly linked list).
+- Exercise idea: record DynamicArray.capacity() after each of 1,000 appends and plot resize points.
+
+WRONG OR IMPRECISE STATEMENTS FIXED
+- Lesson prose in linked-lists/singly.md said the doubly linked figure contrasted with singly linked nodes;
+  the lesson now carries its own figure (singly-insert-after) and states plainly that the library ships no
+  singly linked list.
+- arrays/operations.md placed the fenwick-blocks figure; it is removed here (Task 5 places it). The array-insertion
+  figure moved from arrays/overview.md to arrays/operations.md, where insertion is taught.
+- stacks/implementation.md repeated the stack-lifo figure from the overview; it now holds stack-bracket-matching.
+- No factual errors were found in the existing prose after checking it against the code (DoublyLinkedList.nodeAt,
+  ArrayQueue/RingDeque index arithmetic and clear) and the Java 17 API pages for ArrayList, LinkedList,
+  ArrayDeque and Stack.
+
+JDK STATEMENTS ADDED (checked against the Java SE 17 API pages)
+- ArrayList: get/set constant time, add amortized constant time; Arrays.asList returns a fixed-size view that writes through.
+- LinkedList: doubly linked, permits null, indexed operations traverse from the nearer end.
+- ArrayDeque: prohibits null, likely faster than Stack as a stack and than LinkedList as a queue.
+- Stack: the Deque interface should be used in preference to it.
+- ListIterator.add inserts at the cursor; LinkedHashMap access order and removeEldestEntry for LRU use.
+- PriorityQueue ties are broken arbitrarily.
+
+TEST NOTES
+- VisualExamplesLinearMoreTest reads RingDeque.head/elements and DoublyLinkedList.head/tail/next/previous/element by
+  reflection to assert physical slots and hop counts, because the public API cannot show them (documented in the test).

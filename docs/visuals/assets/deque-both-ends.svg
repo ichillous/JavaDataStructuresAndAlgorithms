@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 890" width="520" height="890" role="img" aria-labelledby="title desc">
+<title id="title">38  A deque at both ends</title>
+<desc id="desc">A RingDeque with four slots receives addLast(20), addLast(30), addFirst(10) and addLast(40); addFirst moves the head from slot 0 back to slot 3, and the tail ends at slot 2. removeLast() returns 40 and removeFirst() returns 10, leaving 20 and 30.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="deque-both-ends-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="deque-both-ends-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="deque-both-ends-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="deque-both-ends-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="deque-both-ends-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="deque-both-ends-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="deque-both-ends-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="deque-both-ends-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="deque-both-ends-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="deque-both-ends-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="deque-both-ends-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="deque-both-ends-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="deque-both-ends-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="deque-both-ends-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="deque-both-ends-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="890" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">38  A deque at both ends</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Linear structures · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">addLast(20), addLast(30)</text>
+<rect x="36" y="178" width="72" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="72.0" y="209.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">20</text>
+<text x="72.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0 head</text>
+<rect x="116" y="178" width="72" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="152.0" y="209.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">30</text>
+<text x="152.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1 tail</text>
+<rect x="196" y="178" width="72" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="232.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="276" y="178" width="72" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="312.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<text x="436" y="196" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">front to back</text>
+<text x="436" y="222" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">20 30</text>
+<circle cx="42" cy="277" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="283" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="284" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">addFirst(10): head wraps to slot 3</text>
+<rect x="36" y="306" width="72" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="72.0" y="337.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">20</text>
+<text x="72.0" y="380" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="116" y="306" width="72" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="152.0" y="337.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">30</text>
+<text x="152.0" y="380" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1 tail</text>
+<rect x="196" y="306" width="72" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="232.0" y="380" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="276" y="306" width="72" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="312.0" y="337.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">10</text>
+<text x="312.0" y="380" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3 head</text>
+<text x="436" y="324" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">front to back</text>
+<text x="436" y="350" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">10 20 30</text>
+<circle cx="42" cy="405" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="411" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="412" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">addLast(40): the buffer is full</text>
+<rect x="36" y="434" width="72" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="72.0" y="465.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">20</text>
+<text x="72.0" y="508" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="116" y="434" width="72" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="152.0" y="465.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">30</text>
+<text x="152.0" y="508" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="196" y="434" width="72" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="232.0" y="465.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">40</text>
+<text x="232.0" y="508" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2 tail</text>
+<rect x="276" y="434" width="72" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="312.0" y="465.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">10</text>
+<text x="312.0" y="508" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3 head</text>
+<text x="436" y="452" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">front to back</text>
+<text x="436" y="478" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">10 20 30 40</text>
+<circle cx="42" cy="533" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="539" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">4</text>
+<text x="66" y="540" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">removeLast() = 40, removeFirst() = 10</text>
+<rect x="36" y="562" width="72" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="72.0" y="593.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">20</text>
+<text x="72.0" y="636" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0 head</text>
+<rect x="116" y="562" width="72" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="152.0" y="593.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">30</text>
+<text x="152.0" y="636" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1 tail</text>
+<rect x="196" y="562" width="72" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="232.0" y="636" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="276" y="562" width="72" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="312.0" y="636" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<text x="436" y="580" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">front to back</text>
+<text x="436" y="606" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">20 30</text>
+<text x="28" y="674" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">Slots follow the circular-buffer rule (conceptual).</text>
+<rect x="28" y="692" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="708" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">head: front</text>
+<rect x="182.496" y="692" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="216.496" y="708" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">tail: back</text>
+<rect x="319.712" y="692" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="353.712" y="708" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">free slot</text>
+<rect x="28" y="732" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="763" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="792" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Both ends are indices on a circular</text>
+<text x="44" y="819" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">buffer: addFirst steps the head back</text>
+<text x="44" y="846" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">and wraps.</text>
+</svg>

@@ -28,7 +28,7 @@ Preorder can serialize shape when absent children are represented. Postorder pro
 <!-- visual:generated tree-traversals | The same tree read four ways. Only the moment the root is read changes among the depth-first orders. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/tree-traversals-dark.svg"><img src="../../docs/visuals/assets/tree-traversals.svg" alt="A binary search tree built from 8, 3, 10, 1, 6, 14, 4 and 7 has root 8, leaves 1, 4, 7 and 14, and height 3. Pre-order reads 8 3 1 6 4 7 10 14, in-order reads the keys sorted, post-order ends at the root 8, and level order reads one depth at a time." width="520"></picture>
 
-**Figure 36.** The same tree read four ways. Only the moment the root is read changes among the depth-first orders. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 40.** The same tree read four ways. Only the moment the root is read changes among the depth-first orders. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 

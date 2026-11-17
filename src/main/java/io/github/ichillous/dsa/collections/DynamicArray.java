@@ -88,6 +88,16 @@ public final class DynamicArray<T> implements Iterable<T> {
         return size;
     }
 
+    /**
+     * Returns the current capacity: the length of the backing array, which is at least
+     * {@link #size()}. Runs in O(1) time. Capacity never shrinks; it only grows, when an
+     * insertion finds the array full, to the larger of the required length and double the
+     * current capacity (see the class description for the cap).
+     */
+    public int capacity() {
+        return elements.length;
+    }
+
     /** Returns whether there are no elements. */
     public boolean isEmpty() {
         return size == 0;

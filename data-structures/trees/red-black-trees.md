@@ -63,7 +63,7 @@ update code.
 <!-- visual:generated red-black-23-nodes | The keys 1 to 5 as a 2-3 tree and as the shape RedBlackTreeMap builds after put 1 to 5. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/red-black-23-nodes-dark.svg"><img src="../../docs/visuals/assets/red-black-23-nodes.svg" alt="After put 1 to 5, a RedBlackTreeMap has black root 4 with red left child 2, black children 1 and 3 under 2, and black 5. Read as a 2-3 tree it is the 3-node [2 4] over the 2-nodes [1], [3] and [5]; the height is 2 as a binary tree and 1 as a 2-3 tree." width="520"></picture>
 
-**Figure 38.** The keys 1 to 5 as a 2-3 tree and as the shape RedBlackTreeMap builds after put 1 to 5. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 42.** The keys 1 to 5 as a 2-3 tree and as the shape RedBlackTreeMap builds after put 1 to 5. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 
@@ -89,7 +89,7 @@ the root. Finally, the root is colored black again.
 <!-- visual:generated red-black-fixups | Each repair on three keys, before and after. These shapes exist only inside one put; the finished map shows only the result. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/red-black-fixups-dark.svg"><img src="../../docs/visuals/assets/red-black-fixups.svg" alt="Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children." width="520"></picture>
 
-**Figure 39.** Each repair on three keys, before and after. These shapes exist only inside one put; the finished map shows only the result. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 43.** Each repair on three keys, before and after. These shapes exist only inside one put; the finished map shows only the result. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 

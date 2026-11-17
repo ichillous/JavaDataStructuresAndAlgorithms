@@ -287,7 +287,39 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.
 
-## 36. Four ways to walk a tree
+## 36. Insert after a known node
+
+[Linear structures: read the lesson](../../data-structures/linked-lists/singly.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/singly-insert-after-dark.svg"><img src="assets/singly-insert-after.svg" alt="In the chain 10, 20, 30, inserting 15 after 10 takes two link writes: 15.next = 10.next, then 10.next = 15, giving 10, 15, 20, 30. Writing 10.next = 15 first makes 15.next point at 15 itself and leaves 20 and 30 unreachable." width="520"></picture>
+
+**Key idea:** Link the new node onward first, then redirect the predecessor.
+
+## 37. Matching brackets with a stack
+
+[Linear structures: read the lesson](../../data-structures/stacks/implementation.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-bracket-matching-dark.svg"><img src="assets/stack-bracket-matching.svg" alt="An ArrayStack traces {[()]}: three pushes and three pops leave it empty. The same stack traced on ([)] holds ( and [ when the closer ) arrives, and the top [ does not match it, so the string is rejected at the third character." width="520"></picture>
+
+**Key idea:** The stack holds exactly the unmatched openers; a closer must match the top.
+
+## 38. A deque at both ends
+
+[Linear structures: read the lesson](../../data-structures/queues/implementation.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/deque-both-ends-dark.svg"><img src="assets/deque-both-ends.svg" alt="A RingDeque with four slots receives addLast(20), addLast(30), addFirst(10) and addLast(40); addFirst moves the head from slot 0 back to slot 3, and the tail ends at slot 2. removeLast() returns 40 and removeFirst() returns 10, leaving 20 and 30." width="520"></picture>
+
+**Key idea:** Both ends are indices on a circular buffer: addFirst steps the head back and wraps.
+
+## 39. Reaching index 5
+
+[Linear structures: read the lesson](../../data-structures/arrays/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/array-vs-list-access-dark.svg"><img src="assets/array-vs-list-access.svg" alt="In a DynamicArray of eight values, get(5) reads slot 5 in one jump. In a DoublyLinkedList of the same values it starts at the tail and follows 2 links, because 5 is in the back half; the hop counts for indices 0 to 7 are 0, 1, 2, 3, 3, 2, 1 and 0." width="520"></picture>
+
+**Key idea:** An array reaches any index in one jump; a list walks links from the nearer end.
+
+## 40. Four ways to walk a tree
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-trees.md)
 
@@ -295,7 +327,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Pre, in and post order differ only in when the root is read.
 
-## 37. Delete with two children
+## 41. Delete with two children
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-search-trees.md)
 
@@ -303,7 +335,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The successor's key replaces the deleted one; its old node is unlinked.
 
-## 38. Red links make 3-nodes
+## 42. Red links make 3-nodes
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -311,7 +343,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A red link and its black parent make one 3-node.
 
-## 39. Three local repairs
+## 43. Three local repairs
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -319,7 +351,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Rotations keep sorted order; a flip splits a 4-node.
 
-## 40. One insertion step
+## 44. One insertion step
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/insertion-sort.md)
 
@@ -327,7 +359,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.
 
-## 41. Heapsort phases
+## 45. Heapsort phases
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/heap-sort.md)
 
@@ -335,7 +367,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.
 
-## 42. Counting sort tally
+## 46. Counting sort tally
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -343,7 +375,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.
 
-## 43. Radix passes by digit
+## 47. Radix passes by digit
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -351,7 +383,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.
 
-## 44. Stable and unstable outcomes
+## 48. Stable and unstable outcomes
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
