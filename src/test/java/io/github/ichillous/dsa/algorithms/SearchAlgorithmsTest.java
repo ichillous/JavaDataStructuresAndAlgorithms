@@ -7,9 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.function.LongPredicate;
-import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
 
 class SearchAlgorithmsTest {
     @Test
@@ -72,7 +70,14 @@ class SearchAlgorithmsTest {
         assertThrows(NullPointerException.class, () -> SearchAlgorithms.upperBound(null, 0));
     }
 
-    /** A monotone predicate that is true from {@code threshold} on, recording every call. */
+    /** The documented bound on predicate calls: one per halving of the full {@code long} range. */
+    private static final int MAX_CALLS = 64;
+
+    /**
+     * A monotone predicate that is true from {@code threshold} on, recording every call. It fails
+     * on call 65, so a search that does not converge (for example after a midpoint overflow) fails
+     * at once instead of spinning.
+     */
     private static final class Probe implements LongPredicate {
         private final long threshold;
         private final long low;
@@ -88,7 +93,9 @@ class SearchAlgorithmsTest {
 
         @Override
         public boolean test(long value) {
-            calls++;
+            if (++calls > MAX_CALLS) {
+                throw new AssertionError("more than " + MAX_CALLS + " predicate calls; last value " + value);
+            }
             outside |= value < low || value >= high;
             return value >= threshold;
         }
@@ -120,11 +127,11 @@ class SearchAlgorithmsTest {
         Probe empty = new Probe(0, 5, 5);
         assertEquals(5, SearchAlgorithms.firstTrue(5, 5, empty));
         assertEquals(0, empty.calls, "an empty range never calls the predicate");
-        assertEquals(10, SearchAlgorithms.firstTrue(3, 10, value -> false));
-        assertEquals(3, SearchAlgorithms.firstTrue(3, 10, value -> true));
-        assertEquals(-7, SearchAlgorithms.firstTrue(-7, -7, value -> true));
-        assertEquals(-4, SearchAlgorithms.firstTrue(-9, 0, value -> value >= -4));
-        assertEquals(6, SearchAlgorithms.firstTrue(5, 7, value -> value >= 6));
+        assertEquals(10, SearchAlgorithms.firstTrue(3, 10, constant(false, 3, 10)));
+        assertEquals(3, SearchAlgorithms.firstTrue(3, 10, constant(true, 3, 10)));
+        assertEquals(-7, SearchAlgorithms.firstTrue(-7, -7, constant(true, -7, -7)));
+        assertEquals(-4, SearchAlgorithms.firstTrue(-9, 0, new Probe(-4, -9, 0)));
+        assertEquals(6, SearchAlgorithms.firstTrue(5, 7, new Probe(6, 5, 7)));
     }
 
     @Test
@@ -135,9 +142,14 @@ class SearchAlgorithmsTest {
         assertTrue(!probe.outside);
     }
 
-    // A signed midpoint overflows here and never converges; the timeout reports that as a failure.
+    /** Probe that is constantly false or true over {@code [low, high)}. */
+    private static Probe constant(boolean result, long low, long high) {
+        // Values in the range are below Long.MAX_VALUE, so that threshold is never reached.
+        return new Probe(result ? Long.MIN_VALUE : Long.MAX_VALUE, low, high);
+    }
+
+    // An overflowing midpoint probes outside the range or never converges; Probe fails on call 65.
     @Test
-    @Timeout(value = 10, unit = TimeUnit.SECONDS, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
     void firstTrueDoesNotOverflowAtLongExtremes() {
         long min = Long.MIN_VALUE;
         long max = Long.MAX_VALUE;
@@ -149,12 +161,24 @@ class SearchAlgorithmsTest {
             assertTrue(!probe.outside, "predicate called outside the range, threshold " + threshold);
             assertTrue(probe.calls <= 64, "calls: " + probe.calls);
         }
-        assertEquals(max, SearchAlgorithms.firstTrue(min, max, value -> false));
-        assertEquals(min, SearchAlgorithms.firstTrue(min, max, value -> true));
-        assertEquals(max, SearchAlgorithms.firstTrue(max - 1, max, value -> false));
-        assertEquals(max - 1, SearchAlgorithms.firstTrue(max - 1, max, value -> true));
-        assertEquals(min, SearchAlgorithms.firstTrue(min, min + 1, value -> true));
-        assertEquals(min + 1, SearchAlgorithms.firstTrue(min, min + 1, value -> false));
+        assertEquals(max, SearchAlgorithms.firstTrue(min, max, constant(false, min, max)));
+        assertEquals(min, SearchAlgorithms.firstTrue(min, max, constant(true, min, max)));
+        assertEquals(max, SearchAlgorithms.firstTrue(max - 1, max, constant(false, max - 1, max)));
+        assertEquals(max - 1, SearchAlgorithms.firstTrue(max - 1, max, constant(true, max - 1, max)));
+        assertEquals(min, SearchAlgorithms.firstTrue(min, min + 1, constant(true, min, min + 1)));
+        assertEquals(min + 1, SearchAlgorithms.firstTrue(min, min + 1, constant(false, min, min + 1)));
+    }
+
+    // Near Long.MAX_VALUE, low + high wraps negative: (low + high) / 2 would leave the range.
+    @Test
+    void firstTrueDoesNotOverflowNearLongMaxValue() {
+        long max = Long.MAX_VALUE;
+        long low = max - 1_000_000L;
+        for (long threshold : new long[] {low, low + 1, max - 500_000L, max - 1, max}) {
+            Probe probe = new Probe(threshold, low, max);
+            assertEquals(threshold, SearchAlgorithms.firstTrue(low, max, probe), "threshold " + threshold);
+            assertTrue(!probe.outside, "predicate called outside the range, threshold " + threshold);
+        }
     }
 
     @Test

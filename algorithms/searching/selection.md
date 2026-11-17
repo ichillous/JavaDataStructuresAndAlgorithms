@@ -135,10 +135,16 @@ int[] sorted = values.clone();
 Arrays.sort(sorted);
 assert Selection.kthSmallest(values, 2) == sorted[2];
 
-List<Integer> scores = List.of(5, 1, 4, 1, 3);
-assert Selection.smallestK(scores, 3, Comparator.naturalOrder())
-        .equals(scores.stream().sorted().limit(3).toList());
+record Task(String name, int priority) {}
+List<Task> tasks = List.of(new Task("x", 2), new Task("y", 1),
+        new Task("z", 2), new Task("w", 2));
+Comparator<Task> byPriority = Comparator.comparingInt(Task::priority);
+// k = 2 cuts through the three priority-2 tasks; the stable sort keeps the earliest, x.
+List<Task> viaStream = tasks.stream().sorted(byPriority).limit(2).toList();
+assert viaStream.equals(List.of(new Task("y", 1), new Task("x", 2)));
+assert Selection.smallestK(tasks, 2, byPriority).equals(viaStream);
 
+List<Integer> scores = List.of(5, 1, 4, 1, 3);
 PriorityQueue<Integer> heap = new PriorityQueue<>(scores);
 assert heap.peek() == 1;
 List<Integer> drained = new java.util.ArrayList<>();
@@ -169,9 +175,10 @@ throws rather than repairing the input.
 1. **Treating `k` as a one-based rank.** The second smallest of `[7, 2, 9]` is 7 and sits at
    `k = 1`; `kthSmallest(values, 2)` returns 9, and `k = 3` throws
    `IndexOutOfBoundsException`. The invariant broken is that `k` is an index into the sorted order.
-2. **Partitioning equal keys to one side.** A two-way partition that sends every value equal
-   to the pivot right removes only one element per round from `[5, 5, 5, 5]` with `k = 3`: n - 1 rounds
-   instead of one. It breaks the rule that each round discards a constant fraction.
+2. **Partitioning equal keys to one side.** A two-way partition that puts the pivot in its final
+   place and sends every other value equal to it right removes only the pivot from
+   `[5, 5, 5, 5]` with `k = 3`, so the range shrinks by one per round: about n rounds instead
+   of the single round a three-way partition needs. It breaks the rule that each round discards a constant fraction.
 3. **Comparing only values in a merge heap.** With the lists `[4]` and `[4]` a heap that ignores
    the list index may pop either 4 first. It breaks stability: equal elements must come out in
    list order, which `mergeSorted` guarantees.
