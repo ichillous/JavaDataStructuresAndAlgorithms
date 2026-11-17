@@ -34,9 +34,10 @@ array is rewritten; it does not rule out auxiliary buffers, which the next colum
 | [Heapsort](heap-sort.md) `heapSort(int[])` | no | yes | O(n log n) | O(1) | A worst-case bound with no extra memory |
 | [Counting](non-comparison-and-comparator-sorts.md) `countingSort(int[])` | not observable for ints | yes | O(n + r) | O(r) | Small value range `r` (at most 2^20) |
 | [LSD radix](non-comparison-and-comparator-sorts.md) `radixSort(int[])` | not observable for ints | yes | O(n) (four passes) | O(n) | Many ints of any value |
-| JDK `Arrays.sort(int[])` and other primitive overloads | no promise | yes | O(n log n) (Javadoc: Dual-Pivot Quicksort, "O(n log(n)) performance on all data sets") | not specified | The default for primitive arrays |
-| JDK `Arrays.sort(Object[])`, `Arrays.sort(T[], Comparator)`, `List.sort`, `Collections.sort` | yes (guaranteed) | array: yes; list: needs a modifiable list | O(n log n) | up to n/2 temporary references (OpenJDK implementation note) | The default for objects and lists |
-| JDK `Arrays.parallelSort` | primitives: no promise; objects: yes (guaranteed) | yes | O(n log n) work | up to the array size for objects (OpenJDK implementation note) | Very large arrays on a multi-core machine |
+| JDK `Arrays.sort(int[])` and other primitive overloads | no promise (the API documentation makes no stability statement) | yes | OpenJDK implementation note: Dual-Pivot Quicksort, "O(n log(n)) performance on all data sets" | not specified by the API documentation | The default for primitive arrays |
+| JDK `Arrays.sort(Object[])`, `Arrays.sort(T[], Comparator)`, `Collections.sort` | yes (guaranteed) | yes, in the array | OpenJDK implementation note: "a stable, adaptive, iterative mergesort", about n comparisons on nearly sorted input; no bound is specified by the API documentation | OpenJDK implementation note: up to n/2 temporary references | The default for object arrays |
+| JDK `List.sort` | yes (guaranteed) | the list must be modifiable, need not be resizable | as `Arrays.sort(Object[])` (OpenJDK implementation note) | the default implementation copies the list to an array and writes it back | The default for lists |
+| JDK `Arrays.parallelSort` | primitives: no promise; objects: yes (guaranteed) | yes | not specified by the API documentation | objects, OpenJDK implementation note: working space no greater than the size of the original array | Very large arrays on a multi-core machine |
 
 Notes on the JDK rows:
 
@@ -44,10 +45,12 @@ Notes on the JDK rows:
   `Arrays.sort(T[], Comparator)`, the object overloads of `parallelSort`, `List.sort`
   and `Collections.sort`). It makes no stability statement for the primitive sorts;
   equal primitives are indistinguishable anyway.
-- "An adaptive merge sort" (Timsort), the Dual-Pivot Quicksort and the use of the
-  ForkJoin common pool by `parallelSort` are OpenJDK implementation notes in the
-  Javadoc, not specification. See the
-  [solution finder](../../docs/solution-finder.md#11-sorting).
+- The algorithm names and the O(n log n) figures for the JDK sorts come from
+  "Implementation note" paragraphs of the Javadoc, so they may change between JDK
+  versions. They are the Dual-Pivot Quicksort for primitives, "a stable, adaptive,
+  iterative mergesort" for objects and lists, and a parallel sort-merge on the ForkJoin
+  common pool for `parallelSort`. The API documentation itself states no time bound for
+  these methods. See the [solution finder](../../docs/solution-finder.md#11-sorting).
 - No speed claims are made here: measure on your own data before choosing between
   sorts with the same bound.
 

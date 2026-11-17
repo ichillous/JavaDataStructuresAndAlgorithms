@@ -38,7 +38,7 @@
 <text x="387.0" y="317.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">3</text>
 <circle cx="42" cy="367" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
 <text x="42" y="373" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
-<text x="66" y="374" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Swap the root to the end, repair</text>
+<text x="66" y="374" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Swap root to the end, then sift</text>
 <text x="39" y="408" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">after extracting 1 maximum</text>
 <rect x="39" y="418" width="56" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
 <text x="67.0" y="449.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">5</text>

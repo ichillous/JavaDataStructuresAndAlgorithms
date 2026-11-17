@@ -80,9 +80,9 @@
 <rect x="320.57599999999996" y="618" width="26" height="20" rx="4" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
 <text x="354.57599999999996" y="634" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">shifted right</text>
 <rect x="28" y="650" width="26" height="20" rx="4" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
-<text x="62" y="666" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">gap</text>
-<rect x="116.832" y="650" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
-<text x="150.832" y="666" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">not yet inserted</text>
+<text x="62" y="666" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">gap (key held aside)</text>
+<rect x="263.712" y="650" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="297.712" y="666" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">not yet inserted</text>
 <rect x="28" y="690" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
 <text x="44" y="721" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
 <text x="44" y="750" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Insertion sort shifts only the larger</text>

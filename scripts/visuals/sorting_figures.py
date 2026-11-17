@@ -50,7 +50,7 @@ def insertion_sort_shift(c, fixtures):
             color="green")
 
     y = c.legend(y + 70, [("good", "sorted prefix"), ("focus", "the key"), ("alt", "shifted right"),
-                          ("muted", "gap"), ("warn", "not yet inserted")])
+                          ("muted", "gap (key held aside)"), ("warn", "not yet inserted")])
     c.note(y + 14, INSERTION_IDEA)
 
 
@@ -78,7 +78,7 @@ def heapsort_phases(c, fixtures):
     c.text(ROW_X, y + 28, "every parent is at least its children", size=18, color="muted")
     y = row(c, y + 38, built, heap_states(n))
 
-    y = c.step(y + 40, 2, "Swap the root to the end, repair")
+    y = c.step(y + 40, 2, "Swap root to the end, then sift")
     c.text(ROW_X, y + 12, "after extracting 1 maximum", size=18, color="muted")
     y = row(c, y + 22, one, heap_states(n - 1))
     suffix_brace(y, n - 1)

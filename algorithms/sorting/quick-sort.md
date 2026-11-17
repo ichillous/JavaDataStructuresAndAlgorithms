@@ -11,7 +11,7 @@ It mutates `int[]` in ascending order, rejects null and accepts empty arrays.
 | **Avoid it when** | You need stability, or a worst-case O(n log n) time bound |
 | **Cost** | O(n log n) typical; O(n²) worst case; O(log n) stack; unstable |
 | **In this repo** | [`SortAlgorithms.quickSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
-| **In the JDK** | `Arrays.sort(int[])`, which the Javadoc describes as a Dual-Pivot Quicksort |
+| **In the JDK** | `Arrays.sort(int[])`, described in the Javadoc implementation note as a Dual-Pivot Quicksort |
 
 <!-- visual:generated quick-partition -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/quick-partition-dark.svg"><img src="../../docs/visuals/assets/quick-partition.svg" alt="Gather duplicate pivot values into one finished equal region." width="520"></picture>
@@ -67,8 +67,8 @@ integers by subtraction can overflow; direct `<` and `>` comparisons are safe.
 
 ## In real Java
 
-Call `Arrays.sort(int[])` in production; its Javadoc describes a Dual-Pivot Quicksort
-and makes no stability promise for primitives. The overload
+Call `Arrays.sort(int[])` in production; its Javadoc implementation note (OpenJDK, not specification) describes a Dual-Pivot
+Quicksort, and the API documentation makes no stability promise for primitives. The overload
 `Arrays.sort(int[], fromIndex, toIndex)` sorts a half-open range and leaves every
 other element untouched, which is the same range convention the repository uses.
 

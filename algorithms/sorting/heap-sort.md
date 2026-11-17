@@ -69,7 +69,8 @@ when a changing collection needs repeated minimum queries.
 
 The JDK has no heapsort method, but `PriorityQueue` is a binary heap: `poll()` removes
 the least element, so offering every value and polling until empty yields ascending
-order in O(n log n). The Javadoc warns that its iterator is not guaranteed to traverse
+order. The Javadoc implementation note (OpenJDK) gives O(log n) time for `offer` and
+`poll`, so the loop costs O(n log n). The Javadoc warns that its iterator is not guaranteed to traverse
 the elements in any particular order, which is the same lesson as the counterexample
 above: a heap's array is not a sorted array.
 
