@@ -6094,7 +6094,7 @@ globalThis.DSA_VISUALS_DATA = {
             ],
             "markers": {
               "i": 1,
-              "l": 1
+              "window": 1
             },
             "legend": [
               [
@@ -6175,7 +6175,7 @@ globalThis.DSA_VISUALS_DATA = {
             ],
             "markers": {
               "i": 2,
-              "l": 1
+              "window": 1
             },
             "legend": [
               [
@@ -6336,7 +6336,7 @@ globalThis.DSA_VISUALS_DATA = {
             ],
             "markers": {
               "i": 4,
-              "l": 4
+              "window": 4
             },
             "legend": [
               [
@@ -6417,7 +6417,7 @@ globalThis.DSA_VISUALS_DATA = {
             ],
             "markers": {
               "i": 5,
-              "l": 4
+              "window": 4
             },
             "legend": [
               [
@@ -6498,7 +6498,7 @@ globalThis.DSA_VISUALS_DATA = {
             ],
             "markers": {
               "i": 6,
-              "l": 4
+              "window": 4
             },
             "legend": [
               [

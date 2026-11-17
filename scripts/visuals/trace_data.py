@@ -557,7 +557,7 @@ def _z_function(f):
             states[index] = 'current'
             markers['i'] = index
             if right > left:
-                markers['l'] = left
+                markers['window'] = left
         lane_states = ['unseen' if value is None else 'chosen' for value in z]
         if index is not None:
             lane_states[index] = 'current'
