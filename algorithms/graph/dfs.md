@@ -17,7 +17,7 @@ Null graphs and invalid source indices are rejected; input is unchanged.
 <!-- visual:generated bfs-vs-dfs-order | A separate small undirected graph visited both ways, not the trace below; compare how depth-first resumes the nearest unfinished neighbor scan while breadth-first finishes each layer. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bfs-vs-dfs-order-dark.svg"><img src="../../docs/visuals/assets/bfs-vs-dfs-order.svg" alt="A 6-vertex undirected graph from source 0: breadthFirst visits 0, 1, 2, 3, 4, 5 in layers of distance 0, 1 and 2, while depthFirst visits 0, 1, 3, 4, 5, 2 by following one branch to its end." width="520"></picture>
 
-**Figure 53.** A separate small undirected graph visited both ways, not the trace below; compare how depth-first resumes the nearest unfinished neighbor scan while breadth-first finishes each layer. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 59.** A separate small undirected graph visited both ways, not the trace below; compare how depth-first resumes the nearest unfinished neighbor scan while breadth-first finishes each layer. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Stack invariant

@@ -55,7 +55,7 @@ assert GraphAlgorithms.connectedComponents(graph).equals(List.of(List.of(0, 1, 2
 <!-- visual:generated bfs-vs-dfs-order | The same graph and source: breadthFirst visits whole layers, depthFirst follows one branch to its end. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bfs-vs-dfs-order-dark.svg"><img src="../../docs/visuals/assets/bfs-vs-dfs-order.svg" alt="A 6-vertex undirected graph from source 0: breadthFirst visits 0, 1, 2, 3, 4, 5 in layers of distance 0, 1 and 2, while depthFirst visits 0, 1, 3, 4, 5, 2 by following one branch to its end." width="520"></picture>
 
-**Figure 53.** The same graph and source: breadthFirst visits whole layers, depthFirst follows one branch to its end. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 59.** The same graph and source: breadthFirst visits whole layers, depthFirst follows one branch to its end. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 BFS and DFS both cost O(V + E) time; they do not optimize the same output. DFS paths need not have minimum edge count. Connected components starts another traversal for each unseen vertex, including isolated vertices; it accepts only undirected graphs.

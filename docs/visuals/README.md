@@ -415,7 +415,55 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** An array reaches any index in one jump; a list walks links from the nearer end.
 
-## 52. Three ways to store a graph
+## 52. Euclid and back-substitution
+
+[Math and bits: read the lesson](../../algorithms/math/number-theory.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/euclid-steps-dark.svg"><img src="assets/euclid-steps.svg" alt="NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd." width="520"></picture>
+
+**Key idea:** The last nonzero remainder is the gcd, and undoing each division writes it as x×a + y×b.
+
+## 53. modPow by repeated squaring
+
+[Math and bits: read the lesson](../../algorithms/math/number-theory.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/modpow-squares-dark.svg"><img src="assets/modpow-squares.svg" alt="NumberTheory.modPow(3, 13, 1000) reads the bits of 13 = 1101 from the lowest: the squares of 3 are 3, 9, 81 and 561 modulo 1000, and the result 3, 3, 243, 323 changes only on the 1 bits, ending at 323." width="520"></picture>
+
+**Key idea:** Square the base once per exponent bit and multiply it in only for 1 bits: O(log e) steps.
+
+## 54. Sieve of Eratosthenes
+
+[Math and bits: read the lesson](../../algorithms/math/number-theory.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sieve-grid-dark.svg"><img src="assets/sieve-grid.svg" alt="NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29." width="520"></picture>
+
+**Key idea:** A prime p starts crossing at p×p, because smaller multiples have a smaller prime factor.
+
+## 55. Reservoir sampling
+
+[Math and bits: read the lesson](../../algorithms/math/randomized-sampling.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/reservoir-sampling-dark.svg"><img src="assets/reservoir-sampling.svg" alt="Sampling.reservoirSample over the items A to H with k = 3 and seed 17 fills the reservoir with A, B, C, then draws j for each later arrival with replacement chance 3/4 down to 3/8; D, F and H replace slots 0, 0 and 1, giving F, H, C." width="520"></picture>
+
+**Key idea:** Arrival i is kept with chance k/i, so every item seen so far ends up in the sample with equal chance.
+
+## 56. Alias table columns
+
+[Math and bits: read the lesson](../../algorithms/math/randomized-sampling.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/alias-table-dark.svg"><img src="assets/alias-table.svg" alt="AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2." width="520"></picture>
+
+**Key idea:** Equal columns split between two items let one uniform column pick and one coin flip draw any weight.
+
+## 57. A set as a bit mask
+
+[Math and bits: read the lesson](../../algorithms/bit-manipulation/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/bitmask-subsets-dark.svg"><img src="assets/bitmask-subsets.svg" alt="The set {1, 3} of four elements is the int mask 1010 = 10. Testing bit 3 gives 1, setting bit 2 gives 1110, clearing bit 3 gives 0010, and (sub - 1) &amp; mask walks the subsets 10, 8, 2 and 0." width="520"></picture>
+
+**Key idea:** A set is an int: test, set and clear bits in one operation, and (sub − 1) & mask visits every subset.
+
+## 58. Three ways to store a graph
 
 [Graphs: read the lesson](../../data-structures/graphs/representation.md)
 
@@ -423,7 +471,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Edge tests favor a matrix; neighbor scans favor an adjacency list.
 
-## 53. BFS and DFS visit order
+## 59. BFS and DFS visit order
 
 [Graphs: read the lesson](../../data-structures/graphs/traversal.md)
 
@@ -431,7 +479,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A queue visits whole layers; a stack follows one branch to its end.
 
-## 54. Kahn's topological order
+## 60. Kahn's topological order
 
 [Graphs: read the lesson](../../algorithms/graph/topological-sort.md)
 
@@ -439,7 +487,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A vertex is output once its in-degree is 0, so every edge points forward.
 
-## 55. Shortest-path chooser
+## 61. Shortest-path chooser
 
 [Graphs: read the lesson](../../algorithms/graph/shortest-paths.md)
 
@@ -447,7 +495,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Use the most specific algorithm whose precondition your graph meets; each one exploits a fact the general one cannot assume.
 
-## 56. 0-1 BFS and its deque
+## 62. 0-1 BFS and its deque
 
 [Graphs: read the lesson](../../algorithms/graph/shortest-paths.md)
 
@@ -455,7 +503,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Zero-weight edges go to the deque's front, unit-weight edges to its back.
 
-## 57. A* with a good heuristic
+## 63. A* with a good heuristic
 
 [Graphs: read the lesson](../../algorithms/graph/shortest-paths.md)
 
@@ -463,7 +511,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A good heuristic keeps the search near the route; far cells never get an h evaluation.
 
-## 58. One Floyd-Warshall round
+## 64. One Floyd-Warshall round
 
 [Graphs: read the lesson](../../algorithms/graph/shortest-paths.md)
 
@@ -471,7 +519,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Round k asks whether going through vertex k beats the best route so far.
 
-## 59. Two pointers, sorted array
+## 65. Two pointers, sorted array
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -479,7 +527,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Each move drops an index with no partner: at most n - 1 moves.
 
-## 60. Window jumping a repeat
+## 66. Window jumping a repeat
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -487,7 +535,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The left edge never moves back, so each unit is added once: linear time.
 
-## 61. Next greater by stack
+## 67. Next greater by stack
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -495,7 +543,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Each index is pushed once and popped once: O(n) despite the inner loop.
 
-## 62. Range adds by differences
+## 68. Range adds by differences
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -503,7 +551,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Two marks per update, then one running sum: O(n + u) in total.
 
-## 63. Sweeping events for rooms
+## 69. Sweeping events for rooms
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -511,7 +559,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The busiest moment sets the room count; at a tie an end comes first.
 
-## 64. Inversions during a merge
+## 70. Inversions during a merge
 
 [Array patterns: read the lesson](../../algorithms/divide-and-conquer/problems.md)
 
@@ -519,7 +567,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A smaller right value jumps over every left value still waiting.
 
-## 65. Four ways to walk a tree
+## 71. Four ways to walk a tree
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-trees.md)
 
@@ -527,7 +575,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Pre, in and post order differ only in when the root is read.
 
-## 66. Delete with two children
+## 72. Delete with two children
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-search-trees.md)
 
@@ -535,7 +583,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The successor's key replaces the deleted one; its old node is unlinked.
 
-## 67. Red links make 3-nodes
+## 73. Red links make 3-nodes
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -543,7 +591,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A red link and its black parent make one 3-node.
 
-## 68. Three local repairs
+## 74. Three local repairs
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -551,7 +599,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Rotations keep sorted order; a flip splits a 4-node.
 
-## 69. Linear search: first match
+## 75. Linear search: first match
 
 [Sorting and searching: read the lesson](../../algorithms/searching/linear-search.md)
 
@@ -559,7 +607,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A hit stops the scan; only a miss costs n comparisons.
 
-## 70. Predicate boundary search
+## 76. Predicate boundary search
 
 [Sorting and searching: read the lesson](../../algorithms/searching/binary-search-on-answer.md)
 
@@ -567,7 +615,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Once a capacity fits, every larger one fits: each probe halves the range.
 
-## 71. Quickselect keeps one part
+## 77. Quickselect keeps one part
 
 [Sorting and searching: read the lesson](../../algorithms/searching/selection.md)
 
@@ -575,7 +623,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** k lies in one part of each partition: keep it, discard the rest.
 
-## 72. K-way merge with a heap
+## 78. K-way merge with a heap
 
 [Sorting and searching: read the lesson](../../algorithms/searching/selection.md)
 
@@ -583,7 +631,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The smallest head is the next output; ties pop in list order.
 
-## 73. One insertion step
+## 79. One insertion step
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/insertion-sort.md)
 
@@ -591,7 +639,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.
 
-## 74. Heapsort phases
+## 80. Heapsort phases
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/heap-sort.md)
 
@@ -599,7 +647,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.
 
-## 75. Counting sort tally
+## 81. Counting sort tally
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -607,7 +655,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.
 
-## 76. Radix passes by digit
+## 82. Radix passes by digit
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -615,7 +663,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.
 
-## 77. Stable and unstable outcomes
+## 83. Stable and unstable outcomes
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 

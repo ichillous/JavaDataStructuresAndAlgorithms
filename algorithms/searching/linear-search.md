@@ -25,7 +25,7 @@ a miss, such as `7`, reads every cell before it can answer `-1`.
 <!-- visual:generated linear-scan-first-match -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/linear-scan-first-match-dark.svg"><img src="../../docs/visuals/assets/linear-scan-first-match.svg" alt="linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1." width="520"></picture>
 
-**Figure 69.** linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 75.** linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 The same trace in a table:

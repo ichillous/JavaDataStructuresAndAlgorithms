@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 868" width="520" height="868" role="img" aria-labelledby="title desc">
+<title id="title">57  A set as a bit mask</title>
+<desc id="desc">The set {1, 3} of four elements is the int mask 1010 = 10. Testing bit 3 gives 1, setting bit 2 gives 1110, clearing bit 3 gives 0010, and (sub - 1) &amp; mask walks the subsets 10, 8, 2 and 0.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="bitmask-subsets-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="bitmask-subsets-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="bitmask-subsets-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="bitmask-subsets-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="bitmask-subsets-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="bitmask-subsets-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="bitmask-subsets-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="bitmask-subsets-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="bitmask-subsets-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="bitmask-subsets-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="bitmask-subsets-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="bitmask-subsets-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="bitmask-subsets-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="bitmask-subsets-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="bitmask-subsets-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="868" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">57  A set as a bit mask</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Math and bits · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">A set as one int</text>
+<rect x="60" y="178" width="60" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="90.0" y="209.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<text x="90.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">bit 3</text>
+<rect x="130" y="178" width="60" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="160.0" y="209.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="160.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">bit 2</text>
+<rect x="200" y="178" width="60" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="230.0" y="209.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<text x="230.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">bit 1</text>
+<rect x="270" y="178" width="60" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="300.0" y="209.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="300.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">bit 0</text>
+<text x="346" y="206" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">mask = 10</text>
+<text x="346" y="234" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">set {1, 3}</text>
+<circle cx="42" cy="289" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="295" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="296" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Test, set and clear a bit</text>
+<text x="48" y="330" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">test bit 3: (10 &gt;&gt; 3) &amp; 1 = 1</text>
+<text x="48" y="360" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">set bit 2: 1010 | 0100 = 1110</text>
+<text x="48" y="390" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">clear bit 3: 1010 &amp; 0111 = 0010</text>
+<circle cx="42" cy="427" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="433" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="434" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Walk subsets: (sub − 1) &amp; mask</text>
+<text x="128.0" y="478" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">bit 3</text>
+<text x="184.0" y="478" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">bit 2</text>
+<text x="240.0" y="478" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">bit 1</text>
+<text x="296.0" y="478" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">bit 0</text>
+<text x="88" y="516.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">10</text>
+<rect x="100" y="490" width="56" height="40" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="128.0" y="517.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<rect x="156" y="490" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="184.0" y="517.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="212" y="490" width="56" height="40" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="240.0" y="517.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<rect x="268" y="490" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="296.0" y="517.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="88" y="556.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">8</text>
+<rect x="100" y="530" width="56" height="40" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="128.0" y="557.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<rect x="156" y="530" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="184.0" y="557.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="212" y="530" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="240.0" y="557.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="268" y="530" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="296.0" y="557.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="88" y="596.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">2</text>
+<rect x="100" y="570" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="128.0" y="597.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="156" y="570" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="184.0" y="597.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="212" y="570" width="56" height="40" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="240.0" y="597.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<rect x="268" y="570" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="296.0" y="597.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="88" y="636.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">0</text>
+<rect x="100" y="610" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="128.0" y="637.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="156" y="610" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="184.0" y="637.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="212" y="610" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="240.0" y="637.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="268" y="610" width="56" height="40" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="296.0" y="637.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="338" y="517" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">9 &amp; 10 = 8</text>
+<text x="338" y="557" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">7 &amp; 10 = 2</text>
+<text x="338" y="597" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">1 &amp; 10 = 0</text>
+<text x="338" y="637" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">0: stop</text>
+<rect x="28" y="668" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="684" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">1: in the subset</text>
+<rect x="218.784" y="668" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="252.784" y="684" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">not in the mask</text>
+<rect x="28" y="708" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="739" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="768" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">A set is an int: test, set and clear</text>
+<text x="44" y="795" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">bits in one operation, and (sub − 1) &amp;</text>
+<text x="44" y="822" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">mask visits every subset.</text>
+</svg>
