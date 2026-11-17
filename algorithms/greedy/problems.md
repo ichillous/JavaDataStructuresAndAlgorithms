@@ -15,6 +15,9 @@ The examples below separate a maintained API from a small executable JDK exercis
 ## Coin change: a local rule that fails
 
 <!-- visual:generated coin-dp -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/coin-dp-dark.svg"><img src="../../docs/visuals/assets/coin-dp.svg" alt="Compare every final coin; the largest-first greedy choice loses." width="520"></picture>
+
+**Figure 16.** Compare every final coin; the largest-first greedy choice loses. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 For denominations `[1, 3, 4]` and amount 6, largest-first chooses `4 + 1 + 1`.

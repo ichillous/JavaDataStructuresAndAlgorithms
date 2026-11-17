@@ -125,6 +125,9 @@ A four-matrix chain shows the whole mechanism: the cost table, the candidate
 splits for the full chain, and the stored splits that are followed back.
 
 <!-- visual:generated matrix-chain-splits -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/matrix-chain-splits-dark.svg"><img src="../../docs/visuals/assets/matrix-chain-splits.svg" alt="The cost table for four matrices with dimensions 30, 1, 40, 10, 25, the three candidate splits of the whole chain, and the stored splits that give (A1((A2A3)A4)) at cost 1400." width="520"></picture>
+
+**Figure 30.** The cost table for four matrices with dimensions 30, 1, 40, 10, 25, the three candidate splits of the whole chain, and the stored splits that give (A1((A2A3)A4)) at cost 1400. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 **Pitfall:** multiplying strictly left to right is not always optimal. For
@@ -149,6 +152,9 @@ close the cycle with d[j][0]; optimum 80 (0-1-3-2-0 and 0-2-3-1-0 tie)
 ```
 
 <!-- visual:generated held-karp-masks -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/held-karp-masks-dark.svg"><img src="../../docs/visuals/assets/held-karp-masks.svg" alt="The Held-Karp table for four cities, one cost per visited set and last city, the closing edge back to city 0, and the optimal tour 0, 2, 3, 1, 0 of cost 80." width="520"></picture>
+
+**Figure 31.** The Held-Karp table for four cities, one cost per visited set and last city, the closing edge back to city 0, and the optimal tour 0, 2, 3, 1, 0 of cost 80. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 The figure lists every (visited set, last city) state and shows the tie: ending
@@ -181,6 +187,9 @@ walk back: D taken (jump to p=2), B taken (jump to 0)  -> [B, D], total 10
 ```
 
 <!-- visual:generated weighted-interval-choice -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/weighted-interval-choice-dark.svg"><img src="../../docs/visuals/assets/weighted-interval-choice.svg" alt="Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10." width="520"></picture>
+
+**Figure 32.** Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 **Pitfall:** the unweighted rule "earliest end first" from

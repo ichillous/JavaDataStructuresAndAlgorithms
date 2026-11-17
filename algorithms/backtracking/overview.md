@@ -7,6 +7,14 @@ than a single local choice. The maintained
 returns immutable results and limits input sizes because it materializes every
 solution. Enumeration can be expensive even when each individual test is cheap.
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | You need valid combinations or one witness under constraints that can reject a partial solution early |
+| **Avoid it when** | Subproblems overlap (use DP) or a proven greedy rule exists |
+| **Cost** | Exponential in the worst case: O(n · n!) for the permutation and queens examples |
+| **In this repo** | [`Backtracking.uniquePermutations`](../../src/main/java/io/github/ichillous/dsa/algorithms/Backtracking.java) and `nQueens` |
+| **In the JDK** | No direct equivalent; `ArrayList` as the path, copied at each solution |
+
 <!-- visual:generated queens-backtracking -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/queens-backtracking-dark.svg"><img src="../../docs/visuals/assets/queens-backtracking.svg" alt="Trace failed placements before reaching the first valid board." width="520"></picture>
 
@@ -71,11 +79,69 @@ bounds, not a claim that pruning removes the exponential growth.
 chosen. Used **positions** and duplicate-branch suppression solve different
 problems. Forgetting to undo an occupied column also silently removes valid boards.
 
+## In real Java
+
+The recursion path is usually one mutable `ArrayList` that is appended to and
+trimmed. Because a list is a reference, recording a solution by adding the path
+itself stores the same object many times; the later undo steps then empty every
+"saved" result. Copy at the moment of success.
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+List<Integer> path = new ArrayList<>();
+List<List<Integer>> aliased = new ArrayList<>();
+List<List<Integer>> copied = new ArrayList<>();
+path.add(1);
+path.add(2);
+aliased.add(path);
+copied.add(new ArrayList<>(path));
+path.remove(path.size() - 1); // undo
+path.remove(path.size() - 1);
+assert aliased.get(0).isEmpty(); // corrupted by the undo
+assert copied.get(0).equals(List.of(1, 2));
+```
+
+## Common mistakes
+
+- **Not undoing a choice.** If `nQueens(4)` forgets to free a column after trying
+  a row, valid boards such as `[1, 3, 0, 2]` disappear: the invariant "bookkeeping
+  matches the current path" breaks.
+- **Deduplicating with `contains`.** For `[1, 1, 2]` the check "value already in
+  the path" refuses the second `1` entirely, so `[1, 1, 2]` is never produced.
+  Track used positions and skip only equivalent siblings.
+- **Storing the live path.** Adding the mutable list instead of a copy yields
+  empty or identical results after the search ends, as the example above shows.
+
 ## Practice
 
 1. Trace which of the two equal positions is allowed at each permutation depth.
 2. Validate queens solutions independently using row, column and diagonal checks.
 3. Explain why pruning a negative remaining sum is unsafe with signed inputs;
    continue with [puzzles and subset sum](problems.md).
+
+## Check yourself
+
+<details>
+<summary>What must a recursive call do to the state before it tries the next sibling choice?</summary>
+
+Undo every change it made for the previous choice (path entry, used flag, occupied column and diagonals), so the next sibling starts from exactly the state the call received.
+
+</details>
+
+<details>
+<summary>Why is a conflict a safe reason to prune in N-Queens?</summary>
+
+Adding more queens can never remove an attack between two queens already placed, so no completion of that partial board is valid.
+
+</details>
+
+<details>
+<summary>Why does `uniquePermutations([1, 1, 2])` return three lists rather than six?</summary>
+
+The two equal values are interchangeable, so choosing either at the same depth repeats a branch. Skipping an equal value unless its predecessor is already used keeps one of each ordering.
+
+</details>
 
 Check the [solutions](../../docs/solutions.md) after trying a small search tree. The [solution finder](../../docs/solution-finder.md#20-backtracking-and-search) compares this technique with its alternatives.
