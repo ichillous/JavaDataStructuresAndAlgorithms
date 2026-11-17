@@ -222,3 +222,51 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dynamic-array-growth-dark.svg"><img src="assets/dynamic-array-growth.svg" alt="A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends." width="520"></picture>
 
 **Key idea:** Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.
+
+## 28. Two pointers, sorted array
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/two-pointers-pair-sum-dark.svg"><img src="assets/two-pointers-pair-sum.svg" alt="pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3." width="520"></picture>
+
+**Key idea:** Each move drops an index with no partner: at most n - 1 moves.
+
+## 29. Window jumping a repeat
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sliding-window-distinct-dark.svg"><img src="assets/sliding-window-distinct.svg" alt="longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5." width="520"></picture>
+
+**Key idea:** The left edge never moves back, so each unit is added once: linear time.
+
+## 30. Next greater by stack
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/monotonic-stack-next-greater-dark.svg"><img src="assets/monotonic-stack-next-greater.svg" alt="nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1." width="520"></picture>
+
+**Key idea:** Each index is pushed once and popped once: O(n) despite the inner loop.
+
+## 31. Range adds by differences
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/difference-array-ranges-dark.svg"><img src="assets/difference-array-ranges.svg" alt="applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0." width="520"></picture>
+
+**Key idea:** Two marks per update, then one running sum: O(n + u) in total.
+
+## 32. Sweeping events for rooms
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/interval-sweep-rooms-dark.svg"><img src="assets/interval-sweep-rooms.svg" alt="minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice." width="520"></picture>
+
+**Key idea:** The busiest moment sets the room count; at a tie an end comes first.
+
+## 33. Inversions during a merge
+
+[Array patterns: read the lesson](../../algorithms/divide-and-conquer/problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/inversion-count-merge-dark.svg"><img src="assets/inversion-count-merge.svg" alt="countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions." width="520"></picture>
+
+**Key idea:** A smaller right value jumps over every left value still waiting.

@@ -297,6 +297,72 @@ globalThis.DSA_VISUALS_DATA = {
       "number": 27,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
+    },
+    {
+      "id": "two-pointers-pair-sum",
+      "title": "Two pointers, sorted array",
+      "category": "Array patterns",
+      "description": "pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "Each move drops an index with no partner: at most n - 1 moves.",
+      "number": 28,
+      "light": "assets/two-pointers-pair-sum.svg",
+      "dark": "assets/two-pointers-pair-sum-dark.svg"
+    },
+    {
+      "id": "sliding-window-distinct",
+      "title": "Window jumping a repeat",
+      "category": "Array patterns",
+      "description": "longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "The left edge never moves back, so each unit is added once: linear time.",
+      "number": 29,
+      "light": "assets/sliding-window-distinct.svg",
+      "dark": "assets/sliding-window-distinct-dark.svg"
+    },
+    {
+      "id": "monotonic-stack-next-greater",
+      "title": "Next greater by stack",
+      "category": "Array patterns",
+      "description": "nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "Each index is pushed once and popped once: O(n) despite the inner loop.",
+      "number": 30,
+      "light": "assets/monotonic-stack-next-greater.svg",
+      "dark": "assets/monotonic-stack-next-greater-dark.svg"
+    },
+    {
+      "id": "difference-array-ranges",
+      "title": "Range adds by differences",
+      "category": "Array patterns",
+      "description": "applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "Two marks per update, then one running sum: O(n + u) in total.",
+      "number": 31,
+      "light": "assets/difference-array-ranges.svg",
+      "dark": "assets/difference-array-ranges-dark.svg"
+    },
+    {
+      "id": "interval-sweep-rooms",
+      "title": "Sweeping events for rooms",
+      "category": "Array patterns",
+      "description": "minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "The busiest moment sets the room count; at a tie an end comes first.",
+      "number": 32,
+      "light": "assets/interval-sweep-rooms.svg",
+      "dark": "assets/interval-sweep-rooms-dark.svg"
+    },
+    {
+      "id": "inversion-count-merge",
+      "title": "Inversions during a merge",
+      "category": "Array patterns",
+      "description": "countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions.",
+      "lesson": "../../algorithms/divide-and-conquer/problems.md",
+      "keyIdea": "A smaller right value jumps over every left value still waiting.",
+      "number": 33,
+      "light": "assets/inversion-count-merge.svg",
+      "dark": "assets/inversion-count-merge-dark.svg"
     }
   ],
   "traces": [
