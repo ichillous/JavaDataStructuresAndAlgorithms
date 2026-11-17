@@ -90,7 +90,7 @@ assert java.util.Arrays.equals(arrivals, new int[] {1, 3, 0, 2, 4});
 ## Common mistakes
 
 1. **Reversing with subtraction.** The comparator `(a, b) -> b - a` is meant to put larger values first. For `1` and `Integer.MIN_VALUE`, `compare(1, Integer.MIN_VALUE)` computes `Integer.MIN_VALUE - 1`, which overflows to `Integer.MAX_VALUE`: positive, so `1` is ordered after the minimum, the opposite of the intent. The comparator breaks the contract that `sign(compare(a, b))` reflects the real order.
-2. **Expecting iteration to be sorted.** After adding 3, 1, 2 to a `PriorityQueue`, a for-each loop or `toString` is documented to give no particular order. The heap invariant orders only parent against children; only repeated `poll` yields priority order.
+2. **Expecting iteration to be sorted.** After adding 3, 1, 2 to a `PriorityQueue`, iterating the queue is documented to give no particular order, and `toString` follows that iteration. The heap invariant orders only parent against children; only repeated `poll` yields priority order.
 3. **Keeping the largest k with a max heap.** For the stream `5, 1, 9, 3` and `k = 2`, a max heap exposes `9` as its head, so making room evicts the best value instead of the weakest. Keep the largest `k` in a **min** heap, whose head is the weakest kept value and the only one a new arrival must beat.
 
 ## Check yourself

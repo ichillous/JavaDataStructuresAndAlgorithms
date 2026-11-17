@@ -142,7 +142,7 @@ def bounded_heap_topk(c, fixtures):
         if action == "fill":
             label, color = "fill (heap not full)", "muted"
         elif action == "drop":
-            label, color = f"drop, not below {max(kept_after[index])}", "red"
+            label, color = f"drop: tie with root {max(kept_after[index])}" if value == max(kept_after[index]) else f"drop: not below root {max(kept_after[index])}", "red"
         else:
             label, color = f"evict {action.split(':')[1]}, keep {value}", "ink"
         c.text(96, top + 23, label, size=18, color=color, weight="700" if action != "fill" else "400")
@@ -379,8 +379,9 @@ def lazy_propagation(c, fixtures):
     y = c.step(bottom + 76, 2, f"rangeSum({query_from}, {query_to}) carries +{delta} down")
     top = y + 36
     draw_tree(top, {0: "focus", tagged: "focus", 6: "focus"}, {0, tagged, 6})
+    c.chip(LAZY_X[tagged] + LAZY_R + 8, _lazy_point(tagged, top, gap)[1] - 15, f"pending +{delta}", color="gold")
     bottom = top + 2 * gap + LAZY_R
-    c.text(28, bottom + 30, f"{stored} stored + {delta} pending x {query_to - query_from} element = {answer}",
+    c.text(28, bottom + 30, f"{stored} stored + {delta} pending, {query_to - query_from} element = {answer}",
            size=18, color="blue", weight="700")
     y = c.legend(bottom + 70, [("warn", "tagged node"), ("muted", "stale child"),
                                ("focus", "queried")])

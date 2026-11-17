@@ -74,7 +74,7 @@
 <text x="452.0" y="473.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
 <rect x="32" y="486" width="48" height="32" rx="8" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
 <text x="56.0" y="509.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">5</text>
-<text x="96" y="509" font-size="18" fill="#ffaaa1" text-anchor="start" font-weight="700">drop, not below 5</text>
+<text x="96" y="509" font-size="18" fill="#ffaaa1" text-anchor="start" font-weight="700">drop: tie with root 5</text>
 <rect x="330" y="486" width="44" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
 <text x="352.0" y="509.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">5</text>
 <rect x="380" y="486" width="44" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>

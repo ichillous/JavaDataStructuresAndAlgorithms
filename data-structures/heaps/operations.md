@@ -68,6 +68,8 @@ For heap `[1, 3, 2, 4, 9, 7]`, removing 1 first creates `[7, 3, 2, 4, 9]`. Swapp
 
 The singleton case needs no sift: removing its final slot leaves an empty heap. Peek and remove then throw the documented empty-state exception, rather than returning a numeric sentinel that could also be a real value.
 
+The arrays in the next figure are the conceptual layout that the sift rules produce; `BinaryMinHeap` keeps its array private, so the tests check the removal order instead.
+
 <!-- visual:generated heap-sift-paths -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/heap-sift-paths-dark.svg"><img src="../../docs/visuals/assets/heap-sift-paths.svg" alt="In the min heap 1, 3, 8, 4, 5, 9, add(7) appends at slot 6 and swaps up one level to slot 2, giving 1, 3, 7, 4, 5, 9, 8. remove() then takes out 1, moves 8 to the root and sifts it down two levels to slot 3, giving 3, 4, 7, 8, 5, 9." width="520"></picture>
 

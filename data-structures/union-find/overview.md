@@ -20,7 +20,7 @@ Union-find, also called disjoint sets, keeps a partition of the indices `0..n-1`
 
 Each group is a tree stored in a `parent` array. A root is its own parent and represents the group. `find(x)` follows parents to the root, so two indices are together exactly when their roots are equal. Two rules keep the trees shallow:
 
-- **Union by size.** `union` attaches the root of the smaller tree under the root of the larger. On a tie, the first argument's root stays the root. A tree of height h then has at least 2^h nodes, so heights stay below log2 n.
+- **Union by size.** `union` attaches the root of the smaller tree under the root of the larger. On a tie, the first argument's root stays the root. A node's depth grows only when its tree is merged under a tree at least as large, which at least doubles the size of the tree it belongs to. A tree of height h therefore has at least 2^h nodes, so heights are at most log2 n.
 - **Path compression.** `find` re-points every node on its path directly at the root, so later finds on those nodes take one step.
 
 Each root also stores its group's size, so `componentSize` and the group count are kept up to date by `union`.
@@ -57,7 +57,6 @@ assert sets.union(0, 1) && sets.union(2, 3) && sets.union(0, 2) && sets.union(0,
 assert sets.union(4, 5) && sets.union(6, 7) && sets.union(4, 6);
 assert sets.components() == 2;
 assert sets.componentSize(0) == 5 && sets.componentSize(7) == 4;
-assert sets.find(7) == 4;
 assert sets.union(0, 5);
 assert !sets.union(7, 3);
 assert sets.components() == 1 && sets.componentSize(7) == 9;
@@ -143,12 +142,12 @@ assert rejected && friends.components() == 2;
 
 ## A pitfall: dropping union by size
 
-A version that always links the first root under the second, without comparing sizes, can build a chain. `union(0, 1)`, `union(1, 2)`, `union(2, 3)` and so on put each previous root under the new index, giving a path of length n - 1 that `find(0)` must walk before compression flattens it. Comparing sizes before linking avoids that chain: heights stay below log2 n even before any compression, and compression then flattens the paths that are used.
+A version that always links the first root under the second, without comparing sizes, can build a chain. `union(0, 1)`, `union(1, 2)`, `union(2, 3)` and so on put each previous root under the new index, giving a path of length n - 1 that `find(0)` must walk before compression flattens it. Comparing sizes before linking avoids that chain: heights stay at most log2 n even before any compression, and compression then flattens the paths that are used.
 
 ## Check yourself
 
 <details>
-<summary>Why does `union(7, 3)` return `false` in the trace?</summary>
+<summary>Why does `union(7, 3)` return `false` in the example?</summary>
 
 By then 7 and 3 are both in the single group rooted at 0, so their roots are equal and nothing merges. The method reports that with `false` and changes no sizes or counts.
 

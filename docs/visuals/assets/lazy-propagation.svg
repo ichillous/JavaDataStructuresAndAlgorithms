@@ -62,7 +62,9 @@
 <text x="270" y="627" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">3</text>
 <circle cx="370" cy="620" r="24" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
 <text x="370" y="627" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">4</text>
-<text x="28" y="674" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">4 stored + 5 pending x 1 element = 9</text>
+<rect x="352" y="543" width="128" height="30" rx="15" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="416.0" y="564" font-size="18" fill="#8a5e00" text-anchor="middle" font-weight="700">pending +5</text>
+<text x="28" y="674" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">4 stored + 5 pending, 1 element = 9</text>
 <rect x="28" y="698" width="26" height="20" rx="4" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
 <text x="62" y="714" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">tagged node</text>
 <rect x="193.728" y="698" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
