@@ -222,3 +222,35 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dynamic-array-growth-dark.svg"><img src="assets/dynamic-array-growth.svg" alt="A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends." width="520"></picture>
 
 **Key idea:** Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.
+
+## 28. Four ways to walk a tree
+
+[Trees and ranges: read the lesson](../../data-structures/trees/binary-trees.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/tree-traversals-dark.svg"><img src="assets/tree-traversals.svg" alt="A binary search tree built from 8, 3, 10, 1, 6, 14, 4 and 7 has root 8, leaves 1, 4, 7 and 14, and height 3. Pre-order reads 8 3 1 6 4 7 10 14, in-order reads the keys sorted, post-order ends at the root 8, and level order reads one depth at a time." width="520"></picture>
+
+**Key idea:** Pre, in and post order differ only in when the root is read.
+
+## 29. Delete with two children
+
+[Trees and ranges: read the lesson](../../data-structures/trees/binary-search-trees.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/bst-delete-successor-dark.svg"><img src="assets/bst-delete-successor.svg" alt="Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1." width="520"></picture>
+
+**Key idea:** The successor's key replaces the deleted key; only its old node is unlinked.
+
+## 30. Red links make 3-nodes
+
+[Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/red-black-23-nodes-dark.svg"><img src="assets/red-black-23-nodes.svg" alt="After put 1 to 5, a RedBlackTreeMap has black root 4 with red left child 2, black children 1 and 3 under 2, and black 5. Read as a 2-3 tree it is the 3-node [2 4] over the 2-nodes [1], [3] and [5]; the height is 2 as a binary tree and 1 as a 2-3 tree." width="520"></picture>
+
+**Key idea:** A red link and its black parent make one 3-node.
+
+## 31. Three local repairs
+
+[Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/red-black-fixups-dark.svg"><img src="assets/red-black-fixups.svg" alt="Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children." width="520"></picture>
+
+**Key idea:** Rotations keep sorted order; a flip splits a 4-node.

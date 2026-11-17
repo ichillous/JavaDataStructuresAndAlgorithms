@@ -297,6 +297,50 @@ globalThis.DSA_VISUALS_DATA = {
       "number": 27,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
+    },
+    {
+      "id": "tree-traversals",
+      "title": "Four ways to walk a tree",
+      "category": "Trees and ranges",
+      "description": "A binary search tree built from 8, 3, 10, 1, 6, 14, 4 and 7 has root 8, leaves 1, 4, 7 and 14, and height 3. Pre-order reads 8 3 1 6 4 7 10 14, in-order reads the keys sorted, post-order ends at the root 8, and level order reads one depth at a time.",
+      "lesson": "../../data-structures/trees/binary-trees.md",
+      "keyIdea": "Pre, in and post order differ only in when the root is read.",
+      "number": 28,
+      "light": "assets/tree-traversals.svg",
+      "dark": "assets/tree-traversals-dark.svg"
+    },
+    {
+      "id": "bst-delete-successor",
+      "title": "Delete with two children",
+      "category": "Trees and ranges",
+      "description": "Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1.",
+      "lesson": "../../data-structures/trees/binary-search-trees.md",
+      "keyIdea": "The successor's key replaces the deleted key; only its old node is unlinked.",
+      "number": 29,
+      "light": "assets/bst-delete-successor.svg",
+      "dark": "assets/bst-delete-successor-dark.svg"
+    },
+    {
+      "id": "red-black-23-nodes",
+      "title": "Red links make 3-nodes",
+      "category": "Trees and ranges",
+      "description": "After put 1 to 5, a RedBlackTreeMap has black root 4 with red left child 2, black children 1 and 3 under 2, and black 5. Read as a 2-3 tree it is the 3-node [2 4] over the 2-nodes [1], [3] and [5]; the height is 2 as a binary tree and 1 as a 2-3 tree.",
+      "lesson": "../../data-structures/trees/red-black-trees.md",
+      "keyIdea": "A red link and its black parent make one 3-node.",
+      "number": 30,
+      "light": "assets/red-black-23-nodes.svg",
+      "dark": "assets/red-black-23-nodes-dark.svg"
+    },
+    {
+      "id": "red-black-fixups",
+      "title": "Three local repairs",
+      "category": "Trees and ranges",
+      "description": "Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children.",
+      "lesson": "../../data-structures/trees/red-black-trees.md",
+      "keyIdea": "Rotations keep sorted order; a flip splits a 4-node.",
+      "number": 31,
+      "light": "assets/red-black-fixups.svg",
+      "dark": "assets/red-black-fixups-dark.svg"
     }
   ],
   "traces": [
