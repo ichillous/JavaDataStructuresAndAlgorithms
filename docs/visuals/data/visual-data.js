@@ -563,13 +563,37 @@ globalThis.DSA_VISUALS_DATA = {
       "dark": "assets/array-vs-list-access-dark.svg"
     },
     {
+      "id": "data-structures-map",
+      "title": "Data structures by question",
+      "category": "Maps",
+      "subtitle": "Maps · Ask a question, open a folder",
+      "description": "9 cards sort the structures by the question they answer. Each card names the family, a method to start with and the folder to open: by position, DynamicArray.get, arrays/ and linked-lists/; by arrival, RingDeque.removeFirst, stacks/ and queues/; by key, ChainedHashMap.get, hash-tables/; by order, RedBlackTreeMap.floorKey, trees/; by priority, BinaryMinHeap.remove, heaps/; by prefix, Trie.wordsWithPrefix, tries/; by range, FenwickTree.rangeSum, range-queries/; by connectivity, UnionFind.connected, union-find/ and graphs/; approximately, BloomFilter.mightContain, probabilistic/.",
+      "keyIdea": "Pick by the question you must answer.",
+      "lesson": "../../data-structures/README.md",
+      "number": 52,
+      "light": "assets/data-structures-map.svg",
+      "dark": "assets/data-structures-map-dark.svg"
+    },
+    {
+      "id": "algorithms-map",
+      "title": "Algorithms by task",
+      "category": "Maps",
+      "subtitle": "Maps · Name the task, open a folder",
+      "description": "9 cards sort the algorithms by the task they perform. Each card names the family, a method to start with and the folder to open: search, SearchAlgorithms.lowerBound, searching/ and array-patterns/; sort, SortAlgorithms.mergeSort, sorting/ and divide-and-conquer/; select, Selection.kthSmallest, searching/; traverse, GraphAlgorithms.breadthFirst, graph/; shortest path, GraphAlgorithms.dijkstra, graph/; connect, FlowNetwork.maxFlow, graph/; optimize, DynamicProgramming.knapsack01, dynamic-programming/ and greedy/ and backtracking/; match text, StringAlgorithms.kmpFindAll, strings/; compute, NumberTheory.modPow, math/ and bit-manipulation/.",
+      "keyIdea": "Pick by the task you must perform.",
+      "lesson": "../../algorithms/README.md",
+      "number": 53,
+      "light": "assets/algorithms-map.svg",
+      "dark": "assets/algorithms-map-dark.svg"
+    },
+    {
       "id": "euclid-steps",
       "title": "Euclid and back-substitution",
       "category": "Math and bits",
       "description": "NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd.",
       "keyIdea": "The last nonzero remainder is the gcd, and undoing each division writes it as x×a + y×b.",
       "lesson": "../../algorithms/math/number-theory.md",
-      "number": 52,
+      "number": 54,
       "light": "assets/euclid-steps.svg",
       "dark": "assets/euclid-steps-dark.svg"
     },
@@ -580,7 +604,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "NumberTheory.modPow(3, 13, 1000) reads the bits of 13 = 1101 from the lowest: the squares of 3 are 3, 9, 81 and 561 modulo 1000, and the result 3, 3, 243, 323 changes only on the 1 bits, ending at 323.",
       "keyIdea": "Square the base once per exponent bit and multiply it in only for 1 bits: O(log e) steps.",
       "lesson": "../../algorithms/math/number-theory.md",
-      "number": 53,
+      "number": 55,
       "light": "assets/modpow-squares.svg",
       "dark": "assets/modpow-squares-dark.svg"
     },
@@ -591,7 +615,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29.",
       "keyIdea": "A prime p starts crossing at p×p, because smaller multiples have a smaller prime factor.",
       "lesson": "../../algorithms/math/number-theory.md",
-      "number": 54,
+      "number": 56,
       "light": "assets/sieve-grid.svg",
       "dark": "assets/sieve-grid-dark.svg"
     },
@@ -602,7 +626,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Sampling.reservoirSample over the items A to H with k = 3 and seed 17 fills the reservoir with A, B, C, then draws j for each later arrival with replacement chance 3/4 down to 3/8; D, F and H replace slots 0, 0 and 1, giving F, H, C.",
       "keyIdea": "Arrival i is kept with chance k/i, so every item seen so far ends up in the sample with equal chance.",
       "lesson": "../../algorithms/math/randomized-sampling.md",
-      "number": 55,
+      "number": 57,
       "light": "assets/reservoir-sampling.svg",
       "dark": "assets/reservoir-sampling-dark.svg"
     },
@@ -613,7 +637,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2.",
       "keyIdea": "Equal columns split between two items let one uniform column pick and one coin flip draw any weight.",
       "lesson": "../../algorithms/math/randomized-sampling.md",
-      "number": 56,
+      "number": 58,
       "light": "assets/alias-table.svg",
       "dark": "assets/alias-table-dark.svg"
     },
@@ -624,7 +648,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "The set {1, 3} of four elements is the int mask 1010 = 10. Testing bit 3 gives 1, setting bit 2 gives 1110, clearing bit 3 gives 0010, and (sub - 1) & mask walks the subsets 10, 8, 2 and 0.",
       "keyIdea": "A set is an int: test, set and clear bits in one operation, and (sub − 1) & mask visits every subset.",
       "lesson": "../../algorithms/bit-manipulation/overview.md",
-      "number": 57,
+      "number": 59,
       "light": "assets/bitmask-subsets.svg",
       "dark": "assets/bitmask-subsets-dark.svg"
     },
@@ -635,7 +659,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT.",
       "keyIdea": "The traceback re-derives each choice from the table: take equal letters, otherwise move toward the larger neighbour, and go up on a tie.",
       "lesson": "../../algorithms/dynamic-programming/problems.md",
-      "number": 58,
+      "number": 60,
       "light": "assets/lcs-traceback.svg",
       "dark": "assets/lcs-traceback-dark.svg"
     },
@@ -646,7 +670,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3.",
       "keyIdea": "Walking back from the corner prefers the diagonal, then delete, then insert; each step that is not a match adds 1.",
       "lesson": "../../algorithms/dynamic-programming/problems.md",
-      "number": 59,
+      "number": 61,
       "light": "assets/edit-distance-grid.svg",
       "dark": "assets/edit-distance-grid-dark.svg"
     },
@@ -657,7 +681,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "The cost table for four matrices with dimensions 30, 1, 40, 10, 25, the three candidate splits of the whole chain, and the stored splits that give (A1((A2A3)A4)) at cost 1400.",
       "keyIdea": "Each cell keeps the cheapest split k; following the stored splits from the whole chain down gives the parenthesization.",
       "lesson": "../../algorithms/dynamic-programming/classic-problems.md",
-      "number": 60,
+      "number": 62,
       "light": "assets/matrix-chain-splits.svg",
       "dark": "assets/matrix-chain-splits-dark.svg"
     },
@@ -668,7 +692,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "The Held-Karp table for four cities, one cost per visited set and last city, the closing edge back to city 0, and the optimal tour 0, 2, 3, 1, 0 of cost 80.",
       "keyIdea": "Held-Karp keeps one best cost per (visited set, last city), so 2^n n^2 steps replace the (n-1)! tours.",
       "lesson": "../../algorithms/dynamic-programming/classic-problems.md",
-      "number": 61,
+      "number": 63,
       "light": "assets/held-karp-masks.svg",
       "dark": "assets/held-karp-masks-dark.svg"
     },
@@ -679,7 +703,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10.",
       "keyIdea": "Take an interval only if its weight plus the best earlier compatible schedule beats skipping it.",
       "lesson": "../../algorithms/dynamic-programming/classic-problems.md",
-      "number": 62,
+      "number": 64,
       "light": "assets/weighted-interval-choice.svg",
       "dark": "assets/weighted-interval-choice-dark.svg"
     },
@@ -690,7 +714,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124.",
       "keyIdea": "Merging the two lightest nodes first leaves the rarest symbols deepest, so frequent symbols get the shortest codes.",
       "lesson": "../../algorithms/greedy/huffman-coding.md",
-      "number": 63,
+      "number": 65,
       "light": "assets/huffman-tree.svg",
       "dark": "assets/huffman-tree-dark.svg"
     },
@@ -701,7 +725,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Six values are split into two halves of three; the sums of all eight subsets of each half are listed, and the first right sum whose complement is stored on the left selects indices 0, 1 and 3 for target 6.",
       "keyIdea": "Each half has only 2^(n/2) subsets, so storing one half's sums and scanning the other's finds a pair in about 2^(n/2) steps, not 2^n.",
       "lesson": "../../algorithms/backtracking/problems.md",
-      "number": 64,
+      "number": 66,
       "light": "assets/subset-sum-halves.svg",
       "dark": "assets/subset-sum-halves-dark.svg"
     },
@@ -712,7 +736,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "One directed graph with 4 vertices and the edges 0 to 1, 0 to 2, 2 to 1 and 2 to 3, shown as an adjacency list, a 4 by 4 adjacency matrix and an edge list, each with the cost of testing an edge and listing neighbors.",
       "keyIdea": "Edge tests favor a matrix; neighbor scans favor an adjacency list.",
       "lesson": "../../data-structures/graphs/representation.md",
-      "number": 65,
+      "number": 67,
       "light": "assets/graph-representations.svg",
       "dark": "assets/graph-representations-dark.svg"
     },
@@ -723,7 +747,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "A 6-vertex undirected graph from source 0: breadthFirst visits 0, 1, 2, 3, 4, 5 in layers of distance 0, 1 and 2, while depthFirst visits 0, 1, 3, 4, 5, 2 by following one branch to its end.",
       "keyIdea": "A queue visits whole layers; a stack follows one branch to its end.",
       "lesson": "../../data-structures/graphs/traversal.md",
-      "number": 66,
+      "number": 68,
       "light": "assets/bfs-vs-dfs-order.svg",
       "dark": "assets/bfs-vs-dfs-order-dark.svg"
     },
@@ -734,7 +758,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Kahn's algorithm on a 5-vertex DAG whose in-degrees are 2, 1, 0, 0 and 2: it pops ready vertices 2, 3, 0, 1, 4, lowering in-degrees and refilling the ready queue, and outputs 2, 3, 0, 1, 4.",
       "keyIdea": "A vertex is output once its in-degree is 0, so every edge points forward.",
       "lesson": "../../algorithms/graph/topological-sort.md",
-      "number": 67,
+      "number": 69,
       "light": "assets/topological-kahn.svg",
       "dark": "assets/topological-kahn-dark.svg"
     },
@@ -745,7 +769,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "A column of seven yes-or-no questions from all pairs, unweighted, 0-1 weights, DAG, negative weights and heuristic to nonnegative weights, each paired with the algorithm and the repository method that answers it.",
       "keyIdea": "Use the most specific algorithm whose precondition your graph meets; each one exploits a fact the general one cannot assume.",
       "lesson": "../../algorithms/graph/shortest-paths.md",
-      "number": 68,
+      "number": 70,
       "light": "assets/shortest-path-chooser.svg",
       "dark": "assets/shortest-path-chooser-dark.svg"
     },
@@ -756,7 +780,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "0-1 BFS from vertex 0 on a 4-vertex directed graph: weight-0 targets are pushed to the front of the deque and weight-1 targets to the back, so vertex 1 is first queued at distance 1 and then improved to 0 through 0, 2, 3, 1.",
       "keyIdea": "Zero-weight edges go to the deque's front, unit-weight edges to its back.",
       "lesson": "../../algorithms/graph/shortest-paths.md",
-      "number": 69,
+      "number": 71,
       "light": "assets/zero-one-bfs-deque.svg",
       "dark": "assets/zero-one-bfs-deque-dark.svg"
     },
@@ -767,7 +791,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "A* on a 5 by 5 unit grid from cell 10 to cell 14 with the Manhattan heuristic: the route 10, 11, 12, 13, 14 has f = g + h equal to 4 everywhere, the heuristic was called for 13 of 25 cells, and with h = 0 it was called for 21.",
       "keyIdea": "A good heuristic keeps the search near the route; far cells never get an h evaluation.",
       "lesson": "../../algorithms/graph/shortest-paths.md",
-      "number": 70,
+      "number": 72,
       "light": "assets/astar-heuristic.svg",
       "dark": "assets/astar-heuristic-dark.svg"
     },
@@ -778,7 +802,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "A 4-vertex directed graph: allowing vertex 1 as a stop-over improves the distance matrix entry d[0][2] from 9 to 5 because d[0][1] + d[1][2] = 3 + 2, and no other entry changes.",
       "keyIdea": "Round k asks whether going through vertex k beats the best route so far.",
       "lesson": "../../algorithms/graph/shortest-paths.md",
-      "number": 71,
+      "number": 73,
       "light": "assets/floyd-warshall-via.svg",
       "dark": "assets/floyd-warshall-via-dark.svg"
     },
@@ -789,7 +813,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3.",
       "lesson": "../../algorithms/array-patterns/overview.md",
       "keyIdea": "Each move drops an index with no partner: at most n - 1 moves.",
-      "number": 72,
+      "number": 74,
       "light": "assets/two-pointers-pair-sum.svg",
       "dark": "assets/two-pointers-pair-sum-dark.svg"
     },
@@ -800,7 +824,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5.",
       "lesson": "../../algorithms/array-patterns/overview.md",
       "keyIdea": "The left edge never moves back, so each unit is added once: linear time.",
-      "number": 73,
+      "number": 75,
       "light": "assets/sliding-window-distinct.svg",
       "dark": "assets/sliding-window-distinct-dark.svg"
     },
@@ -811,7 +835,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1.",
       "lesson": "../../algorithms/array-patterns/overview.md",
       "keyIdea": "Each index is pushed once and popped once: O(n) despite the inner loop.",
-      "number": 74,
+      "number": 76,
       "light": "assets/monotonic-stack-next-greater.svg",
       "dark": "assets/monotonic-stack-next-greater-dark.svg"
     },
@@ -822,7 +846,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0.",
       "lesson": "../../algorithms/array-patterns/overview.md",
       "keyIdea": "Two marks per update, then one running sum: O(n + u) in total.",
-      "number": 75,
+      "number": 77,
       "light": "assets/difference-array-ranges.svg",
       "dark": "assets/difference-array-ranges-dark.svg"
     },
@@ -833,7 +857,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice.",
       "lesson": "../../algorithms/array-patterns/overview.md",
       "keyIdea": "The busiest moment sets the room count; at a tie an end comes first.",
-      "number": 76,
+      "number": 78,
       "light": "assets/interval-sweep-rooms.svg",
       "dark": "assets/interval-sweep-rooms-dark.svg"
     },
@@ -844,7 +868,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions.",
       "lesson": "../../algorithms/divide-and-conquer/problems.md",
       "keyIdea": "A smaller right value jumps over every left value still waiting.",
-      "number": 77,
+      "number": 79,
       "light": "assets/inversion-count-merge.svg",
       "dark": "assets/inversion-count-merge-dark.svg"
     },
@@ -855,7 +879,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "A binary search tree built from 8, 3, 10, 1, 6, 14, 4 and 7 has root 8, leaves 1, 4, 7 and 14, and height 3. Pre-order reads 8 3 1 6 4 7 10 14, in-order reads the keys sorted, post-order ends at the root 8, and level order reads one depth at a time.",
       "lesson": "../../data-structures/trees/binary-trees.md",
       "keyIdea": "Pre, in and post order differ only in when the root is read.",
-      "number": 78,
+      "number": 80,
       "light": "assets/tree-traversals.svg",
       "dark": "assets/tree-traversals-dark.svg"
     },
@@ -866,7 +890,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1.",
       "lesson": "../../data-structures/trees/binary-search-trees.md",
       "keyIdea": "The successor's key replaces the deleted one; its old node is unlinked.",
-      "number": 79,
+      "number": 81,
       "light": "assets/bst-delete-successor.svg",
       "dark": "assets/bst-delete-successor-dark.svg"
     },
@@ -877,7 +901,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "After put 1 to 5, a RedBlackTreeMap has black root 4 with red left child 2, black children 1 and 3 under 2, and black 5. Read as a 2-3 tree it is the 3-node [2 4] over the 2-nodes [1], [3] and [5]; the height is 2 as a binary tree and 1 as a 2-3 tree.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "A red link and its black parent make one 3-node.",
-      "number": 80,
+      "number": 82,
       "light": "assets/red-black-23-nodes.svg",
       "dark": "assets/red-black-23-nodes-dark.svg"
     },
@@ -888,7 +912,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "Rotations keep sorted order; a flip splits a 4-node.",
-      "number": 81,
+      "number": 83,
       "light": "assets/red-black-fixups.svg",
       "dark": "assets/red-black-fixups-dark.svg"
     },
@@ -899,7 +923,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1.",
       "lesson": "../../algorithms/searching/linear-search.md",
       "keyIdea": "A hit stops the scan; only a miss costs n comparisons.",
-      "number": 82,
+      "number": 84,
       "light": "assets/linear-scan-first-match.svg",
       "dark": "assets/linear-scan-first-match-dark.svg"
     },
@@ -910,7 +934,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "For weights 3, 2, 2, 4, 1, 4 shipped in 3 days, capacities 4 and 5 are too slow and 6 to 16 fit. firstTrue(4, 17, fits) probes 10, 7, 5 and 6 and returns 6.",
       "lesson": "../../algorithms/searching/binary-search-on-answer.md",
       "keyIdea": "Once a capacity fits, every larger one fits: each probe halves the range.",
-      "number": 83,
+      "number": 85,
       "light": "assets/predicate-boundary.svg",
       "dark": "assets/predicate-boundary-dark.svg"
     },
@@ -921,7 +945,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "kthSmallest of 7, 2, 9, 4, 4, 1 with k = 2: three partitions with pivots 7, 2 and 4 narrow the range from [0..5] to [0..3] to [2..3], and the equal part answers 4.",
       "lesson": "../../algorithms/searching/selection.md",
       "keyIdea": "k lies in one part of each partition: keep it, discard the rest.",
-      "number": 84,
+      "number": 86,
       "light": "assets/quickselect-shrink.svg",
       "dark": "assets/quickselect-shrink-dark.svg"
     },
@@ -932,7 +956,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "mergeSorted of 1, 4, 7 and 2, 4 and 3, 6 keeps one head per list in a heap; when 4 from list A and 4 from list B tie, A pops first, giving 1, 2, 3, 4, 4, 6, 7.",
       "lesson": "../../algorithms/searching/selection.md",
       "keyIdea": "The smallest head is the next output; ties pop in list order.",
-      "number": 85,
+      "number": 87,
       "light": "assets/kway-merge-heap.svg",
       "dark": "assets/kway-merge-heap-dark.svg"
     },
@@ -943,7 +967,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1.",
       "lesson": "../../algorithms/sorting/insertion-sort.md",
       "keyIdea": "Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.",
-      "number": 86,
+      "number": 88,
       "light": "assets/insertion-sort-shift.svg",
       "dark": "assets/insertion-sort-shift-dark.svg"
     },
@@ -954,7 +978,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Heapsort on 3, 1, 6, 5, 2, 4 builds the max-heap 6, 5, 4, 1, 2, 3, then moves 6 and 5 to the end, giving 5, 3, 4, 1, 2, 6 and 4, 3, 2, 1, 5, 6, until 1 to 6 is sorted.",
       "lesson": "../../algorithms/sorting/heap-sort.md",
       "keyIdea": "Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.",
-      "number": 87,
+      "number": 89,
       "light": "assets/heapsort-phases.svg",
       "dark": "assets/heapsort-phases-dark.svg"
     },
@@ -965,7 +989,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.",
-      "number": 88,
+      "number": 90,
       "light": "assets/counting-sort-counts.svg",
       "dark": "assets/counting-sort-counts-dark.svg"
     },
@@ -976,7 +1000,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Sorting 35, 21, 41, 15, 31, 25 by the ones digit gives 21, 41, 31, 35, 15, 25; a stable pass on the tens digit then gives 15, 21, 25, 31, 35, 41.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.",
-      "number": 89,
+      "number": 91,
       "light": "assets/radix-lsd-passes.svg",
       "dark": "assets/radix-lsd-passes-dark.svg"
     },
@@ -987,7 +1011,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "A stable sort keeps equal keys in their input order; an unstable sort may reorder them, losing any earlier ordering by tag.",
-      "number": 90,
+      "number": 92,
       "light": "assets/sort-stability.svg",
       "dark": "assets/sort-stability-dark.svg"
     },
@@ -998,7 +1022,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box.",
       "keyIdea": "z[i] starts from its mirror's value; only units past the box edge extend it.",
       "lesson": "../../algorithms/strings/pattern-matching.md",
-      "number": 91,
+      "number": 93,
       "light": "assets/z-box.svg",
       "dark": "assets/z-box-dark.svg"
     },
@@ -1009,7 +1033,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Searching aeaecbagab for bagab slides a five-unit window; windows 0 and 5 have the pattern's hash, window 0 (aeaec) is rejected at unit 0 and window 5 is reported.",
       "keyIdea": "Hash hits only choose where to compare; verification rejects impostors.",
       "lesson": "../../algorithms/strings/pattern-matching.md",
-      "number": 92,
+      "number": 94,
       "light": "assets/rabin-karp-rolling.svg",
       "dark": "assets/rabin-karp-rolling-dark.svg"
     },
@@ -1020,7 +1044,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "In cabacabad the palindrome abacaba around index 4 spans [1, 7]; index 5 copies radius 1 from index 3 and index 6 caps radius 3 from index 2 at the 2 units left, giving odd radii 1, 1, 3, 1, 4, 1, 2, 1, 1.",
       "keyIdea": "Inside a palindrome a center copies its mirror's radius, capped at the edge.",
       "lesson": "../../algorithms/strings/pattern-matching.md",
-      "number": 93,
+      "number": 95,
       "light": "assets/manacher-mirror.svg",
       "dark": "assets/manacher-mirror-dark.svg"
     },
@@ -1031,7 +1055,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root.",
       "keyIdea": "A failure link points at the longest suffix of a node that is still in the trie.",
       "lesson": "../../algorithms/strings/multi-pattern-and-suffix-arrays.md",
-      "number": 94,
+      "number": 96,
       "light": "assets/aho-corasick-links.svg",
       "dark": "assets/aho-corasick-links-dark.svg"
     },
@@ -1042,7 +1066,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2.",
       "keyIdea": "One state per text unit; links report every pattern that ends at that unit.",
       "lesson": "../../algorithms/strings/multi-pattern-and-suffix-arrays.md",
-      "number": 95,
+      "number": 97,
       "light": "assets/aho-corasick-scan.svg",
       "dark": "assets/aho-corasick-scan-dark.svg"
     },
@@ -1053,7 +1077,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3.",
       "keyIdea": "Suffixes sharing a prefix sit side by side: a lookup is one range.",
       "lesson": "../../algorithms/strings/multi-pattern-and-suffix-arrays.md",
-      "number": 96,
+      "number": 98,
       "light": "assets/suffix-array-lcp.svg",
       "dark": "assets/suffix-array-lcp-dark.svg"
     }

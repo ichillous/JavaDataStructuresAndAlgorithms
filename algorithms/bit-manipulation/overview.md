@@ -25,7 +25,7 @@ Use bit tricks when a small set, a flag word or a parity fact fits in one `int` 
 <!-- visual:generated bitmask-subsets -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bitmask-subsets-dark.svg"><img src="../../docs/visuals/assets/bitmask-subsets.svg" alt="The set {1, 3} of four elements is the int mask 1010 = 10. Testing bit 3 gives 1, setting bit 2 gives 1110, clearing bit 3 gives 0010, and (sub - 1) &amp; mask walks the subsets 10, 8, 2 and 0." width="520"></picture>
 
-**Figure 57.** The set {1, 3} of four elements is the int mask 1010 = 10. Testing bit 3 gives 1, setting bit 2 gives 1110, clearing bit 3 gives 0010, and (sub - 1) & mask walks the subsets 10, 8, 2 and 0. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 59.** The set {1, 3} of four elements is the int mask 1010 = 10. Testing bit 3 gives 1, setting bit 2 gives 1110, clearing bit 3 gives 0010, and (sub - 1) & mask walks the subsets 10, 8, 2 and 0. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ```java

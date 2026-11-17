@@ -1,5 +1,6 @@
 """Portable checks for generated assets and independently reasoned trace invariants."""
 from collections import Counter, deque
+import html
 from html.parser import HTMLParser
 import importlib.util
 import json
@@ -449,8 +450,8 @@ class GalleryTest(unittest.TestCase):
                     use = next(line for line in text.split("\n") if line.startswith("| **Use it when** |"))
                     cell = use[len("| **Use it when** |"):].rstrip().rstrip("|").strip()
                     self.assertTrue(row.endswith(f" | {cell} |"), row)
-                    alt = by_id[first]["description"].replace("&", "&amp;").replace('"', "&quot;")
-                    self.assertIn(f'alt="{alt}"', row)
+                    alt = re.search(r' alt="([^"]*)"', row).group(1)
+                    self.assertEqual(by_id[first]["description"], html.unescape(alt))
 
     def build(self, files, page_text):
         directory = tempfile.TemporaryDirectory()
@@ -506,6 +507,14 @@ class GalleryTest(unittest.TestCase):
                               "<!-- /visual:generated -->\n<!-- /visual:gallery -->\n")
         documented = "Use `<!-- visual:gallery FOLDER -->`.\n```text\n<!-- visual:gallery topic -->\n```\n"
         self.assertEqual(documented, self.build(files, documented))
+
+    def test_every_folder_a_map_card_names_exists_beside_its_landing_page(self):
+        fixtures = load_all_fixtures(VISUALS / "data")
+        for prefix, folder in (("map.structures", "data-structures"), ("map.algorithms", "algorithms")):
+            for row in fixtures[f"{prefix}.rows"].split(","):
+                for name in fixtures[f"{prefix}.{row}.folders"].split(","):
+                    with self.subTest(card=f"{prefix}.{row}", folder=name):
+                        self.assertTrue((ROOT / folder / name).is_dir())
 
     def test_a_lesson_placed_directly_in_the_gallery_folder_fails(self):
         with self.assertRaisesRegex(ValueError, r"topic/loose\.md .*subfolder"):

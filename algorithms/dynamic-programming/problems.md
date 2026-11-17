@@ -178,7 +178,7 @@ corner cells above and to the left both hold 3, so the rule goes up first.
 <!-- visual:generated lcs-traceback -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/lcs-traceback-dark.svg"><img src="../../docs/visuals/assets/lcs-traceback.svg" alt="The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT." width="520"></picture>
 
-**Figure 58.** The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 60.** The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ```java
@@ -210,7 +210,7 @@ emits a target unit. Replaying the script over the source yields the target.
 <!-- visual:generated edit-distance-grid -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/edit-distance-grid-dark.svg"><img src="../../docs/visuals/assets/edit-distance-grid.svg" alt="The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3." width="520"></picture>
 
-**Figure 59.** The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 61.** The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 The picture shows the walk for `"brain"` to `"paint"`: at each cell the diagonal

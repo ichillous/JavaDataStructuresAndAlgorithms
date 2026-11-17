@@ -16,7 +16,7 @@ one by the properties you need rather than by name.
 <!-- visual:generated sort-stability | A stable sort keeps the tag order of equal keys; an unstable outcome may not. Stability is the property most often needed when sorting records. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/sort-stability-dark.svg"><img src="../../docs/visuals/assets/sort-stability.svg" alt="Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys." width="520"></picture>
 
-**Figure 90.** A stable sort keeps the tag order of equal keys; an unstable outcome may not. Stability is the property most often needed when sorting records. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 92.** A stable sort keeps the tag order of equal keys; an unstable outcome may not. Stability is the property most often needed when sorting records. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Comparison table

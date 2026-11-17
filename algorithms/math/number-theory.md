@@ -55,7 +55,7 @@ keeps every intermediate below `m`, so nothing overflows.
 <!-- visual:generated modpow-squares -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/modpow-squares-dark.svg"><img src="../../docs/visuals/assets/modpow-squares.svg" alt="NumberTheory.modPow(3, 13, 1000) reads the bits of 13 = 1101 from the lowest: the squares of 3 are 3, 9, 81 and 561 modulo 1000, and the result 3, 3, 243, 323 changes only on the 1 bits, ending at 323." width="520"></picture>
 
-**Figure 53.** NumberTheory.modPow(3, 13, 1000) reads the bits of 13 = 1101 from the lowest: the squares of 3 are 3, 9, 81 and 561 modulo 1000, and the result 3, 3, 243, 323 changes only on the 1 bits, ending at 323. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 55.** NumberTheory.modPow(3, 13, 1000) reads the bits of 13 = 1101 from the lowest: the squares of 3 are 3, 9, 81 and 561 modulo 1000, and the result 3, 3, 243, 323 changes only on the 1 bits, ending at 323. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 **Sieve.** When the loop reaches an unmarked `p`, no smaller prime divides it, so
@@ -65,7 +65,7 @@ smaller prime factor.
 <!-- visual:generated sieve-grid -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/sieve-grid-dark.svg"><img src="../../docs/visuals/assets/sieve-grid.svg" alt="NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29." width="520"></picture>
 
-**Figure 54.** NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 56.** NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 **Miller-Rabin.** Write `n - 1 = d * 2^s` with `d` odd. For an odd prime `n` and a
@@ -98,7 +98,7 @@ The last nonzero remainder is 2, with `x = -9`, `y = 47`:
 <!-- visual:generated euclid-steps -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/euclid-steps-dark.svg"><img src="../../docs/visuals/assets/euclid-steps.svg" alt="NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd." width="520"></picture>
 
-**Figure 52.** NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 54.** NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ```java

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 850" width="520" height="850" role="img" aria-labelledby="title desc">
+<title id="title">52  Data structures by question</title>
+<desc id="desc">9 cards sort the structures by the question they answer. Each card names the family, a method to start with and the folder to open: by position, DynamicArray.get, arrays/ and linked-lists/; by arrival, RingDeque.removeFirst, stacks/ and queues/; by key, ChainedHashMap.get, hash-tables/; by order, RedBlackTreeMap.floorKey, trees/; by priority, BinaryMinHeap.remove, heaps/; by prefix, Trie.wordsWithPrefix, tries/; by range, FenwickTree.rangeSum, range-queries/; by connectivity, UnionFind.connected, union-find/ and graphs/; approximately, BloomFilter.mightContain, probabilistic/.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="data-structures-map-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="data-structures-map-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="data-structures-map-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="data-structures-map-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="data-structures-map-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="data-structures-map-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="data-structures-map-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="data-structures-map-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="data-structures-map-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="data-structures-map-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="data-structures-map-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="data-structures-map-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="data-structures-map-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="data-structures-map-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="data-structures-map-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="850" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">52  Data structures by question</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Maps · Ask a question, open a folder</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<text x="50" y="146" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">Question · family</text>
+<text x="476" y="146" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">Start with · folder</text>
+<rect x="28" y="160" width="464" height="58" rx="10" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="36" y="170" width="4" height="38" rx="2" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="50" y="186" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">By position</text>
+<text x="476" y="186" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="700">DynamicArray.get</text>
+<text x="50" y="209" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">Arrays, linked lists</text>
+<text x="476" y="209" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">arrays/ · linked-lists/</text>
+<rect x="28" y="224" width="464" height="58" rx="10" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="36" y="234" width="4" height="38" rx="2" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="50" y="250" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">By arrival</text>
+<text x="476" y="250" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="700">RingDeque.removeFirst</text>
+<text x="50" y="273" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">Stacks, queues, deques</text>
+<text x="476" y="273" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">stacks/ · queues/</text>
+<rect x="28" y="288" width="464" height="58" rx="10" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="36" y="298" width="4" height="38" rx="2" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="50" y="314" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">By key</text>
+<text x="476" y="314" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="700">ChainedHashMap.get</text>
+<text x="50" y="337" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">Hash tables, caches</text>
+<text x="476" y="337" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">hash-tables/</text>
+<rect x="28" y="352" width="464" height="58" rx="10" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="36" y="362" width="4" height="38" rx="2" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="50" y="378" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">By order</text>
+<text x="476" y="378" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="700">RedBlackTreeMap.floorKey</text>
+<text x="50" y="401" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">Search trees</text>
+<text x="476" y="401" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">trees/</text>
+<rect x="28" y="416" width="464" height="58" rx="10" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="36" y="426" width="4" height="38" rx="2" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="50" y="442" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">By priority</text>
+<text x="476" y="442" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="700">BinaryMinHeap.remove</text>
+<text x="50" y="465" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">Binary heaps</text>
+<text x="476" y="465" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">heaps/</text>
+<rect x="28" y="480" width="464" height="58" rx="10" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="36" y="490" width="4" height="38" rx="2" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="50" y="506" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">By prefix</text>
+<text x="476" y="506" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="700">Trie.wordsWithPrefix</text>
+<text x="50" y="529" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">Tries</text>
+<text x="476" y="529" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">tries/</text>
+<rect x="28" y="544" width="464" height="58" rx="10" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="36" y="554" width="4" height="38" rx="2" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="50" y="570" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">By range</text>
+<text x="476" y="570" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="700">FenwickTree.rangeSum</text>
+<text x="50" y="593" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">Fenwick, segment trees</text>
+<text x="476" y="593" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">range-queries/</text>
+<rect x="28" y="608" width="464" height="58" rx="10" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="36" y="618" width="4" height="38" rx="2" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="50" y="634" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">By connectivity</text>
+<text x="476" y="634" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="700">UnionFind.connected</text>
+<text x="50" y="657" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">Union-find, graphs</text>
+<text x="476" y="657" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">union-find/ · graphs/</text>
+<rect x="28" y="672" width="464" height="58" rx="10" fill="#192333" stroke="#8291aa" stroke-width="2"/>
+<rect x="36" y="682" width="4" height="38" rx="2" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="50" y="698" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">Approximately</text>
+<text x="476" y="698" font-size="18" fill="#eef2f8" text-anchor="end" font-weight="700">BloomFilter.mightContain</text>
+<text x="50" y="721" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">Bloom filter, sketch</text>
+<text x="476" y="721" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">probabilistic/</text>
+<rect x="28" y="744" width="464" height="82" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="775" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="804" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Pick by the question you must answer.</text>
+</svg>

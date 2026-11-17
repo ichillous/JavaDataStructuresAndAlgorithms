@@ -23,7 +23,7 @@ Equal values do not count as inversions.
 <!-- visual:generated inversion-count-merge -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/inversion-count-merge-dark.svg"><img src="../../docs/visuals/assets/inversion-count-merge.svg" alt="countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions." width="520"></picture>
 
-**Figure 77.** countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 79.** countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ```text

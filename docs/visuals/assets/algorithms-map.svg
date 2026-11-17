@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 873" width="520" height="873" role="img" aria-labelledby="title desc">
+<title id="title">53  Algorithms by task</title>
+<desc id="desc">9 cards sort the algorithms by the task they perform. Each card names the family, a method to start with and the folder to open: search, SearchAlgorithms.lowerBound, searching/ and array-patterns/; sort, SortAlgorithms.mergeSort, sorting/ and divide-and-conquer/; select, Selection.kthSmallest, searching/; traverse, GraphAlgorithms.breadthFirst, graph/; shortest path, GraphAlgorithms.dijkstra, graph/; connect, FlowNetwork.maxFlow, graph/; optimize, DynamicProgramming.knapsack01, dynamic-programming/ and greedy/ and backtracking/; match text, StringAlgorithms.kmpFindAll, strings/; compute, NumberTheory.modPow, math/ and bit-manipulation/.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="algorithms-map-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="algorithms-map-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="algorithms-map-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="algorithms-map-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="algorithms-map-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="algorithms-map-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="algorithms-map-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="algorithms-map-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="algorithms-map-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="algorithms-map-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="algorithms-map-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="algorithms-map-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="algorithms-map-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="algorithms-map-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="algorithms-map-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="873" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">53  Algorithms by task</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Maps · Name the task, open a folder</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<text x="50" y="146" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">Task · family</text>
+<text x="476" y="146" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">Start with · folder</text>
+<rect x="28" y="160" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="170" width="4" height="38" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="50" y="186" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Search</text>
+<text x="476" y="186" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">SearchAlgorithms.lowerBound</text>
+<text x="50" y="209" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Bounds, scans</text>
+<text x="476" y="209" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">searching/ · array-patterns/</text>
+<rect x="28" y="224" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="234" width="4" height="38" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="50" y="250" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Sort</text>
+<text x="476" y="250" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">SortAlgorithms.mergeSort</text>
+<text x="50" y="273" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Merge, quick</text>
+<text x="476" y="273" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">sorting/ · divide-and-conquer/</text>
+<rect x="28" y="288" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="298" width="4" height="38" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="50" y="314" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Select</text>
+<text x="476" y="314" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">Selection.kthSmallest</text>
+<text x="50" y="337" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">k-th, top k, majority</text>
+<text x="476" y="337" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">searching/</text>
+<rect x="28" y="352" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="362" width="4" height="38" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="50" y="378" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Traverse</text>
+<text x="476" y="378" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">GraphAlgorithms.breadthFirst</text>
+<text x="50" y="401" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">BFS, DFS, topological</text>
+<text x="476" y="401" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">graph/</text>
+<rect x="28" y="416" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="426" width="4" height="38" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="50" y="442" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Shortest path</text>
+<text x="476" y="442" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">GraphAlgorithms.dijkstra</text>
+<text x="50" y="465" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Dijkstra, A*, 0-1 BFS</text>
+<text x="476" y="465" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">graph/</text>
+<rect x="28" y="480" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="490" width="4" height="38" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="50" y="506" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Connect</text>
+<text x="476" y="506" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">FlowNetwork.maxFlow</text>
+<text x="50" y="529" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Kruskal, Prim, max flow</text>
+<text x="476" y="529" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">graph/</text>
+<rect x="28" y="544" width="464" height="81" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="554" width="4" height="61" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="50" y="570" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Optimize</text>
+<text x="476" y="570" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">DynamicProgramming.knapsack01</text>
+<text x="50" y="593" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">DP, greedy</text>
+<text x="476" y="593" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">dynamic-programming/ · greedy/</text>
+<text x="476" y="616" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">backtracking/</text>
+<rect x="28" y="631" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="641" width="4" height="38" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="50" y="657" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Match text</text>
+<text x="476" y="657" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">StringAlgorithms.kmpFindAll</text>
+<text x="50" y="680" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">KMP, Z, Aho-Corasick</text>
+<text x="476" y="680" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">strings/</text>
+<rect x="28" y="695" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="705" width="4" height="38" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="50" y="721" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Compute</text>
+<text x="476" y="721" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">NumberTheory.modPow</text>
+<text x="50" y="744" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">gcd, primes, bits</text>
+<text x="476" y="744" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">math/ · bit-manipulation/</text>
+<rect x="28" y="767" width="464" height="82" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="798" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="827" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Pick by the task you must perform.</text>
+</svg>
