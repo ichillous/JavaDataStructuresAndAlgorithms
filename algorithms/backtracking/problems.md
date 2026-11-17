@@ -87,7 +87,7 @@ assert BacktrackingPuzzles.subsetSum(values, 0L).orElseThrow().isEmpty();
 <!-- visual:generated subset-sum-halves -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/subset-sum-halves-dark.svg"><img src="../../docs/visuals/assets/subset-sum-halves.svg" alt="Six values are split into two halves of three; the sums of all eight subsets of each half are listed, and the first right sum whose complement is stored on the left selects indices 0, 1 and 3 for target 6." width="520"></picture>
 
-**Figure 64.** Six values are split into two halves of three; the sums of all eight subsets of each half are listed, and the first right sum whose complement is stored on the left selects indices 0, 1 and 3 for target 6. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 66.** Six values are split into two halves of three; the sums of all eight subsets of each half are listed, and the first right sum whose complement is stored on the left selects indices 0, 1 and 3 for target 6. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Meet-in-the-middle splits the indices, hashes left-half subset sums and scans

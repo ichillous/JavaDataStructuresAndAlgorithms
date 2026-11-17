@@ -1,9 +1,12 @@
 """Portable checks for generated assets and independently reasoned trace invariants."""
 from collections import Counter, deque
+import html
 from html.parser import HTMLParser
 import importlib.util
 import json
 from pathlib import Path
+import re
+import tempfile
 import unittest
 from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
@@ -359,6 +362,188 @@ class MoreTraceTest(unittest.TestCase):
                 self.assertEqual(remaining, len(predecessors[vertex] - set(emitted)))
         self.assertEqual(trace["frames"][-1]["view"]["order"], ints(self.fixtures, "traces.topo.order"))
         self.assertEqual(sorted(ints(self.fixtures, "traces.topo.order")), list(range(size)))
+
+
+GALLERY_FOLDERS = ("algorithms", "data-structures")
+ROW_LINK = re.compile(r"\| \[(?P<title>(?:[^\]\\]|\\.)+)\]\((?P<href>[^)]+)\) \|")
+
+
+def gallery_lessons(folder):
+    """Every lesson the gallery for ``folder`` must show, recomputed from the file system."""
+    lessons = []
+    for directory in sorted(path for path in (ROOT / folder).iterdir() if path.is_dir()):
+        names = sorted(path.name for path in directory.glob("*.md"))
+        names.sort(key=lambda name: name != "README.md")
+        lessons.extend(f"{directory.name}/{name}" for name in names)
+    return lessons
+
+
+def gallery_region(text):
+    lines = text.split("\n")
+    opens = [index for index, line in enumerate(lines) if line.startswith("<!-- visual:gallery ")]
+    closes = [index for index, line in enumerate(lines) if line == "<!-- /visual:gallery -->"]
+    if len(opens) != 1 or len(closes) != 1:
+        raise AssertionError("expected exactly one gallery region")
+    return "\n".join(lines[opens[0] + 1:closes[0]])
+
+
+def lesson_text(title, figure="alpha", glance=True):
+    table = ("| At a glance | |\n| --- | --- |\n| **Use it when** |  You need *this* `x`.  |\n"
+             "| **Cost** | O(1) |\n" if glance else "")
+    figures = (figure,) if isinstance(figure, str) else tuple(figure or ())
+    region = "".join(f"<!-- visual:generated {item} -->\n<!-- /visual:generated -->\n\nText.\n\n"
+                     for item in figures)
+    return f"# {title}\n\nIntro.\n\n{table}\n{region}\n## More\n"
+
+
+def thumbnail(row):
+    """The figure id a gallery row uses as its thumbnail."""
+    return re.search(r'<img src="[^"]*/assets/([a-z0-9-]+)\.svg"', row).group(1)
+
+
+FAKE_FIGURES = {
+    figure_id: {"id": figure_id, "number": number, "description": f"Shows {figure_id} & more.",
+                "light": f"assets/{figure_id}.svg", "dark": f"assets/{figure_id}-dark.svg"}
+    for number, figure_id in ((1, "alpha"), (2, "beta"), (3, "delta"))}
+
+
+class GalleryTest(unittest.TestCase):
+    """The generated gallery on each folder landing page lists every lesson in that folder."""
+
+    PAGE = "# Topic\n\n<!-- visual:gallery topic -->\nstale\n<!-- /visual:gallery -->\n\nEnd.\n"
+    SMALL = {"topic/README.md": "", "topic/divide-and-conquer/b.md": lesson_text("Bee", "beta"),
+             "topic/divide-and-conquer/README.md": lesson_text("Choose | well"),
+             "topic/hash-tables/a.md": lesson_text("Ay")}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.generator = load_generator()
+
+    def test_each_landing_page_has_one_row_per_lesson_in_folder_and_file_order(self):
+        for folder in GALLERY_FOLDERS:
+            with self.subTest(folder=folder):
+                text = (ROOT / folder / "README.md").read_text(encoding="utf-8")
+                self.assertIn(f"<!-- visual:gallery {folder} -->", text)
+                region = gallery_region(text)
+                links = [match.group("href") for match in ROW_LINK.finditer(region)]
+                self.assertEqual(gallery_lessons(folder), links)
+                headings = [line[4:] for line in region.split("\n") if line.startswith("### ")]
+                subfolders = sorted(path.name for path in (ROOT / folder).iterdir() if path.is_dir())
+                self.assertEqual(len(subfolders), len(headings))
+
+    def test_gallery_rows_use_an_unused_figure_title_and_use_it_when_cell_and_resolve(self):
+        manifest = json.loads((VISUALS / "data/manifest.json").read_text(encoding="utf-8"))
+        by_id = {item["id"]: item for item in manifest["figures"]}
+        for folder in GALLERY_FOLDERS:
+            page = ROOT / folder / "README.md"
+            region = gallery_region(page.read_text(encoding="utf-8"))
+            parser = References()
+            parser.feed(region)
+            self.assertTrue(parser.references)
+            for reference in parser.references:
+                with self.subTest(page=folder, target=reference):
+                    self.assertTrue((page.parent / unquote(reference)).resolve().is_file())
+            rows = [line for line in region.split("\n") if line.startswith("| <a href=")]
+            self.assertEqual(len(gallery_lessons(folder)), len(rows))
+            used = set()
+            for row, lesson in zip(rows, gallery_lessons(folder)):
+                with self.subTest(lesson=lesson):
+                    text = (page.parent / lesson).read_text(encoding="utf-8")
+                    placed = [region.figure_id for region in self.generator.find_regions(lesson, text)]
+                    first = next((item for item in placed if item not in used), placed[0])
+                    used.add(first)
+                    self.assertIn(f'srcset="../docs/visuals/assets/{first}-dark.svg"', row)
+                    self.assertIn(f'<img src="../docs/visuals/assets/{first}.svg"', row)
+                    self.assertIn('width="160"', row)
+                    title = next(line[2:] for line in text.split("\n") if line.startswith("# "))
+                    self.assertIn(f"| [{title}]({lesson}) |", row)
+                    use = next(line for line in text.split("\n") if line.startswith("| **Use it when** |"))
+                    cell = use[len("| **Use it when** |"):].rstrip().rstrip("|").strip()
+                    self.assertTrue(row.endswith(f" | {cell} |"), row)
+                    alt = re.search(r' alt="([^"]*)"', row).group(1)
+                    self.assertEqual(by_id[first]["description"], html.unescape(alt))
+
+    def build(self, files, page_text):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        root = Path(directory.name)
+        for name, text in files.items():
+            (root / name).parent.mkdir(parents=True, exist_ok=True)
+            (root / name).write_text(text, encoding="utf-8")
+        return self.generator.rewrite_galleries("topic/README.md", page_text, FAKE_FIGURES, root=root)
+
+    def test_a_small_folder_renders_headings_rows_and_relative_paths(self):
+        result = self.build(self.SMALL, self.PAGE)
+        self.assertNotIn("stale", result)
+        self.assertIn("### Divide and conquer\n", result)
+        self.assertIn("### Hash tables\n", result)
+        self.assertLess(result.index("### Divide and conquer"), result.index("### Hash tables"))
+        self.assertLess(result.index("(divide-and-conquer/README.md)"), result.index("(divide-and-conquer/b.md)"))
+        self.assertIn('| <a href="divide-and-conquer/b.md"><picture><source media="(prefers-color-scheme: dark)" '
+                      'srcset="../docs/visuals/assets/beta-dark.svg"><img src="../docs/visuals/assets/beta.svg" '
+                      'alt="Shows beta &amp; more." width="160"></picture></a> | [Bee](divide-and-conquer/b.md) | '
+                      'You need *this* `x`. |', result)
+        self.assertIn(r"[Choose \| well](divide-and-conquer/README.md)", result)
+        self.assertNotIn("(README.md)", result, "the landing page itself is not a lesson")
+        self.assertTrue(result.startswith("# Topic\n\n<!-- visual:gallery topic -->\n### "))
+        self.assertTrue(result.endswith("\n<!-- /visual:gallery -->\n\nEnd.\n"))
+        self.assertEqual(result, self.build(self.SMALL, result), "regenerating must be idempotent")
+
+    def test_a_lesson_without_a_figure_or_at_a_glance_table_fails_with_page_line_and_lesson(self):
+        with self.assertRaisesRegex(ValueError, r"topic/README\.md:3: .*topic/sub/plain\.md has no figure region"):
+            self.build({"topic/sub/plain.md": lesson_text("Plain", figure=None)}, self.PAGE)
+        with self.assertRaisesRegex(ValueError, r"topic/README\.md:3: .*topic/sub/plain\.md has no At a glance"):
+            self.build({"topic/sub/plain.md": lesson_text("Plain", glance=False)}, self.PAGE)
+        with self.assertRaisesRegex(ValueError, r"topic/README\.md:3: .*topic/sub/plain\.md has no '# ' title"):
+            self.build({"topic/sub/plain.md": lesson_text("Plain").replace("# Plain", "Plain")}, self.PAGE)
+        with self.assertRaisesRegex(ValueError, r"unknown figure id 'gamma'"):
+            self.build({"topic/sub/plain.md": lesson_text("Plain", figure="gamma")}, self.PAGE)
+
+    def test_malformed_gallery_markers_fail_with_file_and_line(self):
+        files = {"topic/sub/a.md": lesson_text("Ay")}
+        with self.assertRaisesRegex(ValueError, r"topic/README\.md:3: unknown gallery folder 'missing'"):
+            self.build(files, self.PAGE.replace("gallery topic", "gallery missing"))
+        with self.assertRaisesRegex(ValueError, r"topic/README\.md:3: .*unclosed gallery"):
+            self.build(files, "x\n\n<!-- visual:gallery topic -->\n")
+        with self.assertRaisesRegex(ValueError, r"topic/README\.md:1: .*without an opening"):
+            self.build(files, "<!-- /visual:gallery -->\n")
+        with self.assertRaisesRegex(ValueError, r"topic/README\.md:2: .*alone on its line"):
+            self.build(files, "x\nSee <!-- visual:gallery topic --> here\n<!-- /visual:gallery -->\n")
+        with self.assertRaisesRegex(ValueError, r"topic/README\.md:2: .*nested"):
+            self.build(files, "<!-- visual:gallery topic -->\n<!-- visual:gallery topic -->\n"
+                              "<!-- /visual:gallery -->\n")
+        with self.assertRaisesRegex(ValueError, r"topic/README\.md:2: .*inside the gallery"):
+            self.build(files, "<!-- visual:gallery topic -->\n<!-- visual:generated alpha -->\n"
+                              "<!-- /visual:generated -->\n<!-- /visual:gallery -->\n")
+        documented = "Use `<!-- visual:gallery FOLDER -->`.\n```text\n<!-- visual:gallery topic -->\n```\n"
+        self.assertEqual(documented, self.build(files, documented))
+
+    def test_every_folder_a_map_card_names_exists_beside_its_landing_page(self):
+        fixtures = load_all_fixtures(VISUALS / "data")
+        for prefix, folder in (("map.structures", "data-structures"), ("map.algorithms", "algorithms")):
+            for row in fixtures[f"{prefix}.rows"].split(","):
+                for name in fixtures[f"{prefix}.{row}.folders"].split(","):
+                    with self.subTest(card=f"{prefix}.{row}", folder=name):
+                        self.assertTrue((ROOT / folder / name).is_dir())
+
+    def test_thumbnails_prefer_a_figure_not_yet_used_anywhere_on_the_page(self):
+        files = {"topic/a-first/README.md": lesson_text("One", "alpha"),
+                 "topic/a-first/two.md": lesson_text("Two", ("alpha", "beta")),
+                 "topic/b-second/three.md": lesson_text("Three", ("beta", "alpha", "delta")),
+                 "topic/b-second/four.md": lesson_text("Four", ("alpha",))}
+        result = self.build(files, self.PAGE)
+        rows = [line for line in result.split("\n") if line.startswith("| <a href=")]
+        titles = [re.search(r"\| \[([^\]]+)\]", row).group(1) for row in rows]
+        self.assertEqual(["One", "Two", "Four", "Three"], titles)
+        # One takes alpha; Two skips alpha for beta; Four has only alpha, already used, so it
+        # falls back to its first figure; Three skips beta and alpha (used) for delta.
+        self.assertEqual(["alpha", "beta", "alpha", "delta"], [thumbnail(row) for row in rows])
+        self.assertIn('alt="Shows delta &amp; more."', rows[3])
+        self.assertEqual(result, self.build(files, result), "the choice must be deterministic")
+
+    def test_a_lesson_placed_directly_in_the_gallery_folder_fails(self):
+        with self.assertRaisesRegex(ValueError, r"topic/loose\.md .*subfolder"):
+            self.build({"topic/sub/a.md": lesson_text("Ay"), "topic/loose.md": lesson_text("Loose")}, self.PAGE)
 
 
 if __name__ == "__main__":

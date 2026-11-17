@@ -73,7 +73,7 @@ depth, and the sum of the merge weights equals the weighted length.
 <!-- visual:generated huffman-tree -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/huffman-tree-dark.svg"><img src="../../docs/visuals/assets/huffman-tree.svg" alt="Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124." width="520"></picture>
 
-**Figure 63.** Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 65.** Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Ties are broken deterministically: among equal weights, leaves (numbered by

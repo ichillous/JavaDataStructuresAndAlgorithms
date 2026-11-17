@@ -8,6 +8,12 @@ docs/visuals/data/examples*.properties. Markdown pages place figures with named 
     <!-- visual:generated FIGURE_ID | Caption. -->
     <!-- /visual:generated -->
 
+A folder landing page lists every lesson of a folder with a gallery region, filled with one
+table per immediate subfolder (thumbnail of the lesson's first figure, title, "Use it when"):
+
+    <!-- visual:gallery FOLDER -->
+    <!-- /visual:gallery -->
+
 The generator rewrites each region body. See docs/visuals/design.md, "Adding a figure".
 """
 import argparse
@@ -41,6 +47,18 @@ SKIPPED_PREFIXES = ("docs/superpowers/", "target/")
 SKIPPED_PAGES = {"docs/visuals/README.md"}
 
 Region = namedtuple("Region", "figure_id caption start end")
+
+GALLERY_END = "<!-- /visual:gallery -->"
+GALLERY_OPEN = re.compile(r"<!-- visual:gallery (?P<folder>[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*) -->")
+GALLERY_THUMBNAIL_WIDTH = 160
+# Subfolder headings: sentence case from the folder name unless it reads badly.
+GALLERY_HEADINGS = {"divide-and-conquer": "Divide and conquer", "graph": "Graph algorithms",
+                    "math": "Math and randomness", "probabilistic": "Probabilistic structures",
+                    "union-find": "Union-find"}
+GLANCE_HEADER = re.compile(r"^\|\s*At a glance\s*\|")
+USE_IT_WHEN = re.compile(r"^\|\s*\*\*Use it when\*\*\s*\|(?P<cell>.*)\|\s*$")
+MARKDOWN_LINK = re.compile(r"(\]\()([^)\s]+)(\))")
+Gallery = namedtuple("Gallery", "folder start end")
 
 
 def figure_modules(directory=VISUALS_SOURCE):
@@ -104,13 +122,9 @@ def region_pages():
     return pages
 
 
-def find_regions(name, text):
-    """Parse the named regions of one page; a malformed marker fails with file and line.
-
-    Markers count only on a line of their own outside fenced code blocks, so documentation
-    may show the syntax in a fence or in inline code.
-    """
-    regions, current, fence = [], None, None
+def unfenced_lines(text):
+    """Yield ``(line number, stripped line)`` for every line outside fenced code blocks."""
+    fence = None
     for number, line in enumerate(text.split("\n"), 1):
         fence_match = FENCE.match(line)
         if fence_match:
@@ -120,13 +134,34 @@ def find_regions(name, text):
             elif marker[0] == fence[0] and len(marker) >= len(fence) and not line.strip()[len(marker):]:
                 fence = None
             continue
-        stripped = line.strip()
-        if fence is not None or "visual:generated" not in INLINE_CODE.sub("", stripped):
+        if fence is None:
+            yield number, line.strip()
+
+
+def marker_lines(name, text, keyword):
+    """Yield ``(line number, marker)`` for lines that use ``keyword`` outside code.
+
+    A marker must be alone on its line; documentation may show the syntax in a fence or in
+    inline code.
+    """
+    for number, stripped in unfenced_lines(text):
+        if keyword not in INLINE_CODE.sub("", stripped):
             continue
-        where = f"{name}:{number}"
         if not stripped.startswith("<!--") or not stripped.endswith("-->") or stripped.count("<!--") > 1:
-            raise ValueError(f"{where}: a region marker must be alone on its line; "
+            raise ValueError(f"{name}:{number}: a region marker must be alone on its line; "
                              "put documentation of the syntax in inline code or a fence")
+        yield number, stripped
+
+
+def find_regions(name, text):
+    """Parse the named regions of one page; a malformed marker fails with file and line.
+
+    Markers count only on a line of their own outside fenced code blocks, so documentation
+    may show the syntax in a fence or in inline code.
+    """
+    regions, current = [], None
+    for number, stripped in marker_lines(name, text, "visual:generated"):
+        where = f"{name}:{number}"
         if stripped == END:
             if current is None:
                 raise ValueError(f"{where}: closing marker without an opening region")
@@ -171,6 +206,142 @@ def rewrite_regions(name, text, figures_by_id):
     return "\n".join(lines)
 
 
+def find_galleries(name, text):
+    """Parse the gallery regions of one page; a malformed marker fails with file and line."""
+    galleries, current = [], None
+    for number, stripped in marker_lines(name, text, "visual:gallery"):
+        where = f"{name}:{number}"
+        if stripped == GALLERY_END:
+            if current is None:
+                raise ValueError(f"{where}: gallery closing marker without an opening region")
+            galleries.append(current._replace(end=number))
+            current = None
+            continue
+        match = GALLERY_OPEN.fullmatch(stripped)
+        if not match:
+            raise ValueError(f"{where}: malformed gallery marker {stripped!r}; use '<!-- visual:gallery FOLDER -->'")
+        if current is not None:
+            raise ValueError(f"{where}: nested gallery; the gallery opened on line {current.start} is still open")
+        current = Gallery(match.group("folder"), number, None)
+    if current is not None:
+        raise ValueError(f"{name}:{current.start}: unclosed gallery for {current.folder!r}; add '{GALLERY_END}'")
+    return galleries
+
+
+def gallery_heading(folder_name):
+    """A readable heading for a lesson subfolder: the explicit mapping, else sentence case."""
+    return GALLERY_HEADINGS.get(folder_name, folder_name.replace("-", " ").capitalize())
+
+
+def _relative(target, start):
+    return os.path.relpath(target, start).replace("\\", "/")
+
+
+def gallery_entry(lesson, text, figures_by_id):
+    """Title, placed figure ids and verbatim "Use it when" cell of one lesson.
+
+    Returns ``(title, figure_ids, cell)`` with the ids in placement order; raises ValueError
+    naming what the lesson lacks.
+    """
+    regions = find_regions(lesson, text)
+    if not regions:
+        raise ValueError(f"{lesson} has no figure region; place one with '<!-- visual:generated FIGURE_ID -->'")
+    for region in regions:
+        if region.figure_id not in figures_by_id:
+            raise ValueError(f"{lesson}:{region.start}: unknown figure id {region.figure_id!r}")
+    lines = list(unfenced_lines(text))
+    title = next((line[2:].strip() for _, line in lines if line.startswith("# ")), None)
+    if not title:
+        raise ValueError(f"{lesson} has no '# ' title")
+    cell, in_table = None, False
+    for _, line in lines:
+        if GLANCE_HEADER.match(line):
+            in_table = True
+        elif in_table and not line.startswith("|"):
+            break
+        elif in_table and USE_IT_WHEN.match(line):
+            cell = USE_IT_WHEN.match(line).group("cell").strip()
+            break
+    if not in_table:
+        raise ValueError(f"{lesson} has no At a glance table ('| At a glance | |')")
+    if not cell:
+        raise ValueError(f"{lesson} has no '**Use it when**' row in its At a glance table")
+    return title, [region.figure_id for region in regions], cell
+
+
+def choose_thumbnail(figure_ids, used):
+    """The first placed figure not yet used as a thumbnail on the page, else the first one.
+
+    Records the choice in ``used``, so repeats happen only when a lesson has no figure of its own.
+    """
+    chosen = next((figure_id for figure_id in figure_ids if figure_id not in used), figure_ids[0])
+    used.add(chosen)
+    return chosen
+
+
+def gallery_body(name, folder, figures_by_id, root=ROOT, used=None):
+    """The Markdown that lists every lesson in the immediate subfolders of ``folder``.
+
+    ``used`` holds the figure ids already shown as thumbnails earlier on the same page; rows
+    are filled in gallery order and each takes a figure not yet shown when the lesson has one.
+    """
+    used = set() if used is None else used
+    base = root / folder
+    page = (root / name).parent
+    loose = sorted(path.name for path in base.glob("*.md") if path.name != "README.md")
+    if loose:
+        raise ValueError(f"{folder}/{loose[0]} is not in a subfolder; the gallery lists only subfolder lessons")
+    sections = []
+    for directory in sorted(path for path in base.iterdir() if path.is_dir() and not path.name.startswith(".")):
+        lessons = sorted(directory.glob("*.md"), key=lambda path: (path.name != "README.md", path.name))
+        if not lessons:
+            continue
+        rows = [f"### {gallery_heading(directory.name)}", "", "| Figure | Lesson | Use it when |", "| :---: | :--- | :--- |"]
+        for path in lessons:
+            lesson = path.relative_to(root).as_posix()
+            title, figure_ids, cell = gallery_entry(lesson, path.read_text(encoding="utf-8"), figures_by_id)
+            figure = figures_by_id[choose_thumbnail(figure_ids, used)]
+            href = _relative(path, page)
+            light = _relative(root / "docs/visuals" / figure["light"], page)
+            dark = _relative(root / "docs/visuals" / figure["dark"], page)
+
+            def relink(match, lesson_dir=path.parent):
+                target = match.group(2)
+                if re.match(r"[a-z][a-z0-9+.-]*:|[#/]", target):
+                    return match.group(0)
+                return match.group(1) + _relative(lesson_dir / target, page) + match.group(3)
+
+            rows.append(f'| <a href="{href}"><picture><source media="(prefers-color-scheme: dark)" '
+                        f'srcset="{dark}"><img src="{light}" alt="{escape(figure["description"], quote=True)}" '
+                        f'width="{GALLERY_THUMBNAIL_WIDTH}"></picture></a> | '
+                        f'[{title.replace("|", chr(92) + "|")}]({href}) | {MARKDOWN_LINK.sub(relink, cell)} |')
+        sections.append("\n".join(rows))
+    return "\n\n".join(sections) + "\n"
+
+
+def rewrite_galleries(name, text, figures_by_id, root=ROOT):
+    """Replace every gallery region body in ``text`` with the current lesson listing."""
+    galleries = find_galleries(name, text)
+    figure_lines = [region.start for region in find_regions(name, text)]
+    lines = text.split("\n")
+    used, bodies = set(), []
+    for gallery in galleries:  # document order, so thumbnails are chosen top to bottom
+        inside = [line for line in figure_lines if gallery.start < line < gallery.end]
+        if inside:
+            raise ValueError(f"{name}:{inside[0]}: a figure region cannot sit inside the gallery opened on "
+                             f"line {gallery.start}")
+        folder = root / gallery.folder
+        if not folder.is_dir() or gallery.folder.startswith("."):
+            raise ValueError(f"{name}:{gallery.start}: unknown gallery folder {gallery.folder!r}")
+        try:
+            bodies.append(gallery_body(name, gallery.folder, figures_by_id, root, used))
+        except ValueError as error:
+            raise ValueError(f"{name}:{gallery.start}: gallery {gallery.folder!r}: {error}") from None
+    for gallery, body in reversed(list(zip(galleries, bodies))):
+        lines[gallery.start:gallery.end - 1] = body.split("\n")
+    return "\n".join(lines)
+
+
 def build_outputs():
     fixtures = load_all_fixtures(FIXTURES)
     figures = collect_figures(figure_modules())
@@ -204,9 +375,9 @@ def build_outputs():
     by_id = {item["id"]: item for item in metadata}
     for name in region_pages():
         text = (ROOT / name).read_text(encoding="utf-8")
-        if "visual:generated" in text:
-            rewritten = rewrite_regions(name, text, by_id)
-            if find_regions(name, text):
+        if "visual:generated" in text or "visual:gallery" in text:
+            rewritten = rewrite_galleries(name, rewrite_regions(name, text, by_id), by_id)
+            if find_regions(name, text) or find_galleries(name, text):
                 outputs[name] = rewritten
     return outputs
 

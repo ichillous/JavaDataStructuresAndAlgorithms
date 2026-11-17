@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 881" width="520" height="881" role="img" aria-labelledby="title desc">
+<title id="title">53  Algorithms by task</title>
+<desc id="desc">9 cards sort the algorithms by the task they perform. Each card shows a small pictogram, names the family, a method to start with and the folder to open: search, SearchAlgorithms.lowerBound, searching/ and array-patterns/; sort, SortAlgorithms.mergeSort, sorting/ and divide-and-conquer/; select, Selection.kthSmallest, searching/; traverse, GraphAlgorithms.breadthFirst, graph/; shortest path, GraphAlgorithms.dijkstra, graph/; connect, FlowNetwork.maxFlow, graph/; optimize, DynamicProgramming.knapsack01, greedy/ and backtracking/ and dynamic-programming/; match text, StringAlgorithms.kmpFindAll, strings/; compute, NumberTheory.gcd, math/ and bit-manipulation/.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="algorithms-map-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="algorithms-map-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="algorithms-map-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="algorithms-map-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="algorithms-map-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="algorithms-map-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="algorithms-map-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="algorithms-map-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="algorithms-map-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="algorithms-map-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="algorithms-map-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="algorithms-map-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="algorithms-map-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="algorithms-map-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="algorithms-map-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="881" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">53  Algorithms by task</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Maps · Task, family, method, folder</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<rect x="28" y="134" width="464" height="80" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="152" width="64" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="41" y="172" width="6" height="18" rx="2" fill="#f6f8fb" stroke="#8994a5" stroke-width="2" opacity="0.45"/>
+<rect x="49" y="172" width="6" height="18" rx="2" fill="#f6f8fb" stroke="#8994a5" stroke-width="2" opacity="0.45"/>
+<rect x="57" y="172" width="6" height="18" rx="2" fill="#f6f8fb" stroke="#8994a5" stroke-width="2" opacity="0.45"/>
+<rect x="65" y="172" width="6" height="18" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<rect x="73" y="172" width="6" height="18" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="81" y="172" width="6" height="18" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="89" y="172" width="6" height="18" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<line x1="68" y1="156" x2="68" y2="162" stroke="#2451b7" stroke-width="2"/>
+<path d="M 68 168 L 64 162 L 72 162 Z" fill="#2451b7" stroke="#2451b7" stroke-width="1"/>
+<text x="110" y="160" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Search</text>
+<text x="194" y="160" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Bounds, scans</text>
+<text x="110" y="182" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">SearchAlgorithms.lowerBound</text>
+<text x="478" y="160" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">searching/</text>
+<text x="478" y="204" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">array-patterns/</text>
+<rect x="28" y="219" width="464" height="80" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="237" width="64" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="44" y="268" width="8" height="8" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="55" y="262" width="8" height="14" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="66" y="256" width="8" height="20" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="77" y="250" width="8" height="26" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="88" y="244" width="8" height="32" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="110" y="245" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Sort</text>
+<text x="165" y="245" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Merge, quick</text>
+<text x="110" y="267" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">SortAlgorithms.mergeSort</text>
+<text x="478" y="245" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">sorting/</text>
+<text x="478" y="289" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">divide-and-conquer/</text>
+<rect x="28" y="304" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="311" width="64" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="44" y="330" width="8" height="20" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="55" y="342" width="8" height="8" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="66" y="320" width="8" height="30" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="77" y="336" width="8" height="14" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<rect x="88" y="326" width="8" height="24" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="110" y="330" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Select</text>
+<text x="186" y="330" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">k-th, top k, majority</text>
+<text x="110" y="352" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">Selection.kthSmallest</text>
+<text x="478" y="330" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">searching/</text>
+<rect x="28" y="367" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="374" width="64" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<line x1="46" y1="396" x2="62" y2="382" stroke="#8994a5" stroke-width="2"/>
+<line x1="46" y1="396" x2="62" y2="410" stroke="#8994a5" stroke-width="2"/>
+<line x1="62" y1="382" x2="80" y2="396" stroke="#8994a5" stroke-width="2"/>
+<line x1="62" y1="410" x2="80" y2="396" stroke="#8994a5" stroke-width="2"/>
+<line x1="80" y1="396" x2="94" y2="382" stroke="#8994a5" stroke-width="2"/>
+<line x1="62" y1="382" x2="94" y2="382" stroke="#8994a5" stroke-width="2"/>
+<circle cx="46" cy="396" r="6" fill="none" stroke="#2451b7" stroke-width="2"/>
+<circle cx="46" cy="396" r="3" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<circle cx="62" cy="382" r="6" fill="none" stroke="#2451b7" stroke-width="2"/>
+<circle cx="62" cy="382" r="3" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<circle cx="62" cy="410" r="6" fill="none" stroke="#2451b7" stroke-width="2"/>
+<circle cx="62" cy="410" r="3" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<circle cx="80" cy="396" r="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<circle cx="94" cy="382" r="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="110" y="393" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Traverse</text>
+<text x="213" y="393" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">BFS, DFS, topological</text>
+<text x="110" y="415" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">GraphAlgorithms.breadthFirst</text>
+<text x="478" y="393" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">graph/</text>
+<rect x="28" y="430" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="437" width="64" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<line x1="46" y1="459" x2="62" y2="445" stroke="#8994a5" stroke-width="2"/>
+<line x1="46" y1="459" x2="62" y2="473" stroke="#2451b7" stroke-width="3"/>
+<line x1="62" y1="445" x2="80" y2="459" stroke="#8994a5" stroke-width="2"/>
+<line x1="62" y1="473" x2="80" y2="459" stroke="#2451b7" stroke-width="3"/>
+<line x1="80" y1="459" x2="94" y2="445" stroke="#2451b7" stroke-width="3"/>
+<line x1="62" y1="445" x2="94" y2="445" stroke="#8994a5" stroke-width="2"/>
+<circle cx="46" cy="459" r="3" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<circle cx="62" cy="445" r="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<circle cx="62" cy="473" r="3" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<circle cx="80" cy="459" r="3" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<circle cx="94" cy="445" r="3" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="110" y="456" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Shortest path</text>
+<text x="262" y="456" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Dijkstra, A*, 0-1 BFS</text>
+<text x="110" y="478" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">GraphAlgorithms.dijkstra</text>
+<text x="478" y="478" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">graph/</text>
+<rect x="28" y="493" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="500" width="64" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<line x1="50" y1="536" x2="90" y2="508" stroke="#8994a5" stroke-width="2" stroke-dasharray="7 5"/>
+<line x1="50" y1="508" x2="90" y2="508" stroke="#2451b7" stroke-width="3"/>
+<line x1="50" y1="508" x2="50" y2="536" stroke="#2451b7" stroke-width="3"/>
+<line x1="50" y1="536" x2="90" y2="536" stroke="#2451b7" stroke-width="3"/>
+<circle cx="50" cy="508" r="4" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<circle cx="90" cy="508" r="4" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<circle cx="50" cy="536" r="4" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<circle cx="90" cy="536" r="4" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="110" y="519" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Connect</text>
+<text x="207" y="519" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Kruskal, Prim, max flow</text>
+<text x="110" y="541" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">FlowNetwork.maxFlow</text>
+<text x="478" y="541" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">graph/</text>
+<rect x="28" y="556" width="464" height="80" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="574" width="64" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="55" y="580" width="9" height="9" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="66" y="580" width="9" height="9" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="77" y="580" width="9" height="9" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="55" y="591" width="9" height="9" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="66" y="591" width="9" height="9" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="77" y="591" width="9" height="9" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="55" y="602" width="9" height="9" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="66" y="602" width="9" height="9" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="77" y="602" width="9" height="9" rx="2" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="110" y="582" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Optimize</text>
+<text x="214" y="582" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Greedy, DP</text>
+<text x="110" y="604" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">DynamicProgramming.knapsack01</text>
+<text x="478" y="582" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">greedy/</text>
+<text x="478" y="626" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">backtracking/ · dynamic-programming/</text>
+<rect x="28" y="641" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="648" width="64" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="41" y="663" width="6" height="14" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="48" y="663" width="6" height="14" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="55" y="663" width="6" height="14" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="62" y="663" width="6" height="14" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="69" y="663" width="6" height="14" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="76" y="663" width="6" height="14" rx="2" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<rect x="83" y="663" width="6" height="14" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="90" y="663" width="6" height="14" rx="2" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="60" y="659" width="23" height="22" rx="3" fill="none" stroke="#2451b7" stroke-width="2"/>
+<text x="110" y="667" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Match text</text>
+<text x="232" y="667" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">KMP, Z, Aho-Corasick</text>
+<text x="110" y="689" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">StringAlgorithms.kmpFindAll</text>
+<text x="478" y="689" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">strings/</text>
+<rect x="28" y="704" width="464" height="58" rx="10" fill="#f6f8fb" stroke="#8994a5" stroke-width="2"/>
+<rect x="36" y="711" width="64" height="44" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<circle cx="70" cy="733" r="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<line x1="70" y1="722" x2="70" y2="718" stroke="#505b6b" stroke-width="2"/>
+<line x1="79.5" y1="727.5" x2="83.0" y2="725.5" stroke="#505b6b" stroke-width="2"/>
+<line x1="79.5" y1="738.5" x2="83.0" y2="740.5" stroke="#505b6b" stroke-width="2"/>
+<line x1="70" y1="744" x2="70" y2="748" stroke="#505b6b" stroke-width="2"/>
+<line x1="60.5" y1="738.5" x2="57.0" y2="740.5" stroke="#505b6b" stroke-width="2"/>
+<line x1="60.5" y1="727.5" x2="57.0" y2="725.5" stroke="#505b6b" stroke-width="2"/>
+<line x1="70" y1="733" x2="78" y2="725" stroke="#2451b7" stroke-width="2"/>
+<circle cx="70" cy="733" r="3" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="110" y="730" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Compute</text>
+<text x="214" y="730" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">gcd, primes, bits</text>
+<text x="110" y="752" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">NumberTheory.gcd</text>
+<text x="478" y="730" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">math/</text>
+<text x="478" y="752" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">bit-manipulation/</text>
+<rect x="28" y="775" width="464" height="82" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="806" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="835" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Pick by the task you must perform.</text>
+</svg>

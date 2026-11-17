@@ -44,7 +44,7 @@ sample at every prefix, so the stream can stop anywhere.
 <!-- visual:generated reservoir-sampling | One seeded run of reservoirSample: the replacement chance k/i falls with each arrival, and only some draws write a slot. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/reservoir-sampling-dark.svg"><img src="../../docs/visuals/assets/reservoir-sampling.svg" alt="Sampling.reservoirSample over the items A to H with k = 3 and seed 17 fills the reservoir with A, B, C, then draws j for each later arrival with replacement chance 3/4 down to 3/8; D, F and H replace slots 0, 0 and 1, giving F, H, C." width="520"></picture>
 
-**Figure 55.** One seeded run of reservoirSample: the replacement chance k/i falls with each arrival, and only some draws write a slot. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 57.** One seeded run of reservoirSample: the replacement chance k/i falls with each arrival, and only some draws write a slot. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Fisher-Yates walks `i` from `n - 1` down to 1 and swaps position `i` with a uniform
@@ -65,7 +65,7 @@ cutoff 1.
 <!-- visual:generated alias-table -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/alias-table-dark.svg"><img src="../../docs/visuals/assets/alias-table.svg" alt="AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2." width="520"></picture>
 
-**Figure 56.** AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 58.** AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Trace of the table for weights `[1, 0, 3]` (sum 4, scaled weights `[0.75, 0, 2.25]`):

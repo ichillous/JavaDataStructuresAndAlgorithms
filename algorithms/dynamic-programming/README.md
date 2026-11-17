@@ -29,13 +29,13 @@ page maps each family to a maintained method; the
 <!-- visual:generated lcs-traceback | The grid family: a state per pair of prefixes, here for LCS of GCTA and TGCAT. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/lcs-traceback-dark.svg"><img src="../../docs/visuals/assets/lcs-traceback.svg" alt="The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT." width="520"></picture>
 
-**Figure 58.** The grid family: a state per pair of prefixes, here for LCS of GCTA and TGCAT. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 60.** The grid family: a state per pair of prefixes, here for LCS of GCTA and TGCAT. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 <!-- visual:generated held-karp-masks | The bitmask family: a state per visited set and last city. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/held-karp-masks-dark.svg"><img src="../../docs/visuals/assets/held-karp-masks.svg" alt="The Held-Karp table for four cities, one cost per visited set and last city, the closing edge back to city 0, and the optimal tour 0, 2, 3, 1, 0 of cost 80." width="520"></picture>
 
-**Figure 61.** The bitmask family: a state per visited set and last city. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 63.** The bitmask family: a state per visited set and last city. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## The invariant and a trace
