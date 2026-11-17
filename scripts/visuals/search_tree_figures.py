@@ -8,7 +8,7 @@ and an independent reference model.
 
 from drawing import ints
 
-TRAVERSAL_IDEA = "Pre, in and post order differ only in when the root is read."
+TRAVERSAL_IDEA = "Pre, in and post order differ only in when the root is read; level order reads one depth at a time."
 DELETE_IDEA = "The successor's key replaces the deleted one; its old node is unlinked."
 TWO_THREE_IDEA = "A red link and its black parent make one 3-node."
 FIXUP_IDEA = "Rotations keep sorted order; a flip splits a 4-node."
@@ -132,13 +132,13 @@ def tree_traversals(c, fixtures):
         states = ["focus" if k == root["key"] else "good" if k in leaves else None for k in keys]
         return c.cell_row(36, y + 8, keys, cell=50, gap=8, height=36, states=states)
 
-    y = c.step(top + height * dy + 56, 2, "Read the same keys four ways")
+    y = c.step(top + height * dy + 50, 2, "Read the same keys four ways")
     y = row(y + 14, "pre-order: root, left, right", ints(fixtures, "search_tree.traversal.preOrder"))
-    y = row(y + 24, "in-order: left, root, right", ints(fixtures, "search_tree.traversal.inOrder"))
-    y = row(y + 24, "post-order: left, right, root", ints(fixtures, "search_tree.traversal.postOrder"))
-    y = row(y + 24, "level order: depth 0, then 1, 2, 3", ints(fixtures, "search_tree.traversal.levelOrder"))
+    y = row(y + 22, "in-order: left, root, right", ints(fixtures, "search_tree.traversal.inOrder"))
+    y = row(y + 22, "post-order: left, right, root", ints(fixtures, "search_tree.traversal.postOrder"))
+    y = row(y + 22, "level order: depth 0, then 1, 2, 3", ints(fixtures, "search_tree.traversal.levelOrder"))
 
-    y = c.legend(y + 28, [("focus", "root"), ("good", "leaf")])
+    y = c.legend(y + 22, [("focus", "root"), ("good", "leaf")])
     c.note(y + 14, TRAVERSAL_IDEA)
 
 

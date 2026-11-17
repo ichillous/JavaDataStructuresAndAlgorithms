@@ -110,7 +110,7 @@ assert balanced[0] && !balanced[1] && !balanced[2] && !balanced[3] && balanced[4
 ## Check yourself
 
 <details>
-<summary>In the trace for `([)]`, why does the check stop at the third character?</summary>
+<summary>In the trace for <code>([)]</code>, why does the check stop at the third character?</summary>
 
 After `(` and `[` the stack holds `([`. The closer `)` needs `(` on top but finds `[`, so no later character can repair the mismatch.
 
@@ -124,7 +124,7 @@ After `(` and `[` the stack holds `([`. The closer `)` needs `(` on top but find
 </details>
 
 <details>
-<summary>Why does `ArrayStack` check emptiness before computing the top index?</summary>
+<summary>Why does <code>ArrayStack</code> check emptiness before computing the top index?</summary>
 
 So that an empty `pop` or `peek` fails with `NoSuchElementException`, the public contract, instead of an incidental negative-index error from the backing array.
 

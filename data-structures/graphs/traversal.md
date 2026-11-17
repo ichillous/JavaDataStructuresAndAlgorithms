@@ -128,7 +128,7 @@ Both orders are valid depth-first traversals of the graph; the point is that the
 ## Common mistakes
 
 1. **Marking BFS vertices only when dequeued.** On `0 -> 1, 0 -> 2, 1 -> 3, 2 -> 3`, vertex 3 is enqueued by both 1 and 2. The invariant "each vertex enters the queue at most once" is broken, and work and parents are duplicated.
-2. **Pushing all neighbors for DFS.** On the graph above, the shortcut visits `[0, 2, 4, 3, 1]` while `depthFirst` returns `[0, 1, 3, 4, 2]`. DFS must resume the nearest unfinished neighbor scan, which needs an iterator per frame.
+2. **Pushing all neighbors for DFS.** On the six-vertex graph of the [In real Java](#in-real-java) example, the shortcut visits `[0, 2, 4, 3, 1]` while `depthFirst` returns `[0, 1, 3, 4, 2]`. DFS must resume the nearest unfinished neighbor scan, which needs an iterator per frame.
 3. **Using BFS paths for weighted costs.** With `0 -> 1` of weight 10, `0 -> 2` of weight 1 and `2 -> 1` of weight 1, BFS returns the one-edge path costing 10, while the cheapest route `0, 2, 1` costs 2. BFS minimizes edge count, not total weight.
 
 ## Practice
@@ -140,7 +140,7 @@ Both orders are valid depth-first traversals of the graph; the point is that the
 ## Check yourself
 
 <details>
-<summary>What do `breadthFirst(graph, 5)` and `shortestPath(graph, 0, 5)` return when vertex 5 is isolated?</summary>
+<summary>What do <code>breadthFirst(graph, 5)</code> and <code>shortestPath(graph, 0, 5)</code> return when vertex 5 is isolated?</summary>
 
 `breadthFirst(graph, 5)` returns `[5]`, the source alone. `shortestPath(graph, 0, 5)` returns an empty list because 5 is unreachable from 0.
 
@@ -154,7 +154,7 @@ Marking at enqueue guarantees each vertex enters the queue once and that its fir
 </details>
 
 <details>
-<summary>A graph has a directed cycle. Can `topologicalSort` return a partial order?</summary>
+<summary>A graph has a directed cycle. Can <code>topologicalSort</code> return a partial order?</summary>
 
 No. It throws `IllegalArgumentException` rather than return a misleading partial ordering; `GraphStructureAlgorithms.directedCycle` returns a cycle as evidence.
 

@@ -133,7 +133,7 @@ assert visited.equals(List.of("kitchen", "lobby", "cellar", "garden"));
 </details>
 
 <details>
-<summary>Why does `Graph` ignore `addEdge(1, 0)` after `addEdge(0, 1)` in an undirected graph, but `WeightedGraph` keeps repeated edges?</summary>
+<summary>Why does <code>Graph</code> ignore <code>addEdge(1, 0)</code> after <code>addEdge(0, 1)</code> in an undirected graph, but <code>WeightedGraph</code> keeps repeated edges?</summary>
 
 `Graph` stores unweighted adjacency as ordered sets, so the reverse edge is the same logical edge. `WeightedGraph` keeps parallel edges because two edges between the same vertices can carry different weights.
 

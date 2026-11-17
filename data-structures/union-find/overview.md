@@ -147,7 +147,7 @@ A version that always links the first root under the second, without comparing s
 ## Check yourself
 
 <details>
-<summary>Why does `union(7, 3)` return `false` in the example?</summary>
+<summary>Why does <code>union(7, 3)</code> return <code>false</code> in the example?</summary>
 
 By then 7 and 3 are both in the single group rooted at 0, so their roots are equal and nothing merges. The method reports that with `false` and changes no sizes or counts.
 

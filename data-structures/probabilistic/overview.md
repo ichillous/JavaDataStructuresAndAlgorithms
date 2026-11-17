@@ -6,14 +6,15 @@
 | **Avoid it when** | You need exact answers, deletion, or counts of rare items in a short stream. If the distinct items fit in memory, a `HashSet` or `HashMap` is simpler and exact. |
 | **Cost** | O(k) per Bloom operation and O(depth) per sketch operation; space is fixed by the chosen size, not by the number of items. |
 | **In this repo** | [`BloomFilter`](../../src/main/java/io/github/ichillous/dsa/structures/BloomFilter.java), [`CountMinSketch`](../../src/main/java/io/github/ichillous/dsa/structures/CountMinSketch.java) |
-| **In the JDK** | No direct equivalent; the exact versions are `java.util.HashSet`, `java.util.HashMap#merge` and `java.util.BitSet` (see [In real Java](#in-real-java)). |
+| **In the JDK** | No direct equivalent; the exact versions are `java.util.HashSet` and `java.util.HashMap#merge` (see [In real Java](#in-real-java)). `java.util.BitSet` is only a bit array, the storage a filter could be built on, not a membership test. |
 
 Use these structures when exact answers cost too much memory and a small,
 one-sided, quantifiable error is acceptable. A Bloom filter answers "have I seen
 this?" and a Count-Min sketch answers "about how many times have I seen this?",
 both in space that does not grow with the size of the elements. Preconditions: the
-elements must have a good `hashCode()` and be non-null; you must accept that the
-answer is a bound, not a fact.
+elements must have a good `hashCode()` and be non-null, an element's `hashCode()`
+must not change after it is added (equal elements must have equal hash codes),
+and you must accept that the answer is a bound, not a fact.
 
 The maintained sources are
 [BloomFilter](../../src/main/java/io/github/ichillous/dsa/structures/BloomFilter.java)
@@ -27,8 +28,8 @@ and
 ## The invariants and the one-sided errors
 
 **Bloom filter.** `add` sets `k` bits chosen by the element; bits are never
-cleared. So if an element was added, all of its `k` bits are set and
-`mightContain` returns `true`: there are **no false negatives**. If some bit of a
+cleared. Provided hash codes are stable, if an element was added, all of its `k`
+bits are set and `mightContain` returns `true`: there are **no false negatives**. If some bit of a
 query is still `0`, no added element can have set it, so `false` is certain. The
 only error is a **false positive**: an absent element whose `k` bits were all set
 by other elements.

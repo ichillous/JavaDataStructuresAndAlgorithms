@@ -258,21 +258,21 @@ assert sum == new LazySegmentTree(values).rangeSum(from, to);
 ## Check yourself
 
 <details>
-<summary>Why can a sparse table answer `rangeMin` with two overlapping blocks but not `rangeSum`?</summary>
+<summary>Why can a sparse table answer <code>rangeMin</code> with two overlapping blocks but not <code>rangeSum</code>?</summary>
 
 Minimum is idempotent, so `min(x, x) == x` and a value covered twice cannot change the answer. A sum counts each covered value once per block, so the overlap would be added twice.
 
 </details>
 
 <details>
-<summary>After `rangeAdd(2, 4, +5)` on a lazy tree over `1, 2, 3, 4`, why do the leaves still store 3 and 4?</summary>
+<summary>After <code>rangeAdd(2, 4, +5)</code> on a lazy tree over <code>1, 2, 3, 4</code>, why do the leaves still store 3 and 4?</summary>
 
 The update stops at the node covering `[2, 4)`, which records a pending +5 for its children instead of visiting them. A later query adds the pending value back on the way down, so `rangeSum(3, 4)` returns 4 + 5 = 9.
 
 </details>
 
 <details>
-<summary>Why does `rangeSum` not push pending additions down?</summary>
+<summary>Why does <code>rangeSum</code> not push pending additions down?</summary>
 
 Carrying the pending sum down the search path gives the same answer without writing to any node, so a read never modifies the tree.
 

@@ -162,8 +162,8 @@ links and 4-nodes.
 ## Why the height is at most 2 log2(n + 1)
 
 Let `b` be the number of black nodes on every root-to-empty-link path (rule 4).
-Merging each red node into its parent leaves a 2-3 tree of height `b`. Such a tree
-has at least `2^b - 1` keys, so `b <= log2(n + 1)`. A red node always has a black
+Merging each red node into its parent leaves a 2-3 tree with `b` levels (all leaves
+at the same depth). Such a tree has at least `2^b - 1` keys, so `b <= log2(n + 1)`. A red node always has a black
 parent (rules 3 and 5), so a path holds at most `b` red nodes. Every path therefore
 has at most `2b <= 2 log2(n + 1)` nodes, and `height()` (counted in edges) is at
 most `2 log2(n + 1) - 1`.
@@ -263,7 +263,7 @@ for (int key = 999; key >= 0; key--) {
 }
 assert avl.height() == 9;
 assert redBlack.height() == 14;
-assert redBlack.height() <= 2 * Math.log(1001) / Math.log(2);
+assert redBlack.height() <= 2 * Math.log(1001) / Math.log(2) - 1; // at most 18
 assert redBlack.remove(500) == 500;
 assert redBlack.rank(501) == 500;
 ```

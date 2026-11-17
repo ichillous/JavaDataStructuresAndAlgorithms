@@ -82,7 +82,7 @@ Bottom-up build uses O(n) time and O(n) copied storage. Peek is O(1); removal is
 
 ## In real Java
 
-`java.util.PriorityQueue` is the production heap. Besides `poll`, it can remove one specific element with `remove(Object)`, which removes a single instance and returns whether one was present. The Javadoc states linear time for `remove(Object)` and `contains(Object)`, so use them rarely; repeated `poll` stays logarithmic. The queue still yields the remaining values in order afterwards.
+`java.util.PriorityQueue` is the production heap. Besides `poll`, it can remove one specific element with `remove(Object)`, which removes a single instance and returns whether one was present. The Javadoc's implementation note states linear time for `remove(Object)` and `contains(Object)`, so use them rarely; repeated `poll` stays logarithmic. The queue still yields the remaining values in order afterwards.
 
 ```java
 import java.util.ArrayList;
@@ -116,7 +116,7 @@ The child moved up becomes the parent of the other child, so it must be the smal
 </details>
 
 <details>
-<summary>In `[1, 3, 8, 4, 5, 9]`, which slot does `add(7)` end in, and which value moves down?</summary>
+<summary>In <code>[1, 3, 8, 4, 5, 9]</code>, which slot does <code>add(7)</code> end in, and which value moves down?</summary>
 
 The new 7 starts in slot 6, whose parent is slot 2 holding 8. Since 7 is smaller, they swap; slot 2's parent is 1, which is not larger, so 7 stops in slot 2 and 8 moves down to slot 6.
 

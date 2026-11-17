@@ -108,21 +108,21 @@ assert growable.size() == 4 && backing.length == 3;
 ## Check yourself
 
 <details>
-<summary>Why does writing `middle[0] = 99` leave `values[1]` unchanged after `Arrays.copyOfRange(values, 1, 3)`?</summary>
+<summary>Why does writing <code>middle[0] = 99</code> leave <code>values[1]</code> unchanged after <code>Arrays.copyOfRange(values, 1, 3)</code>?</summary>
 
 The copy is a new array with its own storage, and `int` elements are copied by value. Aliasing (`int[] alias = values`) would share one array instead.
 
 </details>
 
 <details>
-<summary>A `DynamicArray` created with capacity 8 holds three elements. What are its size, its valid read indices and its capacity?</summary>
+<summary>A <code>DynamicArray</code> created with capacity 8 holds three elements. What are its size, its valid read indices and its capacity?</summary>
 
 Its size is 3, valid read indices are 0 to 2, and its capacity is 8; `get(3)` throws `IndexOutOfBoundsException` although slots 3 to 7 exist.
 
 </details>
 
 <details>
-<summary>What does the range `[i, i)` contain, and why is that convenient?</summary>
+<summary>What does the range <code>[i, i)</code> contain, and why is that convenient?</summary>
 
 It is empty: `to - from` is zero. Adjacent ranges `[a, b)` and `[b, c)` then join without overlap or gap, so empty ranges need no special case.
 

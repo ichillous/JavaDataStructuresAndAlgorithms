@@ -6,7 +6,7 @@ Use an open-addressed table when you want a hash map with no per-entry nodes: ma
 | --- | --- |
 | **Use it when** | You want a hash map with no per-entry nodes, many small entries, and neighboring slots that share cache lines. |
 | **Avoid it when** | Hash codes are poor or adversarial (one long cluster), or you need to keep references to entries. A constant `hashCode` makes every operation O(n). |
-| **Cost** | Expected O(1) `get`, `put` and `remove` while the load stays at most 2/3; O(n) worst case; O(capacity) space. |
+| **Cost** | Expected O(1) `get` and `remove`, expected amortized O(1) `put`, while the load stays at most 2/3; O(n) worst case; O(capacity) space. |
 | **In this repo** | [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) |
 | **In the JDK** | No general-purpose equivalent: `HashMap` chains collisions. `IdentityHashMap` is a reference-equality map (see [In real Java](#in-real-java)). |
 
@@ -129,7 +129,7 @@ The tempting `remove` sets the found slot to empty and stops. With the trace abo
 
 ## In real Java
 
-Use `HashMap` unless you have measured a reason not to. The one JDK class that probes linearly, `java.util.IdentityHashMap`, answers a different question: it compares keys by reference (`==`) instead of `equals`, so two equal but distinct strings are two keys. Use it only for object-graph bookkeeping, never for value-like keys.
+Use `HashMap` unless you have measured a reason not to. OpenJDK's `java.util.IdentityHashMap` is documented as a linear-probe table, but it answers a different question: its Javadoc says it uses reference-equality in place of object-equality when comparing keys (`==` instead of `equals`), so two equal but distinct strings are two keys. The Javadoc also calls it not a general-purpose `Map`, because it intentionally violates the `Map` contract. Use it only for object-graph bookkeeping, never for value-like keys.
 
 ```java
 import java.util.HashMap;

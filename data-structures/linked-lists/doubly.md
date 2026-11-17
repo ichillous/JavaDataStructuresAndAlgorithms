@@ -114,14 +114,14 @@ assert new ArrayList<>(cache.keySet()).equals(List.of("a", "c"));
 ## Check yourself
 
 <details>
-<summary>After unlinking `B` from `A <-> B <-> C`, which links change and what happens to `B`'s links?</summary>
+<summary>After unlinking <code>B</code> from <code>A &lt;-&gt; B &lt;-&gt; C</code>, which links change and what happens to <code>B</code>'s links?</summary>
 
 `A.next` becomes `C` and `C.previous` becomes `A`. `B`'s own `previous` and `next` are cleared so a stale reference to `B` does not retain the rest of the list.
 
 </details>
 
 <details>
-<summary>What does `remove(index)` cost for an index in the middle of this list?</summary>
+<summary>What does <code>remove(index)</code> cost for an index in the middle of this list?</summary>
 
 O(n): it walks about n / 2 links to find the node, then unlinking is O(1). The search dominates.
 

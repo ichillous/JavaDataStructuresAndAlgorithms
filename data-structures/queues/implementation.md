@@ -103,14 +103,14 @@ assert order.equals(List.of(1, 5, 2, 4, 3));
 ## Check yourself
 
 <details>
-<summary>Where does the element at logical offset `i` live in the circular buffer?</summary>
+<summary>Where does the element at logical offset <code>i</code> live in the circular buffer?</summary>
 
 At physical slot `(head + i) % capacity`. The next addition at the back writes at offset `size`.
 
 </details>
 
 <details>
-<summary>In a four-slot `RingDeque` with head 0, where does the head go after `addFirst`?</summary>
+<summary>In a four-slot <code>RingDeque</code> with head 0, where does the head go after <code>addFirst</code>?</summary>
 
 To slot 3: the head moves back one slot and wraps from 0 to the last slot, so the buffer order is read from slot 3 and then from slot 0.
 

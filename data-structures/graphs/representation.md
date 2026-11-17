@@ -108,7 +108,7 @@ assert rows[0].get(2) && !rows[2].get(0);        // directed: no automatic rever
 
 1. **Using 0 for "no edge" in a weighted matrix.** An edge `0 -> 1` of weight 0 stores 0 in cell `[0][1]`, exactly like a missing edge, so the algorithm loses the edge. The representation must distinguish absence from a legal zero weight, as `WeightedGraph` does with explicit edge records.
 2. **Filling only one triangle of an undirected matrix.** After setting `matrix[0][1] = true` alone, reading row 1 reports no neighbor 0. An undirected matrix must be symmetric: `matrix[a][b] == matrix[b][a]`.
-3. **Calling `neighbors(v)` once per candidate edge.** Each call copies an O(out-degree) snapshot, so testing all V² ordered pairs with `graph.neighbors(from).contains(to)` costs O(V·E) instead of O(V²) or O(V + E). Take one snapshot per visited vertex and reuse it.
+3. **Calling `neighbors(v)` once per candidate edge.** Each call copies an O(out-degree) snapshot, so testing all V² ordered pairs with `graph.neighbors(from).contains(to)` costs O(V² + V·E), because every call copies a whole row. Take one snapshot per vertex and reuse it: iterating the snapshots lists every edge in O(V + E), and marking each one in a boolean row answers all V² pair tests in O(V² + E).
 
 ## Practice
 

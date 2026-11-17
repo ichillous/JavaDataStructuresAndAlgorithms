@@ -101,7 +101,7 @@ assert viaTreeSet.equals(trie.wordsWithPrefix("ca", 100));
 ## Check yourself
 
 <details>
-<summary>Why is `startsWith("")` true in an empty trie while `contains("")` is false?</summary>
+<summary>Why is <code>startsWith("")</code> true in an empty trie while <code>contains("")</code> is false?</summary>
 
 The empty prefix is the root, which always exists. `contains` additionally needs the root's word marker, which is set only after the empty word is added.
 
