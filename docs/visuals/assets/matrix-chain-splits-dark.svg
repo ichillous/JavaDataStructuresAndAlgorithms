@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 870" width="520" height="870" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 880" width="520" height="880" role="img" aria-labelledby="title desc">
 <title id="title">30  Matrix chain splits</title>
 <desc id="desc">The cost table for four matrices with dimensions 30, 1, 40, 10, 25, the three candidate splits of the whole chain, and the stored splits that give (A1((A2A3)A4)) at cost 1400.</desc>
 <style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
 <defs><marker id="matrix-chain-splits-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="matrix-chain-splits-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="matrix-chain-splits-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="matrix-chain-splits-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="matrix-chain-splits-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="matrix-chain-splits-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="matrix-chain-splits-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="matrix-chain-splits-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="matrix-chain-splits-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="matrix-chain-splits-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="matrix-chain-splits-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="matrix-chain-splits-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="matrix-chain-splits-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="matrix-chain-splits-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="matrix-chain-splits-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
-<rect x="0" y="0" width="520" height="870" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<rect x="0" y="0" width="520" height="880" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
 <text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">30  Matrix chain splits</text>
 <text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Optimization · Worked example</text>
 <line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
@@ -55,17 +55,17 @@
 <text x="66" y="528" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Follow the splits</text>
 <rect x="300" y="514" width="165" height="30" rx="15" fill="#173527" stroke="#86dca2" stroke-width="2"/>
 <text x="382.5" y="535" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">(A1((A2A3)A4))</text>
-<text x="66" y="556" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">split[1][4] = 1: A1 | A2..A4</text>
-<text x="66" y="584" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">split[2][4] = 3: A2..A3 | A4</text>
-<text x="66" y="612" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">split[2][3] = 2: A2 | A3</text>
-<rect x="28" y="638" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
-<text x="62" y="654" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">whole chain</text>
-<rect x="190.272" y="638" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
-<text x="224.272" y="654" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">split the answer reuses</text>
-<rect x="28" y="678" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
-<text x="44" y="709" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
-<text x="44" y="738" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Each cell keeps the cheapest split k;</text>
-<text x="44" y="765" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">following the stored splits from the</text>
-<text x="44" y="792" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">whole chain down gives the</text>
-<text x="44" y="819" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">parenthesization.</text>
+<text x="66" y="564" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">split[1][4] = 1: A1 | A2..A4</text>
+<text x="66" y="592" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">split[2][4] = 3: A2..A3 | A4</text>
+<text x="66" y="620" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">split[2][3] = 2: A2 | A3</text>
+<rect x="28" y="646" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="62" y="662" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">whole chain</text>
+<rect x="190.272" y="646" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="224.272" y="662" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">split the answer reuses</text>
+<rect x="28" y="686" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="717" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="746" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Each cell keeps the cheapest split k;</text>
+<text x="44" y="773" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">following the stored splits from the</text>
+<text x="44" y="800" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">whole chain down gives the</text>
+<text x="44" y="827" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">parenthesization.</text>
 </svg>

@@ -346,7 +346,7 @@
       "title": "Weighted interval choices",
       "category": "Optimization",
       "description": "Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10.",
-      "keyIdea": "For each interval by end time, compare skipping it with taking it plus the best schedule that ends before it starts.",
+      "keyIdea": "Take an interval only if its weight plus the best earlier compatible schedule beats skipping it.",
       "lesson": "../../algorithms/dynamic-programming/classic-problems.md",
       "number": 32,
       "light": "assets/weighted-interval-choice.svg",

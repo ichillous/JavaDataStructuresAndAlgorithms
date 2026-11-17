@@ -1,67 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 900" width="520" height="900" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 870" width="520" height="870" role="img" aria-labelledby="title desc">
 <title id="title">33  Huffman merges and lengths</title>
 <desc id="desc">Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124.</desc>
 <style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
 <defs><marker id="huffman-tree-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="huffman-tree-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="huffman-tree-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="huffman-tree-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="huffman-tree-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="huffman-tree-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="huffman-tree-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="huffman-tree-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="huffman-tree-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="huffman-tree-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="huffman-tree-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="huffman-tree-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="huffman-tree-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="huffman-tree-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="huffman-tree-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
-<rect x="0" y="0" width="520" height="900" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<rect x="0" y="0" width="520" height="870" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
 <text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">33  Huffman merges and lengths</text>
 <text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Optimization · Worked example</text>
 <line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
 <circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
 <text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
-<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Merge the two lightest nodes</text>
-<text x="66" y="184" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">queue: 5 9 12 13 16</text>
-<text x="66" y="212" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="700">5 + 9 = 14</text>
-<text x="210" y="212" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">queue: 12 13 14 16</text>
-<text x="66" y="240" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="700">12 + 13 = 25</text>
-<text x="210" y="240" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">queue: 14 16 25</text>
-<text x="66" y="268" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="700">14 + 16 = 30</text>
-<text x="210" y="268" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">queue: 25 30</text>
-<text x="66" y="296" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="700">25 + 30 = 55</text>
-<text x="210" y="296" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">queue: 55</text>
-<text x="66" y="324" font-size="18" fill="#86dca2" text-anchor="start" font-weight="700">merge sums 14 + 25 + 30 + 55 = 124 bits</text>
-<circle cx="42" cy="365" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
-<text x="42" y="371" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
-<text x="66" y="372" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Depth in the tree is the code length</text>
-<line x1="292.25" y1="572.93" x2="279.75" y2="589.07" stroke="#bec9da" stroke-width="2.5"/>
-<line x1="327.75" y1="572.93" x2="340.25" y2="589.07" stroke="#bec9da" stroke-width="2.5"/>
-<line x1="100.25" y1="510.93" x2="87.75" y2="527.07" stroke="#bec9da" stroke-width="2.5"/>
-<line x1="135.75" y1="510.93" x2="148.25" y2="527.07" stroke="#bec9da" stroke-width="2.5"/>
-<line x1="360.02" y1="506.92" x2="331.98" y2="531.08" stroke="#bec9da" stroke-width="2.5"/>
-<line x1="403.98" y1="506.92" x2="432.02" y2="531.08" stroke="#bec9da" stroke-width="2.5"/>
-<line x1="223.75" y1="438.33" x2="144.25" y2="475.67" stroke="#bec9da" stroke-width="2.5"/>
-<line x1="276.25" y1="438.33" x2="355.75" y2="475.67" stroke="#bec9da" stroke-width="2.5"/>
-<circle cx="262" cy="612" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
-<text x="262" y="619" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">a 5</text>
-<text x="262" y="659" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 3</text>
-<circle cx="358" cy="612" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
-<text x="358" y="619" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">b 9</text>
-<text x="358" y="659" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 3</text>
-<circle cx="70" cy="550" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
-<text x="70" y="557" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">c 12</text>
-<text x="70" y="597" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 2</text>
-<circle cx="166" cy="550" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
-<text x="166" y="557" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">d 13</text>
-<text x="166" y="597" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 2</text>
-<circle cx="454" cy="550" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
-<text x="454" y="557" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">e 16</text>
-<text x="454" y="597" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 2</text>
-<circle cx="310.0" cy="550" r="25" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
-<text x="310.0" y="557" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">14</text>
-<circle cx="118.0" cy="488" r="25" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
-<text x="118.0" y="495" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">25</text>
-<circle cx="382.0" cy="488" r="25" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
-<text x="382.0" y="495" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">30</text>
-<circle cx="250.0" cy="426" r="25" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
-<text x="250.0" y="433" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">55</text>
-<rect x="28" y="671" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
-<text x="62" y="687" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">symbol and frequency</text>
-<rect x="283.584" y="671" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
-<text x="317.584" y="687" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">merged node (sum)</text>
-<rect x="28" y="711" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
-<text x="44" y="742" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
-<text x="44" y="771" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Merging the two lightest nodes first</text>
-<text x="44" y="798" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">leaves the rarest symbols deepest, so</text>
-<text x="44" y="825" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">frequent symbols get the shortest</text>
-<text x="44" y="852" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">codes.</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Merge the two lightest: 5 9 12 13 16</text>
+<text x="66" y="184" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="700">5 + 9 = 14</text>
+<text x="210" y="184" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">queue: 12 13 14 16</text>
+<text x="66" y="212" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="700">12 + 13 = 25</text>
+<text x="210" y="212" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">queue: 14 16 25</text>
+<text x="66" y="240" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="700">14 + 16 = 30</text>
+<text x="210" y="240" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">queue: 25 30</text>
+<text x="66" y="268" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="700">25 + 30 = 55</text>
+<text x="210" y="268" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">queue: 55</text>
+<text x="66" y="296" font-size="18" fill="#86dca2" text-anchor="start" font-weight="700">14 + 25 + 30 + 55 = 124, the weighted length</text>
+<circle cx="42" cy="337" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="343" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="344" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Depth in the tree is the code length</text>
+<line x1="291.51" y1="534.34" x2="280.49" y2="547.66" stroke="#bec9da" stroke-width="2.5"/>
+<line x1="328.49" y1="534.34" x2="339.51" y2="547.66" stroke="#bec9da" stroke-width="2.5"/>
+<line x1="99.51" y1="476.34" x2="88.49" y2="489.66" stroke="#bec9da" stroke-width="2.5"/>
+<line x1="136.49" y1="476.34" x2="147.51" y2="489.66" stroke="#bec9da" stroke-width="2.5"/>
+<line x1="359.42" y1="472.19" x2="332.58" y2="493.81" stroke="#bec9da" stroke-width="2.5"/>
+<line x1="404.58" y1="472.19" x2="431.42" y2="493.81" stroke="#bec9da" stroke-width="2.5"/>
+<line x1="223.45" y1="407.67" x2="144.55" y2="442.33" stroke="#bec9da" stroke-width="2.5"/>
+<line x1="276.55" y1="407.67" x2="355.45" y2="442.33" stroke="#bec9da" stroke-width="2.5"/>
+<circle cx="262" cy="570" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="262" y="577" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">a 5</text>
+<text x="262" y="617" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 3</text>
+<circle cx="358" cy="570" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="358" y="577" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">b 9</text>
+<text x="358" y="617" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 3</text>
+<circle cx="70" cy="512" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="70" y="519" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">c 12</text>
+<text x="70" y="559" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 2</text>
+<circle cx="166" cy="512" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="166" y="519" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">d 13</text>
+<text x="166" y="559" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 2</text>
+<circle cx="454" cy="512" r="25" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="454" y="519" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">e 16</text>
+<text x="454" y="559" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">len 2</text>
+<circle cx="310.0" cy="512" r="25" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="310.0" y="519" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">14</text>
+<circle cx="118.0" cy="454" r="25" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="118.0" y="461" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">25</text>
+<circle cx="382.0" cy="454" r="25" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="382.0" y="461" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">30</text>
+<circle cx="250.0" cy="396" r="25" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="250.0" y="403" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">55</text>
+<rect x="28" y="639" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="655" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">symbol and frequency</text>
+<rect x="283.584" y="639" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="317.584" y="655" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">merged node (sum)</text>
+<rect x="28" y="679" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="710" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="739" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Merging the two lightest nodes first</text>
+<text x="44" y="766" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">leaves the rarest symbols deepest, so</text>
+<text x="44" y="793" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">frequent symbols get the shortest</text>
+<text x="44" y="820" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">codes.</text>
 </svg>

@@ -225,7 +225,8 @@ def matrix_chain_splits(c, fixtures):
         y += 28
 
     y = c.step(y + 34, 3, "Follow the splits")
-    c.chip(300, y - 36, text, color="green")
+    y += 8
+    c.chip(300, y - 44, text, color="green")
     for i, j in used:
         k = split[(i, j)]
         left = f"A{i}" if i == k else f"A{i}..A{k}"
@@ -319,8 +320,8 @@ def held_karp_masks(c, fixtures):
 
 # ---------------------------------------------------------------- weighted-interval-choice
 
-INTERVAL_IDEA = ("For each interval by end time, compare skipping it with taking it plus the "
-                 "best schedule that ends before it starts.")
+INTERVAL_IDEA = ("Take an interval only if its weight plus the best earlier compatible "
+                 "schedule beats skipping it.")
 
 
 def weighted_interval_choice(c, fixtures):
@@ -352,19 +353,19 @@ def weighted_interval_choice(c, fixtures):
     y = c.step(156, 1, "Intervals sorted by end, with p(i)")
     x0, unit, bar = 62, 44, 26
     for index, (start, end, weight) in enumerate(spans):
-        top = y + 2 + index * 32
+        top = y + 2 + index * 30
         c.text(28, top + 20, names[index], size=20, weight="700")
         c.rect(x0 + unit * start, top, unit * (end - start), bar, fill="soft", stroke="blue", radius=5)
         c.text(x0 + unit * start + unit * (end - start) / 2, top + 20, f"w={weight}", size=18, color="blue",
                anchor="middle", weight="700")
         c.text(446, top + 20, f"p={compatible[index]}", size=18, color="muted", weight="700")
-    axis = y + 2 + count * 32 + 2
+    axis = y + 2 + count * 30 + 2
     for tick in range(0, max(end for _, end, _ in spans) + 1):
         c.text(x0 + unit * tick, axis + 18, str(tick), size=18, color="muted", anchor="middle")
     y = axis + 22
 
-    y = c.step(y + 22, 2, "take = w + best[p] or skip = best[i-1]")
-    gx, gy, ch = 118, y + 34, 34
+    y = c.step(y + 36, 2, "take = w + best[p] or skip = best[i-1]")
+    gx, gy, ch = 118, y + 34, 32
     rows = [[compatible[i], take[i], skip[i], best[i + 1]] for i in range(count)]
     states = {}
     for i in range(count):
@@ -375,8 +376,9 @@ def weighted_interval_choice(c, fixtures):
            states=states)
     y = gy + ch * count
 
-    y = c.step(y + 38, 3, "Walk back")
-    c.chip(300, y - 36, f"chosen {' + '.join(names[i] for i in chosen)} = {best[count]}", color="green")
+    y = c.step(y + 34, 3, "Walk back")
+    y += 8
+    c.chip(300, y - 44, f"chosen {' + '.join(names[i] for i in chosen)} = {best[count]}", color="green")
     index = count
     while index > 0:
         if best[index] == best[index - 1]:
@@ -425,15 +427,13 @@ def huffman_tree(c, fixtures):
             or cost != int(fixtures[P + "huffman.cost"])):
         raise ValueError("huffman figure disagrees with the fixture")
 
-    y = c.step(156, 1, "Merge the two lightest nodes")
-    c.text(66, y + 6, "queue: " + " ".join(map(str, sorted(weights))), size=18, color="muted")
-    y += 28
+    y = c.step(156, 1, "Merge the two lightest: " + " ".join(map(str, sorted(weights))))
     for merge, queue in zip(merges, queues):
         c.text(66, y + 6, f"{merge.replace('+', ' + ').replace('=', ' = ')}", size=18, weight="700")
         c.text(210, y + 6, "queue: " + " ".join(map(str, queue)), size=18, color="muted")
         y += 28
     total = " + ".join(str(int(m.split("=")[1])) for m in merges)
-    c.text(66, y + 6, f"merge sums {total} = {cost} bits", size=18, color="green", weight="700")
+    c.text(66, y + 6, f"{total} = {cost}, the weighted length", size=18, color="green", weight="700")
     y += 28
 
     y = c.step(y + 26, 2, "Depth in the tree is the code length")
@@ -451,7 +451,7 @@ def huffman_tree(c, fixtures):
     for node in range(len(weights), root + 1):
         left, right = nodes[node][1]
         x[node] = (x[left] + x[right]) / 2
-    top, gap, radius = y + 32, 62, 25
+    top, gap, radius = y + 30, 58, 25
     where = {node: (x[node], top + depth[node] * gap) for node in nodes}
     for node in range(len(weights), root + 1):
         for child in nodes[node][1]:
@@ -463,7 +463,7 @@ def huffman_tree(c, fixtures):
                    color="green")
         else:
             c.node(nx, ny, str(nodes[node][0]), radius=radius, state="focus")
-    y = top + max(depth.values()) * gap + radius + 30
+    y = top + max(depth.values()) * gap + radius + 40
 
     y = c.legend(y + 20, [("good", "symbol and frequency"), ("focus", "merged node (sum)")])
     c.note(y + 14, HUFFMAN_IDEA)
@@ -567,7 +567,7 @@ FIGURES = [
                         "candidate splits of the whole chain, and the stored splits that give "
                         "(A1((A2A3)A4)) at cost 1400."),
         "keyIdea": CHAIN_IDEA, "lesson": "algorithms/dynamic-programming/classic-problems.md",
-        "height": 870, "draw": matrix_chain_splits,
+        "height": 880, "draw": matrix_chain_splits,
     },
     {
         "id": "held-karp-masks", "title": "Held-Karp states", "category": CATEGORY,
@@ -582,7 +582,7 @@ FIGURES = [
                         "take-or-skip comparison for each, and the walk back that chooses B and D for "
                         "total weight 10."),
         "keyIdea": INTERVAL_IDEA, "lesson": "algorithms/dynamic-programming/classic-problems.md",
-        "height": 890, "draw": weighted_interval_choice,
+        "height": 870, "draw": weighted_interval_choice,
     },
     {
         "id": "huffman-tree", "title": "Huffman merges and lengths", "category": CATEGORY,
@@ -590,7 +590,7 @@ FIGURES = [
                         "time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted "
                         "length of 124."),
         "keyIdea": HUFFMAN_IDEA, "lesson": "algorithms/greedy/huffman-coding.md",
-        "height": 900, "draw": huffman_tree,
+        "height": 870, "draw": huffman_tree,
     },
     {
         "id": "subset-sum-halves", "title": "Subset sum, two halves", "category": CATEGORY,

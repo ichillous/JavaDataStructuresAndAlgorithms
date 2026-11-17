@@ -261,7 +261,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/weighted-interval-choice-dark.svg"><img src="assets/weighted-interval-choice.svg" alt="Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10." width="520"></picture>
 
-**Key idea:** For each interval by end time, compare skipping it with taking it plus the best schedule that ends before it starts.
+**Key idea:** Take an interval only if its weight plus the best earlier compatible schedule beats skipping it.
 
 ## 33. Huffman merges and lengths
 
