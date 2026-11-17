@@ -62,9 +62,11 @@ computed as `low + (high - low) / 2` so adding two large indices cannot overflow
 Preparing sorted data costs extra, and inserting into a sorted array can shift
 O(n) elements even though finding its insertion position is logarithmic.
 
-**Counterexample:** `[1, 9, 2]` violates the monotonic predicate “value is below
-2.” Discarding a half can discard the answer. Binary search is valid because the
-predicate changes once, not merely because a problem involves numbers.
+**Counterexample:** in `[2, 0, 1]` the predicate “value is below 2” is false,
+true, true: it does not change once. `binarySearch(a, 2)` probes index 1, sees
+0 < 2, discards index 0 and returns `-1`, although `a[0] == 2`. Binary search is
+valid because the predicate changes once, not merely because a problem involves
+numbers.
 
 ## In real Java
 

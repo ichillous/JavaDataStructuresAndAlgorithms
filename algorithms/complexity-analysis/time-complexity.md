@@ -133,7 +133,8 @@ each index enters and leaves at most once across the whole run.
    an array of 1,024, which is linear overall. The invariant behind O(log n) is O(1)
    work per halving.
 3. **Counting string comparisons as O(1).** Sorting 1,000 strings that share a
-   999-character prefix compares up to 999 characters per comparison, so the model
+   999-character prefix inspects up to 1,000 characters per comparison (the 999
+   shared ones and the first difference), so the model
    must include the key length, not just `n log n` comparisons.
 
 ## Check yourself
@@ -160,8 +161,9 @@ for `m` appends.
 <summary>Why can a recurrence not tell you the stack space of quicksort?</summary>
 
 The recurrence counts work across all calls. Stack space is set by the deepest
-chain of live calls, which depends on which partition is recursed into first, not
-on the total number of calls.
+chain of live calls. With two recursive calls that chain can be `n` deep in
+whichever order they run; recursing only into the smaller partition and looping
+over the larger one bounds it by O(log n), and the work recurrence does not change.
 
 </details>
 
