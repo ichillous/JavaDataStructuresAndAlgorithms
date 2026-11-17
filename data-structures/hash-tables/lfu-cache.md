@@ -1,5 +1,13 @@
 # LFU cache: evict the least used, break ties by recency
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | A few keys are used far more often than the rest and a one-time scan over cold keys must not flush them. |
+| **Avoid it when** | The popular set drifts over time (counts never decay), or recency is the right policy; use an access-order `LinkedHashMap` for LRU. |
+| **Cost** | Expected O(1) `get`, `remove` and `frequency`; expected amortized O(1) `put`; O(capacity) space. |
+| **In this repo** | [`LfuCache`](../../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) |
+| **In the JDK** | No direct equivalent; `LinkedHashMap` in access order covers LRU only. |
+
 A least-frequently-used cache keeps a fixed number of entries and, when a new key arrives at capacity, discards the entry that has been used the fewest times. [`LfuCache`](../../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) breaks frequency ties by evicting the least recently used of the tied entries. It offers the same surface as [`LruCache`](../../src/main/java/io/github/ichillous/dsa/collections/LruCache.java), which is explained in the [hash tables overview](overview.md#composition-an-lru-cache), plus a `frequency(key)` query that does not count as a use.
 
 Preconditions: capacity is positive, keys and values are non-null, and keys keep stable `equals`/`hashCode` while cached. A `null` result from `get`, `put` or `remove` means absence. The class is not thread safe, because even `get` changes the cache.
@@ -18,6 +26,12 @@ Every cached key has exactly one node. A node with frequency `f` is in bucket `f
 A hit moves a node from bucket `f` to the tail of bucket `f + 1`. If bucket `f` was the minimum and became empty, the minimum becomes `f + 1`. A new key always lands in bucket 1 and resets the minimum to 1. No operation scans the buckets.
 
 ## A bucket trace
+
+<!-- visual:generated lfu-buckets -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/lfu-buckets-dark.svg"><img src="../../docs/visuals/assets/lfu-buckets.svg" alt="A capacity-3 LfuCache after put A, B, C and get C holds A and B in bucket 1 and C in bucket 2. get(B) moves B to the end of bucket 2, and put(D) then evicts A, the oldest key of bucket 1." width="520"></picture>
+
+**Figure 30.** A capacity-3 LfuCache after put A, B, C and get C holds A and B in bucket 1 and C in bucket 2. get(B) moves B to the end of bucket 2, and put(D) then evicts A, the oldest key of bucket 1. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 Capacity 2. Each bucket is shown as `f: [least recent ... most recent]`.
 
@@ -72,6 +86,29 @@ When every other entry has a higher count, a new key is the next victim unless i
 ## When to use the JDK instead
 
 If recency is the right policy, use `LinkedHashMap` in access order and override `removeEldestEntry`; it needs far less code and is well tested. The JDK has no LFU, so use this class (or a vetted library such as a production cache with TinyLFU admission) when frequency matters. For concurrent use, wrap this class with external locking or use a concurrent cache library.
+
+## Check yourself
+
+<details>
+<summary>With capacity 2, <code>put(1)</code>, <code>put(2)</code>, <code>get(1)</code>, <code>put(3)</code>: which key is evicted and why?</summary>
+
+Key 2. Key 1 has frequency 2 after the hit and key 2 still has frequency 1, so key 2 heads the lowest non-empty bucket.
+
+</details>
+
+<details>
+<summary>Two keys both have frequency 2. Which one is evicted?</summary>
+
+The one used less recently: each bucket runs from least to most recently used and eviction takes the head of the lowest bucket. Frequency decides first and recency only breaks ties.
+
+</details>
+
+<details>
+<summary>A key is evicted and later inserted again. What is its frequency?</summary>
+
+Frequency 1. An evicted or removed key forgets its history, so a reinserted key starts in bucket 1 like any new key.
+
+</details>
 
 ## Practice
 
