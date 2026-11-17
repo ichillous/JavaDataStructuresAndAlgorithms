@@ -9,6 +9,14 @@ dependencies are ready, and reading the answer from a known cell. The maintained
 implements six of them. For the general method see the
 [overview](overview.md) and [problem set](problems.md).
 
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | You need exact answers for counting, segmentation, bracketing, tours or weighted scheduling. |
+| **Avoid&nbsp;it&nbsp;when** | A simple greedy rule is proven, or `n` is past the exponential limit (16 cities for Held-Karp). |
+| **Cost** | From O(n log n) for weighted intervals to O(2^n n^2) for Held-Karp; see [Costs](#costs) |
+| **In&nbsp;this&nbsp;repo** | [`DynamicProgrammingClassics`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; `Math.addExact` and `Math.multiplyExact` for overflow-safe sums |
+
 Preconditions and conventions shared by all six methods: null arguments are
 rejected, inputs are never modified, returned lists are immutable, and results
 that do not fit the stated type throw `ArithmeticException` instead of wrapping.
@@ -113,6 +121,15 @@ cost(1,3): k=1 -> 0 + 9000 + 10*30*60 = 27000
 answer 4500, "((A1A2)A3)"
 ```
 
+A four-matrix chain shows the whole mechanism: the cost table, the candidate
+splits for the full chain, and the stored splits that are followed back.
+
+<!-- visual:generated matrix-chain-splits -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/matrix-chain-splits-dark.svg"><img src="../../docs/visuals/assets/matrix-chain-splits.svg" alt="The cost table for four matrices with dimensions 30, 1, 40, 10, 25, the three candidate splits of the whole chain, and the stored splits that give (A1((A2A3)A4)) at cost 1400." width="520"></picture>
+
+**Figure 62.** The cost table for four matrices with dimensions 30, 1, 40, 10, 25, the three candidate splits of the whole chain, and the stored splits that give (A1((A2A3)A4)) at cost 1400. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 **Pitfall:** multiplying strictly left to right is not always optimal. For
 `[30, 1, 40, 10, 25]` the left-to-right order `(((A1A2)A3)A4)` costs 20700, while
 the optimal order costs 1400, about fifteen times less.
@@ -133,6 +150,16 @@ best({1},1)=10  best({2},2)=15  best({3},3)=20
 best({1,2},2)=10+35=45 ...      best({1,2,3},j) over all j
 close the cycle with d[j][0]; optimum 80 (0-1-3-2-0 and 0-2-3-1-0 tie)
 ```
+
+<!-- visual:generated held-karp-masks -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/held-karp-masks-dark.svg"><img src="../../docs/visuals/assets/held-karp-masks.svg" alt="The Held-Karp table for four cities, one cost per visited set and last city, the closing edge back to city 0, and the optimal tour 0, 2, 3, 1, 0 of cost 80." width="520"></picture>
+
+**Figure 63.** The Held-Karp table for four cities, one cost per visited set and last city, the closing edge back to city 0, and the optimal tour 0, 2, 3, 1, 0 of cost 80. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
+The figure lists every (visited set, last city) state and shows the tie: ending
+at city 1 and at city 2 both cost 80, and the smaller last city gives the tour
+0, 2, 3, 1.
 
 **Pitfall:** nearest-neighbour (always travel to the closest unvisited city) is
 fast but not optimal. Brute force over permutations costs O((n-1)!); Held-Karp
@@ -158,6 +185,12 @@ i  interval  p(i)  take = w + best[p]   skip = best[i-1]   best[i]
 4  D         2     4 + 6 = 10           6                 10
 walk back: D taken (jump to p=2), B taken (jump to 0)  -> [B, D], total 10
 ```
+
+<!-- visual:generated weighted-interval-choice -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/weighted-interval-choice-dark.svg"><img src="../../docs/visuals/assets/weighted-interval-choice.svg" alt="Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10." width="520"></picture>
+
+**Figure 64.** Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 **Pitfall:** the unweighted rule "earliest end first" from
 [greedy algorithms](../greedy/overview.md) fails with weights. Here it takes `A`
@@ -204,6 +237,40 @@ assert schedule.totalWeight() == 10;
 assert schedule.chosen().equals(List.of(b, d));
 ```
 
+## In real Java
+
+Results are immutable snapshots, so callers cannot corrupt a returned tour, and
+exact arithmetic is the library's default policy: a total that does not fit in a
+`long` throws instead of wrapping. When you combine results yourself, keep the
+same policy with `Math.addExact` rather than `+`.
+
+```java
+import io.github.ichillous.dsa.algorithms.DynamicProgrammingClassics;
+import io.github.ichillous.dsa.algorithms.DynamicProgrammingClassics.Tour;
+import io.github.ichillous.dsa.algorithms.DynamicProgrammingClassics.WeightedInterval;
+import java.util.List;
+
+Tour tour = DynamicProgrammingClassics.travelingSalesman(
+        new long[][] {{0, 10, 15, 20}, {10, 0, 35, 25}, {15, 35, 0, 30}, {20, 25, 30, 0}});
+assert tour.order().equals(List.of(0, 2, 3, 1));
+boolean immutable = false;
+try {
+    tour.order().add(9);
+} catch (UnsupportedOperationException expected) {
+    immutable = true;
+}
+assert immutable;
+
+boolean overflow = false;
+try {
+    DynamicProgrammingClassics.weightedIntervalScheduling(List.of(
+            new WeightedInterval(0, 1, Long.MAX_VALUE), new WeightedInterval(1, 2, 1)));
+} catch (ArithmeticException expected) {
+    overflow = true;
+}
+assert overflow;
+```
+
 ## Costs
 
 | Method | Time | Auxiliary space | Overflow behavior |
@@ -227,6 +294,29 @@ the longest dictionary word. See the
    `best[3]` equals `best[2]` instead of using `C`.
 3. For `dimensions = [5, 10, 3, 12, 5]`, fill the matrix-chain cost table by
    increasing chain length and write the parenthesization the tie rule yields.
+
+## Check yourself
+
+<details>
+<summary>Why does swapping the coin and amount loops change what <code>countCoinCombinations</code> counts?</summary>
+
+With coins outer, each combination is built in coin order, so `1 + 2` and `2 + 1` are one way. With amount outer, every ordering is a separate path, so `{1, 2}` with amount 3 gives 3 instead of 2.
+
+</details>
+
+<details>
+<summary>In the Held-Karp figure, why are ends 1 and 2 both 80 but the tour is 0, 2, 3, 1?</summary>
+
+Equal closing costs go to the smallest last city, so the tour ends at city 1. Walking the predecessors back from there gives 0, 2, 3, 1; the reverse tour 0, 1, 3, 2 has the same cost.
+
+</details>
+
+<details>
+<summary>In weighted interval scheduling, why does <code>best[3]</code> equal <code>best[2]</code> for the intervals above?</summary>
+
+Taking C is worth 2 plus `best[1]` = 3, which is 5, and skipping keeps `best[2]` = 6. Skipping wins, and ties would also skip, so C is never chosen.
+
+</details>
 
 Look up the structures and algorithms in the
 [catalog](../../docs/catalog.md) and the

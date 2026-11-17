@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 852" width="520" height="852" role="img" aria-labelledby="title desc">
+<title id="title">56  Sieve of Eratosthenes</title>
+<desc id="desc">NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="sieve-grid-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="sieve-grid-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="sieve-grid-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="sieve-grid-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="sieve-grid-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="sieve-grid-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="sieve-grid-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="sieve-grid-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="sieve-grid-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="sieve-grid-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="sieve-grid-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="sieve-grid-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="sieve-grid-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="sieve-grid-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="sieve-grid-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="852" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">56  Sieve of Eratosthenes</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Math and bits · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Each prime starts at its square</text>
+<text x="48" y="190" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">p = 2: start at 4</text>
+<text x="492" y="190" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">14 new</text>
+<text x="48" y="220" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">p = 3: start at 9, skip 6</text>
+<text x="492" y="220" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">4 new</text>
+<text x="48" y="250" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">p = 5: start at 25, skip 10, 15, 20</text>
+<text x="492" y="250" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">1 new</text>
+<text x="48" y="280" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">7×7 = 49 is past 30: stop</text>
+<circle cx="42" cy="319" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="325" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="326" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Crossed by its smallest prime</text>
+<rect x="100" y="362" width="64" height="40" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="132.0" y="389.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="164" y="362" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="196.0" y="389.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">2</text>
+<rect x="228" y="362" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="260.0" y="389.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">3</text>
+<rect x="292" y="362" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="324.0" y="389.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">4</text>
+<rect x="356" y="362" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="388.0" y="389.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">5</text>
+<rect x="100" y="402" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="132.0" y="429.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">6</text>
+<rect x="164" y="402" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="196.0" y="429.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">7</text>
+<rect x="228" y="402" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="260.0" y="429.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">8</text>
+<rect x="292" y="402" width="64" height="40" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="324.0" y="429.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">9</text>
+<rect x="356" y="402" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="388.0" y="429.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">10</text>
+<rect x="100" y="442" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="132.0" y="469.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">11</text>
+<rect x="164" y="442" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="196.0" y="469.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">12</text>
+<rect x="228" y="442" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="260.0" y="469.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">13</text>
+<rect x="292" y="442" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="324.0" y="469.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">14</text>
+<rect x="356" y="442" width="64" height="40" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="388.0" y="469.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">15</text>
+<rect x="100" y="482" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="132.0" y="509.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">16</text>
+<rect x="164" y="482" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="196.0" y="509.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">17</text>
+<rect x="228" y="482" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="260.0" y="509.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">18</text>
+<rect x="292" y="482" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="324.0" y="509.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">19</text>
+<rect x="356" y="482" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="388.0" y="509.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">20</text>
+<rect x="100" y="522" width="64" height="40" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="132.0" y="549.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">21</text>
+<rect x="164" y="522" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="196.0" y="549.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">22</text>
+<rect x="228" y="522" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="260.0" y="549.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">23</text>
+<rect x="292" y="522" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="324.0" y="549.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">24</text>
+<rect x="356" y="522" width="64" height="40" rx="3" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="388.0" y="549.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">25</text>
+<rect x="100" y="562" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="132.0" y="589.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">26</text>
+<rect x="164" y="562" width="64" height="40" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="196.0" y="589.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">27</text>
+<rect x="228" y="562" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="260.0" y="589.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">28</text>
+<rect x="292" y="562" width="64" height="40" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="324.0" y="589.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">29</text>
+<rect x="356" y="562" width="64" height="40" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="388.0" y="589.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">30</text>
+<rect x="28" y="620" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="636" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">prime</text>
+<rect x="134.976" y="620" width="26" height="20" rx="4" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="168.976" y="636" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">crossed by 2</text>
+<rect x="305.888" y="620" width="26" height="20" rx="4" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="339.888" y="636" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">crossed by 3</text>
+<rect x="28" y="652" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="62" y="668" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">crossed by 5</text>
+<rect x="198.91199999999998" y="652" width="26" height="20" rx="4" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="232.91199999999998" y="668" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">1: neither</text>
+<rect x="28" y="692" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="723" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="752" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">A prime p starts crossing at p×p,</text>
+<text x="44" y="779" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">because smaller multiples have a</text>
+<text x="44" y="806" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">smaller prime factor.</text>
+</svg>

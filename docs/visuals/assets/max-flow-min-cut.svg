@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 900" width="520" height="900" role="img" aria-labelledby="title desc">
+<title id="title">31  Maximum flow and minimum cut</title>
+<desc id="desc">A four-vertex flow network from source 0 to sink 3 carries a maximum flow of 5. The source side {0, 1} is the set reachable in the residual graph, and the three edges leaving it have capacities 2, 1 and 2, summing to 5.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="max-flow-min-cut-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="max-flow-min-cut-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="max-flow-min-cut-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="max-flow-min-cut-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="max-flow-min-cut-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="max-flow-min-cut-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="max-flow-min-cut-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="max-flow-min-cut-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="max-flow-min-cut-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="max-flow-min-cut-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="max-flow-min-cut-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="max-flow-min-cut-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="max-flow-min-cut-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="max-flow-min-cut-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="max-flow-min-cut-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="900" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">31  Maximum flow and minimum cut</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Each edge has a capacity</text>
+<line x1="88.86" y1="276.39" x2="231.31" y2="232.78" stroke="#8994a5" stroke-width="2.5" marker-end="url(#max-flow-min-cut-line-arrow)"/>
+<text x="157.32" y="238.7" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">5</text>
+<line x1="88.86" y1="291.61" x2="231.31" y2="335.22" stroke="#8994a5" stroke-width="2.5" marker-end="url(#max-flow-min-cut-line-arrow)"/>
+<text x="166.68" y="298.7" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">2</text>
+<line x1="260.0" y1="250.0" x2="260.0" y2="314.0" stroke="#8994a5" stroke-width="2.5" marker-end="url(#max-flow-min-cut-line-arrow)"/>
+<text x="244.0" y="290.0" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">1</text>
+<line x1="284.86" y1="231.61" x2="427.31" y2="275.22" stroke="#8994a5" stroke-width="2.5" marker-end="url(#max-flow-min-cut-line-arrow)"/>
+<text x="362.68" y="238.7" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">2</text>
+<line x1="284.86" y1="336.39" x2="427.31" y2="292.78" stroke="#8994a5" stroke-width="2.5" marker-end="url(#max-flow-min-cut-line-arrow)"/>
+<text x="353.32" y="298.7" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">3</text>
+<circle cx="64" cy="284" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="64" y="291" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">0</text>
+<text x="64" y="330" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="700">source</text>
+<circle cx="260" cy="224" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="260" y="231" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<circle cx="260" cy="344" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="260" y="351" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">2</text>
+<circle cx="456" cy="284" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="456" y="291" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">3</text>
+<text x="456" y="330" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="700">sink</text>
+<circle cx="42" cy="395" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="401" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="402" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Maximum flow 5: flow/capacity</text>
+<line x1="88.86" y1="522.39" x2="231.31" y2="478.78" stroke="#8994a5" stroke-width="2.5" marker-end="url(#max-flow-min-cut-line-arrow)"/>
+<text x="157.32" y="484.7" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">3/5</text>
+<line x1="88.86" y1="537.61" x2="231.31" y2="581.22" stroke="#bd3026" stroke-width="2.5" marker-end="url(#max-flow-min-cut-red-arrow)"/>
+<text x="166.68" y="544.7" font-size="18" fill="#bd3026" text-anchor="middle" font-weight="700">2/2</text>
+<line x1="260.0" y1="496.0" x2="260.0" y2="560.0" stroke="#bd3026" stroke-width="2.5" marker-end="url(#max-flow-min-cut-red-arrow)"/>
+<text x="244.0" y="536.0" font-size="18" fill="#bd3026" text-anchor="end" font-weight="700">1/1</text>
+<line x1="284.86" y1="477.61" x2="427.31" y2="521.22" stroke="#bd3026" stroke-width="2.5" marker-end="url(#max-flow-min-cut-red-arrow)"/>
+<text x="362.68" y="484.7" font-size="18" fill="#bd3026" text-anchor="middle" font-weight="700">2/2</text>
+<line x1="284.86" y1="582.39" x2="427.31" y2="538.78" stroke="#2451b7" stroke-width="2.5" marker-end="url(#max-flow-min-cut-blue-arrow)"/>
+<text x="353.32" y="544.7" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">3/3</text>
+<circle cx="64" cy="530" r="22" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="64" y="537" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">0</text>
+<text x="64" y="576" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="700">source</text>
+<circle cx="260" cy="470" r="22" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="260" y="477" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<circle cx="260" cy="590" r="22" fill="#f0eafb" stroke="#6b3fb8" stroke-width="3"/>
+<text x="260" y="597" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">2</text>
+<circle cx="456" cy="530" r="22" fill="#f0eafb" stroke="#6b3fb8" stroke-width="3"/>
+<text x="456" y="537" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">3</text>
+<text x="456" y="576" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="700">sink</text>
+<text x="28" y="648" font-size="20" fill="#bd3026" text-anchor="start" font-weight="700">Cut: 2 + 1 + 2 = 5 = flow 5</text>
+<text x="28" y="676" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">0→1 has room left, so vertex 1 stays reachable.</text>
+<rect x="28" y="700" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="716" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">source side</text>
+<rect x="186.816" y="700" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="220.816" y="716" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">sink side</text>
+<rect x="28" y="732" width="26" height="20" rx="4" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="62" y="748" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">edge crossing the cut</text>
+<rect x="28" y="770" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="801" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="830" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Edges leaving the final source side are</text>
+<text x="44" y="857" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">saturated and sum to the flow.</text>
+</svg>

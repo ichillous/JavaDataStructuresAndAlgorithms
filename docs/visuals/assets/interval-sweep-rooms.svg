@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 840" width="520" height="840" role="img" aria-labelledby="title desc">
+<title id="title">78  Sweeping events for rooms</title>
+<desc id="desc">minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="interval-sweep-rooms-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="interval-sweep-rooms-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="interval-sweep-rooms-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="interval-sweep-rooms-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="interval-sweep-rooms-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="interval-sweep-rooms-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="interval-sweep-rooms-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="interval-sweep-rooms-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="interval-sweep-rooms-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="interval-sweep-rooms-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="interval-sweep-rooms-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="interval-sweep-rooms-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="interval-sweep-rooms-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="interval-sweep-rooms-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="interval-sweep-rooms-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="840" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">78  Sweeping events for rooms</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Array patterns · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Intervals on a time axis</text>
+<rect x="120" y="182" width="150" height="28" rx="6" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="195.0" y="203" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">[1, 4)</text>
+<rect x="170" y="218" width="150" height="28" rx="6" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="245.0" y="239" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">[2, 5)</text>
+<rect x="320" y="254" width="100" height="28" rx="6" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="370.0" y="275" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">[5, 7)</text>
+<rect x="370" y="290" width="100" height="28" rx="6" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="420.0" y="311" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">[6, 8)</text>
+<line x1="70" y1="330" x2="470" y2="330" stroke="#8994a5" stroke-width="2"/>
+<text x="70" y="356" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="120" y="356" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<text x="170" y="356" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<text x="220" y="356" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<text x="270" y="356" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<text x="320" y="356" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<text x="370" y="356" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<text x="420" y="356" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<text x="470" y="356" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<line x1="320" y1="176" x2="320" y2="330" stroke="#8a5e00" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="330" y="198" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">touch at 5</text>
+<circle cx="42" cy="397" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="403" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="404" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Sort the events and track the depth</text>
+<text x="39" y="446" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">events, ends first at equal times</text>
+<rect x="39" y="458" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="64.0" y="489.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">S1</text>
+<rect x="95" y="458" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="120.0" y="489.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">S2</text>
+<rect x="151" y="458" width="50" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="176.0" y="489.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">E4</text>
+<rect x="207" y="458" width="50" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="232.0" y="489.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">E5</text>
+<rect x="263" y="458" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="288.0" y="489.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">S5</text>
+<rect x="319" y="458" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="344.0" y="489.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">S6</text>
+<rect x="375" y="458" width="50" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="400.0" y="489.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">E7</text>
+<rect x="431" y="458" width="50" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="456.0" y="489.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">E8</text>
+<text x="39" y="540" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">rooms in use after each event</text>
+<rect x="39" y="552" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="64.0" y="583.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="95" y="552" width="50" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="120.0" y="583.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">2</text>
+<rect x="151" y="552" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="176.0" y="583.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="207" y="552" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="232.0" y="583.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="263" y="552" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="288.0" y="583.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="319" y="552" width="50" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="344.0" y="583.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">2</text>
+<rect x="375" y="552" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="400.0" y="583.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="431" y="552" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="456.0" y="583.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<path d="M 207 606 Q 207 614 215 614 H 252.0 Q 260.0 614 260.0 622 Q 260.0 614 268.0 614 H 305 Q 313 614 313 606" fill="none" stroke="#8a5e00" stroke-width="2"/>
+<text x="260.0" y="642" font-size="18" fill="#8a5e00" text-anchor="middle" font-weight="700">tie at 5: end first</text>
+<rect x="28" y="668" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="684" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">S: a start</text>
+<rect x="165.216" y="668" width="26" height="20" rx="4" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="199.216" y="684" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">E: an end</text>
+<rect x="303.296" y="668" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="337.296" y="684" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">deepest: 2 rooms</text>
+<rect x="28" y="708" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="739" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="768" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">The busiest moment sets the room count;</text>
+<text x="44" y="795" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">at a tie an end comes first.</text>
+</svg>

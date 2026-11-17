@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 860" width="520" height="860" role="img" aria-labelledby="title desc">
+<title id="title">83  Three local repairs</title>
+<desc id="desc">Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="red-black-fixups-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="red-black-fixups-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="red-black-fixups-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="red-black-fixups-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="red-black-fixups-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="red-black-fixups-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="red-black-fixups-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="red-black-fixups-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="red-black-fixups-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="red-black-fixups-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="red-black-fixups-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="red-black-fixups-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="red-black-fixups-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="red-black-fixups-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="red-black-fixups-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="860" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">83  Three local repairs</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Rotate left at h, e.g. put 1, 2</text>
+<line x1="84.06" y1="222.7" x2="103.94" y2="243.3" stroke="#bd3026" stroke-width="2.5"/>
+<circle cx="66" cy="204" r="22" fill="#ffffff" stroke="#1f2430" stroke-width="2"/>
+<text x="66" y="211" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<circle cx="122" cy="262" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="122" y="269" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">2</text>
+<line x1="359.94" y1="222.7" x2="340.06" y2="243.3" stroke="#bd3026" stroke-width="2.5"/>
+<circle cx="322" cy="262" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="322" y="269" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">1</text>
+<circle cx="378" cy="204" r="22" fill="#ffffff" stroke="#1f2430" stroke-width="2"/>
+<text x="378" y="211" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">2</text>
+<line x1="240" y1="208" x2="292" y2="208" stroke="#2451b7" stroke-width="2.5" marker-end="url(#red-black-fixups-blue-arrow)"/>
+<text x="30" y="211" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">h</text>
+<text x="286" y="269" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">h</text>
+<circle cx="42" cy="311" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="317" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="318" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Rotate right at h, e.g. put 3, 2, 1</text>
+<line x1="103.94" y1="442.7" x2="84.06" y2="463.3" stroke="#bd3026" stroke-width="2.5"/>
+<line x1="159.94" y1="384.7" x2="140.06" y2="405.3" stroke="#bd3026" stroke-width="2.5"/>
+<circle cx="66" cy="482" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="66" y="489" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">1</text>
+<circle cx="122" cy="424" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="122" y="431" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">2</text>
+<circle cx="178" cy="366" r="22" fill="#ffffff" stroke="#1f2430" stroke-width="2"/>
+<text x="178" y="373" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">3</text>
+<line x1="359.94" y1="384.7" x2="340.06" y2="405.3" stroke="#bd3026" stroke-width="2.5"/>
+<line x1="396.06" y1="384.7" x2="415.94" y2="405.3" stroke="#bd3026" stroke-width="2.5"/>
+<circle cx="322" cy="424" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="322" y="431" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">1</text>
+<circle cx="378" cy="366" r="22" fill="#ffffff" stroke="#1f2430" stroke-width="2"/>
+<text x="378" y="373" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">2</text>
+<circle cx="434" cy="424" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="434" y="431" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">3</text>
+<line x1="240" y1="370" x2="292" y2="370" stroke="#2451b7" stroke-width="2.5" marker-end="url(#red-black-fixups-blue-arrow)"/>
+<text x="214" y="373" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">h</text>
+<text x="470" y="431" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">h</text>
+<text x="322" y="489" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">a flip follows (step 3)</text>
+<circle cx="42" cy="531" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="537" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="538" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Flip colors at h, e.g. put 1, 2, 3</text>
+<line x1="103.94" y1="604.7" x2="84.06" y2="625.3" stroke="#bd3026" stroke-width="2.5"/>
+<line x1="140.06" y1="604.7" x2="159.94" y2="625.3" stroke="#bd3026" stroke-width="2.5"/>
+<circle cx="66" cy="644" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="66" y="651" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">1</text>
+<circle cx="122" cy="586" r="22" fill="#ffffff" stroke="#1f2430" stroke-width="2"/>
+<text x="122" y="593" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">2</text>
+<circle cx="178" cy="644" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="178" y="651" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">3</text>
+<line x1="359.94" y1="604.7" x2="340.06" y2="625.3" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="396.06" y1="604.7" x2="415.94" y2="625.3" stroke="#8994a5" stroke-width="2.5"/>
+<circle cx="322" cy="644" r="22" fill="#ffffff" stroke="#1f2430" stroke-width="2"/>
+<text x="322" y="651" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<circle cx="378" cy="586" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="378" y="593" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">2</text>
+<circle cx="434" cy="644" r="22" fill="#ffffff" stroke="#1f2430" stroke-width="2"/>
+<text x="434" y="651" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">3</text>
+<line x1="240" y1="590" x2="292" y2="590" stroke="#2451b7" stroke-width="2.5" marker-end="url(#red-black-fixups-blue-arrow)"/>
+<text x="86" y="593" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">h</text>
+<text x="342" y="593" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">h</text>
+<circle cx="40" cy="688" r="10" fill="#ffffff" stroke="#1f2430" stroke-width="2"/>
+<text x="58" y="694" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">black node</text>
+<circle cx="190" cy="688" r="10" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="208" y="694" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">red node</text>
+<text x="312" y="694" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">h = repaired node</text>
+<rect x="28" y="718" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="749" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="778" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Rotations keep sorted order; a flip</text>
+<text x="44" y="805" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">splits a 4-node.</text>
+</svg>

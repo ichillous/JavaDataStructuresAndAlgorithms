@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 772" width="520" height="772" role="img" aria-labelledby="title desc">
+<title id="title">77  Range adds by differences</title>
+<desc id="desc">applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="difference-array-ranges-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="difference-array-ranges-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="difference-array-ranges-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="difference-array-ranges-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="difference-array-ranges-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="difference-array-ranges-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="difference-array-ranges-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="difference-array-ranges-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="difference-array-ranges-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="difference-array-ranges-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="difference-array-ranges-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="difference-array-ranges-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="difference-array-ranges-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="difference-array-ranges-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="difference-array-ranges-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="772" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">77  Range adds by differences</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Array patterns · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Add +3 on [1, 4): two marks</text>
+<rect x="39" y="178" width="54" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="66.0" y="209.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="66.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="101" y="178" width="54" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="128.0" y="209.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">+3</text>
+<text x="128.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="163" y="178" width="54" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="190.0" y="209.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="190.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="225" y="178" width="54" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="252.0" y="209.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="252.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<rect x="287" y="178" width="54" height="48" rx="8" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="314.0" y="209.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">-3</text>
+<text x="314.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<rect x="349" y="178" width="54" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="376.0" y="209.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="376.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">spare</text>
+<circle cx="42" cy="281" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="287" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="288" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Add +2 on [0, 2): two more</text>
+<rect x="39" y="310" width="54" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="66.0" y="341.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">+2</text>
+<text x="66.0" y="384" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="101" y="310" width="54" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="128.0" y="341.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">+3</text>
+<text x="128.0" y="384" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="163" y="310" width="54" height="48" rx="8" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="190.0" y="341.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">-2</text>
+<text x="190.0" y="384" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="225" y="310" width="54" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="252.0" y="341.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="252.0" y="384" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<rect x="287" y="310" width="54" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="314.0" y="341.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">-3</text>
+<text x="314.0" y="384" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<rect x="349" y="310" width="54" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="376.0" y="341.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="376.0" y="384" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">spare</text>
+<circle cx="42" cy="413" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="419" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="420" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">One running sum recovers the values</text>
+<rect x="39" y="442" width="54" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="66.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">2</text>
+<text x="66.0" y="516" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="101" y="442" width="54" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="128.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">5</text>
+<text x="128.0" y="516" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="163" y="442" width="54" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="190.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">3</text>
+<text x="190.0" y="516" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="225" y="442" width="54" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="252.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">3</text>
+<text x="252.0" y="516" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<rect x="287" y="442" width="54" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="314.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">0</text>
+<text x="314.0" y="516" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<text x="39" y="542" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">sums: 2, 5, 3, 3, 0</text>
+<rect x="28" y="568" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="584" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">range start: add</text>
+<rect x="226.56" y="568" width="26" height="20" rx="4" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="260.56" y="584" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">range end: undo</text>
+<rect x="28" y="600" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="62" y="616" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">value after the sum</text>
+<rect x="28" y="640" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="671" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="700" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Two marks per update, then one running</text>
+<text x="44" y="727" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">sum: O(n + u) in total.</text>
+</svg>

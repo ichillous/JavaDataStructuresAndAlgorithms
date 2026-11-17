@@ -4,7 +4,15 @@ Start with the [time-complexity foundations](../../complexity-analysis/time-comp
 This lesson derives bounds for actual patterns used in the repository rather than
 assigning a complexity to code merely because it contains recursion or a loop.
 
-<!-- visual:generated -->
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | You need to say how work grows with input size, by solving a recurrence or by amortized accounting. |
+| **Avoid&nbsp;it&nbsp;when** | You want a wall-clock prediction or a comparison of constant factors; a bound counts steps in a stated model and nothing more. |
+| **Cost** | The analysis itself is paper work; the result is a growth rate such as O(n log n) or O(1) amortized |
+| **In&nbsp;this&nbsp;repo** | [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) for amortized growth, [`SortAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) for recurrences |
+| **In&nbsp;the&nbsp;JDK** | `ArrayList` (`add` documented as amortized constant time), `HashMap` (cost depends on `hashCode`) |
+
+<!-- visual:generated complexity-growth -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/complexity-growth-dark.svg"><img src="../../docs/visuals/assets/complexity-growth.svg" alt="Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings." width="520"></picture>
 
 **Figure 26.** Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings. [Visual index and step-throughs](../../docs/visuals/README.md).
@@ -63,6 +71,46 @@ Indexed insertion still shifts O(n) elements and is not covered by that append
 bound. Growing by a fixed single slot would copy `1 + 2 + ... + m` entries instead,
 so it would make repeated appends quadratic.
 
+## In real Java
+
+The `ArrayList` documentation states that `add` runs in amortized constant time
+and that the other operations run in linear time, roughly speaking. A hash
+table's cost bound rests on an assumption the caller controls: the `Object`
+contract notes that distinct hash codes for unequal objects may improve hash-table
+performance. Correctness never depends on that. A key whose `hashCode` is
+constant still gives the right answers, and only the cost model changes.
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+record Collide(int id) {
+    @Override
+    public int hashCode() {
+        return 42;
+    }
+}
+
+Map<Collide, Integer> map = new HashMap<>();
+for (int id = 0; id < 1_000; id++) {
+    map.put(new Collide(id), id);
+}
+assert map.size() == 1_000;
+assert map.get(new Collide(777)) == 777;
+assert map.get(new Collide(1_000)) == null;
+
+List<Integer> list = new ArrayList<>();
+list.add(1);
+list.add(2);
+list.add(0, 0);
+assert list.equals(List.of(0, 1, 2));
+```
+
+The last lines show why `add(0, x)` is outside the amortized append bound: it
+shifts every later element, so it is a different operation.
+
 ## Include the size hidden inside an operation
 
 Hashing and equality may inspect a key; string comparisons are not always O(1).
@@ -74,6 +122,50 @@ larger than the number of bits used to encode that capacity.
 simple ignores how often it restarts. Conversely, the deque in
 [sliding-window maximum](../divide-and-conquer/problems.md) is linear because
 each index enters and leaves at most once across the whole run.
+
+## Common mistakes
+
+1. **Multiplying a loop bound by an inner `while` that is amortized.** Next-greater
+   on `[5, 4, 3, 2, 1, 6]` pops five indices at once when 6 arrives, but every
+   index is pushed and popped once, so the total is O(n), not O(n^2).
+2. **Calling a halving recursion logarithmic while copying the range.** Binary
+   search that passes `Arrays.copyOfRange` slices copies 512 + 256 + ... values on
+   an array of 1,024, which is linear overall. The invariant behind O(log n) is O(1)
+   work per halving.
+3. **Counting string comparisons as O(1).** Sorting 1,000 strings that share a
+   999-character prefix inspects up to 1,000 characters per comparison (the 999
+   shared ones and the first difference), so the model
+   must include the key length, not just `n log n` comparisons.
+
+## Check yourself
+
+<details>
+<summary>Why does merge sort have <code>log2(n)</code> merge levels that each touch at most <code>n</code> values?</summary>
+
+Every level halves the range size, so a power-of-two size needs `log2(n)`
+levels. The ranges on one level are disjoint, so together they hold at most `n`
+values.
+
+</details>
+
+<details>
+<summary>What does "amortized O(1)" mean for the append that triggers growth from capacity 8?</summary>
+
+That single append is O(n): it copies 8 values. The claim is about the whole
+sequence, where earlier cheap appends pay for it so total copies stay below `2m`
+for `m` appends.
+
+</details>
+
+<details>
+<summary>Why can a recurrence not tell you the stack space of quicksort?</summary>
+
+The recurrence counts work across all calls. Stack space is set by the deepest
+chain of live calls. With two recursive calls that chain can be `n` deep in
+whichever order they run; recursing only into the smaller partition and looping
+over the larger one bounds it by O(log n), and the work recurrence does not change.
+
+</details>
 
 ## Practice
 

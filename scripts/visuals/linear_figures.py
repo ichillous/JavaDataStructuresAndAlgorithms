@@ -257,7 +257,7 @@ FIGURES = [
         "title": "Stack: last in, first out",
         "category": "Linear structures",
         "description": "Push and pop share the top; the newest value leaves first.",
-        "lesson": "data-structures/stacks/implementation.md",
+        "lesson": "data-structures/stacks/overview.md",
         "keyIdea": STACK_IDEA,
         "height": 1110,
         "draw": stack_lifo,

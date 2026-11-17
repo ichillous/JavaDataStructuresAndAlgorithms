@@ -20,9 +20,17 @@ This is a Java 17 educational library with executable Markdown lessons.
   in Markdown; link to maintained source. Earlier notes remain in Git history.
 - Do not commit generated `target/` content, IDE settings, credentials, or tool caches.
   Preserve existing history and inspect concurrent remote changes before pushing.
-- Visual sources live in `scripts/visuals/`; their canonical examples are shared
-  with `VisualExamplesTest`. Regenerate with `python3 scripts/generate_visuals.py`.
-  Check with `--check` and the standard-library visual test suite. Do not hand-edit
+- Visual sources live in `scripts/visuals/` (one `<stem>_figures.py` per family);
+  their canonical examples in `docs/visuals/data/examples*.properties` are shared
+  with the `VisualExamples*Test` classes. Place figures with named regions
+  (`<!-- visual:generated FIGURE_ID -->` ... `<!-- /visual:generated -->`) and follow
+  "Adding a figure" in `docs/visuals/design.md`. Regenerate with
+  `python3 scripts/generate_visuals.py`. Check with `--check` and the
+  standard-library visual test suite, including the layout guard, and render with
+  `node scripts/visuals/browser_review.js`. Do not hand-edit
   generated SVGs/data/index or generated lesson regions. Preserve arrow meaning,
   units, state boundaries, alt text and readable labels in both themes. Review
   actual rendered figures and mobile/desktop states after layout changes.
+- Lessons under `algorithms/` and `data-structures/` follow the "Lesson contract" in
+  `docs/visuals/design.md` (At a glance with `&nbsp;` labels, a figure, Check yourself);
+  the landing pages' `<!-- visual:gallery FOLDER -->` regions list them when regenerated.

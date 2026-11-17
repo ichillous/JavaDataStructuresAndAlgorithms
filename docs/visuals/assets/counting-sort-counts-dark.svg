@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 775" width="520" height="775" role="img" aria-labelledby="title desc">
+<title id="title">90  Counting sort tally</title>
+<desc id="desc">For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="counting-sort-counts-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="counting-sort-counts-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="counting-sort-counts-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="counting-sort-counts-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="counting-sort-counts-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="counting-sort-counts-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="counting-sort-counts-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="counting-sort-counts-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="counting-sort-counts-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="counting-sort-counts-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="counting-sort-counts-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="counting-sort-counts-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="counting-sort-counts-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="counting-sort-counts-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="counting-sort-counts-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="775" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">90  Counting sort tally</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Sorting and searching · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Range 6 - 3 + 1 = 4 values</text>
+<rect x="39" y="182" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="67.0" y="213.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<rect x="103" y="182" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="131.0" y="213.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="167" y="182" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="195.0" y="213.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">6</text>
+<rect x="231" y="182" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="259.0" y="213.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="295" y="182" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="323.0" y="213.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="359" y="182" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="387.0" y="213.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">6</text>
+<circle cx="42" cy="267" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="273" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="274" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Tally into counts[value - 3]</text>
+<rect x="39" y="300" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="67.0" y="331.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">2</text>
+<text x="67.0" y="374" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<rect x="103" y="300" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="131.0" y="331.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">1</text>
+<text x="131.0" y="374" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<rect x="167" y="300" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="195.0" y="331.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">1</text>
+<text x="195.0" y="374" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">5</text>
+<rect x="231" y="300" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="259.0" y="331.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">2</text>
+<text x="259.0" y="374" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">6</text>
+<text x="39" y="396" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">box = how often the value below occurs</text>
+<circle cx="42" cy="443" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="449" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="450" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Write each value back, count times</text>
+<rect x="39" y="476" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="67.0" y="507.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">3</text>
+<rect x="103" y="476" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="131.0" y="507.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">3</text>
+<rect x="167" y="476" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="195.0" y="507.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">4</text>
+<rect x="231" y="476" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="259.0" y="507.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">5</text>
+<rect x="295" y="476" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="323.0" y="507.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">6</text>
+<rect x="359" y="476" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="387.0" y="507.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">6</text>
+<rect x="28" y="548" width="26" height="20" rx="4" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="62" y="564" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">count of a value</text>
+<rect x="225.696" y="548" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="259.696" y="564" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">written in order</text>
+<rect x="28" y="588" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="619" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="648" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Counting sort never compares two</text>
+<text x="44" y="675" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">values: it tallies each value, then</text>
+<text x="44" y="702" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">writes each value back as many times as</text>
+<text x="44" y="729" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">it was counted.</text>
+</svg>

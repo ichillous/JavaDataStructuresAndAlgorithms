@@ -8,6 +8,14 @@ offers four tools. `kthSmallest` takes an unsorted `int[]` and a zero-based rank
 `int[]`. Every method rejects null, leaves its input unchanged and returns a fresh
 value; returned lists are immutable.
 
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | You need one rank, the k best, a merge of sorted runs, or a majority value, and not the whole order. |
+| **Avoid&nbsp;it&nbsp;when** | You need many ranks or the full order: sort once. |
+| **Cost** | `kthSmallest` O(n); `smallestK` O(n log(k + 1)); `mergeSorted` O(N log(k + 1)); `majorityElement` O(n). |
+| **In&nbsp;this&nbsp;repo** | [`Selection`](../../src/main/java/io/github/ichillous/dsa/algorithms/Selection.java) |
+| **In&nbsp;the&nbsp;JDK** | `PriorityQueue` and `Stream#sorted` with `limit`; no direct equivalent for a k-th smallest or a k-way merge |
+
 ## Which tool when
 
 | Need | Tool | Why |
@@ -40,6 +48,12 @@ Why that is linear in the worst case: every successful cheap round leaves at mos
 4n in total. At most one cheap round fails, costing at most n more, and the
 median-of-medians phase on what remains is O(n). The three-way partition also keeps
 all-equal input linear.
+
+<!-- visual:generated quickselect-shrink | The partitions of kthSmallest on 7, 2, 9, 4, 4, 1 as the documented rule produces them; the library keeps them private. -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/quickselect-shrink-dark.svg"><img src="../../docs/visuals/assets/quickselect-shrink.svg" alt="kthSmallest of 7, 2, 9, 4, 4, 1 with k = 2: three partitions with pivots 7, 2 and 4 narrow the range from [0..5] to [0..3] to [2..3], and the equal part answers 4." width="520"></picture>
+
+**Figure 86.** The partitions of kthSmallest on 7, 2, 9, 4, 4, 1 as the documented rule produces them; the library keeps them private. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 Trace of `[7, 2, 9, 4, 4, 1]` with `k = 2` (sorted: 1, 2, 4, 4, 7, 9):
 
@@ -79,6 +93,19 @@ assert Selection.majorityElement(new int[] {3, 3, 4}).equals(OptionalInt.of(3));
 assert Selection.majorityElement(new int[] {1, 2}).isEmpty();
 ```
 
+## How the k-way merge picks
+
+`mergeSorted` keeps a heap with the first unconsumed element of each non-empty list. The
+smallest head is the next output; its list then contributes its next element to the heap. Heads
+that compare equal are ordered by list index, so the result equals a stable sort of the
+concatenated lists.
+
+<!-- visual:generated kway-merge-heap | mergeSorted pops the smallest head from a heap of list heads and refills from the same list; equal heads pop in list order. -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/kway-merge-heap-dark.svg"><img src="../../docs/visuals/assets/kway-merge-heap.svg" alt="mergeSorted of 1, 4, 7 and 2, 4 and 3, 6 keeps one head per list in a heap; when 4 from list A and 4 from list B tie, A pops first, giving 1, 2, 3, 4, 4, 6, 7." width="520"></picture>
+
+**Figure 87.** mergeSorted pops the smallest head from a heap of list heads and refills from the same list; equal heads pop in list order. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Costs and contracts
 
 | Method | Time | Auxiliary space | Ties and edge cases |
@@ -87,6 +114,45 @@ assert Selection.majorityElement(new int[] {1, 2}).isEmpty();
 | `smallestK(values, k, order)` | O(n log(k + 1)) | O(min(k, n)) plus the result | Equal elements keep encounter order (same as `sorted(order).limit(k)`); `k = 0` gives `[]`; `k >= n` gives all, sorted; `k < 0` throws `IllegalArgumentException` |
 | `mergeSorted(lists, order)` | O(N log(k + 1)) for N elements in k lists | O(k) plus the result | Equal elements: lower list index first, then earlier position; an unsorted list throws `IllegalArgumentException` when the out-of-order element is reached |
 | `majorityElement(values)` | O(n) | O(1) | Needs a count strictly above `n / 2`; empty input and a tie like `[1, 1, 2, 2]` give empty |
+
+## In real Java
+
+Two JDK tools cover the same ground. `Arrays.sort` followed by an index gives any rank, at
+O(n log n). A `PriorityQueue` is a binary heap whose head is the minimum under its ordering;
+its iterator makes no promise about order, so draw elements with `poll` when order matters.
+`Stream#sorted` is stable for ordered streams, so `sorted(order).limit(k)` agrees with
+`smallestK`.
+
+```java
+import io.github.ichillous.dsa.algorithms.Selection;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+
+int[] values = {7, 2, 9, 4, 4, 1};
+int[] sorted = values.clone();
+Arrays.sort(sorted);
+assert Selection.kthSmallest(values, 2) == sorted[2];
+
+record Task(String name, int priority) {}
+List<Task> tasks = List.of(new Task("x", 2), new Task("y", 1),
+        new Task("z", 2), new Task("w", 2));
+Comparator<Task> byPriority = Comparator.comparingInt(Task::priority);
+// k = 2 cuts through the three priority-2 tasks; the stable sort keeps the earliest, x.
+List<Task> viaStream = tasks.stream().sorted(byPriority).limit(2).toList();
+assert viaStream.equals(List.of(new Task("y", 1), new Task("x", 2)));
+assert Selection.smallestK(tasks, 2, byPriority).equals(viaStream);
+
+List<Integer> scores = List.of(5, 1, 4, 1, 3);
+PriorityQueue<Integer> heap = new PriorityQueue<>(scores);
+assert heap.peek() == 1;
+List<Integer> drained = new java.util.ArrayList<>();
+while (!heap.isEmpty()) {
+    drained.add(heap.poll());
+}
+assert drained.equals(List.of(1, 1, 3, 4, 5));   // poll order is sorted; iteration order need not be
+```
 
 ## Pitfalls
 
@@ -103,6 +169,45 @@ equal elements than `stream().sorted(order).limit(k)`.
 **Unsorted merge inputs.** `mergeSorted` assumes each list is sorted and checks
 that only as it consumes the list: it cannot silently produce a wrong order, but it
 throws rather than repairing the input.
+
+## Common mistakes
+
+1. **Treating `k` as a one-based rank.** The second smallest of `[7, 2, 9]` is 7 and sits at
+   `k = 1`; `kthSmallest(values, 2)` returns 9, and `k = 3` throws
+   `IndexOutOfBoundsException`. The invariant broken is that `k` is an index into the sorted order.
+2. **Partitioning equal keys to one side.** A two-way partition that puts the pivot in its final
+   place and sends every other value equal to it right removes only the pivot from
+   `[5, 5, 5, 5]` with `k = 3`, so the range shrinks by one per round: about n rounds instead
+   of the single round a three-way partition needs. It breaks the rule that each round discards a constant fraction.
+3. **Comparing only values in a merge heap.** With the lists `[4]` and `[4]` a heap that ignores
+   the list index may pop either 4 first. It breaks stability: equal elements must come out in
+   list order, which `mergeSorted` guarantees.
+
+## Check yourself
+
+<details>
+<summary>In the trace of <code>[7, 2, 9, 4, 4, 1]</code>, why are <code>7</code> and <code>9</code> never looked at after round 1?</summary>
+
+The partition around 7 puts the four values below 7 on the left and leaves 7 and 9 at least 7,
+so the value of rank 2 is among those four; only the part holding index 2 can contain the answer.
+
+</details>
+
+<details>
+<summary>Why does the k-way merge heap need a tie rule?</summary>
+
+A heap alone orders equal heads arbitrarily. Breaking ties by list index makes the output equal
+a stable sort of the concatenated lists, so equal elements keep their list order.
+
+</details>
+
+<details>
+<summary>You need the three smallest of a large collection, in order. Which tool, and what extra space?</summary>
+
+`smallestK` with `k = 3`: O(n log(k + 1)) time and O(min(k, n)) extra space beyond the result,
+without sorting everything.
+
+</details>
 
 ## Practice
 

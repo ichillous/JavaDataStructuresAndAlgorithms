@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 884" width="520" height="884" role="img" aria-labelledby="title desc">
+<title id="title">48  Insert after a known node</title>
+<desc id="desc">In the chain 10, 20, 30, inserting 15 after 10 takes two link writes: 15.next = 10.next, then 10.next = 15, giving 10, 15, 20, 30. Writing 10.next = 15 first makes 15.next point at 15 itself and leaves 20 and 30 unreachable.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="singly-insert-after-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="singly-insert-after-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="singly-insert-after-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="singly-insert-after-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="singly-insert-after-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="singly-insert-after-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="singly-insert-after-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="singly-insert-after-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="singly-insert-after-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="singly-insert-after-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="singly-insert-after-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="singly-insert-after-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="singly-insert-after-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="singly-insert-after-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="singly-insert-after-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="884" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">48  Insert after a known node</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Linear structures · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Insert 15 after 10</text>
+<circle cx="62" cy="226" r="24" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="62" y="233" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">10</text>
+<circle cx="167" cy="226" r="24" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="167" y="233" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">20</text>
+<circle cx="272" cy="226" r="24" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="272" y="233" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">30</text>
+<text x="62" y="190" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">head</text>
+<line x1="90.0" y1="226.0" x2="135.0" y2="226.0" stroke="#8291aa" stroke-width="2.5" marker-end="url(#singly-insert-after-line-arrow)"/>
+<line x1="195.0" y1="226.0" x2="240.0" y2="226.0" stroke="#8291aa" stroke-width="2.5" marker-end="url(#singly-insert-after-line-arrow)"/>
+<line x1="300" y1="226" x2="440" y2="226" stroke="#bec9da" stroke-width="2.5" marker-end="url(#singly-insert-after-muted-arrow)"/>
+<text x="466" y="232" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">null</text>
+<circle cx="462" cy="150" r="24" fill="#302a18" stroke="#f4cf70" stroke-width="3"/>
+<text x="462" y="157" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">15</text>
+<text x="430" y="157" font-size="18" fill="#f4cf70" text-anchor="end" font-weight="700">new, not linked</text>
+<circle cx="42" cy="275" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="281" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="282" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Right order: copy the link, then redirect</text>
+<rect x="44" y="304" width="85" height="30" rx="15" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="86.5" y="325" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">write 1</text>
+<text x="141" y="325" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">15.next = 10.next</text>
+<rect x="44" y="340" width="89" height="30" rx="15" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="88.5" y="361" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">write 2</text>
+<text x="145" y="361" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">10.next = 15</text>
+<circle cx="62" cy="416" r="24" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="62" y="423" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">10</text>
+<circle cx="167" cy="416" r="24" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="167" y="423" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">15</text>
+<circle cx="272" cy="416" r="24" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="272" y="423" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">20</text>
+<circle cx="377" cy="416" r="24" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="377" y="423" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">30</text>
+<line x1="90.0" y1="416.0" x2="135.0" y2="416.0" stroke="#86dca2" stroke-width="2.5" marker-end="url(#singly-insert-after-green-arrow)"/>
+<text x="114.5" y="400.0" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">2</text>
+<line x1="195.0" y1="416.0" x2="240.0" y2="416.0" stroke="#86dca2" stroke-width="2.5" marker-end="url(#singly-insert-after-green-arrow)"/>
+<text x="219.5" y="400.0" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">1</text>
+<line x1="300.0" y1="416.0" x2="345.0" y2="416.0" stroke="#8291aa" stroke-width="2.5" marker-end="url(#singly-insert-after-line-arrow)"/>
+<line x1="405" y1="416" x2="440" y2="416" stroke="#bec9da" stroke-width="2.5" marker-end="url(#singly-insert-after-muted-arrow)"/>
+<text x="466" y="422" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">null</text>
+<circle cx="42" cy="475" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="481" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="482" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Wrong order: redirect first</text>
+<rect x="44" y="504" width="85" height="30" rx="15" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="86.5" y="525" font-size="18" fill="#ffaaa1" text-anchor="middle" font-weight="700">write 1</text>
+<text x="141" y="525" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">10.next = 15</text>
+<rect x="44" y="540" width="89" height="30" rx="15" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="88.5" y="561" font-size="18" fill="#ffaaa1" text-anchor="middle" font-weight="700">write 2</text>
+<text x="145" y="561" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">15.next = 10.next</text>
+<circle cx="62" cy="604" r="24" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="62" y="611" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">10</text>
+<circle cx="167" cy="604" r="24" fill="#302a18" stroke="#f4cf70" stroke-width="3"/>
+<text x="167" y="611" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">15</text>
+<circle cx="272" cy="604" r="24" fill="#3d1f22" stroke="#ffaaa1" stroke-width="3"/>
+<text x="272" y="611" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">20</text>
+<circle cx="377" cy="604" r="24" fill="#3d1f22" stroke="#ffaaa1" stroke-width="3"/>
+<text x="377" y="611" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">30</text>
+<line x1="90.0" y1="604.0" x2="135.0" y2="604.0" stroke="#ffaaa1" stroke-width="2.5" marker-end="url(#singly-insert-after-red-arrow)"/>
+<line x1="300.0" y1="604.0" x2="345.0" y2="604.0" stroke="#ffaaa1" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#singly-insert-after-red-arrow)"/>
+<line x1="405" y1="604" x2="440" y2="604" stroke="#bec9da" stroke-width="2.5" marker-end="url(#singly-insert-after-muted-arrow)"/>
+<text x="466" y="610" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">null</text>
+<path d="M 181 630 C 201 670 133 670 153 630" fill="none" stroke="#ffaaa1" stroke-width="2.5" marker-end="url(#singly-insert-after-red-arrow)"/>
+<text x="167" y="700" font-size="18" fill="#ffaaa1" text-anchor="middle" font-weight="700">15.next = 15</text>
+<path d="M 248 634 Q 248 642 256 642 H 316.5 Q 324.5 642 324.5 650 Q 324.5 642 332.5 642 H 393 Q 401 642 401 634" fill="none" stroke="#ffaaa1" stroke-width="2"/>
+<text x="324.5" y="670" font-size="18" fill="#ffaaa1" text-anchor="middle" font-weight="700">20 and 30 unreachable</text>
+<rect x="28" y="712" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="62" y="728" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">new node</text>
+<rect x="169.536" y="712" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="203.536" y="728" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">linked</text>
+<rect x="279.10400000000004" y="712" width="26" height="20" rx="4" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="313.10400000000004" y="728" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">lost</text>
+<rect x="28" y="752" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="783" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="812" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Link the new node onward first, then</text>
+<text x="44" y="839" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">redirect the predecessor.</text>
+</svg>

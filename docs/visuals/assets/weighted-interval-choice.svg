@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 870" width="520" height="870" role="img" aria-labelledby="title desc">
+<title id="title">64  Weighted interval choices</title>
+<desc id="desc">Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="weighted-interval-choice-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="weighted-interval-choice-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="weighted-interval-choice-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="weighted-interval-choice-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="weighted-interval-choice-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="weighted-interval-choice-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="weighted-interval-choice-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="weighted-interval-choice-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="weighted-interval-choice-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="weighted-interval-choice-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="weighted-interval-choice-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="weighted-interval-choice-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="weighted-interval-choice-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="weighted-interval-choice-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="weighted-interval-choice-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="870" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">64  Weighted interval choices</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Optimization · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Intervals sorted by end, with p(i)</text>
+<text x="28" y="200" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">A</text>
+<rect x="62" y="180" width="132" height="26" rx="5" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="128.0" y="200" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">w=3</text>
+<text x="446" y="200" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">p=0</text>
+<text x="28" y="230" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">B</text>
+<rect x="150" y="210" width="132" height="26" rx="5" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="216.0" y="230" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">w=6</text>
+<text x="446" y="230" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">p=0</text>
+<text x="28" y="260" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">C</text>
+<rect x="194" y="240" width="176" height="26" rx="5" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="282.0" y="260" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">w=2</text>
+<text x="446" y="260" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">p=1</text>
+<text x="28" y="290" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">D</text>
+<rect x="282" y="270" width="132" height="26" rx="5" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="348.0" y="290" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">w=4</text>
+<text x="446" y="290" font-size="18" fill="#505b6b" text-anchor="start" font-weight="700">p=2</text>
+<text x="62" y="320" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<text x="106" y="320" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<text x="150" y="320" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<text x="194" y="320" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<text x="238" y="320" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<text x="282" y="320" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<text x="326" y="320" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<text x="370" y="320" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<text x="414" y="320" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<circle cx="42" cy="353" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="359" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="360" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">take = w + best[p] or skip = best[i-1]</text>
+<text x="150.0" y="404" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">p</text>
+<text x="214.0" y="404" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">take</text>
+<text x="278.0" y="404" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">skip</text>
+<text x="342.0" y="404" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">best</text>
+<text x="106" y="438.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">A</text>
+<rect x="118" y="416" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="150.0" y="439.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="182" y="416" width="64" height="32" rx="3" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="214.0" y="439.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<rect x="246" y="416" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="278.0" y="439.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="310" y="416" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="342.0" y="439.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3</text>
+<text x="106" y="470.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">B</text>
+<rect x="118" y="448" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="150.0" y="471.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="182" y="448" width="64" height="32" rx="3" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="214.0" y="471.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">6</text>
+<rect x="246" y="448" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="278.0" y="471.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="310" y="448" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="342.0" y="471.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">6</text>
+<text x="106" y="502.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">C</text>
+<rect x="118" y="480" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="150.0" y="503.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="182" y="480" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="214.0" y="503.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="246" y="480" width="64" height="32" rx="3" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="278.0" y="503.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">6</text>
+<rect x="310" y="480" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="342.0" y="503.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">6</text>
+<text x="106" y="534.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">D</text>
+<rect x="118" y="512" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="150.0" y="535.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<rect x="182" y="512" width="64" height="32" rx="3" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="214.0" y="535.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">10</text>
+<rect x="246" y="512" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="278.0" y="535.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="310" y="512" width="64" height="32" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="342.0" y="535.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">10</text>
+<circle cx="42" cy="571" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="577" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="578" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Walk back</text>
+<rect x="300" y="564" width="188" height="30" rx="15" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="394.0" y="585" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">chosen B + D = 10</text>
+<text x="66" y="614" font-size="18" fill="#1c6b3c" text-anchor="start" font-weight="700">D: best 10 ≠ 6, take, jump to p = 2</text>
+<text x="66" y="642" font-size="18" fill="#1c6b3c" text-anchor="start" font-weight="700">B: best 6 ≠ 3, take, jump to p = 0</text>
+<rect x="28" y="664" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="680" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">winning option</text>
+<rect x="215.32799999999997" y="664" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="249.32799999999997" y="680" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">losing option</text>
+<rect x="28" y="704" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="735" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="764" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Take an interval only if its weight</text>
+<text x="44" y="791" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">plus the best earlier compatible</text>
+<text x="44" y="818" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">schedule beats skipping it.</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 868" width="520" height="868" role="img" aria-labelledby="title desc">
+<title id="title">34  Tree diameter by two sweeps</title>
+<desc id="desc">In a seven-vertex tree, a breadth-first sweep from vertex 0 ends farthest at 6, and a second sweep from 6 ends farthest at 5, so the path 6, 3, 1, 0, 2, 5 of 5 edges is a longest path.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="tree-diameter-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="tree-diameter-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="tree-diameter-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="tree-diameter-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="tree-diameter-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="tree-diameter-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="tree-diameter-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="tree-diameter-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="tree-diameter-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="tree-diameter-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="tree-diameter-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="tree-diameter-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="tree-diameter-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="tree-diameter-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="tree-diameter-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="868" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">34  Tree diameter by two sweeps</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Sweep 1 from 0: farthest is 6</text>
+<line x1="237.27" y1="226.63" x2="192.73" y2="251.37" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="282.73" y1="226.63" x2="327.27" y2="251.37" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="150.03" y1="280.64" x2="129.97" y2="297.36" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="189.97" y1="280.64" x2="210.03" y2="297.36" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="350.0" y1="290.0" x2="350.0" y2="288.0" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="110.0" y1="340.0" x2="110.0" y2="338.0" stroke="#8291aa" stroke-width="2.5"/>
+<circle cx="260" cy="214" r="22" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="260" y="221" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">0</text>
+<text x="288" y="220" font-size="18" fill="#9cbcff" text-anchor="start" font-weight="700">d=0 start</text>
+<circle cx="170" cy="264" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="170" y="271" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">1</text>
+<text x="198" y="270" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=1</text>
+<circle cx="350" cy="264" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="350" y="271" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<text x="378" y="270" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=1</text>
+<circle cx="110" cy="314" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="110" y="321" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="138" y="320" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=2</text>
+<circle cx="230" cy="314" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="230" y="321" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">4</text>
+<text x="258" y="320" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=2</text>
+<circle cx="350" cy="314" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="350" y="321" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">5</text>
+<text x="378" y="320" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=2</text>
+<circle cx="110" cy="364" r="22" fill="#302a18" stroke="#f4cf70" stroke-width="3"/>
+<text x="110" y="371" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">6</text>
+<text x="138" y="370" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">d=3 = u</text>
+<circle cx="42" cy="415" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="421" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="422" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Sweep 2 from 6: farthest is 5</text>
+<line x1="189.97" y1="546.64" x2="210.03" y2="563.36" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="237.27" y1="492.63" x2="192.73" y2="517.37" stroke="#86dca2" stroke-width="2.5"/>
+<line x1="282.73" y1="492.63" x2="327.27" y2="517.37" stroke="#86dca2" stroke-width="2.5"/>
+<line x1="150.03" y1="546.64" x2="129.97" y2="563.36" stroke="#86dca2" stroke-width="2.5"/>
+<line x1="350.0" y1="556.0" x2="350.0" y2="554.0" stroke="#86dca2" stroke-width="2.5"/>
+<line x1="110.0" y1="606.0" x2="110.0" y2="604.0" stroke="#86dca2" stroke-width="2.5"/>
+<circle cx="260" cy="480" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="260" y="487" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">0</text>
+<text x="288" y="486" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=3</text>
+<circle cx="170" cy="530" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="170" y="537" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">1</text>
+<text x="198" y="536" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=2</text>
+<circle cx="350" cy="530" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="350" y="537" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">2</text>
+<text x="378" y="536" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=4</text>
+<circle cx="110" cy="580" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="110" y="587" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">3</text>
+<text x="138" y="586" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=1</text>
+<circle cx="230" cy="580" r="22" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="230" y="587" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">4</text>
+<text x="258" y="586" font-size="18" fill="#bec9da" text-anchor="start" font-weight="700">d=3</text>
+<circle cx="350" cy="580" r="22" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="350" y="587" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">5</text>
+<text x="378" y="586" font-size="18" fill="#86dca2" text-anchor="start" font-weight="700">d=5 = v</text>
+<circle cx="110" cy="630" r="22" fill="#203455" stroke="#9cbcff" stroke-width="3"/>
+<text x="110" y="637" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">6</text>
+<text x="138" y="636" font-size="18" fill="#9cbcff" text-anchor="start" font-weight="700">d=0 start</text>
+<text x="28" y="686" font-size="20" fill="#86dca2" text-anchor="start" font-weight="700">Path 6 → 3 → 1 → 0 → 2 → 5 (5 edges)</text>
+<rect x="28" y="708" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="739" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="768" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">A sweep from any vertex ends at a</text>
+<text x="44" y="795" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">diameter endpoint; sweep again from</text>
+<text x="44" y="822" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">there.</text>
+</svg>

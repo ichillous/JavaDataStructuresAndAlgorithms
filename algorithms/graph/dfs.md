@@ -6,10 +6,18 @@ uses explicit iterator frames rather than Java recursion. This preserves recursi
 neighbor-order behavior while avoiding a call-stack limit on a long chain.
 Null graphs and invalid source indices are rejected; input is unchanged.
 
-<!-- visual:generated -->
-<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/scc-bridges-dark.svg"><img src="../../docs/visuals/assets/scc-bridges.svg" alt="Directed return paths form SCCs; undirected essential edges are bridges." width="520"></picture>
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | You need to explore one branch fully: reachability, finishing order, SCCs, bridges and other structure. |
+| **Avoid&nbsp;it&nbsp;when** | You need the fewest edges to a target (use [BFS](bfs.md)) or the cheapest weighted route. |
+| **Cost** | O(V + E) time and auxiliary space, with no Java call-stack depth limit. |
+| **In&nbsp;this&nbsp;repo** | [`GraphAlgorithms.depthFirst`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java), [`AdvancedGraphAlgorithms.stronglyConnectedComponents`](../../src/main/java/io/github/ichillous/dsa/graphs/AdvancedGraphAlgorithms.java) and `bridges` |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent traversal; `ArrayDeque` as an explicit stack |
 
-**Figure 25.** Directed return paths form SCCs; undirected essential edges are bridges. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- visual:generated bfs-vs-dfs-order | A separate small undirected graph visited both ways, not the trace below; compare how depth-first resumes the nearest unfinished neighbor scan while breadth-first finishes each layer. -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bfs-vs-dfs-order-dark.svg"><img src="../../docs/visuals/assets/bfs-vs-dfs-order.svg" alt="A 6-vertex undirected graph from source 0: breadthFirst visits 0, 1, 2, 3, 4, 5 in layers of distance 0, 1 and 2, while depthFirst visits 0, 1, 3, 4, 5, 2 by following one branch to its end." width="520"></picture>
+
+**Figure 68.** A separate small undirected graph visited both ways, not the trace below; compare how depth-first resumes the nearest unfinished neighbor scan while breadth-first finishes each layer. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Stack invariant
@@ -47,6 +55,7 @@ DFS costs O(V + E) time and O(V + E) auxiliary space including adjacency snapsho
 `topologicalSort` is a separate Kahn indegree algorithm with the same bounds. It
 requires a directed acyclic graph and rejects cycles. A discovery list is not a
 topological order: reversing discovery order does not generally fix it either.
+[Topological sort](topological-sort.md) teaches Kahn's algorithm.
 
 **Counterexample:** DFS can first reach a destination along a long branch even
 when a direct source edge exists. Use [BFS](bfs.md) for a minimum-edge path.
@@ -54,6 +63,12 @@ Also, “visited” alone cannot distinguish a directed edge to an ancestor from
 edge to an already completed branch; recursive-style cycle proofs need more state.
 
 ## Strongly connected components
+
+<!-- visual:generated scc-bridges -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/scc-bridges-dark.svg"><img src="../../docs/visuals/assets/scc-bridges.svg" alt="Directed return paths form SCCs; undirected essential edges are bridges." width="520"></picture>
+
+**Figure 25.** Directed return paths form SCCs; undirected essential edges are bridges. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 In a directed graph, two vertices share an SCC precisely when each can reach the
 other. A one-way edge does not merge SCCs. The maintained
@@ -108,11 +123,59 @@ supported, and directed graphs are rejected. Traversal takes O(V + E), with an
 additional O(b log(b + 1)) sort for `b` normalized output bridges. Auxiliary space
 including result and adjacency snapshots is O(V + E).
 
+## In real Java
+
+Recursive DFS is limited by the thread's stack size, so a long chain can fail with `StackOverflowError`; the iterator-frame implementation keeps its frames on the heap. The example runs `depthFirst` on a 100,000-vertex chain.
+
+```java
+import io.github.ichillous.dsa.graphs.Graph;
+import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import java.util.List;
+
+int size = 100_000;
+Graph chain = Graph.directed(size);
+for (int vertex = 0; vertex + 1 < size; vertex++) {
+    chain.addEdge(vertex, vertex + 1);
+}
+List<Integer> order = GraphAlgorithms.depthFirst(chain, 0);
+assert order.size() == size;
+assert order.get(0) == 0 && order.get(size - 1) == size - 1;
+```
+
+## Common mistakes
+
+1. **Treating discovery order as a topological order.** On `0 -> 1, 0 -> 2, 2 -> 1`, `depthFirst` from 0 returns `[0, 1, 2]`, yet edge `2 -> 1` points backward. A topological order needs every edge to go forward; `topologicalSort` returns `[0, 2, 1]`.
+2. **Detecting directed cycles with "visited" alone.** On the diamond `0 -> 1, 0 -> 2, 1 -> 3, 2 -> 3`, vertex 3 is reached a second time without any cycle. A cycle needs an edge to a vertex still on the current DFS path, which is why `directedCycle` tracks unvisited, on-path and finished states and returns empty here.
+3. **Mixing up directed and undirected algorithms.** `stronglyConnectedComponents(Graph.undirected(2))` throws `IllegalArgumentException`; SCCs and bridges answer different questions on different graph kinds, and each method rejects the wrong kind instead of guessing.
+
 ## Practice
 
 1. Trace discovery and finish events separately on the first graph.
 2. Compare SCC membership with pairwise mutual reachability on tiny graphs.
 3. Remove each undirected edge in a tiny reference graph and recount components;
    compare this slow bridge oracle with the low-link result.
+
+## Check yourself
+
+<details>
+<summary>What does a DFS frame remember that a plain stack of vertices does not?</summary>
+
+Which neighbor to try next. That unfinished scan lets the search resume the nearest branch and reproduce recursive insertion order.
+
+</details>
+
+<details>
+<summary>When is an undirected tree edge from parent to child a bridge?</summary>
+
+When `low[child] > discovery[parent]`: the child's subtree has no back edge to the parent or an ancestor, so removing the edge disconnects it.
+
+</details>
+
+<details>
+<summary>Why does Kosaraju traverse the reversed graph in decreasing finish order?</summary>
+
+The vertex that finishes last lies in a component that, in the reversed graph, has no edge into an unassigned component, so each reverse traversal stays inside one SCC.
+
+</details>
 
 See the [solutions](../../docs/solutions.md) for canonicalization and oracle details. The [solution finder](../../docs/solution-finder.md#14-graph-traversal-and-structure) compares this technique with its alternatives.

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 864" width="520" height="864" role="img" aria-labelledby="title desc">
+<title id="title">51  Reaching index 5</title>
+<desc id="desc">In a DynamicArray of eight values, get(5) reads slot 5 in one jump. In a DoublyLinkedList of the same values it starts at the tail and follows 2 links, because 5 is in the back half; the hop counts for indices 0 to 7 are 0, 1, 2, 3, 3, 2, 1 and 0.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="array-vs-list-access-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="array-vs-list-access-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="array-vs-list-access-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="array-vs-list-access-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="array-vs-list-access-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="array-vs-list-access-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="array-vs-list-access-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="array-vs-list-access-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="array-vs-list-access-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="array-vs-list-access-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="array-vs-list-access-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="array-vs-list-access-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="array-vs-list-access-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="array-vs-list-access-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="array-vs-list-access-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="864" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">51  Reaching index 5</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Linear structures · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Array get(5): one jump</text>
+<rect x="39" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="64.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">10</text>
+<text x="64.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="95" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="120.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">20</text>
+<text x="120.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="151" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="176.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">30</text>
+<text x="176.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="207" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="232.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">40</text>
+<text x="232.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="263" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="288.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">50</text>
+<text x="288.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="319" y="178" width="50" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="344.0" y="209.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">60</text>
+<text x="344.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="375" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="400.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">70</text>
+<text x="400.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="431" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="456.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">80</text>
+<text x="456.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<text x="28" y="280" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">Index 5 is at start + 5 slots: no earlier slot is read.</text>
+<circle cx="42" cy="307" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="313" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="314" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">List get(5): 2 hops from the tail</text>
+<rect x="39" y="380" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="64.0" y="411.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">10</text>
+<text x="64.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0 head</text>
+<rect x="95" y="380" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="120.0" y="411.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">20</text>
+<text x="120.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="151" y="380" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="176.0" y="411.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">30</text>
+<text x="176.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="207" y="380" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="232.0" y="411.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">40</text>
+<text x="232.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="263" y="380" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="288.0" y="411.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">50</text>
+<text x="288.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="319" y="380" width="50" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="344.0" y="411.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">60</text>
+<text x="344.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="375" y="380" width="50" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="400.0" y="411.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">70</text>
+<text x="400.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="431" y="380" width="50" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="456.0" y="411.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">80</text>
+<text x="456.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7 tail</text>
+<path d="M 344.0 378 Q 344.0 370 352.0 370 H 392.0 Q 400.0 370 400.0 362 Q 400.0 370 408.0 370 H 448.0 Q 456.0 370 456.0 378" fill="none" stroke="#6b3fb8" stroke-width="2"/>
+<text x="400.0" y="354" font-size="18" fill="#6b3fb8" text-anchor="middle" font-weight="700">2 hops</text>
+<text x="28" y="482" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">5 is not below 8/2, so the walk starts at the tail.</text>
+<circle cx="42" cy="509" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="515" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="516" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Links followed from the nearer end</text>
+<rect x="39" y="538" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="64.0" y="569.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">0</text>
+<text x="64.0" y="612" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="95" y="538" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="120.0" y="569.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">1</text>
+<text x="120.0" y="612" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="151" y="538" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="176.0" y="569.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">2</text>
+<text x="176.0" y="612" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="207" y="538" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="232.0" y="569.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<text x="232.0" y="612" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="263" y="538" width="50" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="288.0" y="569.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">3</text>
+<text x="288.0" y="612" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="319" y="538" width="50" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="344.0" y="569.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">2</text>
+<text x="344.0" y="612" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="375" y="538" width="50" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="400.0" y="569.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">1</text>
+<text x="400.0" y="612" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="431" y="538" width="50" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="456.0" y="569.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">0</text>
+<text x="456.0" y="612" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<text x="28" y="640" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">At most 3 hops for 8 nodes; an array needs 1 jump.</text>
+<rect x="28" y="660" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="676" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">index 5</text>
+<rect x="148.8" y="660" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="182.8" y="676" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">reached from the tail</text>
+<rect x="28" y="692" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="708" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">reached from the head</text>
+<rect x="28" y="732" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="763" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="792" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">An array reaches any index in one jump;</text>
+<text x="44" y="819" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">a list walks links from the nearer end.</text>
+</svg>

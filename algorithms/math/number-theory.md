@@ -8,6 +8,14 @@ works on `long` with one overflow rule: the answer is exact or the method throws
 modulus up to `Long.MAX_VALUE`, including moduli above about 3 * 10^9 where a plain
 `a * b % m` silently overflows.
 
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | You need a gcd, a modular inverse, a power modulo `m`, all primes up to a limit, or a primality verdict for a `long`. |
+| **Avoid&nbsp;it&nbsp;when** | Values exceed 64 bits (use `BigInteger`) or you need many primes beyond 50,000,000. |
+| **Cost** | `gcd`, `extendedGcd`, `modInverse` O(log min); `modPow` O(log e) multiplies; `primesUpTo(n)` O(n log log n); `isPrime` O(log n) per base |
+| **In&nbsp;this&nbsp;repo** | [NumberTheory](../../src/main/java/io/github/ichillous/dsa/algorithms/NumberTheory.java) |
+| **In&nbsp;the&nbsp;JDK** | `BigInteger.gcd`, `modPow`, `modInverse`, `isProbablePrime`; `Math.floorMod`, `Math.multiplyExact` |
+
 The JDK already has `BigInteger` (`gcd`, `modPow`, `modInverse`, `isProbablePrime`)
 and the `Math.*Exact` family. Prefer them when you need arbitrary size or a
 one-off answer. This class shows how the 64-bit versions work and gives primitives
@@ -44,9 +52,21 @@ to the answer. Every product goes through an exact modular multiply: when the fu
 product fits in 63 bits it is one remainder, otherwise a double-and-add loop
 keeps every intermediate below `m`, so nothing overflows.
 
+<!-- visual:generated modpow-squares -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/modpow-squares-dark.svg"><img src="../../docs/visuals/assets/modpow-squares.svg" alt="NumberTheory.modPow(3, 13, 1000) reads the bits of 13 = 1101 from the lowest: the squares of 3 are 3, 9, 81 and 561 modulo 1000, and the result 3, 3, 243, 323 changes only on the 1 bits, ending at 323." width="520"></picture>
+
+**Figure 55.** NumberTheory.modPow(3, 13, 1000) reads the bits of 13 = 1101 from the lowest: the squares of 3 are 3, 9, 81 and 561 modulo 1000, and the result 3, 3, 243, 323 changes only on the 1 bits, ending at 323. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 **Sieve.** When the loop reaches an unmarked `p`, no smaller prime divides it, so
 `p` is prime. Marking starts at `p*p` since smaller multiples already have a
 smaller prime factor.
+
+<!-- visual:generated sieve-grid -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/sieve-grid-dark.svg"><img src="../../docs/visuals/assets/sieve-grid.svg" alt="NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29." width="520"></picture>
+
+**Figure 56.** NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 **Miller-Rabin.** Write `n - 1 = d * 2^s` with `d` odd. For an odd prime `n` and a
 base `a` not divisible by `n`, either `a^d = 1` or `a^(d*2^r) = -1` for some
@@ -74,6 +94,12 @@ q   old r   r   (x for old r, x for r)   (y for old r, y for r)
 
 The last nonzero remainder is 2, with `x = -9`, `y = 47`:
 `240 * (-9) + 46 * 47 = -2160 + 2162 = 2`.
+
+<!-- visual:generated euclid-steps -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/euclid-steps-dark.svg"><img src="../../docs/visuals/assets/euclid-steps.svg" alt="NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd." width="520"></picture>
+
+**Figure 54.** NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 ```java
 import io.github.ichillous.dsa.algorithms.NumberTheory;
@@ -107,6 +133,26 @@ assert NumberTheory.fibonacciMod(10, 1000) == 55;
 assert NumberTheory.fibonacciMod(90, (1L << 61) - 1) == 2_880_067_194_370_816_120L % ((1L << 61) - 1);
 ```
 
+## In real Java
+
+For one-off or arbitrary-size work use `BigInteger`. The two APIs disagree in one place worth knowing: when `a` has no inverse modulo `m`, `BigInteger.modInverse` throws `ArithmeticException` (its Javadoc: "this BigInteger has no multiplicative inverse mod m"), while `NumberTheory.modInverse` returns an empty `OptionalLong`.
+
+```java
+import io.github.ichillous.dsa.algorithms.NumberTheory;
+import java.math.BigInteger;
+
+BigInteger three = BigInteger.valueOf(3);
+assert three.modPow(BigInteger.valueOf(13), BigInteger.valueOf(1000)).longValueExact()
+        == NumberTheory.modPow(3, 13, 1000);
+assert BigInteger.valueOf(240).gcd(BigInteger.valueOf(46)).intValueExact() == 2;
+try {
+    BigInteger.valueOf(4).modInverse(BigInteger.valueOf(8));
+    assert false : "4 has no inverse modulo 8";
+} catch (ArithmeticException expected) {
+    assert NumberTheory.modInverse(4, 8).isEmpty();
+}
+```
+
 ## Costs
 
 | Method | Time | Auxiliary space |
@@ -122,7 +168,7 @@ assert NumberTheory.fibonacciMod(90, (1L << 61) - 1) == 2_880_067_194_370_816_12
 **`a * b % m` overflows long before `m` does.** With `m = 2^62 + 1`, the value
 `2^62` is congruent to -1, so its square is 1 modulo `m`. The naive expression
 computes `2^124` in 64 bits, which wraps to 0, and reports 0. `modPow` returns 1.
-The same silent wrap would make a hand-written Miller-Rabin accept composites.
+The same silent wrap would make a hand-written Miller-Rabin give wrong verdicts.
 
 **Fermat is not a primality test.** 561 is a Carmichael number: `2^560 mod 561 =
 1` although 561 = 3 * 11 * 17. Miller-Rabin tests the stronger square-root
@@ -154,6 +200,29 @@ assert !NumberTheory.isPrime(561); // ... yet 561 is composite
    make for `limit = 100`?
 3. The Pisano period of 10 is 60. Use it to predict `fibonacciMod(10^18, 10)`
    without a large exponent, then confirm with the method.
+
+## Check yourself
+
+<details>
+<summary>Why is the gcd of 240 and 46 the remainder 2 and not the final remainder 0?</summary>
+
+Each step keeps the gcd of the pair, and the last division `4 = 2 * 2 + 0` shows 2 divides 4, so the pair `(4, 2)` has gcd 2. The remainder 0 only signals that the process can stop.
+
+</details>
+
+<details>
+<summary>For exponent 13, how many modular squarings and how many multiplies into the result does <code>modPow</code> do?</summary>
+
+13 is `1101` in binary: the loop runs four times and squares the base each time, so four squarings. It multiplies into the result only on the three 1 bits, so three multiplies. The fourth squaring happens after the last bit is used and its value is never read; skipping the squaring when `e` is 1 would save it.
+
+</details>
+
+<details>
+<summary>Why does <code>primesUpTo(30)</code> never sieve with 7?</summary>
+
+The outer loop only runs while `p * p <= limit`, and 7 * 7 = 49 exceeds 30. Every composite up to 30 has a prime factor of at most 5, so 2, 3 and 5 have already crossed it out.
+
+</details>
 
 See the [catalog](../../docs/catalog.md) for the source and tests and the
 [complexity guide](../../docs/complexity.md) for the bounds. The [solution finder](../../docs/solution-finder.md#22-math-and-number-theory) compares this technique with its alternatives.

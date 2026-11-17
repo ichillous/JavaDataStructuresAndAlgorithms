@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 876" width="520" height="876" role="img" aria-labelledby="title desc">
+<title id="title">67  Three ways to store a graph</title>
+<desc id="desc">One directed graph with 4 vertices and the edges 0 to 1, 0 to 2, 2 to 1 and 2 to 3, shown as an adjacency list, a 4 by 4 adjacency matrix and an edge list, each with the cost of testing an edge and listing neighbors.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="graph-representations-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="graph-representations-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="graph-representations-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="graph-representations-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="graph-representations-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="graph-representations-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="graph-representations-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="graph-representations-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="graph-representations-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="graph-representations-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="graph-representations-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="graph-representations-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="graph-representations-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="graph-representations-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="graph-representations-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="876" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">67  Three ways to store a graph</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Adjacency list</text>
+<text x="66" y="184" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">edge test O(deg)  ·  neighbors O(deg)</text>
+<text x="66" y="224" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">0 →</text>
+<rect x="124" y="202" width="40" height="30" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="144.0" y="224.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="170" y="202" width="40" height="30" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="190.0" y="224.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<text x="66" y="260" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">1 →</text>
+<text x="124" y="260" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">empty</text>
+<text x="66" y="296" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">2 →</text>
+<rect x="124" y="274" width="40" height="30" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="144.0" y="296.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="170" y="274" width="40" height="30" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="190.0" y="296.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<text x="66" y="332" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">3 →</text>
+<text x="124" y="332" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">empty</text>
+<circle cx="42" cy="371" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="377" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="378" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Adjacency matrix</text>
+<text x="66" y="406" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">edge test O(1)  ·  neighbors O(V)</text>
+<text x="146.0" y="434" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<text x="190.0" y="434" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<text x="234.0" y="434" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<text x="278.0" y="434" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<text x="112" y="467.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">0</text>
+<rect x="124" y="446" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="146.0" y="468.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="168" y="446" width="44" height="30" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="190.0" y="468.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">1</text>
+<rect x="212" y="446" width="44" height="30" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="234.0" y="468.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">1</text>
+<rect x="256" y="446" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="278.0" y="468.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="112" y="497.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">1</text>
+<rect x="124" y="476" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="146.0" y="498.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="168" y="476" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="190.0" y="498.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="212" y="476" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="234.0" y="498.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="256" y="476" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="278.0" y="498.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="112" y="527.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">2</text>
+<rect x="124" y="506" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="146.0" y="528.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="168" y="506" width="44" height="30" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="190.0" y="528.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">1</text>
+<rect x="212" y="506" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="234.0" y="528.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="256" y="506" width="44" height="30" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="278.0" y="528.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">1</text>
+<text x="112" y="557.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">3</text>
+<rect x="124" y="536" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="146.0" y="558.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="168" y="536" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="190.0" y="558.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="212" y="536" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="234.0" y="558.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="256" y="536" width="44" height="30" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="278.0" y="558.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="322" y="482" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">row = from</text>
+<text x="322" y="510" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">column = to</text>
+<circle cx="42" cy="591" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="597" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="598" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Edge list</text>
+<text x="66" y="626" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">edge test O(E)  ·  neighbors O(E)</text>
+<rect x="66" y="640" width="62" height="30" rx="15" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="97.0" y="661" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="700">0→1</text>
+<rect x="136" y="640" width="65" height="30" rx="15" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="168.5" y="661" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="700">0→2</text>
+<rect x="209" y="640" width="61" height="30" rx="15" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="239.5" y="661" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="700">2→1</text>
+<rect x="278" y="640" width="64" height="30" rx="15" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="310.0" y="661" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="700">2→3</text>
+<rect x="28" y="682" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="62" y="698" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">1 = edge present, 0 = no edge</text>
+<text x="28" y="728" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">deg = out-degree · V = vertices · E = edges</text>
+<rect x="28" y="744" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="775" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="804" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Edge tests favor a matrix; neighbor</text>
+<text x="44" y="831" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">scans favor an adjacency list.</text>
+</svg>

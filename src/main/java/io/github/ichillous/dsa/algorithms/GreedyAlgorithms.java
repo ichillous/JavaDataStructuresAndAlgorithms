@@ -62,7 +62,8 @@ public final class GreedyAlgorithms {
      *
      * <p>Overflow policy: merged weights use checked addition. {@link ArithmeticException} is
      * thrown if the sum of all frequencies exceeds {@code Long.MAX_VALUE}. Time O(n log n), extra
-     * space O(n). Lengths are at most the number of used symbols minus one.
+     * space O(n). With two or more used symbols, lengths are at most the number of used symbols
+     * minus one.
      *
      * @param frequencies the symbol frequencies, each at least 0
      * @return the code length per symbol

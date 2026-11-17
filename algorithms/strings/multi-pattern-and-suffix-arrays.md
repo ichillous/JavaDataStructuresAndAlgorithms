@@ -10,6 +10,14 @@ no case folding or normalization happens. Both classes copy their input and
 never mutate it. Aho-Corasick rejects empty patterns, collapses duplicates in the trie and
 accepts an empty pattern set (it then never matches).
 
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | Many fixed patterns must be found in one pass over a text (Aho–Corasick), or a fixed text will answer many substring questions: occurrences, distinct substrings, the longest repeated substring (suffix array). |
+| **Avoid&nbsp;it&nbsp;when** | There is one pattern (use `String.indexOf` or KMP), the pattern set changes often (the automaton is immutable), or the text changes (rebuild the suffix array). |
+| **Cost** | Aho–Corasick: O(P) expected build, O(t + k) expected search. Suffix array: O(n log n) build, O(p log n + k log k) per `occurrences` call. |
+| **In&nbsp;this&nbsp;repo** | [`AhoCorasick`](../../src/main/java/io/github/ichillous/dsa/algorithms/AhoCorasick.java) (`findAll`), [`SuffixArray`](../../src/main/java/io/github/ichillous/dsa/algorithms/SuffixArray.java) (`suffixes`, `lcp`, `occurrences`) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.regex.Pattern` for a few alternatives; no direct equivalent for either structure |
+
 ## The invariants
 
 **Aho-Corasick.** Patterns form a trie. For a node spelling `s`, its failure
@@ -21,6 +29,12 @@ A second link per node jumps to the nearest pattern ending on the failure chain,
 so every match is emitted exactly once. Links are built breadth first, so
 shallow nodes are final before deeper ones need them and long patterns cannot
 overflow the stack.
+
+<!-- visual:generated aho-corasick-links -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/aho-corasick-links-dark.svg"><img src="../../docs/visuals/assets/aho-corasick-links.svg" alt="The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root." width="520"></picture>
+
+**Figure 96.** The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 **Suffix array.** `suffixes()[r]` is the start of the r-th smallest suffix.
 Prefix doubling ranks suffixes by their first `k` characters, then by `2k`,
@@ -43,6 +57,12 @@ pos char  trie prefix kept  matches reported
 result ordered by start, then length: (1,she) (2,he) (2,hers)
 ```
 
+<!-- visual:generated aho-corasick-scan -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/aho-corasick-scan-dark.svg"><img src="../../docs/visuals/assets/aho-corasick-scan.svg" alt="Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2." width="520"></picture>
+
+**Figure 97.** Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 Suffix array of `banana`:
 
 ```text
@@ -56,6 +76,12 @@ rank suffix   start  lcp with previous
 distinct substrings = 6*7/2 - (0+1+3+0+0+2) = 15
 longest repeated    = "ana" (largest lcp, 3)
 ```
+
+<!-- visual:generated suffix-array-lcp -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/suffix-array-lcp-dark.svg"><img src="../../docs/visuals/assets/suffix-array-lcp.svg" alt="The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3." width="520"></picture>
+
+**Figure 98.** The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 ```java
 import io.github.ichillous.dsa.algorithms.AhoCorasick;
@@ -110,6 +136,75 @@ every boundary `0..n`, like `kmpFindAll`, while `AhoCorasick` refuses it.
 Not implemented here: the suffix automaton (a minimal automaton of all
 substrings, with online construction) and the Burrows-Wheeler transform with an
 FM-index. Both build on the same ideas but are outside this library.
+
+## In real Java
+
+For a handful of words, one regular expression is the least code:
+`Pattern.compile` over alternatives, with `Pattern.quote` around each literal.
+`Matcher.find` resumes at the first character not matched by the previous match,
+so it reports non-overlapping matches only, where `AhoCorasick.findAll` reports
+every occurrence. For ordering suffixes, `String.compareTo` orders UTF-16 code
+units, which is the order `SuffixArray` uses, so sorting `substring(i)` values is
+an independent check of `suffixes()`.
+
+```java
+import io.github.ichillous.dsa.algorithms.AhoCorasick;
+import io.github.ichillous.dsa.algorithms.AhoCorasick.Match;
+import io.github.ichillous.dsa.algorithms.SuffixArray;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+List<String> words = List.of("he", "she", "his", "hers");
+String alternatives = String.join("|", words.stream().map(Pattern::quote).toList());
+Matcher matcher = Pattern.compile(alternatives).matcher("ushers");
+List<Match> viaRegex = new ArrayList<>();
+while (matcher.find()) {
+    viaRegex.add(new Match(matcher.start(), matcher.group()));
+}
+assert viaRegex.equals(List.of(new Match(1, "she")));
+assert new AhoCorasick(words).findAll("ushers").size() == 3;
+
+String text = "banana";
+List<Integer> starts = new ArrayList<>();
+for (int i = 0; i < text.length(); i++) {
+    starts.add(i);
+}
+starts.sort((a, b) -> text.substring(a).compareTo(text.substring(b)));
+assert Arrays.equals(starts.stream().mapToInt(Integer::intValue).toArray(),
+        new SuffixArray(text).suffixes());
+```
+
+## Check yourself
+
+<details>
+<summary>Why is the failure link of the node <code>hers</code> the node <code>s</code>, not the root?</summary>
+
+The proper suffixes of `hers` are `ers`, `rs` and `s`; the longest one that is
+also a prefix of some pattern is `s` (it starts `she`). Reading `hers` therefore
+leaves the scan one step into `she`, ready for text that continues that way.
+
+</details>
+
+<details>
+<summary><code>SuffixArray("banana").occurrences("ana")</code> finds ranks 1 and 2, whose starts are 3 and 1. Why does it return <code>[1, 3]</code>?</summary>
+
+All suffixes that start with the pattern are adjacent in sorted order, so the
+binary search yields a rank range. Ranks follow suffix order, not text order, so
+the starts come out as 3, 1 and `occurrences` sorts them ascending.
+
+</details>
+
+<details>
+<summary>Why can an <code>AhoCorasick</code> automaton not answer a pattern given after construction, while a suffix array can?</summary>
+
+The automaton is built from the fixed pattern set, so only those patterns have
+nodes and failure links. A suffix array indexes the text instead, so any later
+pattern is one binary search over the sorted suffixes.
+
+</details>
 
 ## Practice
 

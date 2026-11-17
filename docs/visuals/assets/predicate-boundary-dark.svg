@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 884" width="520" height="884" role="img" aria-labelledby="title desc">
+<title id="title">85  Predicate boundary search</title>
+<desc id="desc">For weights 3, 2, 2, 4, 1, 4 shipped in 3 days, capacities 4 and 5 are too slow and 6 to 16 fit. firstTrue(4, 17, fits) probes 10, 7, 5 and 6 and returns 6.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="predicate-boundary-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="predicate-boundary-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="predicate-boundary-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="predicate-boundary-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="predicate-boundary-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="predicate-boundary-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="predicate-boundary-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="predicate-boundary-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="predicate-boundary-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="predicate-boundary-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="predicate-boundary-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="predicate-boundary-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="predicate-boundary-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="predicate-boundary-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="predicate-boundary-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="884" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">85  Predicate boundary search</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Sorting and searching · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Which capacity c ships in 3 days?</text>
+<text x="28" y="182" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">weights 3, 2, 2, 4, 1, 4, in order</text>
+<rect x="28" y="196" width="32" height="40" rx="8" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="44.0" y="223.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">4</text>
+<text x="44.0" y="262" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">no</text>
+<rect x="64" y="196" width="32" height="40" rx="8" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="80.0" y="223.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">5</text>
+<rect x="100" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="116.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">6</text>
+<text x="116.0" y="262" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">yes</text>
+<rect x="136" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="152.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">7</text>
+<rect x="172" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="188.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">8</text>
+<rect x="208" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="224.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">9</text>
+<rect x="244" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="260.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">10</text>
+<rect x="280" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="296.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">11</text>
+<rect x="316" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="332.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">12</text>
+<rect x="352" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="368.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">13</text>
+<rect x="388" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="404.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">14</text>
+<rect x="424" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="440.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">15</text>
+<rect x="460" y="196" width="32" height="40" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="476.0" y="223.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">16</text>
+<text x="28" y="288" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">False, then true: the boundary is capacity 6.</text>
+<circle cx="42" cy="327" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="333" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="334" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">firstTrue(4, 17, fits) probes the middle</text>
+<text x="28" y="364" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">[4, 17) probe 10: needs 2 days, fits: high = 10</text>
+<rect x="28" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="44.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="64" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="80.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">5</text>
+<rect x="100" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="116.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">6</text>
+<rect x="136" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="152.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">7</text>
+<rect x="172" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="188.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">8</text>
+<rect x="208" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="224.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">9</text>
+<rect x="244" y="378" width="32" height="32" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="260.0" y="401.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">10</text>
+<rect x="280" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="296.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">11</text>
+<rect x="316" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="332.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">12</text>
+<rect x="352" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="368.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">13</text>
+<rect x="388" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="404.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">14</text>
+<rect x="424" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="440.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">15</text>
+<rect x="460" y="378" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="476.0" y="401.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">16</text>
+<text x="28" y="436" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">[4, 10) probe 7: needs 3 days, fits: high = 7</text>
+<rect x="28" y="450" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="44.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="64" y="450" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="80.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">5</text>
+<rect x="100" y="450" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="116.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">6</text>
+<rect x="136" y="450" width="32" height="32" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="152.0" y="473.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">7</text>
+<rect x="172" y="450" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="188.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">8</text>
+<rect x="208" y="450" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="224.0" y="473.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">9</text>
+<rect x="244" y="450" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="260.0" y="473.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">10</text>
+<rect x="280" y="450" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="296.0" y="473.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">11</text>
+<rect x="316" y="450" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="332.0" y="473.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">12</text>
+<rect x="352" y="450" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="368.0" y="473.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">13</text>
+<rect x="388" y="450" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="404.0" y="473.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">14</text>
+<rect x="424" y="450" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="440.0" y="473.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">15</text>
+<rect x="460" y="450" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="476.0" y="473.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">16</text>
+<text x="28" y="508" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">[4, 7) probe 5: needs 4 days, too slow: low = 6</text>
+<rect x="28" y="522" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="44.0" y="545.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="64" y="522" width="32" height="32" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="80.0" y="545.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">5</text>
+<rect x="100" y="522" width="32" height="32" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="116.0" y="545.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">6</text>
+<rect x="136" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="152.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">7</text>
+<rect x="172" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="188.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">8</text>
+<rect x="208" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="224.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">9</text>
+<rect x="244" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="260.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">10</text>
+<rect x="280" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="296.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">11</text>
+<rect x="316" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="332.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">12</text>
+<rect x="352" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="368.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">13</text>
+<rect x="388" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="404.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">14</text>
+<rect x="424" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="440.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">15</text>
+<rect x="460" y="522" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="476.0" y="545.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">16</text>
+<text x="28" y="580" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">[6, 7) probe 6: needs 3 days, fits: high = 6</text>
+<rect x="28" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="44.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<rect x="64" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="80.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">5</text>
+<rect x="100" y="594" width="32" height="32" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="116.0" y="617.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">6</text>
+<rect x="136" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="152.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">7</text>
+<rect x="172" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="188.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">8</text>
+<rect x="208" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="224.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">9</text>
+<rect x="244" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="260.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">10</text>
+<rect x="280" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="296.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">11</text>
+<rect x="316" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="332.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">12</text>
+<rect x="352" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="368.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">13</text>
+<rect x="388" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="404.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">14</text>
+<rect x="424" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="440.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">15</text>
+<rect x="460" y="594" width="32" height="32" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="476.0" y="617.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">16</text>
+<text x="28" y="652" font-size="18" fill="#9cbcff" text-anchor="start" font-weight="700">low = high = 6: the smallest capacity that fits.</text>
+<rect x="28" y="682" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="698" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">fits</text>
+<rect x="114.24" y="682" width="26" height="20" rx="4" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="148.24" y="698" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">too slow</text>
+<rect x="244.54399999999998" y="682" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="278.544" y="698" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">still undecided</text>
+<rect x="28" y="714" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="62" y="730" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">probed middle</text>
+<rect x="211.00799999999998" y="714" width="26" height="20" rx="4" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="245.00799999999998" y="730" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">ruled out</text>
+<rect x="28" y="754" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="785" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="814" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Once a capacity fits, every larger one</text>
+<text x="44" y="841" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">fits: each probe halves the range.</text>
+</svg>

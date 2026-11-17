@@ -4,7 +4,7 @@ These bounds describe the maintained code in the [catalog](catalog.md) and its e
 
 `C` is retained array capacity (which may exceed current size after removals), `n` is the number of stored elements or input values, `h` is tree height, `V` is the number of vertices, and `E` is the number of graph edges, counting parallel weighted edges. For strings, `t` is text length, `p` pattern length, `P` the total length of all patterns in a dictionary, and `k` the number of reported matches or hits. `r` is a value range and `m` a modulus. Space means additional working storage unless the table says stored space or includes output. Logarithmic bounds conventionally mean `log(n + 1)` for empty and singleton inputs.
 
-<!-- visual:generated -->
+<!-- visual:generated complexity-growth -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="visuals/assets/complexity-growth-dark.svg"><img src="visuals/assets/complexity-growth.svg" alt="Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings." width="520"></picture>
 
 **Figure 26.** Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings. [Visual index and step-throughs](visuals/README.md).
@@ -15,6 +15,7 @@ These bounds describe the maintained code in the [catalog](catalog.md) and its e
 | Implementation / operation | Time | Space and assumptions |
 | --- | --- | --- |
 | `DynamicArray` get/set | O(1) worst | O(C) stored capacity; resizing uses temporary O(n) storage |
+| `DynamicArray` capacity | O(1) worst | Returns the backing-array length C; capacity is retained after removal and `clear()` |
 | `DynamicArray` append | O(1) amortized; O(n) for a resize | Geometric capacity growth spreads copying over a sequence of appends; doubling is capped at `Integer.MAX_VALUE - 8`, beyond which `OutOfMemoryError` is thrown |
 | `DynamicArray` indexed insertion/removal | O(n) worst | Shifting dominates; an insertion may also grow capacity |
 | `DoublyLinkedList` add/remove at either end | O(1) worst | O(n) stored nodes; this implementation has both head and tail |
@@ -60,6 +61,7 @@ These time bounds are deterministic worst cases. The probabilistic part is the *
 | --- | --- | --- |
 | Linear search | O(n) worst; O(1) best | O(1); returns the first matching index or `-1` |
 | Binary search, lower/upper bound | O(log n) worst | O(1); ascending input is an unchecked precondition |
+| `firstTrue(low, highExclusive, predicate)` ([binary search on the answer](../algorithms/searching/binary-search-on-answer.md)) | O(log(high - low)) predicate calls, at most 64 for any `long` range, plus the cost of each call | O(1); the predicate must be false then true over the range (unchecked); returns `highExclusive` when no value qualifies |
 | Insertion sort | O(n²) worst; O(n) already sorted | O(1); stable |
 | Bubble sort with early exit | O(n²) worst; O(n) already sorted | O(1); stable |
 | Merge sort | O(n log n) worst | O(n) temporary buffer plus O(log n) call stack; stable |
@@ -119,6 +121,7 @@ KMP, the Z-function and Rabin-Karp are listed with the other string searches abo
 | Reservoir sample (`Sampling.reservoirSample`) | O(n), one random draw per item after the first `k` | O(min(k, n)); uniform over `k`-subsets, never needs `n` in advance |
 | Fisher-Yates shuffle (`Sampling.shuffle`) | O(n), `n - 1` random draws | O(1); in place; every order has probability `1/n!` given a uniform generator |
 | Alias table (`AliasTable`) | O(n) build; O(1) per `sample` | O(n) for normalized weights, cutoffs and aliases; immutable after construction |
+| Subsets of a bit mask with k set bits, by `sub = (sub - 1) & mask` ([JDK-only lesson](../algorithms/bit-manipulation/overview.md), no repository method) | O(2^k) | O(1) |
 
 Number-theory methods are exact for every `long` or throw `ArithmeticException`. Miller-Rabin here is deterministic, not probabilistic. The randomized methods take the caller's `RandomGenerator`; their costs count random draws, and uniformity holds only as far as the supplied generator is uniform.
 
@@ -130,6 +133,7 @@ Number-theory methods are exact for every `long` or throw `ArithmeticException`.
 | BFS, iterative DFS, unweighted shortest path | O(V + E) | O(V + E), including adjacency snapshots; only the reachable part is visited, while state arrays include all vertices |
 | Connected components | O(V + E) | O(V + E), including result; undirected graphs only |
 | Kahn topological ordering | O(V + E) | O(V + E); directed graphs only; rejects a cycle |
+| Kahn with a `PriorityQueue` of ready vertices ([lesson](../algorithms/graph/topological-sort.md) example, not a repository method) | O(V log V + E) | O(V + E); always takes the smallest ready vertex |
 | Dijkstra with a lazy binary heap | O(V + E log(E + 1)) | O(V + E); weighted multigraph can have more heap entries than vertices |
 | Bellman-Ford | O(VE) relaxations plus O(V+E) setup; O(V+E+VEB) bit operations with max integer bit length B | O((V+E)B) auxiliary bits; exact intermediate arithmetic, checked final long distances |
 | 0-1 BFS | O(V + E) | O(V + E); weights must be 0 or 1 |

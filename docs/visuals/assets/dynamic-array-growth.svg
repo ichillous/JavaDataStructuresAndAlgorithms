@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 856" width="520" height="856" role="img" aria-labelledby="title desc">
+<title id="title">47  Appending to a full array</title>
+<desc id="desc">A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="dynamic-array-growth-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="dynamic-array-growth-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="dynamic-array-growth-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="dynamic-array-growth-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="dynamic-array-growth-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="dynamic-array-growth-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="dynamic-array-growth-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="dynamic-array-growth-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="dynamic-array-growth-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="dynamic-array-growth-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="dynamic-array-growth-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="dynamic-array-growth-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="dynamic-array-growth-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="dynamic-array-growth-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="dynamic-array-growth-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="856" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">47  Appending to a full array</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Linear structures · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">add(50) finds no free slot</text>
+<rect x="39" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="64.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">10</text>
+<rect x="95" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="120.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">20</text>
+<rect x="151" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="176.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">30</text>
+<rect x="207" y="178" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="232.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">40</text>
+<rect x="319" y="178" width="50" height="48" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="344.0" y="209.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">50</text>
+<text x="344.0" y="252" font-size="18" fill="#8a5e00" text-anchor="middle" font-weight="700">waiting</text>
+<path d="M 39 230 Q 39 238 47 238 H 140.0 Q 148.0 238 148.0 246 Q 148.0 238 156.0 238 H 249 Q 257 238 257 230" fill="none" stroke="#505b6b" stroke-width="2"/>
+<text x="148.0" y="266" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="700">size 4 = capacity 4</text>
+<circle cx="42" cy="305" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="311" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="312" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Allocate 8 slots, copy 4, write 50</text>
+<path d="M 39 382 Q 39 374 47 374 H 252.0 Q 260.0 374 260.0 366 Q 260.0 374 268.0 374 H 473 Q 481 374 481 382" fill="none" stroke="#2451b7" stroke-width="2"/>
+<text x="260.0" y="358" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">new capacity 8</text>
+<rect x="39" y="386" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="64.0" y="417.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">10</text>
+<rect x="95" y="386" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="120.0" y="417.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">20</text>
+<rect x="151" y="386" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="176.0" y="417.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">30</text>
+<rect x="207" y="386" width="50" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="232.0" y="417.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">40</text>
+<rect x="263" y="386" width="50" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="288.0" y="417.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">50</text>
+<rect x="319" y="386" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="375" y="386" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="431" y="386" width="50" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M 39 438 Q 39 446 47 446 H 140.0 Q 148.0 446 148.0 454 Q 148.0 446 156.0 446 H 249 Q 257 446 257 438" fill="none" stroke="#1c6b3c" stroke-width="2"/>
+<text x="148.0" y="474" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">4 copies</text>
+<line x1="344.0" y1="468" x2="344.0" y2="440" stroke="#2451b7" stroke-width="2.5" marker-end="url(#dynamic-array-growth-blue-arrow)"/>
+<text x="344.0" y="490" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">size = 5</text>
+<circle cx="42" cy="533" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="539" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="540" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Running copy count</text>
+<rect x="66" y="562" width="120" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="126.0" y="583" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">5 appends</text>
+<rect x="196" y="562" width="162" height="30" rx="15" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="277.0" y="583" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">4 copies so far</text>
+<text x="66" y="622" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">Append 9 copies 8 more: 12 copies in 9 appends.</text>
+<rect x="28" y="652" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="668" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">copied</text>
+<rect x="142.752" y="652" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="176.752" y="668" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">new</text>
+<rect x="235.904" y="652" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="269.904" y="668" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">free slot</text>
+<rect x="366.20799999999997" y="652" width="26" height="20" rx="4" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="400.20799999999997" y="668" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">waiting</text>
+<rect x="28" y="692" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="723" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="752" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Doubling makes copies rare: n appends</text>
+<text x="44" y="779" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">copy fewer than 2n values in total, so</text>
+<text x="44" y="806" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">one append costs O(1) amortized.</text>
+</svg>

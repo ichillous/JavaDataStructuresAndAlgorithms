@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 892" width="520" height="892" role="img" aria-labelledby="title desc">
+<title id="title">75  Window jumping a repeat</title>
+<desc id="desc">longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="sliding-window-distinct-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="sliding-window-distinct-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="sliding-window-distinct-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="sliding-window-distinct-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="sliding-window-distinct-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="sliding-window-distinct-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="sliding-window-distinct-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="sliding-window-distinct-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="sliding-window-distinct-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="sliding-window-distinct-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="sliding-window-distinct-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="sliding-window-distinct-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="sliding-window-distinct-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="sliding-window-distinct-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="sliding-window-distinct-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="892" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">75  Window jumping a repeat</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Array patterns · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">i = 2: c is new, window grows</text>
+<rect x="39" y="178" width="52" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="65.0" y="209.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="65.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="99" y="178" width="52" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="125.0" y="209.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="125.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="159" y="178" width="52" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="185.0" y="209.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">c</text>
+<text x="185.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="219" y="178" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="245.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">b</text>
+<text x="245.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="279" y="178" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="305.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">a</text>
+<text x="305.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="339" y="178" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="365.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">d</text>
+<text x="365.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<circle cx="42" cy="285" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="291" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="292" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">i = 3: b was at 1, start jumps to 2</text>
+<rect x="39" y="314" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="65.0" y="345.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">a</text>
+<text x="65.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="99" y="314" width="52" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="125.0" y="345.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">b</text>
+<text x="125.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="159" y="314" width="52" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="185.0" y="345.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">c</text>
+<text x="185.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="219" y="314" width="52" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="245.0" y="345.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">b</text>
+<text x="245.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="279" y="314" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="305.0" y="345.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">a</text>
+<text x="305.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="339" y="314" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="365.0" y="345.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">d</text>
+<text x="365.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<circle cx="42" cy="421" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="427" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="428" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">i = 4: a at 0 is stale, start stays</text>
+<rect x="39" y="450" width="52" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="65.0" y="481.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">a</text>
+<text x="65.0" y="524" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="99" y="450" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="125.0" y="481.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">b</text>
+<text x="125.0" y="524" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="159" y="450" width="52" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="185.0" y="481.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">c</text>
+<text x="185.0" y="524" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="219" y="450" width="52" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="245.0" y="481.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="245.0" y="524" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="279" y="450" width="52" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="305.0" y="481.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">a</text>
+<text x="305.0" y="524" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="339" y="450" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="365.0" y="481.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">d</text>
+<text x="365.0" y="524" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<circle cx="42" cy="557" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="563" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">4</text>
+<text x="66" y="564" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">i = 5: d is new, best Span(2, 6)</text>
+<rect x="39" y="586" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="65.0" y="617.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">a</text>
+<text x="65.0" y="660" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="99" y="586" width="52" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="125.0" y="617.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">b</text>
+<text x="125.0" y="660" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="159" y="586" width="52" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="185.0" y="617.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">c</text>
+<text x="185.0" y="660" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="219" y="586" width="52" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="245.0" y="617.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="245.0" y="660" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="279" y="586" width="52" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="305.0" y="617.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="305.0" y="660" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="339" y="586" width="52" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="365.0" y="617.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">d</text>
+<text x="365.0" y="660" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="28" y="690" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="706" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">window</text>
+<rect x="153.12" y="690" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="187.12" y="706" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">read now</text>
+<rect x="291.2" y="690" width="26" height="20" rx="4" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="325.2" y="706" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">earlier copy</text>
+<rect x="28" y="722" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="62" y="738" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">dropped</text>
+<rect x="28" y="762" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="793" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="822" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">The left edge never moves back, so each</text>
+<text x="44" y="849" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">unit is added once: linear time.</text>
+</svg>

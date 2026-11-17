@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 870" width="520" height="870" role="img" aria-labelledby="title desc">
+<title id="title">35  From hash code to slot</title>
+<desc id="desc">Integer keys 65536 and 131072 have hash codes 0x00010000 and 0x00020000, whose low four bits are both 0, so a plain mask sends both to slot 0. Spreading with h ^ (h &gt;&gt;&gt; 16) and multiplying by 0x9E3779B9 gives slots 1 and 2 of 16.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="hash-index-spread-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="hash-index-spread-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="hash-index-spread-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="hash-index-spread-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="hash-index-spread-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="hash-index-spread-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="hash-index-spread-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="hash-index-spread-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="hash-index-spread-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="hash-index-spread-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="hash-index-spread-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="hash-index-spread-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="hash-index-spread-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="hash-index-spread-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="hash-index-spread-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="870" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">35  From hash code to slot</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Hashing and sketches · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">A mask keeps only the low 4 bits</text>
+<text x="30" y="209" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">65536</text>
+<rect x="122" y="182" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="143.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="168" y="182" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="189.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="214" y="182" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="235.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="260" y="182" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="281.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="306" y="182" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="327.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="352" y="182" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="373.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="398" y="182" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="419.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="444" y="182" width="42" height="40" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="465.0" y="209.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">0</text>
+<text x="30" y="257" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">131072</text>
+<rect x="122" y="230" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="143.0" y="257.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="168" y="230" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="189.0" y="257.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="214" y="230" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="235.0" y="257.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="260" y="230" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="281.0" y="257.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<rect x="306" y="230" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="327.0" y="257.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="352" y="230" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="373.0" y="257.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="398" y="230" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="419.0" y="257.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="444" y="230" width="42" height="40" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="465.0" y="257.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">0</text>
+<text x="30" y="292" font-size="18" fill="#bd3026" text-anchor="start" font-weight="700">hashCode &amp; 15 gives slot 0 and slot 0: a collision</text>
+<circle cx="42" cy="325" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="331" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="332" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Spread: h ^ (h &gt;&gt;&gt; 16)</text>
+<text x="30" y="385" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">65536</text>
+<rect x="122" y="358" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="143.0" y="385.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="168" y="358" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="189.0" y="385.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="214" y="358" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="235.0" y="385.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="260" y="358" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="281.0" y="385.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="306" y="358" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="327.0" y="385.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="352" y="358" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="373.0" y="385.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="398" y="358" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="419.0" y="385.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="444" y="358" width="42" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="465.0" y="385.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">1</text>
+<text x="30" y="433" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">131072</text>
+<rect x="122" y="406" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="143.0" y="433.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="168" y="406" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="189.0" y="433.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="214" y="406" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="235.0" y="433.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="260" y="406" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="281.0" y="433.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<rect x="306" y="406" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="327.0" y="433.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="352" y="406" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="373.0" y="433.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="398" y="406" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="419.0" y="433.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="444" y="406" width="42" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="465.0" y="433.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">2</text>
+<text x="30" y="468" font-size="18" fill="#1c6b3c" text-anchor="start" font-weight="700">The high half now reaches the low 4 bits: 1 and 2</text>
+<circle cx="42" cy="501" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="507" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="508" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Multiply, keep the top 4 bits</text>
+<text x="30" y="561" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">65536</text>
+<rect x="122" y="534" width="42" height="40" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="143.0" y="561.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<rect x="168" y="534" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="189.0" y="561.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">7</text>
+<rect x="214" y="534" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="235.0" y="561.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">f</text>
+<rect x="260" y="534" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="281.0" y="561.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="306" y="534" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="327.0" y="561.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">7</text>
+<rect x="352" y="534" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="373.0" y="561.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">9</text>
+<rect x="398" y="534" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="419.0" y="561.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">b</text>
+<rect x="444" y="534" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="465.0" y="561.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">9</text>
+<text x="30" y="609" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">131072</text>
+<rect x="122" y="582" width="42" height="40" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="143.0" y="609.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">2</text>
+<rect x="168" y="582" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="189.0" y="609.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">f</text>
+<rect x="214" y="582" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="235.0" y="609.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">e</text>
+<rect x="260" y="582" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="281.0" y="609.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="306" y="582" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="327.0" y="609.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">f</text>
+<rect x="352" y="582" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="373.0" y="609.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3</text>
+<rect x="398" y="582" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="419.0" y="609.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">7</text>
+<rect x="444" y="582" width="42" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="465.0" y="609.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<text x="30" y="644" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">Times 0x9E3779B9: slot 1 and slot 2 of 16</text>
+<rect x="28" y="664" width="26" height="20" rx="4" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="62" y="680" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">mask keeps</text>
+<rect x="189.408" y="664" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="223.408" y="680" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">after spreading</text>
+<rect x="28" y="696" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="712" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">top bits: the slot</text>
+<rect x="28" y="736" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="767" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="796" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Mixing lets high bits pick the slot, so</text>
+<text x="44" y="823" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">such keys stop colliding.</text>
+</svg>

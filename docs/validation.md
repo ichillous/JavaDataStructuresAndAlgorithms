@@ -1,5 +1,40 @@
 # Validation evidence
 
+## Lessons and figures expansion verification (2026-11-17)
+
+This pass rewrote or added the 69 lessons under `algorithms/` and `data-structures/`, added
+the two folder landing pages, and brought the figures to 98 and the step-throughs to 13.
+It added two public methods (`SearchAlgorithms.firstTrue`, `DynamicArray.capacity`) and no
+class: the four library packages hold 47 public classes. Every number below was measured
+on the final tree with the command named in brackets. Full `./mvnw -q -B clean verify`
+passed on OpenJDK 21.0.12, compiling with `maven.compiler.release` 17:
+
+| Check | Result |
+| --- | --- |
+| Total JUnit invocations | **843 passed**, zero failures, errors or skips, across **68** test classes [`target/surefire-reports/TEST-*.xml`] |
+| Executable Markdown | All **231 Java blocks** in 76 Markdown files compiled for Java 17 and executed with assertions enabled; 232 `DocumentedExamplesTest` invocations, the extra one being the assertion probe |
+| Production line coverage | **4,495 / 4,547 = 98.86%**, including runnable examples [`target/site/jacoco/jacoco.csv`] |
+| Production branch coverage | **2,480 / 2,518 = 98.49%**, including runnable examples [same file] |
+| Coverage floors | 90% lines and 85% branches enforced; both passed |
+| Compiler and Javadoc | `-Xlint:all -Werror` and Javadoc doclint passed |
+| Packaged programs | The default showcase and `learn` with `binary-search 4`, `negative-edges`, `range-queries`, `lru` and `list` exited with status 0 |
+| Local documentation | **1,521** file links resolve; 0 broken [`python3 scripts/check_docs.py`] |
+| Figures | **98 figures, 196 SVGs**, 0 stale generated files [`python3 scripts/generate_visuals.py --check`] |
+| Step-throughs | **13 traces with 118 states** [frames in `docs/visuals/data/visual-data.js`] |
+| Lessons | **69 lessons** and 2 landing pages under `algorithms/` and `data-structures/`, each with a figure region and an At a glance table |
+| Python visual tests | **73 passed** [`python3 -m unittest discover -s scripts/visuals -p 'test_*.py'`], including new coverage tests for figure placement, lesson figures, lesson reachability from the README and the roadmap, and the rendered-review report |
+| Rendered review | 196 SVG variants and 472 viewer state/layout checks (118 states at 1440px and 390px in both themes), 0 issues [`node scripts/visuals/browser_review.js --all --write --previews`]; details in [visual verification](visuals/verification.md) |
+| Working-tree hygiene | `git diff --check` passed |
+
+Integration fixes in this pass: eight figures named a lesson that no longer placed them
+and were repointed at a page that does, and `dijkstra-path` was placed in its lesson,
+beside the Dijkstra section of the BFS lesson; the solution finder links the new lessons,
+`firstTrue` and the three chooser pages, points union-find, topological sort, insertion sort
+and Kruskal at their own lessons, gives open addressing the exact expected and amortized
+split, describes `Arrays.parallelSort` only through its Javadoc implementation notes, and
+replaces a speed comparison of bubble and insertion sort with a count of element writes.
+Passing tests is evidence, not a proof for all inputs or a benchmark result.
+
 ## Breadth expansion verification (2026-11-16)
 
 The breadth expansion adds 21 public library classes (47 in `algorithms`, `collections`,
@@ -52,8 +87,8 @@ Actual Chromium review measured all 52 SVGs and 216 viewer state/layout combinat
 final text bounds/collision and overflow reports contain no issues. Independent
 code, algorithm and image review found no remaining material visual findings.
 
-See [visual coverage and verification](visuals/verification.md) for exact families,
-previews, reproducibility, Emergent Mind provenance and browser limitations. The
+[Visual coverage and verification](visuals/verification.md) now describes the
+2026-11-17 state; this paragraph remains as the record of the first visual layer. The
 figure/trace values share canonical data with the Java API tests; no measured
 runtime or speedup is claimed. Local documentation file links resolve, and
 HTML/image/manifest references are checked separately by the visual suite.

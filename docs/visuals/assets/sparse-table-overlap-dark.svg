@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 840" width="520" height="840" role="img" aria-labelledby="title desc">
+<title id="title">44  Sparse table overlap</title>
+<desc id="desc">For the values 5, 2, 6, 4, 7, 3, 8, 1, rangeMin(1, 7) takes the minimum of the blocks [1, 5) and [3, 7), which overlap on indices 3 and 4, and gets 2. A sum of the same blocks would give 41 instead of 30.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="sparse-table-overlap-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="sparse-table-overlap-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="sparse-table-overlap-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="sparse-table-overlap-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="sparse-table-overlap-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="sparse-table-overlap-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="sparse-table-overlap-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="sparse-table-overlap-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="sparse-table-overlap-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="sparse-table-overlap-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="sparse-table-overlap-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="sparse-table-overlap-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="sparse-table-overlap-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="sparse-table-overlap-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="sparse-table-overlap-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="840" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">44  Sparse table overlap</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">rangeMin(1, 7): length 6, so blocks of 4</text>
+<rect x="39" y="178" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="64.0" y="209.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">5</text>
+<text x="64.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="95" y="178" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="120.0" y="209.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">2</text>
+<text x="120.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="151" y="178" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="176.0" y="209.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">6</text>
+<text x="176.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="207" y="178" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="232.0" y="209.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<text x="232.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<rect x="263" y="178" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="288.0" y="209.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">7</text>
+<text x="288.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<rect x="319" y="178" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="344.0" y="209.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">3</text>
+<text x="344.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">5</text>
+<rect x="375" y="178" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="400.0" y="209.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">8</text>
+<text x="400.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">6</text>
+<rect x="431" y="178" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="456.0" y="209.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<text x="456.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">7</text>
+<circle cx="42" cy="281" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="287" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="288" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">One block from each end covers it</text>
+<path d="M 95 358 Q 95 350 103 350 H 196.0 Q 204.0 350 204.0 342 Q 204.0 350 212.0 350 H 305 Q 313 350 313 358" fill="none" stroke="#86dca2" stroke-width="2"/>
+<text x="204.0" y="334" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">[1, 5) min 2</text>
+<rect x="39" y="364" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="64.0" y="395.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">5</text>
+<rect x="95" y="364" width="50" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="120.0" y="395.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">2</text>
+<rect x="151" y="364" width="50" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="176.0" y="395.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">6</text>
+<rect x="207" y="364" width="50" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="232.0" y="395.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">4</text>
+<rect x="263" y="364" width="50" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="288.0" y="395.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">7</text>
+<rect x="319" y="364" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="344.0" y="395.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">3</text>
+<rect x="375" y="364" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="400.0" y="395.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">8</text>
+<rect x="431" y="364" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="456.0" y="395.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<path d="M 207 418 Q 207 426 215 426 H 308.0 Q 316.0 426 316.0 434 Q 316.0 426 324.0 426 H 417 Q 425 426 425 418" fill="none" stroke="#9cbcff" stroke-width="2"/>
+<text x="316.0" y="454" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="700">[3, 7) min 3</text>
+<circle cx="42" cy="481" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="487" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="488" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Combine the two answers</text>
+<rect x="40" y="510" width="266" height="30" rx="15" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="173.0" y="531" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">min: min(2, 3) = 2, correct</text>
+<rect x="40" y="552" width="308" height="30" rx="15" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="194.0" y="573" font-size="18" fill="#ffaaa1" text-anchor="middle" font-weight="700">sum: 19 + 22 = 41, true sum 30</text>
+<text x="40" y="610" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">4 + 7 was counted twice.</text>
+<rect x="28" y="634" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="650" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">first block only</text>
+<rect x="217.92" y="634" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="251.92" y="650" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">second block only</text>
+<rect x="28" y="666" width="26" height="20" rx="4" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="62" y="682" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">in both blocks</text>
+<rect x="208.416" y="666" width="26" height="20" rx="4" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="242.416" y="682" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">outside the range</text>
+<rect x="28" y="706" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="737" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="766" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Minimum ignores the overlap of two</text>
+<text x="44" y="793" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">blocks; a sum would count it twice.</text>
+</svg>

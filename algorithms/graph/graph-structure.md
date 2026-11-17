@@ -6,6 +6,14 @@ is, and whether one walk can use every edge once. All are in the maintained
 [GraphStructureAlgorithms](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java)
 and are iterative, so a 100,000-vertex path does not overflow the call stack.
 
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | You need to know which vertices hold a graph together, whether it splits into two sides, where a cycle is, or whether one walk can use every edge once. |
+| **Avoid&nbsp;it&nbsp;when** | You need distances (use [shortest paths](shortest-paths.md)) or only reachability (use [BFS](bfs.md) or [DFS](dfs.md)). |
+| **Cost** | O(V + E) time for every method here; Euler paths are O(V + E) expected. |
+| **In&nbsp;this&nbsp;repo** | [`GraphStructureAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java): `articulationPoints`, `bipartition`, `oddCycle`, `directedCycle`, `eulerianPath` |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent: `java.util` has no graph classes. |
+
 **Preconditions.** Articulation points, bipartition and odd cycles need an
 undirected `Graph`; the directed-cycle search needs a directed one; the Euler path
 accepts either. A wrong direction throws `IllegalArgumentException`, null throws
@@ -36,6 +44,24 @@ bipartition, and adds 2 to an undirected degree.
   and the degrees allow it: undirected, zero or two odd-degree vertices; directed,
   every `out - in` is 0 except at most one `+1` (the start) and one `-1` (the end).
   The result has `E + 1` vertices.
+
+<!-- visual:generated articulation-points -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/articulation-points-dark.svg"><img src="../../docs/visuals/assets/articulation-points.svg" alt="A bowtie graph of two triangles sharing vertex 2 is searched depth-first from 0 with discovery and low values shown, and removing vertex 2 leaves the separate components {0, 1} and {3, 4}." width="520"></picture>
+
+**Figure 27.** A bowtie graph of two triangles sharing vertex 2 is searched depth-first from 0 with discovery and low values shown, and removing vertex 2 leaves the separate components {0, 1} and {3, 4}. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
+<!-- visual:generated bipartite-odd-cycle -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bipartite-odd-cycle-dark.svg"><img src="../../docs/visuals/assets/bipartite-odd-cycle.svg" alt="A 6-cycle splits into left {0, 2, 4} and right {1, 3, 5}, while a 5-cycle with a tail has an edge 2-3 joining two vertices of the same colour, and the witness is the odd cycle 2, 1, 0, 4, 3." width="520"></picture>
+
+**Figure 28.** A 6-cycle splits into left {0, 2, 4} and right {1, 3, 5}, while a 5-cycle with a tail has an edge 2-3 joining two vertices of the same colour, and the witness is the odd cycle 2, 1, 0, 4, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
+<!-- visual:generated euler-path -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/euler-path-dark.svg"><img src="../../docs/visuals/assets/euler-path.svg" alt="A square with a diagonal and a pendant edge has odd degree only at vertices 0 and 4, so the Euler path starts at 0 and walks every edge once: 0, 1, 2, 3, 0, 2, 4." width="520"></picture>
+
+**Figure 29.** A square with a diagonal and a pendant edge has odd degree only at vertices 0 and 4, so the Euler path starts at 0 and walks every edge once: 0, 1, 2, 3, 0, 2, 4. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 ## A worked trace
 
@@ -103,7 +129,7 @@ vertex count; isolated vertices are otherwise ignored.
 
 ## Pitfalls
 
-- A single odd-degree vertex count is not enough. Two disjoint cycles have all
+- The degree count alone is not enough. Two disjoint cycles have all
   degrees even but no Euler path, because the edges are not connected. The
   implementation checks the degree rule first and then that the walk consumed
   `E` edges.
@@ -115,6 +141,43 @@ vertex count; isolated vertices are otherwise ignored.
 - Using `low[c] > discovery[p]` (the bridge test) would miss cut vertices such as
   the center of a bowtie.
 
+## In real Java
+
+The JDK has no graph type, so production code either builds adjacency with
+`java.util` collections (for example a `Map<Integer, List<Integer>>`) or reuses a
+tested class such as this one. Know what the repository's `Graph` models before you
+trust a structural answer: it keeps one edge per vertex pair. Adding the same edge
+twice does not create a second parallel edge, so a "multigraph" input is silently
+reduced and an Euler path of two parallel edges is a single step:
+
+```java
+import io.github.ichillous.dsa.graphs.Graph;
+import io.github.ichillous.dsa.graphs.GraphStructureAlgorithms;
+import java.util.List;
+
+var doubled = Graph.undirected(2).addEdge(0, 1).addEdge(0, 1);
+assert doubled.edgeCount() == 1;
+assert GraphStructureAlgorithms.eulerianPath(doubled).orElseThrow().equals(List.of(0, 1));
+// With two real parallel edges the walk would be 0, 1, 0 and every degree would be even.
+```
+
+If your data can repeat an edge and the repetition matters, count it yourself before
+calling these methods, or model each parallel edge with its own intermediate vertex.
+
+## Common mistakes
+
+- **Marking a one-child DFS root as a cut vertex.** In the path `0-1-2` rooted at 0,
+  vertex 0 has one DFS child. Removing it leaves `{1, 2}` connected, so the
+  invariant "removal increases the component count" fails. Only a root with two or
+  more children is a cut vertex.
+- **Coloring only the component of vertex 0.** For edges `0-1`, `2-3`, `3-4`, `4-2`,
+  a BFS from 0 finds no conflict, yet the triangle `2-3-4` is an odd cycle. The
+  invariant "every edge joins different colors" must hold in every component, which
+  is why `bipartition` starts a search from each uncolored vertex.
+- **Starting a directed Euler path at the smallest vertex.** For `1->2`, `2->0` the
+  out-minus-in balance is `+1` at vertex 1 and `-1` at vertex 0. Starting at 0, which
+  has no outgoing edge, finds no walk; the start must be the vertex with `out - in = 1`.
+
 ## Practice
 
 1. Remove each vertex of a small graph and recount components; compare with the
@@ -123,6 +186,29 @@ vertex count; isolated vertices are otherwise ignored.
    a valid coloring exists exactly when `oddCycle` is empty.
 3. Build a graph by XOR-ing a few random cycles (every degree stays even) and verify
    `eulerianPath` by deleting each consecutive edge from a multiset.
+
+## Check yourself
+
+<details>
+<summary>Why does the articulation test use <code>low[c] &gt;= discovery[p]</code> while the bridge test uses <code>&gt;</code>?</summary>
+
+When `low[c] == discovery[p]`, the subtree's best escape is a back edge that ends at `p`. If `p` is removed that edge disappears with it, so the subtree is cut off and `p` is a cut vertex. If only the tree edge `p-c` is removed, the same back edge is a different edge and still connects the subtree, so equality means `p-c` is not a bridge.
+
+</details>
+
+<details>
+<summary>Which edge proves that a graph is not bipartite, and how is the witness cycle built from it?</summary>
+
+The first edge `u-v` whose endpoints received the same BFS color. The two BFS-tree paths from `u` and `v` to their nearest common ancestor have equal parity, so those paths plus the edge `u-v` form a cycle of odd length.
+
+</details>
+
+<details>
+<summary>A connected undirected graph has four odd-degree vertices. Does an Euler path exist?</summary>
+
+No. A walk that uses every edge once can leave an odd number of unmatched edge ends only at its start and its end, so at most two vertices may have odd degree. With four, `eulerianPath` returns an empty `Optional`.
+
+</details>
 
 See the [catalog](../../docs/catalog.md) for the source and test links, the
 [complexity guide](../../docs/complexity.md) for the cost summary, and

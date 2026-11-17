@@ -5,11 +5,13 @@ unsorted array? The maintained [search implementation](../../src/main/java/io/gi
 returns a zero-based index, or `-1` if absent. It rejects null and does not mutate
 input. Empty arrays are valid. No sorting or auxiliary index is required.
 
-<!-- visual:generated -->
-<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/kmp-overlap-dark.svg"><img src="../../docs/visuals/assets/kmp-overlap.svg" alt="Prefix fallback retains the overlap between two pattern matches." width="520"></picture>
-
-**Figure 18.** For text, reusing matched-prefix information avoids restarting the entire comparison and preserves overlapping matches. [Visual index and step-throughs](../../docs/visuals/README.md).
-<!-- /visual:generated -->
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | The data is unsorted or tiny, you query once, or the match test is not an ordering. |
+| **Avoid&nbsp;it&nbsp;when** | The same large collection is queried again and again: sort it or index it once. |
+| **Cost** | O(1) for a hit at index 0; O(n) for a miss or a hit at the end; O(1) extra space. |
+| **In&nbsp;this&nbsp;repo** | [`SearchAlgorithms.linearSearch`](../../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `List#indexOf` and `List#lastIndexOf`; no direct equivalent for `int[]` |
 
 ## Why the scan is correct
 
@@ -17,7 +19,16 @@ Before visiting index `i`, none of the positions in `[0, i)` equals the target.
 Finding a match at `i` therefore establishes that it is the first match. Advancing
 past an unequal value preserves the invariant; reaching the end proves absence.
 
-For target `4` in `[9, 4, 4, 2]`:
+For target `4` in `[9, 4, 4, 2]` the scan stops at index 1 and never reads the second `4`;
+a miss, such as `7`, reads every cell before it can answer `-1`.
+
+<!-- visual:generated linear-scan-first-match -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/linear-scan-first-match-dark.svg"><img src="../../docs/visuals/assets/linear-scan-first-match.svg" alt="linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1." width="520"></picture>
+
+**Figure 84.** linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
+The same trace in a table:
 
 | Index inspected | Value | Established fact |
 | --- | --- | --- |
@@ -65,13 +76,70 @@ The empty pattern matches every boundary for all-match search. A UTF-16 index is
 not necessarily a count of visible characters.
 
 **Pitfall:** sorting `[9, 4, 4, 2]` before searching changes the meaning of an index.
-The first `4` in the sorted array is not its original position.
+The `9` is at index 0 in the original array but at index 3 in the sorted one.
+
+## In real Java
+
+For a `List`, use `indexOf` (first occurrence) and `lastIndexOf` (last occurrence). Both
+compare with `equals`, so the argument must have the same element type: an `Integer` is never
+equal to a `Long` with the same numeric value.
+
+```java
+import java.util.List;
+
+List<Integer> ints = List.of(9, 4, 4, 2);
+assert ints.indexOf(4) == 1;
+assert ints.lastIndexOf(4) == 2;
+assert ints.indexOf(7) == -1;
+
+List<Long> longs = List.of(9L, 4L, 4L, 2L);
+assert longs.indexOf(4) == -1;   // the int 4 boxes to an Integer, which is not equal to 4L
+assert longs.indexOf(4L) == 1;
+```
+
+## Common mistakes
+
+1. **Sorting first and reporting the sorted index.** Searching for `9` in `[9, 4, 4, 2]`
+   gives index 0, but in the sorted copy `[2, 4, 4, 9]` it gives 3. The invariant broken is
+   that the answer is a position in the array the caller holds.
+2. **Not stopping at the first match.** A loop that keeps scanning and overwrites its answer
+   returns index 2 for target `4` in `[9, 4, 4, 2]`. It breaks the first-match invariant: no
+   position before the reported one equals the target.
+3. **Stopping one cell early.** A bound of `index < values.length - 1` returns `-1` for target `2`
+   in `[9, 4, 4, 2]`, although `2` is at index 3. It breaks the invariant that every position in
+   `[0, n)` is inspected before absence is claimed.
 
 ## Practice
 
 1. Count comparisons for a first-position hit and a miss.
 2. Find the last occurrence without sorting; state the changed invariant.
 3. Compare KMP with a simple substring oracle on overlapping and empty patterns.
+
+## Check yourself
+
+<details>
+<summary>How many comparisons does <code>linearSearch</code> make for target 4 and for target 7 in <code>[9, 4, 4, 2]</code>?</summary>
+
+Two for the `4` (index 0, then the match at index 1) and four for the `7`, which is every cell.
+
+</details>
+
+<details>
+<summary>When can a scan stop early on a miss?</summary>
+
+Only with extra knowledge. In an ascending array it can stop at the first value above the
+target, which is the idea binary search builds on; in an unsorted array a larger value says
+nothing about the cells that follow, so a miss needs all `n` comparisons.
+
+</details>
+
+<details>
+<summary>Why does <code>List.of(4L).indexOf(4)</code> return <code>-1</code>?</summary>
+
+`indexOf` compares with `equals`, and the `int` argument boxes to an `Integer`, which is not
+equal to a `Long` even when the numbers match.
+
+</details>
 
 Use the [exercise solutions and verification guide](../../docs/solutions.md) after
 writing your own trace. Continue with [binary-search boundaries](binary-search.md). The [solution finder](../../docs/solution-finder.md#9-searching) compares this technique with its alternatives.

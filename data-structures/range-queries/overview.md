@@ -11,6 +11,14 @@ to the caller's array do not leak in. This lesson adds two maintained structures
 - [LazySegmentTree](../../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java)
   adds a value to a whole range and returns exact range sums, both in O(log n).
 
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | Many range queries (sum or minimum) hit the same array, so some build work is worth paying for. |
+| **Avoid&nbsp;it&nbsp;when** | There are only a few queries; a plain loop over the range is simpler and fast enough. |
+| **Cost** | Sparse table: build O(n log n), query O(1). Lazy segment tree: build O(n), range add and range sum O(log n). |
+| **In&nbsp;this&nbsp;repo** | [`SparseTable`](../../src/main/java/io/github/ichillous/dsa/structures/SparseTable.java), [`LazySegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java), [`FenwickTree`](../../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java), [`SegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.Arrays#parallelPrefix` for static prefix sums; no range-minimum or lazy structure |
+
 ## Static or dynamic data
 
 Static data is built once and then only read: yesterday's closing prices, or a table
@@ -26,6 +34,20 @@ all, and queries usually pay O(log n) as well.
 | Point replacements, range minimum | [SegmentTree](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) | O(n) | O(log n) | O(log n) | O(n) |
 | Range additions, range sums | [LazySegmentTree](../../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java) | O(n) | O(log n) | O(log n) | O(n) |
 | Static, many range minima | [SparseTable](../../src/main/java/io/github/ichillous/dsa/structures/SparseTable.java) | O(n log n) | Rebuild, O(n log n) | O(1) | O(n log n) |
+
+The two classes that handle point changes have their own lessons. A Fenwick tree stores each prefix sum as a few low-bit blocks, and a segment tree stores the minimum of every interval its nodes cover:
+
+<!-- visual:generated fenwick-blocks -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/fenwick-blocks-dark.svg"><img src="../../docs/visuals/assets/fenwick-blocks.svg" alt="For values 2,-1,4,3, one-based Fenwick slots cover [0,1), [0,2), [2,3) and [0,4). The prefix ending at zero-based boundary 3 combines slots 3 and 2: 4+1=5." width="520"></picture>
+
+**Figure 11.** For values 2,-1,4,3, one-based Fenwick slots cover [0,1), [0,2), [2,3) and [0,4). The prefix ending at zero-based boundary 3 combines slots 3 and 2: 4+1=5. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
+<!-- visual:generated segment-minimum -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/segment-minimum-dark.svg"><img src="../../docs/visuals/assets/segment-minimum.svg" alt="An interval tree over 8,3,7,5 answers the minimum on [1,4) by combining leaf [1,2) with node [2,4). Replacing index 1 with 9 repairs its ancestors and changes the query answer from 3 to 5. Leaves use power-of-two padding with MAX_VALUE when needed." width="520"></picture>
+
+**Figure 12.** An interval tree over 8,3,7,5 answers the minimum on [1,4) by combining leaf [1,2) with node [2,4). Replacing index 1 with 9 repairs its ancestors and changes the query answer from 3 to 5. Leaves use power-of-two padding with MAX_VALUE when needed. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 ## Sparse table: overlapping blocks need an idempotent operation
 
@@ -67,6 +89,12 @@ values[2] = -100;
 assert table.rangeMin(0, 7).getAsLong() == 1;
 assert new SparseTable(new long[] {Long.MAX_VALUE}).rangeMin(0, 1).getAsLong() == Long.MAX_VALUE;
 ```
+
+<!-- visual:generated sparse-table-overlap -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/sparse-table-overlap-dark.svg"><img src="../../docs/visuals/assets/sparse-table-overlap.svg" alt="For the values 5, 2, 6, 4, 7, 3, 8, 1, rangeMin(1, 7) takes the minimum of the blocks [1, 5) and [3, 7), which overlap on indices 3 and 4, and gets 2. A sum of the same blocks would give 41 instead of 30." width="520"></picture>
+
+**Figure 44.** For the values 5, 2, 6, 4, 7, 3, 8, 1, rangeMin(1, 7) takes the minimum of the blocks [1, 5) and [3, 7), which overlap on indices 3 and 4, and gets 2. A sum of the same blocks would give 41 instead of 30. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 An empty range returns `OptionalLong.empty()`, so `Long.MAX_VALUE` stays a real, usable
 minimum. The table has no update method: change the data and you build a new table.
@@ -167,6 +195,12 @@ before it changes anything. If any element would leave `long` range, it throws
 `rangeSum` is exact. It throws `ArithmeticException` only when the true sum is outside
 `long` range, even if every element and every smaller range still fits.
 
+<!-- visual:generated lazy-propagation -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/lazy-propagation-dark.svg"><img src="../../docs/visuals/assets/lazy-propagation.svg" alt="In a LazySegmentTree over 1, 2, 3, 4, rangeAdd(2, 4, 5) stops at the node covering [2, 4), raising its sum to 17 and leaving a pending +5 for its leaves. rangeSum(3, 4) then reads the leaf&#x27;s stored 4, adds the pending 5 and returns 9." width="520"></picture>
+
+**Figure 45.** In a LazySegmentTree over 1, 2, 3, 4, rangeAdd(2, 4, 5) stops at the node covering [2, 4), raising its sum to 17 and leaving a pending +5 for its leaves. rangeSum(3, 4) then reads the leaf's stored 4, adds the pending 5 and returns 9. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Costs and contracts
 
 | Operation | Time | Auxiliary space | Edge cases and overflow |
@@ -195,6 +229,54 @@ first, then mutate.
 **Pushing during a query.** Pushing pending additions inside `rangeSum` gives correct
 answers, but it turns every read into a write. Carry the pending sum down the path
 instead.
+
+## In real Java
+
+The JDK has no range-minimum or lazy structure. For a static array and many range sums, accumulate once and subtract: `Arrays.parallelPrefix` cumulates an array in place (it overwrites its input, so clone first). With half-open ranges, the sum of `[from, to)` is `prefix[to - 1] - prefix[from - 1]`, treating the term before index 0 as zero. Subtraction works for sums but not for minimum, which is why `SparseTable` exists.
+
+```java
+import io.github.ichillous.dsa.structures.LazySegmentTree;
+import java.util.Arrays;
+
+long[] values = {4, 6, 1, 5, 7, 3, 8};
+long[] prefix = values.clone();
+Arrays.parallelPrefix(prefix, Long::sum);
+assert values[1] == 6 && prefix[1] == 10;
+int from = 2;
+int to = 5;
+long sum = prefix[to - 1] - (from == 0 ? 0 : prefix[from - 1]);
+assert sum == 13;
+assert sum == new LazySegmentTree(values).rangeSum(from, to);
+```
+
+## Common mistakes
+
+1. **Using the sparse-table trick for sums.** On `[4, 6, 1, 5, 7, 3, 8]`, summing the two blocks `[1, 5)` and `[3, 7)` for `rangeSum(1, 7)` gives `19 + 23 = 42`, but the true sum is `30`. The overlap `5 + 7` is counted twice, so the shortcut needs an idempotent operation.
+2. **Treating `to` as inclusive.** With half-open ranges, `rangeMin(2, 5)` covers indices 2, 3 and 4. Passing `5` to mean "through index 5" asks for a different range, and `rangeMin(0, size)` is the whole array while `rangeMin(0, size + 1)` throws `IndexOutOfBoundsException`.
+3. **Expecting a static table to see later edits.** After `new SparseTable(values)`, setting `values[2] = -100` changes nothing: the table holds a copy, so the stored minima still describe the old data. Build a new table, or use a tree that supports point updates.
+
+## Check yourself
+
+<details>
+<summary>Why can a sparse table answer <code>rangeMin</code> with two overlapping blocks but not <code>rangeSum</code>?</summary>
+
+Minimum is idempotent, so `min(x, x) == x` and a value covered twice cannot change the answer. A sum counts each covered value once per block, so the overlap would be added twice.
+
+</details>
+
+<details>
+<summary>After <code>rangeAdd(2, 4, +5)</code> on a lazy tree over <code>1, 2, 3, 4</code>, why do the leaves still store 3 and 4?</summary>
+
+The update stops at the node covering `[2, 4)`, which records a pending +5 for its children instead of visiting them. A later query adds the pending value back on the way down, so `rangeSum(3, 4)` returns 4 + 5 = 9.
+
+</details>
+
+<details>
+<summary>Why does <code>rangeSum</code> not push pending additions down?</summary>
+
+Carrying the pending sum down the search path gives the same answer without writing to any node, so a read never modifies the tree.
+
+</details>
 
 ## Practice
 

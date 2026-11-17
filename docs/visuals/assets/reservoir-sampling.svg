@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 834" width="520" height="834" role="img" aria-labelledby="title desc">
+<title id="title">57  Reservoir sampling</title>
+<desc id="desc">Sampling.reservoirSample over the items A to H with k = 3 and seed 17 fills the reservoir with A, B, C, then draws j for each later arrival with replacement chance 3/4 down to 3/8; D, F and H replace slots 0, 0 and 1, giving F, H, C.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="reservoir-sampling-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="reservoir-sampling-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="reservoir-sampling-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="reservoir-sampling-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="reservoir-sampling-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="reservoir-sampling-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="reservoir-sampling-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="reservoir-sampling-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="reservoir-sampling-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="reservoir-sampling-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="reservoir-sampling-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="reservoir-sampling-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="reservoir-sampling-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="reservoir-sampling-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="reservoir-sampling-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="834" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">57  Reservoir sampling</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Math and bits · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">The first 3 items fill the reservoir</text>
+<rect x="61" y="178" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="91.0" y="209.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">A</text>
+<text x="91.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 0</text>
+<rect x="131" y="178" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="161.0" y="209.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">B</text>
+<text x="161.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 1</text>
+<rect x="201" y="178" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="231.0" y="209.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">C</text>
+<text x="231.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 2</text>
+<circle cx="42" cy="281" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="287" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="288" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Arrival i draws j below i</text>
+<text x="157.0" y="334" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">k/i</text>
+<text x="227.0" y="334" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">j</text>
+<text x="297.0" y="334" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 0</text>
+<text x="367.0" y="334" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 1</text>
+<text x="437.0" y="334" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">slot 2</text>
+<text x="110" y="370.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">D #4</text>
+<rect x="122" y="346" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="157.0" y="371.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3/4</text>
+<rect x="192" y="346" width="70" height="36" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="227.0" y="371.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">0</text>
+<rect x="262" y="346" width="70" height="36" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="297.0" y="371.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">D</text>
+<rect x="332" y="346" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="367.0" y="371.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">B</text>
+<rect x="402" y="346" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="437.0" y="371.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">C</text>
+<text x="110" y="406.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">E #5</text>
+<rect x="122" y="382" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="157.0" y="407.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3/5</text>
+<rect x="192" y="382" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="227.0" y="407.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="262" y="382" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="297.0" y="407.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">D</text>
+<rect x="332" y="382" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="367.0" y="407.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">B</text>
+<rect x="402" y="382" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="437.0" y="407.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">C</text>
+<text x="110" y="442.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">F #6</text>
+<rect x="122" y="418" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="157.0" y="443.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3/6</text>
+<rect x="192" y="418" width="70" height="36" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="227.0" y="443.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">0</text>
+<rect x="262" y="418" width="70" height="36" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="297.0" y="443.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">F</text>
+<rect x="332" y="418" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="367.0" y="443.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">B</text>
+<rect x="402" y="418" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="437.0" y="443.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">C</text>
+<text x="110" y="478.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">G #7</text>
+<rect x="122" y="454" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="157.0" y="479.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3/7</text>
+<rect x="192" y="454" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="227.0" y="479.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="262" y="454" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="297.0" y="479.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">F</text>
+<rect x="332" y="454" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="367.0" y="479.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">B</text>
+<rect x="402" y="454" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="437.0" y="479.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">C</text>
+<text x="110" y="514.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">H #8</text>
+<rect x="122" y="490" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="157.0" y="515.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3/8</text>
+<rect x="192" y="490" width="70" height="36" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="227.0" y="515.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<rect x="262" y="490" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="297.0" y="515.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">F</text>
+<rect x="332" y="490" width="70" height="36" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="367.0" y="515.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">H</text>
+<rect x="402" y="490" width="70" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="437.0" y="515.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">C</text>
+<circle cx="42" cy="555" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="561" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="562" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Result for seed 17</text>
+<rect x="66" y="588" width="100" height="30" rx="15" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="116.0" y="609" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">[F, H, C]</text>
+<rect x="28" y="634" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="650" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">j &lt; 3: written here</text>
+<rect x="242.976" y="634" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="276.976" y="650" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">j ≥ 3: item dropped</text>
+<rect x="28" y="674" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="705" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="734" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Arrival i is kept with chance k/i, so</text>
+<text x="44" y="761" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">every item seen so far ends up in the</text>
+<text x="44" y="788" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">sample with equal chance.</text>
+</svg>

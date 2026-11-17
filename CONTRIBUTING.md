@@ -64,12 +64,27 @@ its packaged showcase and terminal lessons must run on supported platforms.
 
 ## Diagrams and traces
 
-Edit visual definitions under `scripts/visuals/`, then regenerate with
+Each figure family has a module `scripts/visuals/<stem>_figures.py`, a fixture file
+`docs/visuals/data/examples-<stem>.properties` whose keys start with `<stem>.`, and a
+Java test `VisualExamples<Stem>Test` that reads it with `VisualFixtures` and checks
+every displayed value against the library. Place a figure in any lesson with a named
+region, `<!-- visual:generated FIGURE_ID -->` closed by `<!-- /visual:generated -->`,
+optionally with a caption after a pipe, then regenerate with
 `python3 scripts/generate_visuals.py`. Do not hand-edit generated SVGs, data or
-marked lesson regions. Keep the canonical properties and Java visual-contract
-tests aligned; intermediate states must preserve the algorithm's invariants.
-Run the generator with `--check`, then
-`python3 -m unittest discover -s scripts/visuals -p 'test_*.py'`.
-Review actual light/dark figures and desktop/phone states after layout changes.
+region bodies, and never write a figure number in lesson prose. Intermediate states
+must preserve the algorithm's invariants. Run the generator with `--check`, then
+`python3 -m unittest discover -s scripts/visuals -p 'test_*.py'`, which includes the
+layout guard. Review actual light/dark figures with
+`node scripts/visuals/browser_review.js --figures ID --sheets DIR`, and desktop/phone
+viewer states with `--all`, after layout changes.
 Keep labels, arrows, alt text, captions and units meaningful. See the
 [visual design guide](docs/visuals/design.md) and [verification](docs/visuals/verification.md).
+
+A new lesson under `algorithms/` or `data-structures/` goes in a topic subfolder, opens with
+an At a glance table (labels written with `&nbsp;`, as in the existing lessons), places at
+least one figure, and normally ends with In real Java, Common mistakes, Practice and Check
+yourself. Link it from the topic map in `README.md` and from its stage in
+`docs/learning-roadmap.md`; the visual test suite fails for a lesson no reader can reach.
+The generated gallery on the folder's landing page (`<!-- visual:gallery FOLDER -->`) then
+lists it after you regenerate; the "Lesson contract" in the design guide says which parts
+are enforced by tests.

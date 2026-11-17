@@ -8,11 +8,19 @@ immutable lists. `kmpFindAll`, `zFindAll` and `rabinKarpFindAll` return identica
 results: every start index, overlaps included. An empty pattern matches at every
 boundary `0..text.length()`.
 
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | One pattern is searched in one text and you need every match or a linear-time guarantee (KMP, Z-function), a cheap rolling-hash filter before an exact check (Rabin–Karp), or the longest palindromic substring (Manacher). |
+| **Avoid&nbsp;it&nbsp;when** | You need one first match in ordinary text (use `String.indexOf`), many patterns at once (use Aho–Corasick), or many queries on one fixed text (use a suffix array). |
+| **Cost** | `zFunction` and `longestPalindromicSubstring` are O(n); `zFindAll` is O(t + p + k); `rabinKarpFindAll` is O(t + p + k·p) when spurious hits are rare and O(t·p) in the worst case. |
+| **In&nbsp;this&nbsp;repo** | [`StringAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/StringAlgorithms.java): `kmpFindAll`, `zFunction`, `zFindAll`, `rabinKarpFindAll`, `longestPalindromicSubstring` |
+| **In&nbsp;the&nbsp;JDK** | `String.indexOf` and `java.util.regex.Pattern` for searching; no direct equivalent for the Z-function or Manacher's algorithm |
+
 ## Which matcher
 
 | Need | Choice | Why |
 | --- | --- | --- |
-| One first match in ordinary text | `String.indexOf` | Highly tuned by the JDK; no code to own |
+| One first match in ordinary text | `String.indexOf` | Already in the JDK; no code to own |
 | Guaranteed linear time, small extra space | KMP (`kmpIndexOf`, `kmpFindAll`) | O(t + p), table of size p |
 | Prefix-overlap questions, or a matcher built from one array | Z-function (`zFunction`, `zFindAll`) | The z-array also answers borders and periods |
 | Many equal-length windows, or a cheap filter before an exact check | Rabin–Karp (`rabinKarpFindAll`) | Rolling hash; every hit is verified |
@@ -20,13 +28,29 @@ boundary `0..text.length()`.
 | Many queries against one fixed text | Suffix array | Pay once to index the text, then each query is a binary search |
 | Sublinear skipping on large alphabets | Boyer–Moore–Horspool | Not implemented here |
 
+KMP never rescans the text. When a match ends, or a comparison fails, it keeps
+the longest proper prefix of the pattern that is also a suffix of what matched,
+so an overlapping match such as `aaa` inside `aaaaa` is found without restarting.
+
+<!-- visual:generated kmp-overlap -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/kmp-overlap-dark.svg"><img src="../../docs/visuals/assets/kmp-overlap.svg" alt="Prefix fallback retains the overlap between two pattern matches." width="520"></picture>
+
+**Figure 18.** Prefix fallback retains the overlap between two pattern matches. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## The invariants
 
 **Z-array.** `z[i]` is the length of the longest common prefix of the text and
 its suffix starting at `i`; by convention `z[0] = text.length()`. The algorithm
 keeps `[left, right)`, the rightmost prefix match seen so far. Inside it, `z[i]`
 starts from `min(right - i, z[i - left])` because the window copies the prefix,
-and only positions past `right` are compared again, so total work is O(n).
+and only a unit past `right` can extend that value, so total work is O(n).
+
+<!-- visual:generated z-box -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/z-box-dark.svg"><img src="../../docs/visuals/assets/z-box.svg" alt="The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box." width="520"></picture>
+
+**Figure 93.** The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 `zFindAll` computes the z-array of `pattern + text`. A position `p + i` with
 `z >= p` means the first `p` units of the combined string, which are the pattern,
@@ -39,10 +63,22 @@ the incoming one updates it in O(1). A window is reported only when its hash equ
 the pattern hash *and* `startsWith` confirms the units. Operands stay below 2^31
 and units below 2^16, so every product fits in a `long`.
 
+<!-- visual:generated rabin-karp-rolling -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/rabin-karp-rolling-dark.svg"><img src="../../docs/visuals/assets/rabin-karp-rolling.svg" alt="Searching aeaecbagab for bagab slides a five-unit window; windows 0 and 5 have the pattern&#x27;s hash, window 0 (aeaec) is rejected at unit 0 and window 5 is reported." width="520"></picture>
+
+**Figure 94.** Searching aeaecbagab for bagab slides a five-unit window; windows 0 and 5 have the pattern's hash, window 0 (aeaec) is rejected at unit 0 and window 5 is reported. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 **Manacher.** For every center, the algorithm reuses the mirror image inside the
 rightmost palindrome `[left, right]` found so far and expands only past `right`.
 Odd and even centers are handled by two arrays. Among palindromes of equal length
 the earliest start wins.
+
+<!-- visual:generated manacher-mirror -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/manacher-mirror-dark.svg"><img src="../../docs/visuals/assets/manacher-mirror.svg" alt="In cabacabad the palindrome abacaba around index 4 spans [1, 7]; index 5 copies radius 1 from index 3 and index 6 caps radius 3 from index 2 at the 2 units left, giving odd radii 1, 1, 3, 1, 4, 1, 2, 1, 1." width="520"></picture>
+
+**Figure 95.** In cabacabad the palindrome abacaba around index 4 spans [1, 7]; index 5 copies radius 1 from index 3 and index 6 caps radius 3 from index 2 at the 2 units left, giving odd radii 1, 1, 3, 1, 4, 1, 2, 1, 1. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 ## Worked trace
 
@@ -87,6 +123,41 @@ assert StringAlgorithms.longestPalindromicSubstring("")
         .equals(new StringAlgorithms.Span(0, 0));
 ```
 
+## In real Java
+
+For one match in ordinary code, call `String.indexOf`: it returns the smallest
+index at which the pattern starts, or `-1`, and `indexOf(str, fromIndex)` resumes
+from a position, so advancing `fromIndex` by one after each hit lists overlapping
+matches. `java.util.regex.Matcher.find` behaves differently: each call resumes at
+the first character not matched by the previous match, so overlapping matches are
+skipped. `Pattern.quote` turns literal text into a pattern, so `.` is not a wildcard.
+
+```java
+import io.github.ichillous.dsa.algorithms.StringAlgorithms;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+String text = "aaaaa";
+List<Integer> viaIndexOf = new ArrayList<>();
+for (int at = text.indexOf("aaa"); at >= 0; at = text.indexOf("aaa", at + 1)) {
+    viaIndexOf.add(at);
+}
+assert viaIndexOf.equals(List.of(0, 1, 2));
+assert viaIndexOf.equals(StringAlgorithms.kmpFindAll(text, "aaa"));
+
+Matcher matcher = Pattern.compile(Pattern.quote("aaa")).matcher(text);
+List<Integer> viaRegex = new ArrayList<>();
+while (matcher.find()) {
+    viaRegex.add(matcher.start());
+}
+assert viaRegex.equals(List.of(0));
+
+assert !Pattern.compile(Pattern.quote("a.c")).matcher("abc").find();
+assert Pattern.compile("a.c").matcher("abc").find();
+```
+
 ## Costs
 
 | Method | Time | Extra space |
@@ -113,6 +184,52 @@ answer exact; the hash only decides where to spend an O(p) comparison.
 Positions are UTF-16 units. A supplementary character is two units, so a match
 index may fall between the halves of a pair, and a palindrome is judged unit by
 unit rather than by code point.
+
+## Common mistakes
+
+1. **Stopping at the hash.** `rabinKarpFindAll("aeaecbagab", "bagab")` is
+   `[5]`, but windows 0 (`aeaec`) and 5 both hash to 1826217140. A matcher that
+   reports on equal hashes also reports 0. The invariant broken: every reported
+   index `i` must satisfy `text.startsWith(pattern, i)`.
+2. **Testing `z == p` instead of `z >= p`.** For text `aaa` and pattern `aa`
+   the combined string `aaaaa` has z-values 3, 2, 1 at positions 2, 3, 4, so
+   the match at text index 0 has `z = 3`, longer than the pattern. An equality
+   test misses it. The invariant: the pattern occurs at `i` exactly when the
+   combined string's z-value at `p + i` is at least `p`.
+3. **Copying a mirror radius without the cap.** In `cabacabad`, center 6 mirrors
+   center 2, whose radius is 3, but only 2 units remain up to the palindrome's
+   right edge 7. Copying 3 claims that `cabad` (indices 4 to 8) is a palindrome,
+   which is false. The invariant: a
+   copied radius may not exceed `right - i + 1`; beyond the edge nothing is known.
+
+## Check yourself
+
+<details>
+<summary>Why does <code>zFindAll</code> need no separator between the pattern and the text?</summary>
+
+A match is read only as "z at `p + i` is at least `p`", never as an exact length,
+so a z-value that runs past the pattern into the text cannot cause a false match.
+The pattern's own prefix is what the z-value compares against.
+
+</details>
+
+<details>
+<summary>Text <code>aeaecbagab</code>, pattern <code>bagab</code>: two windows share the pattern's hash. What does <code>rabinKarpFindAll</code> return?</summary>
+
+`[5]`. Both window 0 and window 5 trigger a comparison, but window 0 differs from
+the pattern at its first unit (`a` against `b`) and is rejected; only window 5
+equals the pattern.
+
+</details>
+
+<details>
+<summary>In <code>cabacabad</code>, why is the radius at center 6 equal to 2 although its mirror's radius is 3?</summary>
+
+The current palindrome ends at index 7, so only 2 units to the right of center 6
+are known to mirror. The algorithm starts at 2, then compares `c` (index 4) with
+`d` (index 8), which differ, so the radius stays 2.
+
+</details>
 
 ## Practice
 

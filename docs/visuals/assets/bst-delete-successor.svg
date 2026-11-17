@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 850" width="520" height="850" role="img" aria-labelledby="title desc">
+<title id="title">81  Delete with two children</title>
+<desc id="desc">Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="bst-delete-successor-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="bst-delete-successor-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="bst-delete-successor-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="bst-delete-successor-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="bst-delete-successor-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="bst-delete-successor-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="bst-delete-successor-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="bst-delete-successor-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="bst-delete-successor-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="bst-delete-successor-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="bst-delete-successor-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="bst-delete-successor-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="bst-delete-successor-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="bst-delete-successor-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="bst-delete-successor-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="850" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">81  Delete with two children</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Trees and ranges · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">delete(2): the node has two children</text>
+<line x1="113.32" y1="222.08" x2="88.68" y2="245.92" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="237.32" y1="282.08" x2="212.68" y2="305.92" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="155.4" y1="215.32" x2="232.6" y2="252.68" stroke="#8994a5" stroke-width="2.5"/>
+<circle cx="70" cy="264" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="70" y="271" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<circle cx="132" cy="204" r="22" fill="#fde9e7" stroke="#bd3026" stroke-width="3"/>
+<text x="132" y="211" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">2</text>
+<circle cx="194" cy="324" r="22" fill="#edf2fc" stroke="#2451b7" stroke-width="3"/>
+<text x="194" y="331" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">3</text>
+<circle cx="256" cy="264" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="256" y="271" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">4</text>
+<text x="168" y="211" font-size="18" fill="#bd3026" text-anchor="start" font-weight="700">delete</text>
+<text x="228" y="331" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">successor</text>
+<text x="300" y="218" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">From 2, go right once,</text>
+<text x="300" y="244" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">then left until there is</text>
+<text x="300" y="270" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">no left child: 3.</text>
+<circle cx="42" cy="369" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="375" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="376" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Copy 3 up, unlink its old node</text>
+<line x1="113.32" y1="442.08" x2="88.68" y2="465.92" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="150.68" y1="442.08" x2="175.32" y2="465.92" stroke="#8994a5" stroke-width="2.5"/>
+<circle cx="70" cy="484" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="70" y="491" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<circle cx="132" cy="424" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="132" y="431" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<circle cx="194" cy="484" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="194" y="491" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">4</text>
+<text x="168" y="431" font-size="18" fill="#1c6b3c" text-anchor="start" font-weight="700">was 2</text>
+<line x1="175.32" y1="502.08" x2="150.68" y2="525.92" stroke="#8994a5" stroke-width="2.5" stroke-dasharray="7 5"/>
+<circle cx="132" cy="544" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="3" stroke-dasharray="6 5"/>
+<text x="132" y="551" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="700"></text>
+<text x="164" y="551" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">old 3, now empty</text>
+<circle cx="42" cy="589" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="595" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="596" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Order and height after</text>
+<text x="66" y="630" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">in-order  1, 2, 3, 4  →  1, 3, 4</text>
+<text x="66" y="660" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">height  2  →  1</text>
+<rect x="28" y="678" width="26" height="20" rx="4" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="62" y="694" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">deleted key</text>
+<rect x="186.816" y="678" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="220.816" y="694" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">successor</text>
+<rect x="334.4" y="678" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="368.4" y="694" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">key copied up</text>
+<rect x="28" y="718" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="749" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="778" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">The successor&#x27;s key replaces the</text>
+<text x="44" y="805" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">deleted one; its old node is unlinked.</text>
+</svg>

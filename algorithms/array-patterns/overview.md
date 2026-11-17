@@ -8,6 +8,14 @@ modifies its input and returns fresh or immutable results. Ranges are half-open
 [GreedyAlgorithms.Interval](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java),
 so they are non-empty and touching endpoints are allowed.
 
+| At&nbsp;a&nbsp;glance | |
+| --- | --- |
+| **Use&nbsp;it&nbsp;when** | One left-to-right scan can replace nested loops: pair sums in sorted data, longest windows, next-greater queries, many range updates, overlapping intervals. |
+| **Avoid&nbsp;it&nbsp;when** | The precondition fails (unsorted input for two pointers) or updates and queries interleave, which needs a tree structure rather than one batch pass. |
+| **Cost** | O(n) for the scans and O(n + u) for `u` range updates; O(n log n) where intervals must be sorted first |
+| **In&nbsp;this&nbsp;repo** | [`ArrayPatterns`](../../src/main/java/io/github/ichillous/dsa/algorithms/ArrayPatterns.java) |
+| **In&nbsp;the&nbsp;JDK** | `ArrayDeque` as a stack, `Arrays.parallelPrefix` for prefix sums, `Arrays.sort` for interval order; no direct equivalent of the two-pointer or window scans |
+
 | Pattern | Method | Precondition |
 | --- | --- | --- |
 | Two pointers | `pairWithSum(sorted, target)` | Ascending order, not checked (a scan would cost as much as the search) |
@@ -25,6 +33,12 @@ If `a[left] + a[right]` is too small, `left` cannot pair with any remaining inde
 `right` is excluded symmetrically. The first match therefore uses the smallest
 first index that has any partner, and its largest partner. Sums use `long`, so
 `Integer.MAX_VALUE + Integer.MAX_VALUE` does not wrap.
+
+<!-- visual:generated two-pointers-pair-sum -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/two-pointers-pair-sum-dark.svg"><img src="../../docs/visuals/assets/two-pointers-pair-sum.svg" alt="pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3." width="520"></picture>
+
+**Figure 74.** pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 Target `6` in `[1, 2, 3, 4, 6]`:
 
@@ -44,6 +58,12 @@ the best range only when strictly longer, so ties keep the earliest start. The
 result is a half-open `StringAlgorithms.Span`, the same type that
 `longestPalindromicSubstring` returns.
 
+<!-- visual:generated sliding-window-distinct -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/sliding-window-distinct-dark.svg"><img src="../../docs/visuals/assets/sliding-window-distinct.svg" alt="longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5." width="520"></picture>
+
+**Figure 75.** longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 `"abba"`:
 
 ```text
@@ -61,6 +81,12 @@ non-increasing. A new value pops every smaller value and becomes their answer.
 Each index is pushed and popped once, so the loop is O(n) despite the inner
 `while`. The histogram version keeps strictly increasing heights; a popped bar's
 rectangle spans from the element below it in the stack to the current index.
+
+<!-- visual:generated monotonic-stack-next-greater -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/monotonic-stack-next-greater-dark.svg"><img src="../../docs/visuals/assets/monotonic-stack-next-greater.svg" alt="nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1." width="520"></picture>
+
+**Figure 76.** nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 `[2, 1, 2, 4, 3]` (the stack lists indices):
 
@@ -83,6 +109,12 @@ two additions of `Long.MAX_VALUE` offset by a base value of `-Long.MAX_VALUE`. T
 implementation keeps 128-bit sums and throws `ArithmeticException` only when a
 final value does not fit.
 
+<!-- visual:generated difference-array-ranges -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/difference-array-ranges-dark.svg"><img src="../../docs/visuals/assets/difference-array-ranges.svg" alt="applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0." width="520"></picture>
+
+**Figure 77.** applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 Length 5 with `+3` on `[1, 4)` and `+2` on `[0, 2)`:
 
 ```text
@@ -97,6 +129,12 @@ the next start is at most its end, so `[10, 12)` joins `[8, 10)`.
 `minimumMeetingRooms` sorts starts and ends separately and sweeps them, freeing
 a room for every end at or before the next start. The answer is the maximum
 number of intervals covering one point.
+
+<!-- visual:generated interval-sweep-rooms -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/interval-sweep-rooms-dark.svg"><img src="../../docs/visuals/assets/interval-sweep-rooms.svg" alt="minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice." width="520"></picture>
+
+**Figure 78.** minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 `[0,30), [5,10), [15,20)`:
 
@@ -166,6 +204,85 @@ repeats an index before the window start, so `start` must not move backwards.
 Touching intervals are merged by `mergeIntervals` but do not conflict in
 `minimumMeetingRooms`; both follow from half-open ranges, where `[1, 2)` and
 `[2, 3)` share no point but leave no gap.
+
+## In real Java
+
+Use `ArrayDeque` (`push` and `pop` work at the head) when you need a stack, and
+`Arrays.parallelPrefix` when you only need a running sum. The JDK prefix helper
+combines with the function you give it, so with `Long::sum` it wraps silently on
+overflow. `applyRangeAdds` keeps 128-bit sums and reports a final value that does
+not fit.
+
+```java
+import io.github.ichillous.dsa.algorithms.ArrayPatterns;
+import io.github.ichillous.dsa.algorithms.ArrayPatterns.RangeAdd;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.List;
+
+long[] diff = {2, 3, -2, 0, -3, 0};
+Arrays.parallelPrefix(diff, Long::sum);
+assert Arrays.equals(Arrays.copyOf(diff, 5), new long[] {2, 5, 3, 3, 0});
+
+long[] wrapped = {Long.MAX_VALUE, 1};
+Arrays.parallelPrefix(wrapped, Long::sum);
+assert wrapped[1] == Long.MIN_VALUE;
+
+boolean rejected = false;
+try {
+    ArrayPatterns.applyRangeAdds(new long[2],
+            List.of(new RangeAdd(0, 2, Long.MAX_VALUE), new RangeAdd(1, 2, 1)));
+} catch (ArithmeticException expected) {
+    rejected = true;
+}
+assert rejected;
+
+Deque<Integer> stack = new ArrayDeque<>();
+stack.push(1);
+stack.push(2);
+assert stack.pop() == 2 && stack.peek() == 1;
+```
+
+## Common mistakes
+
+1. **Popping on `<=` in next-greater.** For `[2, 1, 2]` the equal `2` at index 2
+   would resolve index 0 and give `2` instead of `-1`. The invariant is that
+   resolution needs a strictly greater value.
+2. **Moving the window start backwards.** In `"abba"` the last `a` was seen at
+   index 0, before `start = 2`. Setting `start = 1` would admit the repeated `b`
+   and break the invariant that `[start, i]` holds distinct units.
+3. **Sizing the difference array as `n`.** For length 5 an update on `[2, 5)`
+   writes `diff[5]`, which needs `n + 1` slots. The end mark of an update that
+   reaches the last index must not be lost.
+
+## Check yourself
+
+<details>
+<summary>Why does <code>pairWithSum</code> on <code>[3, 1, 2]</code> with target 3 miss <code>1 + 2</code>?</summary>
+
+The input is not ascending, so the exclusion argument fails: `3 + 2` is too
+large, which only proves index 2 has no partner if every smaller value sits to
+its left. The method does not validate order, so the result is unspecified.
+
+</details>
+
+<details>
+<summary>Why does <code>minimumMeetingRooms</code> say <code>[1, 2)</code> and <code>[2, 3)</code> share one room?</summary>
+
+Intervals are half-open, so they share no point. The sweep processes an end at
+or before the next start first, freeing the room before the next meeting takes it.
+
+</details>
+
+<details>
+<summary>Each index is popped at most once, so why does the nested <code>while</code> in the monotonic stack not make it quadratic?</summary>
+
+Every index is pushed once and popped at most once, so the inner loop runs at
+most `n` times across the whole scan. The cost counts pops in total, not per
+outer iteration.
+
+</details>
 
 ## Practice
 

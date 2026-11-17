@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 870" width="520" height="870" role="img" aria-labelledby="title desc">
+<title id="title">40  Count-Min rows</title>
+<desc id="desc">A Count-Min sketch of 3 rows by 8 columns after adding apple 3, pear 1, fig 2, plum 4 and kiwi 1. pear reads counters 2, 3 and 1 in its three rows, and the minimum, 1, is the estimate.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="count-min-rows-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="count-min-rows-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="count-min-rows-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="count-min-rows-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="count-min-rows-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="count-min-rows-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="count-min-rows-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="count-min-rows-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="count-min-rows-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="count-min-rows-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="count-min-rows-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="count-min-rows-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="count-min-rows-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="count-min-rows-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="count-min-rows-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="870" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">40  Count-Min rows</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Hashing and sketches · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Add 5 keys to a 3 x 8 table</text>
+<text x="39" y="184" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">apple x3, pear x1, fig x2, plum x4, kiwi x1</text>
+<text x="120.0" y="218" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<text x="168.0" y="218" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<text x="216.0" y="218" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<text x="264.0" y="218" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<text x="312.0" y="218" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<text x="360.0" y="218" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">5</text>
+<text x="408.0" y="218" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">6</text>
+<text x="456.0" y="218" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">7</text>
+<text x="84" y="258.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">row 0</text>
+<rect x="96" y="230" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="120.0" y="259.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="144" y="230" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="168.0" y="259.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="192" y="230" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="216.0" y="259.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="240" y="230" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="264.0" y="259.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="288" y="230" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="312.0" y="259.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="336" y="230" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="360.0" y="259.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="384" y="230" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="408.0" y="259.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="432" y="230" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="456.0" y="259.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="84" y="302.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">row 1</text>
+<rect x="96" y="274" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="120.0" y="303.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="144" y="274" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="168.0" y="303.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="192" y="274" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="216.0" y="303.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="240" y="274" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="264.0" y="303.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="288" y="274" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="312.0" y="303.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="336" y="274" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="360.0" y="303.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="384" y="274" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="408.0" y="303.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="432" y="274" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="456.0" y="303.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="84" y="346.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">row 2</text>
+<rect x="96" y="318" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="120.0" y="347.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="144" y="318" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="168.0" y="347.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="192" y="318" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="216.0" y="347.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="240" y="318" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="264.0" y="347.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="288" y="318" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="312.0" y="347.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="336" y="318" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="360.0" y="347.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="384" y="318" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="408.0" y="347.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="432" y="318" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="456.0" y="347.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<circle cx="42" cy="395" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="401" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="402" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Read pear&#x27;s counter in each row</text>
+<text x="120.0" y="446" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<text x="168.0" y="446" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<text x="216.0" y="446" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<text x="264.0" y="446" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<text x="312.0" y="446" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<text x="360.0" y="446" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">5</text>
+<text x="408.0" y="446" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">6</text>
+<text x="456.0" y="446" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">7</text>
+<text x="84" y="486.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">row 0</text>
+<rect x="96" y="458" width="48" height="44" rx="3" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="120.0" y="487.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">2</text>
+<rect x="144" y="458" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="168.0" y="487.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="192" y="458" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="216.0" y="487.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="240" y="458" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="264.0" y="487.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="288" y="458" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="312.0" y="487.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="336" y="458" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="360.0" y="487.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="384" y="458" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="408.0" y="487.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="432" y="458" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="456.0" y="487.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="84" y="530.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">row 1</text>
+<rect x="96" y="502" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="120.0" y="531.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="144" y="502" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="168.0" y="531.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="192" y="502" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="216.0" y="531.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="240" y="502" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="264.0" y="531.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="288" y="502" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="312.0" y="531.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="336" y="502" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="360.0" y="531.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="384" y="502" width="48" height="44" rx="3" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="408.0" y="531.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">3</text>
+<rect x="432" y="502" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="456.0" y="531.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<text x="84" y="574.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">row 2</text>
+<rect x="96" y="546" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="120.0" y="575.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="144" y="546" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="168.0" y="575.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="192" y="546" width="48" height="44" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="216.0" y="575.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">1</text>
+<rect x="240" y="546" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="264.0" y="575.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="288" y="546" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="312.0" y="575.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="336" y="546" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="360.0" y="575.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="384" y="546" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="408.0" y="575.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="432" y="546" width="48" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="456.0" y="575.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<text x="39" y="616" font-size="18" fill="#86dca2" text-anchor="start" font-weight="700">pear reads counters 2, 3, 1; estimate = min = 1</text>
+<text x="39" y="644" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">True count of pear: 1. An estimate is never lower.</text>
+<rect x="28" y="664" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="680" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">smallest: the estimate</text>
+<rect x="28" y="696" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="62" y="712" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">inflated by other keys</text>
+<rect x="28" y="736" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="767" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="796" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Rows only overcount, so a key&#x27;s</text>
+<text x="44" y="823" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">smallest counter is its estimate.</text>
+</svg>

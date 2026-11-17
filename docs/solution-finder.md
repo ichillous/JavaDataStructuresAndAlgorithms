@@ -10,6 +10,13 @@ Search the page with Ctrl-F (Cmd-F on macOS) for a problem word such as "nearest
 repository classes are in the [catalog](catalog.md), and their bounds are in the
 [complexity guide](complexity.md).
 
+To browse by topic instead, every lesson is listed with a figure on the two landing
+pages, [data structures](../data-structures/README.md) and [algorithms](../algorithms/README.md).
+Three chooser pages compare the options inside one family:
+[choosing a sort](../algorithms/sorting/README.md),
+[choosing a graph algorithm](../algorithms/graph/README.md) and
+[recognizing the dynamic-programming family](../algorithms/dynamic-programming/README.md).
+
 ## How to choose
 
 Answer these questions before picking a row:
@@ -87,7 +94,7 @@ Answer these questions before picking a row:
 | --- | --- | --- | --- | --- |
 | General-purpose hash map | The default for key-to-value lookup in one thread | Expected O(1) `get`/`put`; the spec states no worst-case bound; O(n) entries, and iteration costs capacity plus size | JDK: `java.util.HashMap` | Constant time is expected, not worst case: the spec assumes "the hash function disperses the elements properly among the buckets". Keys must keep stable `equals` and `hashCode` while stored. Iteration order is unspecified and may change. Permits one null key and null values. OpenJDK implementation note: a bin with many colliding keys may be stored as a tree. |
 | Separate chaining | To see buckets, load factor and resizing at work, or to get this repository's non-null contract | Expected O(1) `get`/`remove`, expected amortized O(1) `put`; O(n) worst; O(n + capacity) | repo: [ChainedHashMap](../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java) ([lesson](../data-structures/hash-tables/collision-resolution.md)) | A `null` return means absent. Keys with equal hashes share one chain, so a poor `hashCode` makes lookups linear. |
-| Open-addressing map (linear probing, backward-shift deletion) | Many small entries, where one flat array beats a node per entry for memory and cache locality | Expected amortized O(1) `get`/`put`/`remove` with well-spread hashes (load stays at most 2/3); O(n) worst; O(capacity) | repo: [OpenAddressingHashMap](../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) ([lesson](../data-structures/hash-tables/open-addressing.md)) | Clusters grow quickly as the load approaches 1, so the repository map doubles its table before the load passes 2/3. Backward-shift deletion shifts later cluster members back instead of leaving tombstones, so lookups do not degrade after many removals. A constant or adversarial `hashCode` forms one cluster and makes each operation O(n). Null keys and values are rejected, so a `null` return means absent. OpenJDK implementation note, stated in the Javadoc: `java.util.IdentityHashMap` is a linear-probe table. |
+| Open-addressing map (linear probing, backward-shift deletion) | Many small entries, where one flat array beats a node per entry for memory and cache locality | Expected O(1) `get`/`remove`, expected amortized O(1) `put` (a put can resize the table), with well-spread hashes (load stays at most 2/3); O(n) worst; O(capacity) | repo: [OpenAddressingHashMap](../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) ([lesson](../data-structures/hash-tables/open-addressing.md)) | Clusters grow quickly as the load approaches 1, so the repository map doubles its table before the load passes 2/3. Backward-shift deletion shifts later cluster members back instead of leaving tombstones, so lookups do not degrade after many removals. A constant or adversarial `hashCode` forms one cluster and makes each operation O(n). Null keys and values are rejected, so a `null` return means absent. OpenJDK implementation note, stated in the Javadoc: `java.util.IdentityHashMap` is a linear-probe table. |
 | Cuckoo hashing | Lookups must be worst-case O(1): a key can only be in one of two slots | O(1) worst-case lookup; expected amortized O(1) insert; O(n) | not implemented here | An insert can loop and force a full rehash with new hash functions. Usable load is about 50% with two single-slot tables. |
 | Robin Hood hashing | Open addressing with lower variance in probe length | Expected O(1); O(n) worst | not implemented here | On insert, an entry far from its home slot displaces one that is closer to home. Deletion needs backward shifting. Still degrades with a poor hash. |
 | Perfect hashing (static key set) | The key set is fixed in advance, such as keywords or a frozen dictionary | O(1) worst-case lookup after an O(n) expected build; O(n) | not implemented here | Any change to the key set means a rebuild. A lookup of a key outside the set must still compare the stored key. |
@@ -328,6 +335,11 @@ try {
 assert rejected;                         // null elements are prohibited
 ```
 
+The [stack implementation lesson](../data-structures/stacks/implementation.md) traces
+bracket matching over several bracket types with `ArrayDeque`, and the
+[queue implementation lesson](../data-structures/queues/implementation.md) shows a ring
+deque adding and removing at both ends across the wrap.
+
 ### Always take the smallest (or largest) item next
 
 | Option | Use when | Time / space | Java home | Watch out for |
@@ -408,7 +420,7 @@ assert List.copyOf(cache.keySet()).equals(List.of("a", "c"));
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Binary search | A sorted array or random-access list | O(log n); O(1) | repo: [SearchAlgorithms.binarySearch](../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) ([lesson](../algorithms/searching/binary-search.md)); JDK: `java.util.Arrays#binarySearch`, `java.util.Collections#binarySearch` | When the key is absent, the JDK methods return `-(insertion point) - 1`. With duplicates, the JDK makes no guarantee which match it finds; the repository's `binarySearch` returns the first, or `-1`. Unsorted input gives undefined results. Spec: `Collections.binarySearch` on a large list that is not `RandomAccess` does O(n) link traversals. |
+| Binary search | A sorted array or random-access list | O(log n); O(1) | repo: [SearchAlgorithms.binarySearch](../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) ([lesson](../algorithms/searching/binary-search.md); for a monotone yes/no test instead of an array, see [binary search on the answer](../algorithms/searching/binary-search-on-answer.md)); JDK: `java.util.Arrays#binarySearch`, `java.util.Collections#binarySearch` | When the key is absent, the JDK methods return `-(insertion point) - 1`. With duplicates, the JDK makes no guarantee which match it finds; the repository's `binarySearch` returns the first, or `-1`. Unsorted input gives undefined results. Spec: `Collections.binarySearch` on a large list that is not `RandomAccess` does O(n) link traversals. |
 | Lower and upper bound | The first index whose value is at least x, or greater than x; the count of x is the difference | O(log n); O(1) | repo: [SearchAlgorithms.lowerBound](../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) and `upperBound` ([lesson](../algorithms/searching/binary-search.md)) | Ascending order is assumed, not checked. Results lie in `[0, n]`. |
 | Linear search | Unsorted or tiny data, or a single query | O(n); O(1) | repo: [SearchAlgorithms.linearSearch](../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) ([lesson](../algorithms/searching/linear-search.md)) | Sorting first pays off only for many queries. |
 | Exponential (galloping) search | Sorted data of unknown or unbounded length, or a target likely near the front | O(log i) for a target at position i; O(1) | not implemented here | Double the probe index until it passes the target, then binary search the last gap. Doubling an `int` index can overflow. |
@@ -431,7 +443,7 @@ assert Collections.binarySearch(sorted, 99) == -5;   // insertion point == size(
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Binary search on the answer | A yes/no test is monotone in the answer: the smallest capacity, the largest minimum gap, the earliest day | O(log R) tests over an answer range of size R | not implemented here | Prove the test is monotone first. Compute the midpoint as `lo + (hi - lo) / 2` (or with `>>>` on nonnegative values) so it cannot overflow. |
+| Binary search on the answer | A yes/no test is monotone in the answer: the smallest capacity, the earliest day, the integer square root | O(log R) tests over an answer range of size R (at most 64 for any `long` range); O(1) | repo: [SearchAlgorithms.firstTrue](../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) ([lesson](../algorithms/searching/binary-search-on-answer.md)) | Prove the test is monotone first: it must flip from false to true once over the range, so an "exactly k" test does not qualify, and the repository method does not check it. `firstTrue(low, highExclusive, test)` returns `highExclusive` when no value passes. In hand-written code, compute the midpoint as `lo + (hi - lo) / 2` (or with `>>>` on nonnegative values) so it cannot overflow; `firstTrue` uses an unsigned difference and is safe for any `long` bounds. For the largest value that passes a test that is true then false, search for the first value where it fails and subtract one. |
 
 ### Find the peak of a unimodal function
 
@@ -484,14 +496,17 @@ assert largest.equals(List.of(87, 87, 99));
 
 ## 11. Sorting
 
+[Choosing a sort](../algorithms/sorting/README.md) compares every repository sort with the
+JDK sorts by stability, extra space and worst case.
+
 ### Sort an array of primitives
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
 | JDK primitive sort | The default for `int[]`, `long[]` and `double[]` | OpenJDK implementation note, stated in the Javadoc: a Dual-Pivot Quicksort that "offers O(n log(n)) performance on all data sets" | JDK: `java.util.Arrays#sort(int[])` | Not stable: the spec promises stability only for object sorts. Equal primitives are indistinguishable, so this matters when you sort records by a primitive key; sort the records (or boxed indices) with a stable object sort instead. Sorts in place. The spec orders `double[]` by `Double.compareTo`: -0.0 before 0.0, and NaN last. |
-| Parallel sort | Very large arrays on a multi-core machine | O(n log n) work spread over threads | JDK: `java.util.Arrays#parallelSort` | Small arrays gain nothing. The object overloads are guaranteed stable. OpenJDK implementation note (stated in the Javadoc for the object overloads): work runs in the ForkJoin common pool. |
-| Insertion sort | Tiny or nearly sorted arrays | O(n²) worst; O(n) when already sorted; O(1) | repo: [SortAlgorithms.insertionSort](../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) ([lesson](../algorithms/sorting/bubble-sort.md)) | Stable. Quadratic on reversed input. |
-| Bubble sort | Teaching only | O(n²) worst; O(n) when already sorted, with an early exit; O(1) | repo: [SortAlgorithms.bubbleSort](../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) ([lesson](../algorithms/sorting/bubble-sort.md)) | Stable but slower than insertion sort in practice. |
+| Parallel sort | Very large arrays on a multi-core machine | The spec states no time bound. OpenJDK implementation note, stated in the Javadoc: the primitive overloads use the same Dual-Pivot Quicksort as `Arrays.sort(int[])` ("O(n log(n)) performance on all data sets"); the object overloads are a parallel sort-merge that sorts sub-arrays with `Arrays.sort` and merges them, with working space no greater than the size of the original array | JDK: `java.util.Arrays#parallelSort` | The primitive overloads promise no stability; the object overloads are guaranteed stable. OpenJDK implementation note (stated in the Javadoc for the object overloads): work runs in the ForkJoin common pool. |
+| Insertion sort | Tiny or nearly sorted arrays | O(n²) worst; O(n) when already sorted; O(1) | repo: [SortAlgorithms.insertionSort](../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) ([lesson](../algorithms/sorting/insertion-sort.md)) | Stable. Quadratic on reversed input. |
+| Bubble sort | Teaching only | O(n²) worst; O(n) when already sorted, with an early exit; O(1) | repo: [SortAlgorithms.bubbleSort](../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) ([lesson](../algorithms/sorting/bubble-sort.md)) | Stable; does more array writes than insertion sort (two per swap versus one per shift). |
 | Merge sort | Guaranteed O(n log n) with stability | O(n log n) worst; O(n) buffer | repo: [SortAlgorithms.mergeSort](../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) ([lesson](../algorithms/sorting/merge-sort.md)) | Needs the extra buffer. |
 | Three-way quicksort | In-place sorting with many duplicate values | O(n log n) typical; O(n²) worst; O(log n) stack | repo: [SortAlgorithms.quickSort](../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) ([lesson](../algorithms/sorting/quick-sort.md)) | Not stable. A deterministic pivot rule has quadratic inputs. |
 | Heap sort | A worst-case O(n log n) bound with O(1) extra space | O(n log n) worst; O(1) | repo: [SortAlgorithms.heapSort](../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) ([lesson](../algorithms/sorting/heap-sort.md)) | Not stable; poor cache locality. |
@@ -637,6 +652,10 @@ assert !"Aa".equals("BB");                   // equal hashes, different strings
 
 ## 14. Graph traversal and structure
 
+[Choosing a graph algorithm](../algorithms/graph/README.md) maps each graph question to its
+method, precondition, cost and lesson; sections 14 to 17 below add the JDK and
+not-implemented options.
+
 ### Visit everything reachable from a start vertex
 
 | Option | Use when | Time / space | Java home | Watch out for |
@@ -649,13 +668,13 @@ assert !"Aa".equals("BB");                   // equal hashes, different strings
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
 | Traversal components | A static undirected graph | O(V + E) | repo: [GraphAlgorithms.connectedComponents](../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) ([lesson](../algorithms/graph/bfs.md)) | Undirected graphs only; directed graphs need strongly connected components. |
-| Union-find (disjoint sets) | Edges arrive over time and you ask "are these connected?" | O(α(n)) amortized per operation | repo: [UnionFind](../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) ([lesson](../data-structures/graphs/overview.md)) | Edges cannot be removed. See [disjoint sets](#21-disjoint-sets-and-bitsets). |
+| Union-find (disjoint sets) | Edges arrive over time and you ask "are these connected?" | O(α(n)) amortized per operation | repo: [UnionFind](../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) ([lesson](../data-structures/union-find/overview.md)) | Edges cannot be removed. See [disjoint sets](#21-disjoint-sets-and-bitsets). |
 
 ### Order tasks that depend on each other
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Topological sort (Kahn) | Build or job ordering in a directed acyclic graph | O(V + E) | repo: [GraphAlgorithms.topologicalSort](../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) ([lesson](../algorithms/graph/dfs.md)) | It rejects a cycle but does not show it; see directed cycle with witness below. Many valid orders can exist. |
+| Topological sort (Kahn) | Build or job ordering in a directed acyclic graph | O(V + E) | repo: [GraphAlgorithms.topologicalSort](../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) ([lesson](../algorithms/graph/topological-sort.md)) | It rejects a cycle but does not show it; see directed cycle with witness below. Many valid orders can exist. |
 
 ### Find groups of mutually reachable vertices
 
@@ -682,7 +701,7 @@ assert !"Aa".equals("BB");                   // equal hashes, different strings
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
 | Directed cycle with witness | Report the actual dependency loop, not just "a cycle exists" | O(V + E) | repo: [GraphStructureAlgorithms.directedCycle](../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java) ([lesson](../algorithms/graph/graph-structure.md)) | Track three states (unvisited, on the DFS stack, finished); an edge to an on-stack vertex closes a cycle. The repository method is iterative, returns the first cycle found (a self-loop gives `[v]`), returns an empty `Optional` for an acyclic graph, and rejects undirected graphs. |
-| Union-find cycle check (undirected) | Detect a cycle as undirected edges are added | O(α(n)) amortized per edge | repo: [UnionFind.union](../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) ([lesson](../data-structures/graphs/overview.md)) | `union` returns false when both ends are already connected, so the new edge closes a cycle. |
+| Union-find cycle check (undirected) | Detect a cycle as undirected edges are added | O(α(n)) amortized per edge | repo: [UnionFind.union](../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) ([lesson](../data-structures/union-find/overview.md)) | `union` returns false when both ends are already connected, so the new edge closes a cycle. |
 
 ### Use every edge exactly once
 
@@ -700,7 +719,7 @@ assert !"Aa".equals("BB");                   // equal hashes, different strings
 | 0-1 BFS | Every weight is 0 or 1 | O(V + E) with a deque | repo: [ShortestPathAlgorithms.zeroOneBfs](../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java) ([lesson](../algorithms/graph/shortest-paths.md)) | Push a vertex reached by a 0-edge at the front and by a 1-edge at the back. The repository method throws `IllegalArgumentException` if any edge in the graph has another weight, even one the search would not reach. |
 | Dijkstra | Nonnegative weights | O(V + E log(E + 1)) with a lazy binary heap | repo: [GraphAlgorithms.dijkstra](../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) ([lesson](../algorithms/graph/bfs.md)) | A single negative edge breaks it; the repository version rejects all negative edges. |
 | Bellman–Ford | Negative weights, or detecting a negative cycle | O(V·E) | repo: [AdvancedGraphAlgorithms.bellmanFord](../src/main/java/io/github/ichillous/dsa/graphs/AdvancedGraphAlgorithms.java) ([lesson](../algorithms/graph/bfs.md)) | Slow on large graphs. It rejects a negative cycle reachable from the source. |
-| DAG shortest path in topological order | A directed acyclic graph, any weight signs | O(V + E) arithmetic operations; O(V + E) | repo: [ShortestPathAlgorithms.dagShortestPaths](../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java) ([lesson](../algorithms/graph/shortest-paths.md)) | Relax edges in topological order. Negating every weight gives the longest path, which is otherwise hard. The repository method requires a directed graph that is acyclic as a whole (including parts unreachable from the source), otherwise `IllegalArgumentException`; arithmetic is exact, and `ArithmeticException` means a reachable final distance is outside `long`. |
+| DAG shortest path in topological order | A directed acyclic graph, any weight signs | O(V + E) arithmetic operations; O(V + E) | repo: [ShortestPathAlgorithms.dagShortestPaths](../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java) ([lesson](../algorithms/graph/shortest-paths.md); the order itself: [topological sort](../algorithms/graph/topological-sort.md)) | Relax edges in topological order. Negating every weight gives the longest path, which is otherwise hard. The repository method requires a directed graph that is acyclic as a whole (including parts unreachable from the source), otherwise `IllegalArgumentException`; arithmetic is exact, and `ArithmeticException` means a reachable final distance is outside `long`. |
 | A* | One source and one target, with a consistent heuristic (h(u) ≤ w(u, v) + h(v) for every edge, and h(target) = 0), such as straight-line distance on a map | With a consistent heuristic, no worse than Dijkstra and usually far fewer vertices explored (repository: O(V + E log(E + 1)) plus the heuristic's cost); with an admissible but inconsistent heuristic, reopening vertices can take exponential time | repo: [ShortestPathAlgorithms.aStar](../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java) ([lesson](../algorithms/graph/shortest-paths.md)) | The repository's A* requires a consistent heuristic (h >= 0, h(target) = 0 and h(u) <= w(u, v) + h(v)) and throws `IllegalArgumentException` when it meets a violation on an edge it scans, so it never reopens vertices; violations on edges it never scans go unnoticed. Edge weights must be nonnegative, and an unreachable target gives an empty `Optional`. An overestimating heuristic can return a longer path. A heuristic of 0 is Dijkstra. |
 
 ### Between all pairs of vertices
@@ -717,7 +736,7 @@ assert !"Aa".equals("BB");                   // equal hashes, different strings
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Kruskal | Sparse graphs whose edges are easy to sort | O(V + E log(E + 1)) | repo: [GraphAlgorithms.minimumSpanningForest](../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) ([lesson](../algorithms/greedy/problems.md)) | Returns a forest when the graph is disconnected. Negative weights are allowed. |
+| Kruskal | Sparse graphs whose edges are easy to sort | O(V + E log(E + 1)) | repo: [GraphAlgorithms.minimumSpanningForest](../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) ([lesson](../algorithms/graph/minimum-spanning-trees.md)) | Returns a forest when the graph is disconnected. Negative weights are allowed. |
 | Prim | Dense graphs, or growing one tree from a start vertex | O(E log V) with a binary heap; O(V²) with an array scan. Repository: O(V + E log(E + 1)) with a lazy heap | repo: [GraphStructureAlgorithms.primMinimumSpanningForest](../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java) ([lesson](../algorithms/graph/minimum-spanning-trees.md)) | Restart from each unvisited vertex to cover a disconnected graph; the repository method does and returns a forest. Among equal weights it prefers the smaller target vertex, then the smaller source, so its forest can differ from Kruskal's although the total is equal. Negative weights are allowed, the total is checked (`ArithmeticException` beyond `long`), and directed graphs are rejected. |
 
 ### Find the maximum flow and the minimum cut
@@ -769,6 +788,9 @@ iteratively: real trees can be paths 100,000 vertices deep.
 | Tree DP (post-order) | A value per subtree: sizes, best independent set, subtree sums | O(V) | not implemented here | Process vertices in reverse BFS order instead of recursing. |
 
 ## 18. Dynamic programming
+
+[Recognize the DP family](../algorithms/dynamic-programming/README.md) first: it names the
+state and recurrence shape of each family below and points to its lesson.
 
 ### Make an amount from coins
 
@@ -910,14 +932,14 @@ the proof.
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Union-find (disjoint sets) | Dynamic connectivity, Kruskal, grouping equivalent items | O(α(n)) amortized per operation with path compression and union by size; O(n) | repo: [UnionFind](../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) ([lesson](../data-structures/graphs/overview.md)) | Elements are integers `[0, n)`; map other keys to indices first. It cannot split groups. |
+| Union-find (disjoint sets) | Dynamic connectivity, Kruskal, grouping equivalent items | O(α(n)) amortized per operation with path compression and union by size; O(n) | repo: [UnionFind](../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) ([lesson](../data-structures/union-find/overview.md)) | Elements are integers `[0, n)`; map other keys to indices first. It cannot split groups. |
 
 ### Store a dense set of small integers
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Bit set | Flags or membership for indices 0..N | O(1) `get`; O(1) `set` inside the current size, while a bit past it grows the array (OpenJDK implementation note: the array at least doubles, so increasing indices cost amortized O(1)); space proportional to the largest set index; bulk `and`, `or` and `xor` | JDK: `java.util.BitSet#set`, `#nextSetBit`, `#cardinality` | Not safe for multithreaded use without external synchronization. `set(from, to)` is half-open. Iterate with `nextSetBit(i + 1)` until it returns `-1`. |
-| Bit tricks on one word | Up to 64 flags in a single `int` or `long` | O(1) | JDK: `java.lang.Integer#bitCount`, `#numberOfTrailingZeros`, `#lowestOneBit`, and the same methods on `java.lang.Long` | Shift counts are taken modulo the width: `1 << 32` equals 1 for an `int`. Use `1L << k` for a `long` mask. |
+| Bit set | Flags or membership for indices 0..N | O(1) `get`; O(1) `set` inside the current size, while a bit past it grows the array (OpenJDK implementation note: the array at least doubles, so increasing indices cost amortized O(1)); space proportional to the largest set index; bulk `and`, `or` and `xor` | JDK: `java.util.BitSet#set`, `#nextSetBit`, `#cardinality` ([lesson](../algorithms/bit-manipulation/overview.md)) | Not safe for multithreaded use without external synchronization. `set(from, to)` is half-open. Iterate with `nextSetBit(i + 1)` until it returns `-1`. |
+| Bit tricks on one word | Up to 64 flags in a single `int` or `long` | O(1) | JDK: `java.lang.Integer#bitCount`, `#numberOfTrailingZeros`, `#lowestOneBit`, and the same methods on `java.lang.Long` ([lesson](../algorithms/bit-manipulation/overview.md)) | Shift counts are taken modulo the width: `1 << 32` equals 1 for an `int`. Use `1L << k` for a `long` mask. |
 
 ```java
 import java.util.ArrayList;
@@ -950,7 +972,7 @@ assert Long.bitCount(-1L) == 64;
 
 | Option | Use when | Time / space | Java home | Watch out for |
 | --- | --- | --- | --- | --- |
-| Subset enumeration over bitmasks | Visit every subset of a set of n ≤ 30 items, or every submask of a mask | O(2ⁿ) masks; all submasks of all masks together cost O(3ⁿ) | not implemented here | To visit the nonempty submasks of `m`, start at `s = m` and step with `s = (s - 1) & m` until `s` is 0. Use `long` masks from 31 items (up to 62). |
+| Subset enumeration over bitmasks | Visit every subset of a set of n ≤ 30 items, or every submask of a mask | O(2ⁿ) masks; all submasks of all masks together cost O(3ⁿ) | not implemented here; the [bit-manipulation lesson](../algorithms/bit-manipulation/overview.md) walks the submasks of one mask with the JDK | To visit the nonempty submasks of `m`, start at `s = m` and step with `s = (s - 1) & m` until `s` is 0. Use `long` masks from 31 items (up to 62). |
 | Gosper's hack | Visit every n-bit mask with exactly k bits set, in increasing order | O(1) per mask | not implemented here | The next mask comes from the lowest set bit and a division by it; stop before the mask exceeds n bits. |
 
 ## 22. Math and number theory
