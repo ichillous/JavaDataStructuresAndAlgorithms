@@ -32,12 +32,15 @@ array is rewritten; it does not rule out auxiliary buffers, which the next colum
 | [Comparator merge](non-comparison-and-comparator-sorts.md) `mergeSort(T[], Comparator)` | yes | yes | O(n log n) comparisons | O(n) copy, O(log n) stack | A readable stable object sort with a null policy |
 | [Quicksort](quick-sort.md) `quickSort(int[])` | no | yes | O(n²) | O(log n) stack | Many duplicates, in place, typical speed |
 | [Heapsort](heap-sort.md) `heapSort(int[])` | no | yes | O(n log n) | O(1) | A worst-case bound with no extra memory |
-| [Counting](non-comparison-and-comparator-sorts.md) `countingSort(int[])` | not observable for ints | yes | O(n + r) | O(r) | Small value range `r` (at most 2^20) |
-| [LSD radix](non-comparison-and-comparator-sorts.md) `radixSort(int[])` | not observable for ints | yes | O(n) (four passes) | O(n) | Many ints of any value |
+| [Counting](non-comparison-and-comparator-sorts.md) `countingSort(int[])` | n/a: values are rewritten from tallies | yes | O(n + r) | O(r) | Small value range `r` (at most 2^20) |
+| [LSD radix](non-comparison-and-comparator-sorts.md) `radixSort(int[])` | yes (each pass stable) | yes | O(n) (four passes) | O(n) | Many ints of any value |
 | JDK `Arrays.sort(int[])` and other primitive overloads | no promise (the API documentation makes no stability statement) | yes | OpenJDK implementation note: Dual-Pivot Quicksort, "O(n log(n)) performance on all data sets" | not specified by the API documentation | The default for primitive arrays |
 | JDK `Arrays.sort(Object[])`, `Arrays.sort(T[], Comparator)`, `Collections.sort` | yes (guaranteed) | yes, in the array | OpenJDK implementation note: "a stable, adaptive, iterative mergesort", about n comparisons on nearly sorted input; no bound is specified by the API documentation | OpenJDK implementation note: up to n/2 temporary references | The default for object arrays |
 | JDK `List.sort` | yes (guaranteed) | the list must be modifiable, need not be resizable | as `Arrays.sort(Object[])` (OpenJDK implementation note) | the default implementation copies the list to an array and writes it back | The default for lists |
-| JDK `Arrays.parallelSort` | primitives: no promise; objects: yes (guaranteed) | yes | not specified by the API documentation | objects, OpenJDK implementation note: working space no greater than the size of the original array | Very large arrays on a multi-core machine |
+| JDK `Arrays.parallelSort` | primitives: no promise; objects: yes (guaranteed) | yes | primitives: OpenJDK implementation note as for `Arrays.sort(int[])`; objects: not specified by the API documentation | objects, OpenJDK implementation note: working space no greater than the size of the original array | Very large arrays on a multi-core machine |
+
+For `int[]` sorts the Stable column describes the algorithm; equal ints cannot be told apart, so
+no `int[]` sort's stability is observable.
 
 Notes on the JDK rows:
 
@@ -48,8 +51,9 @@ Notes on the JDK rows:
 - The algorithm names and the O(n log n) figures for the JDK sorts come from
   "Implementation note" paragraphs of the Javadoc, so they may change between JDK
   versions. They are the Dual-Pivot Quicksort for primitives, "a stable, adaptive,
-  iterative mergesort" for objects and lists, and a parallel sort-merge on the ForkJoin
-  common pool for `parallelSort`. The API documentation itself states no time bound for
+  iterative mergesort" for objects and lists, and, for the object overloads of
+  `parallelSort`, a parallel sort-merge on the ForkJoin common pool (the primitive
+  overloads' note names the Dual-Pivot Quicksort). The API documentation itself states no time bound for
   these methods. See the [solution finder](../../docs/solution-finder.md#11-sorting).
 - No speed claims are made here: measure on your own data before choosing between
   sorts with the same bound.
@@ -93,9 +97,10 @@ for (int variant = 0; variant < 7; variant++) {
 <details>
 <summary>Which repository sorts are stable?</summary>
 
-Insertion, bubble, the `int[]` merge sort and the Comparator merge sort. Quicksort and
-heapsort are not stable; for counting and radix sort on ints, stability cannot be
-observed because equal ints are indistinguishable.
+Insertion, bubble, the `int[]` merge sort, LSD radix sort (each counting pass is stable)
+and the Comparator merge sort. Quicksort and heapsort are not stable; counting sort
+rewrites values from tallies, so stability does not apply. For any `int[]` sort it
+cannot be observed, because equal ints are indistinguishable.
 
 </details>
 
