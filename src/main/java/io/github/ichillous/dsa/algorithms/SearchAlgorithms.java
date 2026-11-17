@@ -1,6 +1,7 @@
 package io.github.ichillous.dsa.algorithms;
 
 import java.util.Objects;
+import java.util.function.LongPredicate;
 
 /** Searches primitive arrays. Sorted-search methods require ascending input and do not modify it. */
 public final class SearchAlgorithms {
@@ -60,6 +61,49 @@ public final class SearchAlgorithms {
                 low = middle + 1;
             } else {
                 high = middle;
+            }
+        }
+        return low;
+    }
+
+    /**
+     * Returns the smallest value in {@code [lowInclusive, highExclusive)} for which
+     * {@code monotone} is true, or {@code highExclusive} when it is false everywhere (including
+     * for an empty range).
+     *
+     * <p>Precondition, not checked: over the range the predicate is false for a prefix and then
+     * true for the rest, so it changes at most once. Invariant: every value below {@code low} is
+     * false and every value at or above {@code high} is true or is the original upper bound; only
+     * {@code [low, high)} is undecided. If the predicate is not monotone the returned boundary is
+     * unspecified, though it is still a value in {@code [lowInclusive, highExclusive]}.
+     *
+     * <p>The predicate is called O(log(highExclusive - lowInclusive)) times, once per halving
+     * of the range (at most 64 calls for the full {@code long} range), and never with a value
+     * outside the range. The midpoint is {@code low + ((high - low) >>> 1)}: the difference can
+     * exceed {@link Long#MAX_VALUE} (for example for {@code [Long.MIN_VALUE, Long.MAX_VALUE)}),
+     * but read as an unsigned 64-bit number it is exact, so the midpoint never overflows for any
+     * bounds. Space O(1).
+     *
+     * @param lowInclusive the smallest candidate
+     * @param highExclusive one past the largest candidate; also the result when none qualifies
+     * @param monotone predicate that is false then true; must not be null
+     * @return the first value for which the predicate holds, or {@code highExclusive}
+     * @throws NullPointerException if {@code monotone} is null
+     * @throws IllegalArgumentException if {@code lowInclusive > highExclusive}
+     */
+    public static long firstTrue(long lowInclusive, long highExclusive, LongPredicate monotone) {
+        Objects.requireNonNull(monotone, "monotone");
+        if (lowInclusive > highExclusive) {
+            throw new IllegalArgumentException("lowInclusive must not exceed highExclusive");
+        }
+        long low = lowInclusive;
+        long high = highExclusive;
+        while (low < high) {
+            long middle = low + ((high - low) >>> 1);
+            if (monotone.test(middle)) {
+                high = middle;
+            } else {
+                low = middle + 1;
             }
         }
         return low;
