@@ -297,6 +297,83 @@ globalThis.DSA_VISUALS_DATA = {
       "number": 27,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
+    },
+    {
+      "id": "lcs-traceback",
+      "title": "LCS table and traceback",
+      "category": "Optimization",
+      "description": "The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT.",
+      "keyIdea": "The traceback re-derives each choice from the table: take equal letters, otherwise move toward the larger neighbour, and go up on a tie.",
+      "lesson": "../../algorithms/dynamic-programming/problems.md",
+      "number": 28,
+      "light": "assets/lcs-traceback.svg",
+      "dark": "assets/lcs-traceback-dark.svg"
+    },
+    {
+      "id": "edit-distance-grid",
+      "title": "Edit distance path",
+      "category": "Optimization",
+      "description": "The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3.",
+      "keyIdea": "Walking back from the corner prefers the diagonal, then delete, then insert; each step that is not a match adds 1.",
+      "lesson": "../../algorithms/dynamic-programming/problems.md",
+      "number": 29,
+      "light": "assets/edit-distance-grid.svg",
+      "dark": "assets/edit-distance-grid-dark.svg"
+    },
+    {
+      "id": "matrix-chain-splits",
+      "title": "Matrix chain splits",
+      "category": "Optimization",
+      "description": "The cost table for four matrices with dimensions 30, 1, 40, 10, 25, the three candidate splits of the whole chain, and the stored splits that give (A1((A2A3)A4)) at cost 1400.",
+      "keyIdea": "Each cell keeps the cheapest split k; following the stored splits from the whole chain down gives the parenthesization.",
+      "lesson": "../../algorithms/dynamic-programming/classic-problems.md",
+      "number": 30,
+      "light": "assets/matrix-chain-splits.svg",
+      "dark": "assets/matrix-chain-splits-dark.svg"
+    },
+    {
+      "id": "held-karp-masks",
+      "title": "Held-Karp states",
+      "category": "Optimization",
+      "description": "The Held-Karp table for four cities, one cost per visited set and last city, the closing edge back to city 0, and the optimal tour 0, 2, 3, 1, 0 of cost 80.",
+      "keyIdea": "Held-Karp keeps one best cost per (visited set, last city), so 2^n n^2 steps replace the (n-1)! tours.",
+      "lesson": "../../algorithms/dynamic-programming/classic-problems.md",
+      "number": 31,
+      "light": "assets/held-karp-masks.svg",
+      "dark": "assets/held-karp-masks-dark.svg"
+    },
+    {
+      "id": "weighted-interval-choice",
+      "title": "Weighted interval choices",
+      "category": "Optimization",
+      "description": "Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10.",
+      "keyIdea": "For each interval by end time, compare skipping it with taking it plus the best schedule that ends before it starts.",
+      "lesson": "../../algorithms/dynamic-programming/classic-problems.md",
+      "number": 32,
+      "light": "assets/weighted-interval-choice.svg",
+      "dark": "assets/weighted-interval-choice-dark.svg"
+    },
+    {
+      "id": "huffman-tree",
+      "title": "Huffman merges and lengths",
+      "category": "Optimization",
+      "description": "Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124.",
+      "keyIdea": "Merging the two lightest nodes first leaves the rarest symbols deepest, so frequent symbols get the shortest codes.",
+      "lesson": "../../algorithms/greedy/huffman-coding.md",
+      "number": 33,
+      "light": "assets/huffman-tree.svg",
+      "dark": "assets/huffman-tree-dark.svg"
+    },
+    {
+      "id": "subset-sum-halves",
+      "title": "Subset sum, two halves",
+      "category": "Optimization",
+      "description": "Six values are split into two halves of three; the sums of all eight subsets of each half are listed, and the first right sum whose complement is stored on the left selects indices 0, 1 and 3 for target 6.",
+      "keyIdea": "Each half has only 2^(n/2) subsets, so storing one half's sums and scanning the other's finds a pair in about 2^(n/2) steps, not 2^n.",
+      "lesson": "../../algorithms/backtracking/problems.md",
+      "number": 34,
+      "light": "assets/subset-sum-halves.svg",
+      "dark": "assets/subset-sum-halves-dark.svg"
     }
   ],
   "traces": [

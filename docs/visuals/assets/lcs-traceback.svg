@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 860" width="520" height="860" role="img" aria-labelledby="title desc">
+<title id="title">28  LCS table and traceback</title>
+<desc id="desc">The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="lcs-traceback-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="lcs-traceback-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="lcs-traceback-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="lcs-traceback-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="lcs-traceback-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="lcs-traceback-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="lcs-traceback-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="lcs-traceback-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="lcs-traceback-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="lcs-traceback-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="lcs-traceback-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="lcs-traceback-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="lcs-traceback-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="lcs-traceback-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="lcs-traceback-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="860" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">28  LCS table and traceback</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Optimization · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Fill the table; ε is the empty prefix</text>
+<text x="144.0" y="200" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">ε</text>
+<text x="196.0" y="200" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">T</text>
+<text x="248.0" y="200" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">G</text>
+<text x="300.0" y="200" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">C</text>
+<text x="352.0" y="200" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">A</text>
+<text x="404.0" y="200" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">T</text>
+<text x="106" y="236.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">ε</text>
+<rect x="118" y="212" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="144.0" y="237.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="170" y="212" width="52" height="36" rx="3" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="196.0" y="237.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">0</text>
+<rect x="222" y="212" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="248.0" y="237.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="274" y="212" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="300.0" y="237.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="326" y="212" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="352.0" y="237.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="378" y="212" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="404.0" y="237.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<text x="106" y="272.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">G</text>
+<rect x="118" y="248" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="144.0" y="273.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="170" y="248" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="196.0" y="273.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="222" y="248" width="52" height="36" rx="3" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="248.0" y="273.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">1</text>
+<rect x="274" y="248" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="300.0" y="273.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="326" y="248" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="352.0" y="273.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="378" y="248" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="404.0" y="273.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<text x="106" y="308.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">C</text>
+<rect x="118" y="284" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="144.0" y="309.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="170" y="284" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="196.0" y="309.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="222" y="284" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="248.0" y="309.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="274" y="284" width="52" height="36" rx="3" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="300.0" y="309.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">2</text>
+<rect x="326" y="284" width="52" height="36" rx="3" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="352.0" y="309.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">2</text>
+<rect x="378" y="284" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="404.0" y="309.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<text x="106" y="344.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">T</text>
+<rect x="118" y="320" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="144.0" y="345.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="170" y="320" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="196.0" y="345.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="222" y="320" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="248.0" y="345.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="274" y="320" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="300.0" y="345.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<rect x="326" y="320" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="352.0" y="345.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<rect x="378" y="320" width="52" height="36" rx="3" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="404.0" y="345.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<text x="106" y="380.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">A</text>
+<rect x="118" y="356" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="144.0" y="381.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="170" y="356" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="196.0" y="381.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="222" y="356" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="248.0" y="381.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="274" y="356" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="300.0" y="381.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<rect x="326" y="356" width="52" height="36" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="352.0" y="381.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3</text>
+<rect x="378" y="356" width="52" height="36" rx="3" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="404.0" y="381.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">3</text>
+<circle cx="42" cy="429" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="435" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="436" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Walk back from the corner: GCT</text>
+<text x="66" y="464" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">A ≠ T: up 3 ≥ left 3, go up</text>
+<text x="66" y="492" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">T = T: take T, go diagonally</text>
+<text x="66" y="520" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">C ≠ A: up 1 &lt; left 2, go left</text>
+<text x="66" y="548" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">C = C: take C, go diagonally</text>
+<text x="66" y="576" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">G = G: take G, go diagonally</text>
+<rect x="28" y="598" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="614" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">letter taken</text>
+<rect x="185.952" y="598" width="26" height="20" rx="4" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="219.952" y="614" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">differ: move up or left</text>
+<rect x="28" y="630" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="646" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">stop at row 0</text>
+<rect x="28" y="670" width="464" height="163" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="701" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="730" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">The traceback re-derives each choice</text>
+<text x="44" y="757" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">from the table: take equal letters,</text>
+<text x="44" y="784" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">otherwise move toward the larger</text>
+<text x="44" y="811" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">neighbour, and go up on a tie.</text>
+</svg>

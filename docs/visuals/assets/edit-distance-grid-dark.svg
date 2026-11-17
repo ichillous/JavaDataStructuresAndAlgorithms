@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 820" width="520" height="820" role="img" aria-labelledby="title desc">
+<title id="title">29  Edit distance path</title>
+<desc id="desc">The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="edit-distance-grid-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="edit-distance-grid-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="edit-distance-grid-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="edit-distance-grid-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="edit-distance-grid-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="edit-distance-grid-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="edit-distance-grid-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="edit-distance-grid-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="edit-distance-grid-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="edit-distance-grid-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="edit-distance-grid-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="edit-distance-grid-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="edit-distance-grid-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="edit-distance-grid-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="edit-distance-grid-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="820" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">29  Edit distance path</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Optimization · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">The path through the table</text>
+<text x="144.0" y="200" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">ε</text>
+<text x="196.0" y="200" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">p</text>
+<text x="248.0" y="200" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">a</text>
+<text x="300.0" y="200" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">i</text>
+<text x="352.0" y="200" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">n</text>
+<text x="404.0" y="200" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">t</text>
+<text x="106" y="236.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">ε</text>
+<rect x="118" y="212" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="144.0" y="237.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
+<rect x="170" y="212" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="196.0" y="237.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="222" y="212" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="248.0" y="237.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="274" y="212" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="300.0" y="237.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="326" y="212" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="352.0" y="237.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="378" y="212" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="404.0" y="237.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<text x="106" y="272.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">b</text>
+<rect x="118" y="248" width="52" height="36" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="144.0" y="273.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">1</text>
+<rect x="170" y="248" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="196.0" y="273.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="222" y="248" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="248.0" y="273.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="274" y="248" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="300.0" y="273.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="326" y="248" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="352.0" y="273.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="378" y="248" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="404.0" y="273.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<text x="106" y="308.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">r</text>
+<rect x="118" y="284" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="144.0" y="309.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="170" y="284" width="52" height="36" rx="3" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="196.0" y="309.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">2</text>
+<rect x="222" y="284" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="248.0" y="309.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="274" y="284" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="300.0" y="309.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="326" y="284" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="352.0" y="309.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="378" y="284" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="404.0" y="309.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<text x="106" y="344.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">a</text>
+<rect x="118" y="320" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="144.0" y="345.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="170" y="320" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="196.0" y="345.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="222" y="320" width="52" height="36" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="248.0" y="345.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">2</text>
+<rect x="274" y="320" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="300.0" y="345.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="326" y="320" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="352.0" y="345.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="378" y="320" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="404.0" y="345.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<text x="106" y="380.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">i</text>
+<rect x="118" y="356" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="144.0" y="381.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="170" y="356" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="196.0" y="381.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="222" y="356" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="248.0" y="381.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="274" y="356" width="52" height="36" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="300.0" y="381.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">2</text>
+<rect x="326" y="356" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="352.0" y="381.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="378" y="356" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="404.0" y="381.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<text x="106" y="416.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">n</text>
+<rect x="118" y="392" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="144.0" y="417.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<rect x="170" y="392" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="196.0" y="417.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<rect x="222" y="392" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="248.0" y="417.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="274" y="392" width="52" height="36" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="300.0" y="417.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="326" y="392" width="52" height="36" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="352.0" y="417.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">2</text>
+<rect x="378" y="392" width="52" height="36" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="404.0" y="417.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">3</text>
+<circle cx="42" cy="465" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="471" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="472" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">The script, in order (3 changes)</text>
+<rect x="28" y="494" width="111" height="30" rx="15" fill="#192333" stroke="#ffaaa1" stroke-width="2"/>
+<text x="83.5" y="515" font-size="18" fill="#ffaaa1" text-anchor="middle" font-weight="700">1 delete b</text>
+<rect x="28" y="532" width="186" height="30" rx="15" fill="#192333" stroke="#f4cf70" stroke-width="2"/>
+<text x="121.0" y="553" font-size="18" fill="#f4cf70" text-anchor="middle" font-weight="700">2 replace r with p</text>
+<rect x="28" y="570" width="101" height="30" rx="15" fill="#192333" stroke="#86dca2" stroke-width="2"/>
+<text x="78.5" y="591" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">3 keep a</text>
+<rect x="266" y="494" width="97" height="30" rx="15" fill="#192333" stroke="#86dca2" stroke-width="2"/>
+<text x="314.5" y="515" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">4 keep i</text>
+<rect x="266" y="532" width="102" height="30" rx="15" fill="#192333" stroke="#86dca2" stroke-width="2"/>
+<text x="317.0" y="553" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">5 keep n</text>
+<rect x="266" y="570" width="108" height="30" rx="15" fill="#192333" stroke="#9cbcff" stroke-width="2"/>
+<text x="320.0" y="591" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="700">6 insert t</text>
+<rect x="28" y="620" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="636" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">match</text>
+<rect x="139.296" y="620" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="173.296" y="636" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">substitute</text>
+<rect x="286.01599999999996" y="620" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="320.01599999999996" y="636" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">insert</text>
+<rect x="393.856" y="620" width="26" height="20" rx="4" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="427.856" y="636" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">delete</text>
+<rect x="28" y="660" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="691" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="720" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Walking back from the corner prefers</text>
+<text x="44" y="747" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">the diagonal, then delete, then insert;</text>
+<text x="44" y="774" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">each step that is not a match adds 1.</text>
+</svg>

@@ -222,3 +222,59 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dynamic-array-growth-dark.svg"><img src="assets/dynamic-array-growth.svg" alt="A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends." width="520"></picture>
 
 **Key idea:** Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.
+
+## 28. LCS table and traceback
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/lcs-traceback-dark.svg"><img src="assets/lcs-traceback.svg" alt="The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT." width="520"></picture>
+
+**Key idea:** The traceback re-derives each choice from the table: take equal letters, otherwise move toward the larger neighbour, and go up on a tie.
+
+## 29. Edit distance path
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/edit-distance-grid-dark.svg"><img src="assets/edit-distance-grid.svg" alt="The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3." width="520"></picture>
+
+**Key idea:** Walking back from the corner prefers the diagonal, then delete, then insert; each step that is not a match adds 1.
+
+## 30. Matrix chain splits
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/classic-problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/matrix-chain-splits-dark.svg"><img src="assets/matrix-chain-splits.svg" alt="The cost table for four matrices with dimensions 30, 1, 40, 10, 25, the three candidate splits of the whole chain, and the stored splits that give (A1((A2A3)A4)) at cost 1400." width="520"></picture>
+
+**Key idea:** Each cell keeps the cheapest split k; following the stored splits from the whole chain down gives the parenthesization.
+
+## 31. Held-Karp states
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/classic-problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/held-karp-masks-dark.svg"><img src="assets/held-karp-masks.svg" alt="The Held-Karp table for four cities, one cost per visited set and last city, the closing edge back to city 0, and the optimal tour 0, 2, 3, 1, 0 of cost 80." width="520"></picture>
+
+**Key idea:** Held-Karp keeps one best cost per (visited set, last city), so 2^n n^2 steps replace the (n-1)! tours.
+
+## 32. Weighted interval choices
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/classic-problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/weighted-interval-choice-dark.svg"><img src="assets/weighted-interval-choice.svg" alt="Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10." width="520"></picture>
+
+**Key idea:** For each interval by end time, compare skipping it with taking it plus the best schedule that ends before it starts.
+
+## 33. Huffman merges and lengths
+
+[Optimization: read the lesson](../../algorithms/greedy/huffman-coding.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/huffman-tree-dark.svg"><img src="assets/huffman-tree.svg" alt="Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124." width="520"></picture>
+
+**Key idea:** Merging the two lightest nodes first leaves the rarest symbols deepest, so frequent symbols get the shortest codes.
+
+## 34. Subset sum, two halves
+
+[Optimization: read the lesson](../../algorithms/backtracking/problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/subset-sum-halves-dark.svg"><img src="assets/subset-sum-halves.svg" alt="Six values are split into two halves of three; the sums of all eight subsets of each half are listed, and the first right sum whose complement is stored on the left selects indices 0, 1 and 3 for target 6." width="520"></picture>
+
+**Key idea:** Each half has only 2^(n/2) subsets, so storing one half's sums and scanning the other's finds a pair in about 2^(n/2) steps, not 2^n.
