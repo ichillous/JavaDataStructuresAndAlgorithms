@@ -14,6 +14,14 @@ production code can pass `ThreadLocalRandom.current()` or a `SecureRandom`.
 non-negative weights with a positive finite sum. `shuffle` mutates its array; the
 other two never change their inputs.
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | You need a uniform sample from a stream, a uniform shuffle, or many weighted draws from fixed weights |
+| **Avoid it when** | Weights change between draws (rebuild cost), or randomness must be unpredictable (pass a `SecureRandom`, not a seeded generator) |
+| **Cost** | `reservoirSample` O(n) time, O(k) space; `shuffle` O(n); `AliasTable` O(n) build, O(1) per draw |
+| **In this repo** | [Sampling](../../src/main/java/io/github/ichillous/dsa/algorithms/Sampling.java), [AliasTable](../../src/main/java/io/github/ichillous/dsa/algorithms/AliasTable.java) |
+| **In the JDK** | `Collections.shuffle(List, Random)`, `java.util.random.RandomGenerator`, `ThreadLocalRandom`; no direct equivalent for reservoir sampling or the alias method |
+
 ## Which tool when
 
 | Need | Tool | Why |
@@ -33,6 +41,12 @@ item is in with probability `k / (m + 1)`, and an old item stays in with probabi
 `(k / m)(1 - 1 / (m + 1)) = k / (m + 1)`. Induction from `m = k` gives a uniform
 sample at every prefix, so the stream can stop anywhere.
 
+<!-- visual:generated reservoir-sampling | One seeded run of reservoirSample: the replacement chance k/i falls with each arrival, and only some draws write a slot. -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/reservoir-sampling-dark.svg"><img src="../../docs/visuals/assets/reservoir-sampling.svg" alt="Sampling.reservoirSample over the items A to H with k = 3 and seed 17 fills the reservoir with A, B, C, then draws j for each later arrival with replacement chance 3/4 down to 3/8; D, F and H replace slots 0, 0 and 1, giving F, H, C." width="520"></picture>
+
+**Figure 31.** One seeded run of reservoirSample: the replacement chance k/i falls with each arrival, and only some draws write a slot. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 Fisher-Yates walks `i` from `n - 1` down to 1 and swaps position `i` with a uniform
 position in `[0, i]`. Positions above `i` are final. The number of choice sequences
 is `n (n - 1) ... 2 = n!`, and each yields a different permutation, so each order
@@ -47,6 +61,12 @@ For every index the mass in the table, `(cutoff + sum of (1 - cutoff) of columns
 aliasing it) / n`, equals its normalized weight. Rounding can leave entries in a
 worklist when the other is empty; they have mass 1 up to rounding, so they get
 cutoff 1.
+
+<!-- visual:generated alias-table -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/alias-table-dark.svg"><img src="../../docs/visuals/assets/alias-table.svg" alt="AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2." width="520"></picture>
+
+**Figure 32.** AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 Trace of the table for weights `[1, 0, 3]` (sum 4, scaled weights `[0.75, 0, 2.25]`):
 
@@ -92,6 +112,33 @@ for (int i = 0; i < 1_000; i++) {
     }
 }
 assert zeros == 0;
+```
+
+## In real Java
+
+Choose the generator by purpose. `ThreadLocalRandom.current()` is the default for non-reproducible draws in concurrent code, and `SecureRandom` when the result must be unpredictable; both are `Random` subclasses and so work as the `RandomGenerator` these methods take. A behavior worth knowing: `ThreadLocalRandom` cannot be seeded, and its `setSeed` throws `UnsupportedOperationException`, so use `SplittableRandom` or `Random` with a seed when a run must be reproducible.
+
+```java
+import io.github.ichillous.dsa.algorithms.Sampling;
+import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.List;
+import java.util.SplittableRandom;
+import java.util.concurrent.ThreadLocalRandom;
+
+try {
+    ThreadLocalRandom.current().setSeed(1L);
+    assert false : "ThreadLocalRandom cannot be seeded";
+} catch (UnsupportedOperationException expected) {
+    assert new SplittableRandom(5).nextInt(100) == new SplittableRandom(5).nextInt(100);
+}
+
+int[] cards = {1, 2, 3, 4, 5};
+Sampling.shuffle(cards, new SecureRandom());
+int[] sorted = cards.clone();
+Arrays.sort(sorted);
+assert Arrays.equals(sorted, new int[] {1, 2, 3, 4, 5});
+assert Sampling.reservoirSample(List.of(1, 2, 3, 4, 5, 6), 2, ThreadLocalRandom.current()).size() == 2;
 ```
 
 ## Costs and contracts
@@ -150,6 +197,29 @@ fixed seeds and tolerances of about 0.01 over 60,000 trials, never exact counts.
 3. Explain why shuffling a `List` with `Collections.shuffle(list, new Random(7))`
    gives the same order on every run, and why that is a feature in a test and a
    defect in a card game.
+
+## Check yourself
+
+<details>
+<summary>In the reservoir figure, why is item H's replacement chance 3/8?</summary>
+
+H is arrival number 8, so `j` is drawn uniformly from `[0, 8)` and H is written only when `j < 3`. Three of the eight equally likely values qualify.
+
+</details>
+
+<details>
+<summary>In the alias figure, why does D fill part of both the A and B columns?</summary>
+
+D's scaled weight is 2 (weight 4 times 4 columns over a sum of 8), so after filling its own column it has one unit left. It donates half a unit to A's column and half to B's, which each own only half of theirs.
+
+</details>
+
+<details>
+<summary>Why is the sample F, H, C for seed 17 not part of the algorithm's guarantee?</summary>
+
+The algorithm guarantees only that every item is equally likely to be in the sample. Which items appear depends on the sequence of numbers the generator produces, so another generator or seed gives another sample.
+
+</details>
 
 See the [catalog](../../docs/catalog.md) for the source and tests and the
 [complexity guide](../../docs/complexity.md) for the bounds. Related lessons:
