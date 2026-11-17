@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 860" width="520" height="860" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 876" width="520" height="876" role="img" aria-labelledby="title desc">
 <title id="title">31  Shortest-path chooser</title>
 <desc id="desc">A column of seven yes-or-no questions from all pairs, unweighted, 0-1 weights, DAG, negative weights and heuristic to nonnegative weights, each paired with the algorithm and the repository method that answers it.</desc>
 <style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
 <defs><marker id="shortest-path-chooser-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="shortest-path-chooser-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="shortest-path-chooser-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="shortest-path-chooser-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="shortest-path-chooser-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="shortest-path-chooser-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="shortest-path-chooser-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="shortest-path-chooser-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="shortest-path-chooser-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="shortest-path-chooser-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="shortest-path-chooser-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="shortest-path-chooser-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="shortest-path-chooser-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="shortest-path-chooser-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="shortest-path-chooser-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
-<rect x="0" y="0" width="520" height="860" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<rect x="0" y="0" width="520" height="876" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
 <text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">31  Shortest-path chooser</text>
 <text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Graphs · Worked example</text>
 <line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
@@ -50,16 +50,16 @@
 <rect x="292" y="544" width="200" height="50" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
 <text x="304" y="566" font-size="20" fill="#2451b7" text-anchor="start" font-weight="700">Dijkstra</text>
 <text x="304" y="587" font-size="18" fill="#2451b7" text-anchor="start" font-weight="400">dijkstra</text>
-<rect x="28" y="602" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
-<text x="62" y="618" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">GraphAlgorithms</text>
-<rect x="236.064" y="602" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
-<text x="270.06399999999996" y="618" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">ShortestPathAlgorithms</text>
-<rect x="28" y="634" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
-<text x="62" y="650" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">AdvancedGraphAlgorithms</text>
-<rect x="28" y="674" width="464" height="163" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
-<text x="44" y="705" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
-<text x="44" y="734" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Use the most specific algorithm whose</text>
-<text x="44" y="761" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">precondition your graph meets; each one</text>
-<text x="44" y="788" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">exploits a fact the general one cannot</text>
-<text x="44" y="815" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">assume.</text>
+<rect x="28" y="614" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="630" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">GraphAlgorithms</text>
+<rect x="236.064" y="614" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="270.06399999999996" y="630" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">ShortestPathAlgorithms</text>
+<rect x="28" y="646" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="662" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">AdvancedGraphAlgorithms</text>
+<rect x="28" y="686" width="464" height="163" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="717" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="746" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Use the most specific algorithm whose</text>
+<text x="44" y="773" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">precondition your graph meets; each one</text>
+<text x="44" y="800" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">exploits a fact the general one cannot</text>
+<text x="44" y="827" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">assume.</text>
 </svg>

@@ -2,6 +2,14 @@
 
 A graph has vertices and edges. Vertices may be isolated; edges may be directed, weighted, repeated or self-loops. Decide these semantics before choosing an algorithm: a route map and a prerequisite graph use different contracts.
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | Entities and relationships form a network: routes, prerequisites, links between accounts. |
+| **Avoid it when** | A tree, an array or a keyed map already holds the relationship; graph machinery then adds cost without adding meaning. |
+| **Cost** | Storage O(V + E); BFS, DFS and topological order O(V + E); `neighbors` O(out-degree). |
+| **In this repo** | [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) and [`WeightedGraph`](../../src/main/java/io/github/ichillous/dsa/graphs/WeightedGraph.java) |
+| **In the JDK** | no direct equivalent: the JDK has no graph type, so you compose `Map` and `List` (or arrays) yourself |
+
 [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) uses integer vertices `[0, vertexCount)`, an explicit directed/undirected factory, and insertion-ordered adjacency sets. Repeated unweighted edges are ignored. In an undirected graph, adding the reverse of an existing edge does not add a new logical edge.
 
 ```java
@@ -16,12 +24,6 @@ assert relationships.neighbors(0).equals(List.of(1, 2));
 assert relationships.neighbors(3).isEmpty();
 ```
 
-<!-- visual:generated bfs-frontier -->
-<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bfs-frontier-dark.svg"><img src="../../docs/visuals/assets/bfs-frontier.svg" alt="Follow the queue separately from discovery; isolate unreachable vertex 5." width="520"></picture>
-
-**Figure 22.** Follow the queue separately from discovery; isolate unreachable vertex 5. [Visual index and step-throughs](../../docs/visuals/README.md).
-<!-- /visual:generated -->
-
 ## Pick the right question
 
 | Question | Algorithm / restriction |
@@ -32,6 +34,12 @@ assert relationships.neighbors(3).isEmpty();
 | What prerequisite order is possible? | Topological sort of a directed acyclic graph |
 | Least total nonnegative edge weight? | Dijkstra |
 | Cheapest acyclic connections within every component? | Minimum spanning forest of an undirected weighted graph |
+
+<!-- visual:generated shortest-path-chooser | The shortest-path question is answered by asking about the graph, from the top down. -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/shortest-path-chooser-dark.svg"><img src="../../docs/visuals/assets/shortest-path-chooser.svg" alt="A column of seven yes-or-no questions from all pairs, unweighted, 0-1 weights, DAG, negative weights and heuristic to nonnegative weights, each paired with the algorithm and the repository method that answers it." width="520"></picture>
+
+**Figure 31.** The shortest-path question is answered by asking about the graph, from the top down. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 “Reachable from s” is not the same as “connected” in a directed graph. Strong and weak connectivity have separate meanings; the maintained `connectedComponents` API accepts only undirected input to avoid silently choosing one.
 
@@ -75,10 +83,67 @@ Both adjacency representations store O(V + E) data. Adding an unweighted edge is
 
 BFS, DFS, topological ordering and undirected components take O(V + E) time and space here, including snapshots. Dijkstra's lazy heap and Kruskal sorting take O(V + E log(E + 1)) time. Count parallel weighted edges in E; do not assume E is bounded by V² for a multigraph.
 
+## In real Java
+
+The JDK has no graph class, and real data has labels (room names, account ids), not the dense integers `0..V-1` that `Graph` needs. Number the labels once at the boundary, run the integer algorithms, then translate the answer back. A `LinkedHashMap` iterates in insertion order, so the numbering is reproducible.
+
+```java
+import io.github.ichillous.dsa.graphs.Graph;
+import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+List<String> names = List.of("lobby", "kitchen", "garden", "cellar");
+Map<String, Integer> id = new LinkedHashMap<>();
+for (String name : names) {
+    id.put(name, id.size());
+}
+Graph rooms = Graph.undirected(id.size());
+rooms.addEdge(id.get("lobby"), id.get("kitchen"));
+rooms.addEdge(id.get("kitchen"), id.get("cellar"));
+rooms.addEdge(id.get("lobby"), id.get("garden"));
+List<String> visited = new ArrayList<>();
+for (int vertex : GraphAlgorithms.breadthFirst(rooms, id.get("kitchen"))) {
+    visited.add(names.get(vertex));
+}
+assert visited.equals(List.of("kitchen", "lobby", "cellar", "garden"));
+```
+
+## Common mistakes
+
+1. **Counting adjacency entries as edges.** In `Graph.undirected(2).addEdge(0, 1)` the edge is stored in two adjacency lists, yet `edgeCount()` is 1. Using the entry count (2) in a cost formula breaks the rule that the sum of degrees is 2E in an undirected graph.
+2. **Assuming Dijkstra only inspects reachable edges.** With `WeightedGraph.directed(5).addEdge(0, 1, 1).addEdge(3, 4, -1)`, `dijkstra(graph, 0)` throws `IllegalArgumentException` although the negative edge is unreachable from vertex 0. The precondition "every weight is nonnegative" is checked on the whole graph.
+3. **Treating reachability as symmetric in a directed graph.** With only `0 -> 1`, vertex 0 reaches 1 but 1 cannot reach 0, so "connected" has no single meaning; `connectedComponents(Graph.directed(2))` throws `IllegalArgumentException` instead of guessing.
+
 ## Practice
 
 1. Model course prerequisites and decide edge direction before drawing a sample schedule.
 2. Give a directed graph where 0 reaches 1 but 1 cannot reach 0.
 3. Compare reachability on small random graphs with an independent adjacency-matrix reference, including isolated vertices and self-loops.
+
+## Check yourself
+
+<details>
+<summary>An undirected graph has 10 edges. How many adjacency entries does an adjacency list hold?</summary>
+
+20, because every undirected edge appears once in each endpoint's list (a self-loop is the exception and appears once). `edgeCount()` still reports 10.
+
+</details>
+
+<details>
+<summary>Why does `Graph` ignore `addEdge(1, 0)` after `addEdge(0, 1)` in an undirected graph, but `WeightedGraph` keeps repeated edges?</summary>
+
+`Graph` stores unweighted adjacency as ordered sets, so the reverse edge is the same logical edge. `WeightedGraph` keeps parallel edges because two edges between the same vertices can carry different weights.
+
+</details>
+
+<details>
+<summary>Which algorithm answers "what is the cheapest route" when every weight is nonnegative and no better structure is known?</summary>
+
+Dijkstra's algorithm (`GraphAlgorithms.dijkstra`). BFS counts edges, not weights, and Bellman–Ford is only needed once negative weights appear.
+
+</details>
 
 Continue with [representations](representation.md), [traversals and paths](traversal.md) and the [worked solutions](../../docs/solutions.md). The [solution finder](../../docs/solution-finder.md#14-graph-traversal-and-structure) compares this technique with its alternatives.
