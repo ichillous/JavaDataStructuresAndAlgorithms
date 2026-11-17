@@ -33,7 +33,7 @@ overflow the stack.
 <!-- visual:generated aho-corasick-links -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/aho-corasick-links-dark.svg"><img src="../../docs/visuals/assets/aho-corasick-links.svg" alt="The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root." width="520"></picture>
 
-**Figure 87.** The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 94.** The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 **Suffix array.** `suffixes()[r]` is the start of the r-th smallest suffix.
@@ -60,7 +60,7 @@ result ordered by start, then length: (1,she) (2,he) (2,hers)
 <!-- visual:generated aho-corasick-scan -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/aho-corasick-scan-dark.svg"><img src="../../docs/visuals/assets/aho-corasick-scan.svg" alt="Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2." width="520"></picture>
 
-**Figure 88.** Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 95.** Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Suffix array of `banana`:
@@ -80,7 +80,7 @@ longest repeated    = "ana" (largest lcp, 3)
 <!-- visual:generated suffix-array-lcp -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/suffix-array-lcp-dark.svg"><img src="../../docs/visuals/assets/suffix-array-lcp.svg" alt="The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3." width="520"></picture>
 
-**Figure 89.** The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 96.** The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ```java

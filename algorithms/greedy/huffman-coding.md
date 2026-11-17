@@ -9,6 +9,14 @@ be, and `canonicalCodes` turns lengths into actual bit strings. Splitting them
 matches real formats such as DEFLATE, which store only the lengths and rebuild
 the codes on both sides.
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | You know symbol frequencies and want the shortest prefix code with whole-bit codewords |
+| **Avoid it when** | Frequencies are unknown or drifting (use an adaptive scheme), or fractional bits per symbol matter |
+| **Cost** | O(n log n) time, O(n) space for the lengths |
+| **In this repo** | [`GreedyAlgorithms.huffmanCodeLengths`](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) and `canonicalCodes` |
+| **In the JDK** | `java.util.zip.Deflater` and `Inflater` for ready-made compression; `PriorityQueue` for the merge loop |
+
 Preconditions: frequencies are `long` values that are at least 0 (negative values
 throw `IllegalArgumentException`), and null arrays are rejected. Inputs are never
 modified and results are fresh arrays or immutable lists.
@@ -59,6 +67,15 @@ cost         5*4 + 9*4 + 12*3 + 13*3 + 16*3 + 45*1 = 224
 canonical    F "0"   C "100"  D "101"  E "110"  A "1110"  B "1111"
 ```
 
+The same merging on five symbols, drawn as a tree. A symbol's code length is its
+depth, and the sum of the merge weights equals the weighted length.
+
+<!-- visual:generated huffman-tree -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/huffman-tree-dark.svg"><img src="../../docs/visuals/assets/huffman-tree.svg" alt="Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124." width="520"></picture>
+
+**Figure 63.** Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 Ties are broken deterministically: among equal weights, leaves (numbered by
 symbol index) come before internal nodes, and internal nodes come in creation
 order. Different tie rules give different but equally optimal lengths, so compare
@@ -97,6 +114,45 @@ try {
 assert rejected;
 ```
 
+## In real Java
+
+Production code rarely writes its own Huffman coder. `java.util.zip.Deflater`
+and `Inflater` provide general-purpose compression using the ZLIB library, whose
+DEFLATE format combines Huffman codes with other techniques. `deflate` returns the
+number of bytes it wrote, which may be fewer than the buffer holds, and `finished()`
+reports completion after `finish()`.
+
+```java
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
+
+byte[] input = "aaaaaaaaaabbbbbbbbbbaaaaaaaaaa".repeat(20).getBytes(StandardCharsets.UTF_8);
+Deflater deflater = new Deflater();
+deflater.setInput(input);
+deflater.finish();
+byte[] packed = new byte[input.length];
+int packedLength = deflater.deflate(packed);
+assert deflater.finished();
+deflater.end();
+assert packedLength < input.length;
+
+Inflater inflater = new Inflater();
+inflater.setInput(packed, 0, packedLength);
+byte[] restored = new byte[input.length];
+int restoredLength;
+try {
+    restoredLength = inflater.inflate(restored);
+} catch (DataFormatException e) {
+    throw new AssertionError(e);
+}
+inflater.end();
+assert restoredLength == input.length;
+assert Arrays.equals(input, restored);
+```
+
 ## Costs
 
 | Method | Time | Auxiliary space | Overflow behavior |
@@ -128,6 +184,29 @@ Lengths are at most the number of used symbols minus one. See the
    are prefix-free.
 3. Find lengths with Kraft sum above 1 that nonetheless look plausible, such as
    `{1, 2, 2, 2}`, and explain why no prefix code can have them.
+
+## Check yourself
+
+<details>
+<summary>Why does Huffman merge the two lightest nodes rather than the two heaviest?</summary>
+
+Rare symbols belong deepest, so they must be siblings at the bottom; merging them first gives a smaller instance whose optimum differs by exactly their combined weight.
+
+</details>
+
+<details>
+<summary>What does `huffmanCodeLengths` return for frequencies `{0, 7, 0}`, and why?</summary>
+
+`{0, 1, 0}`. Zero-frequency symbols are unused and get length 0, and a single used symbol still needs one bit.
+
+</details>
+
+<details>
+<summary>Why can two correct Huffman implementations disagree on lengths but not on total cost?</summary>
+
+Equal weights can be merged in different orders, giving different trees; every such tree is optimal, so the weighted length is the same.
+
+</details>
 
 Look up the structures and algorithms in the
 [catalog](../../docs/catalog.md), the

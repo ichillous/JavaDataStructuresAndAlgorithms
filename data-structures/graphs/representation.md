@@ -30,7 +30,7 @@ list                 matrix (row = from, column = to)
 <!-- visual:generated graph-representations | The same four-edge graph as an adjacency list, an adjacency matrix and an edge list, with the cost of an edge test and of listing neighbors. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/graph-representations-dark.svg"><img src="../../docs/visuals/assets/graph-representations.svg" alt="One directed graph with 4 vertices and the edges 0 to 1, 0 to 2, 2 to 1 and 2 to 3, shown as an adjacency list, a 4 by 4 adjacency matrix and an edge list, each with the cost of testing an edge and listing neighbors." width="520"></picture>
 
-**Figure 58.** The same four-edge graph as an adjacency list, an adjacency matrix and an edge list, with the cost of an edge test and of listing neighbors. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 65.** The same four-edge graph as an adjacency list, an adjacency matrix and an edge list, with the cost of an edge test and of listing neighbors. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) uses ordered sets internally for deduplication and reproducible neighbor order. Its public neighbor list is a snapshot, not a mutable set view.

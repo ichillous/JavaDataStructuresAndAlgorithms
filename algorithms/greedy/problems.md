@@ -4,13 +4,21 @@ A rule is correct for a particular feasible set and objective. Changing “numbe
 of activities” to “total value,” or allowing item reuse, can invalidate its proof.
 The examples below separate a maintained API from a small executable JDK exercise.
 
-<!-- visual:generated activity-selection -->
-<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/activity-selection-dark.svg"><img src="../../docs/visuals/assets/activity-selection.svg" alt="Choose earliest finishing intervals; touching endpoints remain compatible." width="520"></picture>
-
-**Figure 20.** Choose earliest finishing intervals; touching endpoints remain compatible. [Visual index and step-throughs](../../docs/visuals/README.md).
-<!-- /visual:generated -->
+| At a glance | |
+| --- | --- |
+| **Use it when** | A cut-property or exchange argument covers your exact objective, as for Kruskal and Huffman merging |
+| **Avoid it when** | The objective or feasible set changed (values, reuse, arbitrary coins) and no proof was redone |
+| **Cost** | O(n log n) for the sort or heap in each example below |
+| **In this repo** | [`GraphAlgorithms.minimumSpanningForest`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) and [`GreedyAlgorithms.huffmanCodeLengths`](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) |
+| **In the JDK** | `PriorityQueue` for the repeated "take the smallest" step |
 
 ## Coin change: a local rule that fails
+
+<!-- visual:generated coin-dp -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/coin-dp-dark.svg"><img src="../../docs/visuals/assets/coin-dp.svg" alt="Compare every final coin; the largest-first greedy choice loses." width="520"></picture>
+
+**Figure 16.** Compare every final coin; the largest-first greedy choice loses. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 For denominations `[1, 3, 4]` and amount 6, largest-first chooses `4 + 1 + 1`.
 The optimum is `3 + 3`. Some coin systems admit a greedy rule, but arbitrary
@@ -89,11 +97,70 @@ positive frequencies and at least two symbols. Equal-weight choices can produce
 different equally good trees. Checked arithmetic exposes overflow instead of
 silently changing the objective.
 
+## In real Java
+
+`PriorityQueue` is the JDK tool for "repeatedly take the smallest". Its iterator
+and `toString` do not promise sorted order; only `poll`, `remove` and `peek` expose
+the head. When elements compare equal the head is one of them, chosen arbitrarily,
+so a deterministic tie rule needs an explicit second key in the comparator.
+
+```java
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+
+record Node(long weight, int id) { }
+
+var queue = new PriorityQueue<Node>(
+        Comparator.comparingLong(Node::weight).thenComparingInt(Node::id));
+queue.addAll(List.of(new Node(5, 2), new Node(5, 0), new Node(5, 1), new Node(3, 9)));
+assert queue.poll().id() == 9;
+assert queue.poll().id() == 0; // equal weights fall back to the id
+assert queue.poll().id() == 1;
+assert queue.poll().id() == 2;
+assert queue.isEmpty();
+```
+
+## Common mistakes
+
+- **Largest coin first with arbitrary denominations.** Coins `[1, 3, 4]` and
+  amount 6 give three coins against the optimal two. The invariant "some optimum
+  contains this choice" is false.
+- **Kruskal without the component test.** For the triangle 0-1, 1-2, 0-2, adding
+  all three edges creates a cycle. The invariant "the selected edges form a
+  forest" needs the disjoint-set check on every edge.
+- **Merging the two heaviest in Huffman.** Frequencies `{1, 1, 2, 4}` merged
+  heaviest-first give weighted length 21 instead of 14. The proof needs the two
+  *least* frequent symbols as deepest siblings.
+
 ## Practice
 
 1. Explain why the activity-selection exchange argument does not prove coin change.
 2. Enumerate tiny spanning forests and compare weight, components and acyclicity.
 3. Trace Huffman merges `5+9`, `12+13`, `14+16`, `25+30`, `45+55`; then record
    tree children to derive code lengths and confirm the same weighted total.
+
+## Check yourself
+
+<details>
+<summary>What does the cut property say about Kruskal's choice?</summary>
+
+For any cut of the vertices, a cheapest edge crossing it can be added to some minimum spanning forest. Kruskal's next cheapest edge that joins two components is such an edge.
+
+</details>
+
+<details>
+<summary>Why can't the activity-selection exchange argument prove greedy coin change?</summary>
+
+It relies on a replacement that never hurts the count of remaining room. Coin change has no such structure: replacing a coin changes the remainder, and `[1, 3, 4]` with amount 6 shows the local choice 4 can lose.
+
+</details>
+
+<details>
+<summary>Why does the Huffman JDK exercise report a weighted length but not code lengths?</summary>
+
+It only sums merge weights. Code lengths are depths in the tree, so the tree children must be recorded, which `huffmanCodeLengths` does.
+
+</details>
 
 The [solutions](../../docs/solutions.md) discuss independent oracles and proof scope. The [solution finder](../../docs/solution-finder.md#19-greedy) compares this technique with its alternatives.

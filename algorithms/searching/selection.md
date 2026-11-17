@@ -52,7 +52,7 @@ all-equal input linear.
 <!-- visual:generated quickselect-shrink | The partitions of kthSmallest on 7, 2, 9, 4, 4, 1 as the documented rule produces them; the library keeps them private. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/quickselect-shrink-dark.svg"><img src="../../docs/visuals/assets/quickselect-shrink.svg" alt="kthSmallest of 7, 2, 9, 4, 4, 1 with k = 2: three partitions with pivots 7, 2 and 4 narrow the range from [0..5] to [0..3] to [2..3], and the equal part answers 4." width="520"></picture>
 
-**Figure 77.** The partitions of kthSmallest on 7, 2, 9, 4, 4, 1 as the documented rule produces them; the library keeps them private. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 84.** The partitions of kthSmallest on 7, 2, 9, 4, 4, 1 as the documented rule produces them; the library keeps them private. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Trace of `[7, 2, 9, 4, 4, 1]` with `k = 2` (sorted: 1, 2, 4, 4, 7, 9):
@@ -103,7 +103,7 @@ concatenated lists.
 <!-- visual:generated kway-merge-heap | mergeSorted pops the smallest head from a heap of list heads and refills from the same list; equal heads pop in list order. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/kway-merge-heap-dark.svg"><img src="../../docs/visuals/assets/kway-merge-heap.svg" alt="mergeSorted of 1, 4, 7 and 2, 4 and 3, 6 keeps one head per list in a heap; when 4 from list A and 4 from list B tie, A pops first, giving 1, 2, 3, 4, 4, 6, 7." width="520"></picture>
 
-**Figure 78.** mergeSorted pops the smallest head from a heap of list heads and refills from the same list; equal heads pop in list order. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 85.** mergeSorted pops the smallest head from a heap of list heads and refills from the same list; equal heads pop in list order. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Costs and contracts

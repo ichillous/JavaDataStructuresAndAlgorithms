@@ -38,7 +38,7 @@ The two phases on a six-value input:
 <!-- visual:generated heapsort-phases | The heap shrinks from the right while the sorted suffix grows; the heap array itself is never sorted order. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/heapsort-phases-dark.svg"><img src="../../docs/visuals/assets/heapsort-phases.svg" alt="Heapsort on 3, 1, 6, 5, 2, 4 builds the max-heap 6, 5, 4, 1, 2, 3, then moves 6 and 5 to the end, giving 5, 3, 4, 1, 2, 6 and 4, 3, 2, 1, 5, 6, until 1 to 6 is sorted." width="520"></picture>
 
-**Figure 80.** The heap shrinks from the right while the sorted suffix grows; the heap array itself is never sorted order. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 87.** The heap shrinks from the right while the sorted suffix grows; the heap array itself is never sorted order. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ```java

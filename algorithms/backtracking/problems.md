@@ -5,11 +5,13 @@ choosing a search strategy. Maintained APIs live in
 [BacktrackingPuzzles](../../src/main/java/io/github/ichillous/dsa/algorithms/BacktrackingPuzzles.java);
 small complete enumerations are covered in the [overview](overview.md).
 
-<!-- visual:generated queens-backtracking | The queens search illustrates choose, reject and undo. Sudoku applies the same pattern with row, column and box constraints. -->
-<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/queens-backtracking-dark.svg"><img src="../../docs/visuals/assets/queens-backtracking.svg" alt="Trace failed placements before reaching the first valid board." width="520"></picture>
-
-**Figure 19.** The queens search illustrates choose, reject and undo. Sudoku applies the same pattern with row, column and box constraints. [Visual index and step-throughs](../../docs/visuals/README.md).
-<!-- /visual:generated -->
+| At a glance | |
+| --- | --- |
+| **Use it when** | You need one valid solution to a constraint puzzle (Sudoku) or a subset hitting an exact target |
+| **Avoid it when** | A pruning rule's assumption (such as nonnegative values) is not part of the input contract |
+| **Cost** | About O(9^e) nodes for `e` empty Sudoku cells; expected O(2^(n/2)) for subset sum, n at most 30 |
+| **In this repo** | [`BacktrackingPuzzles.solveSudoku`](../../src/main/java/io/github/ichillous/dsa/algorithms/BacktrackingPuzzles.java) and `subsetSum` |
+| **In the JDK** | `HashMap` for the sum lookup; `Math.addExact` and `long` for sums |
 
 ## Sudoku: preserve givens, propagate legal choices
 
@@ -82,6 +84,12 @@ assert BacktrackingPuzzles.subsetSum(values, 100L).isEmpty();
 assert BacktrackingPuzzles.subsetSum(values, 0L).orElseThrow().isEmpty();
 ```
 
+<!-- visual:generated subset-sum-halves -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/subset-sum-halves-dark.svg"><img src="../../docs/visuals/assets/subset-sum-halves.svg" alt="Six values are split into two halves of three; the sums of all eight subsets of each half are listed, and the first right sum whose complement is stored on the left selects indices 0, 1 and 3 for target 6." width="520"></picture>
+
+**Figure 64.** Six values are split into two halves of three; the sums of all eight subsets of each half are listed, and the first right sum whose complement is stored on the left selects indices 0, 1 and 3 for target 6. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 Meet-in-the-middle splits the indices, hashes left-half subset sums and scans
 right-half sums for complements. Its invariant is that each stored sum has a real
 witness from one half; complementary sums therefore combine disjoint valid
@@ -102,6 +110,42 @@ breaks ties; it is not lexicographic ordering of index lists.
 These are extension exercises, not additional maintained puzzle APIs. Their
 state spaces can be enormous; a compact example is not evidence of scalability.
 
+## In real Java
+
+Sums of `int` values need a wider accumulator. Two `int` values near the limit
+wrap when added as `int`, but the repository method takes a `long` target and
+works in `long`, so a target above `Integer.MAX_VALUE` is reachable. In your own
+code use `long` sums or `Math.addExact` to turn an overflow into an exception.
+
+```java
+import io.github.ichillous.dsa.algorithms.BacktrackingPuzzles;
+import java.util.List;
+
+int[] values = {Integer.MAX_VALUE, 1};
+assert Integer.MAX_VALUE + 1 < 0; // int arithmetic wraps
+long target = (long) Integer.MAX_VALUE + 1L;
+assert BacktrackingPuzzles.subsetSum(values, target).orElseThrow().equals(List.of(0, 1));
+boolean threw = false;
+try {
+    Math.addExact(values[0], values[1]);
+} catch (ArithmeticException expected) {
+    threw = true;
+}
+assert threw;
+```
+
+## Common mistakes
+
+- **Pruning on a negative remainder.** With `[4, -7, 3]` and target `-4`, stopping
+  when the remaining target is negative rejects the answer `[-7, 3]` before it is
+  found; the pruning assumption (nonnegative values) is not in the contract.
+- **Checking rows only in Sudoku.** A board whose rows are permutations of 1 to 9
+  can repeat a digit in a column or box, so the invariant "each digit agrees with
+  its row, column and box" needs all three checks.
+- **Expecting a unique witness.** `[1, 2, 3]` with target 3 has `{3}` and `{1, 2}`;
+  the method returns the smallest mask, `[0, 1]`, and a test should check the sum
+  rather than pin another arbitrary answer.
+
 ## Practice
 
 1. Validate every row, column and box of a returned Sudoku board; checking rows
@@ -110,5 +154,28 @@ state spaces can be enormous; a compact example is not evidence of scalability.
 3. Compare subset-sum witnesses with exhaustive masks for small signed arrays;
    check both the selected indices and their sum, without requiring one arbitrary
    witness when several solutions exist.
+
+## Check yourself
+
+<details>
+<summary>Why does `solveSudoku` choose the empty cell with the fewest legal candidates?</summary>
+
+A cell with one or zero candidates exposes a forced move or a contradiction immediately, so dead branches are cut sooner than with an arbitrary scan order.
+
+</details>
+
+<details>
+<summary>In the subset-sum figure, why is left mask 7 not stored although its sum is 0?</summary>
+
+Left mask 0 already has sum 0 and is smaller, and the method keeps the smallest left mask per sum so the combined mask is the smallest overall.
+
+</details>
+
+<details>
+<summary>Why is the meet-in-the-middle time bound only "expected"?</summary>
+
+It depends on hash-map lookups taking constant expected time; the worst case of a hash lookup is not constant.
+
+</details>
 
 The [solutions](../../docs/solutions.md) explain failure atomicity and witness checks. The [solution finder](../../docs/solution-finder.md#20-backtracking-and-search) compares this technique with its alternatives.

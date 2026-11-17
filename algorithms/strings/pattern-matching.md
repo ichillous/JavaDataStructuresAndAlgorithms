@@ -49,7 +49,7 @@ and only a unit past `right` can extend that value, so total work is O(n).
 <!-- visual:generated z-box -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/z-box-dark.svg"><img src="../../docs/visuals/assets/z-box.svg" alt="The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box." width="520"></picture>
 
-**Figure 84.** The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 91.** The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 `zFindAll` computes the z-array of `pattern + text`. A position `p + i` with
@@ -66,7 +66,7 @@ and units below 2^16, so every product fits in a `long`.
 <!-- visual:generated rabin-karp-rolling -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/rabin-karp-rolling-dark.svg"><img src="../../docs/visuals/assets/rabin-karp-rolling.svg" alt="Searching aeaecbagab for bagab slides a five-unit window; windows 0 and 5 have the pattern&#x27;s hash, window 0 (aeaec) is rejected at unit 0 and window 5 is reported." width="520"></picture>
 
-**Figure 85.** Searching aeaecbagab for bagab slides a five-unit window; windows 0 and 5 have the pattern's hash, window 0 (aeaec) is rejected at unit 0 and window 5 is reported. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 92.** Searching aeaecbagab for bagab slides a five-unit window; windows 0 and 5 have the pattern's hash, window 0 (aeaec) is rejected at unit 0 and window 5 is reported. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 **Manacher.** For every center, the algorithm reuses the mirror image inside the
@@ -77,7 +77,7 @@ the earliest start wins.
 <!-- visual:generated manacher-mirror -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/manacher-mirror-dark.svg"><img src="../../docs/visuals/assets/manacher-mirror.svg" alt="In cabacabad the palindrome abacaba around index 4 spans [1, 7]; index 5 copies radius 1 from index 3 and index 6 caps radius 3 from index 2 at the 2 units left, giving odd radii 1, 1, 3, 1, 4, 1, 2, 1, 1." width="520"></picture>
 
-**Figure 86.** In cabacabad the palindrome abacaba around index 4 spans [1, 7]; index 5 copies radius 1 from index 3 and index 6 caps radius 3 from index 2 at the 2 units left, giving odd radii 1, 1, 3, 1, 4, 1, 2, 1, 1. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 93.** In cabacabad the palindrome abacaba around index 4 spans [1, 7]; index 5 copies radius 1 from index 3 and index 6 caps radius 3 from index 2 at the 2 units left, giving odd radii 1, 1, 3, 1, 4, 1, 2, 1, 1. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Worked trace

@@ -5,6 +5,14 @@ These examples use the maintained
 Inputs are not modified; null inputs are rejected. Distinguish a returned optimum
 value from a reconstructed solution: these methods return values or lengths.
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | You need the best value over a sequence or two strings: knapsack, LCS, edit distance, LIS |
+| **Avoid it when** | You need every optimal solution, or the numeric capacity or string lengths make the table too large |
+| **Cost** | O(nW) for knapsack, O(mn) for LCS and edit distance, O(n log n) for LIS |
+| **In this repo** | [`DynamicProgramming`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java): `knapsack01`, `longestCommonSubsequence`, `editScript`, `longestIncreasingSubsequenceLength` |
+| **In the JDK** | No direct equivalent; `Arrays.binarySearch` helps with the LIS tails array |
+
 <!-- visual:generated knapsack-state -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/knapsack-state-dark.svg"><img src="../../docs/visuals/assets/knapsack-state.svg" alt="Sweep capacities backward so an item cannot reuse itself." width="520"></picture>
 
@@ -83,6 +91,39 @@ LIS takes O(n log(n + 1)) time and O(n) auxiliary space. Equal values replace a
 tail; they do not extend a strictly increasing sequence. The tail array records
 best possibilities by length and is not necessarily one actual subsequence.
 
+## In real Java
+
+The JDK offers no LCS or knapsack, but the LIS tails array is a sorted prefix, so
+`Arrays.binarySearch` finds the slot to replace. Because strict-LIS tails are
+strictly increasing, a hit is unique. The detail to remember is the miss: for an
+absent key the method returns `-(insertion point) - 1`, so the replacement slot is
+`-result - 1`. That slot is the first tail that is `>=` the value, or the current
+size when the value extends the longest subsequence.
+
+```java
+import java.util.Arrays;
+
+int[] tails = {2, 5, 7, 9}; // strictly increasing, as in strict LIS
+int hit = Arrays.binarySearch(tails, 0, tails.length, 7);
+assert hit == 2; // present: replace the tail at this index with the same value
+int miss = Arrays.binarySearch(tails, 0, tails.length, 6);
+assert miss == -3 && -miss - 1 == 2; // absent: insertion point 2 replaces tail 7
+int beyond = Arrays.binarySearch(tails, 0, tails.length, 10);
+assert beyond == -5 && -beyond - 1 == tails.length; // larger than all: append
+```
+
+## Common mistakes
+
+- **Ascending capacity loop for 0/1 knapsack.** One item of weight 2 and value 3
+  with capacity 4 yields 6 instead of 3. The invariant "each state describes only
+  earlier items" fails because the item feeds itself.
+- **Non-strict tail replacement in LIS.** Replacing only when the tail is strictly
+  greater makes input `[2, 2, 2]` report 3 instead of 1, because equal values are
+  appended as if they were increasing.
+- **Counting characters instead of UTF-16 units.** `editDistance` works on
+  UTF-16 units, so `"😀"` (one emoji, two units) against `"a"` costs 2, not 1.
+  A distance defined over code points or grapheme clusters is a different problem.
+
 ## Practice
 
 1. Trace knapsack with a zero-weight positive-value item; prove it is added once.
@@ -131,6 +172,15 @@ equal units are taken; else up if dp[i-1][j] >= dp[i][j-1], else left
 taken in reverse: A B C B  -> reading forward: "BCBA"
 ```
 
+The same walk on a smaller pair, with the tie at the corner made visible: the
+corner cells above and to the left both hold 3, so the rule goes up first.
+
+<!-- visual:generated lcs-traceback -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/lcs-traceback-dark.svg"><img src="../../docs/visuals/assets/lcs-traceback.svg" alt="The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT." width="520"></picture>
+
+**Figure 58.** The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ```java
 import io.github.ichillous.dsa.algorithms.DynamicProgramming;
 import java.util.List;
@@ -156,6 +206,15 @@ assert DynamicProgramming.longestIncreasingSubsequenceIndices(
 `EditStep` indices are cursor positions before the step: `MATCH` and `SUBSTITUTE`
 consume one unit of each string, `DELETE` consumes a source unit, and `INSERT`
 emits a target unit. Replaying the script over the source yields the target.
+
+<!-- visual:generated edit-distance-grid -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/edit-distance-grid-dark.svg"><img src="../../docs/visuals/assets/edit-distance-grid.svg" alt="The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3." width="520"></picture>
+
+**Figure 59.** The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
+The picture shows the walk for `"brain"` to `"paint"`: at each cell the diagonal
+is tried first (a match or a substitution), then a delete, then an insert.
 
 | Method | Time | Auxiliary space |
 | --- | --- | --- |
@@ -187,6 +246,33 @@ index list is one optimum, not the leftmost or the only one.
    is returned and why a later equal item is not preferred.
 3. Change the LCS tie test to `>` instead of `>=`. Which string does
    `"ABCBDAB"` / `"BDCABA"` give now, and is its length still 4?
+
+## Check yourself
+
+<details>
+<summary>Why does 0/1 knapsack sweep capacities downward?</summary>
+
+A downward sweep reads `best[w - weight]` before it is overwritten for the current
+item, so the predecessor still describes only earlier items. An upward sweep would let the same item be counted again.
+
+</details>
+
+<details>
+<summary>In the LCS traceback, which neighbor is chosen when the cell above and the cell to the left are equal, and why does it matter?</summary>
+
+The walk goes up, because the rule tests `dp[i-1][j] >= dp[i][j-1]`. Different tie
+rules return different, equally long subsequences, so tests should compare lengths or validity.
+
+</details>
+
+<details>
+<summary>Why does `editScript` for `"brain"` to `"paint"` start with a delete instead of a substitution?</summary>
+
+The walk runs from the corner backwards, and the script is its reverse. The walk
+ends in column 0 at row 1, where no diagonal exists and only a delete remains, so
+that last step becomes the first operation: delete b, then replace r with p.
+
+</details>
 
 See the [catalog](../../docs/catalog.md) and the
 [complexity guide](../../docs/complexity.md) for the contracts. The [solution finder](../../docs/solution-finder.md#18-dynamic-programming) compares this technique with its alternatives.

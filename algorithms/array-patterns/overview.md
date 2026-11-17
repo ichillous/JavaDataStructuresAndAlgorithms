@@ -37,7 +37,7 @@ first index that has any partner, and its largest partner. Sums use `long`, so
 <!-- visual:generated two-pointers-pair-sum -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/two-pointers-pair-sum-dark.svg"><img src="../../docs/visuals/assets/two-pointers-pair-sum.svg" alt="pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3." width="520"></picture>
 
-**Figure 65.** pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 72.** pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Target `6` in `[1, 2, 3, 4, 6]`:
@@ -61,7 +61,7 @@ result is a half-open `StringAlgorithms.Span`, the same type that
 <!-- visual:generated sliding-window-distinct -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/sliding-window-distinct-dark.svg"><img src="../../docs/visuals/assets/sliding-window-distinct.svg" alt="longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5." width="520"></picture>
 
-**Figure 66.** longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 73.** longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 `"abba"`:
@@ -85,7 +85,7 @@ rectangle spans from the element below it in the stack to the current index.
 <!-- visual:generated monotonic-stack-next-greater -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/monotonic-stack-next-greater-dark.svg"><img src="../../docs/visuals/assets/monotonic-stack-next-greater.svg" alt="nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1." width="520"></picture>
 
-**Figure 67.** nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 74.** nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 `[2, 1, 2, 4, 3]` (the stack lists indices):
@@ -112,7 +112,7 @@ final value does not fit.
 <!-- visual:generated difference-array-ranges -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/difference-array-ranges-dark.svg"><img src="../../docs/visuals/assets/difference-array-ranges.svg" alt="applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0." width="520"></picture>
 
-**Figure 68.** applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 75.** applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Length 5 with `+3` on `[1, 4)` and `+2` on `[0, 2)`:
@@ -133,7 +133,7 @@ number of intervals covering one point.
 <!-- visual:generated interval-sweep-rooms -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/interval-sweep-rooms-dark.svg"><img src="../../docs/visuals/assets/interval-sweep-rooms.svg" alt="minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice." width="520"></picture>
 
-**Figure 69.** minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 76.** minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 `[0,30), [5,10), [15,20)`:

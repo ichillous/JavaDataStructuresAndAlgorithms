@@ -59,7 +59,7 @@ low high mid  days needed  fits?  action
 <!-- visual:generated predicate-boundary | The monotone row of capacities 4 to 16 and the four probes firstTrue makes on the way to capacity 6. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/predicate-boundary-dark.svg"><img src="../../docs/visuals/assets/predicate-boundary.svg" alt="For weights 3, 2, 2, 4, 1, 4 shipped in 3 days, capacities 4 and 5 are too slow and 6 to 16 fit. firstTrue(4, 17, fits) probes 10, 7, 5 and 6 and returns 6." width="520"></picture>
 
-**Figure 76.** The monotone row of capacities 4 to 16 and the four probes firstTrue makes on the way to capacity 6. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 83.** The monotone row of capacities 4 to 16 and the four probes firstTrue makes on the way to capacity 6. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ```java

@@ -463,7 +463,63 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A set is an int: test, set and clear bits in one operation, and (sub − 1) & mask visits every subset.
 
-## 58. Three ways to store a graph
+## 58. LCS table and traceback
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/lcs-traceback-dark.svg"><img src="assets/lcs-traceback.svg" alt="The longest-common-subsequence table for GCTA and TGCAT, with the path longestCommonSubsequence walks back from the corner: it goes up on the tie at the corner, takes T, C and G on equal letters, and returns GCT." width="520"></picture>
+
+**Key idea:** The traceback re-derives each choice from the table: take equal letters, otherwise move toward the larger neighbour, and go up on a tie.
+
+## 59. Edit distance path
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/edit-distance-grid-dark.svg"><img src="assets/edit-distance-grid.svg" alt="The edit-distance table for brain and paint with the path editScript returns: delete b, replace r with p, keep a, i and n, then insert t, for distance 3." width="520"></picture>
+
+**Key idea:** Walking back from the corner prefers the diagonal, then delete, then insert; each step that is not a match adds 1.
+
+## 60. Matrix chain splits
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/classic-problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/matrix-chain-splits-dark.svg"><img src="assets/matrix-chain-splits.svg" alt="The cost table for four matrices with dimensions 30, 1, 40, 10, 25, the three candidate splits of the whole chain, and the stored splits that give (A1((A2A3)A4)) at cost 1400." width="520"></picture>
+
+**Key idea:** Each cell keeps the cheapest split k; following the stored splits from the whole chain down gives the parenthesization.
+
+## 61. Held-Karp states
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/classic-problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/held-karp-masks-dark.svg"><img src="assets/held-karp-masks.svg" alt="The Held-Karp table for four cities, one cost per visited set and last city, the closing edge back to city 0, and the optimal tour 0, 2, 3, 1, 0 of cost 80." width="520"></picture>
+
+**Key idea:** Held-Karp keeps one best cost per (visited set, last city), so 2^n n^2 steps replace the (n-1)! tours.
+
+## 62. Weighted interval choices
+
+[Optimization: read the lesson](../../algorithms/dynamic-programming/classic-problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/weighted-interval-choice-dark.svg"><img src="assets/weighted-interval-choice.svg" alt="Four weighted intervals sorted by end with their last compatible interval, the take-or-skip comparison for each, and the walk back that chooses B and D for total weight 10." width="520"></picture>
+
+**Key idea:** Take an interval only if its weight plus the best earlier compatible schedule beats skipping it.
+
+## 63. Huffman merges and lengths
+
+[Optimization: read the lesson](../../algorithms/greedy/huffman-coding.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/huffman-tree-dark.svg"><img src="assets/huffman-tree.svg" alt="Five symbols with frequencies 5, 9, 12, 13 and 16 are merged two lightest at a time into a tree, which gives code lengths 3, 3, 2, 2 and 2 and a weighted length of 124." width="520"></picture>
+
+**Key idea:** Merging the two lightest nodes first leaves the rarest symbols deepest, so frequent symbols get the shortest codes.
+
+## 64. Subset sum, two halves
+
+[Optimization: read the lesson](../../algorithms/backtracking/problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/subset-sum-halves-dark.svg"><img src="assets/subset-sum-halves.svg" alt="Six values are split into two halves of three; the sums of all eight subsets of each half are listed, and the first right sum whose complement is stored on the left selects indices 0, 1 and 3 for target 6." width="520"></picture>
+
+**Key idea:** Each half has only 2^(n/2) subsets, so storing one half's sums and scanning the other's finds a pair in about 2^(n/2) steps, not 2^n.
+
+## 65. Three ways to store a graph
 
 [Graphs: read the lesson](../../data-structures/graphs/representation.md)
 
@@ -471,7 +527,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Edge tests favor a matrix; neighbor scans favor an adjacency list.
 
-## 59. BFS and DFS visit order
+## 66. BFS and DFS visit order
 
 [Graphs: read the lesson](../../data-structures/graphs/traversal.md)
 
@@ -479,7 +535,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A queue visits whole layers; a stack follows one branch to its end.
 
-## 60. Kahn's topological order
+## 67. Kahn's topological order
 
 [Graphs: read the lesson](../../algorithms/graph/topological-sort.md)
 
@@ -487,7 +543,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A vertex is output once its in-degree is 0, so every edge points forward.
 
-## 61. Shortest-path chooser
+## 68. Shortest-path chooser
 
 [Graphs: read the lesson](../../algorithms/graph/shortest-paths.md)
 
@@ -495,7 +551,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Use the most specific algorithm whose precondition your graph meets; each one exploits a fact the general one cannot assume.
 
-## 62. 0-1 BFS and its deque
+## 69. 0-1 BFS and its deque
 
 [Graphs: read the lesson](../../algorithms/graph/shortest-paths.md)
 
@@ -503,7 +559,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Zero-weight edges go to the deque's front, unit-weight edges to its back.
 
-## 63. A* with a good heuristic
+## 70. A* with a good heuristic
 
 [Graphs: read the lesson](../../algorithms/graph/shortest-paths.md)
 
@@ -511,7 +567,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A good heuristic keeps the search near the route; far cells never get an h evaluation.
 
-## 64. One Floyd-Warshall round
+## 71. One Floyd-Warshall round
 
 [Graphs: read the lesson](../../algorithms/graph/shortest-paths.md)
 
@@ -519,7 +575,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Round k asks whether going through vertex k beats the best route so far.
 
-## 65. Two pointers, sorted array
+## 72. Two pointers, sorted array
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -527,7 +583,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Each move drops an index with no partner: at most n - 1 moves.
 
-## 66. Window jumping a repeat
+## 73. Window jumping a repeat
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -535,7 +591,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The left edge never moves back, so each unit is added once: linear time.
 
-## 67. Next greater by stack
+## 74. Next greater by stack
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -543,7 +599,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Each index is pushed once and popped once: O(n) despite the inner loop.
 
-## 68. Range adds by differences
+## 75. Range adds by differences
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -551,7 +607,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Two marks per update, then one running sum: O(n + u) in total.
 
-## 69. Sweeping events for rooms
+## 76. Sweeping events for rooms
 
 [Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
 
@@ -559,7 +615,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The busiest moment sets the room count; at a tie an end comes first.
 
-## 70. Inversions during a merge
+## 77. Inversions during a merge
 
 [Array patterns: read the lesson](../../algorithms/divide-and-conquer/problems.md)
 
@@ -567,7 +623,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A smaller right value jumps over every left value still waiting.
 
-## 71. Four ways to walk a tree
+## 78. Four ways to walk a tree
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-trees.md)
 
@@ -575,7 +631,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Pre, in and post order differ only in when the root is read.
 
-## 72. Delete with two children
+## 79. Delete with two children
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-search-trees.md)
 
@@ -583,7 +639,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The successor's key replaces the deleted one; its old node is unlinked.
 
-## 73. Red links make 3-nodes
+## 80. Red links make 3-nodes
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -591,7 +647,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A red link and its black parent make one 3-node.
 
-## 74. Three local repairs
+## 81. Three local repairs
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -599,7 +655,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Rotations keep sorted order; a flip splits a 4-node.
 
-## 75. Linear search: first match
+## 82. Linear search: first match
 
 [Sorting and searching: read the lesson](../../algorithms/searching/linear-search.md)
 
@@ -607,7 +663,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A hit stops the scan; only a miss costs n comparisons.
 
-## 76. Predicate boundary search
+## 83. Predicate boundary search
 
 [Sorting and searching: read the lesson](../../algorithms/searching/binary-search-on-answer.md)
 
@@ -615,7 +671,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Once a capacity fits, every larger one fits: each probe halves the range.
 
-## 77. Quickselect keeps one part
+## 84. Quickselect keeps one part
 
 [Sorting and searching: read the lesson](../../algorithms/searching/selection.md)
 
@@ -623,7 +679,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** k lies in one part of each partition: keep it, discard the rest.
 
-## 78. K-way merge with a heap
+## 85. K-way merge with a heap
 
 [Sorting and searching: read the lesson](../../algorithms/searching/selection.md)
 
@@ -631,7 +687,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The smallest head is the next output; ties pop in list order.
 
-## 79. One insertion step
+## 86. One insertion step
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/insertion-sort.md)
 
@@ -639,7 +695,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.
 
-## 80. Heapsort phases
+## 87. Heapsort phases
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/heap-sort.md)
 
@@ -647,7 +703,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.
 
-## 81. Counting sort tally
+## 88. Counting sort tally
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -655,7 +711,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.
 
-## 82. Radix passes by digit
+## 89. Radix passes by digit
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -663,7 +719,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.
 
-## 83. Stable and unstable outcomes
+## 90. Stable and unstable outcomes
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -671,7 +727,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A stable sort keeps equal keys in their input order; an unstable sort may reorder them, losing any earlier ordering by tag.
 
-## 84. Z-array and the Z-box
+## 91. Z-array and the Z-box
 
 [Strings: read the lesson](../../algorithms/strings/pattern-matching.md)
 
@@ -679,7 +735,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** z[i] starts from its mirror's value; only units past the box edge extend it.
 
-## 85. Rabin-Karp: hash, then verify
+## 92. Rabin-Karp: hash, then verify
 
 [Strings: read the lesson](../../algorithms/strings/pattern-matching.md)
 
@@ -687,7 +743,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Hash hits only choose where to compare; verification rejects impostors.
 
-## 86. Manacher: reuse the mirror
+## 93. Manacher: reuse the mirror
 
 [Strings: read the lesson](../../algorithms/strings/pattern-matching.md)
 
@@ -695,7 +751,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Inside a palindrome a center copies its mirror's radius, capped at the edge.
 
-## 87. Aho-Corasick links
+## 94. Aho-Corasick links
 
 [Strings: read the lesson](../../algorithms/strings/multi-pattern-and-suffix-arrays.md)
 
@@ -703,7 +759,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A failure link points at the longest suffix of a node that is still in the trie.
 
-## 88. Aho-Corasick scan
+## 95. Aho-Corasick scan
 
 [Strings: read the lesson](../../algorithms/strings/multi-pattern-and-suffix-arrays.md)
 
@@ -711,7 +767,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** One state per text unit; links report every pattern that ends at that unit.
 
-## 89. Suffix array and a pattern range
+## 96. Suffix array and a pattern range
 
 [Strings: read the lesson](../../algorithms/strings/multi-pattern-and-suffix-arrays.md)
 
