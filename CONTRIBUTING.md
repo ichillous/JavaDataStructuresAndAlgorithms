@@ -79,3 +79,9 @@ layout guard. Review actual light/dark figures with
 viewer states with `--all`, after layout changes.
 Keep labels, arrows, alt text, captions and units meaningful. See the
 [visual design guide](docs/visuals/design.md) and [verification](docs/visuals/verification.md).
+
+A new lesson under `algorithms/` or `data-structures/` goes in a topic subfolder, opens with
+an At a glance table (labels written with `&nbsp;`, as in the existing lessons), places at
+least one figure, and ends with In real Java, Common mistakes, Practice and Check yourself.
+The generated gallery on the folder's landing page (`<!-- visual:gallery FOLDER -->`) then
+lists it after you regenerate; the "Lesson contract" in the design guide gives the details.

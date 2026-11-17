@@ -31,3 +31,6 @@ This is a Java 17 educational library with executable Markdown lessons.
   generated SVGs/data/index or generated lesson regions. Preserve arrow meaning,
   units, state boundaries, alt text and readable labels in both themes. Review
   actual rendered figures and mobile/desktop states after layout changes.
+- Lessons under `algorithms/` and `data-structures/` follow the "Lesson contract" in
+  `docs/visuals/design.md` (At a glance with `&nbsp;` labels, a figure, Check yourself);
+  the landing pages' `<!-- visual:gallery FOLDER -->` regions list them when regenerated.

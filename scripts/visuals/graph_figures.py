@@ -195,7 +195,7 @@ FIGURES = [
      "height": 1070, "draw": draw_dijkstra},
     {"id": "bellman-negative", "title": "Negative edge or cycle?", "category": "Graphs",
      "description": "A negative edge yields -3; an added cycle makes targets 1 and 2 unbounded.",
-     "lesson": "algorithms/graph/bfs.md",
+     "lesson": "algorithms/graph/shortest-paths.md",
      "keyIdea": "A negative edge can be safe; this API rejects any reachable negative cycle.",
      "height": 1100, "draw": draw_bellman},
     {"id": "scc-bridges", "title": "SCCs and bridges differ", "category": "Graphs",

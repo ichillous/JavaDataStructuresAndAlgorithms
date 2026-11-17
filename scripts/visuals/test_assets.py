@@ -365,8 +365,65 @@ class MoreTraceTest(unittest.TestCase):
         self.assertEqual(sorted(ints(self.fixtures, "traces.topo.order")), list(range(size)))
 
 
+def visual_data():
+    """The object that docs/visuals/data/visual-data.js assigns, read as JSON."""
+    text = (VISUALS / "data/visual-data.js").read_text(encoding="utf-8")
+    return json.loads(text[text.index("{"):text.rindex("}") + 1])
+
+
+class CoverageTest(unittest.TestCase):
+    """Every figure is placed, every lesson shows one, and the rendered review covers them all."""
+
+    maxDiff = None
+
+    @classmethod
+    def setUpClass(cls):
+        cls.generator = load_generator()
+        cls.manifest = json.loads((VISUALS / "data/manifest.json").read_text(encoding="utf-8"))
+        cls.placements = {}
+        for name in cls.generator.region_pages():
+            for region in cls.generator.find_regions(name, (ROOT / name).read_text(encoding="utf-8")):
+                cls.placements.setdefault(region.figure_id, set()).add(name)
+
+    def test_every_figure_is_placed_in_at_least_one_region(self):
+        unplaced = [figure["id"] for figure in self.manifest["figures"] if figure["id"] not in self.placements]
+        self.assertEqual([], unplaced)
+
+    def test_each_figure_lesson_places_that_figure(self):
+        wrong = {}
+        for figure in self.manifest["figures"]:
+            lesson = (VISUALS / figure["lesson"]).resolve().relative_to(ROOT).as_posix()
+            if lesson not in self.placements.get(figure["id"], set()):
+                wrong[figure["id"]] = (lesson, sorted(self.placements.get(figure["id"], set())))
+        self.assertEqual({}, wrong, "figure id: (its lesson, the pages that place it)")
+
+    def test_every_lesson_under_the_two_folders_has_a_figure_region_and_an_at_a_glance_table(self):
+        lessons = sorted(path for folder in GALLERY_FOLDERS for path in (ROOT / folder).rglob("*.md"))
+        self.assertGreaterEqual(len(lessons), 71)
+        for path in lessons:
+            name = path.relative_to(ROOT).as_posix()
+            with self.subTest(lesson=name):
+                text = path.read_text(encoding="utf-8")
+                self.assertTrue(self.generator.find_regions(name, text), "no figure region")
+                self.assertTrue(any(self.generator.GLANCE_HEADER.match(line) for line in text.split("\n")),
+                                "no At a glance table")
+
+    def test_rendered_review_covers_every_svg_and_trace_state_and_found_no_issue(self):
+        report = json.loads((VISUALS / "data/browser-review.json").read_text(encoding="utf-8"))
+        svgs = sorted((VISUALS / "assets").glob("*.svg"))
+        self.assertEqual(2 * len(self.manifest["figures"]), len(svgs))
+        self.assertEqual(len(svgs), report["svg_variants"])
+        frames = sum(len(trace["frames"]) for trace in visual_data()["traces"])
+        layouts = len(report["viewports"]) * len(report["themes"])
+        self.assertEqual(frames * layouts, report["tested_frame_states"],
+                         "every trace frame is checked once per viewport and theme")
+        self.assertEqual([], report["issues"])
+        for screenshot in report["screenshots"]:
+            self.assertTrue((VISUALS / screenshot).is_file(), screenshot)
+
+
 GALLERY_FOLDERS = ("algorithms", "data-structures")
-ROW_LINK = re.compile(r"\| \[(?P<title>(?:[^\]\\]|\\.)+)\]\((?P<href>[^)]+)\) \|")
+ROW_LINK =re.compile(r"\| \[(?P<title>(?:[^\]\\]|\\.)+)\]\((?P<href>[^)]+)\) \|")
 
 
 def gallery_lessons(folder):
