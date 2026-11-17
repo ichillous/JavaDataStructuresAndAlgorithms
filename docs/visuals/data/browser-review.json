@@ -1,6 +1,6 @@
 {
-  "svg_variants": 52,
-  "tested_frame_states": 216,
+  "svg_variants": 196,
+  "tested_frame_states": 472,
   "screenshots": [
     "previews/desktop-light.png",
     "previews/desktop-dark.png",
@@ -23,5 +23,5 @@
     "dark"
   ],
   "review_mode": "Chromium over loopback HTTP; direct file URL navigation blocked by managed browser policy",
-  "date": "2026-11-02"
+  "date": "2026-11-17"
 }
