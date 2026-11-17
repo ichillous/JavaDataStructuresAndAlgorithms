@@ -6,7 +6,7 @@ A linked list stores a sequence in nodes connected by references. It trades chea
 | --- | --- |
 | **Use it when** | You work at the ends or at nodes you already hold, as in queues, deques and recency lists. |
 | **Avoid it when** | You index by position or scan the whole sequence often; an array is both simpler and kinder to the cache. |
-| **Cost** | Add or remove at either end O(1); reach an indexed node O(min(i, n - i)) in a doubly linked list. |
+| **Cost** | Add or remove at either end O(1); reach an indexed node O(min(i, n - 1 - i)) in a doubly linked list. |
 | **In this repo** | [`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java) |
 | **In the JDK** | `java.util.LinkedList` (doubly linked); for queue or stack use, `java.util.ArrayDeque`. |
 

@@ -87,7 +87,7 @@ import java.util.Deque;
 import java.util.Map;
 
 Map<Character, Character> openerFor = Map.of(')', '(', ']', '[', '}', '{');
-String[] inputs = {"{[()]}", "([)]", "(()", "())"};
+String[] inputs = {"{[()]}", "([)]", "(()", "())", "a(b)"};
 boolean[] balanced = new boolean[inputs.length];
 for (int i = 0; i < inputs.length; i++) {
     Deque<Character> openers = new ArrayDeque<>();
@@ -95,6 +95,8 @@ for (int i = 0; i < inputs.length; i++) {
     for (char token : inputs[i].toCharArray()) {
         if (openerFor.containsValue(token)) {
             openers.push(token);
+        } else if (!openerFor.containsKey(token)) {
+            continue; // Ignore characters that are not brackets.
         } else if (openers.isEmpty() || openers.pop().charValue() != openerFor.get(token)) {
             ok = false; // A closer with no matching opener on top.
             break;
@@ -102,7 +104,7 @@ for (int i = 0; i < inputs.length; i++) {
     }
     balanced[i] = ok && openers.isEmpty();
 }
-assert balanced[0] && !balanced[1] && !balanced[2] && !balanced[3];
+assert balanced[0] && !balanced[1] && !balanced[2] && !balanced[3] && balanced[4];
 ```
 
 ## Check yourself

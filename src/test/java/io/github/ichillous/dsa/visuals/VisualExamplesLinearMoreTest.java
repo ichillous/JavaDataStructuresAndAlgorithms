@@ -98,7 +98,7 @@ class VisualExamplesLinearMoreTest {
     }
 
     @Test
-    void insertingAfterAKnownNodeInTheRightOrderMatchesTheJdkAndTheMaintainedList() {
+    void insertingAfterAKnownNodeInTheRightOrderMatchesTheJdkLinkedList() {
         int[] before = DATA.ints("linear_more.insert.before");
         int predecessor = DATA.number("linear_more.insert.predecessorIndex");
         int value = DATA.number("linear_more.insert.value");
@@ -115,16 +115,9 @@ class VisualExamplesLinearMoreTest {
 
         LinkedList<Integer> jdk = new LinkedList<>(Arrays.stream(before).boxed().toList());
         jdk.add(predecessor + 1, value);
-        DoublyLinkedList<Integer> maintained = new DoublyLinkedList<>();
-        for (int element : DATA.ints("linear_more.insert.result")) {
-            maintained.addLast(element);
-        }
-        List<Integer> maintainedContents = new ArrayList<>();
-        maintained.forEach(maintainedContents::add);
 
         assertEquals(DATA.list("linear_more.insert.result"), observed);
         assertEquals(DATA.list("linear_more.insert.result"), jdk);
-        assertEquals(DATA.list("linear_more.insert.result"), maintainedContents);
     }
 
     @Test
@@ -289,6 +282,9 @@ class VisualExamplesLinearMoreTest {
             // docs/complexity.md: the node is found in min(index, n - 1 - index) hops from the nearer end.
             assertEquals(hops[position], Math.min(position, values.length - 1 - position),
                     "hops to index " + position);
+            // The start end (colors in the figure) follows the documented nearer-end rule.
+            assertEquals(DATA.list("linear_more.access.fromTail").contains(position),
+                    position >= values.length / 2, "start end for index " + position);
         }
     }
 

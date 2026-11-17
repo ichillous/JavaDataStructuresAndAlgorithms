@@ -45,15 +45,9 @@ The backing dynamic array grows geometrically. Push is O(1) amortized but O(n) o
 
 A Java call stack also stores unfinished method invocations, but recursive calls consume JVM frames. Java does not guarantee tail-call elimination. An explicit data-structure stack can avoid recursive depth limits, while still requiring memory for pending work.
 
-## Common mistake
-
-“Use a stack to visit the nearest vertex first” is wrong: the most recently scheduled vertex comes first, not necessarily the vertex with fewest edges from the source. Use a FIFO queue for BFS and an explicit stack for DFS.
-
-For application code, `ArrayDeque` is the usual JDK stack choice. This repository's stack exists so that growth, bounds and empty-state behavior are inspectable.
-
 ## In real Java
 
-The `java.util.Stack` class documents that the `Deque` interface and its implementations should be used in preference to it, so production code uses `ArrayDeque`. `push` adds at the front, so iteration starts at the top. The empty-stack behavior differs from this repository's `ArrayStack`: `pop` throws `NoSuchElementException`, but `peek` returns null.
+The `java.util.Stack` class documents that the `Deque` interface and its implementations should be used in preference to it, so production code uses `ArrayDeque`. This repository's stack exists so that growth, bounds and empty-state behavior are inspectable. `push` adds at the front, so iteration starts at the top. The empty-stack behavior differs from this repository's `ArrayStack`: `pop` throws `NoSuchElementException`, but `peek` returns null.
 
 ```java
 import java.util.ArrayDeque;
@@ -80,7 +74,7 @@ assert rejected;
 
 ## Common mistakes
 
-1. **Using a stack for breadth-first order.** Pushing the neighbors `1` and `2` of vertex `0` pops `2` first, so the walk is depth-first. BFS needs a FIFO queue so that vertices leave in the order they were discovered.
+1. **Using a stack for breadth-first order.** "Visit the nearest vertex first" is not what a stack does: pushing the neighbors `1` and `2` of vertex `0` pops `2` first, so the walk is depth-first and need not reach the vertex with the fewest edges first. BFS needs a FIFO queue so that vertices leave in the order they were discovered.
 2. **Popping without checking.** Reading `)` as the first character of the balance check pops an empty stack and throws `NoSuchElementException`. An empty stack at a closer means the input closes something never opened, which the check must report instead of crashing.
 3. **Assuming `java.util.Stack` iterates like a stack.** After `push(1)`, `push(2)`, `push(3)` its iteration order is `[1, 2, 3]`, bottom first, because it is a `Vector`; an `ArrayDeque` used with `push` iterates `[3, 2, 1]`. Code that prints or copies the structure sees opposite orders.
 

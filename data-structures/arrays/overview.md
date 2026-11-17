@@ -101,7 +101,7 @@ assert growable.size() == 4 && backing.length == 3;
 
 ## Common mistakes
 
-1. **Shifting left to right on insertion.** Inserting `X` at index 1 of `[10, 20, 30]` by copying forward overwrites `20` with itself and then `30` with `20`, leaving `[10, X, 20, 20]` instead of `[10, X, 20, 30]`. This breaks the rule that every live element survives an insertion.
+1. **Shifting left to right on insertion.** Inserting `X` at index 1 of `[10, 20, 30]` with a forward loop first copies `20` over `30` (slot 2), then copies that same `20` into slot 3, and finally writes `X` at index 1. The result is `[10, X, 20, 20]` instead of `[10, X, 20, 30]`: `30` is lost. This breaks the rule that every live element survives an insertion.
 2. **Reading at `size` instead of below it.** With three elements, `get(3)` is out of range even when the capacity is eight. Live elements occupy exactly the prefix `[0, size)`; only insertion may use `index == size`.
 3. **Treating a copy as a clone of the contents.** `Arrays.copyOfRange` on an array of mutable objects copies references, so changing an object through the copy changes it in the original. The copied array has its own slots, but its elements are shared.
 

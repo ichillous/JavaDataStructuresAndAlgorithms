@@ -117,7 +117,9 @@ def singly_insert_after(c, fixtures):
     y = c.step(156, 1, f"Insert {value} after {predecessor}")
     row = y + 48
     _chain(c, row, before, head=True)
-    c.node(NODE_XS[3], row, value, radius=NODE_R, state="warn")
+    # The new node sits apart from the chain, with no link in or out.
+    c.node(462, 150, value, radius=NODE_R, state="warn")
+    c.text(430, 157, "new, not linked", anchor="end", size=18, color="gold", weight="700")
 
     # 2. The right order.
     y = c.step(row + 56, 2, "Right order: copy the link, then redirect")
@@ -286,6 +288,7 @@ def array_vs_list_access(c, fixtures):
     assert values[index] == value
     assert hops == [i if i < count // 2 else count - 1 - i for i in range(count)]
     from_head = index < count // 2
+    assert [i for i in range(count) if i >= count // 2] == ints(fixtures, "linear_more.access.fromTail")
     steps = index if from_head else count - 1 - index
     assert not from_head and steps == hops[index]
 
