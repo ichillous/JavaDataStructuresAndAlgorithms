@@ -419,7 +419,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 [Maps: read the lesson](../../data-structures/README.md)
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/data-structures-map-dark.svg"><img src="assets/data-structures-map.svg" alt="9 cards sort the structures by the question they answer. Each card names the family, a method to start with and the folder to open: by position, DynamicArray.get, arrays/ and linked-lists/; by arrival, RingDeque.removeFirst, stacks/ and queues/; by key, ChainedHashMap.get, hash-tables/; by order, RedBlackTreeMap.floorKey, trees/; by priority, BinaryMinHeap.remove, heaps/; by prefix, Trie.wordsWithPrefix, tries/; by range, FenwickTree.rangeSum, range-queries/; by connectivity, UnionFind.connected, union-find/ and graphs/; approximately, BloomFilter.mightContain, probabilistic/." width="520"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/data-structures-map-dark.svg"><img src="assets/data-structures-map.svg" alt="9 cards sort the structures by the question they answer. Each card shows a small pictogram, names the family, a method to start with and the folder to open: by position, DynamicArray.get, arrays/ and linked-lists/; by arrival, RingDeque.removeFirst, stacks/ and queues/; by key, ChainedHashMap.get, hash-tables/; by order, RedBlackTreeMap.floorKey, trees/; by priority, BinaryMinHeap.remove, heaps/; by prefix, Trie.wordsWithPrefix, tries/; by range, FenwickTree.rangeSum, range-queries/; by connectivity, UnionFind.find, union-find/ and graphs/; approximately, BloomFilter.mightContain, probabilistic/." width="520"></picture>
 
 **Key idea:** Pick by the question you must answer.
 
@@ -427,7 +427,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 [Maps: read the lesson](../../algorithms/README.md)
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/algorithms-map-dark.svg"><img src="assets/algorithms-map.svg" alt="9 cards sort the algorithms by the task they perform. Each card names the family, a method to start with and the folder to open: search, SearchAlgorithms.lowerBound, searching/ and array-patterns/; sort, SortAlgorithms.mergeSort, sorting/ and divide-and-conquer/; select, Selection.kthSmallest, searching/; traverse, GraphAlgorithms.breadthFirst, graph/; shortest path, GraphAlgorithms.dijkstra, graph/; connect, FlowNetwork.maxFlow, graph/; optimize, DynamicProgramming.knapsack01, dynamic-programming/ and greedy/ and backtracking/; match text, StringAlgorithms.kmpFindAll, strings/; compute, NumberTheory.modPow, math/ and bit-manipulation/." width="520"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/algorithms-map-dark.svg"><img src="assets/algorithms-map.svg" alt="9 cards sort the algorithms by the task they perform. Each card shows a small pictogram, names the family, a method to start with and the folder to open: search, SearchAlgorithms.lowerBound, searching/ and array-patterns/; sort, SortAlgorithms.mergeSort, sorting/ and divide-and-conquer/; select, Selection.kthSmallest, searching/; traverse, GraphAlgorithms.breadthFirst, graph/; shortest path, GraphAlgorithms.dijkstra, graph/; connect, FlowNetwork.maxFlow, graph/; optimize, DynamicProgramming.knapsack01, greedy/ and backtracking/ and dynamic-programming/; match text, StringAlgorithms.kmpFindAll, strings/; compute, NumberTheory.gcd, math/ and bit-manipulation/." width="520"></picture>
 
 **Key idea:** Pick by the task you must perform.
 
