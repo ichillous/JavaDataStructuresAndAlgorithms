@@ -59,6 +59,9 @@ GALLERY_HEADINGS = {"divide-and-conquer": "Divide and conquer", "graph": "Graph 
 GLANCE_HEADER = re.compile(r"^\|\s*At(?: |&nbsp;)a(?: |&nbsp;)glance\s*\|")
 USE_IT_WHEN = re.compile(r"^\|\s*\*\*Use(?: |&nbsp;)it(?: |&nbsp;)when\*\*\s*\|(?P<cell>.*)\|\s*$")
 MARKDOWN_LINK = re.compile(r"(\]\()([^)\s]+)(\))")
+# Link forms the "Use it when" rewriter cannot move to the landing page: a target with a title
+# or in angle brackets, a reference link, or a raw HTML link. They fail the build instead.
+UNMOVABLE_LINK = re.compile(r"\]\((?![^)\s<]+\))[^)]*\)?|\]\[[^\]]*\]|<a\s[^>]*>|\bhref\s*=")
 Gallery = namedtuple("Gallery", "folder start end")
 
 
@@ -280,6 +283,33 @@ def choose_thumbnail(figure_ids, used):
     return chosen
 
 
+def folder_markdown(root, folder):
+    """Markdown files under ``root/folder``, as sorted paths relative to that folder.
+
+    In a git checkout this is the same listing region_pages uses (tracked, plus untracked
+    files that are not ignored), so every checkout lists the same lessons. When ``root`` is
+    not the top of a git checkout (the generator's tests use temporary directories), the file
+    system is read instead. Hidden files and folders are skipped.
+    """
+    root = Path(root)
+    try:
+        top = subprocess.run(["git", "rev-parse", "--show-toplevel"], cwd=root, capture_output=True,
+                             text=True, check=True).stdout.strip()
+        in_checkout = Path(top).resolve() == root.resolve()
+    except (OSError, subprocess.CalledProcessError):
+        in_checkout = False
+    if in_checkout:
+        names = subprocess.check_output(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard",
+                                         "--", folder], cwd=root).decode().split("\0")
+        prefix = folder.rstrip("/") + "/"
+        found = [name[len(prefix):] for name in names if name.startswith(prefix) and (root / name).is_file()]
+    else:
+        found = [path.relative_to(root / folder).as_posix() for path in (root / folder).rglob("*")
+                 if path.is_file()]
+    return sorted({name for name in found if name.endswith(".md")
+                   and not any(part.startswith(".") for part in name.split("/"))})
+
+
 def gallery_body(name, folder, figures_by_id, root=ROOT, used=None):
     """The Markdown that lists every lesson in the immediate subfolders of ``folder``.
 
@@ -287,17 +317,23 @@ def gallery_body(name, folder, figures_by_id, root=ROOT, used=None):
     are filled in gallery order and each takes a figure not yet shown when the lesson has one.
     """
     used = set() if used is None else used
-    base = root / folder
     page = (root / name).parent
-    loose = sorted(path.name for path in base.glob("*.md") if path.name != "README.md")
-    if loose:
-        raise ValueError(f"{folder}/{loose[0]} is not in a subfolder; the gallery lists only subfolder lessons")
+    by_folder = {}
+    for relative in folder_markdown(root, folder):
+        parts = relative.split("/")
+        if len(parts) == 1:
+            if parts[0] != "README.md":
+                raise ValueError(f"{folder}/{relative} is not in a subfolder; the gallery lists only subfolder lessons")
+        elif len(parts) == 2:
+            by_folder.setdefault(parts[0], []).append(root / folder / relative)
+        else:
+            raise ValueError(f"{folder}/{relative} is below an immediate subfolder; the gallery lists only "
+                             f"lessons in an immediate subfolder of {folder}")
     sections = []
-    for directory in sorted(path for path in base.iterdir() if path.is_dir() and not path.name.startswith(".")):
-        lessons = sorted(directory.glob("*.md"), key=lambda path: (path.name != "README.md", path.name))
-        if not lessons:
-            continue
-        rows = [f"### {gallery_heading(directory.name)}", "", "| Figure | Lesson | Use it when |", "| :---: | :--- | :--- |"]
+    for directory_name in sorted(by_folder):
+        lessons = sorted(by_folder[directory_name], key=lambda path: (path.name != "README.md", path.name))
+        rows = [f"### {gallery_heading(directory_name)}", "", "| Figure | Lesson | Use it when |",
+                "| :---: | :--- | :--- |"]
         for path in lessons:
             lesson = path.relative_to(root).as_posix()
             title, figure_ids, cell = gallery_entry(lesson, path.read_text(encoding="utf-8"), figures_by_id)
@@ -312,8 +348,14 @@ def gallery_body(name, folder, figures_by_id, root=ROOT, used=None):
                     return match.group(0)
                 return match.group(1) + _relative(lesson_dir / target, page) + match.group(3)
 
+            unsupported = UNMOVABLE_LINK.search(cell)
+            if unsupported:
+                raise ValueError(f"{lesson}: the Use it when cell has a link form the gallery cannot rewrite "
+                                 f"({unsupported.group(0)!r}); write it as [text](relative/path)")
+            # Escape "|" too: inside a Markdown table it would end the cell even within the alt text.
+            alt = escape(figure["description"], quote=True).replace("|", "&#124;")
             rows.append(f'| <a href="{href}"><picture><source media="(prefers-color-scheme: dark)" '
-                        f'srcset="{dark}"><img src="{light}" alt="{escape(figure["description"], quote=True)}" '
+                        f'srcset="{dark}"><img src="{light}" alt="{alt}" '
                         f'width="{GALLERY_THUMBNAIL_WIDTH}"></picture></a> | '
                         f'[{title.replace("|", chr(92) + "|")}]({href}) | {MARKDOWN_LINK.sub(relink, cell)} |')
         sections.append("\n".join(rows))
