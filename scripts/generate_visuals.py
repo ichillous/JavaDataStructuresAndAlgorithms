@@ -32,6 +32,8 @@ CORE_MODULES = ("linear_figures", "tree_figures", "algorithm_figures", "graph_fi
 FIGURE_KEYS = {"id", "title", "category", "description", "keyIdea", "lesson", "height", "draw"}
 
 END = "<!-- /visual:generated -->"
+FIGURE_ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
+INLINE_CODE = re.compile(r"(`+)(?:(?!\1).)+?\1")
 OPEN = re.compile(r"<!-- visual:generated (?P<id>[a-z0-9]+(?:-[a-z0-9]+)*)(?: \| (?P<caption>\S(?:.*\S)?))? -->")
 FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})")
 # Pages never scanned for regions: plans and fragments, and the generated visual index.
@@ -48,10 +50,27 @@ def figure_modules(directory=VISUALS_SOURCE):
 
 
 def collect_figures(module_names):
-    """Concatenate each module's FIGURES list; a repeated id fails the build."""
+    """Concatenate each module's FIGURES list after validating it.
+
+    A module without a FIGURES list, a figure that is not a dict, lacks a required key or has
+    an id that is not lowercase words joined by hyphens, or a repeated id fails the build.
+    """
     figures, owners = [], {}
     for name in module_names:
-        for figure in importlib.import_module(name).FIGURES:
+        module_figures = getattr(importlib.import_module(name), "FIGURES", None)
+        if not isinstance(module_figures, list):
+            raise ValueError(f"{name}: define FIGURES as a list of figure dicts")
+        for position, figure in enumerate(module_figures):
+            if not isinstance(figure, dict):
+                raise ValueError(f"{name}: FIGURES[{position}] is not a dict")
+            label = f"{name}: figure {figure.get('id', f'FIGURES[{position}]')!r}"
+            missing = FIGURE_KEYS - set(figure)
+            if missing:
+                raise ValueError(f"{label} lacks {', '.join(sorted(missing))}")
+            if not isinstance(figure["id"], str) or not FIGURE_ID.fullmatch(figure["id"]):
+                raise ValueError(f"{label}: an id must be lowercase words joined by hyphens")
+            if not callable(figure["draw"]):
+                raise ValueError(f"{label}: draw must be a function")
             if figure["id"] in owners:
                 raise ValueError(f"Duplicate figure id {figure['id']!r} in {owners[figure['id']]} and {name}")
             owners[figure["id"]] = name
@@ -102,9 +121,12 @@ def find_regions(name, text):
                 fence = None
             continue
         stripped = line.strip()
-        if fence is not None or not stripped.startswith("<!--") or "visual:generated" not in stripped:
+        if fence is not None or "visual:generated" not in INLINE_CODE.sub("", stripped):
             continue
         where = f"{name}:{number}"
+        if not stripped.startswith("<!--") or not stripped.endswith("-->") or stripped.count("<!--") > 1:
+            raise ValueError(f"{where}: a region marker must be alone on its line; "
+                             "put documentation of the syntax in inline code or a fence")
         if stripped == END:
             if current is None:
                 raise ValueError(f"{where}: closing marker without an opening region")

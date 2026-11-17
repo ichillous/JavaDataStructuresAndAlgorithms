@@ -5,6 +5,7 @@ that it is slightly wider than real text; browser_review.js checks the real boxe
 """
 import importlib.util
 from pathlib import Path
+import re
 import unittest
 
 from drawing import Canvas, STATES, estimate_text_width
@@ -106,6 +107,52 @@ class PrimitiveTest(unittest.TestCase):
         self.assertIn('stroke-dasharray="6 5"', svg)
         with self.assertRaisesRegex(ValueError, "glow"):
             drawn.cell_row(40, 260, ["a"], states=["glow"])
+
+    def test_state_names_are_colors_and_unknown_colors_fail(self):
+        drawn = canvas(900)
+        self.assertEqual(drawn.color("green"), drawn.color("good"))
+        # "muted" is both a palette name and a state; as a color it keeps its palette meaning.
+        self.assertNotEqual(drawn.color("line"), drawn.color("muted"))
+        self.assertEqual("none", drawn.color("none"))
+        drawn.chip(40, 140, "kept", color="good")
+        drawn.pointer(300, 200, "size", color="bad")
+        drawn.brace(40, 200, 300, "copies", color="alt")
+        drawn.curve(60, 400, 220, 400, color="warn", label="move")
+        drawn.node(320, 480, "1")
+        drawn.node(440, 480, "2")
+        drawn.edge((320, 480), (440, 480), color="focus", label="3")
+        drawn.arrow(40, 560, 120, 560, color="good")
+        drawn.line(40, 600, 120, 600, color="bad", arrow=True)
+        drawn.path("M 40 640 H 120", color="muted", arrow=True)
+        drawn.rect(200, 620, 40, 40, fill="none", stroke="alt")
+        svg = drawn.svg("colors")
+        defined = set(re.findall(r'<marker id="([^"]+)"', svg))
+        used = set(re.findall(r'marker-end="url\(#([^)]+)\)"', svg))
+        self.assertTrue(used, "the canvas should use arrow markers")
+        self.assertLessEqual(used, defined)
+        for paint in re.findall(r'(?:fill|stroke)="([^"]*)"', svg):
+            self.assertRegex(paint, r"^(#[0-9a-f]{6}|none)$")
+        for bad in ("glow", "#ff0000", "Good"):
+            with self.subTest(color=bad):
+                with self.assertRaisesRegex(ValueError, "Unknown color.*good"):
+                    drawn.chip(40, 700, "x", color=bad)
+                with self.assertRaisesRegex(ValueError, "Unknown color"):
+                    drawn.arrow(40, 700, 80, 700, color=bad)
+        with self.assertRaisesRegex(ValueError, "not 'none'"):
+            drawn.line(40, 700, 80, 700, color="none", arrow=True)
+
+    def test_mismatched_labels_identical_edge_ends_and_arcs_fail(self):
+        drawn = canvas(600)
+        with self.assertRaisesRegex(ValueError, "3 values but 2 labels"):
+            drawn.cell_row(40, 160, [1, 2, 3], labels=["0", "1"])
+        with self.assertRaisesRegex(ValueError, "2 rows but 1 row labels"):
+            drawn.grid(100, 200, [[1, 2], [3, 4]], row_labels=["a"])
+        with self.assertRaisesRegex(ValueError, "2 columns but 3 column labels"):
+            drawn.grid(100, 200, [[1, 2], [3, 4]], col_labels=["a", "b", "c"])
+        with self.assertRaisesRegex(ValueError, "two different endpoints"):
+            drawn.edge((100, 100), (100, 100))
+        with self.assertRaisesRegex(ValueError, "'A'"):
+            drawn.path("M 10 10 A 5 5 0 0 1 20 20")
 
     def test_every_primitive_draws_inside_a_clean_layout(self):
         drawn = canvas(800)

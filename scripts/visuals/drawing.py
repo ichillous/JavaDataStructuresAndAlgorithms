@@ -91,8 +91,8 @@ def _path_points(d):
         if token.isalpha():
             if command is not None:
                 flush()
-            if token.islower():
-                raise ValueError(f"Use absolute path commands only, not {token!r}")
+            if token.islower() or token.upper() == "A":
+                raise ValueError(f"Use absolute M, L, H, V, Q, C, T, S or Z path commands, not {token!r}")
             command, numbers = token.upper(), []
         else:
             numbers.append(float(token))
@@ -125,8 +125,29 @@ class Canvas:
         self.paragraph(28, 74, subtitle, width=43, size=20, color="muted")
         self.line(28, 118, 492, 118, color="line", width=1)
 
+    def color_key(self, color):
+        """The palette key for a palette name or a state name (a state means its stroke color).
+
+        Any other name raises ValueError, so a misspelling cannot emit an invalid paint or a
+        reference to an arrow marker that does not exist.
+        """
+        if color in self.colors:
+            return color
+        if color in STATES:
+            return STATES[color][0]
+        raise ValueError(f"Unknown color {color!r}; use a palette name ({', '.join(self.colors)}), "
+                         f"a state name ({', '.join(STATES)}) or 'none' for no paint")
+
     def color(self, color):
-        return self.colors.get(color, color)
+        """The hex paint for a palette or state name; ``"none"`` means no paint."""
+        if color == "none":
+            return "none"
+        return self.colors[self.color_key(color)]
+
+    def _marker(self, color):
+        if color == "none":
+            raise ValueError("An arrow needs a visible color, not 'none'")
+        return f' marker-end="url(#{self.id}-{self.color_key(color)}-arrow)"'
 
     # Original primitives: their output must not change.
 
@@ -154,7 +175,7 @@ class Canvas:
     def line(self, x1, y1, x2, y2, color="line", width=2, dashed=False, arrow=False):
         self.shape_bottoms.append((max(y1, y2), f"line from ({x1}, {y1}) to ({x2}, {y2})"))
         dash = ' stroke-dasharray="7 5"' if dashed else ''
-        marker = f' marker-end="url(#{self.id}-{color}-arrow)"' if arrow else ''
+        marker = self._marker(color) if arrow else ''
         self.parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
                           f'stroke="{self.color(color)}" stroke-width="{width}"{dash}{marker}/>')
 
@@ -166,7 +187,7 @@ class Canvas:
         if points:
             self.shape_bottoms.append((max(py for _, py in points), f"path {d[:40]}"))
         dash = ' stroke-dasharray="7 5"' if dashed else ''
-        marker = f' marker-end="url(#{self.id}-{color}-arrow)"' if arrow else ''
+        marker = self._marker(color) if arrow else ''
         self.parts.append(f'<path d="{d}" fill="{self.color(fill)}" stroke="{self.color(color)}" '
                           f'stroke-width="{width}"{dash}{marker}/>')
 
@@ -232,6 +253,8 @@ class Canvas:
         """
         if states is not None and len(states) != len(values):
             raise ValueError(f"cell_row has {len(values)} values but {len(states)} states")
+        if labels is not None and len(labels) != len(values):
+            raise ValueError(f"cell_row has {len(values)} values but {len(labels)} labels")
         for index, value in enumerate(values):
             left = x + index * (cell + gap)
             state = states[index] if states else None
@@ -254,6 +277,11 @@ class Canvas:
         ``states`` maps ``(row, column)`` to a STATES name. Returns the y below the grid.
         """
         states = states or {}
+        columns = max((len(values) for values in rows), default=0)
+        if row_labels is not None and len(row_labels) != len(rows):
+            raise ValueError(f"grid has {len(rows)} rows but {len(row_labels)} row labels")
+        if col_labels is not None and len(col_labels) != columns:
+            raise ValueError(f"grid has {columns} columns but {len(col_labels)} column labels")
         for (row, column), state in states.items():
             _state(state)
             if not (0 <= row < len(rows) and 0 <= column < len(rows[row])):
@@ -343,6 +371,8 @@ class Canvas:
         """
         (sx, sy), (ex, ey) = start, end
         length = math.hypot(ex - sx, ey - sy)
+        if length == 0:
+            raise ValueError(f"edge needs two different endpoints, got {start} twice")
         ux, uy = (ex - sx) / length, (ey - sy) / length
         end_trim = radius + (8 if directed else 4)
         points = (round(sx + ux * (radius + 4), 2), round(sy + uy * (radius + 4), 2),
@@ -433,12 +463,17 @@ def _state(name):
 
 def load_fixtures(path):
     """Read one Java Properties fixture file of ASCII ``key=value`` lines without escapes."""
-    values = {}
-    for line in Path(path).read_text(encoding="utf-8").splitlines():
+    path = Path(path)
+    values, lines = {}, {}
+    for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         line = line.strip()
         if line and not line.startswith("#"):
-            key, value = line.split("=", 1)
-            values[key.strip()] = value.strip()
+            if "=" not in line:
+                raise ValueError(f"{path.name}:{number}: expected key=value, got {line!r}")
+            key, value = (part.strip() for part in line.split("=", 1))
+            if key in values:
+                raise ValueError(f"{path.name}:{number}: key {key!r} repeats line {lines[key]}")
+            values[key], lines[key] = value, number
     return values
 
 

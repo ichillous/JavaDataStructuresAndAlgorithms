@@ -47,17 +47,47 @@ class ModuleDiscoveryTest(unittest.TestCase):
         self.assertEqual("complexity-growth", figures[25]["id"])
         self.assertIn("dynamic-array-growth", [item["id"] for item in figures[26:]])
 
-    def test_duplicate_figure_ids_fail_the_build(self):
-        first = types.ModuleType("dup_one_figures")
-        first.FIGURES = [{"id": "same"}]
-        second = types.ModuleType("dup_two_figures")
-        second.FIGURES = [{"id": "same"}]
-        sys.modules.update(dup_one_figures=first, dup_two_figures=second)
+    def collect(self, *figure_lists):
+        names = []
+        for index, figures in enumerate(figure_lists):
+            module = types.ModuleType(f"fake_{index}_figures")
+            if figures is not None:
+                module.FIGURES = figures
+            sys.modules[module.__name__] = module
+            names.append(module.__name__)
         try:
-            with self.assertRaisesRegex(ValueError, "same"):
-                GENERATOR.collect_figures(["dup_one_figures", "dup_two_figures"])
+            return GENERATOR.collect_figures(names)
         finally:
-            del sys.modules["dup_one_figures"], sys.modules["dup_two_figures"]
+            for name in names:
+                del sys.modules[name]
+
+    @staticmethod
+    def complete(figure_id, **changes):
+        figure = {"id": figure_id, "title": "T", "category": "C", "description": "D.", "keyIdea": "K.",
+                  "lesson": "README.md", "height": 600, "draw": lambda canvas, fixtures: None}
+        figure.update(changes)
+        return figure
+
+    def test_duplicate_figure_ids_fail_the_build(self):
+        with self.assertRaisesRegex(ValueError, "Duplicate figure id 'same' in fake_0_figures and fake_1_figures"):
+            self.collect([self.complete("same")], [self.complete("same")])
+
+    def test_modules_and_figures_are_validated_with_the_module_named(self):
+        self.assertEqual(["ok-figure"], [item["id"] for item in self.collect([self.complete("ok-figure")])])
+        with self.assertRaisesRegex(ValueError, "fake_0_figures: define FIGURES"):
+            self.collect(None)
+        with self.assertRaisesRegex(ValueError, r"fake_0_figures: FIGURES\[0\] is not a dict"):
+            self.collect(["not a dict"])
+        incomplete = self.complete("partial")
+        del incomplete["lesson"]
+        with self.assertRaisesRegex(ValueError, "fake_0_figures: figure 'partial' lacks lesson"):
+            self.collect([incomplete])
+        for bad_id in ("Upper", "two words", "trailing-", "under_score"):
+            with self.subTest(figure_id=bad_id):
+                with self.assertRaisesRegex(ValueError, "lowercase words joined by hyphens"):
+                    self.collect([self.complete(bad_id)])
+        with self.assertRaisesRegex(ValueError, "draw must be a function"):
+            self.collect([self.complete("no-draw", draw="draw")])
 
 
 class FixtureMergeTest(unittest.TestCase):
@@ -79,6 +109,19 @@ class FixtureMergeTest(unittest.TestCase):
             self.write(directory, "examples.properties", "shared.key=1\n")
             self.write(directory, "examples-shared.properties", "shared.key=2\n")
             with self.assertRaisesRegex(ValueError, "shared.key"):
+                load_all_fixtures(Path(directory))
+
+    def test_a_key_repeated_inside_one_file_fails_with_file_line_and_key(self):
+        with tempfile.TemporaryDirectory() as directory:
+            self.write(directory, "examples.properties", "a.x=1\n# note\na.x=2\n")
+            with self.assertRaisesRegex(ValueError, r"examples\.properties:3: key 'a\.x' repeats line 1"):
+                load_all_fixtures(Path(directory))
+
+    def test_a_line_without_equals_fails_with_file_and_line(self):
+        with tempfile.TemporaryDirectory() as directory:
+            self.write(directory, "examples.properties", "a.x=1\n")
+            self.write(directory, "examples-b.properties", "b.ok=2\nb.broken\n")
+            with self.assertRaisesRegex(ValueError, r"examples-b\.properties:2: expected key=value"):
                 load_all_fixtures(Path(directory))
 
     def test_a_family_key_must_start_with_the_file_stem(self):
@@ -136,6 +179,13 @@ class NamedRegionTest(unittest.TestCase):
             with self.subTest(marker=marker):
                 with self.assertRaisesRegex(ValueError, r"lesson\.md:1: "):
                     self.rewrite(marker + "\n<!-- /visual:generated -->\n", "lesson.md")
+
+    def test_a_marker_sharing_its_line_with_text_fails(self):
+        for line in ("See <!-- visual:generated alpha --> here", "<!-- visual:generated alpha --> trailing",
+                     "<!-- note --> <!-- visual:generated alpha -->"):
+            with self.subTest(line=line):
+                with self.assertRaisesRegex(ValueError, r"lesson\.md:2: .*alone on its line"):
+                    self.rewrite("x\n" + line + "\n<!-- /visual:generated -->\n", "lesson.md")
 
     def test_markers_inside_fenced_code_and_inline_code_are_documentation(self):
         text = ("Write `<!-- visual:generated FIGURE_ID -->` where it belongs.\n\n```text\n"

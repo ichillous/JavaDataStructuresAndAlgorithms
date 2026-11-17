@@ -18,7 +18,13 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
-const { chromium } = require('playwright');
+let chromium;
+try {
+  ({ chromium } = require('playwright'));
+} catch (error) {
+  console.error('browser_review.js needs the Playwright package (require("playwright") failed: ' + error.message.split('\n')[0] + ').');
+  process.exit(2);
+}
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const VISUALS = path.join(ROOT, 'docs', 'visuals');
@@ -39,7 +45,10 @@ function parseArguments(argv) {
   for (let index = 0; index < argv.length; index++) {
     const argument = argv[index];
     if (argument === '--figures') options.figures = (argv[++index] || '').split(',').map((id) => id.trim()).filter(Boolean);
-    else if (argument === '--sheets') options.sheets = argv[++index];
+    else if (argument === '--sheets') {
+      options.sheets = argv[++index];
+      if (!options.sheets || options.sheets.startsWith('--')) usage('--sheets needs a directory.');
+    }
     else if (argument === '--all') options.all = true;
     else if (argument === '--write') options.write = true;
     else if (argument === '--previews') options.previews = true;
@@ -48,7 +57,6 @@ function parseArguments(argv) {
   if (!options.all && !(options.figures && options.figures.length)) usage('Name figures with --figures or use --all.');
   if (options.all && options.figures) usage('Use either --figures or --all, not both.');
   if ((options.write || options.previews) && !options.all) usage('--write and --previews need --all.');
-  if (options.sheets === undefined) usage('--sheets needs a directory.');
   return options;
 }
 

@@ -146,7 +146,10 @@ index:
 
 The caption defaults to the figure's `description`. To use another caption, add it
 after a pipe: `<!-- visual:generated FIGURE_ID | One caption sentence. -->`. A caption
-must not contain two consecutive hyphens, because it lives in an HTML comment. A page
+must not contain two consecutive hyphens, because it lives in an HTML comment. The
+caption is emitted as Markdown, not escaped, so `*`, `` ` `` and links work and a literal
+`<` must be written as `&lt;`; the description is escaped for the alt text. A marker
+that shares its line with other text fails the build, unless it is inside inline code. A page
 may hold any number of regions. Markers count only on a line of their own, outside
 fenced code. The generator scans tracked and untracked, non-ignored Markdown, except
 `docs/superpowers/`, hidden directories and this folder's generated `README.md`. An
@@ -191,7 +194,13 @@ themes:
 Color never carries meaning alone: name every state you use in a label or a legend
 entry. The plain palette names (`ink`, `muted`, `line`, `blue`, `soft`, `note`, `gold`,
 `red`, `panel`, `green`, `mint`, `violet`, `lilac`, `rose`) are also accepted wherever
-a `color` is taken.
+a `color` is taken, and so are the state names, each meaning its stroke color
+(`color="good"` is green; `muted` keeps its palette meaning). `"none"` means no paint
+and is allowed only for fills and strokes, not for arrows. Any other name raises
+`ValueError`. Fixture files fail with file and line on a repeated key or a line
+without `=`. `cell_row` and `grid` labels must match the number of cells, rows or
+columns. `edge` needs two different endpoints. `path` rejects relative and arc
+commands.
 
 ### Composition
 
