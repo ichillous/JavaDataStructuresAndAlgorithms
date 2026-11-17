@@ -285,6 +285,17 @@
       "number": 26,
       "light": "assets/complexity-growth.svg",
       "dark": "assets/complexity-growth-dark.svg"
+    },
+    {
+      "id": "dynamic-array-growth",
+      "title": "Appending to a full array",
+      "category": "Linear structures",
+      "description": "A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends.",
+      "lesson": "../../data-structures/arrays/operations.md",
+      "keyIdea": "Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.",
+      "number": 27,
+      "light": "assets/dynamic-array-growth.svg",
+      "dark": "assets/dynamic-array-growth-dark.svg"
     }
   ],
   "traces": [
