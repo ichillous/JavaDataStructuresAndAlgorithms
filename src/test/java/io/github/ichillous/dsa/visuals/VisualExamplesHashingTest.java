@@ -143,9 +143,13 @@ class VisualExamplesHashingTest {
         assertFalse(naivePath.stream().anyMatch(slot -> holeOnly.get(slot).equals(lookup)),
                 "so it never reaches the key stored one slot further on");
 
-        // The real map backward-shifts instead. The documented invariant (every key sits on its
-        // probe path from its home slot, with no tombstones) fixes the result: it is the layout of
-        // the surviving keys inserted in their original order.
+        // The real map backward-shifts instead. Its slots are private, so the drawn "after" layout
+        // is modelled as the surviving keys inserted in their original order. This test asserts
+        // that the model matches the fixture, that every survivor lies on its probe path in it,
+        // and that the real map still finds every survivor and no longer finds the removed key.
+        // For this cluster the documented invariant (no empty slot between a key's home slot and
+        // the key, no tombstones) allows only one placement, so the model is the map's layout;
+        // in general, different insertion orders can give different valid layouts.
         assertEquals("v" + removed, map.remove(removed));
         List<String> survivors = new ArrayList<>(order);
         survivors.remove(removed);

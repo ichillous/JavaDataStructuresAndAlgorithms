@@ -629,7 +629,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/tree-traversals-dark.svg"><img src="assets/tree-traversals.svg" alt="A binary search tree built from 8, 3, 10, 1, 6, 14, 4 and 7 has root 8, leaves 1, 4, 7 and 14, and height 3. Pre-order reads 8 3 1 6 4 7 10 14, in-order reads the keys sorted, post-order ends at the root 8, and level order reads one depth at a time." width="520"></picture>
 
-**Key idea:** Pre, in and post order differ only in when the root is read.
+**Key idea:** Pre, in and post order differ only in when the root is read; level order reads one depth at a time.
 
 ## 79. Delete with two children
 
