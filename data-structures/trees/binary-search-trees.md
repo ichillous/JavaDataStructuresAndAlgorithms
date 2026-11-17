@@ -51,7 +51,7 @@ For node 3 in the diagram, the successor is 4. It has no left child by construct
 <!-- visual:generated bst-delete-successor | Deleting 2 from a smaller tree. Its successor 3 is the leftmost key of the right subtree; copying it up leaves a valid three-key tree of height 1. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bst-delete-successor-dark.svg"><img src="../../docs/visuals/assets/bst-delete-successor.svg" alt="Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1." width="520"></picture>
 
-**Figure 47.** Deleting 2 from a smaller tree. Its successor 3 is the leftmost key of the right subtree; copying it up leaves a valid three-key tree of height 1. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 54.** Deleting 2 from a smaller tree. Its successor 3 is the leftmost key of the right subtree; copying it up leaves a valid three-key tree of height 1. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 

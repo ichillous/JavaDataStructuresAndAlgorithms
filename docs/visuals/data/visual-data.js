@@ -497,13 +497,90 @@ globalThis.DSA_VISUALS_DATA = {
       "dark": "assets/array-vs-list-access-dark.svg"
     },
     {
+      "id": "graph-representations",
+      "title": "Three ways to store a graph",
+      "category": "Graphs",
+      "description": "One directed graph with 4 vertices and the edges 0 to 1, 0 to 2, 2 to 1 and 2 to 3, shown as an adjacency list, a 4 by 4 adjacency matrix and an edge list, each with the cost of testing an edge and listing neighbors.",
+      "keyIdea": "Edge tests favor a matrix; neighbor scans favor an adjacency list.",
+      "lesson": "../../data-structures/graphs/representation.md",
+      "number": 46,
+      "light": "assets/graph-representations.svg",
+      "dark": "assets/graph-representations-dark.svg"
+    },
+    {
+      "id": "bfs-vs-dfs-order",
+      "title": "BFS and DFS visit order",
+      "category": "Graphs",
+      "description": "A 6-vertex undirected graph from source 0: breadthFirst visits 0, 1, 2, 3, 4, 5 in layers of distance 0, 1 and 2, while depthFirst visits 0, 1, 3, 4, 5, 2 by following one branch to its end.",
+      "keyIdea": "A queue visits whole layers; a stack follows one branch to its end.",
+      "lesson": "../../data-structures/graphs/traversal.md",
+      "number": 47,
+      "light": "assets/bfs-vs-dfs-order.svg",
+      "dark": "assets/bfs-vs-dfs-order-dark.svg"
+    },
+    {
+      "id": "topological-kahn",
+      "title": "Kahn's topological order",
+      "category": "Graphs",
+      "description": "Kahn's algorithm on a 5-vertex DAG whose in-degrees are 2, 1, 0, 0 and 2: it pops ready vertices 2, 3, 0, 1, 4, lowering in-degrees and refilling the ready queue, and outputs 2, 3, 0, 1, 4.",
+      "keyIdea": "A vertex is output once its in-degree is 0, so every edge points forward.",
+      "lesson": "../../algorithms/graph/topological-sort.md",
+      "number": 48,
+      "light": "assets/topological-kahn.svg",
+      "dark": "assets/topological-kahn-dark.svg"
+    },
+    {
+      "id": "shortest-path-chooser",
+      "title": "Shortest-path chooser",
+      "category": "Graphs",
+      "description": "A column of seven yes-or-no questions from all pairs, unweighted, 0-1 weights, DAG, negative weights and heuristic to nonnegative weights, each paired with the algorithm and the repository method that answers it.",
+      "keyIdea": "Use the most specific algorithm whose precondition your graph meets; each one exploits a fact the general one cannot assume.",
+      "lesson": "../../algorithms/graph/shortest-paths.md",
+      "number": 49,
+      "light": "assets/shortest-path-chooser.svg",
+      "dark": "assets/shortest-path-chooser-dark.svg"
+    },
+    {
+      "id": "zero-one-bfs-deque",
+      "title": "0-1 BFS and its deque",
+      "category": "Graphs",
+      "description": "0-1 BFS from vertex 0 on a 4-vertex directed graph: weight-0 targets are pushed to the front of the deque and weight-1 targets to the back, so vertex 1 is first queued at distance 1 and then improved to 0 through 0, 2, 3, 1.",
+      "keyIdea": "Zero-weight edges go to the deque's front, unit-weight edges to its back.",
+      "lesson": "../../algorithms/graph/shortest-paths.md",
+      "number": 50,
+      "light": "assets/zero-one-bfs-deque.svg",
+      "dark": "assets/zero-one-bfs-deque-dark.svg"
+    },
+    {
+      "id": "astar-heuristic",
+      "title": "A* with a good heuristic",
+      "category": "Graphs",
+      "description": "A* on a 5 by 5 unit grid from cell 10 to cell 14 with the Manhattan heuristic: the route 10, 11, 12, 13, 14 has f = g + h equal to 4 everywhere, the heuristic was called for 13 of 25 cells, and with h = 0 it was called for 21.",
+      "keyIdea": "A good heuristic keeps the search near the route; far cells never get an h evaluation.",
+      "lesson": "../../algorithms/graph/shortest-paths.md",
+      "number": 51,
+      "light": "assets/astar-heuristic.svg",
+      "dark": "assets/astar-heuristic-dark.svg"
+    },
+    {
+      "id": "floyd-warshall-via",
+      "title": "One Floyd-Warshall round",
+      "category": "Graphs",
+      "description": "A 4-vertex directed graph: allowing vertex 1 as a stop-over improves the distance matrix entry d[0][2] from 9 to 5 because d[0][1] + d[1][2] = 3 + 2, and no other entry changes.",
+      "keyIdea": "Round k asks whether going through vertex k beats the best route so far.",
+      "lesson": "../../algorithms/graph/shortest-paths.md",
+      "number": 52,
+      "light": "assets/floyd-warshall-via.svg",
+      "dark": "assets/floyd-warshall-via-dark.svg"
+    },
+    {
       "id": "tree-traversals",
       "title": "Four ways to walk a tree",
       "category": "Trees and ranges",
       "description": "A binary search tree built from 8, 3, 10, 1, 6, 14, 4 and 7 has root 8, leaves 1, 4, 7 and 14, and height 3. Pre-order reads 8 3 1 6 4 7 10 14, in-order reads the keys sorted, post-order ends at the root 8, and level order reads one depth at a time.",
       "lesson": "../../data-structures/trees/binary-trees.md",
       "keyIdea": "Pre, in and post order differ only in when the root is read.",
-      "number": 46,
+      "number": 53,
       "light": "assets/tree-traversals.svg",
       "dark": "assets/tree-traversals-dark.svg"
     },
@@ -514,7 +591,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1.",
       "lesson": "../../data-structures/trees/binary-search-trees.md",
       "keyIdea": "The successor's key replaces the deleted one; its old node is unlinked.",
-      "number": 47,
+      "number": 54,
       "light": "assets/bst-delete-successor.svg",
       "dark": "assets/bst-delete-successor-dark.svg"
     },
@@ -525,7 +602,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "After put 1 to 5, a RedBlackTreeMap has black root 4 with red left child 2, black children 1 and 3 under 2, and black 5. Read as a 2-3 tree it is the 3-node [2 4] over the 2-nodes [1], [3] and [5]; the height is 2 as a binary tree and 1 as a 2-3 tree.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "A red link and its black parent make one 3-node.",
-      "number": 48,
+      "number": 55,
       "light": "assets/red-black-23-nodes.svg",
       "dark": "assets/red-black-23-nodes-dark.svg"
     },
@@ -536,7 +613,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "Rotations keep sorted order; a flip splits a 4-node.",
-      "number": 49,
+      "number": 56,
       "light": "assets/red-black-fixups.svg",
       "dark": "assets/red-black-fixups-dark.svg"
     },
@@ -547,7 +624,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1.",
       "lesson": "../../algorithms/sorting/insertion-sort.md",
       "keyIdea": "Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.",
-      "number": 50,
+      "number": 57,
       "light": "assets/insertion-sort-shift.svg",
       "dark": "assets/insertion-sort-shift-dark.svg"
     },
@@ -558,7 +635,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Heapsort on 3, 1, 6, 5, 2, 4 builds the max-heap 6, 5, 4, 1, 2, 3, then moves 6 and 5 to the end, giving 5, 3, 4, 1, 2, 6 and 4, 3, 2, 1, 5, 6, until 1 to 6 is sorted.",
       "lesson": "../../algorithms/sorting/heap-sort.md",
       "keyIdea": "Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.",
-      "number": 51,
+      "number": 58,
       "light": "assets/heapsort-phases.svg",
       "dark": "assets/heapsort-phases-dark.svg"
     },
@@ -569,7 +646,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.",
-      "number": 52,
+      "number": 59,
       "light": "assets/counting-sort-counts.svg",
       "dark": "assets/counting-sort-counts-dark.svg"
     },
@@ -580,7 +657,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Sorting 35, 21, 41, 15, 31, 25 by the ones digit gives 21, 41, 31, 35, 15, 25; a stable pass on the tens digit then gives 15, 21, 25, 31, 35, 41.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.",
-      "number": 53,
+      "number": 60,
       "light": "assets/radix-lsd-passes.svg",
       "dark": "assets/radix-lsd-passes-dark.svg"
     },
@@ -591,7 +668,7 @@ globalThis.DSA_VISUALS_DATA = {
       "description": "Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "A stable sort keeps equal keys in their input order; an unstable sort may reorder them, losing any earlier ordering by tag.",
-      "number": 54,
+      "number": 61,
       "light": "assets/sort-stability.svg",
       "dark": "assets/sort-stability-dark.svg"
     }
