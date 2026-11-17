@@ -10,6 +10,14 @@ also record their subtree sizes. Besides `get`, `put` and `remove`, it answers:
   given position)
 - range counts: `countInRange` over a half-open range `[from, to)`
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | Keys change while you keep asking ordered questions: nearest key, rank, select or range counts |
+| **Avoid it when** | The keys are fixed (sort once and binary search), you only need exact lookups (a hash map), or `TreeMap` already suffices because you need no rank or select |
+| **Cost** | O(log n) worst case for `get`, `put`, `remove`, `floorKey`, `ceilingKey`, `rank`, `select` and `countInRange`; O(n) storage; `keys()` and `height()` are O(n) |
+| **In this repo** | [`RedBlackTreeMap`](../../src/main/java/io/github/ichillous/dsa/structures/RedBlackTreeMap.java) |
+| **In the JDK** | `java.util.TreeMap` and `java.util.TreeSet` |
+
 Use it when a set of keys changes while you keep asking ordered questions about it,
 such as "how many scores are below 70?" or "what is the 100th smallest timestamp?".
 For a fixed array, sorting once and using [binary search](../../algorithms/searching/binary-search.md)
@@ -52,6 +60,13 @@ All 2-3 leaves sit at the same depth, which is rule 4. The package-private
 `checkInvariants()` used by the tests checks all six rules independently of the
 update code.
 
+<!-- visual:generated red-black-23-nodes | The keys 1 to 5 as a 2-3 tree and as the shape RedBlackTreeMap builds after put 1 to 5. -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/red-black-23-nodes-dark.svg"><img src="../../docs/visuals/assets/red-black-23-nodes.svg" alt="After put 1 to 5, a RedBlackTreeMap has black root 4 with red left child 2, black children 1 and 3 under 2, and black 5. Read as a 2-3 tree it is the 3-node [2 4] over the 2-nodes [1], [3] and [5]; the height is 2 as a binary tree and 1 as a 2-3 tree." width="520"></picture>
+
+**Figure 38.** The keys 1 to 5 as a 2-3 tree and as the shape RedBlackTreeMap builds after put 1 to 5. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
+
 ## Three local fixes
 
 An insertion adds a red leaf: in 2-3 terms, the new key joins an existing bottom
@@ -70,6 +85,13 @@ becomes red, so black heights are unchanged. A color flip keeps black heights eq
 too: every path through `h` trades a black `h` for a black child. But `h` is now
 red, so its parent may need a fix of its own. That is how a split ripples up toward
 the root. Finally, the root is colored black again.
+
+<!-- visual:generated red-black-fixups | Each repair on three keys, before and after. These shapes exist only inside one put; the finished map shows only the result. -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/red-black-fixups-dark.svg"><img src="../../docs/visuals/assets/red-black-fixups.svg" alt="Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children." width="520"></picture>
+
+**Figure 39.** Each repair on three keys, before and after. These shapes exist only inside one put; the finished map shows only the result. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 
 Trace: inserting 1, 2, 3, 4 and 5 in ascending order. `(R)` marks a red node and
 `(B)` a black one.
@@ -318,6 +340,29 @@ descending keys, the left-leaning tree above has height 14. The bound allows up 
 3. Express `floorKey(k)` using only `rank`, `select` and `containsKey`. Compare it
    with `TreeMap.floorKey` on a seeded random test that includes absent keys and an
    empty map.
+
+## Check yourself
+
+<details>
+<summary>What does a red link mean, and why may it only lean left?</summary>
+
+A red node is glued to its parent so the pair acts as one 3-node of a 2-3 tree. Leaning left is the convention that makes each 3-node drawn one way, so the invariants and fixes need only one orientation.
+
+</details>
+
+<details>
+<summary>Which fixes does put 3, then 2, then 1 apply, and what is the result?</summary>
+
+Putting 1 creates two red nodes in a row on the left, so rotate right at 3 and then flip colors at 2. The result is black 2 with black children 1 and 3, height 1 instead of a chain of height 2.
+
+</details>
+
+<details>
+<summary>At most how many nodes can lie on one root-to-empty-link path in a map of 1,000 keys?</summary>
+
+19. A path has at most 2 log2(n + 1) nodes, which is about 19.9 for 1,000 keys, so the height is at most 18 edges.
+
+</details>
 
 See the [catalog](../../docs/catalog.md) for source and tests, and the
 [complexity guide](../../docs/complexity.md) for the cost model. The
