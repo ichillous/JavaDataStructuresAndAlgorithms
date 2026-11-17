@@ -171,8 +171,8 @@
     if (view.note) container.append(element('p', 'state-note', view.note));
     container.append(arrayRow(view.values || [], view.labels, view.states, view.markers));
     if (view.range) {
-      let label = (view.markers ? 'Inspect ' : 'Active run ') + '[' + view.range.join(', ') + ')';
-      if (view.markers && view.markers.high === view.values.length) label += ' · high is the end boundary';
+      let label = view.rangeLabel || (view.markers ? 'Inspect ' : 'Active run ') + '[' + view.range.join(', ') + ')';
+      if (!view.rangeLabel && view.markers && view.markers.high === view.values.length) label += ' · high is the end boundary';
       container.append(element('p', 'range-label', label));
     }
     (view.lanes || []).forEach((lane) => {
@@ -251,12 +251,13 @@
     container.append(svg);
     const facts = element('div', 'state-facts');
     facts.append(factRow(view.queueLabel || 'Queue', view.queue.length ? '[ ' + view.queue.join(', ') + ' ]' : '[ empty ]'));
-    if (!view.directed || (view.order && view.order.length)) facts.append(factRow('Visit order', view.order.length ? view.order.join(' → ') : 'Not started'));
+    if (!view.directed || (view.order && view.order.length)) facts.append(factRow(view.orderLabel || 'Visit order', view.order.length ? view.order.join(' → ') : 'Not started'));
     if (view.path && view.path.length) facts.append(factRow('Shortest path', view.path.join(' → ')));
     container.append(facts);
     if (view.distances) {
       const distances = element('div', 'distance-table');
-      distances.setAttribute('aria-label', 'Tentative distances by vertex');
+      distances.setAttribute('aria-label', view.tableLabel || 'Tentative distances by vertex');
+      if (view.tableLabel) container.append(element('p', 'lane-label', view.tableLabel));
       view.distances.forEach((distance, index) => {
         const item = element('div', 'distance-item');
         item.append(element('span', '', 'vertex ' + index), document.createTextNode(distance === null ? '∞' : String(distance)));
@@ -267,7 +268,8 @@
   }
   function renderLegend(trace, view) {
     let labels;
-    if (view.type === 'graph') labels = [['current', 'Current / relaxed edge'], ['frontier', 'Discovered, pending'], ['done', 'Processed / parent edge'], ['unseen', 'Not discovered']];
+    if (Array.isArray(view.legend)) labels = view.legend;
+    else if (view.type === 'graph') labels = [['current', 'Current / relaxed edge'], ['frontier', 'Discovered, pending'], ['done', 'Processed / parent edge'], ['unseen', 'Not discovered']];
     else if (trace.id === 'binary') labels = [['current', 'Inspect / midpoint'], ['boundary', 'Retained answer boundary'], ['chosen', 'Final answer'], ['excluded', 'Discarded']];
     else if (view.type === 'dp') labels = [['current', 'Current amount'], ['chosen', 'Chosen predecessor / solved'], ['unseen', 'Not computed']];
     else labels = [['current', 'Active run / next front'], ['chosen', 'Output / sorted'], ['excluded', 'Outside run / consumed']];

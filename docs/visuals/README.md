@@ -1,6 +1,6 @@
 # Visual learning index
 
-Open [index.html](index.html) locally for the searchable gallery and five step-throughs.
+Open [index.html](index.html) locally for the searchable gallery and thirteen step-throughs.
 The HTML uses local assets and works offline without a server. On GitHub, browse the figures below.
 
 Each numbered figure has an explicit light/dark version, an accessible description and a linked lesson.
