@@ -213,7 +213,7 @@ Each step keeps the gcd of the pair, and the last division `4 = 2 * 2 + 0` shows
 <details>
 <summary>For exponent 13, how many modular squarings and how many multiplies into the result does `modPow` do?</summary>
 
-13 is `1101` in binary: the loop runs four times and squares the base each time, so four squarings. It multiplies into the result only on the three 1 bits, so three multiplies.
+13 is `1101` in binary: the loop runs four times and squares the base each time, so four squarings. It multiplies into the result only on the three 1 bits, so three multiplies. The fourth squaring happens after the last bit is used and its value is never read; skipping the squaring when `e` is 1 would save it.
 
 </details>
 
