@@ -318,3 +318,43 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/red-black-fixups-dark.svg"><img src="assets/red-black-fixups.svg" alt="Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children." width="520"></picture>
 
 **Key idea:** Rotations keep sorted order; a flip splits a 4-node.
+
+## 40. One insertion step
+
+[Sorting and searching: read the lesson](../../algorithms/sorting/insertion-sort.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/insertion-sort-shift-dark.svg"><img src="assets/insertion-sort-shift.svg" alt="In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1." width="520"></picture>
+
+**Key idea:** Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.
+
+## 41. Heapsort phases
+
+[Sorting and searching: read the lesson](../../algorithms/sorting/heap-sort.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/heapsort-phases-dark.svg"><img src="assets/heapsort-phases.svg" alt="Heapsort on 3, 1, 6, 5, 2, 4 builds the max-heap 6, 5, 4, 1, 2, 3, then moves 6 and 5 to the end, giving 5, 3, 4, 1, 2, 6 and 4, 3, 2, 1, 5, 6, until 1 to 6 is sorted." width="520"></picture>
+
+**Key idea:** Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.
+
+## 42. Counting sort tally
+
+[Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/counting-sort-counts-dark.svg"><img src="assets/counting-sort-counts.svg" alt="For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6." width="520"></picture>
+
+**Key idea:** Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.
+
+## 43. Radix passes by digit
+
+[Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/radix-lsd-passes-dark.svg"><img src="assets/radix-lsd-passes.svg" alt="Sorting 35, 21, 41, 15, 31, 25 by the ones digit gives 21, 41, 31, 35, 15, 25; a stable pass on the tens digit then gives 15, 21, 25, 31, 35, 41." width="520"></picture>
+
+**Key idea:** Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.
+
+## 44. Stable and unstable outcomes
+
+[Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sort-stability-dark.svg"><img src="assets/sort-stability.svg" alt="Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys." width="520"></picture>
+
+**Key idea:** A stable sort keeps equal keys in their input order; an unstable sort may reorder them, losing any earlier ordering by tag.

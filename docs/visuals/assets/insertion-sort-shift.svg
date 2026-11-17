@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 877" width="520" height="877" role="img" aria-labelledby="title desc">
+<title id="title">40  One insertion step</title>
+<desc id="desc">In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="insertion-sort-shift-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="insertion-sort-shift-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="insertion-sort-shift-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="insertion-sort-shift-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="insertion-sort-shift-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="insertion-sort-shift-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="insertion-sort-shift-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="insertion-sort-shift-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="insertion-sort-shift-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="insertion-sort-shift-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="insertion-sort-shift-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="insertion-sort-shift-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="insertion-sort-shift-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="insertion-sort-shift-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="insertion-sort-shift-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="877" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">40  One insertion step</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Sorting and searching · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Prefix is sorted; save key 4</text>
+<rect x="39" y="182" width="56" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="67.0" y="213.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<text x="67.0" y="256" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="103" y="182" width="56" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="131.0" y="213.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">5</text>
+<text x="131.0" y="256" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="167" y="182" width="56" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="195.0" y="213.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">8</text>
+<text x="195.0" y="256" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="231" y="182" width="56" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="259.0" y="213.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">9</text>
+<text x="259.0" y="256" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="295" y="182" width="56" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="323.0" y="213.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">4</text>
+<text x="323.0" y="256" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="359" y="182" width="56" height="48" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="387.0" y="213.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">1</text>
+<text x="387.0" y="256" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<circle cx="42" cy="281" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="287" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="288" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Shift 3 larger values right</text>
+<rect x="39" y="314" width="56" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="67.0" y="345.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<text x="67.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="103" y="314" width="56" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="131.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="167" y="314" width="56" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="195.0" y="345.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">5</text>
+<text x="195.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="231" y="314" width="56" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="259.0" y="345.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">8</text>
+<text x="259.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="295" y="314" width="56" height="48" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="323.0" y="345.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">9</text>
+<text x="323.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="359" y="314" width="56" height="48" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="387.0" y="345.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">1</text>
+<text x="387.0" y="388" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<path d="M 167 390 Q 167 398 175 398 H 251.0 Q 259.0 398 259.0 406 Q 259.0 398 267.0 398 H 343 Q 351 398 351 390" fill="none" stroke="#505b6b" stroke-width="2"/>
+<text x="259.0" y="426" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="700">3 shifts</text>
+<circle cx="42" cy="451" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="457" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="458" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Drop 4 into the gap at index 1</text>
+<rect x="39" y="484" width="56" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="67.0" y="515.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<text x="67.0" y="558" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="103" y="484" width="56" height="48" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="131.0" y="515.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">4</text>
+<text x="131.0" y="558" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="167" y="484" width="56" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="195.0" y="515.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">5</text>
+<text x="195.0" y="558" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="231" y="484" width="56" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="259.0" y="515.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">8</text>
+<text x="259.0" y="558" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="295" y="484" width="56" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="323.0" y="515.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">9</text>
+<text x="323.0" y="558" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="359" y="484" width="56" height="48" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="387.0" y="515.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">1</text>
+<text x="387.0" y="558" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<path d="M 39 560 Q 39 568 47 568 H 187.0 Q 195.0 568 195.0 576 Q 195.0 568 203.0 568 H 343 Q 351 568 351 560" fill="none" stroke="#1c6b3c" stroke-width="2"/>
+<text x="195.0" y="596" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">sorted prefix: 5 values</text>
+<rect x="28" y="618" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="634" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">sorted prefix</text>
+<rect x="198.91199999999998" y="618" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="232.91199999999998" y="634" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">the key</text>
+<rect x="320.57599999999996" y="618" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="354.57599999999996" y="634" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">shifted right</text>
+<rect x="28" y="650" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="62" y="666" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">gap (key held aside)</text>
+<rect x="263.712" y="650" width="26" height="20" rx="4" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="297.712" y="666" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">not yet inserted</text>
+<rect x="28" y="690" width="464" height="163" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="721" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="750" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Insertion sort shifts only the larger</text>
+<text x="44" y="777" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">values one slot right, then drops the</text>
+<text x="44" y="804" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">saved key into the gap, so the sorted</text>
+<text x="44" y="831" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">prefix grows by one.</text>
+</svg>

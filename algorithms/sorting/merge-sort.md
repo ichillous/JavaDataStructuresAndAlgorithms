@@ -5,6 +5,14 @@ them. The maintained [implementation](../../src/main/java/io/github/ichillous/ds
 uses half-open ranges, one reusable buffer and ascending `int[]` order. It mutates
 input, rejects null and accepts empty input.
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | You need a guaranteed O(n log n) bound and stability, and can afford an O(n) buffer |
+| **Avoid it when** | Memory is tight: it needs a buffer of the array's size plus O(log n) stack |
+| **Cost** | O(n log n) worst case; O(n) buffer; O(log n) stack; stable |
+| **In this repo** | [`SortAlgorithms.mergeSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) for `int[]` and for `T[]` with a `Comparator` |
+| **In the JDK** | `Arrays.sort(Object[])`, `Arrays.sort(T[], Comparator)` and `List.sort`, all guaranteed stable |
+
 <!-- visual:generated merge-recursion -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/merge-recursion-dark.svg"><img src="../../docs/visuals/assets/merge-recursion.svg" alt="Split into singletons, then merge sorted children bottom up." width="520"></picture>
 
@@ -59,6 +67,44 @@ correctly but loses stability for records with equal keys. Allocating a fresh
 buffer for every element would add needless allocation; a shared buffer is enough
 because recursive subproblems complete before their parent merge uses it.
 
+## In real Java
+
+For objects, call `List.sort` or `Arrays.sort(T[], Comparator)`: the Javadoc guarantees
+the sort is stable, so equal elements are not reordered. That makes multi-key sorting
+by repeated passes safe: sort by the secondary key first, then stably by the primary
+key. The result equals one sort with `thenComparing`.
+
+```java
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+record Person(String city, String name) {}
+
+List<Person> people = new ArrayList<>(List.of(
+        new Person("Rome", "Zoe"), new Person("Oslo", "Ann"),
+        new Person("Rome", "Bo"), new Person("Oslo", "Cy")));
+List<Person> twoPasses = new ArrayList<>(people);
+twoPasses.sort(Comparator.comparing(Person::name));
+twoPasses.sort(Comparator.comparing(Person::city)); // stable: names stay ordered per city
+List<Person> onePass = new ArrayList<>(people);
+onePass.sort(Comparator.comparing(Person::city).thenComparing(Person::name));
+assert twoPasses.equals(onePass);
+assert twoPasses.get(0).name().equals("Ann") && twoPasses.get(3).name().equals("Zoe");
+```
+
+## Common mistakes
+
+1. **Taking the right element on a tie.** Merging `[2a]` with `[2b]` (equal keys) then
+   gives `2b, 2a`. That breaks stability: equal keys must keep their input order, so
+   a tie must take the left value.
+2. **Merging without a buffer.** Merging halves `[2, 3]` and `[1]` directly into
+   the array writes 1 at index 0 and overwrites the unconsumed 2. The merge invariant
+   needs the unconsumed left values to stay intact, which the buffer guarantees.
+3. **Computing the middle as `(from + to) / 2`.** For `from = 1_500_000_000` and
+   `to = 2_000_000_000` the sum overflows `int` and gives a negative middle. The range
+   split must keep `from <= middle <= to`, so use `from + (to - from) / 2`.
+
 ## Practice
 
 1. Trace merging `[1, 4, 7]` and `[2, 4, 6]`, labeling the two `4` values by origin.
@@ -69,3 +115,29 @@ because recursive subproblems complete before their parent merge uses it.
 
 Compare your reasoning with the [solutions](../../docs/solutions.md) and
 [space analysis](../../complexity-analysis/space-complexity.md). The [solution finder](../../docs/solution-finder.md#11-sorting) compares this technique with its alternatives.
+
+## Check yourself
+
+<details>
+<summary>Why does merge sort need an O(n) buffer when heapsort needs none?</summary>
+
+Merging writes outputs while left values are still unconsumed, so writing in place
+would overwrite them. The buffer holds the merged run until the merge finishes.
+
+</details>
+
+<details>
+<summary>How many merges does the implementation perform on <code>[1, 2, 3, 4]</code>?</summary>
+
+None. After sorting each half it compares the left maximum with the right minimum, finds
+them in order and skips the merge, so the array costs n - 1 boundary comparisons.
+
+</details>
+
+<details>
+<summary>Where does the stability of the merge come from?</summary>
+
+When the front values tie, the merge takes the left one, so equal elements never move
+past each other.
+
+</details>

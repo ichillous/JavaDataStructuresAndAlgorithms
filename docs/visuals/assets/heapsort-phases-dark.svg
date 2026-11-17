@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 893" width="520" height="893" role="img" aria-labelledby="title desc">
+<title id="title">41  Heapsort phases</title>
+<desc id="desc">Heapsort on 3, 1, 6, 5, 2, 4 builds the max-heap 6, 5, 4, 1, 2, 3, then moves 6 and 5 to the end, giving 5, 3, 4, 1, 2, 6 and 4, 3, 2, 1, 5, 6, until 1 to 6 is sorted.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="heapsort-phases-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="heapsort-phases-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="heapsort-phases-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="heapsort-phases-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="heapsort-phases-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="heapsort-phases-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="heapsort-phases-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="heapsort-phases-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="heapsort-phases-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="heapsort-phases-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="heapsort-phases-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="heapsort-phases-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="heapsort-phases-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="heapsort-phases-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="heapsort-phases-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="893" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">41  Heapsort phases</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Sorting and searching · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Build a max-heap in place</text>
+<text x="39" y="190" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">input</text>
+<rect x="39" y="200" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="67.0" y="231.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">3</text>
+<rect x="103" y="200" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="131.0" y="231.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="167" y="200" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="195.0" y="231.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">6</text>
+<rect x="231" y="200" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="259.0" y="231.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<rect x="295" y="200" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="323.0" y="231.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="359" y="200" width="56" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="387.0" y="231.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<text x="39" y="276" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">every parent is at least its children</text>
+<rect x="39" y="286" width="56" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="67.0" y="317.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">6</text>
+<rect x="103" y="286" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="131.0" y="317.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">5</text>
+<rect x="167" y="286" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="195.0" y="317.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">4</text>
+<rect x="231" y="286" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="259.0" y="317.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">1</text>
+<rect x="295" y="286" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="323.0" y="317.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">2</text>
+<rect x="359" y="286" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="387.0" y="317.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">3</text>
+<circle cx="42" cy="367" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="373" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="374" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Swap root to the end, then sift</text>
+<text x="39" y="408" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">after extracting 1 maximum</text>
+<rect x="39" y="418" width="56" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="67.0" y="449.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">5</text>
+<rect x="103" y="418" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="131.0" y="449.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">3</text>
+<rect x="167" y="418" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="195.0" y="449.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">4</text>
+<rect x="231" y="418" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="259.0" y="449.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">1</text>
+<rect x="295" y="418" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="323.0" y="449.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">2</text>
+<rect x="359" y="418" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="387.0" y="449.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">6</text>
+<path d="M 359 462 Q 359 470 367 470 H 379.0 Q 387.0 470 387.0 478 Q 387.0 470 395.0 470 H 407 Q 415 470 415 462" fill="none" stroke="#86dca2" stroke-width="2"/>
+<text x="387.0" y="498" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">sorted: 1</text>
+<text x="39" y="532" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">after 2 maxima; repeat until sorted</text>
+<rect x="39" y="542" width="56" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="67.0" y="573.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">4</text>
+<rect x="103" y="542" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="131.0" y="573.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">3</text>
+<rect x="167" y="542" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="195.0" y="573.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">2</text>
+<rect x="231" y="542" width="56" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="259.0" y="573.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">1</text>
+<rect x="295" y="542" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="323.0" y="573.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">5</text>
+<rect x="359" y="542" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="387.0" y="573.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">6</text>
+<path d="M 295 586 Q 295 594 303 594 H 347.0 Q 355.0 594 355.0 602 Q 355.0 594 363.0 594 H 407 Q 415 594 415 586" fill="none" stroke="#86dca2" stroke-width="2"/>
+<text x="355.0" y="622" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">sorted: 2</text>
+<rect x="28" y="634" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="62" y="650" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">heap root</text>
+<rect x="167.808" y="634" width="26" height="20" rx="4" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="201.808" y="650" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">rest of the heap</text>
+<rect x="28" y="666" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="682" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">sorted suffix</text>
+<rect x="28" y="706" width="464" height="163" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="737" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="766" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Heapsort builds a max-heap, then swaps</text>
+<text x="44" y="793" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">the root to the end and repairs the</text>
+<text x="44" y="820" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">shorter heap; the sorted suffix grows</text>
+<text x="44" y="847" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">by one each time.</text>
+</svg>
