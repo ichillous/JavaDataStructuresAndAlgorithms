@@ -53,7 +53,7 @@ assert list.get(0) == 99 && list.size() == 1;
 <!-- visual:generated array-vs-list-access | The list reaches index 5 from the tail in 2 hops; the array needs one jump for any index. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/array-vs-list-access-dark.svg"><img src="../../docs/visuals/assets/array-vs-list-access.svg" alt="In a DynamicArray of eight values, get(5) reads slot 5 in one jump. In a DoublyLinkedList of the same values it starts at the tail and follows 2 links, because 5 is in the back half; the hop counts for indices 0 to 7 are 0, 1, 2, 3, 3, 2, 1 and 0." width="520"></picture>
 
-**Figure 45.** The list reaches index 5 from the tail in 2 hops; the array needs one jump for any index. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 51.** The list reaches index 5 from the tail in 2 hops; the array needs one jump for any index. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Index lookup starts from the nearer endpoint, taking O(min(i, n - 1 - i)) link steps. The implementation does not expose nodes, so `remove(index)` still includes this search. Once the node is found, unlinking is O(1).

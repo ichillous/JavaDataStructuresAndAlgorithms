@@ -73,7 +73,7 @@ The arrays in the next figure are the conceptual layout that the sift rules prod
 <!-- visual:generated heap-sift-paths -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/heap-sift-paths-dark.svg"><img src="../../docs/visuals/assets/heap-sift-paths.svg" alt="In the min heap 1, 3, 8, 4, 5, 9, add(7) appends at slot 6 and swaps up one level to slot 2, giving 1, 3, 7, 4, 5, 9, 8. remove() then takes out 1, moves 8 to the root and sifts it down two levels to slot 3, giving 3, 4, 7, 8, 5, 9." width="520"></picture>
 
-**Figure 35.** In the min heap 1, 3, 8, 4, 5, 9, add(7) appends at slot 6 and swaps up one level to slot 2, giving 1, 3, 7, 4, 5, 9, 8. remove() then takes out 1, moves 8 to the root and sifts it down two levels to slot 3, giving 3, 4, 7, 8, 5, 9. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 41.** In the min heap 1, 3, 8, 4, 5, 9, add(7) appends at slot 6 and swaps up one level to slot 2, giving 1, 3, 7, 4, 5, 9, 8. remove() then takes out 1, moves 8 to the root and sifts it down two levels to slot 3, giving 3, 4, 7, 8, 5, 9. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Cost and ownership

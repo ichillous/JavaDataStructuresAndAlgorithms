@@ -61,7 +61,7 @@ To keep the largest `k` values from a stream, maintain a **min** heap of at most
 <!-- visual:generated bounded-heap-topk -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bounded-heap-topk-dark.svg"><img src="../../docs/visuals/assets/bounded-heap-topk.svg" alt="Selection.smallestK over the stream 8, 3, 9, 5, 2, 5, 1 with k = 3 fills the heap with 8, 3, 9, then evicts 9, evicts 8, drops the second 5 and evicts 5 for 1, ending with 1, 2, 3." width="520"></picture>
 
-**Figure 36.** Selection.smallestK over the stream 8, 3, 9, 5, 2, 5, 1 with k = 3 fills the heap with 8, 3, 9, then evicts 9, evicts 8, drops the second 5 and evicts 5 for 1, ending with 1, 2, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 42.** Selection.smallestK over the stream 8, 3, 9, 5, 2, 5, 1 with k = 3 fills the heap with 8, 3, 9, then evicts 9, evicts 8, drops the second 5 and evicts 5 for 1, ending with 1, 2, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## In real Java

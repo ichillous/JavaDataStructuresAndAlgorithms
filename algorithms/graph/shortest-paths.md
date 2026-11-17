@@ -39,7 +39,7 @@ reaches the most specific correct method first; the table lists the same methods
 <!-- visual:generated shortest-path-chooser | Ask the questions from the top; each answer is the algorithm and the repository method that implements it. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/shortest-path-chooser-dark.svg"><img src="../../docs/visuals/assets/shortest-path-chooser.svg" alt="A column of seven yes-or-no questions from all pairs, unweighted, 0-1 weights, DAG, negative weights and heuristic to nonnegative weights, each paired with the algorithm and the repository method that answers it." width="520"></picture>
 
-**Figure 49.** Ask the questions from the top; each answer is the algorithm and the repository method that implements it. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 55.** Ask the questions from the top; each answer is the algorithm and the repository method that implements it. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## The invariants
@@ -78,7 +78,7 @@ path to 1: 0 -> 2 -> 3 -> 1, distance 0
 <!-- visual:generated zero-one-bfs-deque | The deque after each pop on the trace below: zero-weight targets go to the front, unit-weight targets to the back. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/zero-one-bfs-deque-dark.svg"><img src="../../docs/visuals/assets/zero-one-bfs-deque.svg" alt="0-1 BFS from vertex 0 on a 4-vertex directed graph: weight-0 targets are pushed to the front of the deque and weight-1 targets to the back, so vertex 1 is first queued at distance 1 and then improved to 0 through 0, 2, 3, 1." width="520"></picture>
 
-**Figure 50.** The deque after each pop on the trace below: zero-weight targets go to the front, unit-weight targets to the back. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 56.** The deque after each pop on the trace below: zero-weight targets go to the front, unit-weight targets to the back. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Executable example: 0-1 BFS and DAG paths
@@ -162,7 +162,7 @@ A* counts only what the heuristic function reveals. `aStar` evaluates `h` at mos
 <!-- visual:generated astar-heuristic | A* on a 5 by 5 grid: along the route f = g + h is constant, and the heuristic is called for fewer cells than with h = 0. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/astar-heuristic-dark.svg"><img src="../../docs/visuals/assets/astar-heuristic.svg" alt="A* on a 5 by 5 unit grid from cell 10 to cell 14 with the Manhattan heuristic: the route 10, 11, 12, 13, 14 has f = g + h equal to 4 everywhere, the heuristic was called for 13 of 25 cells, and with h = 0 it was called for 21." width="520"></picture>
 
-**Figure 51.** A* on a 5 by 5 grid: along the route f = g + h is constant, and the heuristic is called for fewer cells than with h = 0. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 57.** A* on a 5 by 5 grid: along the route f = g + h is constant, and the heuristic is called for fewer cells than with h = 0. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Floyd–Warshall improves a matrix of distances one stop-over vertex at a time. The figure shows one round on a four-vertex graph: allowing vertex 1 as a stop-over changes exactly one entry.
@@ -170,7 +170,7 @@ Floyd–Warshall improves a matrix of distances one stop-over vertex at a time. 
 <!-- visual:generated floyd-warshall-via | One Floyd-Warshall round: d[0][2] improves from 9 to 5 once vertex 1 may be used as a stop-over. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/floyd-warshall-via-dark.svg"><img src="../../docs/visuals/assets/floyd-warshall-via.svg" alt="A 4-vertex directed graph: allowing vertex 1 as a stop-over improves the distance matrix entry d[0][2] from 9 to 5 because d[0][1] + d[1][2] = 3 + 2, and no other entry changes." width="520"></picture>
 
-**Figure 52.** One Floyd-Warshall round: d[0][2] improves from 9 to 5 once vertex 1 may be used as a stop-over. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 58.** One Floyd-Warshall round: d[0][2] improves from 9 to 5 once vertex 1 may be used as a stop-over. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Negative weights

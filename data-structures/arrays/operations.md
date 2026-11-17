@@ -49,7 +49,7 @@ assert values.get(0) == 20 && values.get(1) == 99;
 <!-- visual:generated dynamic-array-growth -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/dynamic-array-growth-dark.svg"><img src="../../docs/visuals/assets/dynamic-array-growth.svg" alt="A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends." width="520"></picture>
 
-**Figure 41.** A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 47.** A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 The growth policy is visible through `capacity()`, which returns the backing array's length and never shrinks. Counting capacity changes over 1,000 appends shows why doubling is cheap: each resize copies the live elements once, and the copies add up to less than twice the final size.

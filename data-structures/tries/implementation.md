@@ -69,7 +69,7 @@ assert words.wordsWithPrefix("ab", 9).equals(List.of("ab", "abc", "abd"));
 <!-- visual:generated trie-prefix-walk -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/trie-prefix-walk-dark.svg"><img src="../../docs/visuals/assets/trie-prefix-walk.svg" alt="For the words car, card, care, cart, cat and dog, wordsWithPrefix(&quot;ca&quot;, 3) walks the c and a nodes, then emits car, card and care in sorted order and stops before cart and cat; the dog branch is never visited." width="520"></picture>
 
-**Figure 37.** For the words car, card, care, cart, cat and dog, wordsWithPrefix("ca", 3) walks the c and a nodes, then emits car, card and care in sorted order and stops before cart and cat; the dog branch is never visited. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 43.** For the words car, card, care, cart, cat and dog, wordsWithPrefix("ca", 3) walks the c and a nodes, then emits car, card and care in sorted order and stops before cart and cat; the dog branch is never visited. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Negative limits are rejected. A zero limit returns no results. Results are detached immutable snapshots; later updates do not change a previous suggestion list. Failing to shorten the path builder when backtracking can silently concatenate sibling labels into nonexistent words.

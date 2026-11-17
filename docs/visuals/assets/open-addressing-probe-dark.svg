@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 810" width="520" height="810" role="img" aria-labelledby="title desc">
+<title id="title">36  Probing past a taken slot</title>
+<desc id="desc">In an 8-slot table holding K, B and G, put(L) finds home slot 7 taken by G, wraps to slot 0 and stores L there; get(T), also homed at 7, visits slots 7, 0 and 1 and stops at the empty slot 1.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="open-addressing-probe-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="open-addressing-probe-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="open-addressing-probe-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="open-addressing-probe-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="open-addressing-probe-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="open-addressing-probe-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="open-addressing-probe-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="open-addressing-probe-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="open-addressing-probe-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="open-addressing-probe-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="open-addressing-probe-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="open-addressing-probe-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="open-addressing-probe-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="open-addressing-probe-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="open-addressing-probe-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="810" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">36  Probing past a taken slot</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Hashing and sketches · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">put(L): home slot 7 is taken</text>
+<path d="M 456 242 Q 260 174 64 242" fill="none" stroke="#9cbcff" stroke-width="2.5" marker-end="url(#open-addressing-probe-blue-arrow)"/>
+<text x="260.0" y="190.0" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="700">7 taken, wrap to 0</text>
+<rect x="39" y="248" width="50" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="64.0" y="279.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">L</text>
+<text x="64.0" y="322" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="95" y="248" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="120.0" y="322" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="151" y="248" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="176.0" y="279.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">K</text>
+<text x="176.0" y="322" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="207" y="248" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="232.0" y="322" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<rect x="263" y="248" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="288.0" y="322" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<rect x="319" y="248" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="344.0" y="322" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">5</text>
+<rect x="375" y="248" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="400.0" y="279.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">B</text>
+<text x="400.0" y="322" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">6</text>
+<rect x="431" y="248" width="50" height="48" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="456.0" y="279.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">G</text>
+<text x="456.0" y="322" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">7</text>
+<text x="39" y="348" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">Home slots: K 2, B 6, G 7, L 7</text>
+<text x="39" y="376" font-size="18" fill="#86dca2" text-anchor="start" font-weight="700">L lands in slot 0, the first free slot on its path</text>
+<circle cx="42" cy="409" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="415" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="416" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">get(T) also has home slot 7</text>
+<rect x="39" y="444" width="50" height="48" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="64.0" y="475.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">L</text>
+<text x="64.0" y="518" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<rect x="95" y="444" width="50" height="48" rx="8" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="120.0" y="518" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">1</text>
+<rect x="151" y="444" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="176.0" y="475.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">K</text>
+<text x="176.0" y="518" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">2</text>
+<rect x="207" y="444" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="232.0" y="518" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">3</text>
+<rect x="263" y="444" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="288.0" y="518" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">4</text>
+<rect x="319" y="444" width="50" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="344.0" y="518" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">5</text>
+<rect x="375" y="444" width="50" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="400.0" y="475.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">B</text>
+<text x="400.0" y="518" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">6</text>
+<rect x="431" y="444" width="50" height="48" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="456.0" y="475.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">G</text>
+<text x="456.0" y="518" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">7</text>
+<text x="39" y="544" font-size="18" fill="#ffaaa1" text-anchor="start" font-weight="700">Visits 7, 0, 1: slot 1 is empty, so T is absent</text>
+<rect x="28" y="574" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="62" y="590" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">stored key</text>
+<rect x="178.176" y="574" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="212.176" y="590" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">L placed</text>
+<rect x="308.47999999999996" y="574" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="342.47999999999996" y="590" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">taken or visited</text>
+<rect x="28" y="606" width="26" height="20" rx="4" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="62" y="622" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">empty slot ends search</text>
+<rect x="292.224" y="606" width="26" height="20" rx="4" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="326.224" y="622" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">empty slot</text>
+<rect x="28" y="646" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="677" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="706" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">A collision moves to the next slot and</text>
+<text x="44" y="733" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">wraps past the end; a lookup retraces</text>
+<text x="44" y="760" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">it to the first empty slot.</text>
+</svg>

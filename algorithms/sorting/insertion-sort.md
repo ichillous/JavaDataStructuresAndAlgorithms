@@ -24,7 +24,7 @@ strictly greater than the key one slot right, and writes the key into the gap. N
 <!-- visual:generated insertion-sort-shift -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/insertion-sort-shift-dark.svg"><img src="../../docs/visuals/assets/insertion-sort-shift.svg" alt="In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1." width="520"></picture>
 
-**Figure 57.** In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 63.** In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Shifting stops at the first value that is not greater than the key. That is why equal

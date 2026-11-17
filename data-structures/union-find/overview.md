@@ -44,7 +44,7 @@ find(7)       path 7 -> 6 -> 4 -> 0; afterwards 7 and 6 point at 0
 <!-- visual:generated union-find-compression -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/union-find-compression-dark.svg"><img src="../../docs/visuals/assets/union-find-compression.svg" alt="In a UnionFind over 9 indices, union(0, 5) hangs the size-4 root 4 under the size-5 root 0. Before find(7) the path is 7, 6, 4, 0; afterwards 7 and 6 point directly at 0." width="520"></picture>
 
-**Figure 40.** In a UnionFind over 9 indices, union(0, 5) hangs the size-4 root 4 under the size-5 root 0. Before find(7) the path is 7, 6, 4, 0; afterwards 7 and 6 point directly at 0. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 46.** In a UnionFind over 9 indices, union(0, 5) hangs the size-4 root 4 under the size-5 root 0. Before find(7) the path is 7, 6, 4, 0; afterwards 7 and 6 point directly at 0. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 Compression changes only the parent pointers on the find path. Every group, its size and its root stay the same.

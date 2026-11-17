@@ -38,7 +38,7 @@ assert relationships.neighbors(3).isEmpty();
 <!-- visual:generated shortest-path-chooser | The shortest-path question is answered by asking about the graph, from the top down. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/shortest-path-chooser-dark.svg"><img src="../../docs/visuals/assets/shortest-path-chooser.svg" alt="A column of seven yes-or-no questions from all pairs, unweighted, 0-1 weights, DAG, negative weights and heuristic to nonnegative weights, each paired with the algorithm and the repository method that answers it." width="520"></picture>
 
-**Figure 49.** The shortest-path question is answered by asking about the graph, from the top down. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 55.** The shortest-path question is answered by asking about the graph, from the top down. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 “Reachable from s” is not the same as “connected” in a directed graph. Strong and weak connectivity have separate meanings; the maintained `connectedComponents` API accepts only undirected input to avoid silently choosing one.

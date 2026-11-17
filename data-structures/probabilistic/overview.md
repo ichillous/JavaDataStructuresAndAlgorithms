@@ -1,5 +1,13 @@
 # Probabilistic membership and frequency: Bloom filter and Count-Min sketch
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | Exact answers cost too much memory and a small one-sided error is acceptable: skip a disk lookup for most absent keys (Bloom filter), or track approximate counts in a huge key space (Count-Min sketch). |
+| **Avoid it when** | You need exact answers, deletion, or counts of rare items in a short stream. If the distinct items fit in memory, a `HashSet` or `HashMap` is simpler and exact. |
+| **Cost** | O(k) per Bloom operation and O(depth) per sketch operation; space is fixed by the chosen size, not by the number of items. |
+| **In this repo** | [`BloomFilter`](../../src/main/java/io/github/ichillous/dsa/structures/BloomFilter.java), [`CountMinSketch`](../../src/main/java/io/github/ichillous/dsa/structures/CountMinSketch.java) |
+| **In the JDK** | No direct equivalent; the exact versions are `java.util.HashSet`, `java.util.HashMap#merge` and `java.util.BitSet` (see [In real Java](#in-real-java)). |
+
 Use these structures when exact answers cost too much memory and a small,
 one-sided, quantifiable error is acceptable. A Bloom filter answers "have I seen
 this?" and a Count-Min sketch answers "about how many times have I seen this?",
@@ -25,12 +33,24 @@ query is still `0`, no added element can have set it, so `false` is certain. The
 only error is a **false positive**: an absent element whose `k` bits were all set
 by other elements.
 
+<!-- visual:generated bloom-filter-bits -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bloom-filter-bits-dark.svg"><img src="../../docs/visuals/assets/bloom-filter-bits.svg" alt="A 16-bit Bloom filter with two probes per key sets bits 8, 11, 1 and 3 for apple and pear. kiwi reads bits 8 and 7 and bit 7 is clear, a definite miss; plum reads bits 1 and 11, both set, a false positive." width="520"></picture>
+
+**Figure 39.** A 16-bit Bloom filter with two probes per key sets bits 8, 11, 1 and 3 for apple and pear. kiwi reads bits 8 and 7 and bit 7 is clear, a definite miss; plum reads bits 1 and 11, both set, a false positive. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 **Count-Min sketch.** `add(item, c)` adds `c` to one counter in each of `depth`
 rows. A counter holds the true count of its item plus the counts of every other
 item that collided into it, so each counter is at least the true count, and so is
 their minimum. The only error is an **overestimate**; it never underestimates.
 Taking the minimum over independent rows is what makes a large overestimate
 unlikely.
+
+<!-- visual:generated count-min-rows -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/count-min-rows-dark.svg"><img src="../../docs/visuals/assets/count-min-rows.svg" alt="A Count-Min sketch of 3 rows by 8 columns after adding apple 3, pear 1, fig 2, plum 4 and kiwi 1. pear reads counters 2, 3 and 1 in its three rows, and the minimum, 1, is the estimate." width="520"></picture>
+
+**Figure 40.** A Count-Min sketch of 3 rows by 8 columns after adding apple 3, pear 1, fig 2, plum 4 and kiwi 1. pear reads counters 2, 3 and 1 in its three rows, and the minimum, 1, is the estimate. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 Index `i` of a Bloom element comes from two 32-bit halves `h1`, `h2` of a
 SplitMix64-mixed `hashCode()`: `floorMod(h1 + i * step, m)` with
@@ -72,15 +92,16 @@ how many distinct items arrive. After 50,000 additions the allowed overestimate 
 
 ## A worked trace
 
-A 16-bit filter with `k = 2`, where the hash gives element `a` bits `{3, 9}`,
-element `b` bits `{9, 14}` and the absent element `c` bits `{3, 14}`:
+A 16-bit filter with `k = 2`. The class's documented hash rule gives `apple` the bits
+`{11, 8}`, `pear` the bits `{3, 1}`, the absent `kiwi` the bits `{8, 7}` and the absent `plum`
+the bits `{1, 11}`:
 
 ```text
-step        bits set            result
-add a       3, 9
-add b       3, 9, 14
-query c     bit 3 = 1, bit 14 = 1   mightContain = true   (false positive: c was never added)
-query d     bit 5 = 0               mightContain = false  (definitely absent)
+step         bits set          result
+add apple    8, 11
+add pear     1, 3, 8, 11
+query kiwi   bit 8 = 1, bit 7 = 0     mightContain = false  (definitely absent)
+query plum   bit 1 = 1, bit 11 = 1    mightContain = true   (false positive: plum was never added)
 ```
 
 ## Executable example
@@ -106,6 +127,40 @@ sketch.add("pear");
 assert sketch.estimate("apple") >= 3;
 assert sketch.estimate("pear") >= 1;
 assert sketch.totalCount() == 4;
+```
+
+## In real Java
+
+The JDK has no Bloom filter or Count-Min sketch, but it has their exact counterparts, and the exact versions are the right test oracle: a `HashSet` shows what a Bloom filter may get wrong, and `HashMap.merge` shows what a sketch may overcount. In the 16-bit example the filter says `plum` is possibly present while the exact set knows it is not, and no sketch estimate falls below the exact count.
+
+```java
+import io.github.ichillous.dsa.structures.BloomFilter;
+import io.github.ichillous.dsa.structures.CountMinSketch;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+BloomFilter<String> filter = new BloomFilter<>(16, 2);
+Set<String> exact = new HashSet<>();
+for (String fruit : new String[] {"apple", "pear"}) {
+    filter.add(fruit);
+    exact.add(fruit);
+}
+assert filter.mightContain("apple") && exact.contains("apple"); // never a false negative
+assert !filter.mightContain("kiwi") && !exact.contains("kiwi"); // a clear bit proves absence
+assert filter.mightContain("plum") && !exact.contains("plum"); // false positive: the exact set disagrees
+
+CountMinSketch<String> sketch = new CountMinSketch<>(8, 3);
+Map<String, Long> counts = new HashMap<>();
+for (String key : new String[] {"apple", "pear", "apple", "fig", "apple", "plum", "plum"}) {
+    sketch.add(key);
+    counts.merge(key, 1L, Long::sum);
+}
+for (Map.Entry<String, Long> entry : counts.entrySet()) {
+    assert sketch.estimate(entry.getKey()) >= entry.getValue(); // an estimate never undercounts
+}
+assert sketch.totalCount() == 7;
 ```
 
 ## Costs
@@ -135,6 +190,29 @@ total throws `ArithmeticException` and leaves the sketch unchanged.
 
 HyperLogLog (approximate distinct counts) and cuckoo filters (approximate
 membership with deletion) are related structures that are **not implemented here**.
+
+## Check yourself
+
+<details>
+<summary>A Bloom filter says <code>false</code> for an element. Can it have been added?</summary>
+
+No. Adding sets all of the element's bits and bits are never cleared, so one clear bit proves the element was never added. A <code>true</code> answer is the one that is only "possibly".
+
+</details>
+
+<details>
+<summary>Why can a Count-Min estimate be too high but never too low?</summary>
+
+Every add increments one counter in each row, and other items that collide into the same counter only add more. Each of the item's counters is therefore at least its true count, and so is their minimum.
+
+</details>
+
+<details>
+<summary>Why does clearing a Bloom filter's bits to delete an element break the filter?</summary>
+
+Those bits may also have been set by other elements. Clearing them can make a still-present element report <code>false</code>, creating the false negatives the structure promises never to produce.
+
+</details>
 
 ## Practice
 

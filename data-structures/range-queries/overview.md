@@ -93,7 +93,7 @@ assert new SparseTable(new long[] {Long.MAX_VALUE}).rangeMin(0, 1).getAsLong() =
 <!-- visual:generated sparse-table-overlap -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/sparse-table-overlap-dark.svg"><img src="../../docs/visuals/assets/sparse-table-overlap.svg" alt="For the values 5, 2, 6, 4, 7, 3, 8, 1, rangeMin(1, 7) takes the minimum of the blocks [1, 5) and [3, 7), which overlap on indices 3 and 4, and gets 2. A sum of the same blocks would give 41 instead of 30." width="520"></picture>
 
-**Figure 38.** For the values 5, 2, 6, 4, 7, 3, 8, 1, rangeMin(1, 7) takes the minimum of the blocks [1, 5) and [3, 7), which overlap on indices 3 and 4, and gets 2. A sum of the same blocks would give 41 instead of 30. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 44.** For the values 5, 2, 6, 4, 7, 3, 8, 1, rangeMin(1, 7) takes the minimum of the blocks [1, 5) and [3, 7), which overlap on indices 3 and 4, and gets 2. A sum of the same blocks would give 41 instead of 30. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 An empty range returns `OptionalLong.empty()`, so `Long.MAX_VALUE` stays a real, usable
@@ -198,7 +198,7 @@ before it changes anything. If any element would leave `long` range, it throws
 <!-- visual:generated lazy-propagation -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/lazy-propagation-dark.svg"><img src="../../docs/visuals/assets/lazy-propagation.svg" alt="In a LazySegmentTree over 1, 2, 3, 4, rangeAdd(2, 4, 5) stops at the node covering [2, 4), raising its sum to 17 and leaving a pending +5 for its leaves. rangeSum(3, 4) then reads the leaf&#x27;s stored 4, adds the pending 5 and returns 9." width="520"></picture>
 
-**Figure 39.** In a LazySegmentTree over 1, 2, 3, 4, rangeAdd(2, 4, 5) stops at the node covering [2, 4), raising its sum to 17 and leaving a pending +5 for its leaves. rangeSum(3, 4) then reads the leaf's stored 4, adds the pending 5 and returns 9. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 45.** In a LazySegmentTree over 1, 2, 3, 4, rangeAdd(2, 4, 5) stops at the node covering [2, 4), raising its sum to 17 and leaving a pending +5 for its leaves. rangeSum(3, 4) then reads the leaf's stored 4, adds the pending 5 and returns 9. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Costs and contracts

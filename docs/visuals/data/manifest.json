@@ -375,13 +375,79 @@
       "dark": "assets/tree-diameter-dark.svg"
     },
     {
+      "id": "hash-index-spread",
+      "title": "From hash code to slot",
+      "category": "Hashing and sketches",
+      "description": "Integer keys 65536 and 131072 have hash codes 0x00010000 and 0x00020000, whose low four bits are both 0, so a plain mask sends both to slot 0. Spreading with h ^ (h >>> 16) and multiplying by 0x9E3779B9 gives slots 1 and 2 of 16.",
+      "lesson": "../../data-structures/hash-tables/functions.md",
+      "keyIdea": "Mixing lets high bits pick the slot, so such keys stop colliding.",
+      "number": 35,
+      "light": "assets/hash-index-spread.svg",
+      "dark": "assets/hash-index-spread-dark.svg"
+    },
+    {
+      "id": "open-addressing-probe",
+      "title": "Probing past a taken slot",
+      "category": "Hashing and sketches",
+      "description": "In an 8-slot table holding K, B and G, put(L) finds home slot 7 taken by G, wraps to slot 0 and stores L there; get(T), also homed at 7, visits slots 7, 0 and 1 and stops at the empty slot 1.",
+      "lesson": "../../data-structures/hash-tables/open-addressing.md",
+      "keyIdea": "A collision moves to the next slot and wraps past the end; a lookup retraces it to the first empty slot.",
+      "number": 36,
+      "light": "assets/open-addressing-probe.svg",
+      "dark": "assets/open-addressing-probe-dark.svg"
+    },
+    {
+      "id": "backward-shift-delete",
+      "title": "Backward-shift deletion",
+      "category": "Hashing and sketches",
+      "description": "In the cluster C, H, M, B at slots 3 to 6, clearing only H's slot 4 would hide M, which is stored at slot 5 but starts its search at slot 4. Backward-shift deletion moves M to slot 4, clears slot 5 and leaves B at its home slot 6.",
+      "lesson": "../../data-structures/hash-tables/open-addressing.md",
+      "keyIdea": "Shifting later keys back keeps every key reachable.",
+      "number": 37,
+      "light": "assets/backward-shift-delete.svg",
+      "dark": "assets/backward-shift-delete-dark.svg"
+    },
+    {
+      "id": "lfu-buckets",
+      "title": "LFU frequency buckets",
+      "category": "Hashing and sketches",
+      "description": "A capacity-3 LfuCache after put A, B, C and get C holds A and B in bucket 1 and C in bucket 2. get(B) moves B to the end of bucket 2, and put(D) then evicts A, the oldest key of bucket 1.",
+      "lesson": "../../data-structures/hash-tables/lfu-cache.md",
+      "keyIdea": "Hits lift keys; the oldest key in the lowest bucket is evicted.",
+      "number": 38,
+      "light": "assets/lfu-buckets.svg",
+      "dark": "assets/lfu-buckets-dark.svg"
+    },
+    {
+      "id": "bloom-filter-bits",
+      "title": "Bloom filter bits",
+      "category": "Hashing and sketches",
+      "description": "A 16-bit Bloom filter with two probes per key sets bits 8, 11, 1 and 3 for apple and pear. kiwi reads bits 8 and 7 and bit 7 is clear, a definite miss; plum reads bits 1 and 11, both set, a false positive.",
+      "lesson": "../../data-structures/probabilistic/overview.md",
+      "keyIdea": "One clear bit proves absence; all-set bits mean only possibly present.",
+      "number": 39,
+      "light": "assets/bloom-filter-bits.svg",
+      "dark": "assets/bloom-filter-bits-dark.svg"
+    },
+    {
+      "id": "count-min-rows",
+      "title": "Count-Min rows",
+      "category": "Hashing and sketches",
+      "description": "A Count-Min sketch of 3 rows by 8 columns after adding apple 3, pear 1, fig 2, plum 4 and kiwi 1. pear reads counters 2, 3 and 1 in its three rows, and the minimum, 1, is the estimate.",
+      "lesson": "../../data-structures/probabilistic/overview.md",
+      "keyIdea": "Rows only overcount, so a key's smallest counter is its estimate.",
+      "number": 40,
+      "light": "assets/count-min-rows.svg",
+      "dark": "assets/count-min-rows-dark.svg"
+    },
+    {
       "id": "heap-sift-paths",
       "title": "Heap sift paths",
       "category": "Trees and ranges",
       "description": "In the min heap 1, 3, 8, 4, 5, 9, add(7) appends at slot 6 and swaps up one level to slot 2, giving 1, 3, 7, 4, 5, 9, 8. remove() then takes out 1, moves 8 to the root and sifts it down two levels to slot 3, giving 3, 4, 7, 8, 5, 9.",
       "lesson": "../../data-structures/heaps/operations.md",
       "keyIdea": "Each repair follows one path of at most log2 n levels.",
-      "number": 35,
+      "number": 41,
       "light": "assets/heap-sift-paths.svg",
       "dark": "assets/heap-sift-paths-dark.svg"
     },
@@ -392,7 +458,7 @@
       "description": "Selection.smallestK over the stream 8, 3, 9, 5, 2, 5, 1 with k = 3 fills the heap with 8, 3, 9, then evicts 9, evicts 8, drops the second 5 and evicts 5 for 1, ending with 1, 2, 3.",
       "lesson": "../../data-structures/queues/priority-queues.md",
       "keyIdea": "The root is the largest value kept; an arrival must beat it to get in.",
-      "number": 36,
+      "number": 42,
       "light": "assets/bounded-heap-topk.svg",
       "dark": "assets/bounded-heap-topk-dark.svg"
     },
@@ -403,7 +469,7 @@
       "description": "For the words car, card, care, cart, cat and dog, wordsWithPrefix(\"ca\", 3) walks the c and a nodes, then emits car, card and care in sorted order and stops before cart and cat; the dog branch is never visited.",
       "lesson": "../../data-structures/tries/implementation.md",
       "keyIdea": "Walk the prefix once, then visit children in sorted order until the limit.",
-      "number": 37,
+      "number": 43,
       "light": "assets/trie-prefix-walk.svg",
       "dark": "assets/trie-prefix-walk-dark.svg"
     },
@@ -414,7 +480,7 @@
       "description": "For the values 5, 2, 6, 4, 7, 3, 8, 1, rangeMin(1, 7) takes the minimum of the blocks [1, 5) and [3, 7), which overlap on indices 3 and 4, and gets 2. A sum of the same blocks would give 41 instead of 30.",
       "lesson": "../../data-structures/range-queries/overview.md",
       "keyIdea": "Minimum ignores the overlap of two blocks; a sum would count it twice.",
-      "number": 38,
+      "number": 44,
       "light": "assets/sparse-table-overlap.svg",
       "dark": "assets/sparse-table-overlap-dark.svg"
     },
@@ -425,7 +491,7 @@
       "description": "In a LazySegmentTree over 1, 2, 3, 4, rangeAdd(2, 4, 5) stops at the node covering [2, 4), raising its sum to 17 and leaving a pending +5 for its leaves. rangeSum(3, 4) then reads the leaf's stored 4, adds the pending 5 and returns 9.",
       "lesson": "../../data-structures/range-queries/overview.md",
       "keyIdea": "A range add stops at a covering node and leaves a pending value.",
-      "number": 39,
+      "number": 45,
       "light": "assets/lazy-propagation.svg",
       "dark": "assets/lazy-propagation-dark.svg"
     },
@@ -436,7 +502,7 @@
       "description": "In a UnionFind over 9 indices, union(0, 5) hangs the size-4 root 4 under the size-5 root 0. Before find(7) the path is 7, 6, 4, 0; afterwards 7 and 6 point directly at 0.",
       "lesson": "../../data-structures/union-find/overview.md",
       "keyIdea": "Union by size keeps trees shallow; find re-points its path at the root.",
-      "number": 40,
+      "number": 46,
       "light": "assets/union-find-compression.svg",
       "dark": "assets/union-find-compression-dark.svg"
     },
@@ -447,7 +513,7 @@
       "description": "A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends.",
       "lesson": "../../data-structures/arrays/operations.md",
       "keyIdea": "Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.",
-      "number": 41,
+      "number": 47,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
     },
@@ -458,7 +524,7 @@
       "description": "In the chain 10, 20, 30, inserting 15 after 10 takes two link writes: 15.next = 10.next, then 10.next = 15, giving 10, 15, 20, 30. Writing 10.next = 15 first makes 15.next point at 15 itself and leaves 20 and 30 unreachable.",
       "lesson": "../../data-structures/linked-lists/singly.md",
       "keyIdea": "Link the new node onward first, then redirect the predecessor.",
-      "number": 42,
+      "number": 48,
       "light": "assets/singly-insert-after.svg",
       "dark": "assets/singly-insert-after-dark.svg"
     },
@@ -469,7 +535,7 @@
       "description": "An ArrayStack traces {[()]}: three pushes and three pops leave it empty. The same stack traced on ([)] holds ( and [ when the closer ) arrives, and the top [ does not match it, so the string is rejected at the third character.",
       "lesson": "../../data-structures/stacks/implementation.md",
       "keyIdea": "The stack holds exactly the unmatched openers; a closer must match the top.",
-      "number": 43,
+      "number": 49,
       "light": "assets/stack-bracket-matching.svg",
       "dark": "assets/stack-bracket-matching-dark.svg"
     },
@@ -480,7 +546,7 @@
       "description": "A RingDeque with four slots receives addLast(20), addLast(30), addFirst(10) and addLast(40); addFirst moves the head from slot 0 back to slot 3, and the tail ends at slot 2. removeLast() returns 40 and removeFirst() returns 10, leaving 20 and 30.",
       "lesson": "../../data-structures/queues/implementation.md",
       "keyIdea": "Both ends are indices on a circular buffer: addFirst steps the head back and wraps.",
-      "number": 44,
+      "number": 50,
       "light": "assets/deque-both-ends.svg",
       "dark": "assets/deque-both-ends-dark.svg"
     },
@@ -491,7 +557,7 @@
       "description": "In a DynamicArray of eight values, get(5) reads slot 5 in one jump. In a DoublyLinkedList of the same values it starts at the tail and follows 2 links, because 5 is in the back half; the hop counts for indices 0 to 7 are 0, 1, 2, 3, 3, 2, 1 and 0.",
       "lesson": "../../data-structures/arrays/overview.md",
       "keyIdea": "An array reaches any index in one jump; a list walks links from the nearer end.",
-      "number": 45,
+      "number": 51,
       "light": "assets/array-vs-list-access.svg",
       "dark": "assets/array-vs-list-access-dark.svg"
     },
@@ -502,7 +568,7 @@
       "description": "One directed graph with 4 vertices and the edges 0 to 1, 0 to 2, 2 to 1 and 2 to 3, shown as an adjacency list, a 4 by 4 adjacency matrix and an edge list, each with the cost of testing an edge and listing neighbors.",
       "keyIdea": "Edge tests favor a matrix; neighbor scans favor an adjacency list.",
       "lesson": "../../data-structures/graphs/representation.md",
-      "number": 46,
+      "number": 52,
       "light": "assets/graph-representations.svg",
       "dark": "assets/graph-representations-dark.svg"
     },
@@ -513,7 +579,7 @@
       "description": "A 6-vertex undirected graph from source 0: breadthFirst visits 0, 1, 2, 3, 4, 5 in layers of distance 0, 1 and 2, while depthFirst visits 0, 1, 3, 4, 5, 2 by following one branch to its end.",
       "keyIdea": "A queue visits whole layers; a stack follows one branch to its end.",
       "lesson": "../../data-structures/graphs/traversal.md",
-      "number": 47,
+      "number": 53,
       "light": "assets/bfs-vs-dfs-order.svg",
       "dark": "assets/bfs-vs-dfs-order-dark.svg"
     },
@@ -524,7 +590,7 @@
       "description": "Kahn's algorithm on a 5-vertex DAG whose in-degrees are 2, 1, 0, 0 and 2: it pops ready vertices 2, 3, 0, 1, 4, lowering in-degrees and refilling the ready queue, and outputs 2, 3, 0, 1, 4.",
       "keyIdea": "A vertex is output once its in-degree is 0, so every edge points forward.",
       "lesson": "../../algorithms/graph/topological-sort.md",
-      "number": 48,
+      "number": 54,
       "light": "assets/topological-kahn.svg",
       "dark": "assets/topological-kahn-dark.svg"
     },
@@ -535,7 +601,7 @@
       "description": "A column of seven yes-or-no questions from all pairs, unweighted, 0-1 weights, DAG, negative weights and heuristic to nonnegative weights, each paired with the algorithm and the repository method that answers it.",
       "keyIdea": "Use the most specific algorithm whose precondition your graph meets; each one exploits a fact the general one cannot assume.",
       "lesson": "../../algorithms/graph/shortest-paths.md",
-      "number": 49,
+      "number": 55,
       "light": "assets/shortest-path-chooser.svg",
       "dark": "assets/shortest-path-chooser-dark.svg"
     },
@@ -546,7 +612,7 @@
       "description": "0-1 BFS from vertex 0 on a 4-vertex directed graph: weight-0 targets are pushed to the front of the deque and weight-1 targets to the back, so vertex 1 is first queued at distance 1 and then improved to 0 through 0, 2, 3, 1.",
       "keyIdea": "Zero-weight edges go to the deque's front, unit-weight edges to its back.",
       "lesson": "../../algorithms/graph/shortest-paths.md",
-      "number": 50,
+      "number": 56,
       "light": "assets/zero-one-bfs-deque.svg",
       "dark": "assets/zero-one-bfs-deque-dark.svg"
     },
@@ -557,7 +623,7 @@
       "description": "A* on a 5 by 5 unit grid from cell 10 to cell 14 with the Manhattan heuristic: the route 10, 11, 12, 13, 14 has f = g + h equal to 4 everywhere, the heuristic was called for 13 of 25 cells, and with h = 0 it was called for 21.",
       "keyIdea": "A good heuristic keeps the search near the route; far cells never get an h evaluation.",
       "lesson": "../../algorithms/graph/shortest-paths.md",
-      "number": 51,
+      "number": 57,
       "light": "assets/astar-heuristic.svg",
       "dark": "assets/astar-heuristic-dark.svg"
     },
@@ -568,7 +634,7 @@
       "description": "A 4-vertex directed graph: allowing vertex 1 as a stop-over improves the distance matrix entry d[0][2] from 9 to 5 because d[0][1] + d[1][2] = 3 + 2, and no other entry changes.",
       "keyIdea": "Round k asks whether going through vertex k beats the best route so far.",
       "lesson": "../../algorithms/graph/shortest-paths.md",
-      "number": 52,
+      "number": 58,
       "light": "assets/floyd-warshall-via.svg",
       "dark": "assets/floyd-warshall-via-dark.svg"
     },
@@ -579,7 +645,7 @@
       "description": "A binary search tree built from 8, 3, 10, 1, 6, 14, 4 and 7 has root 8, leaves 1, 4, 7 and 14, and height 3. Pre-order reads 8 3 1 6 4 7 10 14, in-order reads the keys sorted, post-order ends at the root 8, and level order reads one depth at a time.",
       "lesson": "../../data-structures/trees/binary-trees.md",
       "keyIdea": "Pre, in and post order differ only in when the root is read.",
-      "number": 53,
+      "number": 59,
       "light": "assets/tree-traversals.svg",
       "dark": "assets/tree-traversals-dark.svg"
     },
@@ -590,7 +656,7 @@
       "description": "Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1.",
       "lesson": "../../data-structures/trees/binary-search-trees.md",
       "keyIdea": "The successor's key replaces the deleted one; its old node is unlinked.",
-      "number": 54,
+      "number": 60,
       "light": "assets/bst-delete-successor.svg",
       "dark": "assets/bst-delete-successor-dark.svg"
     },
@@ -601,7 +667,7 @@
       "description": "After put 1 to 5, a RedBlackTreeMap has black root 4 with red left child 2, black children 1 and 3 under 2, and black 5. Read as a 2-3 tree it is the 3-node [2 4] over the 2-nodes [1], [3] and [5]; the height is 2 as a binary tree and 1 as a 2-3 tree.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "A red link and its black parent make one 3-node.",
-      "number": 55,
+      "number": 61,
       "light": "assets/red-black-23-nodes.svg",
       "dark": "assets/red-black-23-nodes-dark.svg"
     },
@@ -612,7 +678,7 @@
       "description": "Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "Rotations keep sorted order; a flip splits a 4-node.",
-      "number": 56,
+      "number": 62,
       "light": "assets/red-black-fixups.svg",
       "dark": "assets/red-black-fixups-dark.svg"
     },
@@ -623,7 +689,7 @@
       "description": "In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1.",
       "lesson": "../../algorithms/sorting/insertion-sort.md",
       "keyIdea": "Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.",
-      "number": 57,
+      "number": 63,
       "light": "assets/insertion-sort-shift.svg",
       "dark": "assets/insertion-sort-shift-dark.svg"
     },
@@ -634,7 +700,7 @@
       "description": "Heapsort on 3, 1, 6, 5, 2, 4 builds the max-heap 6, 5, 4, 1, 2, 3, then moves 6 and 5 to the end, giving 5, 3, 4, 1, 2, 6 and 4, 3, 2, 1, 5, 6, until 1 to 6 is sorted.",
       "lesson": "../../algorithms/sorting/heap-sort.md",
       "keyIdea": "Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.",
-      "number": 58,
+      "number": 64,
       "light": "assets/heapsort-phases.svg",
       "dark": "assets/heapsort-phases-dark.svg"
     },
@@ -645,7 +711,7 @@
       "description": "For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.",
-      "number": 59,
+      "number": 65,
       "light": "assets/counting-sort-counts.svg",
       "dark": "assets/counting-sort-counts-dark.svg"
     },
@@ -656,7 +722,7 @@
       "description": "Sorting 35, 21, 41, 15, 31, 25 by the ones digit gives 21, 41, 31, 35, 15, 25; a stable pass on the tens digit then gives 15, 21, 25, 31, 35, 41.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.",
-      "number": 60,
+      "number": 66,
       "light": "assets/radix-lsd-passes.svg",
       "dark": "assets/radix-lsd-passes-dark.svg"
     },
@@ -667,7 +733,7 @@
       "description": "Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "A stable sort keeps equal keys in their input order; an unstable sort may reorder them, losing any earlier ordering by tag.",
-      "number": 61,
+      "number": 67,
       "light": "assets/sort-stability.svg",
       "dark": "assets/sort-stability-dark.svg"
     }

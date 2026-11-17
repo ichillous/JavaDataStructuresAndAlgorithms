@@ -31,7 +31,7 @@ Insertion after a node you already hold needs two link writes, and their order m
 <!-- visual:generated singly-insert-after -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/singly-insert-after-dark.svg"><img src="../../docs/visuals/assets/singly-insert-after.svg" alt="In the chain 10, 20, 30, inserting 15 after 10 takes two link writes: 15.next = 10.next, then 10.next = 15, giving 10, 15, 20, 30. Writing 10.next = 15 first makes 15.next point at 15 itself and leaves 20 and 30 unreachable." width="520"></picture>
 
-**Figure 42.** In the chain 10, 20, 30, inserting 15 after 10 takes two link writes: 15.next = 10.next, then 10.next = 15, giving 10, 15, 20, 30. Writing 10.next = 15 first makes 15.next point at 15 itself and leaves 20 and 30 unreachable. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 48.** In the chain 10, 20, 30, inserting 15 after 10 takes two link writes: 15.next = 10.next, then 10.next = 15, giving 10, 15, 20, 30. Writing 10.next = 15 first makes 15.next point at 15 itself and leaves 20 and 30 unreachable. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ```text

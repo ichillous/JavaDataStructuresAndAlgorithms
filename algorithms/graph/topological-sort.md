@@ -21,7 +21,7 @@ Kahn's algorithm keeps an in-degree count for every vertex and a FIFO queue of t
 <!-- visual:generated topological-kahn | Kahn's algorithm on a five-vertex DAG: in-degrees, the ready queue after each pop, and the output order. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/topological-kahn-dark.svg"><img src="../../docs/visuals/assets/topological-kahn.svg" alt="Kahn&#x27;s algorithm on a 5-vertex DAG whose in-degrees are 2, 1, 0, 0 and 2: it pops ready vertices 2, 3, 0, 1, 4, lowering in-degrees and refilling the ready queue, and outputs 2, 3, 0, 1, 4." width="520"></picture>
 
-**Figure 48.** Kahn's algorithm on a five-vertex DAG: in-degrees, the ready queue after each pop, and the output order. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 54.** Kahn's algorithm on a five-vertex DAG: in-degrees, the ready queue after each pop, and the output order. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## Worked trace
