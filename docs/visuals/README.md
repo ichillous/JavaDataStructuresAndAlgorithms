@@ -215,7 +215,71 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Theoretical normalized work; constants, machines and measured runtime are outside this comparison.
 
-## 27. Appending to a full array
+## 27. Articulation points
+
+[Graphs: read the lesson](../../algorithms/graph/graph-structure.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/articulation-points-dark.svg"><img src="assets/articulation-points.svg" alt="A bowtie graph of two triangles sharing vertex 2 is searched depth-first from 0 with discovery and low values shown, and removing vertex 2 leaves the separate components {0, 1} and {3, 4}." width="520"></picture>
+
+**Key idea:** An articulation point has a child whose low is at least its own disc.
+
+## 28. Bipartite or odd cycle
+
+[Graphs: read the lesson](../../algorithms/graph/graph-structure.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/bipartite-odd-cycle-dark.svg"><img src="assets/bipartite-odd-cycle.svg" alt="A 6-cycle splits into left {0, 2, 4} and right {1, 3, 5}, while a 5-cycle with a tail has an edge 2-3 joining two vertices of the same colour, and the witness is the odd cycle 2, 1, 0, 4, 3." width="520"></picture>
+
+**Key idea:** A graph is two-colourable exactly when it has no odd cycle; the first edge joining equal colours exposes one.
+
+## 29. Euler path
+
+[Graphs: read the lesson](../../algorithms/graph/graph-structure.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/euler-path-dark.svg"><img src="assets/euler-path.svg" alt="A square with a diagonal and a pendant edge has odd degree only at vertices 0 and 4, so the Euler path starts at 0 and walks every edge once: 0, 1, 2, 3, 0, 2, 4." width="520"></picture>
+
+**Key idea:** Connected edges with zero or two odd-degree vertices give an Euler path.
+
+## 30. Kruskal and Prim
+
+[Graphs: read the lesson](../../algorithms/graph/minimum-spanning-trees.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/mst-kruskal-prim-dark.svg"><img src="assets/mst-kruskal-prim.svg" alt="One weighted graph on five vertices has a minimum spanning tree of total weight 11. Kruskal keeps edges in the order 1, 2, 3, 5 and skips two that close a cycle, while Prim from vertex 0 picks 1, 2, 5, 3." width="520"></picture>
+
+**Key idea:** Both algorithms add cheapest safe edges, in different orders, to reach one total.
+
+## 31. Maximum flow and minimum cut
+
+[Graphs: read the lesson](../../algorithms/graph/flows-and-matching.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/max-flow-min-cut-dark.svg"><img src="assets/max-flow-min-cut.svg" alt="A four-vertex flow network from source 0 to sink 3 carries a maximum flow of 5. The source side {0, 1} is the set reachable in the residual graph, and the three edges leaving it have capacities 2, 1 and 2, summing to 5." width="520"></picture>
+
+**Key idea:** Edges leaving the final source side are saturated and sum to the flow.
+
+## 32. Augmenting a matching
+
+[Graphs: read the lesson](../../algorithms/graph/flows-and-matching.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/matching-augmenting-path-dark.svg"><img src="assets/matching-augmenting-path.svg" alt="A bipartite matching of size 2 leaves left vertex 1 and right vertex 1 free. Flipping the alternating path L1, R0, L0, R1 gives the maximum matching of size 3." width="520"></picture>
+
+**Key idea:** Flipping one augmenting path grows a matching by exactly one pair.
+
+## 33. Binary lifting for LCA
+
+[Graphs: read the lesson](../../algorithms/graph/tree-queries.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/lca-binary-lifting-dark.svg"><img src="assets/lca-binary-lifting.svg" alt="In a seven-vertex tree rooted at 0, lca(6, 4) lifts vertex 6 by 2 to vertex 3, finds the 2^2 and 2^1 ancestors equal, jumps both vertices by 2^0 to 1 and 2, and returns their parent 0, read from the table of 2^j-th ancestors." width="520"></picture>
+
+**Key idea:** Equalise depths, then jump both by powers of two while ancestors differ.
+
+## 34. Tree diameter by two sweeps
+
+[Graphs: read the lesson](../../algorithms/graph/tree-queries.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/tree-diameter-dark.svg"><img src="assets/tree-diameter.svg" alt="In a seven-vertex tree, a breadth-first sweep from vertex 0 ends farthest at 6, and a second sweep from 6 ends farthest at 5, so the path 6, 3, 1, 0, 2, 5 of 5 edges is a longest path." width="520"></picture>
+
+**Key idea:** A sweep from any vertex ends at a diameter endpoint; sweep again from there.
+
+## 35. Appending to a full array
 
 [Linear structures: read the lesson](../../data-structures/arrays/operations.md)
 

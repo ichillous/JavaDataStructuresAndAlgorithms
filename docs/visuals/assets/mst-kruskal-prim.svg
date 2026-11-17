@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 882" width="520" height="882" role="img" aria-labelledby="title desc">
+<title id="title">30  Kruskal and Prim</title>
+<desc id="desc">One weighted graph on five vertices has a minimum spanning tree of total weight 11. Kruskal keeps edges in the order 1, 2, 3, 5 and skips two that close a cycle, while Prim from vertex 0 picks 1, 2, 5, 3.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="mst-kruskal-prim-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="mst-kruskal-prim-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="mst-kruskal-prim-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="mst-kruskal-prim-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="mst-kruskal-prim-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="mst-kruskal-prim-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="mst-kruskal-prim-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="mst-kruskal-prim-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="mst-kruskal-prim-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="mst-kruskal-prim-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="mst-kruskal-prim-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="mst-kruskal-prim-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="mst-kruskal-prim-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="mst-kruskal-prim-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="mst-kruskal-prim-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="882" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">30  Kruskal and Prim</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">One graph; its minimum tree totals 11</text>
+<line x1="94.54" y1="259.41" x2="205.46" y2="220.59" stroke="#8994a5" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="144.71" y="224.9" font-size="18" fill="#1f2430" text-anchor="middle" font-weight="700">4</text>
+<line x1="94.54" y1="276.59" x2="205.46" y2="315.41" stroke="#2451b7" stroke-width="2.5"/>
+<text x="155.29" y="280.9" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<line x1="230.0" y1="238.0" x2="230.0" y2="298.0" stroke="#2451b7" stroke-width="2.5"/>
+<text x="214.0" y="274.0" font-size="18" fill="#2451b7" text-anchor="end" font-weight="700">2</text>
+<line x1="256.0" y1="212.0" x2="364.0" y2="212.0" stroke="#2451b7" stroke-width="2.5"/>
+<text x="310.0" y="196.0" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">5</text>
+<line x1="251.3" y1="309.09" x2="368.7" y2="226.91" stroke="#8994a5" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="300.82" y="260.89" font-size="18" fill="#1f2430" text-anchor="end" font-weight="700">8</text>
+<line x1="398.74" y1="236.49" x2="421.26" y2="299.51" stroke="#2451b7" stroke-width="2.5"/>
+<text x="425.07" y="268.62" font-size="18" fill="#2451b7" text-anchor="end" font-weight="700">3</text>
+<circle cx="70" cy="268" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="70" y="275" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">0</text>
+<circle cx="230" cy="212" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="230" y="219" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">1</text>
+<circle cx="230" cy="324" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="230" y="331" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">2</text>
+<circle cx="390" cy="212" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="390" y="219" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">3</text>
+<circle cx="430" cy="324" r="22" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="430" y="331" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="700">4</text>
+<text x="28" y="376" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">solid: in the tree   dashed: left out</text>
+<circle cx="42" cy="409" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="415" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="416" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Kruskal: 1 + 2 + 3 + 5 = 11</text>
+<rect x="39" y="442" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="69.0" y="473.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">1</text>
+<text x="69.0" y="516" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0-2</text>
+<rect x="109" y="442" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="139.0" y="473.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">2</text>
+<text x="139.0" y="516" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1-2</text>
+<rect x="179" y="442" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="209.0" y="473.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<text x="209.0" y="516" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3-4</text>
+<rect x="249" y="442" width="60" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="279.0" y="473.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">4</text>
+<text x="279.0" y="516" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0-1</text>
+<rect x="319" y="442" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="349.0" y="473.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">5</text>
+<text x="349.0" y="516" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1-3</text>
+<rect x="389" y="442" width="60" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="419.0" y="473.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">8</text>
+<text x="419.0" y="516" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2-3</text>
+<circle cx="42" cy="551" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="557" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="558" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Prim from 0: 1 + 2 + 5 + 3 = 11</text>
+<rect x="39" y="584" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="69.0" y="615.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">1</text>
+<text x="69.0" y="658" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0→2</text>
+<rect x="109" y="584" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="139.0" y="615.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">2</text>
+<text x="139.0" y="658" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2→1</text>
+<rect x="179" y="584" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="209.0" y="615.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">5</text>
+<text x="209.0" y="658" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1→3</text>
+<rect x="249" y="584" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="279.0" y="615.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3</text>
+<text x="279.0" y="658" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3→4</text>
+<rect x="28" y="686" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="702" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">edge kept</text>
+<rect x="171.26399999999998" y="686" width="26" height="20" rx="4" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="205.26399999999998" y="702" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">closes a cycle</text>
+<rect x="28" y="724" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="755" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="784" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Both algorithms add cheapest safe</text>
+<text x="44" y="811" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">edges, in different orders, to reach</text>
+<text x="44" y="838" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">one total.</text>
+</svg>

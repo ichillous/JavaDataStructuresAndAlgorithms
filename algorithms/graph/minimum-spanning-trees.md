@@ -12,6 +12,14 @@ components. Two maintained implementations give the same total weight:
   `primMinimumSpanningForest` is Prim: grow one tree from a start vertex by always
   taking the cheapest edge that leaves it.
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | You must connect every vertex as cheaply as possible and the connection need not be a shortest path between any two of them: networks, clustering, cheapest wiring. |
+| **Avoid it when** | You need cheapest routes between vertices (use [shortest paths](shortest-paths.md)) or the graph is directed. |
+| **Cost** | O(V + E log(E + 1)) time and O(V + E) auxiliary space for both Kruskal and the lazy-heap Prim. |
+| **In this repo** | [`GraphAlgorithms.minimumSpanningForest`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) (Kruskal), [`GraphStructureAlgorithms.primMinimumSpanningForest`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java) |
+| **In the JDK** | No direct equivalent. |
+
 **Preconditions.** An undirected `WeightedGraph`; a directed one throws
 `IllegalArgumentException`. Negative weights, parallel edges and loops are allowed
 (loops are never chosen). The total is accumulated exactly and must fit in a
@@ -27,6 +35,12 @@ component of the cheapest remaining edge. Because both only ever add a crossing 
 that is cheapest, an exchange argument shows the final forest is minimum. Prim
 restarts from the smallest unvisited vertex once its heap is empty, which gives one
 tree per component.
+
+<!-- visual:generated mst-kruskal-prim -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/mst-kruskal-prim-dark.svg"><img src="../../docs/visuals/assets/mst-kruskal-prim.svg" alt="One weighted graph on five vertices has a minimum spanning tree of total weight 11. Kruskal keeps edges in the order 1, 2, 3, 5 and skips two that close a cycle, while Prim from vertex 0 picks 1, 2, 5, 3." width="520"></picture>
+
+**Figure 30.** One weighted graph on five vertices has a minimum spanning tree of total weight 11. Kruskal keeps edges in the order 1, 2, 3, 5 and skips two that close a cycle, while Prim from vertex 0 picks 1, 2, 5, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 ## A worked trace
 
@@ -86,6 +100,44 @@ component. The implementation restarts for every unvisited vertex. Finally, Prim
 computes a minimum spanning tree, not shortest paths: the tree path between two
 vertices need not be their shortest path (compare Dijkstra).
 
+## In real Java
+
+The JDK has no spanning-tree API, so use this class or write the algorithm over
+your own adjacency. One behavior is worth relying on: Kruskal here sorts the edge
+list by weight and equal weights keep the order in which you added the edges, so
+the chosen forest is reproducible. In a triangle whose three edges all weigh 1, the
+first two added are kept and the third closes a cycle:
+
+```java
+import io.github.ichillous.dsa.graphs.GraphAlgorithms;
+import io.github.ichillous.dsa.graphs.WeightedGraph;
+
+var triangle = WeightedGraph.undirected(3).addEdge(0, 1, 1).addEdge(1, 2, 1).addEdge(0, 2, 1);
+var forest = GraphAlgorithms.minimumSpanningForest(triangle);
+assert forest.totalWeight() == 2;
+assert forest.edges().size() == 2;
+assert forest.edges().get(0).from() == 0 && forest.edges().get(0).to() == 1;
+assert forest.edges().get(1).from() == 1 && forest.edges().get(1).to() == 2;
+
+var reordered = WeightedGraph.undirected(3).addEdge(0, 2, 1).addEdge(1, 2, 1).addEdge(0, 1, 1);
+assert GraphAlgorithms.minimumSpanningForest(reordered).edges().get(0).to() == 2;
+```
+
+Reordering the input changes which minimum forest you get but never its total.
+
+## Common mistakes
+
+- **Summing weights in an `int`.** Two edges of weight `2_000_000_000` total
+  `4_000_000_000`, which wraps to a negative `int`. The invariant "the total equals
+  the true sum" needs a `long` at least; the library accumulates exactly and throws
+  `ArithmeticException` when the total does not fit in a `long`.
+- **Dropping negative edges before running.** For `0-1 (-3)`, `1-2 (4)`, `0-2 (5)`
+  the minimum tree is `0-1`, `1-2` with total 1. Filtering the negative edge leaves
+  only `1-2` and `0-2`, total 9. The cut property never uses the sign of a weight.
+- **Adding a loop or a second edge inside one component.** An edge `3-3` of weight
+  `-5` looks cheapest, but a tree has no cycle and `V - c` edges. Kruskal's
+  union-find test rejects it because both endpoints are already in one set.
+
 ## Practice
 
 1. Hand-run Prim from each possible start vertex on the worked example; the total
@@ -94,6 +146,29 @@ vertices need not be their shortest path (compare Dijkstra).
    edges and confirm the minimum total matches both algorithms.
 3. Make a graph with several equal-weight edges and explain why the two edge lists
    differ while the totals agree.
+
+## Check yourself
+
+<details>
+<summary>State the cut property and say which algorithm uses which partition.</summary>
+
+For any partition of the vertices, a cheapest edge that crosses it belongs to some minimum spanning forest. Prim uses "vertices already in the tree" versus the rest; Kruskal uses the component of the cheapest remaining edge that joins two different components.
+
+</details>
+
+<details>
+<summary>Prim and Kruskal return different edge lists on the same graph. Is one of them wrong?</summary>
+
+Not necessarily. With equal weights several minimum forests exist, and the tie rules differ (input order for Kruskal, smaller target then smaller source for Prim). Compare the total weight and component count instead of the edge lists.
+
+</details>
+
+<details>
+<summary>Why is the path between two vertices in a minimum spanning tree not necessarily their shortest path?</summary>
+
+The tree minimizes the sum of all its edges, not the distance between any pair. In a triangle with weights 2, 2 and 3, the tree drops the weight-3 edge, yet that edge (cost 3) beats the tree path between its endpoints (cost 4).
+
+</details>
 
 See the [catalog](../../docs/catalog.md) for the source and test links, the
 [complexity guide](../../docs/complexity.md) for the cost summary, and
