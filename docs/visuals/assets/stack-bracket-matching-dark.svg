@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 790" width="520" height="790" role="img" aria-labelledby="title desc">
+<title id="title">29  Matching brackets with a stack</title>
+<desc id="desc">An ArrayStack traces {[()]}: three pushes and three pops leave it empty. The same stack traced on ([)] holds ( and [ when the closer ) arrives, and the top [ does not match it, so the string is rejected at the third character.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="stack-bracket-matching-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="stack-bracket-matching-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="stack-bracket-matching-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="stack-bracket-matching-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="stack-bracket-matching-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="stack-bracket-matching-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="stack-bracket-matching-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="stack-bracket-matching-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="stack-bracket-matching-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="stack-bracket-matching-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="stack-bracket-matching-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="stack-bracket-matching-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="stack-bracket-matching-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="stack-bracket-matching-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="stack-bracket-matching-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="790" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">29  Matching brackets with a stack</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Linear structures · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Balanced {[()]}: the stack ends empty</text>
+<text x="78" y="210.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">read</text>
+<rect x="90" y="182" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="123.0" y="211.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">{</text>
+<rect x="156" y="182" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="189.0" y="211.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">[</text>
+<rect x="222" y="182" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="255.0" y="211.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">(</text>
+<rect x="288" y="182" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="321.0" y="211.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">)</text>
+<rect x="354" y="182" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="387.0" y="211.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">]</text>
+<rect x="420" y="182" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="453.0" y="211.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">}</text>
+<text x="78" y="254.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">op</text>
+<rect x="90" y="226" width="66" height="44" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="123.0" y="255.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">push</text>
+<rect x="156" y="226" width="66" height="44" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="189.0" y="255.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">push</text>
+<rect x="222" y="226" width="66" height="44" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="255.0" y="255.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">push</text>
+<rect x="288" y="226" width="66" height="44" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="321.0" y="255.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">pop</text>
+<rect x="354" y="226" width="66" height="44" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="387.0" y="255.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">pop</text>
+<rect x="420" y="226" width="66" height="44" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="453.0" y="255.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">pop</text>
+<text x="78" y="298.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">stack</text>
+<rect x="90" y="270" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="123.0" y="299.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">{</text>
+<rect x="156" y="270" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="189.0" y="299.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">{[</text>
+<rect x="222" y="270" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="255.0" y="299.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">{[(</text>
+<rect x="288" y="270" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="321.0" y="299.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">{[</text>
+<rect x="354" y="270" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="387.0" y="299.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">{</text>
+<rect x="420" y="270" width="66" height="44" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="453.0" y="299.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">none</text>
+<circle cx="42" cy="359" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="365" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="366" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Unbalanced ([)]: rejected at character 3</text>
+<text x="78" y="420.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">read</text>
+<rect x="90" y="392" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="123.0" y="421.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">(</text>
+<rect x="156" y="392" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="189.0" y="421.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">[</text>
+<rect x="222" y="392" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="255.0" y="421.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">)</text>
+<rect x="288" y="392" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="321.0" y="421.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">]</text>
+<text x="78" y="464.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">op</text>
+<rect x="90" y="436" width="66" height="44" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="123.0" y="465.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">push</text>
+<rect x="156" y="436" width="66" height="44" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="189.0" y="465.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">push</text>
+<rect x="222" y="436" width="66" height="44" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="255.0" y="465.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">stop</text>
+<rect x="288" y="436" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="78" y="508.0" font-size="18" fill="#bec9da" text-anchor="end" font-weight="400">stack</text>
+<rect x="90" y="480" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="123.0" y="509.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">(</text>
+<rect x="156" y="480" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="189.0" y="509.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">([</text>
+<rect x="222" y="480" width="66" height="44" rx="3" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="255.0" y="509.0" font-size="20" fill="#ffaaa1" text-anchor="middle" font-weight="700">([</text>
+<rect x="288" y="480" width="66" height="44" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="28" y="556" font-size="18" fill="#ffaaa1" text-anchor="start" font-weight="700">) needs (, but the top is [.</text>
+<rect x="28" y="586" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="62" y="602" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">push</text>
+<rect x="128.064" y="586" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="162.064" y="602" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">pop: match</text>
+<rect x="283.424" y="586" width="26" height="20" rx="4" fill="#3d1f22" stroke="#ffaaa1" stroke-width="2"/>
+<text x="317.424" y="602" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">mismatch: stop</text>
+<rect x="28" y="618" width="26" height="20" rx="4" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="62" y="634" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">not read</text>
+<rect x="28" y="658" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="689" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="718" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">The stack holds exactly the unmatched</text>
+<text x="44" y="745" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">openers; a closer must match the top.</text>
+</svg>

@@ -297,6 +297,50 @@ globalThis.DSA_VISUALS_DATA = {
       "number": 27,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
+    },
+    {
+      "id": "singly-insert-after",
+      "title": "Insert after a known node",
+      "category": "Linear structures",
+      "description": "In the chain 10, 20, 30, inserting 15 after 10 takes two link writes: 15.next = 10.next, then 10.next = 15, giving 10, 15, 20, 30. Writing 10.next = 15 first makes 15.next point at 15 itself and leaves 20 and 30 unreachable.",
+      "lesson": "../../data-structures/linked-lists/singly.md",
+      "keyIdea": "Link the new node onward first, then redirect the predecessor.",
+      "number": 28,
+      "light": "assets/singly-insert-after.svg",
+      "dark": "assets/singly-insert-after-dark.svg"
+    },
+    {
+      "id": "stack-bracket-matching",
+      "title": "Matching brackets with a stack",
+      "category": "Linear structures",
+      "description": "An ArrayStack traces {[()]}: three pushes and three pops leave it empty. The same stack traced on ([)] holds ( and [ when the closer ) arrives, and the top [ does not match it, so the string is rejected at the third character.",
+      "lesson": "../../data-structures/stacks/implementation.md",
+      "keyIdea": "The stack holds exactly the unmatched openers; a closer must match the top.",
+      "number": 29,
+      "light": "assets/stack-bracket-matching.svg",
+      "dark": "assets/stack-bracket-matching-dark.svg"
+    },
+    {
+      "id": "deque-both-ends",
+      "title": "A deque at both ends",
+      "category": "Linear structures",
+      "description": "A RingDeque with four slots receives addLast(20), addLast(30), addFirst(10) and addLast(40); addFirst moves the head from slot 0 back to slot 3, and the tail ends at slot 2. removeLast() returns 40 and removeFirst() returns 10, leaving 20 and 30.",
+      "lesson": "../../data-structures/queues/implementation.md",
+      "keyIdea": "Both ends are indices on a circular buffer: addFirst steps the head back and wraps.",
+      "number": 30,
+      "light": "assets/deque-both-ends.svg",
+      "dark": "assets/deque-both-ends-dark.svg"
+    },
+    {
+      "id": "array-vs-list-access",
+      "title": "Reaching index 5",
+      "category": "Linear structures",
+      "description": "In a DynamicArray of eight values, get(5) reads slot 5 in one jump. In a DoublyLinkedList of the same values it starts at the tail and follows 2 links, because 5 is in the back half; the hop counts for indices 0 to 7 are 0, 1, 2, 3, 3, 2, 1 and 0.",
+      "lesson": "../../data-structures/arrays/overview.md",
+      "keyIdea": "An array reaches any index in one jump; a list walks links from the nearer end.",
+      "number": 31,
+      "light": "assets/array-vs-list-access.svg",
+      "dark": "assets/array-vs-list-access-dark.svg"
     }
   ],
   "traces": [
