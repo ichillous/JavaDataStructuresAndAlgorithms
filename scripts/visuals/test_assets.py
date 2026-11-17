@@ -6,6 +6,7 @@ import importlib.util
 import json
 from pathlib import Path
 import re
+import subprocess
 import tempfile
 import unittest
 from urllib.parse import unquote, urlsplit
@@ -464,14 +465,17 @@ class GalleryTest(unittest.TestCase):
                     alt = re.search(r' alt="([^"]*)"', row).group(1)
                     self.assertEqual(by_id[first]["description"], html.unescape(alt))
 
-    def build(self, files, page_text):
+    def build(self, files, page_text, figures=FAKE_FIGURES, git_ignore=None):
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)
         root = Path(directory.name)
         for name, text in files.items():
             (root / name).parent.mkdir(parents=True, exist_ok=True)
             (root / name).write_text(text, encoding="utf-8")
-        return self.generator.rewrite_galleries("topic/README.md", page_text, FAKE_FIGURES, root=root)
+        if git_ignore is not None:
+            (root / ".gitignore").write_text(git_ignore, encoding="utf-8")
+            subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+        return self.generator.rewrite_galleries("topic/README.md", page_text, figures, root=root)
 
     def test_a_small_folder_renders_headings_rows_and_relative_paths(self):
         result = self.build(self.SMALL, self.PAGE)
@@ -489,6 +493,35 @@ class GalleryTest(unittest.TestCase):
         self.assertTrue(result.startswith("# Topic\n\n<!-- visual:gallery topic -->\n### "))
         self.assertTrue(result.endswith("\n<!-- /visual:gallery -->\n\nEnd.\n"))
         self.assertEqual(result, self.build(self.SMALL, result), "regenerating must be idempotent")
+
+    def test_a_pipe_in_a_figure_description_cannot_split_the_table_row(self):
+        figures = dict(FAKE_FIGURES)
+        figures["alpha"] = dict(figures["alpha"], description='Keys "a" | "b" share <one> bucket & slot.')
+        result = self.build({"topic/sub/a.md": lesson_text("Ay")}, self.PAGE, figures=figures)
+        row = next(line for line in result.split("\n") if line.startswith("| <a href="))
+        self.assertEqual(4, len(re.findall(r"(?<!\\)\|", row)), "exactly three cells: " + row)
+        alt = re.search(r' alt="([^"]*)"', row).group(1)
+        self.assertEqual(figures["alpha"]["description"], html.unescape(alt))
+
+    def test_a_relative_link_in_a_use_it_when_cell_is_rewritten_for_the_page(self):
+        lesson = lesson_text("Ay").replace("You need *this* `x`.",
+                                           "See [the map](../other.md#part) or [web](https://example.com).")
+        result = self.build({"topic/sub/a.md": lesson}, self.PAGE)
+        self.assertIn("See [the map](other.md#part) or [web](https://example.com). |", result)
+
+    def test_a_use_it_when_link_form_the_rewriter_cannot_move_fails(self):
+        for link in ('[t](../x.md "Title")', "[t](<../x y.md>)", "[t][ref]", "<a href=\"../x.md\">t</a>"):
+            with self.subTest(link=link):
+                lesson = lesson_text("Ay").replace("You need *this* `x`.", f"See {link}.")
+                with self.assertRaisesRegex(ValueError, r"topic/sub/a\.md: .*link"):
+                    self.build({"topic/sub/a.md": lesson}, self.PAGE)
+
+    def test_lessons_come_from_the_git_file_listing_when_the_root_is_a_checkout(self):
+        files = {"topic/sub/a.md": lesson_text("Ay"), "topic/sub/ignored.md": lesson_text("Ignored")}
+        listed = self.build(files, self.PAGE, git_ignore="topic/sub/ignored.md\n")
+        self.assertIn("[Ay](sub/a.md)", listed)
+        self.assertNotIn("Ignored", listed)
+        self.assertIn("Ignored", self.build(files, self.PAGE), "outside git the file system is read")
 
     def test_non_breaking_labels_are_read_like_plain_ones(self):
         files = dict(self.SMALL)
@@ -567,6 +600,10 @@ class GalleryTest(unittest.TestCase):
     def test_a_lesson_placed_directly_in_the_gallery_folder_fails(self):
         with self.assertRaisesRegex(ValueError, r"topic/loose\.md .*subfolder"):
             self.build({"topic/sub/a.md": lesson_text("Ay"), "topic/loose.md": lesson_text("Loose")}, self.PAGE)
+
+    def test_a_lesson_in_a_deeper_folder_fails(self):
+        with self.assertRaisesRegex(ValueError, r"topic/sub/deeper/x\.md .*immediate subfolder"):
+            self.build({"topic/sub/a.md": lesson_text("Ay"), "topic/sub/deeper/x.md": lesson_text("Deep")}, self.PAGE)
 
 
 if __name__ == "__main__":

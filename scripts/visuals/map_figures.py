@@ -13,9 +13,9 @@ from drawing import Canvas, estimate_text_width, load_fixtures
 
 FIXTURE_FILE = Path(__file__).resolve().parents[2] / "docs/visuals/data/examples-map.properties"
 
-FIRST_ROW = 134     # top of the first card
-ROW_GAP = 5
-LINE_1, LINE_STEP, ROW_PAD = 26, 22, 10   # first baseline in a card, line step, padding below
+FIRST_ROW = 132     # top of the first card
+ROW_GAP = 4
+LINE_1, LINE_STEP, ROW_PAD = 26, 22, 8    # first baseline in a card, line step, padding below
 ICON_X, ICON_W, ICON_H = 40, 56, 40        # pictogram box, vertically centred in its card
 TEXT_X = 110         # card text starts right of the pictogram tile
 RIGHT_X = 478        # right-aligned text ends here
@@ -32,22 +32,34 @@ def rows(fixtures, prefix):
             for name in names]
 
 
+def api_lines(row):
+    """The method as one line, or, when ``Class.method`` is too wide, as ``Class.`` and ``method``."""
+    width = RIGHT_X - TEXT_X
+    if estimate_text_width(row["api"], 18, "700") <= width:
+        return [row["api"]]
+    owner, _, method = row["api"].partition(".")
+    lines = [owner + ".", method]
+    if any(estimate_text_width(line, 18, "700") > width for line in lines):
+        raise ValueError(f"map card {row['label']!r}: method {row['api']!r} does not fit even on two lines")
+    return lines
+
+
 def folder_lines(row):
     """The right-aligned folder column, one entry per card line ("" leaves a line empty).
 
     Folders fill the card's lines from the top: beside the question and family, then beside
     the method, then on lines of their own; neighbours share a line, joined by ' · ', when
-    they fit. Raises ValueError when the question and family, or the method, cannot fit on
-    one line, so a fixture edit can never make card text overlap.
+    they fit. Raises ValueError when the question and family cannot fit on one line, so a
+    fixture edit can never make card text overlap. The result covers every card line.
     """
     width = RIGHT_X - TEXT_X
     first = estimate_text_width(row["label"], 20, "700") + TITLE_GAP + estimate_text_width(row["family"], 18)
-    second = estimate_text_width(row["api"], 18, "700")
-    if first > width or second > width:
-        raise ValueError(f"map card {row['label']!r}: the question and family, or the method, do not fit")
+    if first > width:
+        raise ValueError(f"map card {row['label']!r}: the question and family do not fit on one line")
+    left = [first] + [estimate_text_width(line, 18, "700") for line in api_lines(row)]
 
     def room(index):
-        return width - COLUMN_GAP - (first, second)[index] if index < 2 else width
+        return width - COLUMN_GAP - left[index] if index < len(left) else width
 
     lines, current = [], ""
     for folder in row["folders"]:
@@ -62,11 +74,11 @@ def folder_lines(row):
         else:
             current = candidate
     lines.append(current)
-    return lines + [""] * (2 - len(lines))
+    return lines + [""] * (len(left) - len(lines))
 
 
 def card_height(row):
-    return max(LINE_1 + LINE_STEP * (len(folder_lines(row)) - 1) + ROW_PAD, ICON_H + 16)
+    return max(LINE_1 + LINE_STEP * (len(folder_lines(row)) - 1) + ROW_PAD, ICON_H + 12)
 
 
 def note_top(row_list):
@@ -281,7 +293,8 @@ def draw_map(c, row_list, idea):
         c.text(TEXT_X, y + LINE_1, row["label"], size=20, color="blue", weight="700")
         family_x = TEXT_X + round(estimate_text_width(row["label"], 20, "700")) + TITLE_GAP
         c.text(family_x, y + LINE_1, row["family"], size=18)
-        c.text(TEXT_X, y + LINE_1 + LINE_STEP, row["api"], size=18, weight="700")
+        for index, line in enumerate(api_lines(row), 1):
+            c.text(TEXT_X, y + LINE_1 + LINE_STEP * index, line, size=18, weight="700")
         for index, line in enumerate(folder_lines(row)):
             if line:
                 c.text(RIGHT_X, y + LINE_1 + LINE_STEP * index, line, size=18, color="muted", anchor="end")
