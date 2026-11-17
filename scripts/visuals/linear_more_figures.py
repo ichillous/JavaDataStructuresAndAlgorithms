@@ -264,7 +264,8 @@ def deque_both_ends(c, fixtures):
     for number, (heading, (slots, head, tail, order)) in enumerate(zip(headings, steps), start=1):
         _deque_step(c, y, number, heading, slots, head, tail, order)
         y += 128
-    y = c.legend(y + 6, [("focus", "head: front"), ("alt", "tail: back"), ("muted", "free slot")])
+    c.text(28, y + 6, "Slots follow the circular-buffer rule (conceptual).", size=18, color="muted")
+    y = c.legend(y + 40, [("focus", "head: front"), ("alt", "tail: back"), ("muted", "free slot")])
     c.note(y + 14, DEQUE_IDEA)
 
 
@@ -370,7 +371,7 @@ FIGURES = [
                         "at slot 2. removeLast() returns 40 and removeFirst() returns 10, leaving 20 and 30."),
         "lesson": "data-structures/queues/implementation.md",
         "keyIdea": DEQUE_IDEA,
-        "height": 860,
+        "height": 890,
         "draw": deque_both_ends,
     },
     {

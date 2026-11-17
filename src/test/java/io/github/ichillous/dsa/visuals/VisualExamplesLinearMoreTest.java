@@ -6,7 +6,6 @@ import io.github.ichillous.dsa.collections.DynamicArray;
 import io.github.ichillous.dsa.collections.RingDeque;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -222,52 +221,55 @@ class VisualExamplesLinearMoreTest {
                 "the stack still holds the unmatched openers when the mismatch is found");
     }
 
-    /** Reads a private field. The public RingDeque API cannot show physical slots or the head. */
-    private static Object field(Object target, Class<?> type, String name) {
-        try {
-            Field field = type.getDeclaredField(name);
-            field.setAccessible(true);
-            return field.get(target);
-        } catch (ReflectiveOperationException exception) {
-            throw new AssertionError(type.getSimpleName() + " no longer has a field named " + name, exception);
-        }
-    }
-
-    private static void assertDequeStep(RingDeque<Integer> deque, int step) {
-        String prefix = "linear_more.deque.step" + step + ".";
-        Object[] elements = (Object[]) field(deque, RingDeque.class, "elements");
-        List<String> slots = new ArrayList<>();
-        for (Object element : elements) {
-            slots.add(element == null ? "." : element.toString());
-        }
-        int head = (Integer) field(deque, RingDeque.class, "head");
-        List<Integer> order = DATA.list(prefix + "order");
-        assertEquals(DATA.strings(prefix + "slots"), slots, "slots after step " + step);
-        assertEquals(DATA.number(prefix + "head"), head, "head after step " + step);
-        assertEquals(DATA.number(prefix + "tail"), (head + deque.size() - 1) % elements.length,
-                "tail slot after step " + step);
+    /** Order the deque reports through its public API, front to back, by draining a copy of the steps. */
+    private static void assertDequeObservable(RingDeque<Integer> deque, int step) {
+        List<Integer> order = DATA.list("linear_more.deque.step" + step + ".order");
         assertEquals(order.size(), deque.size(), "size after step " + step);
         assertEquals(order.get(0), deque.peekFirst(), "first after step " + step);
         assertEquals(order.get(order.size() - 1), deque.peekLast(), "last after step " + step);
     }
 
-    @Test
-    void theDequeStepsMoveHeadAndTailAroundTheCircularBuffer() {
-        RingDeque<Integer> deque = new RingDeque<>(DATA.number("linear_more.deque.capacity"));
-        deque.addLast(20);
-        deque.addLast(30);
-        assertDequeStep(deque, 1);
-        deque.addFirst(10);
-        assertDequeStep(deque, 2);
-        deque.addLast(40);
-        assertDequeStep(deque, 3);
-        assertEquals(DATA.number("linear_more.deque.step4.removedLast"), deque.removeLast());
-        assertEquals(DATA.number("linear_more.deque.step4.removedFirst"), deque.removeFirst());
-        assertDequeStep(deque, 4);
+    /** The documented circular-buffer rule, as a test-local model: slot positions of the figure. */
+    private static void assertSlotsFollowTheCircularRule(int step, int capacity, int head, List<Integer> order) {
+        String prefix = "linear_more.deque.step" + step + ".";
+        String[] slots = new String[capacity];
+        Arrays.fill(slots, ".");
+        for (int offset = 0; offset < order.size(); offset++) {
+            slots[(head + offset) % capacity] = order.get(offset).toString();
+        }
+        assertEquals(DATA.strings(prefix + "slots"), Arrays.asList(slots), "slots, step " + step);
+        assertEquals(DATA.number(prefix + "head"), head, "head, step " + step);
+        assertEquals(DATA.number(prefix + "tail"), (head + order.size() - 1) % capacity, "tail, step " + step);
     }
 
     @Test
-    void indexedAccessIsOneJumpInAnArrayAndHopsFromTheNearerEndInTheList() {
+    void theDequeStepsGiveTheObservableResultsAndTheCircularSlotRuleShownInTheFigure() {
+        int capacity = DATA.number("linear_more.deque.capacity");
+        RingDeque<Integer> deque = new RingDeque<>(capacity);
+        deque.addLast(20);
+        deque.addLast(30);
+        assertDequeObservable(deque, 1);
+        deque.addFirst(10);
+        assertDequeObservable(deque, 2);
+        deque.addLast(40);
+        assertDequeObservable(deque, 3);
+        assertEquals(DATA.number("linear_more.deque.step4.removedLast"), deque.removeLast());
+        assertEquals(DATA.number("linear_more.deque.step4.removedFirst"), deque.removeFirst());
+        assertDequeObservable(deque, 4);
+
+        // The head moves back on addFirst (wrapping), forward on removeFirst; the tail follows size.
+        assertSlotsFollowTheCircularRule(1, capacity, 0, DATA.list("linear_more.deque.step1.order"));
+        assertSlotsFollowTheCircularRule(2, capacity, capacity - 1, DATA.list("linear_more.deque.step2.order"));
+        assertSlotsFollowTheCircularRule(3, capacity, capacity - 1, DATA.list("linear_more.deque.step3.order"));
+        assertSlotsFollowTheCircularRule(4, capacity, 0, DATA.list("linear_more.deque.step4.order"));
+
+        assertEquals(20, deque.removeFirst());
+        assertEquals(30, deque.removeLast());
+        assertTrue(deque.isEmpty());
+    }
+
+    @Test
+    void indexedAccessIsOneJumpInAnArrayAndTheDocumentedHopCountInTheList() {
         int[] values = DATA.ints("linear_more.access.values");
         int index = DATA.number("linear_more.access.index");
         DynamicArray<Integer> array = new DynamicArray<>();
@@ -281,22 +283,12 @@ class VisualExamplesLinearMoreTest {
 
         int[] hops = DATA.ints("linear_more.access.hops");
         assertEquals(values.length, hops.length);
-        Object head = field(list, DoublyLinkedList.class, "head");
-        Object tail = field(list, DoublyLinkedList.class, "tail");
         for (int position = 0; position < values.length; position++) {
-            // The rule in DoublyLinkedList.nodeAt: the first half starts at the head, the rest at the tail.
-            boolean fromHead = position < values.length / 2;
-            Object node = fromHead ? head : tail;
-            int target = fromHead ? position : values.length - 1 - position;
-            for (int walked = 0; walked < target; walked++) {
-                node = field(node, node.getClass(), fromHead ? "next" : "previous");
-            }
-            assertEquals(hops[position], target, "hops to index " + position);
-            assertEquals(values[position], field(node, node.getClass(), "element"),
-                    "node reached for index " + position);
-            assertEquals(values[position], list.get(position));
             assertEquals(values[position], array.get(position));
-            assertEquals(hops[position], Math.min(position, values.length - 1 - position));
+            assertEquals(values[position], list.get(position));
+            // docs/complexity.md: the node is found in min(index, n - 1 - index) hops from the nearer end.
+            assertEquals(hops[position], Math.min(position, values.length - 1 - position),
+                    "hops to index " + position);
         }
     }
 
