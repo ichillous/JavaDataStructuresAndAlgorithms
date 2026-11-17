@@ -125,7 +125,7 @@ It promotes the entry to most recent, which relinks the recency list and changes
 <details>
 <summary>Why must a resize visit every mapping instead of copying the old bucket heads?</summary>
 
-A key's bucket index depends on the capacity, so most keys belong in a different bucket after doubling. Chains copied as they were would hold keys that the new indices never search.
+A key's bucket index depends on the capacity: after doubling, a key at index `i` belongs at `i` or `i + old capacity`, and with well-spread hash codes about half of them move. Chains copied as they were would hold keys that the new indices never search.
 
 </details>
 

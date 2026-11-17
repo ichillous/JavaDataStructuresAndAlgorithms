@@ -82,7 +82,7 @@ Bottom-up build uses O(n) time and O(n) copied storage. Peek is O(1); removal is
 
 ## In real Java
 
-`java.util.PriorityQueue` is the production heap. Besides `poll`, it can remove one specific element with `remove(Object)`, which removes a single instance and returns whether one was present. The Javadoc states linear time for `remove(Object)` and `contains(Object)`, so use them rarely; repeated `poll` stays logarithmic. The queue still yields the remaining values in order afterwards.
+`java.util.PriorityQueue` is the production heap. Besides `poll`, it can remove one specific element with `remove(Object)`, which removes a single instance and returns whether one was present. The Javadoc's implementation note states linear time for `remove(Object)` and `contains(Object)`, so use them rarely; repeated `poll` stays logarithmic. The queue still yields the remaining values in order afterwards.
 
 ```java
 import java.util.ArrayList;

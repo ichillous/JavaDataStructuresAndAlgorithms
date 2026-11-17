@@ -128,7 +128,7 @@ Both orders are valid depth-first traversals of the graph; the point is that the
 ## Common mistakes
 
 1. **Marking BFS vertices only when dequeued.** On `0 -> 1, 0 -> 2, 1 -> 3, 2 -> 3`, vertex 3 is enqueued by both 1 and 2. The invariant "each vertex enters the queue at most once" is broken, and work and parents are duplicated.
-2. **Pushing all neighbors for DFS.** On the graph above, the shortcut visits `[0, 2, 4, 3, 1]` while `depthFirst` returns `[0, 1, 3, 4, 2]`. DFS must resume the nearest unfinished neighbor scan, which needs an iterator per frame.
+2. **Pushing all neighbors for DFS.** On the six-vertex graph of the [In real Java](#in-real-java) example, the shortcut visits `[0, 2, 4, 3, 1]` while `depthFirst` returns `[0, 1, 3, 4, 2]`. DFS must resume the nearest unfinished neighbor scan, which needs an iterator per frame.
 3. **Using BFS paths for weighted costs.** With `0 -> 1` of weight 10, `0 -> 2` of weight 1 and `2 -> 1` of weight 1, BFS returns the one-edge path costing 10, while the cheapest route `0, 2, 1` costs 2. BFS minimizes edge count, not total weight.
 
 ## Practice

@@ -87,7 +87,7 @@ Load factor is `entries / buckets`. Keeping it bounded limits average occupancy 
 
 ## In real Java
 
-Do not write hash functions by hand when the JDK derives them. A `record` gets `equals` and `hashCode` derived from all of its components, `Objects.hash(a, b)` hashes values as if they were placed in an array and hashed with `Arrays.hashCode`, and `List.hashCode` is defined by a fixed formula. Those three agree here, and a record works as a map key with no extra code.
+Do not write hash functions by hand when the JDK derives them. A `record` gets `equals` and `hashCode` derived from all of its components, `Objects.hash(a, b)` hashes values as if they were placed in an array and hashed with `Arrays.hashCode`, and `List.hashCode` is defined by a fixed formula. `Objects.hash(1, 2)`, `Arrays.hashCode` of the same values and `List.of(1, 2).hashCode()` therefore give the same value. A record's exact hash value is not specified, only that equal records have equal hash codes, and that is enough for a record to work as a map key with no extra code.
 
 ```java
 import java.util.Arrays;
