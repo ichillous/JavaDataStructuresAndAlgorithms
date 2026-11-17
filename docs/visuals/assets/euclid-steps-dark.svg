@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 856" width="520" height="856" role="img" aria-labelledby="title desc">
+<title id="title">28  Euclid and back-substitution</title>
+<desc id="desc">NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="euclid-steps-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="euclid-steps-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="euclid-steps-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="euclid-steps-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="euclid-steps-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="euclid-steps-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="euclid-steps-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="euclid-steps-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="euclid-steps-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="euclid-steps-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="euclid-steps-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="euclid-steps-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="euclid-steps-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="euclid-steps-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="euclid-steps-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="856" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">28  Euclid and back-substitution</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Math and bits · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Divide again with the remainder</text>
+<text x="110.0" y="194" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">dividend</text>
+<text x="210.0" y="194" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">quotient</text>
+<text x="310.0" y="194" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">divisor</text>
+<text x="410.0" y="194" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">remainder</text>
+<rect x="60" y="206" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="110.0" y="230.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">240</text>
+<rect x="160" y="206" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="210.0" y="230.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">5</text>
+<rect x="260" y="206" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="310.0" y="230.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">46</text>
+<rect x="360" y="206" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="410.0" y="230.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">10</text>
+<rect x="60" y="240" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="110.0" y="264.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">46</text>
+<rect x="160" y="240" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="210.0" y="264.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="260" y="240" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="310.0" y="264.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">10</text>
+<rect x="360" y="240" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="410.0" y="264.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">6</text>
+<rect x="60" y="274" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="110.0" y="298.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">10</text>
+<rect x="160" y="274" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="210.0" y="298.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="260" y="274" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="310.0" y="298.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">6</text>
+<rect x="360" y="274" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="410.0" y="298.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="60" y="308" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="110.0" y="332.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">6</text>
+<rect x="160" y="308" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="210.0" y="332.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">1</text>
+<rect x="260" y="308" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="310.0" y="332.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="360" y="308" width="100" height="34" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="410.0" y="332.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">2</text>
+<rect x="60" y="342" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="110.0" y="366.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">4</text>
+<rect x="160" y="342" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="210.0" y="366.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">2</text>
+<rect x="260" y="342" width="100" height="34" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="310.0" y="366.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">2</text>
+<rect x="360" y="342" width="100" height="34" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="410.0" y="366.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
+<text x="60" y="402" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">dividend = quotient × divisor + remainder</text>
+<circle cx="42" cy="441" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="447" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="448" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Substitute back, last remainder first</text>
+<text x="48" y="482" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">2 = 6 − 4</text>
+<text x="310" y="482" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">from 6 = 1×4 + 2</text>
+<text x="48" y="512" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">2 = 2×6 − 10</text>
+<text x="310" y="512" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">4 → 10 − 6</text>
+<text x="48" y="542" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">2 = 2×46 − 9×10</text>
+<text x="310" y="542" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">6 → 46 − 4×10</text>
+<text x="48" y="572" font-size="20" fill="#86dca2" text-anchor="start" font-weight="700">2 = 47×46 − 9×240</text>
+<text x="310" y="572" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">10 → 240 − 5×46</text>
+<text x="48" y="606" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">extendedGcd(240, 46) returns x = −9, y = 47</text>
+<rect x="28" y="624" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="640" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">gcd = 2, last nonzero remainder</text>
+<rect x="28" y="656" width="26" height="20" rx="4" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="62" y="672" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">remainder 0: stop</text>
+<rect x="28" y="696" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="727" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="756" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">The last nonzero remainder is the gcd,</text>
+<text x="44" y="783" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">and undoing each division writes it as</text>
+<text x="44" y="810" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">x×a + y×b.</text>
+</svg>

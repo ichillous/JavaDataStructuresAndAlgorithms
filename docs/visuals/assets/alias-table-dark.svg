@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 862" width="520" height="862" role="img" aria-labelledby="title desc">
+<title id="title">32  Alias table columns</title>
+<desc id="desc">AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="alias-table-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="alias-table-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="alias-table-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="alias-table-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="alias-table-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="alias-table-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="alias-table-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="alias-table-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="alias-table-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="alias-table-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="alias-table-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="alias-table-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="alias-table-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="alias-table-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="alias-table-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="862" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">32  Alias table columns</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Math and bits · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Weights sum to 8</text>
+<rect x="36" y="178" width="100" height="48" rx="8" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="86.0" y="209.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">1</text>
+<text x="86.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">A: 1/8</text>
+<rect x="152" y="178" width="100" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="202.0" y="209.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">1</text>
+<text x="202.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">B: 1/8</text>
+<rect x="268" y="178" width="100" height="48" rx="8" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="318.0" y="209.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">2</text>
+<text x="318.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">C: 1/4</text>
+<rect x="384" y="178" width="100" height="48" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="434.0" y="209.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">4</text>
+<text x="434.0" y="252" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">D: 1/2</text>
+<circle cx="42" cy="293" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="299" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="300" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Each column: item below, alias above</text>
+<path d="M 36 356 Q 36 348 44 348 H 252.0 Q 260.0 348 260.0 340 Q 260.0 348 268.0 348 H 476 Q 484 348 484 356" fill="none" stroke="#9cbcff" stroke-width="2"/>
+<text x="260.0" y="332" font-size="18" fill="#9cbcff" text-anchor="middle" font-weight="700">4 columns of equal height</text>
+<rect x="36" y="422.0" width="100" height="60.0" rx="3" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
+<text x="86.0" y="459.0" font-size="20" fill="#9cbcff" text-anchor="middle" font-weight="700">A 1/2</text>
+<rect x="36" y="362" width="100" height="60.0" rx="3" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="86.0" y="399.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">D 1/2</text>
+<text x="86.0" y="510" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">cutoff 1/2</text>
+<rect x="152" y="422.0" width="100" height="60.0" rx="3" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="202.0" y="459.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">B 1/2</text>
+<rect x="152" y="362" width="100" height="60.0" rx="3" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="202.0" y="399.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">D 1/2</text>
+<text x="202.0" y="510" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">cutoff 1/2</text>
+<rect x="268" y="362.0" width="100" height="120.0" rx="3" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="318.0" y="429.0" font-size="20" fill="#cdb6ff" text-anchor="middle" font-weight="700">C 1</text>
+<text x="318.0" y="510" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">cutoff 1</text>
+<rect x="384" y="362.0" width="100" height="120.0" rx="3" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="434.0" y="429.0" font-size="20" fill="#f4cf70" text-anchor="middle" font-weight="700">D 1</text>
+<text x="434.0" y="510" font-size="18" fill="#bec9da" text-anchor="middle" font-weight="400">cutoff 1</text>
+<circle cx="42" cy="553" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="559" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="560" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Add each item&#x27;s pieces, divide by 4</text>
+<text x="48" y="594" font-size="20" fill="#9cbcff" text-anchor="start" font-weight="700">A: 1/2 ÷ 4 = 1/8</text>
+<text x="48" y="622" font-size="20" fill="#86dca2" text-anchor="start" font-weight="700">B: 1/2 ÷ 4 = 1/8</text>
+<text x="48" y="650" font-size="20" fill="#cdb6ff" text-anchor="start" font-weight="700">C: 1 ÷ 4 = 1/4</text>
+<text x="48" y="678" font-size="20" fill="#f4cf70" text-anchor="start" font-weight="700">D: (1 + 1/2 + 1/2) ÷ 4 = 1/2</text>
+<rect x="28" y="702" width="464" height="136" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="733" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="762" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Equal columns split between two items</text>
+<text x="44" y="789" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">let one uniform column pick and one</text>
+<text x="44" y="816" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">coin flip draw any weight.</text>
+</svg>

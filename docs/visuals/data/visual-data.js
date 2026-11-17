@@ -297,6 +297,72 @@ globalThis.DSA_VISUALS_DATA = {
       "number": 27,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
+    },
+    {
+      "id": "euclid-steps",
+      "title": "Euclid and back-substitution",
+      "category": "Math and bits",
+      "description": "NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd.",
+      "keyIdea": "The last nonzero remainder is the gcd, and undoing each division writes it as x×a + y×b.",
+      "lesson": "../../algorithms/math/number-theory.md",
+      "number": 28,
+      "light": "assets/euclid-steps.svg",
+      "dark": "assets/euclid-steps-dark.svg"
+    },
+    {
+      "id": "modpow-squares",
+      "title": "modPow by repeated squaring",
+      "category": "Math and bits",
+      "description": "NumberTheory.modPow(3, 13, 1000) reads the bits of 13 = 1101 from the lowest: the squares of 3 are 3, 9, 81 and 561 modulo 1000, and the result 3, 3, 243, 323 changes only on the 1 bits, ending at 323.",
+      "keyIdea": "Square the base once per exponent bit and multiply it in only for 1 bits: O(log e) steps.",
+      "lesson": "../../algorithms/math/number-theory.md",
+      "number": 29,
+      "light": "assets/modpow-squares.svg",
+      "dark": "assets/modpow-squares-dark.svg"
+    },
+    {
+      "id": "sieve-grid",
+      "title": "Sieve of Eratosthenes",
+      "category": "Math and bits",
+      "description": "NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29.",
+      "keyIdea": "A prime p starts crossing at p×p, because smaller multiples have a smaller prime factor.",
+      "lesson": "../../algorithms/math/number-theory.md",
+      "number": 30,
+      "light": "assets/sieve-grid.svg",
+      "dark": "assets/sieve-grid-dark.svg"
+    },
+    {
+      "id": "reservoir-sampling",
+      "title": "Reservoir sampling",
+      "category": "Math and bits",
+      "description": "Sampling.reservoirSample over the items A to H with k = 3 and seed 17 fills the reservoir with A, B, C, then draws j for each later arrival with replacement chance 3/4 down to 3/8; D, F and H replace slots 0, 0 and 1, giving F, H, C.",
+      "keyIdea": "Arrival i is kept with chance k/i, so every item seen so far ends up in the sample with equal chance.",
+      "lesson": "../../algorithms/math/randomized-sampling.md",
+      "number": 31,
+      "light": "assets/reservoir-sampling.svg",
+      "dark": "assets/reservoir-sampling-dark.svg"
+    },
+    {
+      "id": "alias-table",
+      "title": "Alias table columns",
+      "category": "Math and bits",
+      "description": "AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2.",
+      "keyIdea": "Equal columns split between two items let one uniform column pick and one coin flip draw any weight.",
+      "lesson": "../../algorithms/math/randomized-sampling.md",
+      "number": 32,
+      "light": "assets/alias-table.svg",
+      "dark": "assets/alias-table-dark.svg"
+    },
+    {
+      "id": "bitmask-subsets",
+      "title": "A set as a bit mask",
+      "category": "Math and bits",
+      "description": "The set {1, 3} of four elements is the int mask 1010 = 10. Testing bit 3 gives 1, setting bit 2 gives 1110, clearing bit 3 gives 0010, and (sub - 1) & mask walks the subsets 10, 8, 2 and 0.",
+      "keyIdea": "A set is an int: test, set and clear bits in one operation, and (sub − 1) & mask visits every subset.",
+      "lesson": "../../algorithms/bit-manipulation/overview.md",
+      "number": 33,
+      "light": "assets/bitmask-subsets.svg",
+      "dark": "assets/bitmask-subsets-dark.svg"
     }
   ],
   "traces": [

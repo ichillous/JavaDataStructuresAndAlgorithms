@@ -222,3 +222,51 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dynamic-array-growth-dark.svg"><img src="assets/dynamic-array-growth.svg" alt="A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends." width="520"></picture>
 
 **Key idea:** Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.
+
+## 28. Euclid and back-substitution
+
+[Math and bits: read the lesson](../../algorithms/math/number-theory.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/euclid-steps-dark.svg"><img src="assets/euclid-steps.svg" alt="NumberTheory.gcd(240, 46) divides 240 by 46, 46 by 10, 10 by 6, 6 by 4 and 4 by 2, reaching remainder 0, so the gcd is 2. Substituting the divisions backwards gives 2 = 47 times 46 minus 9 times 240, the coefficients of extendedGcd." width="520"></picture>
+
+**Key idea:** The last nonzero remainder is the gcd, and undoing each division writes it as x×a + y×b.
+
+## 29. modPow by repeated squaring
+
+[Math and bits: read the lesson](../../algorithms/math/number-theory.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/modpow-squares-dark.svg"><img src="assets/modpow-squares.svg" alt="NumberTheory.modPow(3, 13, 1000) reads the bits of 13 = 1101 from the lowest: the squares of 3 are 3, 9, 81 and 561 modulo 1000, and the result 3, 3, 243, 323 changes only on the 1 bits, ending at 323." width="520"></picture>
+
+**Key idea:** Square the base once per exponent bit and multiply it in only for 1 bits: O(log e) steps.
+
+## 30. Sieve of Eratosthenes
+
+[Math and bits: read the lesson](../../algorithms/math/number-theory.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sieve-grid-dark.svg"><img src="assets/sieve-grid.svg" alt="NumberTheory.primesUpTo(30) on a grid of 1 to 30: 2 crosses out 14 multiples from 4, 3 crosses out 4 more from 9, 5 crosses out 25, and the ten numbers never crossed are the primes 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29." width="520"></picture>
+
+**Key idea:** A prime p starts crossing at p×p, because smaller multiples have a smaller prime factor.
+
+## 31. Reservoir sampling
+
+[Math and bits: read the lesson](../../algorithms/math/randomized-sampling.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/reservoir-sampling-dark.svg"><img src="assets/reservoir-sampling.svg" alt="Sampling.reservoirSample over the items A to H with k = 3 and seed 17 fills the reservoir with A, B, C, then draws j for each later arrival with replacement chance 3/4 down to 3/8; D, F and H replace slots 0, 0 and 1, giving F, H, C." width="520"></picture>
+
+**Key idea:** Arrival i is kept with chance k/i, so every item seen so far ends up in the sample with equal chance.
+
+## 32. Alias table columns
+
+[Math and bits: read the lesson](../../algorithms/math/randomized-sampling.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/alias-table-dark.svg"><img src="assets/alias-table.svg" alt="AliasTable for the weights 1, 1, 2, 4 has four equal columns: A and B each keep half their column and give the other half to D, while C and D fill their columns. Adding the pieces back gives the probabilities 1/8, 1/8, 1/4 and 1/2." width="520"></picture>
+
+**Key idea:** Equal columns split between two items let one uniform column pick and one coin flip draw any weight.
+
+## 33. A set as a bit mask
+
+[Math and bits: read the lesson](../../algorithms/bit-manipulation/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/bitmask-subsets-dark.svg"><img src="assets/bitmask-subsets.svg" alt="The set {1, 3} of four elements is the int mask 1010 = 10. Testing bit 3 gives 1, setting bit 2 gives 1110, clearing bit 3 gives 0010, and (sub - 1) &amp; mask walks the subsets 10, 8, 2 and 0." width="520"></picture>
+
+**Key idea:** A set is an int: test, set and clear bits in one operation, and (sub − 1) & mask visits every subset.
