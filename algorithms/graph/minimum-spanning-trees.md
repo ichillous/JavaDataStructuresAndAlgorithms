@@ -36,10 +36,10 @@ that is cheapest, an exchange argument shows the final forest is minimum. Prim
 restarts from the smallest unvisited vertex once its heap is empty, which gives one
 tree per component.
 
-<!-- visual:generated mst-kruskal-prim -->
+<!-- visual:generated mst-kruskal-prim | The graph of the trace below plus vertex 4 and edge 3-4 of weight 3, so its minimum spanning tree weighs 11 rather than 8; Kruskal keeps the edges of weight 1, 2, 3, 5 and Prim from vertex 0 picks 1, 2, 5, 3. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/mst-kruskal-prim-dark.svg"><img src="../../docs/visuals/assets/mst-kruskal-prim.svg" alt="One weighted graph on five vertices has a minimum spanning tree of total weight 11. Kruskal keeps edges in the order 1, 2, 3, 5 and skips two that close a cycle, while Prim from vertex 0 picks 1, 2, 5, 3." width="520"></picture>
 
-**Figure 30.** One weighted graph on five vertices has a minimum spanning tree of total weight 11. Kruskal keeps edges in the order 1, 2, 3, 5 and skips two that close a cycle, while Prim from vertex 0 picks 1, 2, 5, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
+**Figure 30.** The graph of the trace below plus vertex 4 and edge 3-4 of weight 3, so its minimum spanning tree weighs 11 rather than 8; Kruskal keeps the edges of weight 1, 2, 3, 5 and Prim from vertex 0 picks 1, 2, 5, 3. [Visual index and step-throughs](../../docs/visuals/README.md).
 <!-- /visual:generated -->
 
 ## A worked trace
