@@ -92,8 +92,8 @@ the additions are:
 | Lessons | [`sorting/insertion-sort.md`](../algorithms/sorting/insertion-sort.md), [`searching/binary-search-on-answer.md`](../algorithms/searching/binary-search-on-answer.md), [`graph/topological-sort.md`](../algorithms/graph/topological-sort.md), [`bit-manipulation/overview.md`](../algorithms/bit-manipulation/overview.md), [`union-find/overview.md`](../data-structures/union-find/overview.md) |
 | API | `SearchAlgorithms.firstTrue(long, long, LongPredicate)` (binary search on the answer) and `DynamicArray.capacity()` (backing-array length); see the [catalog](catalog.md) |
 
-Every lesson now opens with an "At a glance" table and has at least one figure; most also
-gained "In real Java", "Common mistakes" and "Check yourself" sections. Statements found
+Every lesson now opens with an "At a glance" table, has at least one figure and ends with
+"Check yourself" questions; most also gained "In real Java" and "Common mistakes" sections. Statements found
 wrong during the rewrite were corrected in place; earlier wording remains in Git history.
 
 ## What is and is not established
