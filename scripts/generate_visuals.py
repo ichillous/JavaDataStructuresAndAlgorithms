@@ -279,7 +279,7 @@ def gallery_body(name, folder, figures_by_id, root=ROOT):
         lessons = sorted(directory.glob("*.md"), key=lambda path: (path.name != "README.md", path.name))
         if not lessons:
             continue
-        rows = [f"### {gallery_heading(directory.name)}", "", "| Figure | Lesson | Use it when |", "| --- | --- | --- |"]
+        rows = [f"### {gallery_heading(directory.name)}", "", "| Figure | Lesson | Use it when |", "| :---: | :--- | :--- |"]
         for path in lessons:
             lesson = path.relative_to(root).as_posix()
             title, figure, cell = gallery_entry(lesson, path.read_text(encoding="utf-8"), figures_by_id)
