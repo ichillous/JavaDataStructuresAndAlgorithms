@@ -31,7 +31,7 @@ assert words.contains("car");
 assert words.wordsWithPrefix("ca", 2).equals(List.of("car", "cart"));
 ```
 
-<!-- visual:generated -->
+<!-- visual:generated trie-pruning -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/trie-pruning-dark.svg"><img src="../../docs/visuals/assets/trie-pruning.svg" alt="The words car, cart and cat share a c-a prefix. Deleting car clears the r node&#x27;s word marker but preserves its t child for cart and the sibling t branch for cat." width="520"></picture>
 
 **Figure 09.** The words car, cart and cat share a c-a prefix. Deleting car clears the r node's word marker but preserves its t child for cart and the sibling t branch for cat. [Visual index and step-throughs](../../docs/visuals/README.md).

@@ -63,7 +63,7 @@ show the desktop/phone layouts and the scope of verification.
 | Understand changes from the original notes | [Migration guide](docs/migration.md) |
 | Extend the library | [Contributing](CONTRIBUTING.md) |
 
-<!-- visual:generated -->
+<!-- visual:generated array-insertion | See the state change, then explore all diagrams and step-throughs in the visual index. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="docs/visuals/assets/array-insertion-dark.svg"><img src="docs/visuals/assets/array-insertion.svg" alt="Shift the suffix before writing the new value into the live array." width="520"></picture>
 
 **Figure 01.** See the state change, then explore all diagrams and step-throughs in the visual index. [Visual index and step-throughs](docs/visuals/README.md).

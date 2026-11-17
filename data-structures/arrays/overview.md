@@ -4,7 +4,7 @@ An array stores a fixed number of values addressed by integer index. Use an arra
 
 A Java array has indices `0..length-1`. A range `[from, to)` includes `from`, excludes `to`, and has `to - from` elements. This convention makes the empty range `[i, i)` natural and lets adjacent ranges join without overlap.
 
-<!-- visual:generated -->
+<!-- visual:generated array-insertion -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/array-insertion-dark.svg"><img src="../../docs/visuals/assets/array-insertion.svg" alt="Shift the suffix before writing the new value into the live array." width="520"></picture>
 
 **Figure 01.** Shift the suffix before writing the new value into the live array. [Visual index and step-throughs](../../docs/visuals/README.md).

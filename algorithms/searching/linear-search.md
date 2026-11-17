@@ -5,7 +5,7 @@ unsorted array? The maintained [search implementation](../../src/main/java/io/gi
 returns a zero-based index, or `-1` if absent. It rejects null and does not mutate
 input. Empty arrays are valid. No sorting or auxiliary index is required.
 
-<!-- visual:generated -->
+<!-- visual:generated kmp-overlap | For text, reusing matched-prefix information avoids restarting the entire comparison and preserves overlapping matches. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/kmp-overlap-dark.svg"><img src="../../docs/visuals/assets/kmp-overlap.svg" alt="Prefix fallback retains the overlap between two pattern matches." width="520"></picture>
 
 **Figure 18.** For text, reusing matched-prefix information avoids restarting the entire comparison and preserves overlapping matches. [Visual index and step-throughs](../../docs/visuals/README.md).

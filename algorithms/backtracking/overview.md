@@ -7,7 +7,7 @@ than a single local choice. The maintained
 returns immutable results and limits input sizes because it materializes every
 solution. Enumeration can be expensive even when each individual test is cheap.
 
-<!-- visual:generated -->
+<!-- visual:generated queens-backtracking -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/queens-backtracking-dark.svg"><img src="../../docs/visuals/assets/queens-backtracking.svg" alt="Trace failed placements before reaching the first valid board." width="520"></picture>
 
 **Figure 19.** Trace failed placements before reaching the first valid board. [Visual index and step-throughs](../../docs/visuals/README.md).

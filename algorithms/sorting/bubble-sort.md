@@ -5,7 +5,7 @@ quadratic worst-case work makes it a poor default for large arrays. The maintain
 [SortAlgorithms](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java)
 mutates `int[]` in ascending order, rejects null and accepts empty input.
 
-<!-- visual:generated -->
+<!-- visual:generated bubble-swaps -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bubble-swaps-dark.svg"><img src="../../docs/visuals/assets/bubble-swaps.svg" alt="Swap neighboring values; each pass settles a maximum on the right." width="520"></picture>
 
 **Figure 21.** Swap neighboring values; each pass settles a maximum on the right. [Visual index and step-throughs](../../docs/visuals/README.md).

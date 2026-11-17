@@ -4,7 +4,7 @@ A rule is correct for a particular feasible set and objective. Changing “numbe
 of activities” to “total value,” or allowing item reuse, can invalidate its proof.
 The examples below separate a maintained API from a small executable JDK exercise.
 
-<!-- visual:generated -->
+<!-- visual:generated activity-selection -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/activity-selection-dark.svg"><img src="../../docs/visuals/assets/activity-selection.svg" alt="Choose earliest finishing intervals; touching endpoints remain compatible." width="520"></picture>
 
 **Figure 20.** Choose earliest finishing intervals; touching endpoints remain compatible. [Visual index and step-throughs](../../docs/visuals/README.md).

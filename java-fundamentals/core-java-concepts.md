@@ -6,7 +6,7 @@ contracts. This page focuses on language details that change algorithm behavior.
 For broader notes, the author's [JavaNotes](https://github.com/ichillous/JavaNotes)
 is a separate resource; it is not required by this build.
 
-<!-- visual:generated -->
+<!-- visual:generated array-insertion | Read indices, live size and ownership separately: mutation changes one array, while a defensive copy preserves another. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../docs/visuals/assets/array-insertion-dark.svg"><img src="../docs/visuals/assets/array-insertion.svg" alt="Shift the suffix before writing the new value into the live array." width="520"></picture>
 
 **Figure 01.** Read indices, live size and ownership separately: mutation changes one array, while a defensive copy preserves another. [Visual index and step-throughs](../docs/visuals/README.md).

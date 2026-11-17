@@ -8,8 +8,7 @@ import unittest
 from urllib.parse import unquote, urlsplit
 import xml.etree.ElementTree as ET
 
-from drawing import load_fixtures, ints
-from lesson_links import LESSONS
+from drawing import load_all_fixtures, ints
 from trace_data import build_traces
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -31,10 +30,18 @@ class References(HTMLParser):
             self.references.extend(item.strip().split()[0] for item in values["srcset"].split(","))
 
 
+def load_generator():
+    spec = importlib.util.spec_from_file_location("generate_visuals", ROOT / "scripts/generate_visuals.py")
+    generator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(generator)
+    return generator
+
+
 class VisualAssetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.fixtures = load_fixtures(VISUALS / "data/examples.properties")
+        cls.generator = load_generator()
+        cls.fixtures = load_all_fixtures(VISUALS / "data")
         cls.manifest = json.loads((VISUALS / "data/manifest.json").read_text(encoding="utf-8"))
 
     def test_registered_assets_have_accessible_metadata_and_portable_svg(self):
@@ -61,7 +68,10 @@ class VisualAssetTest(unittest.TestCase):
                                 self.assertTrue(value.startswith("#"), "SVG must not require an external resource")
 
     def test_html_and_lesson_image_references_resolve(self):
-        pages = [VISUALS / "index.html", VISUALS / "README.md"] + [ROOT / name for name in LESSONS]
+        lessons = [name for name in self.generator.region_pages()
+                   if self.generator.find_regions(name, (ROOT / name).read_text(encoding="utf-8"))]
+        self.assertGreaterEqual(len(lessons), 48)
+        pages = [VISUALS / "index.html", VISUALS / "README.md"] + [ROOT / name for name in lessons]
         for path in pages:
             parser = References()
             parser.feed(path.read_text(encoding="utf-8"))
@@ -73,10 +83,7 @@ class VisualAssetTest(unittest.TestCase):
                     self.assertTrue((path.parent / unquote(url.path)).resolve().is_file())
 
     def test_committed_outputs_are_exactly_reproducible(self):
-        spec = importlib.util.spec_from_file_location("generate_visuals", ROOT / "scripts/generate_visuals.py")
-        generator = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(generator)
-        for name, expected in generator.build_outputs().items():
+        for name, expected in self.generator.build_outputs().items():
             with self.subTest(output=name):
                 self.assertEqual((ROOT / name).read_text(encoding="utf-8"), expected)
 

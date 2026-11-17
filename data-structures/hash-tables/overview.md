@@ -17,7 +17,7 @@ assert counts.get("pear") == 2;
 assert counts.get("missing") == null;
 ```
 
-<!-- visual:generated -->
+<!-- visual:generated lru-recency | An LRU cache combines hashed lookup with an ordered recency list; a successful lookup changes the next eviction. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/lru-recency-dark.svg"><img src="../../docs/visuals/assets/lru-recency.svg" alt="Promote a cache hit before deciding which entry to evict next." width="520"></picture>
 
 **Figure 06.** An LRU cache combines hashed lookup with an ordered recency list; a successful lookup changes the next eviction. [Visual index and step-throughs](../../docs/visuals/README.md).

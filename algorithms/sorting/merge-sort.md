@@ -5,7 +5,7 @@ them. The maintained [implementation](../../src/main/java/io/github/ichillous/ds
 uses half-open ranges, one reusable buffer and ascending `int[]` order. It mutates
 input, rejects null and accepts empty input.
 
-<!-- visual:generated -->
+<!-- visual:generated merge-recursion -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/merge-recursion-dark.svg"><img src="../../docs/visuals/assets/merge-recursion.svg" alt="Split into singletons, then merge sorted children bottom up." width="520"></picture>
 
 **Figure 14.** Split into singletons, then merge sorted children bottom up. [Visual index and step-throughs](../../docs/visuals/README.md).

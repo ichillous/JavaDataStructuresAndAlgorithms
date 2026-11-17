@@ -5,7 +5,7 @@ These examples use the maintained
 Inputs are not modified; null inputs are rejected. Distinguish a returned optimum
 value from a reconstructed solution: these methods return values or lengths.
 
-<!-- visual:generated -->
+<!-- visual:generated knapsack-state -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/knapsack-state-dark.svg"><img src="../../docs/visuals/assets/knapsack-state.svg" alt="Sweep capacities backward so an item cannot reuse itself." width="520"></picture>
 
 **Figure 17.** Sweep capacities backward so an item cannot reuse itself. [Visual index and step-throughs](../../docs/visuals/README.md).

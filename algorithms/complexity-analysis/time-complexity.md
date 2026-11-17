@@ -4,7 +4,7 @@ Start with the [time-complexity foundations](../../complexity-analysis/time-comp
 This lesson derives bounds for actual patterns used in the repository rather than
 assigning a complexity to code merely because it contains recursion or a loop.
 
-<!-- visual:generated -->
+<!-- visual:generated complexity-growth -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/complexity-growth-dark.svg"><img src="../../docs/visuals/assets/complexity-growth.svg" alt="Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings." width="520"></picture>
 
 **Figure 26.** Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings. [Visual index and step-throughs](../../docs/visuals/README.md).

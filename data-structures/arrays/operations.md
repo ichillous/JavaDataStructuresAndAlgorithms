@@ -2,7 +2,7 @@
 
 Use [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) to study resizable indexed storage. The implementation owns its backing array, preserves insertion order, rejects null elements and exposes only the live prefix through its iterator.
 
-<!-- visual:generated -->
+<!-- visual:generated fenwick-blocks | The prefix blocks below complement the insertion trace: aggregates answer ranges without shifting array values. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/fenwick-blocks-dark.svg"><img src="../../docs/visuals/assets/fenwick-blocks.svg" alt="For values 2,-1,4,3, one-based Fenwick slots cover [0,1), [0,2), [2,3) and [0,4). The prefix ending at zero-based boundary 3 combines slots 3 and 2: 4+1=5." width="520"></picture>
 
 **Figure 11.** The prefix blocks below complement the insertion trace: aggregates answer ranges without shifting array values. [Visual index and step-throughs](../../docs/visuals/README.md).

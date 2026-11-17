@@ -16,7 +16,7 @@ assert relationships.neighbors(0).equals(List.of(1, 2));
 assert relationships.neighbors(3).isEmpty();
 ```
 
-<!-- visual:generated -->
+<!-- visual:generated bfs-frontier -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bfs-frontier-dark.svg"><img src="../../docs/visuals/assets/bfs-frontier.svg" alt="Follow the queue separately from discovery; isolate unreachable vertex 5." width="520"></picture>
 
 **Figure 22.** Follow the queue separately from discovery; isolate unreachable vertex 5. [Visual index and step-throughs](../../docs/visuals/README.md).
