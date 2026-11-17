@@ -10,13 +10,13 @@ also record their subtree sizes. Besides `get`, `put` and `remove`, it answers:
   given position)
 - range counts: `countInRange` over a half-open range `[from, to)`
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Keys change while you keep asking ordered questions: nearest key, rank, select or range counts |
-| **Avoid it when** | The keys are fixed (sort once and binary search), you only need exact lookups (a hash map), or `TreeMap` already suffices because you need no rank or select |
+| **Use&nbsp;it&nbsp;when** | Keys change while you keep asking ordered questions: nearest key, rank, select or range counts. |
+| **Avoid&nbsp;it&nbsp;when** | The keys are fixed (sort once and binary search), you only need exact lookups (a hash map), or `TreeMap` already suffices because you need no rank or select. |
 | **Cost** | O(log n) worst case for `get`, `put`, `remove`, `floorKey`, `ceilingKey`, `rank`, `select` and `countInRange`; O(n) storage; `keys()` and `height()` are O(n) |
-| **In this repo** | [`RedBlackTreeMap`](../../src/main/java/io/github/ichillous/dsa/structures/RedBlackTreeMap.java) |
-| **In the JDK** | `java.util.TreeMap` and `java.util.TreeSet` |
+| **In&nbsp;this&nbsp;repo** | [`RedBlackTreeMap`](../../src/main/java/io/github/ichillous/dsa/structures/RedBlackTreeMap.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.TreeMap` and `java.util.TreeSet` |
 
 Use it when a set of keys changes while you keep asking ordered questions about it,
 such as "how many scores are below 70?" or "what is the 100th smallest timestamp?".

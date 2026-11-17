@@ -5,13 +5,13 @@ input, workspace and output. Here, track which object owns each allocation and
 when a caller can safely retain it. These distinctions affect API behavior as
 well as the big-O description.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You must say what memory an operation needs beyond its input: workspace, retained capacity, output and the recursion stack |
-| **Avoid it when** | You would sum allocation sizes over all calls; that measures traffic, not the peak that is live at once |
+| **Use&nbsp;it&nbsp;when** | You must say what memory an operation needs beyond its input: workspace, retained capacity, output and the recursion stack. |
+| **Avoid&nbsp;it&nbsp;when** | You would sum allocation sizes over all calls; that measures traffic, not the peak that is live at once. |
 | **Cost** | A model of live storage, for example O(depth) for a recursion path or O(capacity) for a grown array |
-| **In this repo** | [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java), [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) snapshots |
-| **In the JDK** | `ArrayList.trimToSize()`, `List.subList` (a view), `List.copyOf` (a detached copy) |
+| **In&nbsp;this&nbsp;repo** | [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java), [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) snapshots |
+| **In&nbsp;the&nbsp;JDK** | `ArrayList.trimToSize()`, `List.subList` (a view), `List.copyOf` (a detached copy) |
 
 <!-- visual:generated merge-recursion | This call tree depicts operations across time, not simultaneous allocations. Live frames on one branch determine recursion-stack space. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/merge-recursion-dark.svg"><img src="../../docs/visuals/assets/merge-recursion.svg" alt="Split into singletons, then merge sorted children bottom up." width="520"></picture>

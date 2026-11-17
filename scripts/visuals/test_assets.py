@@ -457,8 +457,9 @@ class GalleryTest(unittest.TestCase):
                     self.assertIn('width="160"', row)
                     title = next(line[2:] for line in text.split("\n") if line.startswith("# "))
                     self.assertIn(f"| [{title}]({lesson}) |", row)
-                    use = next(line for line in text.split("\n") if line.startswith("| **Use it when** |"))
-                    cell = use[len("| **Use it when** |"):].rstrip().rstrip("|").strip()
+                    label = "| **Use&nbsp;it&nbsp;when** |"
+                    use = next(line for line in text.split("\n") if line.startswith(label))
+                    cell = use[len(label):].rstrip().rstrip("|").strip()
                     self.assertTrue(row.endswith(f" | {cell} |"), row)
                     alt = re.search(r' alt="([^"]*)"', row).group(1)
                     self.assertEqual(by_id[first]["description"], html.unescape(alt))
@@ -488,6 +489,28 @@ class GalleryTest(unittest.TestCase):
         self.assertTrue(result.startswith("# Topic\n\n<!-- visual:gallery topic -->\n### "))
         self.assertTrue(result.endswith("\n<!-- /visual:gallery -->\n\nEnd.\n"))
         self.assertEqual(result, self.build(self.SMALL, result), "regenerating must be idempotent")
+
+    def test_non_breaking_labels_are_read_like_plain_ones(self):
+        files = dict(self.SMALL)
+        plain = next(name for name, text in files.items() if "| **Use it when** |" in text)
+        files[plain] = (files[plain].replace("| At a glance | |", "| At&nbsp;a&nbsp;glance | |")
+                        .replace("**Use it when**", "**Use&nbsp;it&nbsp;when**"))
+        self.assertEqual(self.build(self.SMALL, self.PAGE), self.build(files, self.PAGE))
+
+    def test_every_lesson_writes_its_at_a_glance_labels_with_non_breaking_spaces(self):
+        labels = ["Use it when", "Avoid it when", "Cost", "In this repo", "In the JDK"]
+        for folder in ("algorithms", "data-structures"):
+            for path in sorted((ROOT / folder).rglob("*.md")):
+                with self.subTest(lesson=path.relative_to(ROOT).as_posix()):
+                    lines = path.read_text(encoding="utf-8").split("\n")
+                    self.assertIn("| At&nbsp;a&nbsp;glance | |", lines)
+                    for label in labels:
+                        row = f"| **{label.replace(' ', '&nbsp;')}** |"
+                        self.assertEqual(1, sum(line.startswith(row) for line in lines), label)
+                    for label in labels[:2]:
+                        row = next(line for line in lines
+                                   if line.startswith(f"| **{label.replace(' ', '&nbsp;')}** |"))
+                        self.assertRegex(row, r"[.?!] \|$", f"{label} cell ends with a full stop")
 
     def test_a_lesson_without_a_figure_or_at_a_glance_table_fails_with_page_line_and_lesson(self):
         with self.assertRaisesRegex(ValueError, r"topic/README\.md:3: .*topic/sub/plain\.md has no figure region"):

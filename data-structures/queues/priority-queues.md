@@ -2,13 +2,13 @@
 
 A priority queue removes the smallest or largest key according to an ordering. It is useful when the next task depends on priority rather than arrival: Dijkstra's tentative distances, scheduling, event simulation and selecting the best `k` candidates.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | The next item to process is the one with the best priority, not the oldest: scheduling, Dijkstra, event simulation, top-`k`. |
-| **Avoid it when** | You need FIFO order, sorted iteration, or to look up and change an arbitrary item's priority. |
+| **Use&nbsp;it&nbsp;when** | The next item to process is the one with the best priority, not the oldest: scheduling, Dijkstra, event simulation, top-`k`. |
+| **Avoid&nbsp;it&nbsp;when** | You need FIFO order, sorted iteration, or to look up and change an arbitrary item's priority. |
 | **Cost** | Peek O(1); remove-min O(log n); insert O(log n) amortized; space O(n). |
-| **In this repo** | [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java), [`Selection.smallestK`](../../src/main/java/io/github/ichillous/dsa/algorithms/Selection.java) |
-| **In the JDK** | `java.util.PriorityQueue` |
+| **In&nbsp;this&nbsp;repo** | [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java), [`Selection.smallestK`](../../src/main/java/io/github/ichillous/dsa/algorithms/Selection.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.PriorityQueue` |
 
 A heap guarantees that its root is minimal, not that its entire array is sorted. After every removal the next minimum becomes accessible; arbitrary iteration need not follow priority order.
 

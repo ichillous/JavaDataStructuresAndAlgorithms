@@ -2,13 +2,13 @@
 
 Use [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) to study resizable indexed storage. The implementation owns its backing array, preserves insertion order, rejects null elements and exposes only the live prefix through its iterator.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need ordered, indexed storage that grows, and you can pay O(n) for an insertion or removal away from the end. |
-| **Avoid it when** | You insert or remove at the front or middle all the time, or you need stable node references while the sequence changes. |
+| **Use&nbsp;it&nbsp;when** | You need ordered, indexed storage that grows, and you can pay O(n) for an insertion or removal away from the end. |
+| **Avoid&nbsp;it&nbsp;when** | You insert or remove at the front or middle all the time, or you need stable node references while the sequence changes. |
 | **Cost** | `get`/`set` O(1); `add(index, x)` and `remove(index)` O(n); append O(1) amortized, O(n) when a resize copies. |
-| **In this repo** | [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) |
-| **In the JDK** | `java.util.ArrayList` |
+| **In&nbsp;this&nbsp;repo** | [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.ArrayList` |
 
 ## Insertion and removal invariants
 

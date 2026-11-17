@@ -4,13 +4,13 @@ Divide and conquer splits a problem into smaller instances, solves them, then
 combines their answers. The split alone is not enough: specify what each recursive
 call guarantees and why combining those guarantees solves the parent instance.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Subproblems are independent and a cheap combine rule exists: sorting, counting cross pairs, searching a sorted range |
-| **Avoid it when** | Subproblems repeat the same states (use caching or dynamic programming), or the split cannot be kept balanced and the combine step costs more than the split saves |
+| **Use&nbsp;it&nbsp;when** | Subproblems are independent and a cheap combine rule exists: sorting, counting cross pairs, searching a sorted range. |
+| **Avoid&nbsp;it&nbsp;when** | Subproblems repeat the same states (use caching or dynamic programming), or the split cannot be kept balanced and the combine step costs more than the split saves. |
 | **Cost** | `T(n) = 2T(n/2) + O(n)` gives O(n log n); one half and O(1) work gives O(log n); live frames decide stack space separately |
-| **In this repo** | [`SortAlgorithms.mergeSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java), [`SequenceAlgorithms.countInversions`](../../src/main/java/io/github/ichillous/dsa/algorithms/SequenceAlgorithms.java) |
-| **In the JDK** | `Arrays.sort`, `Arrays.binarySearch`, `List.sort` |
+| **In&nbsp;this&nbsp;repo** | [`SortAlgorithms.mergeSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java), [`SequenceAlgorithms.countInversions`](../../src/main/java/io/github/ichillous/dsa/algorithms/SequenceAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `Arrays.sort`, `Arrays.binarySearch`, `List.sort` |
 
 <!-- visual:generated merge-recursion -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/merge-recursion-dark.svg"><img src="../../docs/visuals/assets/merge-recursion.svg" alt="Split into singletons, then merge sorted children bottom up." width="520"></picture>

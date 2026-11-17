@@ -8,13 +8,13 @@ offers four tools. `kthSmallest` takes an unsorted `int[]` and a zero-based rank
 `int[]`. Every method rejects null, leaves its input unchanged and returns a fresh
 value; returned lists are immutable.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need one rank, the k best, a merge of sorted runs, or a majority value, and not the whole order. |
-| **Avoid it when** | You need many ranks or the full order: sort once. |
+| **Use&nbsp;it&nbsp;when** | You need one rank, the k best, a merge of sorted runs, or a majority value, and not the whole order. |
+| **Avoid&nbsp;it&nbsp;when** | You need many ranks or the full order: sort once. |
 | **Cost** | `kthSmallest` O(n); `smallestK` O(n log(k + 1)); `mergeSorted` O(N log(k + 1)); `majorityElement` O(n). |
-| **In this repo** | [`Selection`](../../src/main/java/io/github/ichillous/dsa/algorithms/Selection.java) |
-| **In the JDK** | `PriorityQueue` and `Stream#sorted` with `limit`; no direct equivalent for a k-th smallest or a k-way merge |
+| **In&nbsp;this&nbsp;repo** | [`Selection`](../../src/main/java/io/github/ichillous/dsa/algorithms/Selection.java) |
+| **In&nbsp;the&nbsp;JDK** | `PriorityQueue` and `Stream#sorted` with `limit`; no direct equivalent for a k-th smallest or a k-way merge |
 
 ## Which tool when
 

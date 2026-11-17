@@ -5,13 +5,13 @@ unsorted array? The maintained [search implementation](../../src/main/java/io/gi
 returns a zero-based index, or `-1` if absent. It rejects null and does not mutate
 input. Empty arrays are valid. No sorting or auxiliary index is required.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | The data is unsorted or tiny, you query once, or the match test is not an ordering. |
-| **Avoid it when** | The same large collection is queried again and again: sort it or index it once. |
+| **Use&nbsp;it&nbsp;when** | The data is unsorted or tiny, you query once, or the match test is not an ordering. |
+| **Avoid&nbsp;it&nbsp;when** | The same large collection is queried again and again: sort it or index it once. |
 | **Cost** | O(1) for a hit at index 0; O(n) for a miss or a hit at the end; O(1) extra space. |
-| **In this repo** | [`SearchAlgorithms.linearSearch`](../../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) |
-| **In the JDK** | `List#indexOf` and `List#lastIndexOf`; no direct equivalent for `int[]` |
+| **In&nbsp;this&nbsp;repo** | [`SearchAlgorithms.linearSearch`](../../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `List#indexOf` and `List#lastIndexOf`; no direct equivalent for `int[]` |
 
 ## Why the scan is correct
 

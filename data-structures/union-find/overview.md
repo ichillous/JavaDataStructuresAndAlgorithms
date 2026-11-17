@@ -2,13 +2,13 @@
 
 Union-find, also called disjoint sets, keeps a partition of the indices `0..n-1` into groups. It answers two questions quickly: are two indices in the same group, and how do I merge two groups? It never splits a group. Use it when items only ever join, such as edges arriving in a graph, equivalent names, or cells that merge into regions.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Groups only merge and you ask "are these connected?": Kruskal's algorithm, cycle detection while adding undirected edges, grouping equivalent items. |
-| **Avoid it when** | You must remove an edge or split a group, or you must list a group's members cheaply. |
+| **Use&nbsp;it&nbsp;when** | Groups only merge and you ask "are these connected?": Kruskal's algorithm, cycle detection while adding undirected edges, grouping equivalent items. |
+| **Avoid&nbsp;it&nbsp;when** | You must remove an edge or split a group, or you must list a group's members cheaply. |
 | **Cost** | `find`, `union`, `connected`, `componentSize`: O(α(n)) amortized; construction and space O(n); `components` and `size` O(1). |
-| **In this repo** | [`UnionFind`](../../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) |
-| **In the JDK** | no direct equivalent |
+| **In&nbsp;this&nbsp;repo** | [`UnionFind`](../../src/main/java/io/github/ichillous/dsa/structures/UnionFind.java) |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent |
 
 <!-- visual:generated union-find -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/union-find-dark.svg"><img src="../../docs/visuals/assets/union-find.svg" alt="Union operations on five indices produce components {0,1,2} and {3,4}. Parent arrows point toward roots 0 and 3, whose component sizes are three and two. Finding index 2 follows its link to root 0." width="520"></picture>

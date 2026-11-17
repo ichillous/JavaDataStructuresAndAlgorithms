@@ -1,12 +1,12 @@
 # LFU cache: evict the least used, break ties by recency
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | A few keys are used far more often than the rest and a one-time scan over cold keys must not flush them. |
-| **Avoid it when** | The popular set drifts over time (counts never decay), or recency is the right policy; use an access-order `LinkedHashMap` for LRU. |
+| **Use&nbsp;it&nbsp;when** | A few keys are used far more often than the rest and a one-time scan over cold keys must not flush them. |
+| **Avoid&nbsp;it&nbsp;when** | The popular set drifts over time (counts never decay), or recency is the right policy; use an access-order `LinkedHashMap` for LRU. |
 | **Cost** | Expected O(1) `get`, `remove` and `frequency`; expected amortized O(1) `put`; O(capacity) space. |
-| **In this repo** | [`LfuCache`](../../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) |
-| **In the JDK** | No direct equivalent; `LinkedHashMap` in access order covers LRU only. |
+| **In&nbsp;this&nbsp;repo** | [`LfuCache`](../../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; `LinkedHashMap` in access order covers LRU only. |
 
 A least-frequently-used cache keeps a fixed number of entries and, when a new key arrives at capacity, discards the entry that has been used the fewest times. [`LfuCache`](../../src/main/java/io/github/ichillous/dsa/collections/LfuCache.java) breaks frequency ties by evicting the least recently used of the tied entries. It offers the same surface as [`LruCache`](../../src/main/java/io/github/ichillous/dsa/collections/LruCache.java), which is explained in the [hash tables overview](overview.md#composition-an-lru-cache), plus a `frequency(key)` query that does not count as a use.
 

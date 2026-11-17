@@ -5,13 +5,13 @@ quadratic worst-case work makes it a poor default for large arrays. The maintain
 [SortAlgorithms](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java)
 mutates `int[]` in ascending order, rejects null and accepts empty input.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You are learning the sorted-suffix invariant, or an array is known to be almost sorted and tiny |
-| **Avoid it when** | The input is large or reversed: the work is quadratic and insertion sort does less data movement |
+| **Use&nbsp;it&nbsp;when** | You are learning the sorted-suffix invariant, or an array is known to be almost sorted and tiny. |
+| **Avoid&nbsp;it&nbsp;when** | The input is large or reversed: the work is quadratic and insertion sort does less data movement. |
 | **Cost** | O(n²) worst case; O(n) on sorted input with the early exit; O(1) extra space; stable |
-| **In this repo** | [`SortAlgorithms.bubbleSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
-| **In the JDK** | No direct equivalent; use `Arrays.sort` or `List.sort` |
+| **In&nbsp;this&nbsp;repo** | [`SortAlgorithms.bubbleSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; use `Arrays.sort` or `List.sort` |
 
 <!-- visual:generated bubble-swaps -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bubble-swaps-dark.svg"><img src="../../docs/visuals/assets/bubble-swaps.svg" alt="Swap neighboring values; each pass settles a maximum on the right." width="520"></picture>

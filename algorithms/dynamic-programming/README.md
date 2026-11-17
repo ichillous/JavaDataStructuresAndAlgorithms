@@ -6,13 +6,13 @@ page maps each family to a maintained method; the
 [overview](overview.md), [problem set](problems.md) and
 [classic problems](classic-problems.md) give the full derivations.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You face an optimization or counting problem and need to pick a state shape quickly |
-| **Avoid it when** | A greedy proof exists, or you need every optimal solution rather than one value |
+| **Use&nbsp;it&nbsp;when** | You face an optimization or counting problem and need to pick a state shape quickly. |
+| **Avoid&nbsp;it&nbsp;when** | A greedy proof exists, or you need every optimal solution rather than one value. |
 | **Cost** | States times work per state; each family below states its own bound |
-| **In this repo** | [`DynamicProgramming`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java) and [`DynamicProgrammingClassics`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) |
-| **In the JDK** | No direct equivalent; plain arrays, `long` and `Math.addExact` |
+| **In&nbsp;this&nbsp;repo** | [`DynamicProgramming`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java) and [`DynamicProgrammingClassics`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; plain arrays, `long` and `Math.addExact` |
 
 ## The families
 

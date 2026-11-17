@@ -7,13 +7,13 @@ up to some boundary and true from there on, binary search finds the boundary. Th
 [`SearchAlgorithms.firstTrue`](../../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java)
 does this for any `long` range and a `LongPredicate`.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You want the smallest (or, by negating the test, the largest) value that satisfies a condition that, once true, stays true for larger values. |
-| **Avoid it when** | The condition is not monotone, or the answer set is small enough to scan, or a direct formula exists. |
+| **Use&nbsp;it&nbsp;when** | You want the smallest (or, by negating the test, the largest) value that satisfies a condition that, once true, stays true for larger values. |
+| **Avoid&nbsp;it&nbsp;when** | The condition is not monotone, or the answer set is small enough to scan, or a direct formula exists. |
 | **Cost** | O(log(high - low)) feasibility tests, each costing whatever the test costs; O(1) extra space. |
-| **In this repo** | [`SearchAlgorithms.firstTrue`](../../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) |
-| **In the JDK** | No direct equivalent: `Arrays#binarySearch` searches an array by key, not a range by predicate. |
+| **In&nbsp;this&nbsp;repo** | [`SearchAlgorithms.firstTrue`](../../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent: `Arrays#binarySearch` searches an array by key, not a range by predicate. |
 
 ## Preconditions and the invariant
 

@@ -4,13 +4,13 @@ A rule is correct for a particular feasible set and objective. Changing “numbe
 of activities” to “total value,” or allowing item reuse, can invalidate its proof.
 The examples below separate a maintained API from a small executable JDK exercise.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | A cut-property or exchange argument covers your exact objective, as for Kruskal and Huffman merging |
-| **Avoid it when** | The objective or feasible set changed (values, reuse, arbitrary coins) and no proof was redone |
+| **Use&nbsp;it&nbsp;when** | A cut-property or exchange argument covers your exact objective, as for Kruskal and Huffman merging. |
+| **Avoid&nbsp;it&nbsp;when** | The objective or feasible set changed (values, reuse, arbitrary coins) and no proof was redone. |
 | **Cost** | O(n log n) for the sort or heap in each example below |
-| **In this repo** | [`GraphAlgorithms.minimumSpanningForest`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) and [`GreedyAlgorithms.huffmanCodeLengths`](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) |
-| **In the JDK** | `PriorityQueue` for the repeated "take the smallest" step |
+| **In&nbsp;this&nbsp;repo** | [`GraphAlgorithms.minimumSpanningForest`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) and [`GreedyAlgorithms.huffmanCodeLengths`](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `PriorityQueue` for the repeated "take the smallest" step |
 
 ## Coin change: a local rule that fails
 

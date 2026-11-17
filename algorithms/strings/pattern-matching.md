@@ -8,13 +8,13 @@ immutable lists. `kmpFindAll`, `zFindAll` and `rabinKarpFindAll` return identica
 results: every start index, overlaps included. An empty pattern matches at every
 boundary `0..text.length()`.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | One pattern is searched in one text and you need every match or a linear-time guarantee (KMP, Z-function), a cheap rolling-hash filter before an exact check (Rabin–Karp), or the longest palindromic substring (Manacher). |
-| **Avoid it when** | You need one first match in ordinary text (use `String.indexOf`), many patterns at once (use Aho–Corasick), or many queries on one fixed text (use a suffix array). |
+| **Use&nbsp;it&nbsp;when** | One pattern is searched in one text and you need every match or a linear-time guarantee (KMP, Z-function), a cheap rolling-hash filter before an exact check (Rabin–Karp), or the longest palindromic substring (Manacher). |
+| **Avoid&nbsp;it&nbsp;when** | You need one first match in ordinary text (use `String.indexOf`), many patterns at once (use Aho–Corasick), or many queries on one fixed text (use a suffix array). |
 | **Cost** | `zFunction` and `longestPalindromicSubstring` are O(n); `zFindAll` is O(t + p + k); `rabinKarpFindAll` is O(t + p + k·p) when spurious hits are rare and O(t·p) in the worst case. |
-| **In this repo** | [`StringAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/StringAlgorithms.java): `kmpFindAll`, `zFunction`, `zFindAll`, `rabinKarpFindAll`, `longestPalindromicSubstring` |
-| **In the JDK** | `String.indexOf` and `java.util.regex.Pattern` for searching; no direct equivalent for the Z-function or Manacher's algorithm |
+| **In&nbsp;this&nbsp;repo** | [`StringAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/StringAlgorithms.java): `kmpFindAll`, `zFunction`, `zFindAll`, `rabinKarpFindAll`, `longestPalindromicSubstring` |
+| **In&nbsp;the&nbsp;JDK** | `String.indexOf` and `java.util.regex.Pattern` for searching; no direct equivalent for the Z-function or Manacher's algorithm |
 
 ## Which matcher
 

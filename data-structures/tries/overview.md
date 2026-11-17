@@ -2,13 +2,13 @@
 
 A trie stores strings along labeled edges. Words with the same prefix share a path, making prefix lookup and autocomplete natural. Use a hash set for exact membership alone; consider a trie when prefixes are the central operation.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Prefix queries such as autocomplete are central, over a set of strings that changes. |
-| **Avoid it when** | You need only exact membership (use a hash set), or memory is tight: a node per character costs far more than the strings. |
+| **Use&nbsp;it&nbsp;when** | Prefix queries such as autocomplete are central, over a set of strings that changes. |
+| **Avoid&nbsp;it&nbsp;when** | You need only exact membership (use a hash set), or memory is tight: a node per character costs far more than the strings. |
 | **Cost** | Add, contains and prefix check O(L log A) for length L and at most A children per node; enumeration adds visited nodes and output. |
-| **In this repo** | [`Trie`](../../src/main/java/io/github/ichillous/dsa/structures/Trie.java) |
-| **In the JDK** | no direct equivalent; a `java.util.TreeSet<String>` scanned from `tailSet(prefix)` covers prefix lookups |
+| **In&nbsp;this&nbsp;repo** | [`Trie`](../../src/main/java/io/github/ichillous/dsa/structures/Trie.java) |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent; a `java.util.TreeSet<String>` scanned from `tailSet(prefix)` covers prefix lookups |
 
 ```text
 root

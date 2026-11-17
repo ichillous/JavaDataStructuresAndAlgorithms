@@ -5,13 +5,13 @@ The maintained [implementation](../../src/main/java/io/github/ichillous/dsa/algo
 uses a deterministic middle-position pivot and groups equal values together.
 It mutates `int[]` in ascending order, rejects null and accepts empty arrays.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You sort an `int[]` in place, especially one with many duplicate values |
-| **Avoid it when** | You need stability, or a worst-case O(n log n) time bound |
+| **Use&nbsp;it&nbsp;when** | You sort an `int[]` in place, especially one with many duplicate values. |
+| **Avoid&nbsp;it&nbsp;when** | You need stability, or a worst-case O(n log n) time bound. |
 | **Cost** | O(n log n) typical; O(n²) worst case; O(log n) stack; unstable |
-| **In this repo** | [`SortAlgorithms.quickSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
-| **In the JDK** | `Arrays.sort(int[])`, described in the Javadoc implementation note as a Dual-Pivot Quicksort |
+| **In&nbsp;this&nbsp;repo** | [`SortAlgorithms.quickSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `Arrays.sort(int[])`, described in the Javadoc implementation note as a Dual-Pivot Quicksort |
 
 <!-- visual:generated quick-partition -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/quick-partition-dark.svg"><img src="../../docs/visuals/assets/quick-partition.svg" alt="Gather duplicate pivot values into one finished equal region." width="520"></picture>

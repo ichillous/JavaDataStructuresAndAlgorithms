@@ -55,8 +55,9 @@ GALLERY_THUMBNAIL_WIDTH = 160
 GALLERY_HEADINGS = {"divide-and-conquer": "Divide and conquer", "graph": "Graph algorithms",
                     "math": "Math and randomness", "probabilistic": "Probabilistic structures",
                     "union-find": "Union-find"}
-GLANCE_HEADER = re.compile(r"^\|\s*At a glance\s*\|")
-USE_IT_WHEN = re.compile(r"^\|\s*\*\*Use it when\*\*\s*\|(?P<cell>.*)\|\s*$")
+# Labels are written with &nbsp; so GitHub never wraps them; a plain space is read the same way.
+GLANCE_HEADER = re.compile(r"^\|\s*At(?: |&nbsp;)a(?: |&nbsp;)glance\s*\|")
+USE_IT_WHEN = re.compile(r"^\|\s*\*\*Use(?: |&nbsp;)it(?: |&nbsp;)when\*\*\s*\|(?P<cell>.*)\|\s*$")
 MARKDOWN_LINK = re.compile(r"(\]\()([^)\s]+)(\))")
 Gallery = namedtuple("Gallery", "folder start end")
 
@@ -263,9 +264,9 @@ def gallery_entry(lesson, text, figures_by_id):
             cell = USE_IT_WHEN.match(line).group("cell").strip()
             break
     if not in_table:
-        raise ValueError(f"{lesson} has no At a glance table ('| At a glance | |')")
+        raise ValueError(f"{lesson} has no At a glance table ('| At&nbsp;a&nbsp;glance | |')")
     if not cell:
-        raise ValueError(f"{lesson} has no '**Use it when**' row in its At a glance table")
+        raise ValueError(f"{lesson} has no '**Use&nbsp;it&nbsp;when**' row in its At a glance table")
     return title, [region.figure_id for region in regions], cell
 
 

@@ -11,13 +11,13 @@ to the caller's array do not leak in. This lesson adds two maintained structures
 - [LazySegmentTree](../../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java)
   adds a value to a whole range and returns exact range sums, both in O(log n).
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Many range queries (sum or minimum) hit the same array, so some build work is worth paying for. |
-| **Avoid it when** | There are only a few queries; a plain loop over the range is simpler and fast enough. |
+| **Use&nbsp;it&nbsp;when** | Many range queries (sum or minimum) hit the same array, so some build work is worth paying for. |
+| **Avoid&nbsp;it&nbsp;when** | There are only a few queries; a plain loop over the range is simpler and fast enough. |
 | **Cost** | Sparse table: build O(n log n), query O(1). Lazy segment tree: build O(n), range add and range sum O(log n). |
-| **In this repo** | [`SparseTable`](../../src/main/java/io/github/ichillous/dsa/structures/SparseTable.java), [`LazySegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java), [`FenwickTree`](../../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java), [`SegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) |
-| **In the JDK** | `java.util.Arrays#parallelPrefix` for static prefix sums; no range-minimum or lazy structure |
+| **In&nbsp;this&nbsp;repo** | [`SparseTable`](../../src/main/java/io/github/ichillous/dsa/structures/SparseTable.java), [`LazySegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/LazySegmentTree.java), [`FenwickTree`](../../src/main/java/io/github/ichillous/dsa/structures/FenwickTree.java), [`SegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.Arrays#parallelPrefix` for static prefix sums; no range-minimum or lazy structure |
 
 ## Static or dynamic data
 

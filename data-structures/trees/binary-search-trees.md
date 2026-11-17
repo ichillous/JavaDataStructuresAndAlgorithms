@@ -4,13 +4,13 @@
 
 Null keys are rejected. `compareTo == 0` defines a duplicate, even if `equals` would distinguish the objects. Keep ordering-relevant fields stable while a key is stored.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Keys are inserted and removed over time and you need ordered membership or sorted traversal, and the input order is not adversarial |
-| **Avoid it when** | Keys may arrive sorted, because the tree becomes a chain; use [AVL](avl-trees.md) or [red-black](red-black-trees.md) balancing |
+| **Use&nbsp;it&nbsp;when** | Keys are inserted and removed over time and you need ordered membership or sorted traversal, and the input order is not adversarial. |
+| **Avoid&nbsp;it&nbsp;when** | Keys may arrive sorted, because the tree becomes a chain; use [AVL](avl-trees.md) or [red-black](red-black-trees.md) balancing. |
 | **Cost** | Search, add and remove are O(h), up to O(n); `inOrder` and `height` are O(n) |
-| **In this repo** | [`BinarySearchTree`](../../src/main/java/io/github/ichillous/dsa/structures/BinarySearchTree.java) |
-| **In the JDK** | `java.util.TreeSet` (a balanced, comparator-aware ordered set) |
+| **In&nbsp;this&nbsp;repo** | [`BinarySearchTree`](../../src/main/java/io/github/ichillous/dsa/structures/BinarySearchTree.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.TreeSet` (a balanced, comparator-aware ordered set) |
 
 ## Search and insertion
 

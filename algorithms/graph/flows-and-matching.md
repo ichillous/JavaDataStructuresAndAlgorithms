@@ -9,13 +9,13 @@ computes a maximum flow and a minimum cut with Dinic's algorithm, and
 [BipartiteMatching](../../src/main/java/io/github/ichillous/dsa/graphs/BipartiteMatching.java)
 computes a maximum matching with Hopcroft-Karp.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You must route the most of something through capacity-limited links, find the cheapest set of links separating two vertices, or pair items from two sides (tasks to workers). |
-| **Avoid it when** | Edges carry costs to minimize (min-cost flow and the Hungarian algorithm are not implemented here) or you only need one path. |
+| **Use&nbsp;it&nbsp;when** | You must route the most of something through capacity-limited links, find the cheapest set of links separating two vertices, or pair items from two sides (tasks to workers). |
+| **Avoid&nbsp;it&nbsp;when** | Edges carry costs to minimize (min-cost flow and the Hungarian algorithm are not implemented here) or you only need one path. |
 | **Cost** | `maxFlow` O(V^2 E); `maximumMatching` O((V + E) sqrt(V)); both O(V + E) auxiliary space. |
-| **In this repo** | [`FlowNetwork.maxFlow`](../../src/main/java/io/github/ichillous/dsa/graphs/FlowNetwork.java), [`BipartiteMatching.maximumMatching`](../../src/main/java/io/github/ichillous/dsa/graphs/BipartiteMatching.java) |
-| **In the JDK** | No direct equivalent. |
+| **In&nbsp;this&nbsp;repo** | [`FlowNetwork.maxFlow`](../../src/main/java/io/github/ichillous/dsa/graphs/FlowNetwork.java), [`BipartiteMatching.maximumMatching`](../../src/main/java/io/github/ichillous/dsa/graphs/BipartiteMatching.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent. |
 
 Preconditions: vertices are `0..V-1`; capacities are `>= 0`; parallel edges are kept
 and each is a separate edge; `source != sink`. The network is never mutated by a

@@ -11,13 +11,13 @@ compatible: one ending at 2 can precede one starting at 2. Integer-extreme
 endpoints are valid. Null collections/elements and empty/backward intervals are
 rejected. The method sorts a copy and returns an immutable schedule.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | A proof (an exchange argument) shows some optimum contains the local choice, as for earliest-finish activity selection |
-| **Avoid it when** | Items carry values or can be reused with arbitrary denominations; use dynamic programming |
+| **Use&nbsp;it&nbsp;when** | A proof (an exchange argument) shows some optimum contains the local choice, as for earliest-finish activity selection. |
+| **Avoid&nbsp;it&nbsp;when** | Items carry values or can be reused with arbitrary denominations; use dynamic programming. |
 | **Cost** | O(n log(n + 1)) to sort, O(n) to scan, O(n) space |
-| **In this repo** | [`GreedyAlgorithms.selectActivities`](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) |
-| **In the JDK** | `Comparator.comparingInt`, `List.sort` and `Integer.compare` for the sort step |
+| **In&nbsp;this&nbsp;repo** | [`GreedyAlgorithms.selectActivities`](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `Comparator.comparingInt`, `List.sort` and `Integer.compare` for the sort step |
 
 <!-- visual:generated activity-selection -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/activity-selection-dark.svg"><img src="../../docs/visuals/assets/activity-selection.svg" alt="Choose earliest finishing intervals; touching endpoints remain compatible." width="520"></picture>

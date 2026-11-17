@@ -5,13 +5,13 @@ them. The maintained [implementation](../../src/main/java/io/github/ichillous/ds
 uses half-open ranges, one reusable buffer and ascending `int[]` order. It mutates
 input, rejects null and accepts empty input.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need a guaranteed O(n log n) bound and stability, and can afford an O(n) buffer |
-| **Avoid it when** | Memory is tight: it needs a buffer of the array's size plus O(log n) stack |
+| **Use&nbsp;it&nbsp;when** | You need a guaranteed O(n log n) bound and stability, and can afford an O(n) buffer. |
+| **Avoid&nbsp;it&nbsp;when** | Memory is tight: it needs a buffer of the array's size plus O(log n) stack. |
 | **Cost** | O(n log n) worst case; O(n) buffer; O(log n) stack; stable |
-| **In this repo** | [`SortAlgorithms.mergeSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) for `int[]` and for `T[]` with a `Comparator` |
-| **In the JDK** | `Arrays.sort(Object[])`, `Arrays.sort(T[], Comparator)` and `List.sort`, all guaranteed stable |
+| **In&nbsp;this&nbsp;repo** | [`SortAlgorithms.mergeSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) for `int[]` and for `T[]` with a `Comparator` |
+| **In&nbsp;the&nbsp;JDK** | `Arrays.sort(Object[])`, `Arrays.sort(T[], Comparator)` and `List.sort`, all guaranteed stable |
 
 <!-- visual:generated merge-recursion -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/merge-recursion-dark.svg"><img src="../../docs/visuals/assets/merge-recursion.svg" alt="Split into singletons, then merge sorted children bottom up." width="520"></picture>

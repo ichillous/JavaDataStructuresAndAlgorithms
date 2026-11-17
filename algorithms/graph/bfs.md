@@ -7,13 +7,13 @@ vertices are `0..V-1`, duplicate edges are ignored, neighbor order follows inser
 order, and directed edges are traversed only in their given direction. Invalid
 vertices and null graphs are rejected. Do not mutate a graph during a computation.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need reachability, fewest-edge paths, distance layers or undirected components. |
-| **Avoid it when** | Edge costs differ: use Dijkstra (nonnegative), Bellman–Ford (negative) or the [shortest-path toolkit](shortest-paths.md). |
+| **Use&nbsp;it&nbsp;when** | You need reachability, fewest-edge paths, distance layers or undirected components. |
+| **Avoid&nbsp;it&nbsp;when** | Edge costs differ: use Dijkstra (nonnegative), Bellman–Ford (negative) or the [shortest-path toolkit](shortest-paths.md). |
 | **Cost** | O(V + E) time and auxiliary space for BFS, `shortestPath` and `connectedComponents`. |
-| **In this repo** | [`GraphAlgorithms.breadthFirst`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java), `shortestPath`, `connectedComponents` |
-| **In the JDK** | no direct equivalent traversal; `ArrayDeque` as the FIFO queue |
+| **In&nbsp;this&nbsp;repo** | [`GraphAlgorithms.breadthFirst`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java), `shortestPath`, `connectedComponents` |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent traversal; `ArrayDeque` as the FIFO queue |
 
 <!-- visual:generated bfs-frontier -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/bfs-frontier-dark.svg"><img src="../../docs/visuals/assets/bfs-frontier.svg" alt="Follow the queue separately from discovery; isolate unreachable vertex 5." width="520"></picture>

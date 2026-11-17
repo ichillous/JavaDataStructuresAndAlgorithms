@@ -12,13 +12,13 @@ components. Two maintained implementations give the same total weight:
   `primMinimumSpanningForest` is Prim: grow one tree from a start vertex by always
   taking the cheapest edge that leaves it.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You must connect every vertex as cheaply as possible and the connection need not be a shortest path between any two of them: networks, clustering, cheapest wiring. |
-| **Avoid it when** | You need cheapest routes between vertices (use [shortest paths](shortest-paths.md)) or the graph is directed. |
+| **Use&nbsp;it&nbsp;when** | You must connect every vertex as cheaply as possible and the connection need not be a shortest path between any two of them: networks, clustering, cheapest wiring. |
+| **Avoid&nbsp;it&nbsp;when** | You need cheapest routes between vertices (use [shortest paths](shortest-paths.md)) or the graph is directed. |
 | **Cost** | O(V + E log(E + 1)) time and O(V + E) auxiliary space for both Kruskal and the lazy-heap Prim. |
-| **In this repo** | [`GraphAlgorithms.minimumSpanningForest`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) (Kruskal), [`GraphStructureAlgorithms.primMinimumSpanningForest`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java) |
-| **In the JDK** | No direct equivalent. |
+| **In&nbsp;this&nbsp;repo** | [`GraphAlgorithms.minimumSpanningForest`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) (Kruskal), [`GraphStructureAlgorithms.primMinimumSpanningForest`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent. |
 
 **Preconditions.** An undirected `WeightedGraph`; a directed one throws
 `IllegalArgumentException`. Negative weights, parallel edges and loops are allowed

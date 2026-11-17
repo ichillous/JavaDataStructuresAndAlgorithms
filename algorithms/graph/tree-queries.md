@@ -8,13 +8,13 @@ Two maintained classes answer pairwise and whole-tree questions on the repositor
 [TreeAlgorithms](../../src/main/java/io/github/ichillous/dsa/graphs/TreeAlgorithms.java)
 (`diameterPath`).
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You ask many questions about one fixed tree: lowest common ancestor, distance between two vertices, k-th ancestor, or the longest path. |
-| **Avoid it when** | The graph has a cycle or several components (the classes reject it) or the tree changes between queries. |
+| **Use&nbsp;it&nbsp;when** | You ask many questions about one fixed tree: lowest common ancestor, distance between two vertices, k-th ancestor, or the longest path. |
+| **Avoid&nbsp;it&nbsp;when** | The graph has a cycle or several components (the classes reject it) or the tree changes between queries. |
 | **Cost** | Build O(V log V); each LCA, distance or k-th-ancestor query O(log V); `diameterPath` O(V). |
-| **In this repo** | [`LowestCommonAncestor`](../../src/main/java/io/github/ichillous/dsa/graphs/LowestCommonAncestor.java), [`TreeAlgorithms.diameterPath`](../../src/main/java/io/github/ichillous/dsa/graphs/TreeAlgorithms.java) |
-| **In the JDK** | No direct equivalent. |
+| **In&nbsp;this&nbsp;repo** | [`LowestCommonAncestor`](../../src/main/java/io/github/ichillous/dsa/graphs/LowestCommonAncestor.java), [`TreeAlgorithms.diameterPath`](../../src/main/java/io/github/ichillous/dsa/graphs/TreeAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent. |
 
 **Preconditions.** The graph must be undirected, non-empty, connected and have
 exactly `V - 1` edges; anything else throws `IllegalArgumentException`. A

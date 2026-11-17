@@ -8,13 +8,13 @@ works on `long` with one overflow rule: the answer is exact or the method throws
 modulus up to `Long.MAX_VALUE`, including moduli above about 3 * 10^9 where a plain
 `a * b % m` silently overflows.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need a gcd, a modular inverse, a power modulo `m`, all primes up to a limit, or a primality verdict for a `long` |
-| **Avoid it when** | Values exceed 64 bits (use `BigInteger`) or you need many primes beyond 50,000,000 |
+| **Use&nbsp;it&nbsp;when** | You need a gcd, a modular inverse, a power modulo `m`, all primes up to a limit, or a primality verdict for a `long`. |
+| **Avoid&nbsp;it&nbsp;when** | Values exceed 64 bits (use `BigInteger`) or you need many primes beyond 50,000,000. |
 | **Cost** | `gcd`, `extendedGcd`, `modInverse` O(log min); `modPow` O(log e) multiplies; `primesUpTo(n)` O(n log log n); `isPrime` O(log n) per base |
-| **In this repo** | [NumberTheory](../../src/main/java/io/github/ichillous/dsa/algorithms/NumberTheory.java) |
-| **In the JDK** | `BigInteger.gcd`, `modPow`, `modInverse`, `isProbablePrime`; `Math.floorMod`, `Math.multiplyExact` |
+| **In&nbsp;this&nbsp;repo** | [NumberTheory](../../src/main/java/io/github/ichillous/dsa/algorithms/NumberTheory.java) |
+| **In&nbsp;the&nbsp;JDK** | `BigInteger.gcd`, `modPow`, `modInverse`, `isProbablePrime`; `Math.floorMod`, `Math.multiplyExact` |
 
 The JDK already has `BigInteger` (`gcd`, `modPow`, `modInverse`, `isProbablePrime`)
 and the `Math.*Exact` family. Prefer them when you need arbitrary size or a

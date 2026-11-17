@@ -6,13 +6,13 @@ maintained
 sorts an `int[]` in ascending order in place, rejects null and accepts empty and
 one-element arrays. Equal values keep their relative order.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | The array is tiny or nearly sorted, or you insert a few values into an already sorted array |
-| **Avoid it when** | The array is large and far from sorted, such as a reversed array |
+| **Use&nbsp;it&nbsp;when** | The array is tiny or nearly sorted, or you insert a few values into an already sorted array. |
+| **Avoid&nbsp;it&nbsp;when** | The array is large and far from sorted, such as a reversed array. |
 | **Cost** | O(n²) worst case; O(n) on sorted input; O(1) extra space; stable |
-| **In this repo** | [`SortAlgorithms.insertionSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
-| **In the JDK** | `Arrays.sort(int[])` for the whole array; `ArrayList.add(int, E)` shifts later elements right, the same move as one insertion step |
+| **In&nbsp;this&nbsp;repo** | [`SortAlgorithms.insertionSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `Arrays.sort(int[])` for the whole array; `ArrayList.add(int, E)` shifts later elements right, the same move as one insertion step |
 
 ## The invariant
 

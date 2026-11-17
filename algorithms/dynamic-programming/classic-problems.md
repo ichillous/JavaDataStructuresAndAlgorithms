@@ -9,13 +9,13 @@ dependencies are ready, and reading the answer from a known cell. The maintained
 implements six of them. For the general method see the
 [overview](overview.md) and [problem set](problems.md).
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need exact answers for counting, segmentation, bracketing, tours or weighted scheduling |
-| **Avoid it when** | A simple greedy rule is proven, or `n` is past the exponential limit (16 cities for Held-Karp) |
+| **Use&nbsp;it&nbsp;when** | You need exact answers for counting, segmentation, bracketing, tours or weighted scheduling. |
+| **Avoid&nbsp;it&nbsp;when** | A simple greedy rule is proven, or `n` is past the exponential limit (16 cities for Held-Karp). |
 | **Cost** | From O(n log n) for weighted intervals to O(2^n n^2) for Held-Karp; see [Costs](#costs) |
-| **In this repo** | [`DynamicProgrammingClassics`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) |
-| **In the JDK** | No direct equivalent; `Math.addExact` and `Math.multiplyExact` for overflow-safe sums |
+| **In&nbsp;this&nbsp;repo** | [`DynamicProgrammingClassics`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgrammingClassics.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; `Math.addExact` and `Math.multiplyExact` for overflow-safe sums |
 
 Preconditions and conventions shared by all six methods: null arguments are
 rejected, inputs are never modified, returned lists are immutable, and results

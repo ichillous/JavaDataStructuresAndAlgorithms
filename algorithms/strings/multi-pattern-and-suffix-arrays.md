@@ -10,13 +10,13 @@ no case folding or normalization happens. Both classes copy their input and
 never mutate it. Aho-Corasick rejects empty patterns, collapses duplicates in the trie and
 accepts an empty pattern set (it then never matches).
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Many fixed patterns must be found in one pass over a text (Aho–Corasick), or a fixed text will answer many substring questions: occurrences, distinct substrings, the longest repeated substring (suffix array). |
-| **Avoid it when** | There is one pattern (use `String.indexOf` or KMP), the pattern set changes often (the automaton is immutable), or the text changes (rebuild the suffix array). |
+| **Use&nbsp;it&nbsp;when** | Many fixed patterns must be found in one pass over a text (Aho–Corasick), or a fixed text will answer many substring questions: occurrences, distinct substrings, the longest repeated substring (suffix array). |
+| **Avoid&nbsp;it&nbsp;when** | There is one pattern (use `String.indexOf` or KMP), the pattern set changes often (the automaton is immutable), or the text changes (rebuild the suffix array). |
 | **Cost** | Aho–Corasick: O(P) expected build, O(t + k) expected search. Suffix array: O(n log n) build, O(p log n + k log k) per `occurrences` call. |
-| **In this repo** | [`AhoCorasick`](../../src/main/java/io/github/ichillous/dsa/algorithms/AhoCorasick.java) (`findAll`), [`SuffixArray`](../../src/main/java/io/github/ichillous/dsa/algorithms/SuffixArray.java) (`suffixes`, `lcp`, `occurrences`) |
-| **In the JDK** | `java.util.regex.Pattern` for a few alternatives; no direct equivalent for either structure |
+| **In&nbsp;this&nbsp;repo** | [`AhoCorasick`](../../src/main/java/io/github/ichillous/dsa/algorithms/AhoCorasick.java) (`findAll`), [`SuffixArray`](../../src/main/java/io/github/ichillous/dsa/algorithms/SuffixArray.java) (`suffixes`, `lcp`, `occurrences`) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.regex.Pattern` for a few alternatives; no direct equivalent for either structure |
 
 ## The invariants
 

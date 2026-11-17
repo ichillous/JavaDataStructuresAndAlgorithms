@@ -5,13 +5,13 @@ shows three useful ways to avoid recomputing array work. All methods reject null
 and leave input unchanged. Choose the method by the invariant you can prove,
 rather than forcing every array problem into recursion.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You can state an invariant that lets one pass reuse earlier work: a merge counts cross pairs, a running sum extends a range, a deque keeps useful candidates |
-| **Avoid it when** | The invariant needs rescanning the array for each answer, or the input violates the precondition (a window longer than the array) |
+| **Use&nbsp;it&nbsp;when** | You can state an invariant that lets one pass reuse earlier work: a merge counts cross pairs, a running sum extends a range, a deque keeps useful candidates. |
+| **Avoid&nbsp;it&nbsp;when** | The invariant needs rescanning the array for each answer, or the input violates the precondition (a window longer than the array). |
 | **Cost** | O(n log n) for the inversion count, O(n) for Kadane and for the sliding-window deque |
-| **In this repo** | [`SequenceAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/SequenceAlgorithms.java) |
-| **In the JDK** | `ArrayDeque` for the window, `Math.addExact` and `Math.toIntExact` for checked counts; no direct equivalent of the three algorithms |
+| **In&nbsp;this&nbsp;repo** | [`SequenceAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/SequenceAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `ArrayDeque` for the window, `Math.addExact` and `Math.toIntExact` for checked counts; no direct equivalent of the three algorithms |
 
 ## Count inversions during a merge
 

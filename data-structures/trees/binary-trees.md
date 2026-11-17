@@ -2,13 +2,13 @@
 
 A binary tree allows at most two children per node, conventionally called left and right. This describes branching, not key ordering, completeness or balance. A binary search tree adds an ordering rule; a heap adds a different rule.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You model a hierarchy with at most two children per node, such as an expression tree, and need to name traversal orders precisely |
-| **Avoid it when** | You need ordered lookup without an ordering rule; a plain binary tree gives no shortcut, so use a [search tree](binary-search-trees.md) |
+| **Use&nbsp;it&nbsp;when** | You model a hierarchy with at most two children per node, such as an expression tree, and need to name traversal orders precisely. |
+| **Avoid&nbsp;it&nbsp;when** | You need ordered lookup without an ordering rule; a plain binary tree gives no shortcut, so use a [search tree](binary-search-trees.md). |
 | **Cost** | A full traversal visits n nodes in O(n); depth-first recursion uses O(h) call frames for height h |
-| **In this repo** | [`BinarySearchTree#inOrder`](../../src/main/java/io/github/ichillous/dsa/structures/BinarySearchTree.java), the only traversal the library exposes |
-| **In the JDK** | No direct equivalent: there is no public general binary-tree node class |
+| **In&nbsp;this&nbsp;repo** | [`BinarySearchTree#inOrder`](../../src/main/java/io/github/ichillous/dsa/structures/BinarySearchTree.java), the only traversal the library exposes |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent: there is no public general binary-tree node class |
 
 ```text
        A

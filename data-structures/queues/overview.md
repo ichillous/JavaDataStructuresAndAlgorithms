@@ -2,13 +2,13 @@
 
 A FIFO queue adds at the back and removes at the front. Use it when earlier scheduled work should run first: level-order traversal, unweighted shortest paths, buffers or simple task processing.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Earlier arrivals must be handled first: breadth-first traversal, buffering, simple task processing. |
-| **Avoid it when** | You need the most urgent item first (a priority queue) or the most recent first (a stack). |
+| **Use&nbsp;it&nbsp;when** | Earlier arrivals must be handled first: breadth-first traversal, buffering, simple task processing. |
+| **Avoid&nbsp;it&nbsp;when** | You need the most urgent item first (a priority queue) or the most recent first (a stack). |
 | **Cost** | `enqueue` O(1) amortized; `dequeue`, `peek` O(1); `clear` O(capacity). |
-| **In this repo** | [`ArrayQueue`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayQueue.java) |
-| **In the JDK** | `java.util.ArrayDeque` through the `Queue` methods `offer`, `poll` and `peek`. |
+| **In&nbsp;this&nbsp;repo** | [`ArrayQueue`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayQueue.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.ArrayDeque` through the `Queue` methods `offer`, `poll` and `peek`. |
 
 ```text
 enqueue A, B, C       dequeue -> A

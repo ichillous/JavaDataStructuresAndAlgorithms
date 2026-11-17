@@ -10,13 +10,13 @@ A useful design sequence is: define one state in a sentence, derive its recurren
 identify base cases, choose an order that satisfies dependencies, then decide what
 must be retained. Writing loops before the state often hides a different problem.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | A solution is built from smaller states that recur, and one state fits in a sentence |
-| **Avoid it when** | A proven greedy rule exists, or the state space (such as a huge numeric capacity) will not fit in memory |
+| **Use&nbsp;it&nbsp;when** | A solution is built from smaller states that recur, and one state fits in a sentence. |
+| **Avoid&nbsp;it&nbsp;when** | A proven greedy rule exists, or the state space (such as a huge numeric capacity) will not fit in memory. |
 | **Cost** | Number of states times work per state, for example O((c + 1)(a + 1)) time and O(a + 1) space for coin change |
-| **In this repo** | [`DynamicProgramming.minimumCoins`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java) and its siblings; the [family guide](README.md) maps problems to state shapes |
-| **In the JDK** | No direct equivalent; use `long`, `Math.addExact` and plain arrays for tables |
+| **In&nbsp;this&nbsp;repo** | [`DynamicProgramming.minimumCoins`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java) and its siblings; the [family guide](README.md) maps problems to state shapes |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; use `long`, `Math.addExact` and plain arrays for tables |
 
 <!-- visual:generated coin-dp -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/coin-dp-dark.svg"><img src="../../docs/visuals/assets/coin-dp.svg" alt="Compare every final coin; the largest-first greedy choice loses." width="520"></picture>

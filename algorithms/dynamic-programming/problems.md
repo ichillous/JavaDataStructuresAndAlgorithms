@@ -5,13 +5,13 @@ These examples use the maintained
 Inputs are not modified; null inputs are rejected. Distinguish a returned optimum
 value from a reconstructed solution: these methods return values or lengths.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need the best value over a sequence or two strings: knapsack, LCS, edit distance, LIS |
-| **Avoid it when** | You need every optimal solution, or the numeric capacity or string lengths make the table too large |
+| **Use&nbsp;it&nbsp;when** | You need the best value over a sequence or two strings: knapsack, LCS, edit distance, LIS. |
+| **Avoid&nbsp;it&nbsp;when** | You need every optimal solution, or the numeric capacity or string lengths make the table too large. |
 | **Cost** | O(nW) for knapsack, O(mn) for LCS and edit distance, O(n log n) for LIS |
-| **In this repo** | [`DynamicProgramming`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java): `knapsack01`, `longestCommonSubsequence`, `editScript`, `longestIncreasingSubsequenceLength` |
-| **In the JDK** | No direct equivalent; `Arrays.binarySearch` helps with the LIS tails array |
+| **In&nbsp;this&nbsp;repo** | [`DynamicProgramming`](../../src/main/java/io/github/ichillous/dsa/algorithms/DynamicProgramming.java): `knapsack01`, `longestCommonSubsequence`, `editScript`, `longestIncreasingSubsequenceLength` |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; `Arrays.binarySearch` helps with the LIS tails array |
 
 <!-- visual:generated knapsack-state -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/knapsack-state-dark.svg"><img src="../../docs/visuals/assets/knapsack-state.svg" alt="Sweep capacities backward so an item cannot reuse itself." width="520"></picture>

@@ -7,13 +7,13 @@ than a single local choice. The maintained
 returns immutable results and limits input sizes because it materializes every
 solution. Enumeration can be expensive even when each individual test is cheap.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need valid combinations or one witness under constraints that can reject a partial solution early |
-| **Avoid it when** | Subproblems overlap (use DP) or a proven greedy rule exists |
+| **Use&nbsp;it&nbsp;when** | You need valid combinations or one witness under constraints that can reject a partial solution early. |
+| **Avoid&nbsp;it&nbsp;when** | Subproblems overlap (use DP) or a proven greedy rule exists. |
 | **Cost** | Exponential in the worst case: O(n · n!) for the permutation and queens examples |
-| **In this repo** | [`Backtracking.uniquePermutations`](../../src/main/java/io/github/ichillous/dsa/algorithms/Backtracking.java) and `nQueens` |
-| **In the JDK** | No direct equivalent; `ArrayList` as the path, copied at each solution |
+| **In&nbsp;this&nbsp;repo** | [`Backtracking.uniquePermutations`](../../src/main/java/io/github/ichillous/dsa/algorithms/Backtracking.java) and `nQueens` |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; `ArrayList` as the path, copied at each solution |
 
 <!-- visual:generated queens-backtracking -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/queens-backtracking-dark.svg"><img src="../../docs/visuals/assets/queens-backtracking.svg" alt="Trace failed placements before reaching the first valid board." width="520"></picture>

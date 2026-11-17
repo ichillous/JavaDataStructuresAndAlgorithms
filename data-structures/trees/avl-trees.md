@@ -4,13 +4,13 @@
 
 This bounds height by O(log n), giving O(log n) worst-case search, insertion and deletion. The tree remains a set: null keys are rejected, and `compareTo == 0` means duplicate.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Lookups dominate and you want the shallowest guaranteed height, with membership and sorted traversal only |
-| **Avoid it when** | You need a map, nearest-key queries or rank and select; use [`RedBlackTreeMap`](red-black-trees.md) or the JDK's `TreeMap` |
+| **Use&nbsp;it&nbsp;when** | Lookups dominate and you want the shallowest guaranteed height, with membership and sorted traversal only. |
+| **Avoid&nbsp;it&nbsp;when** | You need a map, nearest-key queries or rank and select; use [`RedBlackTreeMap`](red-black-trees.md) or the JDK's `TreeMap`. |
 | **Cost** | O(log n) worst case for `add`, `remove` and `contains`; `height()` is O(1); `inOrder()` is O(n) |
-| **In this repo** | [`AvlTree`](../../src/main/java/io/github/ichillous/dsa/structures/AvlTree.java) |
-| **In the JDK** | No direct equivalent: `java.util.TreeSet` is red-black based |
+| **In&nbsp;this&nbsp;repo** | [`AvlTree`](../../src/main/java/io/github/ichillous/dsa/structures/AvlTree.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent: `java.util.TreeSet` is red-black based |
 
 <!-- visual:generated avl-rotation -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/avl-rotation-dark.svg"><img src="../../docs/visuals/assets/avl-rotation.svg" alt="Inserting 30, 20 and 10 produces a left-heavy chain. A right rotation makes 20 the root with children 10 and 30, preserving in-order traversal and restoring height one." width="520"></picture>

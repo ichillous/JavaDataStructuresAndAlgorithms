@@ -6,13 +6,13 @@ end of the remaining array. The maintained
 method sorts ascending in the supplied `int[]`, rejects null and accepts empty
 input. It uses neither an auxiliary heap object nor a recursion stack.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need a worst-case O(n log n) bound and O(1) extra space for an `int[]` |
-| **Avoid it when** | You need stability, or you sort objects by a key: use a stable object sort |
+| **Use&nbsp;it&nbsp;when** | You need a worst-case O(n log n) bound and O(1) extra space for an `int[]`. |
+| **Avoid&nbsp;it&nbsp;when** | You need stability, or you sort objects by a key: use a stable object sort. |
 | **Cost** | O(n log n) worst case; O(n) heap build; O(1) extra space; unstable |
-| **In this repo** | [`SortAlgorithms.heapSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
-| **In the JDK** | No heapsort method; `PriorityQueue` is a heap, and `Arrays.sort` is the general default |
+| **In&nbsp;this&nbsp;repo** | [`SortAlgorithms.heapSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | No heapsort method; `PriorityQueue` is a heap, and `Arrays.sort` is the general default |
 
 For a zero-based array, the children of index `i` are `2*i + 1` and `2*i + 2` when
 those positions exist. A max-heap requires each parent to be at least as large as

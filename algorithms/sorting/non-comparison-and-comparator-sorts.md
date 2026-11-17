@@ -15,13 +15,13 @@ anything. Counting sort requires `max - min + 1` to be at most
 `COUNTING_SORT_MAX_RANGE` (2^20) and throws `IllegalArgumentException` otherwise,
 leaving the array unchanged.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Integer keys fall in a small range (`countingSort`), keys span the full `int` range (`radixSort`), or objects need a stable sort by a key (`mergeSort(T[], Comparator)`) |
-| **Avoid it when** | The value range is huge and the count is small (counting), or the keys are not integers (radix) |
+| **Use&nbsp;it&nbsp;when** | Integer keys fall in a small range (`countingSort`), keys span the full `int` range (`radixSort`), or objects need a stable sort by a key (`mergeSort(T[], Comparator)`). |
+| **Avoid&nbsp;it&nbsp;when** | The value range is huge and the count is small (counting), or the keys are not integers (radix). |
 | **Cost** | Counting O(n + r) time and O(r) space; radix O(n) time and O(n) space; Comparator merge sort O(n log n) comparisons |
-| **In this repo** | [`SortAlgorithms.countingSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java), `radixSort`, `mergeSort(T[], Comparator)` |
-| **In the JDK** | No counting or radix sort; `Arrays.sort(T[], Comparator)` and `List.sort` are the stable object sorts |
+| **In&nbsp;this&nbsp;repo** | [`SortAlgorithms.countingSort`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java), `radixSort`, `mergeSort(T[], Comparator)` |
+| **In&nbsp;the&nbsp;JDK** | No counting or radix sort; `Arrays.sort(T[], Comparator)` and `List.sort` are the stable object sorts |
 
 ## Why these can beat n log n
 

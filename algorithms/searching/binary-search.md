@@ -5,13 +5,13 @@ Use binary search when an array is already in ascending order. The maintained
 does not scan to validate sortedness: that would turn an O(log n) query into O(n).
 Methods reject null, accept an empty array and never modify input.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | The data is in ascending order, or a yes/no question flips from false to true exactly once, and you query repeatedly. |
-| **Avoid it when** | The data is unsorted, queried once (a scan is cheaper than sorting), or changes with many inserts into an array. |
+| **Use&nbsp;it&nbsp;when** | The data is in ascending order, or a yes/no question flips from false to true exactly once, and you query repeatedly. |
+| **Avoid&nbsp;it&nbsp;when** | The data is unsorted, queried once (a scan is cheaper than sorting), or changes with many inserts into an array. |
 | **Cost** | O(log n) per query and O(1) extra space; O(n log n) to sort first. |
-| **In this repo** | [`lowerBound`, `upperBound`, `binarySearch` and `firstTrue`](../../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) |
-| **In the JDK** | `Arrays#binarySearch` and `Collections#binarySearch` |
+| **In&nbsp;this&nbsp;repo** | [`lowerBound`, `upperBound`, `binarySearch` and `firstTrue`](../../src/main/java/io/github/ichillous/dsa/algorithms/SearchAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `Arrays#binarySearch` and `Collections#binarySearch` |
 
 | Method | Meaning when the target is absent |
 | --- | --- |

@@ -2,13 +2,13 @@
 
 The library does not ship a singly linked list. The executable examples below use `java.util.LinkedList`, which is doubly linked, so the singly linked behavior is shown by the traces and the figure. A singly linked node stores a value and a reference to its successor. The sequence begins at `head` and ends at the first null successor. Maintaining a `tail` makes append O(1), but there is still no backward link.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You only walk forward and edit at the head, or you keep a tail for appends and never remove from the back. |
-| **Avoid it when** | You remove from the back, walk backward or index by position; a doubly linked list or an array fits better. |
+| **Use&nbsp;it&nbsp;when** | You only walk forward and edit at the head, or you keep a tail for appends and never remove from the back. |
+| **Avoid&nbsp;it&nbsp;when** | You remove from the back, walk backward or index by position; a doubly linked list or an array fits better. |
 | **Cost** | Head add/remove O(1); append with a tail O(1); remove the tail or find an indexed node O(n). |
-| **In this repo** | No singly linked class; the maintained list is [`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java). |
-| **In the JDK** | No direct equivalent: `java.util.LinkedList` is doubly linked. |
+| **In&nbsp;this&nbsp;repo** | No singly linked class; the maintained list is [`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java). |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent: `java.util.LinkedList` is doubly linked. |
 
 ## Trace removal
 

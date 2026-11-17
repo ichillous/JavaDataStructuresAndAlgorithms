@@ -14,13 +14,13 @@ production code can pass `ThreadLocalRandom.current()` or a `SecureRandom`.
 non-negative weights with a positive finite sum. `shuffle` mutates its array; the
 other two never change their inputs.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need a uniform sample from a stream, a uniform shuffle, or many weighted draws from fixed weights |
-| **Avoid it when** | Weights change between draws (rebuild cost), or randomness must be unpredictable (pass a `SecureRandom`, not a seeded generator) |
+| **Use&nbsp;it&nbsp;when** | You need a uniform sample from a stream, a uniform shuffle, or many weighted draws from fixed weights. |
+| **Avoid&nbsp;it&nbsp;when** | Weights change between draws (rebuild cost), or randomness must be unpredictable (pass a `SecureRandom`, not a seeded generator). |
 | **Cost** | `reservoirSample` O(n) time, O(k) space; `shuffle` O(n); `AliasTable` O(n) build, O(1) per draw |
-| **In this repo** | [Sampling](../../src/main/java/io/github/ichillous/dsa/algorithms/Sampling.java), [AliasTable](../../src/main/java/io/github/ichillous/dsa/algorithms/AliasTable.java) |
-| **In the JDK** | `Collections.shuffle(List, Random)`, `java.util.random.RandomGenerator`, `ThreadLocalRandom`; no direct equivalent for reservoir sampling or the alias method |
+| **In&nbsp;this&nbsp;repo** | [Sampling](../../src/main/java/io/github/ichillous/dsa/algorithms/Sampling.java), [AliasTable](../../src/main/java/io/github/ichillous/dsa/algorithms/AliasTable.java) |
+| **In&nbsp;the&nbsp;JDK** | `Collections.shuffle(List, Random)`, `java.util.random.RandomGenerator`, `ThreadLocalRandom`; no direct equivalent for reservoir sampling or the alias method |
 
 ## Which tool when
 

@@ -2,13 +2,13 @@
 
 A topological order lists the vertices of a directed graph so that every edge `u -> v` has `u` before `v`. It exists exactly when the graph has no directed cycle. [`GraphAlgorithms.topologicalSort`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) implements Kahn's algorithm on the repository's fixed-vertex [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java).
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Work has prerequisites: build steps, course plans, spreadsheet cells, any "A before B" rules that must all hold. |
-| **Avoid it when** | The graph is undirected or may contain a cycle you need to explain (use `directedCycle` for the witness), or you only need reachability. |
+| **Use&nbsp;it&nbsp;when** | Work has prerequisites: build steps, course plans, spreadsheet cells, any "A before B" rules that must all hold. |
+| **Avoid&nbsp;it&nbsp;when** | The graph is undirected or may contain a cycle you need to explain (use `directedCycle` for the witness), or you only need reachability. |
 | **Cost** | O(V + E) time and auxiliary space. |
-| **In this repo** | [`GraphAlgorithms.topologicalSort`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java); the witness is [`GraphStructureAlgorithms.directedCycle`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java) |
-| **In the JDK** | no direct equivalent; `ArrayDeque` or `PriorityQueue` holds the ready vertices |
+| **In&nbsp;this&nbsp;repo** | [`GraphAlgorithms.topologicalSort`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java); the witness is [`GraphStructureAlgorithms.directedCycle`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent; `ArrayDeque` or `PriorityQueue` holds the ready vertices |
 
 ## Purpose and preconditions
 

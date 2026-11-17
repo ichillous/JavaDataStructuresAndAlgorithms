@@ -2,13 +2,13 @@
 
 A stack is last in, first out: `push` adds a value at the top, `peek` observes it, and `pop` removes it. Use this discipline for nested work such as parentheses, expression evaluation, undo history or explicit traversal frames.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | The most recent unfinished item must be handled first: nested brackets, undo history, explicit DFS or traversal frames. |
-| **Avoid it when** | Items must leave in arrival order, or you need to read or change items below the top. |
+| **Use&nbsp;it&nbsp;when** | The most recent unfinished item must be handled first: nested brackets, undo history, explicit DFS or traversal frames. |
+| **Avoid&nbsp;it&nbsp;when** | Items must leave in arrival order, or you need to read or change items below the top. |
 | **Cost** | `push` O(1) amortized, `pop` and `peek` O(1); clear O(n). |
-| **In this repo** | [`ArrayStack`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayStack.java) |
-| **In the JDK** | `java.util.ArrayDeque` through `push`, `pop` and `peek` (the `Deque` interface). |
+| **In&nbsp;this&nbsp;repo** | [`ArrayStack`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayStack.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.ArrayDeque` through `push`, `pop` and `peek` (the `Deque` interface). |
 
 ```text
 push A   push B   pop -> B

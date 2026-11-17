@@ -2,13 +2,13 @@
 
 A binary min heap keeps the smallest value at its root. Every parent compares no greater than its children, but siblings and separate subtrees need not be ordered relative to each other. This is enough to repeatedly select the minimum without sorting the whole collection.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You repeatedly need the smallest (or largest) of a changing collection: scheduling, event simulation, Dijkstra, the best `k` of a stream. |
-| **Avoid it when** | You need sorted iteration, searching for an arbitrary value, or ranks; a heap orders only parent against child. |
+| **Use&nbsp;it&nbsp;when** | You repeatedly need the smallest (or largest) of a changing collection: scheduling, event simulation, Dijkstra, the best `k` of a stream. |
+| **Avoid&nbsp;it&nbsp;when** | You need sorted iteration, searching for an arbitrary value, or ranks; a heap orders only parent against child. |
 | **Cost** | Peek O(1); add and remove O(log n); build from n values O(n); space O(n). |
-| **In this repo** | [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) |
-| **In the JDK** | `java.util.PriorityQueue` |
+| **In&nbsp;this&nbsp;repo** | [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.PriorityQueue` |
 
 ```text
         1             array: [1, 3, 2, 4, 9, 7]

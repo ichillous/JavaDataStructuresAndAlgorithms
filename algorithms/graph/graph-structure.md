@@ -6,13 +6,13 @@ is, and whether one walk can use every edge once. All are in the maintained
 [GraphStructureAlgorithms](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java)
 and are iterative, so a 100,000-vertex path does not overflow the call stack.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need to know which vertices hold a graph together, whether it splits into two sides, where a cycle is, or whether one walk can use every edge once. |
-| **Avoid it when** | You need distances (use [shortest paths](shortest-paths.md)) or only reachability (use [BFS](bfs.md) or [DFS](dfs.md)). |
+| **Use&nbsp;it&nbsp;when** | You need to know which vertices hold a graph together, whether it splits into two sides, where a cycle is, or whether one walk can use every edge once. |
+| **Avoid&nbsp;it&nbsp;when** | You need distances (use [shortest paths](shortest-paths.md)) or only reachability (use [BFS](bfs.md) or [DFS](dfs.md)). |
 | **Cost** | O(V + E) time for every method here; Euler paths are O(V + E) expected. |
-| **In this repo** | [`GraphStructureAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java): `articulationPoints`, `bipartition`, `oddCycle`, `directedCycle`, `eulerianPath` |
-| **In the JDK** | No direct equivalent: `java.util` has no graph classes. |
+| **In&nbsp;this&nbsp;repo** | [`GraphStructureAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphStructureAlgorithms.java): `articulationPoints`, `bipartition`, `oddCycle`, `directedCycle`, `eulerianPath` |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent: `java.util` has no graph classes. |
 
 **Preconditions.** Articulation points, bipartition and odd cycles need an
 undirected `Graph`; the directed-cycle search needs a directed one; the Euler path

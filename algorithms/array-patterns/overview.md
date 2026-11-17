@@ -8,13 +8,13 @@ modifies its input and returns fresh or immutable results. Ranges are half-open
 [GreedyAlgorithms.Interval](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java),
 so they are non-empty and touching endpoints are allowed.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | One left-to-right scan can replace nested loops: pair sums in sorted data, longest windows, next-greater queries, many range updates, overlapping intervals |
-| **Avoid it when** | The precondition fails (unsorted input for two pointers) or updates and queries interleave, which needs a tree structure rather than one batch pass |
+| **Use&nbsp;it&nbsp;when** | One left-to-right scan can replace nested loops: pair sums in sorted data, longest windows, next-greater queries, many range updates, overlapping intervals. |
+| **Avoid&nbsp;it&nbsp;when** | The precondition fails (unsorted input for two pointers) or updates and queries interleave, which needs a tree structure rather than one batch pass. |
 | **Cost** | O(n) for the scans and O(n + u) for `u` range updates; O(n log n) where intervals must be sorted first |
-| **In this repo** | [`ArrayPatterns`](../../src/main/java/io/github/ichillous/dsa/algorithms/ArrayPatterns.java) |
-| **In the JDK** | `ArrayDeque` as a stack, `Arrays.parallelPrefix` for prefix sums, `Arrays.sort` for interval order; no direct equivalent of the two-pointer or window scans |
+| **In&nbsp;this&nbsp;repo** | [`ArrayPatterns`](../../src/main/java/io/github/ichillous/dsa/algorithms/ArrayPatterns.java) |
+| **In&nbsp;the&nbsp;JDK** | `ArrayDeque` as a stack, `Arrays.parallelPrefix` for prefix sums, `Arrays.sort` for interval order; no direct equivalent of the two-pointer or window scans |
 
 | Pattern | Method | Precondition |
 | --- | --- | --- |

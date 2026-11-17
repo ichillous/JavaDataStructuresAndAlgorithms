@@ -2,13 +2,13 @@
 
 An array stores a fixed number of values addressed by integer index. Use an array when positions matter and size is known; use a dynamic array when the sequence must grow. Contiguous storage makes indexed reads cheap, but inserting at the front still moves later elements.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Positions matter and you read or replace by index far more often than you insert or remove in the middle. |
-| **Avoid it when** | You mostly insert or remove near the front or middle of a long sequence, or you need to hold a node and splice around it. |
+| **Use&nbsp;it&nbsp;when** | Positions matter and you read or replace by index far more often than you insert or remove in the middle. |
+| **Avoid&nbsp;it&nbsp;when** | You mostly insert or remove near the front or middle of a long sequence, or you need to hold a node and splice around it. |
 | **Cost** | Indexed read and replace O(1); insert or remove at an index O(n); append O(1) amortized with a growable array. |
-| **In this repo** | [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) |
-| **In the JDK** | `java.util.ArrayList` for a growable sequence; plain `int[]` or `T[]` for a fixed length. |
+| **In&nbsp;this&nbsp;repo** | [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.ArrayList` for a growable sequence; plain `int[]` or `T[]` for a fixed length. |
 
 A Java array has indices `0..length-1`. A range `[from, to)` includes `from`, excludes `to`, and has `to - from` elements. This convention makes the empty range `[i, i)` natural and lets adjacent ranges join without overlap.
 

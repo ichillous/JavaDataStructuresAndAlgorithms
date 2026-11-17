@@ -5,13 +5,13 @@ choosing a search strategy. Maintained APIs live in
 [BacktrackingPuzzles](../../src/main/java/io/github/ichillous/dsa/algorithms/BacktrackingPuzzles.java);
 small complete enumerations are covered in the [overview](overview.md).
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need one valid solution to a constraint puzzle (Sudoku) or a subset hitting an exact target |
-| **Avoid it when** | A pruning rule's assumption (such as nonnegative values) is not part of the input contract |
+| **Use&nbsp;it&nbsp;when** | You need one valid solution to a constraint puzzle (Sudoku) or a subset hitting an exact target. |
+| **Avoid&nbsp;it&nbsp;when** | A pruning rule's assumption (such as nonnegative values) is not part of the input contract. |
 | **Cost** | About O(9^e) nodes for `e` empty Sudoku cells; expected O(2^(n/2)) for subset sum, n at most 30 |
-| **In this repo** | [`BacktrackingPuzzles.solveSudoku`](../../src/main/java/io/github/ichillous/dsa/algorithms/BacktrackingPuzzles.java) and `subsetSum` |
-| **In the JDK** | `HashMap` for the sum lookup; `Math.addExact` and `long` for sums |
+| **In&nbsp;this&nbsp;repo** | [`BacktrackingPuzzles.solveSudoku`](../../src/main/java/io/github/ichillous/dsa/algorithms/BacktrackingPuzzles.java) and `subsetSum` |
+| **In&nbsp;the&nbsp;JDK** | `HashMap` for the sum lookup; `Math.addExact` and `long` for sums |
 
 ## Sudoku: preserve givens, propagate legal choices
 

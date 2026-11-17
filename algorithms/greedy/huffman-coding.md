@@ -9,13 +9,13 @@ be, and `canonicalCodes` turns lengths into actual bit strings. Splitting them
 matches real formats such as DEFLATE, which store only the lengths and rebuild
 the codes on both sides.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You know symbol frequencies and want the shortest prefix code with whole-bit codewords |
-| **Avoid it when** | Frequencies are unknown or drifting (use an adaptive scheme), or fractional bits per symbol matter |
+| **Use&nbsp;it&nbsp;when** | You know symbol frequencies and want the shortest prefix code with whole-bit codewords. |
+| **Avoid&nbsp;it&nbsp;when** | Frequencies are unknown or drifting (use an adaptive scheme), or fractional bits per symbol matter. |
 | **Cost** | O(n log n) time, O(n) space for the lengths |
-| **In this repo** | [`GreedyAlgorithms.huffmanCodeLengths`](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) and `canonicalCodes` |
-| **In the JDK** | `java.util.zip.Deflater` and `Inflater` for ready-made compression; `PriorityQueue` for the merge loop |
+| **In&nbsp;this&nbsp;repo** | [`GreedyAlgorithms.huffmanCodeLengths`](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) and `canonicalCodes` |
+| **In&nbsp;the&nbsp;JDK** | `java.util.zip.Deflater` and `Inflater` for ready-made compression; `PriorityQueue` for the merge loop |
 
 Preconditions: frequencies are `long` values that are at least 0 (negative values
 throw `IllegalArgumentException`), and null arrays are rejected. Inputs are never

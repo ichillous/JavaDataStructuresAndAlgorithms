@@ -5,13 +5,13 @@ Every sort in this repository lives in
 This page compares them with the JDK sorts you would normally call, so you can pick
 one by the properties you need rather than by name.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You must choose between the repository sorts and the JDK sorts for a concrete input |
-| **Avoid it when** | You only need the default: call `Arrays.sort` for primitives and `List.sort` for objects |
+| **Use&nbsp;it&nbsp;when** | You must choose between the repository sorts and the JDK sorts for a concrete input. |
+| **Avoid&nbsp;it&nbsp;when** | You only need the default: call `Arrays.sort` for primitives and `List.sort` for objects. |
 | **Cost** | From O(n) (radix) to O(n²) (insertion, bubble); see the table below |
-| **In this repo** | [`SortAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
-| **In the JDK** | `Arrays.sort`, `List.sort`, `Arrays.parallelSort` |
+| **In&nbsp;this&nbsp;repo** | [`SortAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) |
+| **In&nbsp;the&nbsp;JDK** | `Arrays.sort`, `List.sort`, `Arrays.parallelSort` |
 
 <!-- visual:generated sort-stability | A stable sort keeps the tag order of equal keys; an unstable outcome may not. Stability is the property most often needed when sorting records. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/sort-stability-dark.svg"><img src="../../docs/visuals/assets/sort-stability.svg" alt="Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys." width="520"></picture>

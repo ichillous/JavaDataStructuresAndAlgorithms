@@ -2,13 +2,13 @@
 
 [`Trie`](../../src/main/java/io/github/ichillous/dsa/structures/Trie.java) owns its nodes and exposes word operations rather than mutable node references. Ordered child maps give deterministic suggestions; iterative traversal avoids one Java call frame per character.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need to know exactly how a trie inserts, prunes on delete and collects suggestions with a limit. |
-| **Avoid it when** | You want a high-level overview first; start with [tries](overview.md). |
+| **Use&nbsp;it&nbsp;when** | You need to know exactly how a trie inserts, prunes on delete and collects suggestions with a limit. |
+| **Avoid&nbsp;it&nbsp;when** | You want a high-level overview first; start with [tries](overview.md). |
 | **Cost** | Add, remove and lookup O(L log A); suggestions O(P log A) plus visited nodes and output characters. |
-| **In this repo** | [`Trie.add`, `remove` and `wordsWithPrefix`](../../src/main/java/io/github/ichillous/dsa/structures/Trie.java) |
-| **In the JDK** | no direct equivalent; see `TreeSet#tailSet` in [tries](overview.md) |
+| **In&nbsp;this&nbsp;repo** | [`Trie.add`, `remove` and `wordsWithPrefix`](../../src/main/java/io/github/ichillous/dsa/structures/Trie.java) |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent; see `TreeSet#tailSet` in [tries](overview.md) |
 
 <!-- visual:generated trie-pruning -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/trie-pruning-dark.svg"><img src="../../docs/visuals/assets/trie-pruning.svg" alt="The words car, cart and cat share a c-a prefix. Deleting car clears the r node&#x27;s word marker but preserves its t child for cart and the sibling t branch for cat." width="520"></picture>

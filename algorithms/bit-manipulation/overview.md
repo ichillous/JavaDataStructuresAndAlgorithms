@@ -2,13 +2,13 @@
 
 Use bit tricks when a small set, a flag word or a parity fact fits in one `int` or `long`: the whole value is copied, compared and combined in single operations. Everything here uses only the JDK (`Integer`, `Long`, `BitSet`), so there is no maintained class in this repository to link; each example below is a few statements checked with assertions.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | A set has at most 32 or 64 members, or you need parity, lowest-set-bit, or subset enumeration |
-| **Avoid it when** | Members are not small dense integers, or the set can outgrow one word (use `BitSet`) |
+| **Use&nbsp;it&nbsp;when** | A set has at most 32 or 64 members, or you need parity, lowest-set-bit, or subset enumeration. |
+| **Avoid&nbsp;it&nbsp;when** | Members are not small dense integers, or the set can outgrow one word (use `BitSet`). |
 | **Cost** | O(1) per test, set, clear or toggle; walking all subsets of a mask with `k` set bits takes `2^k` steps |
-| **In this repo** | No dedicated class; the subset-sum search in [BacktrackingPuzzles](../../src/main/java/io/github/ichillous/dsa/algorithms/BacktrackingPuzzles.java) identifies subsets by bit mask ([lesson](../backtracking/problems.md)) |
-| **In the JDK** | `Integer.bitCount`, `Integer.lowestOneBit`, `Integer.numberOfTrailingZeros`, `Long.rotateLeft`, `java.util.BitSet` |
+| **In&nbsp;this&nbsp;repo** | No dedicated class; the subset-sum search in [BacktrackingPuzzles](../../src/main/java/io/github/ichillous/dsa/algorithms/BacktrackingPuzzles.java) identifies subsets by bit mask ([lesson](../backtracking/problems.md)) |
+| **In&nbsp;the&nbsp;JDK** | `Integer.bitCount`, `Integer.lowestOneBit`, `Integer.numberOfTrailingZeros`, `Long.rotateLeft`, `java.util.BitSet` |
 
 ## Preconditions and edge cases
 

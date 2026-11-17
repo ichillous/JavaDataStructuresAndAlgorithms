@@ -2,13 +2,13 @@
 
 [`ArrayQueue`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayQueue.java) stores a head index and logical size separately from capacity. Element at logical offset `i` lives at `(head + i) % capacity`. The next enqueue writes at logical offset `size`.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need FIFO order, or both-end insertion and removal, without per-element node allocation. |
-| **Avoid it when** | You need arbitrary indexed insertion, or items ordered by priority. |
+| **Use&nbsp;it&nbsp;when** | You need FIFO order, or both-end insertion and removal, without per-element node allocation. |
+| **Avoid&nbsp;it&nbsp;when** | You need arbitrary indexed insertion, or items ordered by priority. |
 | **Cost** | Enqueue or add at either end O(1) amortized, O(n) when growing; remove and peek at the ends O(1); `clear` O(capacity). |
-| **In this repo** | [`ArrayQueue`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayQueue.java) and [`RingDeque`](../../src/main/java/io/github/ichillous/dsa/collections/RingDeque.java) |
-| **In the JDK** | `java.util.ArrayDeque` |
+| **In&nbsp;this&nbsp;repo** | [`ArrayQueue`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayQueue.java) and [`RingDeque`](../../src/main/java/io/github/ichillous/dsa/collections/RingDeque.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.ArrayDeque` |
 
 <!-- visual:generated queue-wrap -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/queue-wrap-dark.svg"><img src="../../docs/visuals/assets/queue-wrap.svg" alt="The head moves around the buffer while FIFO order stays intact." width="520"></picture>

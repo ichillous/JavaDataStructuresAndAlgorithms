@@ -2,13 +2,13 @@
 
 Use an open-addressed table when you want a hash map with no per-entry nodes: mappings live directly in two arrays and a collision moves to a nearby slot. The maintained [OpenAddressingHashMap](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) mirrors [ChainedHashMap](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java): keys and values are non-null, `put` and `remove` return the previous value, and null means absent. Read [collision resolution](collision-resolution.md) first for the chaining side of the comparison.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You want a hash map with no per-entry nodes, many small entries, and neighboring slots that share cache lines. |
-| **Avoid it when** | Hash codes are poor or adversarial (one long cluster), or you need to keep references to entries. A constant `hashCode` makes every operation O(n). |
+| **Use&nbsp;it&nbsp;when** | You want a hash map with no per-entry nodes, many small entries, and neighboring slots that share cache lines. |
+| **Avoid&nbsp;it&nbsp;when** | Hash codes are poor or adversarial (one long cluster), or you need to keep references to entries. A constant `hashCode` makes every operation O(n). |
 | **Cost** | Expected O(1) `get` and `remove`, expected amortized O(1) `put`, while the load stays at most 2/3; O(n) worst case; O(capacity) space. |
-| **In this repo** | [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) |
-| **In the JDK** | No general-purpose equivalent: `HashMap` chains collisions. `IdentityHashMap` is a reference-equality map (see [In real Java](#in-real-java)). |
+| **In&nbsp;this&nbsp;repo** | [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) |
+| **In&nbsp;the&nbsp;JDK** | No general-purpose equivalent: `HashMap` chains collisions. `IdentityHashMap` is a reference-equality map (see [In real Java](#in-real-java)). |
 
 ## Chaining versus probing
 

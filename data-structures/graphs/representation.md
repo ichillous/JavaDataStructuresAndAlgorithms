@@ -2,13 +2,13 @@
 
 An adjacency list stores outgoing neighbors per vertex. An adjacency matrix stores a cell for every ordered vertex pair. Neither is universally better; choose based on graph density, edge checks and traversal workload.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You must decide how edges are stored before writing algorithms: a list when you scan neighbors, a matrix when you test arbitrary edges. |
-| **Avoid it when** | A V-by-V matrix for a large sparse graph; it allocates V² cells to hold few edges. |
+| **Use&nbsp;it&nbsp;when** | You must decide how edges are stored before writing algorithms: a list when you scan neighbors, a matrix when you test arbitrary edges. |
+| **Avoid&nbsp;it&nbsp;when** | A V-by-V matrix for a large sparse graph; it allocates V² cells to hold few edges. |
 | **Cost** | List: O(V + E) space, neighbors in O(out-degree). Matrix: O(V²) space, edge test O(1). |
-| **In this repo** | [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) (ordered adjacency sets) and [`WeightedGraph`](../../src/main/java/io/github/ichillous/dsa/graphs/WeightedGraph.java) (edge records) |
-| **In the JDK** | no direct equivalent graph type; `BitSet` is a compact boolean matrix row |
+| **In&nbsp;this&nbsp;repo** | [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) (ordered adjacency sets) and [`WeightedGraph`](../../src/main/java/io/github/ichillous/dsa/graphs/WeightedGraph.java) (edge records) |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent graph type; `BitSet` is a compact boolean matrix row |
 
 ```text
 edges: 0 -> 1, 0 -> 2, 2 -> 1

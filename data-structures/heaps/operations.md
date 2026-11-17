@@ -2,13 +2,13 @@
 
 Read [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) alongside this trace. A complete-tree array has height O(log n), so repairing one root-to-leaf or leaf-to-root path gives logarithmic priority operations.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need to understand or review how a binary heap restores order after add, remove and bulk construction. |
-| **Avoid it when** | You only need a priority queue as a tool; use `PriorityQueue` and skip the mechanics. |
+| **Use&nbsp;it&nbsp;when** | You need to understand or review how a binary heap restores order after add, remove and bulk construction. |
+| **Avoid&nbsp;it&nbsp;when** | You only need a priority queue as a tool; use `PriorityQueue` and skip the mechanics. |
 | **Cost** | Add and remove O(log n); build from n values O(n); sifts use O(1) extra workspace. |
-| **In this repo** | [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) |
-| **In the JDK** | `java.util.PriorityQueue` |
+| **In&nbsp;this&nbsp;repo** | [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.PriorityQueue` |
 
 ## Bottom-up construction
 

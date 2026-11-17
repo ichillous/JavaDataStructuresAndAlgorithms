@@ -12,13 +12,13 @@ vertices have empty distances and paths. Null graphs are rejected, bad vertices 
 Read [DFS](dfs.md) for the topological-order idea used by the DAG method and
 [Topological sort](topological-sort.md) for how such an order is computed.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You know something about the graph (weights 0 or 1, acyclic, a target with a heuristic, all pairs wanted) that lets a specialised method beat the general one. |
-| **Avoid it when** | The general method already meets your size: Dijkstra for nonnegative weights needs no special structure. |
+| **Use&nbsp;it&nbsp;when** | You know something about the graph (weights 0 or 1, acyclic, a target with a heuristic, all pairs wanted) that lets a specialised method beat the general one. |
+| **Avoid&nbsp;it&nbsp;when** | The general method already meets your size: Dijkstra for nonnegative weights needs no special structure. |
 | **Cost** | 0-1 BFS and DAG paths O(V + E); A* O(V + E log(E + 1)) worst case plus heuristic calls; Floyd–Warshall O(V³). |
-| **In this repo** | [`ShortestPathAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java): `zeroOneBfs`, `dagShortestPaths`, `aStar`, `floydWarshall` |
-| **In the JDK** | no direct equivalent; `ArrayDeque` (0-1 BFS) and `PriorityQueue` (Dijkstra, A*) are the building blocks |
+| **In&nbsp;this&nbsp;repo** | [`ShortestPathAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java): `zeroOneBfs`, `dagShortestPaths`, `aStar`, `floydWarshall` |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent; `ArrayDeque` (0-1 BFS) and `PriorityQueue` (Dijkstra, A*) are the building blocks |
 
 ## Decision table
 

@@ -2,13 +2,13 @@
 
 A hash code is a routing hint, not a unique identifier. Two equal keys must have equal hash codes; different keys may also have equal hash codes. The table must still compare keys for equality after locating a bucket.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You define a key type, or need to understand how a hash code becomes a bucket or slot index. |
-| **Avoid it when** | You would be tempted to treat a hash code as an identity, to hash mutable state, or to rely on a specific hash value across JDK versions. |
+| **Use&nbsp;it&nbsp;when** | You define a key type, or need to understand how a hash code becomes a bucket or slot index. |
+| **Avoid&nbsp;it&nbsp;when** | You would be tempted to treat a hash code as an identity, to hash mutable state, or to rely on a specific hash value across JDK versions. |
 | **Cost** | Computing the hash costs the key's own `hashCode` (O(length) for a string); the index arithmetic is O(1). The table's O(1) expected bound assumes both are constant. |
-| **In this repo** | Bucket index by `floorMod`: [`ChainedHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java); spread then multiply: [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) |
-| **In the JDK** | `Object.hashCode`, `Objects.hash`, `Arrays.hashCode`, records (derived `hashCode`) |
+| **In&nbsp;this&nbsp;repo** | Bucket index by `floorMod`: [`ChainedHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java); spread then multiply: [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) |
+| **In&nbsp;the&nbsp;JDK** | `Object.hashCode`, `Objects.hash`, `Arrays.hashCode`, records (derived `hashCode`) |
 
 For a positive capacity `m`, [`ChainedHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java) uses `Math.floorMod(hashCode, m)`, producing an index in `[0, m)` even for negative hashes.
 

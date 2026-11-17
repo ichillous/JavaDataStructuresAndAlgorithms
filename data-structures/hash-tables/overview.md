@@ -2,13 +2,13 @@
 
 A hash table maps keys to values by using a hash code to select a bucket, then checking equality within that bucket. Use it for membership, counting, indexing or caching when key order is not required.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You look entries up by key and need no ordering: membership, counting, indexing, caching. |
-| **Avoid it when** | You need sorted iteration, nearest-key queries or a hard worst-case bound; use an ordered tree. Also avoid it for keys whose hash or equality state changes while stored. |
+| **Use&nbsp;it&nbsp;when** | You look entries up by key and need no ordering: membership, counting, indexing, caching. |
+| **Avoid&nbsp;it&nbsp;when** | You need sorted iteration, nearest-key queries or a hard worst-case bound; use an ordered tree. Also avoid it for keys whose hash or equality state changes while stored. |
 | **Cost** | Expected O(1) `get`, `put` and `remove` with well-distributed hashes (insertion is amortized because of resizing); O(n) worst case; O(n + capacity) space. |
-| **In this repo** | [`ChainedHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java), [`LruCache`](../../src/main/java/io/github/ichillous/dsa/collections/LruCache.java) |
-| **In the JDK** | `java.util.HashMap` (see [In real Java](#in-real-java)) |
+| **In&nbsp;this&nbsp;repo** | [`ChainedHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java), [`LruCache`](../../src/main/java/io/github/ichillous/dsa/collections/LruCache.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.HashMap` (see [In real Java](#in-real-java)) |
 
 [`ChainedHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java) uses separate chaining and a maximum load factor of 0.75. It rejects null keys and values, so a null lookup result means the key is absent. A replacement returns the old value without changing the mapping count.
 

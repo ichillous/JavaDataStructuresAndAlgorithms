@@ -4,13 +4,13 @@ Start with the [time-complexity foundations](../../complexity-analysis/time-comp
 This lesson derives bounds for actual patterns used in the repository rather than
 assigning a complexity to code merely because it contains recursion or a loop.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need to say how work grows with input size, by solving a recurrence or by amortized accounting |
-| **Avoid it when** | You want a wall-clock prediction or a comparison of constant factors; a bound counts steps in a stated model and nothing more |
+| **Use&nbsp;it&nbsp;when** | You need to say how work grows with input size, by solving a recurrence or by amortized accounting. |
+| **Avoid&nbsp;it&nbsp;when** | You want a wall-clock prediction or a comparison of constant factors; a bound counts steps in a stated model and nothing more. |
 | **Cost** | The analysis itself is paper work; the result is a growth rate such as O(n log n) or O(1) amortized |
-| **In this repo** | [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) for amortized growth, [`SortAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) for recurrences |
-| **In the JDK** | `ArrayList` (`add` documented as amortized constant time), `HashMap` (cost depends on `hashCode`) |
+| **In&nbsp;this&nbsp;repo** | [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) for amortized growth, [`SortAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/SortAlgorithms.java) for recurrences |
+| **In&nbsp;the&nbsp;JDK** | `ArrayList` (`add` documented as amortized constant time), `HashMap` (cost depends on `hashCode`) |
 
 <!-- visual:generated complexity-growth -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/complexity-growth-dark.svg"><img src="../../docs/visuals/assets/complexity-growth.svg" alt="Five illustrative functions share a value of one at input size one. A logarithmic work axis shows logarithmic, linear, n log n, quadratic and exponential growth without implying benchmark timings." width="520"></picture>

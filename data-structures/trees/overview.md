@@ -2,13 +2,13 @@
 
 A tree is a connected acyclic graph; a rooted tree gives every non-root node one parent. Trees organize hierarchical data, but different tree structures optimize different operations. The word “tree” alone does not imply logarithmic search.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You must pick a tree: ordered keys, repeated minimum, prefixes or interval queries each need a different invariant |
-| **Avoid it when** | You only need membership or counts by exact key; a hash map is simpler, and a sorted array suits data that never changes |
+| **Use&nbsp;it&nbsp;when** | You must pick a tree: ordered keys, repeated minimum, prefixes or interval queries each need a different invariant. |
+| **Avoid&nbsp;it&nbsp;when** | You only need membership or counts by exact key; a hash map is simpler, and a sorted array suits data that never changes. |
 | **Cost** | Search trees cost O(h) for height h: O(n) in the worst case when unbalanced, O(log n) once balanced; a full traversal is always O(n) |
-| **In this repo** | [`BinarySearchTree`](../../src/main/java/io/github/ichillous/dsa/structures/BinarySearchTree.java), [`AvlTree`](../../src/main/java/io/github/ichillous/dsa/structures/AvlTree.java), [`RedBlackTreeMap`](../../src/main/java/io/github/ichillous/dsa/structures/RedBlackTreeMap.java), [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java), [`Trie`](../../src/main/java/io/github/ichillous/dsa/structures/Trie.java), [`SegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) |
-| **In the JDK** | `java.util.TreeMap` and `java.util.TreeSet` (ordered), `java.util.PriorityQueue` (priority) |
+| **In&nbsp;this&nbsp;repo** | [`BinarySearchTree`](../../src/main/java/io/github/ichillous/dsa/structures/BinarySearchTree.java), [`AvlTree`](../../src/main/java/io/github/ichillous/dsa/structures/AvlTree.java), [`RedBlackTreeMap`](../../src/main/java/io/github/ichillous/dsa/structures/RedBlackTreeMap.java), [`BinaryMinHeap`](../../src/main/java/io/github/ichillous/dsa/structures/BinaryMinHeap.java), [`Trie`](../../src/main/java/io/github/ichillous/dsa/structures/Trie.java), [`SegmentTree`](../../src/main/java/io/github/ichillous/dsa/structures/SegmentTree.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.TreeMap` and `java.util.TreeSet` (ordered), `java.util.PriorityQueue` (priority) |
 
 ## Compare the maintained structures
 

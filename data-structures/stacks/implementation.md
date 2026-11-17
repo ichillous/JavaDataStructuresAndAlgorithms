@@ -2,13 +2,13 @@
 
 [`ArrayStack`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayStack.java) delegates storage to `DynamicArray`. The top is at index `size - 1`, so pushing appends and popping removes the final element. No shifting is needed for a pop.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You want LIFO access over growable storage and the empty-state, bounds and growth rules to be inspectable. |
-| **Avoid it when** | You need FIFO order or indexed access; a queue or `DynamicArray` is the direct tool. |
+| **Use&nbsp;it&nbsp;when** | You want LIFO access over growable storage and the empty-state, bounds and growth rules to be inspectable. |
+| **Avoid&nbsp;it&nbsp;when** | You need FIFO order or indexed access; a queue or `DynamicArray` is the direct tool. |
 | **Cost** | `push` O(1) amortized; `pop`, `peek` O(1); `clear` O(n); storage O(capacity). |
-| **In this repo** | [`ArrayStack`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayStack.java), built on [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) |
-| **In the JDK** | `java.util.ArrayDeque` (`push`, `pop`, `peek`). |
+| **In&nbsp;this&nbsp;repo** | [`ArrayStack`](../../src/main/java/io/github/ichillous/dsa/collections/ArrayStack.java), built on [`DynamicArray`](../../src/main/java/io/github/ichillous/dsa/collections/DynamicArray.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.ArrayDeque` (`push`, `pop`, `peek`). |
 
 This is a useful design lesson: a new behavioral contract does not always require a new storage engine. The stack exposes only the operations that preserve LIFO access.
 

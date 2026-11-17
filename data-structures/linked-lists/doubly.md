@@ -2,13 +2,13 @@
 
 [`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java) stores a head, a tail, a size and nodes with two links. Values are non-null, order is stable, and indexed methods validate `[0, size)`. Empty endpoint removals throw `NoSuchElementException`.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need O(1) changes at both ends or O(1) removal of a node you hold, as in an LRU recency list. |
-| **Avoid it when** | You look elements up by index or scan often; use `DynamicArray` or `ArrayDeque` instead. |
+| **Use&nbsp;it&nbsp;when** | You need O(1) changes at both ends or O(1) removal of a node you hold, as in an LRU recency list. |
+| **Avoid&nbsp;it&nbsp;when** | You look elements up by index or scan often; use `DynamicArray` or `ArrayDeque` instead. |
 | **Cost** | Endpoint add/remove O(1); `get(i)` and `remove(i)` O(min(i, n - 1 - i)) to find, then O(1) to unlink. |
-| **In this repo** | [`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java) |
-| **In the JDK** | `java.util.LinkedList`; for an LRU map, `java.util.LinkedHashMap` in access order. |
+| **In&nbsp;this&nbsp;repo** | [`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.LinkedList`; for an LRU map, `java.util.LinkedHashMap` in access order. |
 
 <!-- visual:generated linked-unlink -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/linked-unlink-dark.svg"><img src="../../docs/visuals/assets/linked-unlink.svg" alt="Bypass the middle node in both directions, then clear its links." width="520"></picture>

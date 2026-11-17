@@ -2,13 +2,13 @@
 
 Collisions occur whenever different keys select the same bucket. A correct implementation must preserve all mappings and terminate an absent-key search. This repository maintains [separate chaining](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java); open addressing is maintained too: [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) uses linear probing with backward-shift deletion, and the [open-addressing lesson](open-addressing.md) traces it. The probing comparison below stays a design comparison.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Choosing or reviewing how a hash table resolves two keys that select the same bucket or slot. |
-| **Avoid it when** | You only need a working map; use `java.util.HashMap` and leave collision handling to it. |
+| **Use&nbsp;it&nbsp;when** | You are choosing or reviewing how a hash table resolves two keys that select the same bucket or slot. |
+| **Avoid&nbsp;it&nbsp;when** | You only need a working map; use `java.util.HashMap` and leave collision handling to it. |
 | **Cost** | Chaining: expected O(1 + load) per search, O(n) worst case. Probing: expected O(1) while the load stays bounded; clusters and deletion need care. |
-| **In this repo** | [`ChainedHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java) (chaining), [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) (linear probing) |
-| **In the JDK** | `java.util.HashMap` (see [In real Java](#in-real-java)) |
+| **In&nbsp;this&nbsp;repo** | [`ChainedHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/ChainedHashMap.java) (chaining), [`OpenAddressingHashMap`](../../src/main/java/io/github/ichillous/dsa/collections/OpenAddressingHashMap.java) (linear probing) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.HashMap` (see [In real Java](#in-real-java)) |
 
 ## Chaining: search one bucket's list
 

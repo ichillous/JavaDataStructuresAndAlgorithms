@@ -2,13 +2,13 @@
 
 Traversal explores reachability while avoiding repeated work on cycles. [`GraphAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java) provides BFS, iterative DFS, unweighted shortest paths, components, topological ordering and weighted algorithms. Results are immutable snapshots.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You need what is reachable, the fewest edges to a target, connected components or a dependency order. |
-| **Avoid it when** | Edges carry costs that matter: BFS counts edges, not weights, so use Dijkstra or another weighted method. |
+| **Use&nbsp;it&nbsp;when** | You need what is reachable, the fewest edges to a target, connected components or a dependency order. |
+| **Avoid&nbsp;it&nbsp;when** | Edges carry costs that matter: BFS counts edges, not weights, so use Dijkstra or another weighted method. |
 | **Cost** | BFS, DFS, unweighted shortest path, components and topological order O(V + E); Dijkstra O(V + E log(E + 1)). |
-| **In this repo** | [`GraphAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java): `breadthFirst`, `depthFirst`, `shortestPath`, `connectedComponents`, `topologicalSort`, `dijkstra` |
-| **In the JDK** | no direct equivalent traversal; `ArrayDeque` serves as the BFS queue or the DFS stack |
+| **In&nbsp;this&nbsp;repo** | [`GraphAlgorithms`](../../src/main/java/io/github/ichillous/dsa/graphs/GraphAlgorithms.java): `breadthFirst`, `depthFirst`, `shortestPath`, `connectedComponents`, `topologicalSort`, `dijkstra` |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent traversal; `ArrayDeque` serves as the BFS queue or the DFS stack |
 
 ## BFS: discover before enqueueing
 

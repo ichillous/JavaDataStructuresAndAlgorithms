@@ -1,12 +1,12 @@
 # Probabilistic membership and frequency: Bloom filter and Count-Min sketch
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Exact answers cost too much memory and a small one-sided error is acceptable: skip a disk lookup for most absent keys (Bloom filter), or track approximate counts in a huge key space (Count-Min sketch). |
-| **Avoid it when** | You need exact answers, deletion, or counts of rare items in a short stream. If the distinct items fit in memory, a `HashSet` or `HashMap` is simpler and exact. |
+| **Use&nbsp;it&nbsp;when** | Exact answers cost too much memory and a small one-sided error is acceptable: skip a disk lookup for most absent keys (Bloom filter), or track approximate counts in a huge key space (Count-Min sketch). |
+| **Avoid&nbsp;it&nbsp;when** | You need exact answers, deletion, or counts of rare items in a short stream. If the distinct items fit in memory, a `HashSet` or `HashMap` is simpler and exact. |
 | **Cost** | O(k) per Bloom operation and O(depth) per sketch operation; space is fixed by the chosen size, not by the number of items. |
-| **In this repo** | [`BloomFilter`](../../src/main/java/io/github/ichillous/dsa/structures/BloomFilter.java), [`CountMinSketch`](../../src/main/java/io/github/ichillous/dsa/structures/CountMinSketch.java) |
-| **In the JDK** | No direct equivalent; the exact versions are `java.util.HashSet` and `java.util.HashMap#merge` (see [In real Java](#in-real-java)). `java.util.BitSet` is only a bit array, the storage a filter could be built on, not a membership test. |
+| **In&nbsp;this&nbsp;repo** | [`BloomFilter`](../../src/main/java/io/github/ichillous/dsa/structures/BloomFilter.java), [`CountMinSketch`](../../src/main/java/io/github/ichillous/dsa/structures/CountMinSketch.java) |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent; the exact versions are `java.util.HashSet` and `java.util.HashMap#merge` (see [In real Java](#in-real-java)). `java.util.BitSet` is only a bit array, the storage a filter could be built on, not a membership test. |
 
 Use these structures when exact answers cost too much memory and a small,
 one-sided, quantifiable error is acceptable. A Bloom filter answers "have I seen

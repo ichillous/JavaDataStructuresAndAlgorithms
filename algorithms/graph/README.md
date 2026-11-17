@@ -6,13 +6,13 @@ grouped by question, with what each method needs and what it costs. All methods 
 on vertices `0..V-1`, are iterative (a 100,000-vertex path does not overflow the call
 stack) and never modify their input.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You have a graph problem and want the right method, its precondition and its cost before you read a lesson. |
-| **Avoid it when** | You already know the algorithm; go straight to its lesson. |
+| **Use&nbsp;it&nbsp;when** | You have a graph problem and want the right method, its precondition and its cost before you read a lesson. |
+| **Avoid&nbsp;it&nbsp;when** | You already know the algorithm; go straight to its lesson. |
 | **Cost** | Most methods are O(V + E); shortest paths with weights, spanning trees and flows add a logarithmic or polynomial factor, listed below. |
-| **In this repo** | [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) and [`WeightedGraph`](../../src/main/java/io/github/ichillous/dsa/graphs/WeightedGraph.java) hold the data; the classes named in the tables below hold the algorithms. |
-| **In the JDK** | No direct equivalent: `java.util` has no graph classes. Build adjacency with `Map` and `List`, or use this repository's classes. |
+| **In&nbsp;this&nbsp;repo** | [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) and [`WeightedGraph`](../../src/main/java/io/github/ichillous/dsa/graphs/WeightedGraph.java) hold the data; the classes named in the tables below hold the algorithms. |
+| **In&nbsp;the&nbsp;JDK** | No direct equivalent: `java.util` has no graph classes. Build adjacency with `Map` and `List`, or use this repository's classes. |
 
 ## The data
 

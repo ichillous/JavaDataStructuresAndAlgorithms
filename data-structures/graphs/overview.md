@@ -2,13 +2,13 @@
 
 A graph has vertices and edges. Vertices may be isolated; edges may be directed, weighted, repeated or self-loops. Decide these semantics before choosing an algorithm: a route map and a prerequisite graph use different contracts.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | Entities and relationships form a network: routes, prerequisites, links between accounts. |
-| **Avoid it when** | A tree, an array or a keyed map already holds the relationship; graph machinery then adds cost without adding meaning. |
+| **Use&nbsp;it&nbsp;when** | Entities and relationships form a network: routes, prerequisites, links between accounts. |
+| **Avoid&nbsp;it&nbsp;when** | A tree, an array or a keyed map already holds the relationship; graph machinery then adds cost without adding meaning. |
 | **Cost** | Storage O(V + E); BFS, DFS and topological order O(V + E); `neighbors` O(out-degree). |
-| **In this repo** | [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) and [`WeightedGraph`](../../src/main/java/io/github/ichillous/dsa/graphs/WeightedGraph.java) |
-| **In the JDK** | no direct equivalent: the JDK has no graph type, so you compose `Map` and `List` (or arrays) yourself |
+| **In&nbsp;this&nbsp;repo** | [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) and [`WeightedGraph`](../../src/main/java/io/github/ichillous/dsa/graphs/WeightedGraph.java) |
+| **In&nbsp;the&nbsp;JDK** | no direct equivalent: the JDK has no graph type, so you compose `Map` and `List` (or arrays) yourself |
 
 [`Graph`](../../src/main/java/io/github/ichillous/dsa/graphs/Graph.java) uses integer vertices `[0, vertexCount)`, an explicit directed/undirected factory, and insertion-ordered adjacency sets. Repeated unweighted edges are ignored. In an undirected graph, adding the reverse of an existing edge does not add a new logical edge.
 

@@ -2,13 +2,13 @@
 
 A linked list stores a sequence in nodes connected by references. It trades cheap array indexing for cheap changes at known nodes or maintained ends. The useful question is **how do you obtain the node?** Finding position `i` is usually the expensive part.
 
-| At a glance | |
+| At&nbsp;a&nbsp;glance | |
 | --- | --- |
-| **Use it when** | You work at the ends or at nodes you already hold, as in queues, deques and recency lists. |
-| **Avoid it when** | You index by position or scan the whole sequence often; an array is both simpler and kinder to the cache. |
+| **Use&nbsp;it&nbsp;when** | You work at the ends or at nodes you already hold, as in queues, deques and recency lists. |
+| **Avoid&nbsp;it&nbsp;when** | You index by position or scan the whole sequence often; an array is both simpler and kinder to the cache. |
 | **Cost** | Add or remove at either end O(1); reach an indexed node O(min(i, n - 1 - i)) in a doubly linked list. |
-| **In this repo** | [`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java) |
-| **In the JDK** | `java.util.LinkedList` (doubly linked); for queue or stack use, `java.util.ArrayDeque`. |
+| **In&nbsp;this&nbsp;repo** | [`DoublyLinkedList`](../../src/main/java/io/github/ichillous/dsa/collections/DoublyLinkedList.java) |
+| **In&nbsp;the&nbsp;JDK** | `java.util.LinkedList` (doubly linked); for queue or stack use, `java.util.ArrayDeque`. |
 
 ```text
 singly:  head -> A -> B -> C -> null
