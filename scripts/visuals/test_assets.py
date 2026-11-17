@@ -390,14 +390,21 @@ def gallery_region(text):
 def lesson_text(title, figure="alpha", glance=True):
     table = ("| At a glance | |\n| --- | --- |\n| **Use it when** |  You need *this* `x`.  |\n"
              "| **Cost** | O(1) |\n" if glance else "")
-    region = f"<!-- visual:generated {figure} -->\n<!-- /visual:generated -->\n" if figure else ""
+    figures = (figure,) if isinstance(figure, str) else tuple(figure or ())
+    region = "".join(f"<!-- visual:generated {item} -->\n<!-- /visual:generated -->\n\nText.\n\n"
+                     for item in figures)
     return f"# {title}\n\nIntro.\n\n{table}\n{region}\n## More\n"
+
+
+def thumbnail(row):
+    """The figure id a gallery row uses as its thumbnail."""
+    return re.search(r'<img src="[^"]*/assets/([a-z0-9-]+)\.svg"', row).group(1)
 
 
 FAKE_FIGURES = {
     figure_id: {"id": figure_id, "number": number, "description": f"Shows {figure_id} & more.",
                 "light": f"assets/{figure_id}.svg", "dark": f"assets/{figure_id}-dark.svg"}
-    for number, figure_id in ((1, "alpha"), (2, "beta"))}
+    for number, figure_id in ((1, "alpha"), (2, "beta"), (3, "delta"))}
 
 
 class GalleryTest(unittest.TestCase):
@@ -424,7 +431,7 @@ class GalleryTest(unittest.TestCase):
                 subfolders = sorted(path.name for path in (ROOT / folder).iterdir() if path.is_dir())
                 self.assertEqual(len(subfolders), len(headings))
 
-    def test_gallery_rows_use_the_first_figure_title_and_use_it_when_cell_and_resolve(self):
+    def test_gallery_rows_use_an_unused_figure_title_and_use_it_when_cell_and_resolve(self):
         manifest = json.loads((VISUALS / "data/manifest.json").read_text(encoding="utf-8"))
         by_id = {item["id"]: item for item in manifest["figures"]}
         for folder in GALLERY_FOLDERS:
@@ -438,10 +445,13 @@ class GalleryTest(unittest.TestCase):
                     self.assertTrue((page.parent / unquote(reference)).resolve().is_file())
             rows = [line for line in region.split("\n") if line.startswith("| <a href=")]
             self.assertEqual(len(gallery_lessons(folder)), len(rows))
+            used = set()
             for row, lesson in zip(rows, gallery_lessons(folder)):
                 with self.subTest(lesson=lesson):
                     text = (page.parent / lesson).read_text(encoding="utf-8")
-                    first = self.generator.find_regions(lesson, text)[0].figure_id
+                    placed = [region.figure_id for region in self.generator.find_regions(lesson, text)]
+                    first = next((item for item in placed if item not in used), placed[0])
+                    used.add(first)
                     self.assertIn(f'srcset="../docs/visuals/assets/{first}-dark.svg"', row)
                     self.assertIn(f'<img src="../docs/visuals/assets/{first}.svg"', row)
                     self.assertIn('width="160"', row)
@@ -515,6 +525,21 @@ class GalleryTest(unittest.TestCase):
                 for name in fixtures[f"{prefix}.{row}.folders"].split(","):
                     with self.subTest(card=f"{prefix}.{row}", folder=name):
                         self.assertTrue((ROOT / folder / name).is_dir())
+
+    def test_thumbnails_prefer_a_figure_not_yet_used_anywhere_on_the_page(self):
+        files = {"topic/a-first/README.md": lesson_text("One", "alpha"),
+                 "topic/a-first/two.md": lesson_text("Two", ("alpha", "beta")),
+                 "topic/b-second/three.md": lesson_text("Three", ("beta", "alpha", "delta")),
+                 "topic/b-second/four.md": lesson_text("Four", ("alpha",))}
+        result = self.build(files, self.PAGE)
+        rows = [line for line in result.split("\n") if line.startswith("| <a href=")]
+        titles = [re.search(r"\| \[([^\]]+)\]", row).group(1) for row in rows]
+        self.assertEqual(["One", "Two", "Four", "Three"], titles)
+        # One takes alpha; Two skips alpha for beta; Four has only alpha, already used, so it
+        # falls back to its first figure; Three skips beta and alpha (used) for delta.
+        self.assertEqual(["alpha", "beta", "alpha", "delta"], [thumbnail(row) for row in rows])
+        self.assertIn('alt="Shows delta &amp; more."', rows[3])
+        self.assertEqual(result, self.build(files, result), "the choice must be deterministic")
 
     def test_a_lesson_placed_directly_in_the_gallery_folder_fails(self):
         with self.assertRaisesRegex(ValueError, r"topic/loose\.md .*subfolder"):
