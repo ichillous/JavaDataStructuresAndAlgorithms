@@ -471,7 +471,55 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Round k asks whether going through vertex k beats the best route so far.
 
-## 59. Four ways to walk a tree
+## 59. Two pointers, sorted array
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/two-pointers-pair-sum-dark.svg"><img src="assets/two-pointers-pair-sum.svg" alt="pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3." width="520"></picture>
+
+**Key idea:** Each move drops an index with no partner: at most n - 1 moves.
+
+## 60. Window jumping a repeat
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sliding-window-distinct-dark.svg"><img src="assets/sliding-window-distinct.svg" alt="longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5." width="520"></picture>
+
+**Key idea:** The left edge never moves back, so each unit is added once: linear time.
+
+## 61. Next greater by stack
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/monotonic-stack-next-greater-dark.svg"><img src="assets/monotonic-stack-next-greater.svg" alt="nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1." width="520"></picture>
+
+**Key idea:** Each index is pushed once and popped once: O(n) despite the inner loop.
+
+## 62. Range adds by differences
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/difference-array-ranges-dark.svg"><img src="assets/difference-array-ranges.svg" alt="applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0." width="520"></picture>
+
+**Key idea:** Two marks per update, then one running sum: O(n + u) in total.
+
+## 63. Sweeping events for rooms
+
+[Array patterns: read the lesson](../../algorithms/array-patterns/overview.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/interval-sweep-rooms-dark.svg"><img src="assets/interval-sweep-rooms.svg" alt="minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice." width="520"></picture>
+
+**Key idea:** The busiest moment sets the room count; at a tie an end comes first.
+
+## 64. Inversions during a merge
+
+[Array patterns: read the lesson](../../algorithms/divide-and-conquer/problems.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/inversion-count-merge-dark.svg"><img src="assets/inversion-count-merge.svg" alt="countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions." width="520"></picture>
+
+**Key idea:** A smaller right value jumps over every left value still waiting.
+
+## 65. Four ways to walk a tree
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-trees.md)
 
@@ -479,7 +527,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Pre, in and post order differ only in when the root is read.
 
-## 60. Delete with two children
+## 66. Delete with two children
 
 [Trees and ranges: read the lesson](../../data-structures/trees/binary-search-trees.md)
 
@@ -487,7 +535,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** The successor's key replaces the deleted one; its old node is unlinked.
 
-## 61. Red links make 3-nodes
+## 67. Red links make 3-nodes
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -495,7 +543,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** A red link and its black parent make one 3-node.
 
-## 62. Three local repairs
+## 68. Three local repairs
 
 [Trees and ranges: read the lesson](../../data-structures/trees/red-black-trees.md)
 
@@ -503,7 +551,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Rotations keep sorted order; a flip splits a 4-node.
 
-## 63. One insertion step
+## 69. One insertion step
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/insertion-sort.md)
 
@@ -511,7 +559,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.
 
-## 64. Heapsort phases
+## 70. Heapsort phases
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/heap-sort.md)
 
@@ -519,7 +567,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.
 
-## 65. Counting sort tally
+## 71. Counting sort tally
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -527,7 +575,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.
 
-## 66. Radix passes by digit
+## 72. Radix passes by digit
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -535,7 +583,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.
 
-## 67. Stable and unstable outcomes
+## 73. Stable and unstable outcomes
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 

@@ -639,13 +639,79 @@
       "dark": "assets/floyd-warshall-via-dark.svg"
     },
     {
+      "id": "two-pointers-pair-sum",
+      "title": "Two pointers, sorted array",
+      "category": "Array patterns",
+      "description": "pairWithSum on 1, 2, 3, 4, 6 with target 6 starts at the two ends: 1 + 6 is too large so the right index drops, 1 + 4 is too small so the left index drops, and 2 + 4 matches at indices 1 and 3.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "Each move drops an index with no partner: at most n - 1 moves.",
+      "number": 59,
+      "light": "assets/two-pointers-pair-sum.svg",
+      "dark": "assets/two-pointers-pair-sum-dark.svg"
+    },
+    {
+      "id": "sliding-window-distinct",
+      "title": "Window jumping a repeat",
+      "category": "Array patterns",
+      "description": "longestSubstringWithoutRepeats on abcbad grows the window to abc, jumps its start to index 2 when b repeats, ignores the stale earlier a at index 0, and ends with the longest window cbad at indices 2 to 5.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "The left edge never moves back, so each unit is added once: linear time.",
+      "number": 60,
+      "light": "assets/sliding-window-distinct.svg",
+      "dark": "assets/sliding-window-distinct-dark.svg"
+    },
+    {
+      "id": "monotonic-stack-next-greater",
+      "title": "Next greater by stack",
+      "category": "Array patterns",
+      "description": "nextGreaterIndices on 2, 1, 2, 4, 3 keeps unresolved indices on a stack: index 1 is resolved by the second 2, the equal 2 at index 0 stays, and the 4 resolves indices 2 and 0, giving 3, 2, 3, -1, -1.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "Each index is pushed once and popped once: O(n) despite the inner loop.",
+      "number": 61,
+      "light": "assets/monotonic-stack-next-greater.svg",
+      "dark": "assets/monotonic-stack-next-greater-dark.svg"
+    },
+    {
+      "id": "difference-array-ranges",
+      "title": "Range adds by differences",
+      "category": "Array patterns",
+      "description": "applyRangeAdds on five zeros marks +3 at index 1 and -3 at index 4, then +2 at index 0 and -2 at index 2, and one running sum produces 2, 5, 3, 3, 0.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "Two marks per update, then one running sum: O(n + u) in total.",
+      "number": 62,
+      "light": "assets/difference-array-ranges.svg",
+      "dark": "assets/difference-array-ranges-dark.svg"
+    },
+    {
+      "id": "interval-sweep-rooms",
+      "title": "Sweeping events for rooms",
+      "category": "Array patterns",
+      "description": "minimumMeetingRooms on the intervals [1, 4), [2, 5), [5, 7) and [6, 8) sorts the eight start and end events, processes the end at 5 before the start at 5, and reaches a depth of 2, so two rooms suffice.",
+      "lesson": "../../algorithms/array-patterns/overview.md",
+      "keyIdea": "The busiest moment sets the room count; at a tie an end comes first.",
+      "number": 63,
+      "light": "assets/interval-sweep-rooms.svg",
+      "dark": "assets/interval-sweep-rooms-dark.svg"
+    },
+    {
+      "id": "inversion-count-merge",
+      "title": "Inversions during a merge",
+      "category": "Array patterns",
+      "description": "countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions.",
+      "lesson": "../../algorithms/divide-and-conquer/problems.md",
+      "keyIdea": "A smaller right value jumps over every left value still waiting.",
+      "number": 64,
+      "light": "assets/inversion-count-merge.svg",
+      "dark": "assets/inversion-count-merge-dark.svg"
+    },
+    {
       "id": "tree-traversals",
       "title": "Four ways to walk a tree",
       "category": "Trees and ranges",
       "description": "A binary search tree built from 8, 3, 10, 1, 6, 14, 4 and 7 has root 8, leaves 1, 4, 7 and 14, and height 3. Pre-order reads 8 3 1 6 4 7 10 14, in-order reads the keys sorted, post-order ends at the root 8, and level order reads one depth at a time.",
       "lesson": "../../data-structures/trees/binary-trees.md",
       "keyIdea": "Pre, in and post order differ only in when the root is read.",
-      "number": 59,
+      "number": 65,
       "light": "assets/tree-traversals.svg",
       "dark": "assets/tree-traversals-dark.svg"
     },
@@ -656,7 +722,7 @@
       "description": "Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1.",
       "lesson": "../../data-structures/trees/binary-search-trees.md",
       "keyIdea": "The successor's key replaces the deleted one; its old node is unlinked.",
-      "number": 60,
+      "number": 66,
       "light": "assets/bst-delete-successor.svg",
       "dark": "assets/bst-delete-successor-dark.svg"
     },
@@ -667,7 +733,7 @@
       "description": "After put 1 to 5, a RedBlackTreeMap has black root 4 with red left child 2, black children 1 and 3 under 2, and black 5. Read as a 2-3 tree it is the 3-node [2 4] over the 2-nodes [1], [3] and [5]; the height is 2 as a binary tree and 1 as a 2-3 tree.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "A red link and its black parent make one 3-node.",
-      "number": 61,
+      "number": 67,
       "light": "assets/red-black-23-nodes.svg",
       "dark": "assets/red-black-23-nodes-dark.svg"
     },
@@ -678,7 +744,7 @@
       "description": "Rotate left turns black 1 with a red right child 2 into black 2 with a red left child 1. Rotate right turns black 3 over red 2 over red 1 into black 2 with red children 1 and 3. Flip colors turns black 2 with red children into red 2 with black children.",
       "lesson": "../../data-structures/trees/red-black-trees.md",
       "keyIdea": "Rotations keep sorted order; a flip splits a 4-node.",
-      "number": 62,
+      "number": 68,
       "light": "assets/red-black-fixups.svg",
       "dark": "assets/red-black-fixups-dark.svg"
     },
@@ -689,7 +755,7 @@
       "description": "In 3, 5, 8, 9, 4, 1 the prefix 3, 5, 8, 9 is sorted. The key 4 is saved, the three larger values 5, 8 and 9 shift one slot right, and 4 drops into index 1.",
       "lesson": "../../algorithms/sorting/insertion-sort.md",
       "keyIdea": "Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.",
-      "number": 63,
+      "number": 69,
       "light": "assets/insertion-sort-shift.svg",
       "dark": "assets/insertion-sort-shift-dark.svg"
     },
@@ -700,7 +766,7 @@
       "description": "Heapsort on 3, 1, 6, 5, 2, 4 builds the max-heap 6, 5, 4, 1, 2, 3, then moves 6 and 5 to the end, giving 5, 3, 4, 1, 2, 6 and 4, 3, 2, 1, 5, 6, until 1 to 6 is sorted.",
       "lesson": "../../algorithms/sorting/heap-sort.md",
       "keyIdea": "Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.",
-      "number": 64,
+      "number": 70,
       "light": "assets/heapsort-phases.svg",
       "dark": "assets/heapsort-phases-dark.svg"
     },
@@ -711,7 +777,7 @@
       "description": "For 5, 3, 6, 3, 4, 6 the range 3 to 6 has four counts: 2, 1, 1 and 2. Writing each value back that many times gives 3, 3, 4, 5, 6, 6.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.",
-      "number": 65,
+      "number": 71,
       "light": "assets/counting-sort-counts.svg",
       "dark": "assets/counting-sort-counts-dark.svg"
     },
@@ -722,7 +788,7 @@
       "description": "Sorting 35, 21, 41, 15, 31, 25 by the ones digit gives 21, 41, 31, 35, 15, 25; a stable pass on the tens digit then gives 15, 21, 25, 31, 35, 41.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.",
-      "number": 66,
+      "number": 72,
       "light": "assets/radix-lsd-passes.svg",
       "dark": "assets/radix-lsd-passes-dark.svg"
     },
@@ -733,7 +799,7 @@
       "description": "Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys.",
       "lesson": "../../algorithms/sorting/non-comparison-and-comparator-sorts.md",
       "keyIdea": "A stable sort keeps equal keys in their input order; an unstable sort may reorder them, losing any earlier ordering by tag.",
-      "number": 67,
+      "number": 73,
       "light": "assets/sort-stability.svg",
       "dark": "assets/sort-stability-dark.svg"
     }

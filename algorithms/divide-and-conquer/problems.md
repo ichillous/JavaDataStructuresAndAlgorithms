@@ -5,11 +5,13 @@ shows three useful ways to avoid recomputing array work. All methods reject null
 and leave input unchanged. Choose the method by the invariant you can prove,
 rather than forcing every array problem into recursion.
 
-<!-- visual:generated quick-partition -->
-<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/quick-partition-dark.svg"><img src="../../docs/visuals/assets/quick-partition.svg" alt="Gather duplicate pivot values into one finished equal region." width="520"></picture>
-
-**Figure 15.** Gather duplicate pivot values into one finished equal region. [Visual index and step-throughs](../../docs/visuals/README.md).
-<!-- /visual:generated -->
+| At a glance | |
+| --- | --- |
+| **Use it when** | You can state an invariant that lets one pass reuse earlier work: a merge counts cross pairs, a running sum extends a range, a deque keeps useful candidates |
+| **Avoid it when** | The invariant needs rescanning the array for each answer, or the input violates the precondition (a window longer than the array) |
+| **Cost** | O(n log n) for the inversion count, O(n) for Kadane and for the sliding-window deque |
+| **In this repo** | [`SequenceAlgorithms`](../../src/main/java/io/github/ichillous/dsa/algorithms/SequenceAlgorithms.java) |
+| **In the JDK** | `ArrayDeque` for the window, `Math.addExact` and `Math.toIntExact` for checked counts; no direct equivalent of the three algorithms |
 
 ## Count inversions during a merge
 
@@ -17,6 +19,12 @@ An inversion is a pair `i < j` with `a[i] > a[j]`. Recursively count pairs withi
 each half. During merging, when a right value is smaller than the current left
 value, it is smaller than **every remaining left value**. Add their count once.
 Equal values do not count as inversions.
+
+<!-- visual:generated inversion-count-merge -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/inversion-count-merge-dark.svg"><img src="../../docs/visuals/assets/inversion-count-merge.svg" alt="countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions." width="520"></picture>
+
+**Figure 64.** countInversions on 2, 4, 1, 3, 5 merges the sorted halves 2, 4 and 1, 3, 5: emitting 1 jumps over two left values, emitting 3 jumps over one, and the other values add nothing, for 3 inversions. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
 
 ```text
 merge left [2, 4] and right [1, 3, 5]
@@ -91,6 +99,73 @@ Require `1 <= window <= input.length`; empty input has no valid window. Each ind
 enters and leaves the deque at most once, giving O(n) time despite nested loops.
 Auxiliary storage is O(window), plus O(n-window+1) output. Keeping values without
 indices loses the information needed to expire an old maximum correctly.
+
+## In real Java
+
+The inversion count is a `long` because a descending array of 100,000 values has
+`n(n - 1) / 2 = 4,999,950,000` inversions, more than `Integer.MAX_VALUE`.
+`Math.toIntExact` documents that it throws `ArithmeticException` when its `long`
+argument does not fit an `int`, so a caller who needs an `int` can fail loudly
+instead of truncating.
+
+```java
+import io.github.ichillous.dsa.algorithms.SequenceAlgorithms;
+
+int[] descending = new int[100_000];
+for (int i = 0; i < descending.length; i++) {
+    descending[i] = descending.length - i;
+}
+long inversions = SequenceAlgorithms.countInversions(descending);
+assert inversions == 100_000L * 99_999L / 2;
+assert inversions > Integer.MAX_VALUE;
+boolean rejected = false;
+try {
+    Math.toIntExact(inversions);
+} catch (ArithmeticException expected) {
+    rejected = true;
+}
+assert rejected;
+```
+
+## Common mistakes
+
+1. **Starting Kadane's best at 0.** For `[-8, -3, -5]` that returns an empty
+   range with sum 0. The invariant is that the answer is a nonempty range, so the
+   best sum starts at the first element.
+2. **Merging with `<` on ties when counting inversions.** For `[2, 2, 2]` the
+   right values would each jump the equal left values and report 3 pairs instead
+   of 0.
+3. **Keeping values instead of indices in the window deque.** For `[5, 1, 1]`
+   with window 2 the second window `[1, 1]` must report 1, but a deque holding
+   only the value 5 cannot tell that 5 has left the window.
+
+## Check yourself
+
+<details>
+<summary>In a merge of left `[2, 4]` and right `[1, 3, 5]`, why does emitting 1 add exactly 2?</summary>
+
+Both left values are still waiting and both are larger than 1. Because each half
+is sorted, a right value smaller than the front left value is smaller than every
+remaining left value, so one subtraction counts them all.
+
+</details>
+
+<details>
+<summary>Why is the sliding-window deque linear although it has a nested loop?</summary>
+
+Each index enters the deque once and leaves it at most once, from the back when a
+better candidate arrives or from the front when it expires. The inner loop
+therefore runs at most `n` times in total.
+
+</details>
+
+<details>
+<summary>Why does Kadane's method keep a preceding sum of zero?</summary>
+
+Dropping it would start the range later, but the policy is the earliest start
+among equal sums. For `[0, 1]` the answer is the range `[0, 2)`, not `[1, 2)`.
+
+</details>
 
 ## Practice
 
