@@ -79,7 +79,8 @@ not reordered. That is the same promise a merge makes when it takes the left
 element on ties. For primitive arrays stability cannot be observed, which is why
 the library's `int[]` sort does not claim it. (OpenJDK implementation note: the
 object sort is a merge sort and `Arrays.sort(int[])` is a dual-pivot quicksort;
-the API documents the stability guarantee, not the algorithm.)
+the specification guarantees stability for the object sort, and the algorithms are
+named only in non-normative Implementation Notes.)
 
 ```java
 import java.util.Arrays;

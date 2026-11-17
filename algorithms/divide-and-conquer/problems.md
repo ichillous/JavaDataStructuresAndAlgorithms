@@ -97,8 +97,9 @@ assert Arrays.equals(SequenceAlgorithms.slidingWindowMaximum(input, 1), input);
 
 Require `1 <= window <= input.length`; empty input has no valid window. Each index
 enters and leaves the deque at most once, giving O(n) time despite nested loops.
-Auxiliary storage is O(window), plus O(n-window+1) output. Keeping values without
-indices loses the information needed to expire an old maximum correctly.
+Auxiliary storage is O(window), plus O(n-window+1) output. Keeping values alone works
+only if equal values are kept and the front is compared with the outgoing value;
+storing indices makes expiry unambiguous.
 
 ## In real Java
 
@@ -136,8 +137,9 @@ assert rejected;
    right values would each jump the equal left values and report 3 pairs instead
    of 0.
 3. **Keeping values instead of indices in the window deque.** For `[5, 1, 1]`
-   with window 2 the second window `[1, 1]` must report 1, but a deque holding
-   only the value 5 cannot tell that 5 has left the window.
+   with window 2, a value deque `[5, 1]` that is never expired reports 5 for the
+   second window `[1, 1]` instead of 1. The invariant broken is that the deque's
+   front lies inside the current window.
 
 ## Check yourself
 

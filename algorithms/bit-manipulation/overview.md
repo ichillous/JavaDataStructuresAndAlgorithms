@@ -148,7 +148,7 @@ assert Integer.numberOfLeadingZeros(1) == 31;
 | `Integer.bitCount`, `lowestOneBit`, `numberOfTrailingZeros` | O(1) | O(1) |
 | Visit every set bit by `rest &= rest - 1` | O(k) for `k` set bits | O(1) |
 | Walk all subsets of a mask with `k` set bits | O(2^k) | O(1) |
-| `BitSet.nextSetBit` loop over a set | proportional to the set's length in words plus the bits found | O(length / 64) words |
+| `BitSet.nextSetBit` loop over a set | not specified by the API; OpenJDK implementation note: proportional to the set's length in words plus the bits found | OpenJDK implementation note: O(length / 64) words for the set |
 
 ## Pitfalls
 
@@ -157,6 +157,11 @@ assert Integer.numberOfLeadingZeros(1) == 31;
 **Treating `Integer.MIN_VALUE` as a normal power of two.** The test `x != 0 && (x & (x - 1)) == 0` accepts `Integer.MIN_VALUE`, which is `1 << 31`, because `MIN_VALUE & (MIN_VALUE - 1)` is 0. If "power of two" must mean a positive value, add `x > 0`.
 
 **Shifting a negative number with `>>` when you wanted bits.** `-8 >> 1` is `-4`, not a bit pattern with a zero on top. Use `>>>` to treat the 32 bits as unsigned. The invariant broken is "the top bits are zero after a right shift".
+
+**Writing `x & 1 == 0` for an evenness test.** `==` binds more tightly than `&`, so Java reads
+this as `x & (1 == 0)`, an `int` combined with a `boolean`. For an `int x` it does not compile:
+javac reports "bad operand types for binary operator '&'". Write `(x & 1) == 0`. The invariant
+broken is "the mask is applied before the comparison".
 
 ```java
 int wrong = 0;
@@ -170,6 +175,8 @@ for (int i = 0; i < 40; i++) {
 }
 assert Long.bitCount(right) == 40;
 assert (Integer.MIN_VALUE & (Integer.MIN_VALUE - 1)) == 0; // passes the naive power-of-two test
+int x = -6;
+assert (x & 1) == 0; // the parentheses are required; -6 is even
 ```
 
 ## Practice
