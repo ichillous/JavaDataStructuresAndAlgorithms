@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 890" width="520" height="890" role="img" aria-labelledby="title desc">
+<title id="title">72  K-way merge with a heap</title>
+<desc id="desc">mergeSorted of 1, 4, 7 and 2, 4 and 3, 6 keeps one head per list in a heap; when 4 from list A and 4 from list B tie, A pops first, giving 1, 2, 3, 4, 4, 6, 7.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="kway-merge-heap-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="kway-merge-heap-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="kway-merge-heap-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="kway-merge-heap-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="kway-merge-heap-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="kway-merge-heap-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="kway-merge-heap-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="kway-merge-heap-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="kway-merge-heap-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="kway-merge-heap-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="kway-merge-heap-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="kway-merge-heap-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="kway-merge-heap-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="kway-merge-heap-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="kway-merge-heap-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="890" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">72  K-way merge with a heap</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Sorting and searching · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">The heap holds each list&#x27;s first value</text>
+<text x="28" y="208" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">A</text>
+<rect x="100" y="182" width="44" height="40" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="122.0" y="209.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">1</text>
+<rect x="150" y="182" width="44" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="172.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">4</text>
+<rect x="200" y="182" width="44" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="222.0" y="209.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">7</text>
+<text x="28" y="258" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">B</text>
+<rect x="100" y="232" width="44" height="40" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="122.0" y="259.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">2</text>
+<rect x="150" y="232" width="44" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="172.0" y="259.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">4</text>
+<text x="28" y="308" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">C</text>
+<rect x="100" y="282" width="44" height="40" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="122.0" y="309.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">3</text>
+<rect x="150" y="282" width="44" height="40" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="172.0" y="309.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">6</text>
+<text x="28" y="350" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">heap</text>
+<rect x="100" y="330" width="51" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="125.5" y="351" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">1·A</text>
+<rect x="159" y="330" width="54" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="186.0" y="351" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">2·B</text>
+<rect x="221" y="330" width="55" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="248.5" y="351" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">3·C</text>
+<circle cx="42" cy="395" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="401" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="402" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">After popping 1, 2, 3: a tie</text>
+<text x="28" y="446" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">output</text>
+<rect x="100" y="426" width="54" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="127.0" y="453.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">1·A</text>
+<rect x="160" y="426" width="54" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="187.0" y="453.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">2·B</text>
+<rect x="220" y="426" width="54" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="247.0" y="453.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3·C</text>
+<text x="28" y="498" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">heap</text>
+<rect x="100" y="478" width="56" height="30" rx="15" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="128.0" y="499" font-size="18" fill="#8a5e00" text-anchor="middle" font-weight="700">4·A</text>
+<rect x="164" y="478" width="55" height="30" rx="15" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="191.5" y="499" font-size="18" fill="#8a5e00" text-anchor="middle" font-weight="700">4·B</text>
+<rect x="227" y="478" width="55" height="30" rx="15" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="254.5" y="499" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">6·C</text>
+<text x="28" y="534" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">4·A and 4·B compare equal: A has the lower list index,</text>
+<text x="28" y="560" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">so A pops first.</text>
+<circle cx="42" cy="599" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="605" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="606" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Finish: pop until every list is used up</text>
+<rect x="28" y="628" width="58" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="57.0" y="655.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">1·A</text>
+<rect x="92" y="628" width="58" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="121.0" y="655.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">2·B</text>
+<rect x="156" y="628" width="58" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="185.0" y="655.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">3·C</text>
+<rect x="220" y="628" width="58" height="40" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="249.0" y="655.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">4·A</text>
+<rect x="284" y="628" width="58" height="40" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="313.0" y="655.0" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">4·B</text>
+<rect x="348" y="628" width="58" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="377.0" y="655.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">6·C</text>
+<rect x="412" y="628" width="58" height="40" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="441.0" y="655.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">7·A</text>
+<rect x="28" y="688" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="704" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">head of a list</text>
+<rect x="198.91199999999998" y="688" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="232.91199999999998" y="704" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">output</text>
+<rect x="28" y="720" width="26" height="20" rx="4" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="62" y="736" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">equal values, list order</text>
+<rect x="28" y="760" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="791" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="820" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">The smallest head is the next output;</text>
+<text x="44" y="847" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">ties pop in list order.</text>
+</svg>

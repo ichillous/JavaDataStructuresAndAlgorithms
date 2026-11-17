@@ -1,11 +1,15 @@
 package io.github.ichillous.dsa.algorithms;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.function.LongPredicate;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 class SearchAlgorithmsTest {
     @Test
@@ -66,5 +70,99 @@ class SearchAlgorithmsTest {
         assertThrows(NullPointerException.class, () -> SearchAlgorithms.binarySearch(null, 0));
         assertThrows(NullPointerException.class, () -> SearchAlgorithms.lowerBound(null, 0));
         assertThrows(NullPointerException.class, () -> SearchAlgorithms.upperBound(null, 0));
+    }
+
+    /** A monotone predicate that is true from {@code threshold} on, recording every call. */
+    private static final class Probe implements LongPredicate {
+        private final long threshold;
+        private final long low;
+        private final long high;
+        private int calls;
+        private boolean outside;
+
+        Probe(long threshold, long low, long high) {
+            this.threshold = threshold;
+            this.low = low;
+            this.high = high;
+        }
+
+        @Override
+        public boolean test(long value) {
+            calls++;
+            outside |= value < low || value >= high;
+            return value >= threshold;
+        }
+    }
+
+    @Test
+    void firstTrueMatchesBruteForceOnSeededThresholds() {
+        Random random = new Random(0xF1257);
+        for (int trial = 0; trial < 2000; trial++) {
+            long low = random.nextInt(61) - 30;
+            long high = low + random.nextInt(40);
+            long threshold = random.nextInt(100) - 50;
+            long expected = high;
+            for (long value = low; value < high; value++) {
+                if (value >= threshold) {
+                    expected = value;
+                    break;
+                }
+            }
+            Probe probe = new Probe(threshold, low, high);
+            assertEquals(expected, SearchAlgorithms.firstTrue(low, high, probe),
+                    "trial " + trial + " range [" + low + ", " + high + ") threshold " + threshold);
+            assertTrue(!probe.outside, "predicate called outside the range, trial " + trial);
+        }
+    }
+
+    @Test
+    void firstTrueHandlesEmptyAllFalseAndAllTrueRanges() {
+        Probe empty = new Probe(0, 5, 5);
+        assertEquals(5, SearchAlgorithms.firstTrue(5, 5, empty));
+        assertEquals(0, empty.calls, "an empty range never calls the predicate");
+        assertEquals(10, SearchAlgorithms.firstTrue(3, 10, value -> false));
+        assertEquals(3, SearchAlgorithms.firstTrue(3, 10, value -> true));
+        assertEquals(-7, SearchAlgorithms.firstTrue(-7, -7, value -> true));
+        assertEquals(-4, SearchAlgorithms.firstTrue(-9, 0, value -> value >= -4));
+        assertEquals(6, SearchAlgorithms.firstTrue(5, 7, value -> value >= 6));
+    }
+
+    @Test
+    void firstTrueUsesLogarithmicallyManyCallsInsideTheRange() {
+        Probe probe = new Probe(700_000, 0, 1_000_000);
+        assertEquals(700_000, SearchAlgorithms.firstTrue(0, 1_000_000, probe));
+        assertTrue(probe.calls <= 20, "calls: " + probe.calls);
+        assertTrue(!probe.outside);
+    }
+
+    // A signed midpoint overflows here and never converges; the timeout reports that as a failure.
+    @Test
+    @Timeout(value = 10, unit = TimeUnit.SECONDS, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
+    void firstTrueDoesNotOverflowAtLongExtremes() {
+        long min = Long.MIN_VALUE;
+        long max = Long.MAX_VALUE;
+        // high - low exceeds Long.MAX_VALUE here, so a signed midpoint would overflow.
+        long[] thresholds = {min, min + 1, -1, 0, 1, max - 1, max};
+        for (long threshold : thresholds) {
+            Probe probe = new Probe(threshold, min, max);
+            assertEquals(threshold, SearchAlgorithms.firstTrue(min, max, probe), "threshold " + threshold);
+            assertTrue(!probe.outside, "predicate called outside the range, threshold " + threshold);
+            assertTrue(probe.calls <= 64, "calls: " + probe.calls);
+        }
+        assertEquals(max, SearchAlgorithms.firstTrue(min, max, value -> false));
+        assertEquals(min, SearchAlgorithms.firstTrue(min, max, value -> true));
+        assertEquals(max, SearchAlgorithms.firstTrue(max - 1, max, value -> false));
+        assertEquals(max - 1, SearchAlgorithms.firstTrue(max - 1, max, value -> true));
+        assertEquals(min, SearchAlgorithms.firstTrue(min, min + 1, value -> true));
+        assertEquals(min + 1, SearchAlgorithms.firstTrue(min, min + 1, value -> false));
+    }
+
+    @Test
+    void firstTrueRejectsInvalidArguments() {
+        assertThrows(IllegalArgumentException.class, () -> SearchAlgorithms.firstTrue(1, 0, value -> true));
+        assertThrows(IllegalArgumentException.class,
+                () -> SearchAlgorithms.firstTrue(Long.MAX_VALUE, Long.MIN_VALUE, value -> true));
+        assertThrows(NullPointerException.class, () -> SearchAlgorithms.firstTrue(0, 1, null));
+        assertThrows(NullPointerException.class, () -> SearchAlgorithms.firstTrue(0, 0, null));
     }
 }

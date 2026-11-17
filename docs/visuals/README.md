@@ -551,7 +551,39 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Rotations keep sorted order; a flip splits a 4-node.
 
-## 69. One insertion step
+## 69. Linear search: first match
+
+[Sorting and searching: read the lesson](../../algorithms/searching/linear-search.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/linear-scan-first-match-dark.svg"><img src="assets/linear-scan-first-match.svg" alt="linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1." width="520"></picture>
+
+**Key idea:** A hit stops the scan; only a miss costs n comparisons.
+
+## 70. Predicate boundary search
+
+[Sorting and searching: read the lesson](../../algorithms/searching/binary-search-on-answer.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/predicate-boundary-dark.svg"><img src="assets/predicate-boundary.svg" alt="For weights 3, 2, 2, 4, 1, 4 shipped in 3 days, capacities 4 and 5 are too slow and 6 to 16 fit. firstTrue(4, 17, fits) probes 10, 7, 5 and 6 and returns 6." width="520"></picture>
+
+**Key idea:** Once a capacity fits, every larger one fits: each probe halves the range.
+
+## 71. Quickselect keeps one part
+
+[Sorting and searching: read the lesson](../../algorithms/searching/selection.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/quickselect-shrink-dark.svg"><img src="assets/quickselect-shrink.svg" alt="kthSmallest of 7, 2, 9, 4, 4, 1 with k = 2: three partitions with pivots 7, 2 and 4 narrow the range from [0..5] to [0..3] to [2..3], and the equal part answers 4." width="520"></picture>
+
+**Key idea:** k lies in one part of each partition: keep it, discard the rest.
+
+## 72. K-way merge with a heap
+
+[Sorting and searching: read the lesson](../../algorithms/searching/selection.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/kway-merge-heap-dark.svg"><img src="assets/kway-merge-heap.svg" alt="mergeSorted of 1, 4, 7 and 2, 4 and 3, 6 keeps one head per list in a heap; when 4 from list A and 4 from list B tie, A pops first, giving 1, 2, 3, 4, 4, 6, 7." width="520"></picture>
+
+**Key idea:** The smallest head is the next output; ties pop in list order.
+
+## 73. One insertion step
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/insertion-sort.md)
 
@@ -559,7 +591,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Insertion sort shifts only the larger values one slot right, then drops the saved key into the gap, so the sorted prefix grows by one.
 
-## 70. Heapsort phases
+## 74. Heapsort phases
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/heap-sort.md)
 
@@ -567,7 +599,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Heapsort builds a max-heap, then swaps the root to the end and repairs the shorter heap; the sorted suffix grows by one each time.
 
-## 71. Counting sort tally
+## 75. Counting sort tally
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -575,7 +607,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Counting sort never compares two values: it tallies each value, then writes each value back as many times as it was counted.
 
-## 72. Radix passes by digit
+## 76. Radix passes by digit
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
@@ -583,7 +615,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 **Key idea:** Radix sort orders by the least significant digit first; because every pass is stable, ties keep the earlier order and the last pass leaves a full sort.
 
-## 73. Stable and unstable outcomes
+## 77. Stable and unstable outcomes
 
 [Sorting and searching: read the lesson](../../algorithms/sorting/non-comparison-and-comparator-sorts.md)
 
