@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 750" width="520" height="750" role="img" aria-labelledby="title desc">
+<title id="title">28  Linear search: first match</title>
+<desc id="desc">linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="linear-scan-first-match-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="linear-scan-first-match-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="linear-scan-first-match-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="linear-scan-first-match-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="linear-scan-first-match-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="linear-scan-first-match-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="linear-scan-first-match-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="linear-scan-first-match-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="linear-scan-first-match-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="linear-scan-first-match-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="linear-scan-first-match-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="linear-scan-first-match-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="linear-scan-first-match-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="linear-scan-first-match-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="linear-scan-first-match-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="750" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">28  Linear search: first match</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Sorting and searching · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Search 4: stop at the first match</text>
+<rect x="28" y="178" width="60" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="58.0" y="209.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">9</text>
+<text x="58.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="98" y="178" width="60" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="128.0" y="209.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">4</text>
+<text x="128.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="168" y="178" width="60" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="198.0" y="209.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<text x="198.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="238" y="178" width="60" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="268.0" y="209.0" font-size="20" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<text x="268.0" y="252" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<text x="28" y="280" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">2 comparisons, returns index 1.</text>
+<text x="28" y="306" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">The 4 at index 2 is never inspected.</text>
+<circle cx="42" cy="351" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="357" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="358" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Search 7: inspect every cell</text>
+<rect x="28" y="380" width="60" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="58.0" y="411.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">9</text>
+<text x="58.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="98" y="380" width="60" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="128.0" y="411.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">4</text>
+<text x="128.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="168" y="380" width="60" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="198.0" y="411.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">4</text>
+<text x="198.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="238" y="380" width="60" height="48" rx="8" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="268.0" y="411.0" font-size="20" fill="#bd3026" text-anchor="middle" font-weight="700">2</text>
+<text x="268.0" y="454" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<text x="28" y="482" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">4 comparisons, returns -1.</text>
+<text x="28" y="508" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">4 comparisons = n; absence cannot be known sooner.</text>
+<rect x="28" y="544" width="26" height="20" rx="4" fill="#fde9e7" stroke="#bd3026" stroke-width="2"/>
+<text x="62" y="560" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">inspected, not equal</text>
+<rect x="264.576" y="544" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="298.576" y="560" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">first match, returned</text>
+<rect x="28" y="576" width="26" height="20" rx="4" fill="#ffffff" stroke="#8994a5" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="62" y="592" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">never inspected</text>
+<rect x="28" y="616" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="647" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="676" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">A hit stops the scan; only a miss costs</text>
+<text x="44" y="703" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">n comparisons.</text>
+</svg>

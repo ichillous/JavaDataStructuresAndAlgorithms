@@ -222,3 +222,35 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/dynamic-array-growth-dark.svg"><img src="assets/dynamic-array-growth.svg" alt="A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends." width="520"></picture>
 
 **Key idea:** Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.
+
+## 28. Linear search: first match
+
+[Sorting and searching: read the lesson](../../algorithms/searching/linear-search.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/linear-scan-first-match-dark.svg"><img src="assets/linear-scan-first-match.svg" alt="linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1." width="520"></picture>
+
+**Key idea:** A hit stops the scan; only a miss costs n comparisons.
+
+## 29. Predicate boundary search
+
+[Sorting and searching: read the lesson](../../algorithms/searching/binary-search-on-answer.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/predicate-boundary-dark.svg"><img src="assets/predicate-boundary.svg" alt="For weights 3, 2, 2, 4, 1, 4 shipped in 3 days, capacities 4 and 5 are too slow and 6 to 16 fit. firstTrue(4, 17, fits) probes 10, 7, 5 and 6 and returns 6." width="520"></picture>
+
+**Key idea:** Once a capacity fits, every larger one fits: each probe halves the range.
+
+## 30. Quickselect keeps one part
+
+[Sorting and searching: read the lesson](../../algorithms/searching/selection.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/quickselect-shrink-dark.svg"><img src="assets/quickselect-shrink.svg" alt="kthSmallest of 7, 2, 9, 4, 4, 1 with k = 2: three partitions with pivots 7, 2 and 4 narrow the range from [0..5] to [0..3] to [2..3], and the equal part answers 4." width="520"></picture>
+
+**Key idea:** k lies in one part of each partition: keep it, discard the rest.
+
+## 31. K-way merge with a heap
+
+[Sorting and searching: read the lesson](../../algorithms/searching/selection.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/kway-merge-heap-dark.svg"><img src="assets/kway-merge-heap.svg" alt="mergeSorted of 1, 4, 7 and 2, 4 and 3, 6 keeps one head per list in a heap; when 4 from list A and 4 from list B tie, A pops first, giving 1, 2, 3, 4, 4, 6, 7." width="520"></picture>
+
+**Key idea:** The smallest head is the next output; ties pop in list order.

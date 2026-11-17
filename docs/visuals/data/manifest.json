@@ -296,6 +296,50 @@
       "number": 27,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
+    },
+    {
+      "id": "linear-scan-first-match",
+      "title": "Linear search: first match",
+      "category": "Sorting and searching",
+      "description": "linearSearch for 4 in 9, 4, 4, 2 inspects two cells and returns index 1, never reaching the second 4; a search for 7 inspects all four cells and returns -1.",
+      "lesson": "../../algorithms/searching/linear-search.md",
+      "keyIdea": "A hit stops the scan; only a miss costs n comparisons.",
+      "number": 28,
+      "light": "assets/linear-scan-first-match.svg",
+      "dark": "assets/linear-scan-first-match-dark.svg"
+    },
+    {
+      "id": "predicate-boundary",
+      "title": "Predicate boundary search",
+      "category": "Sorting and searching",
+      "description": "For weights 3, 2, 2, 4, 1, 4 shipped in 3 days, capacities 4 and 5 are too slow and 6 to 16 fit. firstTrue(4, 17, fits) probes 10, 7, 5 and 6 and returns 6.",
+      "lesson": "../../algorithms/searching/binary-search-on-answer.md",
+      "keyIdea": "Once a capacity fits, every larger one fits: each probe halves the range.",
+      "number": 29,
+      "light": "assets/predicate-boundary.svg",
+      "dark": "assets/predicate-boundary-dark.svg"
+    },
+    {
+      "id": "quickselect-shrink",
+      "title": "Quickselect keeps one part",
+      "category": "Sorting and searching",
+      "description": "kthSmallest of 7, 2, 9, 4, 4, 1 with k = 2: three partitions with pivots 7, 2 and 4 narrow the range from [0..5] to [0..3] to [2..3], and the equal part answers 4.",
+      "lesson": "../../algorithms/searching/selection.md",
+      "keyIdea": "k lies in one part of each partition: keep it, discard the rest.",
+      "number": 30,
+      "light": "assets/quickselect-shrink.svg",
+      "dark": "assets/quickselect-shrink-dark.svg"
+    },
+    {
+      "id": "kway-merge-heap",
+      "title": "K-way merge with a heap",
+      "category": "Sorting and searching",
+      "description": "mergeSorted of 1, 4, 7 and 2, 4 and 3, 6 keeps one head per list in a heap; when 4 from list A and 4 from list B tie, A pops first, giving 1, 2, 3, 4, 4, 6, 7.",
+      "lesson": "../../algorithms/searching/selection.md",
+      "keyIdea": "The smallest head is the next output; ties pop in list order.",
+      "number": 31,
+      "light": "assets/kway-merge-heap.svg",
+      "dark": "assets/kway-merge-heap-dark.svg"
     }
   ],
   "traces": [
