@@ -11,6 +11,14 @@ compatible: one ending at 2 can precede one starting at 2. Integer-extreme
 endpoints are valid. Null collections/elements and empty/backward intervals are
 rejected. The method sorts a copy and returns an immutable schedule.
 
+| At a glance | |
+| --- | --- |
+| **Use it when** | A proof (an exchange argument) shows some optimum contains the local choice, as for earliest-finish activity selection |
+| **Avoid it when** | Items carry values or can be reused with arbitrary denominations; use dynamic programming |
+| **Cost** | O(n log(n + 1)) to sort, O(n) to scan, O(n) space |
+| **In this repo** | [`GreedyAlgorithms.selectActivities`](../../src/main/java/io/github/ichillous/dsa/algorithms/GreedyAlgorithms.java) |
+| **In the JDK** | `Comparator.comparingInt`, `List.sort` and `Integer.compare` for the sort step |
+
 <!-- visual:generated activity-selection -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/activity-selection-dark.svg"><img src="../../docs/visuals/assets/activity-selection.svg" alt="Choose earliest finishing intervals; touching endpoints remain compatible." width="520"></picture>
 
@@ -60,6 +68,42 @@ with a comparator is safer than subtracting them, which can overflow.
 `[2, 3)`, losing an activity. For a weighted objective, a single valuable interval
 might beat several short cheap ones; earliest finish has no proof for total value.
 
+## In real Java
+
+Greedy code is mostly a sort plus a scan, so the JDK part is the comparator.
+`Integer.compare(a, b)` is always safe; the shortcut `a - b` overflows when the
+values are far apart (`Integer.MIN_VALUE - 1` is positive), which is exactly the
+integer-extreme endpoints this lesson allows. `List.sort` is stable, so a
+comparator on one key keeps equal elements in input order.
+
+```java
+import io.github.ichillous.dsa.algorithms.GreedyAlgorithms;
+import io.github.ichillous.dsa.algorithms.GreedyAlgorithms.Interval;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+assert Integer.MIN_VALUE - 1 > 0; // subtraction wraps: wrong order
+assert Integer.compare(Integer.MIN_VALUE, 1) < 0;
+
+List<Interval> byEnd = new ArrayList<>(List.of(
+        new Interval(Integer.MIN_VALUE, 1), new Interval(0, 0 + 1), new Interval(1, 2)));
+byEnd.sort(Comparator.comparingInt(Interval::end));
+assert byEnd.get(0).equals(new Interval(Integer.MIN_VALUE, 1));
+assert GreedyAlgorithms.selectActivities(byEnd).size() == 2;
+```
+
+## Common mistakes
+
+- **Sorting by start.** Intervals `[0, 4)`, `[1, 2)`, `[2, 3)` sorted by start
+  pick `[0, 4)` first and return 1 activity instead of 2. The exchange argument
+  needs the earliest *end*, which leaves the most room.
+- **Treating touching intervals as overlapping.** `[1, 2)` and `[2, 3)` are
+  compatible. Testing `next.start() > last.end()` instead of `>=` drops one and
+  breaks the half-open invariant.
+- **Sorting by shortest duration.** `[0, 5)`, `[4, 6)`, `[5, 10)`: the shortest
+  interval `[4, 6)` conflicts with both others, giving 1 where 2 are possible.
+
 ## Practice
 
 1. Trace two compatible activities that share an endpoint and two that overlap.
@@ -67,6 +111,29 @@ might beat several short cheap ones; earliest finish has no proof for total valu
    greedy schedule, including equal finishes and negative endpoints.
 3. Add interval values and construct a counterexample to earliest finish. State
    a DP subproblem that could solve the weighted version.
+
+## Check yourself
+
+<details>
+<summary>What exactly does the exchange argument show for earliest-finish selection?</summary>
+
+That swapping any optimal schedule's first activity for the earliest-finishing one keeps it feasible and the same size, because the replacement ends no later. So some optimal schedule contains the greedy choice.
+
+</details>
+
+<details>
+<summary>Why are `[1, 2)` and `[2, 3)` both selected?</summary>
+
+Intervals are half-open, so one ending at 2 does not occupy time 2 and the next may start there.
+
+</details>
+
+<details>
+<summary>Why does the earliest-finish rule give no guarantee for weighted intervals?</summary>
+
+A single heavy interval can outweigh several light ones that finish earlier, and the exchange argument only preserves the count, not the total value. Use weighted interval scheduling instead.
+
+</details>
 
 See [solutions](../../docs/solutions.md) and
 [other greedy problems](problems.md) for where proof obligations change. The [solution finder](../../docs/solution-finder.md#19-greedy) compares this technique with its alternatives.
