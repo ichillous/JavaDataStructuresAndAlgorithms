@@ -86,7 +86,7 @@ def heapsort_phases(c, fixtures):
     y = row(c, y + 76, two, heap_states(n - 2))
     suffix_brace(y, n - 2)
 
-    y = c.legend(y + 70, [("focus", "heap root"), ("alt", "rest of the heap"), ("good", "sorted suffix")])
+    y = c.legend(y + 60, [("focus", "heap root"), ("alt", "rest of the heap"), ("good", "sorted suffix")])
     c.note(y + 14, HEAP_IDEA)
 
 
@@ -141,10 +141,10 @@ def radix_lsd_passes(c, fixtures):
     c.text(ROW_X, y + 22, "ties keep the previous order:", size=18, color="muted")
     y = row(c, y + 32, second, ["good"] * n)
 
-    y = c.legend(y + 38, [("warn", "digit being read"), ("alt", "after the ones pass"),
+    y = c.legend(y + 30, [("warn", "digit being read"), ("alt", "after the ones pass"),
                           ("good", "after the tens pass")])
-    c.text(28, y + 22, "Base 10 shown; radixSort uses 8-bit digits.", size=18, color="muted")
-    c.note(y + 46, RADIX_IDEA)
+    c.text(28, y + 20, "Base 10 shown; radixSort uses 8-bit digits.", size=18, color="muted")
+    c.note(y + 40, RADIX_IDEA)
 
 
 # ---------------------------------------------------------------- sort-stability
@@ -198,7 +198,7 @@ FIGURES = [
         "description": ("Heapsort on 3, 1, 6, 5, 2, 4 builds the max-heap 6, 5, 4, 1, 2, 3, then moves 6 "
                         "and 5 to the end, giving 5, 3, 4, 1, 2, 6 and 4, 3, 2, 1, 5, 6, until 1 to 6 is sorted."),
         "lesson": "algorithms/sorting/heap-sort.md", "keyIdea": HEAP_IDEA,
-        "height": 903, "draw": heapsort_phases,
+        "height": 893, "draw": heapsort_phases,
     },
     {
         "id": "counting-sort-counts", "title": "Counting sort tally", "category": CATEGORY,
@@ -212,7 +212,7 @@ FIGURES = [
         "description": ("Sorting 35, 21, 41, 15, 31, 25 by the ones digit gives 21, 41, 31, 35, 15, 25; a "
                         "stable pass on the tens digit then gives 15, 21, 25, 31, 35, 41."),
         "lesson": "algorithms/sorting/non-comparison-and-comparator-sorts.md", "keyIdea": RADIX_IDEA,
-        "height": 912, "draw": radix_lsd_passes,
+        "height": 898, "draw": radix_lsd_passes,
     },
     {
         "id": "sort-stability", "title": "Stable and unstable outcomes", "category": CATEGORY,

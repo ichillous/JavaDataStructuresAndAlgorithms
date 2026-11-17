@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 912" width="520" height="912" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 898" width="520" height="898" role="img" aria-labelledby="title desc">
 <title id="title">31  Radix passes by digit</title>
 <desc id="desc">Sorting 35, 21, 41, 15, 31, 25 by the ones digit gives 21, 41, 31, 35, 15, 25; a stable pass on the tens digit then gives 15, 21, 25, 31, 35, 41.</desc>
 <style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
 <defs><marker id="radix-lsd-passes-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="radix-lsd-passes-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="radix-lsd-passes-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="radix-lsd-passes-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="radix-lsd-passes-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="radix-lsd-passes-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="radix-lsd-passes-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="radix-lsd-passes-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="radix-lsd-passes-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="radix-lsd-passes-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="radix-lsd-passes-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="radix-lsd-passes-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="radix-lsd-passes-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="radix-lsd-passes-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="radix-lsd-passes-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
-<rect x="0" y="0" width="520" height="912" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<rect x="0" y="0" width="520" height="898" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
 <text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">31  Radix passes by digit</text>
 <text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Sorting and searching · Worked example</text>
 <line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
@@ -75,18 +75,18 @@
 <text x="323.0" y="555.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">35</text>
 <rect x="359" y="524" width="56" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
 <text x="387.0" y="555.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">41</text>
-<rect x="28" y="594" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
-<text x="62" y="610" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">digit being read</text>
-<rect x="223.104" y="594" width="26" height="20" rx="4" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
-<text x="257.10400000000004" y="610" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">after the ones pass</text>
-<rect x="28" y="626" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
-<text x="62" y="642" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">after the tens pass</text>
-<text x="28" y="674" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">Base 10 shown; radixSort uses 8-bit digits.</text>
-<rect x="28" y="698" width="464" height="190" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
-<text x="44" y="729" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
-<text x="44" y="758" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Radix sort orders by the least</text>
-<text x="44" y="785" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">significant digit first; because every</text>
-<text x="44" y="812" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">pass is stable, ties keep the earlier</text>
-<text x="44" y="839" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">order and the last pass leaves a full</text>
-<text x="44" y="866" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">sort.</text>
+<rect x="28" y="586" width="26" height="20" rx="4" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="62" y="602" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">digit being read</text>
+<rect x="223.104" y="586" width="26" height="20" rx="4" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="257.10400000000004" y="602" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">after the ones pass</text>
+<rect x="28" y="618" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="634" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">after the tens pass</text>
+<text x="28" y="664" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">Base 10 shown; radixSort uses 8-bit digits.</text>
+<rect x="28" y="684" width="464" height="190" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="715" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="744" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Radix sort orders by the least</text>
+<text x="44" y="771" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">significant digit first; because every</text>
+<text x="44" y="798" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">pass is stable, ties keep the earlier</text>
+<text x="44" y="825" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">order and the last pass leaves a full</text>
+<text x="44" y="852" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">sort.</text>
 </svg>
