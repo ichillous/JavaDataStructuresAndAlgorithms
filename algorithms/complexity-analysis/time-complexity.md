@@ -140,7 +140,7 @@ each index enters and leaves at most once across the whole run.
 ## Check yourself
 
 <details>
-<summary>Why does merge sort have `log2(n)` merge levels that each touch at most `n` values?</summary>
+<summary>Why does merge sort have <code>log2(n)</code> merge levels that each touch at most <code>n</code> values?</summary>
 
 Every level halves the range size, so a power-of-two size needs `log2(n)`
 levels. The ranges on one level are disjoint, so together they hold at most `n`

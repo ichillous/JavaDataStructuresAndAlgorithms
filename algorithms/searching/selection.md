@@ -186,7 +186,7 @@ throws rather than repairing the input.
 ## Check yourself
 
 <details>
-<summary>In the trace of `[7, 2, 9, 4, 4, 1]`, why are `7` and `9` never looked at after round 1?</summary>
+<summary>In the trace of <code>[7, 2, 9, 4, 4, 1]</code>, why are <code>7</code> and <code>9</code> never looked at after round 1?</summary>
 
 The partition around 7 puts the four values below 7 on the left and leaves 7 and 9 at least 7,
 so the value of rank 2 is among those four; only the part holding index 2 can contain the answer.

@@ -298,7 +298,7 @@ the longest dictionary word. See the
 ## Check yourself
 
 <details>
-<summary>Why does swapping the coin and amount loops change what `countCoinCombinations` counts?</summary>
+<summary>Why does swapping the coin and amount loops change what <code>countCoinCombinations</code> counts?</summary>
 
 With coins outer, each combination is built in coin order, so `1 + 2` and `2 + 1` are one way. With amount outer, every ordering is a separate path, so `{1, 2}` with amount 3 gives 3 instead of 2.
 
@@ -312,7 +312,7 @@ Equal closing costs go to the smallest last city, so the tour ends at city 1. Wa
 </details>
 
 <details>
-<summary>In weighted interval scheduling, why does `best[3]` equal `best[2]` for the intervals above?</summary>
+<summary>In weighted interval scheduling, why does <code>best[3]</code> equal <code>best[2]</code> for the intervals above?</summary>
 
 Taking C is worth 2 plus `best[1]` = 3, which is 5, and skipping keeps `best[2]` = 6. Skipping wins, and ties would also skip, so C is never chosen.
 

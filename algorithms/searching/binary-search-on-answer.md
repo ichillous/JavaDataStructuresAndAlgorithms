@@ -186,7 +186,7 @@ the range; the exclusive bound is one past it. If none qualified, `firstTrue` re
 </details>
 
 <details>
-<summary>Why does "ships in exactly 3 days" break `firstTrue`?</summary>
+<summary>Why does "ships in exactly 3 days" break <code>firstTrue</code>?</summary>
 
 It is false for capacities 4 and 5, true for 6 to 8, and false again from 9, so it changes more
 than once. A probe at 10 sees false and discards the lower half, which holds the real answer 6.
@@ -194,7 +194,7 @@ than once. A probe at 10 sees false and discards the lower half, which holds the
 </details>
 
 <details>
-<summary>About how many predicate calls does `firstTrue` make on a range of a billion candidates?</summary>
+<summary>About how many predicate calls does <code>firstTrue</code> make on a range of a billion candidates?</summary>
 
 About 30, since each call halves the undecided range and 2^30 is just over a billion.
 

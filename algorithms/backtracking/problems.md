@@ -158,7 +158,7 @@ assert threw;
 ## Check yourself
 
 <details>
-<summary>Why does `solveSudoku` choose the empty cell with the fewest legal candidates?</summary>
+<summary>Why does <code>solveSudoku</code> choose the empty cell with the fewest legal candidates?</summary>
 
 A cell with one or zero candidates exposes a forced move or a contradiction immediately, so dead branches are cut sooner than with an arbitrary scan order.
 

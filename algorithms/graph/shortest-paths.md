@@ -278,14 +278,14 @@ The deque holds vertices in nondecreasing distance order. A zero-weight target h
 </details>
 
 <details>
-<summary>What does `f = g + h` stay at along an optimal route when the heuristic is consistent and the grid has unit edges?</summary>
+<summary>What does <code>f = g + h</code> stay at along an optimal route when the heuristic is consistent and the grid has unit edges?</summary>
 
 The optimal route length. In the figure `f` is 4 for every cell from 10 to 14, because each step raises `g` by 1 and lowers the Manhattan `h` by 1.
 
 </details>
 
 <details>
-<summary>Floyd–Warshall has just finished the round that allows vertex k. Which paths does `d[i][j]` now account for?</summary>
+<summary>Floyd–Warshall has just finished the round that allows vertex k. Which paths does <code>d[i][j]</code> now account for?</summary>
 
 The shortest walks from i to j whose intermediate vertices all lie in 0 through k. That round asks whether `d[i][k] + d[k][j]` beats the current value.
 

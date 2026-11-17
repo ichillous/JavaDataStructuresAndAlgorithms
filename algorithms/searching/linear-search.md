@@ -118,7 +118,7 @@ assert longs.indexOf(4L) == 1;
 ## Check yourself
 
 <details>
-<summary>How many comparisons does `linearSearch` make for target 4 and for target 7 in `[9, 4, 4, 2]`?</summary>
+<summary>How many comparisons does <code>linearSearch</code> make for target 4 and for target 7 in <code>[9, 4, 4, 2]</code>?</summary>
 
 Two for the `4` (index 0, then the match at index 1) and four for the `7`, which is every cell.
 
@@ -134,7 +134,7 @@ nothing about the cells that follow, so a miss needs all `n` comparisons.
 </details>
 
 <details>
-<summary>Why does `List.of(4L).indexOf(4)` return `-1`?</summary>
+<summary>Why does <code>List.of(4L).indexOf(4)</code> return <code>-1</code>?</summary>
 
 `indexOf` compares with `equals`, and the `int` argument boxes to an `Integer`, which is not
 equal to a `Long` even when the numbers match.

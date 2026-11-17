@@ -188,14 +188,14 @@ assert (x & 1) == 0; // the parentheses are required; -6 is even
 ## Check yourself
 
 <details>
-<summary>Why does `(sub - 1) & mask` never leave the mask?</summary>
+<summary>Why does <code>(sub - 1) &amp; mask</code> never leave the mask?</summary>
 
 The `& mask` clears every bit the mask does not contain, so each result is a subset of `mask`. The subtraction only makes the next smaller value; the AND removes the bits borrowed through the bits outside the mask.
 
 </details>
 
 <details>
-<summary>What is `1 << 32` for an `int`, and what does `1L << 32` give?</summary>
+<summary>What is <code>1 &lt;&lt; 32</code> for an <code>int</code>, and what does <code>1L &lt;&lt; 32</code> give?</summary>
 
 `1 << 32` is 1, because an `int` shift count is taken modulo 32. `1L << 32` is 4294967296, because the shift happens on a `long`.
 

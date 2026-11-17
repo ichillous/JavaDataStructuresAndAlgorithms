@@ -162,7 +162,7 @@ Not in general. It is unique only when the graph forces a single order, for exam
 </details>
 
 <details>
-<summary>Why can `dagShortestPaths` handle negative weights when Dijkstra cannot?</summary>
+<summary>Why can <code>dagShortestPaths</code> handle negative weights when Dijkstra cannot?</summary>
 
 It processes vertices in topological order, so when a vertex is processed every predecessor is already final; no cycle exists to make a negative edge keep lowering earlier labels.
 

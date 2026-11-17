@@ -195,7 +195,7 @@ Rare symbols belong deepest, so they must be siblings at the bottom; merging the
 </details>
 
 <details>
-<summary>What does `huffmanCodeLengths` return for frequencies `{0, 7, 0}`, and why?</summary>
+<summary>What does <code>huffmanCodeLengths</code> return for frequencies <code>{0, 7, 0}</code>, and why?</summary>
 
 `{0, 1, 0}`. Zero-frequency symbols are unused and get length 0, and a single used symbol still needs one bit.
 

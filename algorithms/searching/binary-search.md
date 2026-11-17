@@ -112,7 +112,7 @@ Searching a range of answers rather than an array is the same technique:
 ## Check yourself
 
 <details>
-<summary>Why does `upperBound(a, 2) - lowerBound(a, 2)` count the 2s in `[1, 2, 2, 2, 5]`?</summary>
+<summary>Why does <code>upperBound(a, 2) - lowerBound(a, 2)</code> count the 2s in <code>[1, 2, 2, 2, 5]</code>?</summary>
 
 `lowerBound` is the index of the first value at least 2 (1) and `upperBound` is the index of the
 first value above 2 (4), so the half-open range `[1, 4)` holds exactly the equal values: 3.
@@ -120,14 +120,14 @@ first value above 2 (4), so the half-open range `[1, 4)` holds exactly the equal
 </details>
 
 <details>
-<summary>What does `Arrays.binarySearch` return for key 3 in `{1, 2, 2, 2, 5}`?</summary>
+<summary>What does <code>Arrays.binarySearch</code> return for key 3 in <code>{1, 2, 2, 2, 5}</code>?</summary>
 
 `-5`. The insertion point is 4, and the JDK reports an absent key as `-(insertion point) - 1`.
 
 </details>
 
 <details>
-<summary>What does `low == high` mean when the lower-bound loop ends?</summary>
+<summary>What does <code>low == high</code> mean when the lower-bound loop ends?</summary>
 
 Everything before it is below the target and everything from it on is at least the target, so
 that shared index is the first position whose value is at least the target; it equals the array

@@ -114,7 +114,7 @@ assert Arrays.binarySearch(sorted, 4) == -3;
 ## Check yourself
 
 <details>
-<summary>Why does `T(n) = 2T(n/2) + O(n)` give O(n log n) for merge sort?</summary>
+<summary>Why does <code>T(n) = 2T(n/2) + O(n)</code> give O(n log n) for merge sort?</summary>
 
 Each of the `log2(n)` levels merges disjoint ranges that together hold `n`
 values, so every level costs O(n). Levels times work per level gives O(n log n).

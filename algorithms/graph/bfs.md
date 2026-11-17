@@ -172,7 +172,7 @@ for (int vertex = 0; vertex < 6; vertex++) {
 ## Check yourself
 
 <details>
-<summary>What does `shortestPath(graph, 0, 4)` return when 4 cannot be reached?</summary>
+<summary>What does <code>shortestPath(graph, 0, 4)</code> return when 4 cannot be reached?</summary>
 
 An empty list. A reachable target always yields a path that includes both endpoints, and `shortestPath(graph, 2, 2)` is `[2]`.
 
@@ -186,7 +186,7 @@ The queue processes layer d completely before layer d + 1, so the vertex that fi
 </details>
 
 <details>
-<summary>Dijkstra returns `OptionalLong.empty()` for some vertex. What does that mean, and what does it not mean?</summary>
+<summary>Dijkstra returns <code>OptionalLong.empty()</code> for some vertex. What does that mean, and what does it not mean?</summary>
 
 The vertex is unreachable from the source. It does not mean distance 0 or a missing graph vertex; a reachable `Long.MAX_VALUE` is still a valid distance.
 

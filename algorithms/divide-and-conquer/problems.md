@@ -144,7 +144,7 @@ assert rejected;
 ## Check yourself
 
 <details>
-<summary>In a merge of left `[2, 4]` and right `[1, 3, 5]`, why does emitting 1 add exactly 2?</summary>
+<summary>In a merge of left <code>[2, 4]</code> and right <code>[1, 3, 5]</code>, why does emitting 1 add exactly 2?</summary>
 
 Both left values are still waiting and both are larger than 1. Because each half
 is sorted, a right value smaller than the front left value is smaller than every
