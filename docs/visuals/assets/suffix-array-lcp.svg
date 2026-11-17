@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 870" width="520" height="870" role="img" aria-labelledby="title desc">
+<title id="title">89  Suffix array and a pattern range</title>
+<desc id="desc">The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="suffix-array-lcp-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="suffix-array-lcp-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="suffix-array-lcp-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="suffix-array-lcp-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="suffix-array-lcp-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="suffix-array-lcp-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="suffix-array-lcp-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="suffix-array-lcp-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="suffix-array-lcp-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="suffix-array-lcp-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="suffix-array-lcp-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="suffix-array-lcp-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="suffix-array-lcp-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="suffix-array-lcp-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="suffix-array-lcp-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="870" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">89  Suffix array and a pattern range</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Strings · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Suffixes of banana, sorted</text>
+<text x="146.0" y="202" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">start</text>
+<text x="246.0" y="202" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">suffix</text>
+<text x="346.0" y="202" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">lcp</text>
+<text x="84" y="239.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">rank 0</text>
+<rect x="96" y="214" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="146.0" y="240.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">5</text>
+<rect x="196" y="214" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="246.0" y="240.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">a</text>
+<rect x="296" y="214" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="346.0" y="240.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<text x="84" y="277.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">rank 1</text>
+<rect x="96" y="252" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="146.0" y="278.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3</text>
+<rect x="196" y="252" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="246.0" y="278.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">ana</text>
+<rect x="296" y="252" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="346.0" y="278.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<text x="84" y="315.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">rank 2</text>
+<rect x="96" y="290" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="146.0" y="316.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="196" y="290" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="246.0" y="316.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">anana</text>
+<rect x="296" y="290" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="346.0" y="316.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3</text>
+<text x="84" y="353.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">rank 3</text>
+<rect x="96" y="328" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="146.0" y="354.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="196" y="328" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="246.0" y="354.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">banana</text>
+<rect x="296" y="328" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="346.0" y="354.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<text x="84" y="391.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">rank 4</text>
+<rect x="96" y="366" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="146.0" y="392.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">4</text>
+<rect x="196" y="366" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="246.0" y="392.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">na</text>
+<rect x="296" y="366" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="346.0" y="392.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<text x="84" y="429.0" font-size="18" fill="#505b6b" text-anchor="end" font-weight="400">rank 5</text>
+<rect x="96" y="404" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="146.0" y="430.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<rect x="196" y="404" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="246.0" y="430.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">nana</text>
+<rect x="296" y="404" width="100" height="38" rx="3" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="346.0" y="430.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<text x="28" y="464" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">lcp: common prefix with the rank above.</text>
+<circle cx="42" cy="501" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="507" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="508" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">ana is the rank range [1, 3)</text>
+<rect x="28" y="546" width="77" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="66.5" y="577.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">a</text>
+<text x="66.5" y="620" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="105" y="546" width="77" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="143.5" y="577.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">ana</text>
+<text x="143.5" y="620" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="182" y="546" width="77" height="48" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="220.5" y="577.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">anana</text>
+<text x="220.5" y="620" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="259" y="546" width="77" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="297.5" y="577.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">banana</text>
+<text x="297.5" y="620" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="336" y="546" width="77" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="374.5" y="577.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">na</text>
+<text x="374.5" y="620" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="413" y="546" width="77" height="48" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="451.5" y="577.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">nana</text>
+<text x="451.5" y="620" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<path d="M 105 616 Q 105 624 113 624 H 174.0 Q 182.0 624 182.0 632 Q 182.0 624 190.0 624 H 251 Q 259 624 259 616" fill="none" stroke="#1c6b3c" stroke-width="2"/>
+<text x="182.0" y="652" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">low 1, high 3</text>
+<text x="28" y="682" font-size="18" fill="#1f2430" text-anchor="start" font-weight="700">Starts 3, 1 sorted: 1, 3</text>
+<rect x="28" y="696" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="712" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">suffix starts with ana</text>
+<rect x="28" y="736" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="767" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="796" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Suffixes sharing a prefix sit side by</text>
+<text x="44" y="823" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">side: a lookup is one range.</text>
+</svg>

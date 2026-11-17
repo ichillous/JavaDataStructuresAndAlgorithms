@@ -670,3 +670,51 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/sort-stability-dark.svg"><img src="assets/sort-stability.svg" alt="Records 3a, 1b, 3c, 2d, 1e, 3f sorted by their number: a stable sort gives 1b, 1e, 2d, 3a, 3c, 3f, keeping tags in order, while a hypothetical unstable outcome 1e, 1b, 2d, 3c, 3a, 3f reorders equal keys." width="520"></picture>
 
 **Key idea:** A stable sort keeps equal keys in their input order; an unstable sort may reorder them, losing any earlier ordering by tag.
+
+## 84. Z-array and the Z-box
+
+[Strings: read the lesson](../../algorithms/strings/pattern-matching.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/z-box-dark.svg"><img src="assets/z-box.svg" alt="The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box." width="520"></picture>
+
+**Key idea:** z[i] starts from its mirror's value; only units past the box edge extend it.
+
+## 85. Rabin-Karp: hash, then verify
+
+[Strings: read the lesson](../../algorithms/strings/pattern-matching.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/rabin-karp-rolling-dark.svg"><img src="assets/rabin-karp-rolling.svg" alt="Searching aeaecbagab for bagab slides a five-unit window; windows 0 and 5 have the pattern&#x27;s hash, window 0 (aeaec) is rejected at unit 0 and window 5 is reported." width="520"></picture>
+
+**Key idea:** Hash hits only choose where to compare; verification rejects impostors.
+
+## 86. Manacher: reuse the mirror
+
+[Strings: read the lesson](../../algorithms/strings/pattern-matching.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/manacher-mirror-dark.svg"><img src="assets/manacher-mirror.svg" alt="In cabacabad the palindrome abacaba around index 4 spans [1, 7]; index 5 copies radius 1 from index 3 and index 6 caps radius 3 from index 2 at the 2 units left, giving odd radii 1, 1, 3, 1, 4, 1, 2, 1, 1." width="520"></picture>
+
+**Key idea:** Inside a palindrome a center copies its mirror's radius, capped at the edge.
+
+## 87. Aho-Corasick links
+
+[Strings: read the lesson](../../algorithms/strings/multi-pattern-and-suffix-arrays.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/aho-corasick-links-dark.svg"><img src="assets/aho-corasick-links.svg" alt="The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root." width="520"></picture>
+
+**Key idea:** A failure link points at the longest suffix of a node that is still in the trie.
+
+## 88. Aho-Corasick scan
+
+[Strings: read the lesson](../../algorithms/strings/multi-pattern-and-suffix-arrays.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/aho-corasick-scan-dark.svg"><img src="assets/aho-corasick-scan.svg" alt="Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2." width="520"></picture>
+
+**Key idea:** One state per text unit; links report every pattern that ends at that unit.
+
+## 89. Suffix array and a pattern range
+
+[Strings: read the lesson](../../algorithms/strings/multi-pattern-and-suffix-arrays.md)
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/suffix-array-lcp-dark.svg"><img src="assets/suffix-array-lcp.svg" alt="The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3." width="520"></picture>
+
+**Key idea:** Suffixes sharing a prefix sit side by side: a lookup is one range.

@@ -912,6 +912,72 @@
       "number": 83,
       "light": "assets/sort-stability.svg",
       "dark": "assets/sort-stability-dark.svg"
+    },
+    {
+      "id": "z-box",
+      "title": "Z-array and the Z-box",
+      "category": "Strings",
+      "description": "The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box.",
+      "keyIdea": "z[i] starts from its mirror's value; only units past the box edge extend it.",
+      "lesson": "../../algorithms/strings/pattern-matching.md",
+      "number": 84,
+      "light": "assets/z-box.svg",
+      "dark": "assets/z-box-dark.svg"
+    },
+    {
+      "id": "rabin-karp-rolling",
+      "title": "Rabin-Karp: hash, then verify",
+      "category": "Strings",
+      "description": "Searching aeaecbagab for bagab slides a five-unit window; windows 0 and 5 have the pattern's hash, window 0 (aeaec) is rejected at unit 0 and window 5 is reported.",
+      "keyIdea": "Hash hits only choose where to compare; verification rejects impostors.",
+      "lesson": "../../algorithms/strings/pattern-matching.md",
+      "number": 85,
+      "light": "assets/rabin-karp-rolling.svg",
+      "dark": "assets/rabin-karp-rolling-dark.svg"
+    },
+    {
+      "id": "manacher-mirror",
+      "title": "Manacher: reuse the mirror",
+      "category": "Strings",
+      "description": "In cabacabad the palindrome abacaba around index 4 spans [1, 7]; index 5 copies radius 1 from index 3 and index 6 caps radius 3 from index 2 at the 2 units left, giving odd radii 1, 1, 3, 1, 4, 1, 2, 1, 1.",
+      "keyIdea": "Inside a palindrome a center copies its mirror's radius, capped at the edge.",
+      "lesson": "../../algorithms/strings/pattern-matching.md",
+      "number": 86,
+      "light": "assets/manacher-mirror.svg",
+      "dark": "assets/manacher-mirror-dark.svg"
+    },
+    {
+      "id": "aho-corasick-links",
+      "title": "Aho-Corasick links",
+      "category": "Strings",
+      "description": "The trie of he, she, his and hers, then its failure links listed one per row: sh to h, she to he, his to s and hers to s; every other node links to the root.",
+      "keyIdea": "A failure link points at the longest suffix of a node that is still in the trie.",
+      "lesson": "../../algorithms/strings/multi-pattern-and-suffix-arrays.md",
+      "number": 87,
+      "light": "assets/aho-corasick-links.svg",
+      "dark": "assets/aho-corasick-links-dark.svg"
+    },
+    {
+      "id": "aho-corasick-scan",
+      "title": "Aho-Corasick scan",
+      "category": "Strings",
+      "description": "Scanning ushers keeps the states root, s, sh, she, her and hers, and reports she at 1, he at 2 (through the link she to he) and hers at 2.",
+      "keyIdea": "One state per text unit; links report every pattern that ends at that unit.",
+      "lesson": "../../algorithms/strings/multi-pattern-and-suffix-arrays.md",
+      "number": 88,
+      "light": "assets/aho-corasick-scan.svg",
+      "dark": "assets/aho-corasick-scan-dark.svg"
+    },
+    {
+      "id": "suffix-array-lcp",
+      "title": "Suffix array and a pattern range",
+      "category": "Strings",
+      "description": "The sorted suffixes of banana start at 5, 3, 1, 0, 4, 2 with lcp 0, 1, 3, 0, 0, 2; the pattern ana is the rank range [1, 3), whose starts 3 and 1 sort to 1, 3.",
+      "keyIdea": "Suffixes sharing a prefix sit side by side: a lookup is one range.",
+      "lesson": "../../algorithms/strings/multi-pattern-and-suffix-arrays.md",
+      "number": 89,
+      "light": "assets/suffix-array-lcp.svg",
+      "dark": "assets/suffix-array-lcp-dark.svg"
     }
   ],
   "traces": [
