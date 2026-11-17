@@ -91,7 +91,14 @@ class VisualExamplesSearchTreeTest {
         assertEquals(DATA.list("search_tree.twothree.putOrder"), map.keys());
         assertEquals(DATA.number("search_tree.twothree.height"), map.height());
 
+        assertEquals(map.size(), puts(DATA.ints("search_tree.twothree.putOrder"), new ArrayList<>()).inOrder().size());
+        assertEquals(3, map.rank(4));
+        assertEquals(4, map.select(3));
+
         Model shape = Model.parse(DATA.text("search_tree.twothree.shape"));
+        // The drawn shape is what the documented left-leaning insertion builds for these puts.
+        assertEquals(DATA.text("search_tree.twothree.shape"),
+                puts(DATA.ints("search_tree.twothree.putOrder"), new ArrayList<>()).coloredShape());
         assertEquals(map.keys(), shape.inOrder());
         assertEquals(map.height(), shape.height());
         shape.assertLeftLeaning(true);
@@ -129,6 +136,15 @@ class VisualExamplesSearchTreeTest {
         String prefix = "search_tree.fix." + name;
         Model before = Model.parse(DATA.text(prefix + ".before"));
         Model after = repair.apply(Model.parse(DATA.text(prefix + ".before")));
+
+        // The documented insertion applies this repair to exactly these shapes while running the puts.
+        List<String[]> applied = new ArrayList<>();
+        puts(DATA.ints(prefix + ".puts"), applied);
+        String op = name.equals("flip") ? "flip" : name;
+        assertTrue(applied.stream().anyMatch(step -> step[0].equals(op)
+                        && step[1].equals(DATA.text(prefix + ".before"))
+                        && step[2].equals(DATA.text(prefix + ".after"))),
+                "the puts reach " + DATA.text(prefix + ".before") + " and repair it with " + op);
         assertEquals(DATA.text(prefix + ".after"), after.coloredShape());
         assertEquals(before.inOrder(), after.inOrder(), "a repair keeps the sorted order");
         assertEquals(before.blackHeight(), after.blackHeight(), "a repair keeps the black height");
@@ -143,6 +159,53 @@ class VisualExamplesSearchTreeTest {
     }
 
     // ---- reference model: a plain node with the documented rules, independent of the library ----
+
+    /**
+     * Runs left-leaning red-black insertion (the class Javadoc and lesson: add a red leaf, then
+     * on the way up rotate left, rotate right, flip colors, and color the root black). Each
+     * repair is recorded as {operation, shape before, shape after} of the subtree it changed.
+     */
+    private static Model puts(int[] keys, List<String[]> applied) {
+        Model root = null;
+        for (int key : keys) {
+            root = put(root, key, applied);
+            root.red = false;
+        }
+        return root;
+    }
+
+    private static Model put(Model node, int key, List<String[]> applied) {
+        if (node == null) {
+            return new Model(key, true, null, null);
+        }
+        if (key < node.key) {
+            node.left = put(node.left, key, applied);
+        } else if (key > node.key) {
+            node.right = put(node.right, key, applied);
+        }
+        if (isRed(node.right) && !isRed(node.left)) {
+            node = record(applied, "rotateLeft", node, Model::rotateLeft);
+        }
+        if (isRed(node.left) && isRed(node.left.left)) {
+            node = record(applied, "rotateRight", node, Model::rotateRight);
+        }
+        if (isRed(node.left) && isRed(node.right)) {
+            node = record(applied, "flip", node, Model::flipColors);
+        }
+        return node;
+    }
+
+    private static Model record(List<String[]> applied, String operation, Model node,
+                                java.util.function.UnaryOperator<Model> repair) {
+        String before = node.coloredShape();
+        Model result = repair.apply(node);
+        applied.add(new String[] {operation, before, result.coloredShape()});
+        return result;
+    }
+
+    private static boolean isRed(Model node) {
+        return node != null && node.red;
+    }
 
     private static Model insert(Model node, int key) {
         if (node == null) {

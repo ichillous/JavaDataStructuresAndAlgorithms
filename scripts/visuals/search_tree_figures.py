@@ -9,7 +9,7 @@ and an independent reference model.
 from drawing import ints
 
 TRAVERSAL_IDEA = "Pre, in and post order differ only in when the root is read."
-DELETE_IDEA = "The successor's key replaces the deleted key; only its old node is unlinked."
+DELETE_IDEA = "The successor's key replaces the deleted one; its old node is unlinked."
 TWO_THREE_IDEA = "A red link and its black parent make one 3-node."
 FIXUP_IDEA = "Rotations keep sorted order; a flip splits a 4-node."
 
@@ -68,14 +68,14 @@ def layout(tree, x0, spacing, y0, dy):
     return nodes
 
 
-def draw_tree(c, nodes, state_of, dashed_edges=()):
+def draw_tree(c, nodes, state_of):
     """Edges first, then nodes; ``state_of(record)`` returns a state name or None."""
     for record in nodes:
         parent = record["parent"]
         if parent is not None:
             color = "red" if record["color"] == "R" else "line"
             c.edge((parent["x"], parent["y"]), (record["x"], record["y"]), radius=NODE_R,
-                   directed=False, color=color, dashed=record["key"] in dashed_edges)
+                   directed=False, color=color)
     for record in nodes:
         state = state_of(record)
         c.node(record["x"], record["y"], record["key"], radius=NODE_R, state=state)
@@ -97,21 +97,23 @@ def draw_rb_tree(c, nodes):
                color=None if record["color"] == "R" else "ink")
 
 
-def rb_legend(c, y):
-    """Swatches for black and red nodes; the text names each color."""
+def rb_legend(c, y, repaired=False):
+    """Swatches for black and red nodes; the text names each color. ``repaired`` adds the h marker."""
     c.parts.append(f'<circle cx="40" cy="{y - 6}" r="10" fill="{c.color("paper")}" '
                    f'stroke="{c.color("ink")}" stroke-width="2"/>')
     c.text(58, y, "black node", size=18)
     c.parts.append(f'<circle cx="190" cy="{y - 6}" r="10" fill="{c.color("rose")}" '
                    f'stroke="{c.color("red")}" stroke-width="3"/>')
-    c.text(208, y, "red node, red link", size=18)
+    c.text(208, y, "red node" if repaired else "red node, red link", size=18)
+    if repaired:
+        c.text(312, y, "h = repaired node", size=18, color="blue", weight="700")
     return y + 10
 
 
 def tree_traversals(c, fixtures):
     """One tree, its parts named once, then the four sequences it produces."""
     tree = parse(fixtures["search_tree.traversal.shape"])
-    top, dy = 204, 46
+    top, dy = 204, 42
     nodes = layout(tree, 130, 46, top, dy)
     height = int(fixtures["search_tree.traversal.height"])
     leaves = set(ints(fixtures, "search_tree.traversal.leaves"))
@@ -128,13 +130,13 @@ def tree_traversals(c, fixtures):
     def row(y, title, keys):
         c.text(36, y, title, size=18, color="ink", weight="700")
         states = ["focus" if k == root["key"] else "good" if k in leaves else None for k in keys]
-        return c.cell_row(36, y + 8, keys, cell=50, gap=8, height=38, states=states)
+        return c.cell_row(36, y + 8, keys, cell=50, gap=8, height=36, states=states)
 
-    y = c.step(top + height * dy + 58, 2, "Read the same keys four ways")
+    y = c.step(top + height * dy + 56, 2, "Read the same keys four ways")
     y = row(y + 14, "pre-order: root, left, right", ints(fixtures, "search_tree.traversal.preOrder"))
-    y = row(y + 28, "in-order: left, root, right", ints(fixtures, "search_tree.traversal.inOrder"))
-    y = row(y + 28, "post-order: left, right, root", ints(fixtures, "search_tree.traversal.postOrder"))
-    y = row(y + 28, "level order: depth 0, then 1, 2, 3", ints(fixtures, "search_tree.traversal.levelOrder"))
+    y = row(y + 24, "in-order: left, root, right", ints(fixtures, "search_tree.traversal.inOrder"))
+    y = row(y + 24, "post-order: left, right, root", ints(fixtures, "search_tree.traversal.postOrder"))
+    y = row(y + 24, "level order: depth 0, then 1, 2, 3", ints(fixtures, "search_tree.traversal.levelOrder"))
 
     y = c.legend(y + 28, [("focus", "root"), ("good", "leaf")])
     c.note(y + 14, TRAVERSAL_IDEA)
@@ -153,6 +155,7 @@ def bst_delete_successor(c, fixtures):
 
     y = c.step(156, 1, f"delete({key}): the node has two children")
     before, node_of, bottom = place(fixtures["search_tree.delete.before"], y + 26)
+    removed_parent = node_of[successor]["parent"]["key"]
     draw_tree(c, before, lambda n: "bad" if n["key"] == key else "focus" if n["key"] == successor else None)
     c.text(node_of[key]["x"] + 36, node_of[key]["y"] + 7, "delete", size=18, color="red", weight="700")
     c.text(node_of[successor]["x"] + 34, node_of[successor]["y"] + 7, "successor", size=18,
@@ -167,7 +170,7 @@ def bst_delete_successor(c, fixtures):
     c.text(node_of[successor]["x"] + 36, node_of[successor]["y"] + 7, f"was {key}", size=18,
            color="green", weight="700")
     # The old position of the successor is empty after the unlink.
-    parent = node_of[max(k for k in node_of)]
+    parent = node_of[removed_parent]
     gx, gy = parent["x"] - 62, parent["y"] + 60
     c.edge((parent["x"], parent["y"]), (gx, gy), radius=NODE_R, directed=False, color="line", dashed=True)
     c.node(gx, gy, "", radius=NODE_R, state="muted")
@@ -221,13 +224,10 @@ def red_black_23_nodes(c, fixtures):
 
 def red_black_fixups(c, fixtures):
     """The three local repairs, each on three keys, before and after."""
-    steps = [
-        ("rotateLeft", "Rotate left at h", "puts"),
-        ("rotateRight", "Rotate right at h", "puts"),
-        ("flip", "Flip colors at h", "puts"),
-    ]
+    steps = [("rotateLeft", "Rotate left at h"), ("rotateRight", "Rotate right at h"),
+             ("flip", "Flip colors at h")]
     y = 156
-    for number, (name, title, _) in enumerate(steps, 1):
+    for number, (name, title) in enumerate(steps, 1):
         prefix = f"search_tree.fix.{name}"
         puts = ints(fixtures, prefix + ".puts")
         y = c.step(y, number, title + ", e.g. put " + ", ".join(map(str, puts)))
@@ -243,9 +243,11 @@ def red_black_fixups(c, fixtures):
         for record in (old_top, after_h):
             c.text(record["x"] + side, record["y"] + 7, "h", size=18, color="blue", weight="700",
                    anchor="middle")
-        y = max(n["y"] for n in before + after) + 62
+        if name == "rotateRight":
+            c.text(322, before[0]["y"] + 7, "a flip follows (step 3)", size=18, color="muted")
+        y = max(n["y"] for n in before + after) + 56
 
-    y = rb_legend(c, y - 6)
+    y = rb_legend(c, y - 6, repaired=True)
     c.note(y + 14, FIXUP_IDEA)
 
 
@@ -259,7 +261,7 @@ FIGURES = [
                         "post-order ends at the root 8, and level order reads one depth at a time."),
         "lesson": "data-structures/trees/binary-trees.md",
         "keyIdea": TRAVERSAL_IDEA,
-        "height": 890,
+        "height": 860,
         "draw": tree_traversals,
     },
     {
@@ -271,7 +273,7 @@ FIGURES = [
                         "The in-order keys become 1, 3, 4 and the height drops from 2 to 1."),
         "lesson": "data-structures/trees/binary-search-trees.md",
         "keyIdea": DELETE_IDEA,
-        "height": 880,
+        "height": 850,
         "draw": bst_delete_successor,
     },
     {
@@ -295,7 +297,7 @@ FIGURES = [
                         "Flip colors turns black 2 with red children into red 2 with black children."),
         "lesson": "data-structures/trees/red-black-trees.md",
         "keyIdea": FIXUP_IDEA,
-        "height": 870,
+        "height": 860,
         "draw": red_black_fixups,
     },
 ]

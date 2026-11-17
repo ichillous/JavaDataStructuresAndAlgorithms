@@ -315,7 +315,7 @@ globalThis.DSA_VISUALS_DATA = {
       "category": "Trees and ranges",
       "description": "Deleting key 2 from a BinarySearchTree whose root 2 has children 1 and 4, with 3 below 4, copies the in-order successor 3 into the root and unlinks the old 3. The in-order keys become 1, 3, 4 and the height drops from 2 to 1.",
       "lesson": "../../data-structures/trees/binary-search-trees.md",
-      "keyIdea": "The successor's key replaces the deleted key; only its old node is unlinked.",
+      "keyIdea": "The successor's key replaces the deleted one; its old node is unlinked.",
       "number": 29,
       "light": "assets/bst-delete-successor.svg",
       "dark": "assets/bst-delete-successor-dark.svg"
