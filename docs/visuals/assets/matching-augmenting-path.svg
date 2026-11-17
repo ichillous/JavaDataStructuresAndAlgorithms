@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 888" width="520" height="888" role="img" aria-labelledby="title desc">
+<title id="title">32  Augmenting a matching</title>
+<desc id="desc">A bipartite matching of size 2 leaves left vertex 1 and right vertex 1 free. Flipping the alternating path L1, R0, L0, R1 gives the maximum matching of size 3.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="matching-augmenting-path-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="matching-augmenting-path-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="matching-augmenting-path-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="matching-augmenting-path-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="matching-augmenting-path-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="matching-augmenting-path-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="matching-augmenting-path-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="matching-augmenting-path-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="matching-augmenting-path-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="matching-augmenting-path-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="matching-augmenting-path-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="matching-augmenting-path-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="matching-augmenting-path-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="matching-augmenting-path-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="matching-augmenting-path-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="888" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">32  Augmenting a matching</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Graphs · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">A matching of size 2; two vertices are free</text>
+<line x1="155.38" y1="266.34" x2="364.62" y2="219.66" stroke="#1c6b3c" stroke-width="2.5"/>
+<line x1="156.0" y1="272.0" x2="364.0" y2="272.0" stroke="#2451b7" stroke-width="2.5" stroke-dasharray="7 5"/>
+<line x1="156.0" y1="214.0" x2="364.0" y2="214.0" stroke="#2451b7" stroke-width="2.5" stroke-dasharray="7 5"/>
+<line x1="156.0" y1="330.0" x2="364.0" y2="330.0" stroke="#1c6b3c" stroke-width="2.5"/>
+<circle cx="130" cy="214" r="22" fill="#fff3c4" stroke="#8a5e00" stroke-width="3"/>
+<text x="130" y="221" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">L1</text>
+<circle cx="130" cy="272" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="130" y="279" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">L0</text>
+<circle cx="130" cy="330" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="130" y="337" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">L2</text>
+<circle cx="390" cy="214" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="390" y="221" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">R0</text>
+<circle cx="390" cy="272" r="22" fill="#fff3c4" stroke="#8a5e00" stroke-width="3"/>
+<text x="390" y="279" font-size="20" fill="#8a5e00" text-anchor="middle" font-weight="700">R1</text>
+<circle cx="390" cy="330" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="390" y="337" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">R2</text>
+<text x="100" y="220" font-size="18" fill="#8a5e00" text-anchor="end" font-weight="700">free</text>
+<text x="420" y="278" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">free</text>
+<text x="28" y="386" font-size="18" fill="#2451b7" text-anchor="start" font-weight="700">Alternating path: L1 – R0 – L0 – R1</text>
+<circle cx="42" cy="423" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="429" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="430" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Flip the path: a matching of size 3</text>
+<line x1="155.38" y1="540.34" x2="364.62" y2="493.66" stroke="#8994a5" stroke-width="2.5"/>
+<line x1="156.0" y1="546.0" x2="364.0" y2="546.0" stroke="#1c6b3c" stroke-width="2.5"/>
+<line x1="156.0" y1="488.0" x2="364.0" y2="488.0" stroke="#1c6b3c" stroke-width="2.5"/>
+<line x1="156.0" y1="604.0" x2="364.0" y2="604.0" stroke="#1c6b3c" stroke-width="2.5"/>
+<circle cx="130" cy="488" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="130" y="495" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">L1</text>
+<circle cx="130" cy="546" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="130" y="553" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">L0</text>
+<circle cx="130" cy="604" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="130" y="611" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">L2</text>
+<circle cx="390" cy="488" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="390" y="495" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">R0</text>
+<circle cx="390" cy="546" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="390" y="553" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">R1</text>
+<circle cx="390" cy="604" r="22" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="3"/>
+<text x="390" y="611" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">R2</text>
+<rect x="28" y="658" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="674" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">matched vertex</text>
+<rect x="222.24" y="658" width="26" height="20" rx="4" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="256.24" y="674" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">free vertex</text>
+<text x="28" y="706" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">solid green: matched edge</text>
+<text x="28" y="732" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">dashed blue: becomes matched after the flip</text>
+<rect x="28" y="756" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="787" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="816" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Flipping one augmenting path grows a</text>
+<text x="44" y="843" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">matching by exactly one pair.</text>
+</svg>

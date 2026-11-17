@@ -287,13 +287,101 @@
       "dark": "assets/complexity-growth-dark.svg"
     },
     {
+      "id": "articulation-points",
+      "title": "Articulation points",
+      "category": "Graphs",
+      "description": "A bowtie graph of two triangles sharing vertex 2 is searched depth-first from 0 with discovery and low values shown, and removing vertex 2 leaves the separate components {0, 1} and {3, 4}.",
+      "keyIdea": "An articulation point has a child whose low is at least its own disc.",
+      "lesson": "../../algorithms/graph/graph-structure.md",
+      "number": 27,
+      "light": "assets/articulation-points.svg",
+      "dark": "assets/articulation-points-dark.svg"
+    },
+    {
+      "id": "bipartite-odd-cycle",
+      "title": "Bipartite or odd cycle",
+      "category": "Graphs",
+      "description": "A 6-cycle splits into left {0, 2, 4} and right {1, 3, 5}, while a 5-cycle with a tail has an edge 2-3 joining two vertices of the same colour, and the witness is the odd cycle 2, 1, 0, 4, 3.",
+      "keyIdea": "A graph is two-colourable exactly when it has no odd cycle; the first edge joining equal colours exposes one.",
+      "lesson": "../../algorithms/graph/graph-structure.md",
+      "number": 28,
+      "light": "assets/bipartite-odd-cycle.svg",
+      "dark": "assets/bipartite-odd-cycle-dark.svg"
+    },
+    {
+      "id": "euler-path",
+      "title": "Euler path",
+      "category": "Graphs",
+      "description": "A square with a diagonal and a pendant edge has odd degree only at vertices 0 and 4, so the Euler path starts at 0 and walks every edge once: 0, 1, 2, 3, 0, 2, 4.",
+      "keyIdea": "Connected edges with zero or two odd-degree vertices give an Euler path.",
+      "lesson": "../../algorithms/graph/graph-structure.md",
+      "number": 29,
+      "light": "assets/euler-path.svg",
+      "dark": "assets/euler-path-dark.svg"
+    },
+    {
+      "id": "mst-kruskal-prim",
+      "title": "Kruskal and Prim",
+      "category": "Graphs",
+      "description": "One weighted graph on five vertices has a minimum spanning tree of total weight 11. Kruskal keeps edges in the order 1, 2, 3, 5 and skips two that close a cycle, while Prim from vertex 0 picks 1, 2, 5, 3.",
+      "keyIdea": "Both algorithms add cheapest safe edges, in different orders, to reach one total.",
+      "lesson": "../../algorithms/graph/minimum-spanning-trees.md",
+      "number": 30,
+      "light": "assets/mst-kruskal-prim.svg",
+      "dark": "assets/mst-kruskal-prim-dark.svg"
+    },
+    {
+      "id": "max-flow-min-cut",
+      "title": "Maximum flow and minimum cut",
+      "category": "Graphs",
+      "description": "A four-vertex flow network from source 0 to sink 3 carries a maximum flow of 5. The source side {0, 1} is the set reachable in the residual graph, and the three edges leaving it have capacities 2, 1 and 2, summing to 5.",
+      "keyIdea": "Edges leaving the final source side are saturated and sum to the flow.",
+      "lesson": "../../algorithms/graph/flows-and-matching.md",
+      "number": 31,
+      "light": "assets/max-flow-min-cut.svg",
+      "dark": "assets/max-flow-min-cut-dark.svg"
+    },
+    {
+      "id": "matching-augmenting-path",
+      "title": "Augmenting a matching",
+      "category": "Graphs",
+      "description": "A bipartite matching of size 2 leaves left vertex 1 and right vertex 1 free. Flipping the alternating path L1, R0, L0, R1 gives the maximum matching of size 3.",
+      "keyIdea": "Flipping one augmenting path grows a matching by exactly one pair.",
+      "lesson": "../../algorithms/graph/flows-and-matching.md",
+      "number": 32,
+      "light": "assets/matching-augmenting-path.svg",
+      "dark": "assets/matching-augmenting-path-dark.svg"
+    },
+    {
+      "id": "lca-binary-lifting",
+      "title": "Binary lifting for LCA",
+      "category": "Graphs",
+      "description": "In a seven-vertex tree rooted at 0, lca(6, 4) lifts vertex 6 by 2 to vertex 3, finds the 2^2 and 2^1 ancestors equal, jumps both vertices by 2^0 to 1 and 2, and returns their parent 0, read from the table of 2^j-th ancestors.",
+      "keyIdea": "Equalise depths, then jump both by powers of two while ancestors differ.",
+      "lesson": "../../algorithms/graph/tree-queries.md",
+      "number": 33,
+      "light": "assets/lca-binary-lifting.svg",
+      "dark": "assets/lca-binary-lifting-dark.svg"
+    },
+    {
+      "id": "tree-diameter",
+      "title": "Tree diameter by two sweeps",
+      "category": "Graphs",
+      "description": "In a seven-vertex tree, a breadth-first sweep from vertex 0 ends farthest at 6, and a second sweep from 6 ends farthest at 5, so the path 6, 3, 1, 0, 2, 5 of 5 edges is a longest path.",
+      "keyIdea": "A sweep from any vertex ends at a diameter endpoint; sweep again from there.",
+      "lesson": "../../algorithms/graph/tree-queries.md",
+      "number": 34,
+      "light": "assets/tree-diameter.svg",
+      "dark": "assets/tree-diameter-dark.svg"
+    },
+    {
       "id": "dynamic-array-growth",
       "title": "Appending to a full array",
       "category": "Linear structures",
       "description": "A DynamicArray with capacity 4 holds 10, 20, 30 and 40, so add(50) allocates 8 slots, copies the four values and writes 50 at index 4. That append copies 4 values; the next copy happens at append 9 and moves 8, for 12 copies in 9 appends.",
       "lesson": "../../data-structures/arrays/operations.md",
       "keyIdea": "Doubling makes copies rare: n appends copy fewer than 2n values in total, so one append costs O(1) amortized.",
-      "number": 27,
+      "number": 35,
       "light": "assets/dynamic-array-growth.svg",
       "dark": "assets/dynamic-array-growth-dark.svg"
     }
