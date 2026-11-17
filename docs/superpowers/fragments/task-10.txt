@@ -1,0 +1,24 @@
+Task 10 fragment: array patterns, divide and conquer, complexity
+
+README topic map additions: none. No topic paths were added or renamed.
+Catalog and complexity rows: none. No library API was added; ArrayPatterns and
+SequenceAlgorithms are unchanged.
+
+Solution-finder rows: the array-and-sequence-patterns section may mention that the
+array-patterns lesson now carries a figure for each pattern (two pointers, sliding
+window, monotonic stack, difference array, interval sweep) and that the divide-and-conquer
+problems lesson carries the inversion-count merge figure.
+
+New figures (stem pattern, category Array patterns): two-pointers-pair-sum,
+sliding-window-distinct, monotonic-stack-next-greater, difference-array-ranges,
+interval-sweep-rooms, inversion-count-merge.
+
+Figure placement: complexity-growth stays in algorithms/complexity-analysis/time-complexity.md,
+merge-recursion stays in space-complexity.md and divide-and-conquer/overview.md.
+quick-partition moved from divide-and-conquer/problems.md (off topic there) to
+divide-and-conquer/overview.md beside the recurrence table; sorting/quick-sort.md keeps it.
+The repository-root complexity-analysis/ copies were not edited (outside ownership).
+
+Wrong statements fixed: none found in the five lessons.
+
+Roadmap and exercise additions: none.
