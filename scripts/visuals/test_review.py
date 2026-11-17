@@ -41,6 +41,27 @@ class PaletteContrastReviewTest(unittest.TestCase):
                     self.assertGreaterEqual(ratio, 4.5,
                                             f"{theme}: {foreground} on {background} is {ratio:.2f}:1")
 
+    def test_state_colors_meet_contrast_floor_on_their_fills(self):
+        # Semantic states: good (green on mint), alt (violet on lilac), bad (red on rose).
+        pairings = (
+            ("ink", "mint"), ("ink", "lilac"), ("ink", "rose"),
+            ("muted", "mint"), ("muted", "lilac"), ("muted", "rose"),
+            ("green", "paper"), ("green", "panel"), ("green", "mint"),
+            ("violet", "paper"), ("violet", "panel"), ("violet", "lilac"),
+            ("red", "rose"),
+        )
+        for theme, palette in PALETTES.items():
+            for foreground, background in pairings:
+                with self.subTest(theme=theme, foreground=foreground, background=background):
+                    ratio = contrast(palette[foreground], palette[background])
+                    self.assertGreaterEqual(ratio, 4.5,
+                                            f"{theme}: {foreground} on {background} is {ratio:.2f}:1")
+
+    def test_badge_numbers_read_on_their_blue_disc(self):
+        for theme, palette in PALETTES.items():
+            with self.subTest(theme=theme):
+                self.assertGreaterEqual(contrast(palette["paper"], palette["blue"]), 4.5)
+
 
 if __name__ == "__main__":
     unittest.main()
