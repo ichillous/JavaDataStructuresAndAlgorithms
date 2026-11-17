@@ -168,7 +168,7 @@ try {
 **`a * b % m` overflows long before `m` does.** With `m = 2^62 + 1`, the value
 `2^62` is congruent to -1, so its square is 1 modulo `m`. The naive expression
 computes `2^124` in 64 bits, which wraps to 0, and reports 0. `modPow` returns 1.
-The same silent wrap would make a hand-written Miller-Rabin accept composites.
+The same silent wrap would make a hand-written Miller-Rabin give wrong verdicts.
 
 **Fermat is not a primality test.** 561 is a Carmichael number: `2^560 mod 561 =
 1` although 561 = 3 * 11 * 17. Miller-Rabin tests the stronger square-root

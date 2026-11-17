@@ -160,7 +160,7 @@ assert Arrays.equals(input, restored);
 | `huffmanCodeLengths` | O(n log n) with a priority queue | O(n) | merged weights use checked addition; `ArithmeticException` if the total frequency exceeds `Long.MAX_VALUE` |
 | `canonicalCodes` | O(n log n + sum of lengths) | O(sum of lengths) for the output | the Kraft check is exact integer arithmetic, so no overflow |
 
-Lengths are at most the number of used symbols minus one. See the
+With two or more used symbols, lengths are at most the number of used symbols minus one. See the
 [complexity guide](../../docs/complexity.md) for how these bounds are stated.
 
 ## Pitfalls and limits
