@@ -85,6 +85,12 @@ V entries. It rejects **every** negative edge, even in an unreachable component.
 Unreachable distances are empty; a reachable `Long.MAX_VALUE` is valid. Overflowing
 detours are ignored, but an unrepresentable final reachable shortest distance throws.
 
+<!-- visual:generated dijkstra-path -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/dijkstra-path-dark.svg"><img src="../../docs/visuals/assets/dijkstra-path.svg" alt="Compare weighted routes from source 0 and distinguish unreachable vertex 4." width="520"></picture>
+
+**Figure 23.** Compare weighted routes from source 0 and distinguish unreachable vertex 4. [Visual index and step-throughs](../../docs/visuals/README.md).
+<!-- /visual:generated -->
+
 ## Signed edges: Bellman–Ford
 
 [AdvancedGraphAlgorithms](../../src/main/java/io/github/ichillous/dsa/graphs/AdvancedGraphAlgorithms.java)

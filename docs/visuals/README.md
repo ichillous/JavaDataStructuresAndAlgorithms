@@ -25,7 +25,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 ## 03. Stack: last in, first out
 
-[Linear structures: read the lesson](../../data-structures/stacks/implementation.md)
+[Linear structures: read the lesson](../../data-structures/stacks/overview.md)
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-lifo-dark.svg"><img src="assets/stack-lifo.svg" alt="Push and pop share the top; the newest value leaves first." width="520"></picture>
 
@@ -81,7 +81,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 ## 10. Union-find components
 
-[Trees and ranges: read the lesson](../../data-structures/trees/overview.md)
+[Trees and ranges: read the lesson](../../data-structures/union-find/overview.md)
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/union-find-dark.svg"><img src="assets/union-find.svg" alt="Union operations on five indices produce components {0,1,2} and {3,4}. Parent arrows point toward roots 0 and 3, whose component sizes are three and two. Finding index 2 follows its link to root 0." width="520"></picture>
 
@@ -89,7 +89,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 ## 11. Fenwick prefix blocks
 
-[Trees and ranges: read the lesson](../../docs/solutions.md)
+[Trees and ranges: read the lesson](../../data-structures/range-queries/overview.md)
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/fenwick-blocks-dark.svg"><img src="assets/fenwick-blocks.svg" alt="For values 2,-1,4,3, one-based Fenwick slots cover [0,1), [0,2), [2,3) and [0,4). The prefix ending at zero-based boundary 3 combines slots 3 and 2: 4+1=5." width="520"></picture>
 
@@ -97,7 +97,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 ## 12. Segment minimum
 
-[Trees and ranges: read the lesson](../../data-structures/trees/overview.md)
+[Trees and ranges: read the lesson](../../data-structures/range-queries/overview.md)
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/segment-minimum-dark.svg"><img src="assets/segment-minimum.svg" alt="An interval tree over 8,3,7,5 answers the minimum on [1,4) by combining leaf [1,2) with node [2,4). Replacing index 1 with 9 repairs its ancestors and changes the query answer from 3 to 5. Leaves use power-of-two padding with MAX_VALUE when needed." width="520"></picture>
 
@@ -129,7 +129,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 ## 16. Coin change: build an optimum
 
-[Algorithm traces: read the lesson](../../algorithms/dynamic-programming/problems.md)
+[Algorithm traces: read the lesson](../../algorithms/dynamic-programming/overview.md)
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/coin-dp-dark.svg"><img src="assets/coin-dp.svg" alt="Compare every final coin; the largest-first greedy choice loses." width="520"></picture>
 
@@ -145,7 +145,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 ## 18. KMP: keep the overlap
 
-[Algorithm traces: read the lesson](../../algorithms/searching/linear-search.md)
+[Algorithm traces: read the lesson](../../algorithms/strings/pattern-matching.md)
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/kmp-overlap-dark.svg"><img src="assets/kmp-overlap.svg" alt="Prefix fallback retains the overlap between two pattern matches." width="520"></picture>
 
@@ -153,7 +153,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 ## 19. N-queens: reject and undo
 
-[Algorithm traces: read the lesson](../../algorithms/backtracking/problems.md)
+[Algorithm traces: read the lesson](../../algorithms/backtracking/overview.md)
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/queens-backtracking-dark.svg"><img src="assets/queens-backtracking.svg" alt="Trace failed placements before reaching the first valid board." width="520"></picture>
 
@@ -193,7 +193,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 ## 24. Negative edge or cycle?
 
-[Graphs: read the lesson](../../algorithms/graph/bfs.md)
+[Graphs: read the lesson](../../algorithms/graph/shortest-paths.md)
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/bellman-negative-dark.svg"><img src="assets/bellman-negative.svg" alt="A negative edge yields -3; an added cycle makes targets 1 and 2 unbounded." width="520"></picture>
 
