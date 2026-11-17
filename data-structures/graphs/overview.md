@@ -113,7 +113,7 @@ assert visited.equals(List.of("kitchen", "lobby", "cellar", "garden"));
 
 ## Common mistakes
 
-1. **Counting adjacency entries as edges.** In `Graph.undirected(2).addEdge(0, 1)` the edge is stored in two adjacency lists, yet `edgeCount()` is 1. Using the entry count (2) in a cost formula breaks the rule that the sum of degrees is 2E in an undirected graph.
+1. **Counting adjacency entries as edges.** In `Graph.undirected(2).addEdge(0, 1)` the edge is stored in two adjacency lists, yet `edgeCount()` is 1. An edge count taken from adjacency entries would be 2E, double the real E, and skew every cost formula.
 2. **Assuming Dijkstra only inspects reachable edges.** With `WeightedGraph.directed(5).addEdge(0, 1, 1).addEdge(3, 4, -1)`, `dijkstra(graph, 0)` throws `IllegalArgumentException` although the negative edge is unreachable from vertex 0. The precondition "every weight is nonnegative" is checked on the whole graph.
 3. **Treating reachability as symmetric in a directed graph.** With only `0 -> 1`, vertex 0 reaches 1 but 1 cannot reach 0, so "connected" has no single meaning; `connectedComponents(Graph.directed(2))` throws `IllegalArgumentException` instead of guessing.
 

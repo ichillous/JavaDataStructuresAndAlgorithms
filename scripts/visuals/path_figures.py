@@ -237,7 +237,7 @@ def zero_one_bfs_deque(c, fx):
 # astar-heuristic
 # ---------------------------------------------------------------------------------------
 
-ASTAR_IDEA = "A good heuristic keeps the search near the route and skips far cells."
+ASTAR_IDEA = "A good heuristic keeps the search near the route; far cells never get an h evaluation."
 
 
 def astar_heuristic(c, fx):
@@ -372,7 +372,7 @@ FIGURES = [
                         "route 10, 11, 12, 13, 14 has f = g + h equal to 4 everywhere, the heuristic was "
                         "called for 13 of 25 cells, and with h = 0 it was called for 21."),
         "keyIdea": ASTAR_IDEA, "lesson": "algorithms/graph/shortest-paths.md",
-        "height": 812, "draw": astar_heuristic,
+        "height": 840, "draw": astar_heuristic,
     },
     {
         "id": "floyd-warshall-via", "title": "One Floyd-Warshall round", "category": "Graphs",

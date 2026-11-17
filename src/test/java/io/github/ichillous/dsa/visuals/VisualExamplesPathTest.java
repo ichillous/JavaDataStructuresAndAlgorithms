@@ -268,13 +268,16 @@ class VisualExamplesPathTest {
         int targetRow = target / columns;
         int targetColumn = target % columns;
         TreeSet<Integer> evaluated = new TreeSet<>();
+        int[] calls = {0};
         var route = ShortestPathAlgorithms.aStar(grid, source, target, cell -> {
+            calls[0]++;
             evaluated.add(cell);
             return Math.abs(cell / columns - targetRow) + Math.abs(cell % columns - targetColumn);
         }).orElseThrow();
         assertEquals(DATA.list("path.astar.route"), route.path());
         assertEquals(DATA.number("path.astar.distance"), route.distance());
         assertEquals(DATA.list("path.astar.hSeen"), List.copyOf(evaluated));
+        assertEquals(evaluated.size(), calls[0], "h is evaluated at most once per vertex");
 
         List<Integer> g = new ArrayList<>();
         List<Integer> h = new ArrayList<>();
@@ -291,12 +294,15 @@ class VisualExamplesPathTest {
         assertEquals(DATA.list("path.astar.f"), f);
 
         TreeSet<Integer> zeroEvaluated = new TreeSet<>();
+        int[] zeroCalls = {0};
         var plain = ShortestPathAlgorithms.aStar(grid, source, target, cell -> {
+            zeroCalls[0]++;
             zeroEvaluated.add(cell);
             return 0;
         }).orElseThrow();
         assertEquals(route.distance(), plain.distance());
         assertEquals(DATA.number("path.astar.zeroSeen"), zeroEvaluated.size());
+        assertEquals(zeroEvaluated.size(), zeroCalls[0], "h = 0 is also evaluated once per vertex");
         assertTrue(evaluated.size() < zeroEvaluated.size());
     }
 

@@ -33,8 +33,8 @@ Read [DFS](dfs.md) for the topological-order idea used by the DAG method.
 | sparse all-pairs | Johnson, not implemented here |
 
 Choose the most specific row that applies; each more specific algorithm exploits a
-structural fact that the general one cannot assume. The diagram asks the questions in
-an order that reaches the most specific correct method first.
+structural fact that the general one cannot assume. Ask the questions in the diagram's order, which
+reaches the most specific correct method first; the table lists the same methods.
 
 <!-- visual:generated shortest-path-chooser | Ask the questions from the top; each answer is the algorithm and the repository method that implements it. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/shortest-path-chooser-dark.svg"><img src="../../docs/visuals/assets/shortest-path-chooser.svg" alt="A column of seven yes-or-no questions from all pairs, unweighted, 0-1 weights, DAG, negative weights and heuristic to nonnegative weights, each paired with the algorithm and the repository method that answers it." width="520"></picture>
@@ -157,7 +157,7 @@ assert all.distance(2, 0).isEmpty();
 assert all.distance(1, 1).equals(OptionalLong.of(0));
 ```
 
-A* counts only what the heuristic function reveals. `aStar` evaluates `h` at most once per vertex, so counting calls to the function you pass counts the vertices the search reached. The figure compares the Manhattan heuristic with `h = 0`, which orders the queue by `g` alone, as Dijkstra does; it does not claim which cells were expanded, because the public API does not expose that.
+A* counts only what the heuristic function reveals. `aStar` evaluates `h` at most once per vertex, so counting calls to the function you pass counts the vertices the search reached. The figure compares the Manhattan heuristic with `h = 0`, which orders the queue by `g` alone (ties by vertex number, so the count depends on the library's tie-break), as Dijkstra does; it does not claim which cells were expanded, because the public API does not expose that.
 
 <!-- visual:generated astar-heuristic | A* on a 5 by 5 grid: along the route f = g + h is constant, and the heuristic is called for fewer cells than with h = 0. -->
 <picture><source media="(prefers-color-scheme: dark)" srcset="../../docs/visuals/assets/astar-heuristic-dark.svg"><img src="../../docs/visuals/assets/astar-heuristic.svg" alt="A* on a 5 by 5 unit grid from cell 10 to cell 14 with the Manhattan heuristic: the route 10, 11, 12, 13, 14 has f = g + h equal to 4 everywhere, the heuristic was called for 13 of 25 cells, and with h = 0 it was called for 21." width="520"></picture>

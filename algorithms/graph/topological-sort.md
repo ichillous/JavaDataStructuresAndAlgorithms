@@ -66,7 +66,7 @@ assert GraphStructureAlgorithms.directedCycle(dag).orElseThrow().equals(List.of(
 ## Uses
 
 * **Build order.** Tasks are vertices and "needs" is an edge from prerequisite to dependent. Any topological order is a valid build sequence, and several can exist.
-* **Course prerequisites.** Decide the edge direction first: `algebra -> calculus` means algebra comes before calculus. A cycle means the requirements are contradictory, and `directedCycle` reports the courses involved.
+* **Course prerequisites.** Decide the edge direction first: `algebra -> calculus` means algebra comes before calculus. A cycle means the requirements are contradictory, and `directedCycle` names one cycle (the first it finds) so you can see which courses conflict.
 * **DAG shortest paths.** [`ShortestPathAlgorithms.dagShortestPaths`](../../src/main/java/io/github/ichillous/dsa/graphs/ShortestPathAlgorithms.java) relaxes edges in topological order, so negative weights are fine and the cost is O(V + E). See the [shortest-path toolkit](shortest-paths.md).
 
 Real data has labels, not integers. Number the labels, sort, then translate back:
@@ -143,7 +143,7 @@ On `0 -> 1, 0 -> 2, 2 -> 1`, `depthFirst` from 0 returns `[0, 1, 2]`, but edge `
 
 1. Model four courses where two have prerequisites and write a test that checks every edge goes forward in the result, instead of comparing to one fixed order.
 2. Add one edge to a valid DAG so that it becomes cyclic and assert that `topologicalSort` throws while `directedCycle` returns a loop whose consecutive vertices are edges.
-3. Compute the longest chain in a DAG of task durations by negating weights and calling `dagShortestPaths`, then compare with a brute-force search on a five-vertex graph.
+3. Compute the longest chain from one source in a DAG of task durations by negating weights and calling `dagShortestPaths`, then compare with a brute-force search on a five-vertex graph.
 
 ## Check yourself
 

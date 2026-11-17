@@ -269,7 +269,7 @@ Figures use the same canonical examples as the Java visual-contract tests. See [
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/astar-heuristic-dark.svg"><img src="assets/astar-heuristic.svg" alt="A* on a 5 by 5 unit grid from cell 10 to cell 14 with the Manhattan heuristic: the route 10, 11, 12, 13, 14 has f = g + h equal to 4 everywhere, the heuristic was called for 13 of 25 cells, and with h = 0 it was called for 21." width="520"></picture>
 
-**Key idea:** A good heuristic keeps the search near the route and skips far cells.
+**Key idea:** A good heuristic keeps the search near the route; far cells never get an h evaluation.
 
 ## 34. One Floyd-Warshall round
 
