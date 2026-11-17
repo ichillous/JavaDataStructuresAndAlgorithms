@@ -352,57 +352,68 @@ def _insertion(f):
 
 def _quickselect(f):
     original, k = _ints(f, 'traces.quickselect.values'), int(f['traces.quickselect.k'])
-    values, frames, size, low, high = list(original), [], len(original), 0, len(original)
-    legend = [['current', 'Pivot (final position)'], ['boundary', 'Smaller than the pivot'],
-              ['active', 'Active, not yet ordered'], ['excluded', 'Outside the active range'], ['chosen', 'Answer']]
+    values, frames, size = list(original), [], len(original)
+    low, high = 0, size - 1  # inclusive bounds, as in Selection.kthSmallest
+    plain = [['active', 'Active range'], ['excluded', 'Outside the active range'], ['chosen', 'Answer (rank k)']]
+    banded = [['boundary', 'Less than the pivot'], ['current', 'Equal to the pivot'],
+              ['active', 'Greater than the pivot'], ['excluded', 'Outside the active range']]
 
-    def view(low, high, pivot=None):
-        states = ['excluded' if i < low or i >= high else 'active' for i in range(size)]
-        if pivot is not None:
-            for index in range(low, high):
-                states[index] = 'boundary' if index < pivot else 'active'
-            states[pivot] = 'current'
-        markers = {'k': k}
-        if pivot is not None and pivot != k:
-            markers['pivot'] = pivot
-        return _array_view(values, states, range=[low, high], rangeLabel=f'Active range [{low}, {high})',
-                           markers=markers, legend=legend,
+    def view(low, high, bands=None, answer=False):
+        states = ['excluded' if i < low or i > high else 'active' for i in range(size)]
+        legend = plain
+        if bands:
+            lt, gt = bands
+            for index in range(low, high + 1):
+                states[index] = 'boundary' if index < lt else ('current' if index <= gt else 'active')
+            legend = banded
+        if answer:
+            states[k] = 'chosen'
+            legend = plain
+        return _array_view(values, states, range=[low, high + 1], rangeLabel=f'Active range [{low}, {high + 1})',
+                           markers={'k': k}, legend=legend,
                            note=f'Find the value with zero-based rank k = {k}: the one at index {k} once sorted.')
 
-    _frame(frames, f'Look for index {k}', f'Rank k = {k} means the value that would sit at index {k} after sorting. '
-           'Partitioning places one pivot at its final index; only the side containing k needs more work.', view(low, high))
+    _frame(frames, f'Look for index {k}',
+           f'Rank k = {k} means the value that would sit at index {k} after sorting. Selection.kthSmallest uses a '
+           'median-of-three pivot and a three-way partition, then keeps only the part that holds k. It also has a '
+           'median-of-medians fallback for pivots that shrink the range too little; this small input never needs it.',
+           view(low, high))
     while True:
-        pivot_value = values[high - 1]
-        boundary = low
-        for index in range(low, high - 1):
-            if values[index] < pivot_value:
-                values[index], values[boundary] = values[boundary], values[index]
-                boundary += 1
-        values[high - 1], values[boundary] = values[boundary], values[high - 1]
-        _frame(frames, f'Partition around {pivot_value}',
-               f'Take the last value of [{low}, {high}) as the pivot and move smaller values before it. '
-               f'The pivot lands at its final sorted index {boundary}.', view(low, high, boundary))
-        if boundary == k:
+        mid = low + (high - low) // 2
+        x, y, z = values[low], values[mid], values[high]
+        pivot = max(min(x, y), min(max(x, y), z))
+        lt, gt, i = low, high, low
+        while i <= gt:
+            if values[i] < pivot:
+                values[lt], values[i] = values[i], values[lt]
+                lt += 1
+                i += 1
+            elif values[i] > pivot:
+                values[i], values[gt] = values[gt], values[i]
+                gt -= 1
+            else:
+                i += 1
+        _frame(frames, f'Partition around {pivot}',
+               f'The pivot is the median of {x}, {y} and {z} (first, middle, last of [{low}, {high + 1})). '
+               f'One pass groups values less than {pivot}, equal to {pivot}, and greater than {pivot}: '
+               f'the equal band is indices {lt} to {gt}.', view(low, high, (lt, gt)))
+        if lt <= k <= gt:
             break
-        if k < boundary:
-            high = boundary
-            side = f'k = {k} is left of index {boundary}, so keep [{low}, {high}) and drop the pivot and everything right of it.'
+        if k < lt:
+            high = lt - 1
+            side = f'k = {k} is left of the equal band, so keep indices {low} to {high}; the band and everything right of it are dropped.'
         else:
-            low = boundary + 1
-            side = f'k = {k} is right of index {boundary}, so keep [{low}, {high}) and drop the pivot and everything left of it.'
-        _frame(frames, 'Keep the side that holds k', side + f' Index {k} is still inside the range.', view(low, high))
-    _require(values[k], int(f['traces.quickselect.answer']), 'quickselect answer')
+            low = gt + 1
+            side = f'k = {k} is right of the equal band, so keep indices {low} to {high}; the band and everything left of it are dropped.'
+        _frame(frames, 'Keep the part that holds k', side + f' Index {k} is still inside the active range.', view(low, high))
+    _require(pivot, int(f['traces.quickselect.answer']), 'quickselect answer')
     _require(values[k], sorted(original)[k], 'quickselect rank')
-    states = ['excluded'] * size
-    states[k] = 'chosen'
-    _frame(frames, f'The pivot is index {k}', f'The pivot landed exactly at index {k}, so {values[k]} is the value of rank {k}. '
-           'The rest of the array is only partly ordered, which is all selection needs.',
-           _array_view(values, states, range=[k, k + 1], rangeLabel=f'Active range [{k}, {k + 1})',
-                       markers={'k': k}, legend=legend))
+    _frame(frames, f'Index {k} is in the equal band',
+           f'Index {k} lies inside the band of values equal to {pivot}, so {pivot} is the value of rank {k}. '
+           'The rest of the array is only partly ordered, which is all selection needs.', view(lt, gt, answer=True))
     return _trace('quickselect', 'Quickselect: partition one side', 'Searching',
-                  'Find the k-th smallest value by partitioning and keeping only the side that contains index k. '
-                  'The trace uses a last-element pivot; the library chooses pivots differently.',
-                  'Unlike a full sort, each round discards a side; the answer index never leaves the active range.',
+                  'Find the k-th smallest value with a median-of-three pivot and a three-way partition, keeping only the part that holds index k.',
+                  'Unlike a full sort, each round discards parts; the answer index never leaves the active range.',
                   'algorithms/searching/selection.md', frames)
 
 
@@ -424,27 +435,29 @@ def _radix(f):
                            note='Stable passes from the least significant digit; later passes never reorder ties.')
 
     _frame(frames, 'Start with the unsorted numbers',
-           'Least-significant-digit radix sort makes one stable pass per digit. After pass d the values are ordered by their last d digits.',
-           view(order, 'active'))
+           'Least-significant-digit radix sort makes one stable pass per digit; after pass d the values are ordered by their '
+           "last d digits. The library's radixSort uses four 8-bit passes and flips the sign bit; decimal digits are shown "
+           'here so the passes are readable.', view(order, 'active'))
     for place in (1, 2, 3):
         _frame(frames, f'Pass {place}: read the {names[place]} digit',
-               f'Each value goes into the bucket named by its {names[place]} digit. Buckets are read from 0 to 9, each in arrival order.',
+               f'Read the {names[place]} digit of every value. The next stable pass orders the values by that digit alone.',
                view(order, 'active', place))
         after = sorted(order, key=lambda value: value % 10 ** place)  # stable, like a counting pass
         groups = {}
         for value in after:
             groups.setdefault(_digit(value, place), []).append(value)
         ties = '; '.join(f'digit {digit}: {members}' for digit, members in groups.items() if len(members) > 1)
-        _frame(frames, f'Pass {place}: collect the buckets',
-               f'Values are ordered by their last {place} digit{"s" if place > 1 else ""}. '
+        last = 'last digit' if place == 1 else f'last {place} digits'
+        _frame(frames, f'Pass {place}: stable pass by the {names[place]} digit',
+               f'Values are now ordered by their {last}. '
                f'Ties keep their earlier order ({ties or "none in this pass"}).', view(after, 'chosen', place))
         order = after
     _require(order, _ints(f, 'traces.radix.sorted'), 'radix result')
     _frame(frames, 'Sorted by all three digits', f'Three stable passes sorted the numbers: {order}.', view(order, 'chosen'))
     return _trace('radix', 'Radix sort: one digit per pass', 'Sorting',
-                  'Sort three-digit numbers with stable passes from the ones digit to the hundreds digit. '
-                  'The library uses four 8-bit digits instead of decimal ones; the idea is the same.',
-                  'Stability is what lets a later, more significant digit sort without undoing earlier work.',
+                  'Sort three-digit numbers with stable passes from the ones digit to the hundreds digit.',
+                  "Stability lets a more significant digit sort without undoing earlier work. The library's radixSort uses four "
+                  '8-bit passes and flips the sign bit; decimal digits are shown here so the passes are readable.',
                   'algorithms/sorting/non-comparison-and-comparator-sorts.md', frames)
 
 
@@ -495,6 +508,7 @@ def _window(f):
     size, start, last, best = len(text), 0, {}, (0, 0)
     legend = [['current', 'Character just read'], ['active', 'Window (all distinct)'], ['excluded', 'Dropped from the window'],
               ['unseen', 'Not read yet'], ['chosen', 'Best window']]
+    final_legend = [['chosen', 'Best window'], ['excluded', 'Outside the best window']]
 
     def view(start, end, best, finished=False):
         states = ['unseen'] * size
@@ -508,7 +522,7 @@ def _window(f):
         markers = {} if end is None or finished else {'start': start, 'end': end}
         lane = {'label': 'Best window so far', 'values': list(text[best[0]:best[1]]),
                 'states': ['chosen'] * (best[1] - best[0])}
-        return _array_view(list(text), states, markers=markers, lanes=[lane], legend=legend,
+        return _array_view(list(text), states, markers=markers, lanes=[lane], legend=final_legend if finished else legend,
                            note='Window = characters from start to end, all distinct.')
 
     _frame(frames, 'Start with an empty window', f'Scan "{text}" once. The window always holds distinct characters; a repeat moves its left edge.', view(0, None, best))
@@ -544,11 +558,12 @@ def _z_function(f):
     size = len(text)
     z, left, right = [None] * size, 0, 0
     z[0] = size
-    legend = [['current', 'Index being computed'], ['active', 'Rightmost matching window'], ['unseen', 'Not yet computed'],
-              ['chosen', 'Computed z value']]
+    legend = [['current', 'Index being computed'], ['active', 'Matching window in force at this step'],
+              ['excluded', 'Outside that window'], ['unseen', 'Z entry not computed yet'], ['chosen', 'Computed z value']]
 
-    def view(index=None, finished=False):
-        states = ['chosen' if finished else 'unseen'] * size
+    def view(index=None, finished=False, box=(0, 0)):
+        left, right = box
+        states = ['chosen' if finished else 'excluded'] * size
         if not finished:
             for position in range(left, right):
                 states[position] = 'active'
@@ -566,7 +581,7 @@ def _z_function(f):
                                    'values': list(z), 'states': lane_states}],
                            note=f'Text "{text}" · z[i] compares the text with its own suffix from index i.')
 
-    _frame(frames, 'z[0] is the whole text', f'By the repository convention z[0] = {size}. Every other entry compares the text with its suffix.', view())
+    _frame(frames, 'z[0] is the whole text', f'By the repository convention z[0] = {size}. Every other entry compares the text with its suffix.', view(box=(0, 0)))
     for index in range(1, size):
         inside = index < right
         match = min(right - index, z[index - left]) if inside else 0
@@ -574,7 +589,7 @@ def _z_function(f):
         while index + match < size and text[match] == text[index + match]:
             match += 1
         z[index] = match
-        window_start = left
+        window_start, window_end = left, right
         if index + match > right:
             left, right = index, index + match
         if inside:
@@ -582,9 +597,12 @@ def _z_function(f):
                    f'{copied} character{"s" if copied != 1 else ""} copied without rescanning, {match - copied} compared fresh.')
         else:
             how = f'Index {index} is outside every known window, so compare the text with the suffix from scratch.'
-        _frame(frames, f'Compute z[{index}] = {match}', f'{how} Longest prefix match: "{text[:match]}" ({match}).', view(index))
+        _frame(frames, f'Compute z[{index}] = {match}',
+               f'{how} Longest prefix match: "{text[:match]}" ({match}). The highlighted window is the one in force before this step'
+               + (f'; afterwards the window becomes [{left}, {right}).' if (left, right) != (window_start, window_end) else '; it is unchanged.'),
+               view(index, box=(window_start, window_end)))
     _require(z, _ints(f, 'traces.z.result'), 'Z-array')
-    _frame(frames, 'The Z-array is complete', f'z = {z}. Reusing the rightmost window keeps the total work linear.', view(finished=True))
+    _frame(frames, 'The Z-array is complete', f'z = {z}. Reusing the rightmost window keeps the total work linear.', view(finished=True, box=(0, 0)))
     return _trace('z-function', 'Z-function: reuse the matching window', 'Strings',
                   'Build the Z-array while reusing the rightmost prefix match instead of rescanning.',
                   'Inside a known match window, earlier z values bound the new one, so characters are not compared twice.',
@@ -678,7 +696,7 @@ def _topological(f):
                 released.append(neighbor)
         _frame(frames, f'Emit vertex {vertex}',
                f'All predecessors of {vertex} are already emitted. Remove its outgoing edges; '
-               + (f'{released} now have no unemitted predecessor and join the queue.' if released else 'no vertex became ready.'),
+               + ((f'vertex {released[0]} now has no unemitted predecessor and joins the queue.' if len(released) == 1 else f'vertices {", ".join(map(str, released))} now have no unemitted predecessor and join the queue.') if released else 'no vertex became ready.'),
                view(vertex))
     _require(order, _ints(f, 'traces.topo.order'), 'topological order')
     if len(order) != size:

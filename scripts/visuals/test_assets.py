@@ -277,6 +277,9 @@ class MoreTraceTest(unittest.TestCase):
                 self.assertEqual(inside, list(range(inside[0], inside[-1] + 1)))
                 chars = [text[i] for i in inside]
                 self.assertEqual(len(chars), len(set(chars)), frame["title"])
+                # Maximal: the window ends at the character just read and cannot grow left.
+                self.assertEqual(inside[-1], view["markers"]["end"])
+                self.assertTrue(inside[0] == 0 or text[inside[0] - 1] in chars, frame["title"])
             best = view["lanes"][0]["values"]
             self.assertEqual(len(best), len(set(best)))
             self.assertGreaterEqual(len(best), best_length)
@@ -319,6 +322,17 @@ class MoreTraceTest(unittest.TestCase):
                 self.assertEqual(view["nodes"][stack[-1]]["state"], "current")
             self.assertTrue(set(stack) <= set(view["order"]))
             self.assertEqual(view["order"], ints(self.fixtures, "traces.dfs.order")[:len(view["order"])])
+        frames = [frame["view"] for frame in trace["frames"]]
+        for before, after in zip(frames, frames[1:]):
+            if len(after["queue"]) == len(before["queue"]) - 1:
+                popped = before["queue"][-1]  # a vertex is popped only when nothing unvisited is left
+                self.assertTrue(adjacency[popped] <= set(before["order"]))
+                self.assertEqual(after["queue"], before["queue"][:-1])
+            elif after["queue"]:
+                self.assertEqual(after["queue"][:-1], before["queue"])
+                pushed = after["queue"][-1]
+                self.assertIn(pushed, adjacency[before["queue"][-1]])
+                self.assertNotIn(pushed, before["order"])
         final = trace["frames"][-1]["view"]
         self.assertEqual(final["queue"], [])
         self.assertEqual(final["order"], ints(self.fixtures, "traces.dfs.order"))
