@@ -94,7 +94,9 @@ def _merge(f):
                 'note': 'Each merge reads copied sorted runs and builds a separate output buffer.'}
 
     _frame(frames, 'Divide, then merge sorted runs',
-           'Split until runs contain one value. Merge sorted neighbors without dropping or inventing values.', view())
+           'Split until runs contain one value. Merge sorted neighbors without dropping or inventing values. '
+           'The runs are drawn as copies for clarity; SortAlgorithms.mergeSort reads them in place, writes one '
+           'shared buffer, and skips a merge whose halves are already in order.', view())
 
     def sort(lo, hi):
         if hi - lo < 2:
@@ -293,7 +295,7 @@ def _coins(f):
     return _trace('coins', 'Coin change: reuse smaller answers', 'Dynamic programming',
                   'Fill a minimum-coin table and inspect every last-coin candidate.',
                   'A correct recurrence compares all valid predecessors; a greedy choice can miss the optimum.',
-                  'algorithms/dynamic-programming/problems.md', frames)
+                  'algorithms/dynamic-programming/overview.md', frames)
 
 
 def _array_view(values, states, labels=None, **extra):
@@ -347,7 +349,7 @@ def _insertion(f):
     return _trace('insertion', 'Insertion sort: grow a sorted prefix', 'Sorting',
                   'Insert each value into an already sorted prefix by shifting larger values right.',
                   'The prefix is sorted after every insertion; shifting only strictly larger values keeps equal values stable.',
-                  'algorithms/sorting/bubble-sort.md', frames)
+                  'algorithms/sorting/insertion-sort.md', frames)
 
 
 def _quickselect(f):
@@ -592,14 +594,27 @@ def _z_function(f):
         window_start, window_end = left, right
         if index + match > right:
             left, right = index, index + match
+        if index + match < size:
+            stop = f'the fresh comparison of text[{match}] with text[{index + match}] fails'
+        else:
+            stop = 'the text ends'
         if inside:
             how = (f'Index {index} lies inside the window starting at {window_start}, so it starts from z[{index - window_start}]: '
-                   f'{copied} character{"s" if copied != 1 else ""} copied without rescanning, {match - copied} compared fresh.')
+                   f'{copied} character{"s" if copied != 1 else ""} copied without rescanning, '
+                   f'{match - copied} more matched by fresh comparisons, then {stop}.')
         else:
-            how = f'Index {index} is outside every known window, so compare the text with the suffix from scratch.'
+            how = (f'Index {index} is outside every known window, so compare the text with the suffix from scratch: '
+                   f'{match} character{"s match" if match != 1 else " matches"}, then {stop}.')
+        if (left, right) == (window_start, window_end):
+            after = '; it is unchanged.'
+        elif left == right:
+            after = (f'; afterwards it is the empty range [{left}, {right}): nothing matched at {index}, '
+                     'so no matched characters are kept for reuse.')
+        else:
+            after = f'; afterwards the window becomes [{left}, {right}).'
         _frame(frames, f'Compute z[{index}] = {match}',
                f'{how} Longest prefix match: "{text[:match]}" ({match}). The highlighted window is the one in force before this step'
-               + (f'; afterwards the window becomes [{left}, {right}).' if (left, right) != (window_start, window_end) else '; it is unchanged.'),
+               + after,
                view(index, box=(window_start, window_end)))
     _require(z, _ints(f, 'traces.z.result'), 'Z-array')
     _frame(frames, 'The Z-array is complete', f'z = {z}. Reusing the rightmost window keeps the total work linear.', view(finished=True, box=(0, 0)))
@@ -706,7 +721,7 @@ def _topological(f):
     return _trace('topological', "Topological sort: Kahn's algorithm", 'Graphs',
                   'Repeatedly emit a vertex with no unemitted predecessors from a directed acyclic graph.',
                   'A vertex becomes ready only when every predecessor is emitted, so the order respects every edge.',
-                  'algorithms/graph/dfs.md', frames)
+                  'algorithms/graph/topological-sort.md', frames)
 
 
 def build_traces(fixtures):
