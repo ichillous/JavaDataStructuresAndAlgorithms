@@ -20,7 +20,7 @@ page maps each family to a maintained method; the
 | --- | --- | --- | --- | --- |
 | Linear | One index or amount, `best[a]` | `minimumCoins`, `countCoinCombinations`, `wordBreak` | O(c · a); O(n · L) lookups | "Does the answer for `a` follow from answers for smaller `a`?" |
 | Grid (two sequences) | A prefix of each input, `(i, j)` | `editScript`, `longestCommonSubsequence` | O(mn) | "Compare two strings or sequences position by position?" |
-| Interval | A range `(i, j)` of one input | `matrixChainOrder`, `longestPalindromicSubsequenceLength` | O(n^3) and O(n^2) | "Is the best answer for a range found by splitting it in two?" |
+| Interval | A range `(i, j)` of one input | `matrixChainOrder`, `longestPalindromicSubsequenceLength` | O(n^3) and O(n^2) | "Is the best answer for a range built from smaller ranges inside it, by a split point or by trimming its ends?" |
 | Knapsack | Items processed so far and remaining capacity | `knapsack01` (0/1 items under a capacity) | O(nW) | "Each item is taken or skipped under a budget?" |
 | Subsequence | Best ending at or using the first `i` elements | `longestIncreasingSubsequenceLength` | O(n log n) | "Pick elements in order, not contiguous?" |
 | Bitmask | A set of visited items plus a last item | `travelingSalesman` | O(2^n n^2), n at most 16 | "Must every item be used once, and n is tiny?" |
@@ -127,7 +127,7 @@ Capacity is a number, so the table has `W + 1` entries while `W` needs only abou
 <details>
 <summary>What question separates the interval family from the linear family?</summary>
 
-Whether the best answer for a range comes from splitting the range at some point and combining two sub-ranges (interval), or from one smaller prefix or amount (linear).
+Whether the best answer for a range is built from smaller ranges inside it, by splitting at some point and combining two sub-ranges or by trimming its ends (interval), or from one smaller prefix or amount (linear).
 
 </details>
 

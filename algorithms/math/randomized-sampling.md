@@ -184,8 +184,8 @@ cannot map evenly onto `n!` orders unless `n^n` is a multiple of `n!`. For `n = 
 draws from `[0, i]`, not `[0, n)`.
 
 **Small generator state.** A generator with a 32-bit seed can produce at most
-2^32 distinct shuffles, far fewer than `n!` for `n > 12`, however correct the
-algorithm. Statistical tests must also allow sampling noise: the tests here use
+2^32 distinct shuffles, fewer than `n!` once `n >= 13` and vastly fewer for a
+52-card deck (`52!` is about 8 * 10^67), however correct the algorithm. Statistical tests must also allow sampling noise: the tests here use
 fixed seeds and tolerances of about 0.01 over 60,000 trials, never exact counts.
 
 ## Practice

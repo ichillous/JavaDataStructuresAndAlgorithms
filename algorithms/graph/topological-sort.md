@@ -137,7 +137,7 @@ A `PriorityQueue` makes the algorithm O(V log V + E) instead of O(V + E).
 
 ## Pitfall: a DFS discovery order is not a topological order
 
-On `0 -> 1, 0 -> 2, 2 -> 1`, `depthFirst` from 0 returns `[0, 1, 2]`, but edge `2 -> 1` points backward. `topologicalSort` returns `[0, 2, 1]`. Reversing a discovery order does not repair it in general; only finish times (or Kahn's in-degree rule) give a valid order. The order is also not unique: `[1, 2, 0, 3]` and `[1, 0, 2, 3]` both satisfy the edges `1 -> 0` and `2 -> 3`, so tests should check that every edge points forward rather than compare against one arbitrary order.
+On `0 -> 1, 0 -> 2, 2 -> 1`, `depthFirst` from 0 returns `[0, 1, 2]`, but edge `2 -> 1` points backward. `topologicalSort` returns `[0, 2, 1]`. Reversing a discovery order does not repair it in general; only reverse DFS finishing order (or Kahn's in-degree rule) gives a valid order. The order is also not unique: `[1, 2, 0, 3]` and `[1, 0, 2, 3]` both satisfy the edges `1 -> 0` and `2 -> 3`, so tests should check that every edge points forward rather than compare against one arbitrary order.
 
 ## Practice
 
@@ -162,7 +162,7 @@ Not in general. It is unique only when the graph forces a single order, for exam
 </details>
 
 <details>
-<summary>Why can `dagShortestPaths` handle negative weights when Dijkstra cannot?</summary>
+<summary>Why can <code>dagShortestPaths</code> handle negative weights when Dijkstra cannot?</summary>
 
 It processes vertices in topological order, so when a vertex is processed every predecessor is already final; no cycle exists to make a negative edge keep lowering earlier labels.
 

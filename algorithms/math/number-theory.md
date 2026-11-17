@@ -168,7 +168,7 @@ try {
 **`a * b % m` overflows long before `m` does.** With `m = 2^62 + 1`, the value
 `2^62` is congruent to -1, so its square is 1 modulo `m`. The naive expression
 computes `2^124` in 64 bits, which wraps to 0, and reports 0. `modPow` returns 1.
-The same silent wrap would make a hand-written Miller-Rabin accept composites.
+The same silent wrap would make a hand-written Miller-Rabin give wrong verdicts.
 
 **Fermat is not a primality test.** 561 is a Carmichael number: `2^560 mod 561 =
 1` although 561 = 3 * 11 * 17. Miller-Rabin tests the stronger square-root
@@ -211,14 +211,14 @@ Each step keeps the gcd of the pair, and the last division `4 = 2 * 2 + 0` shows
 </details>
 
 <details>
-<summary>For exponent 13, how many modular squarings and how many multiplies into the result does `modPow` do?</summary>
+<summary>For exponent 13, how many modular squarings and how many multiplies into the result does <code>modPow</code> do?</summary>
 
-13 is `1101` in binary: the loop runs four times and squares the base each time, so four squarings. It multiplies into the result only on the three 1 bits, so three multiplies.
+13 is `1101` in binary: the loop runs four times and squares the base each time, so four squarings. It multiplies into the result only on the three 1 bits, so three multiplies. The fourth squaring happens after the last bit is used and its value is never read; skipping the squaring when `e` is 1 would save it.
 
 </details>
 
 <details>
-<summary>Why does `primesUpTo(30)` never sieve with 7?</summary>
+<summary>Why does <code>primesUpTo(30)</code> never sieve with 7?</summary>
 
 The outer loop only runs while `p * p <= limit`, and 7 * 7 = 49 exceeds 30. Every composite up to 30 has a prime factor of at most 5, so 2, 3 and 5 have already crossed it out.
 

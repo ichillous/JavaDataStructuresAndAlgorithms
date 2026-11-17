@@ -259,7 +259,7 @@ assert stack.pop() == 2 && stack.peek() == 1;
 ## Check yourself
 
 <details>
-<summary>Why does `pairWithSum` on `[3, 1, 2]` with target 3 miss `1 + 2`?</summary>
+<summary>Why does <code>pairWithSum</code> on <code>[3, 1, 2]</code> with target 3 miss <code>1 + 2</code>?</summary>
 
 The input is not ascending, so the exclusion argument fails: `3 + 2` is too
 large, which only proves index 2 has no partner if every smaller value sits to
@@ -268,7 +268,7 @@ its left. The method does not validate order, so the result is unspecified.
 </details>
 
 <details>
-<summary>Why does `minimumMeetingRooms` say `[1, 2)` and `[2, 3)` share one room?</summary>
+<summary>Why does <code>minimumMeetingRooms</code> say <code>[1, 2)</code> and <code>[2, 3)</code> share one room?</summary>
 
 Intervals are half-open, so they share no point. The sweep processes an end at
 or before the next start first, freeing the room before the next meeting takes it.
@@ -276,7 +276,7 @@ or before the next start first, freeing the room before the next meeting takes i
 </details>
 
 <details>
-<summary>Each index is popped at most once, so why does the nested `while` in the monotonic stack not make it quadratic?</summary>
+<summary>Each index is popped at most once, so why does the nested <code>while</code> in the monotonic stack not make it quadratic?</summary>
 
 Every index is pushed once and popped at most once, so the inner loop runs at
 most `n` times across the whole scan. The cost counts pops in total, not per

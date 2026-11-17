@@ -1410,8 +1410,8 @@
       "frames": [
         {
           "title": "Divide, then merge sorted runs",
-          "explanation": "Split until runs contain one value. Merge sorted neighbors without dropping or inventing values.",
-          "summary": "Split until runs contain one value. Merge sorted neighbors without dropping or inventing values.",
+          "explanation": "Split until runs contain one value. Merge sorted neighbors without dropping or inventing values. The runs are drawn as copies for clarity; SortAlgorithms.mergeSort reads them in place, writes one shared buffer, and skips a merge whose halves are already in order.",
+          "summary": "Split until runs contain one value. Merge sorted neighbors without dropping or inventing values. The runs are drawn as copies for clarity; SortAlgorithms.mergeSort reads them in place, writes one shared buffer, and skips a merge whose halves are already in order.",
           "view": {
             "type": "array",
             "values": [
@@ -3773,7 +3773,7 @@
       "category": "Dynamic programming",
       "description": "Fill a minimum-coin table and inspect every last-coin candidate.",
       "keyIdea": "A correct recurrence compares all valid predecessors; a greedy choice can miss the optimum.",
-      "lesson": "../../algorithms/dynamic-programming/problems.md",
+      "lesson": "../../algorithms/dynamic-programming/overview.md",
       "frames": [
         {
           "title": "The empty amount costs zero",
@@ -4184,7 +4184,7 @@
       "category": "Sorting",
       "description": "Insert each value into an already sorted prefix by shifting larger values right.",
       "keyIdea": "The prefix is sorted after every insertion; shifting only strictly larger values keeps equal values stable.",
-      "lesson": "../../algorithms/sorting/bubble-sort.md",
+      "lesson": "../../algorithms/sorting/insertion-sort.md",
       "frames": [
         {
           "title": "A one-value prefix is sorted",
@@ -6670,8 +6670,8 @@
         },
         {
           "title": "Compute z[1] = 1",
-          "explanation": "Index 1 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; afterwards the window becomes [1, 2).",
-          "summary": "Index 1 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; afterwards the window becomes [1, 2).",
+          "explanation": "Index 1 is outside every known window, so compare the text with the suffix from scratch: 1 character matches, then the fresh comparison of text[1] with text[2] fails. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; afterwards the window becomes [1, 2).",
+          "summary": "Index 1 is outside every known window, so compare the text with the suffix from scratch: 1 character matches, then the fresh comparison of text[1] with text[2] fails. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; afterwards the window becomes [1, 2).",
           "view": {
             "type": "array",
             "values": [
@@ -6754,8 +6754,8 @@
         },
         {
           "title": "Compute z[2] = 0",
-          "explanation": "Index 2 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
-          "summary": "Index 2 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
+          "explanation": "Index 2 is outside every known window, so compare the text with the suffix from scratch: 0 characters match, then the fresh comparison of text[0] with text[2] fails. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
+          "summary": "Index 2 is outside every known window, so compare the text with the suffix from scratch: 0 characters match, then the fresh comparison of text[0] with text[2] fails. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
           "view": {
             "type": "array",
             "values": [
@@ -6839,8 +6839,8 @@
         },
         {
           "title": "Compute z[3] = 0",
-          "explanation": "Index 3 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; afterwards the window becomes [3, 3).",
-          "summary": "Index 3 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; afterwards the window becomes [3, 3).",
+          "explanation": "Index 3 is outside every known window, so compare the text with the suffix from scratch: 0 characters match, then the fresh comparison of text[0] with text[3] fails. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; afterwards it is the empty range [3, 3): nothing matched at 3, so no matched characters are kept for reuse.",
+          "summary": "Index 3 is outside every known window, so compare the text with the suffix from scratch: 0 characters match, then the fresh comparison of text[0] with text[3] fails. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; afterwards it is the empty range [3, 3): nothing matched at 3, so no matched characters are kept for reuse.",
           "view": {
             "type": "array",
             "values": [
@@ -6924,8 +6924,8 @@
         },
         {
           "title": "Compute z[4] = 3",
-          "explanation": "Index 4 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"aab\" (3). The highlighted window is the one in force before this step; afterwards the window becomes [4, 7).",
-          "summary": "Index 4 is outside every known window, so compare the text with the suffix from scratch. Longest prefix match: \"aab\" (3). The highlighted window is the one in force before this step; afterwards the window becomes [4, 7).",
+          "explanation": "Index 4 is outside every known window, so compare the text with the suffix from scratch: 3 characters match, then the text ends. Longest prefix match: \"aab\" (3). The highlighted window is the one in force before this step; afterwards the window becomes [4, 7).",
+          "summary": "Index 4 is outside every known window, so compare the text with the suffix from scratch: 3 characters match, then the text ends. Longest prefix match: \"aab\" (3). The highlighted window is the one in force before this step; afterwards the window becomes [4, 7).",
           "view": {
             "type": "array",
             "values": [
@@ -7008,8 +7008,8 @@
         },
         {
           "title": "Compute z[5] = 1",
-          "explanation": "Index 5 lies inside the window starting at 4, so it starts from z[1]: 1 character copied without rescanning, 0 compared fresh. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; it is unchanged.",
-          "summary": "Index 5 lies inside the window starting at 4, so it starts from z[1]: 1 character copied without rescanning, 0 compared fresh. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; it is unchanged.",
+          "explanation": "Index 5 lies inside the window starting at 4, so it starts from z[1]: 1 character copied without rescanning, 0 more matched by fresh comparisons, then the fresh comparison of text[1] with text[6] fails. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; it is unchanged.",
+          "summary": "Index 5 lies inside the window starting at 4, so it starts from z[1]: 1 character copied without rescanning, 0 more matched by fresh comparisons, then the fresh comparison of text[1] with text[6] fails. Longest prefix match: \"a\" (1). The highlighted window is the one in force before this step; it is unchanged.",
           "view": {
             "type": "array",
             "values": [
@@ -7093,8 +7093,8 @@
         },
         {
           "title": "Compute z[6] = 0",
-          "explanation": "Index 6 lies inside the window starting at 4, so it starts from z[2]: 0 characters copied without rescanning, 0 compared fresh. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
-          "summary": "Index 6 lies inside the window starting at 4, so it starts from z[2]: 0 characters copied without rescanning, 0 compared fresh. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
+          "explanation": "Index 6 lies inside the window starting at 4, so it starts from z[2]: 0 characters copied without rescanning, 0 more matched by fresh comparisons, then the fresh comparison of text[0] with text[6] fails. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
+          "summary": "Index 6 lies inside the window starting at 4, so it starts from z[2]: 0 characters copied without rescanning, 0 more matched by fresh comparisons, then the fresh comparison of text[0] with text[6] fails. Longest prefix match: \"\" (0). The highlighted window is the one in force before this step; it is unchanged.",
           "view": {
             "type": "array",
             "values": [
@@ -8301,7 +8301,7 @@
       "category": "Graphs",
       "description": "Repeatedly emit a vertex with no unemitted predecessors from a directed acyclic graph.",
       "keyIdea": "A vertex becomes ready only when every predecessor is emitted, so the order respects every edge.",
-      "lesson": "../../algorithms/graph/dfs.md",
+      "lesson": "../../algorithms/graph/topological-sort.md",
       "frames": [
         {
           "title": "Find the vertices with no predecessors",

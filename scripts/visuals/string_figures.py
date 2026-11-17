@@ -4,7 +4,7 @@ Every displayed value comes from the fixture file and is asserted against the li
 independent model) by VisualExamplesStringTest.
 """
 
-from drawing import ints
+from drawing import _state, ints
 
 CATEGORY = "Strings"
 
@@ -255,6 +255,22 @@ def aho_corasick_scan(c, f):
 SA_IDEA = "Suffixes sharing a prefix sit side by side: a lookup is one range."
 
 
+def _suffix_row(c, top, values, cell, gap, states, labels):
+    """cell_row with 18px values: a 6-letter suffix at the default 20px nearly fills a 77px cell.
+
+    Private helper (drawing.cell_row has no text-size option): draw the boxes and labels with
+    empty values, then write each value at 18px in the ink and weight cell_row would use.
+    """
+    bottom = c.cell_row(X, top, [""] * len(values), cell=cell, gap=gap, states=states, labels=labels)
+    for index, value in enumerate(values):
+        ink, weight = "ink", "400"
+        if states[index] is not None:
+            ink, weight = _state(states[index])[2], "700"
+        c.text(X + index * (cell + gap) + cell / 2, top + 48 / 2 + 6, value, size=18,
+               anchor="middle", weight=weight, color=ink)
+    return bottom
+
+
 def suffix_array_lcp(c, f):
     text = f["string.sa.text"]
     suffixes = ints(f, "string.sa.suffixes")
@@ -275,11 +291,10 @@ def suffix_array_lcp(c, f):
     # 2. The pattern is a rank range.
     y = c.step(y + 44, 2, f"{pattern} is the rank range [{low}, {high})")
     row = y + 16
-    cell, gap = 77, 0
+    cell, gap = 77, 0  # six cells fill the 462px content width
     values = [text[suffixes[r]:] for r in range(n)]
     states = ["good" if low <= r < high else None for r in range(n)]
-    y = c.cell_row(X, row, values, cell=cell, gap=gap, states=states,
-                   labels=[str(r) for r in range(n)])
+    y = _suffix_row(c, row, values, cell, gap, states, [str(r) for r in range(n)])
     c.brace(X + low * (cell + gap), X + (high - 1) * (cell + gap) + cell, y - 2,
             f"low {low}, high {high}", color="green")
     c.text(X, y + 56, "Starts " + ", ".join(str(suffixes[r]) for r in range(low, high))

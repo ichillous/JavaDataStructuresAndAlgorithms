@@ -266,7 +266,7 @@ rules return different, equally long subsequences, so tests should compare lengt
 </details>
 
 <details>
-<summary>Why does `editScript` for `"brain"` to `"paint"` start with a delete instead of a substitution?</summary>
+<summary>Why does <code>editScript</code> for <code>"brain"</code> to <code>"paint"</code> start with a delete instead of a substitution?</summary>
 
 The walk runs from the corner backwards, and the script is its reverse. The walk
 ends in column 0 at row 1, where no diagonal exists and only a delete remains, so

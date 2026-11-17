@@ -138,7 +138,7 @@ Adding more queens can never remove an attack between two queens already placed,
 </details>
 
 <details>
-<summary>Why does `uniquePermutations([1, 1, 2])` return three lists rather than six?</summary>
+<summary>Why does <code>uniquePermutations([1, 1, 2])</code> return three lists rather than six?</summary>
 
 The two equal values are interchangeable, so choosing either at the same depth repeats a branch. Skipping an equal value unless its predecessor is already used keeps one of each ordering.
 

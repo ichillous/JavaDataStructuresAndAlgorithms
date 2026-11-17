@@ -180,7 +180,7 @@ assert Arrays.equals(starts.stream().mapToInt(Integer::intValue).toArray(),
 ## Check yourself
 
 <details>
-<summary>Why is the failure link of the node `hers` the node `s`, not the root?</summary>
+<summary>Why is the failure link of the node <code>hers</code> the node <code>s</code>, not the root?</summary>
 
 The proper suffixes of `hers` are `ers`, `rs` and `s`; the longest one that is
 also a prefix of some pattern is `s` (it starts `she`). Reading `hers` therefore
@@ -189,7 +189,7 @@ leaves the scan one step into `she`, ready for text that continues that way.
 </details>
 
 <details>
-<summary>`SuffixArray("banana").occurrences("ana")` finds ranks 1 and 2, whose starts are 3 and 1. Why does it return `[1, 3]`?</summary>
+<summary><code>SuffixArray("banana").occurrences("ana")</code> finds ranks 1 and 2, whose starts are 3 and 1. Why does it return <code>[1, 3]</code>?</summary>
 
 All suffixes that start with the pattern are adjacent in sorted order, so the
 binary search yields a rank range. Ranks follow suffix order, not text order, so
@@ -198,7 +198,7 @@ the starts come out as 3, 1 and `occurrences` sorts them ascending.
 </details>
 
 <details>
-<summary>Why can an `AhoCorasick` automaton not answer a pattern given after construction, while a suffix array can?</summary>
+<summary>Why can an <code>AhoCorasick</code> automaton not answer a pattern given after construction, while a suffix array can?</summary>
 
 The automaton is built from the fixed pattern set, so only those patterns have
 nodes and failure links. A suffix array indexes the text instead, so any later

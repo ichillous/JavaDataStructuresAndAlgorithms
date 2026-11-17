@@ -62,9 +62,11 @@ computed as `low + (high - low) / 2` so adding two large indices cannot overflow
 Preparing sorted data costs extra, and inserting into a sorted array can shift
 O(n) elements even though finding its insertion position is logarithmic.
 
-**Counterexample:** `[1, 9, 2]` violates the monotonic predicate “value is below
-2.” Discarding a half can discard the answer. Binary search is valid because the
-predicate changes once, not merely because a problem involves numbers.
+**Counterexample:** in `[2, 0, 1]` the predicate “value is below 2” is false,
+true, true: it does not change once. `binarySearch(a, 2)` probes index 1, sees
+0 < 2, discards index 0 and returns `-1`, although `a[0] == 2`. Binary search is
+valid because the predicate changes once, not merely because a problem involves
+numbers.
 
 ## In real Java
 
@@ -110,7 +112,7 @@ Searching a range of answers rather than an array is the same technique:
 ## Check yourself
 
 <details>
-<summary>Why does `upperBound(a, 2) - lowerBound(a, 2)` count the 2s in `[1, 2, 2, 2, 5]`?</summary>
+<summary>Why does <code>upperBound(a, 2) - lowerBound(a, 2)</code> count the 2s in <code>[1, 2, 2, 2, 5]</code>?</summary>
 
 `lowerBound` is the index of the first value at least 2 (1) and `upperBound` is the index of the
 first value above 2 (4), so the half-open range `[1, 4)` holds exactly the equal values: 3.
@@ -118,14 +120,14 @@ first value above 2 (4), so the half-open range `[1, 4)` holds exactly the equal
 </details>
 
 <details>
-<summary>What does `Arrays.binarySearch` return for key 3 in `{1, 2, 2, 2, 5}`?</summary>
+<summary>What does <code>Arrays.binarySearch</code> return for key 3 in <code>{1, 2, 2, 2, 5}</code>?</summary>
 
 `-5`. The insertion point is 4, and the JDK reports an absent key as `-(insertion point) - 1`.
 
 </details>
 
 <details>
-<summary>What does `low == high` mean when the lower-bound loop ends?</summary>
+<summary>What does <code>low == high</code> mean when the lower-bound loop ends?</summary>
 
 Everything before it is below the target and everything from it on is at least the target, so
 that shared index is the first position whose value is at least the target; it equals the array

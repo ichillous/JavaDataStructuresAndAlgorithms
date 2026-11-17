@@ -73,9 +73,9 @@
 <text x="240.0" y="637.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">0</text>
 <rect x="268" y="610" width="56" height="40" rx="3" fill="#111827" stroke="#8291aa" stroke-width="2" stroke-dasharray="6 5"/>
 <text x="296.0" y="637.0" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="400">0</text>
-<text x="338" y="517" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">9 &amp; 10 = 8</text>
-<text x="338" y="557" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">7 &amp; 10 = 2</text>
-<text x="338" y="597" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">1 &amp; 10 = 0</text>
+<text x="338" y="517" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">(10−1) &amp; 10 = 8</text>
+<text x="338" y="557" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">(8−1) &amp; 10 = 2</text>
+<text x="338" y="597" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">(2−1) &amp; 10 = 0</text>
 <text x="338" y="637" font-size="18" fill="#bec9da" text-anchor="start" font-weight="400">0: stop</text>
 <rect x="28" y="668" width="26" height="20" rx="4" fill="#203455" stroke="#9cbcff" stroke-width="2"/>
 <text x="62" y="684" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">1: in the subset</text>

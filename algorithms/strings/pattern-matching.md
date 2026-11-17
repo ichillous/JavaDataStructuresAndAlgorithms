@@ -205,7 +205,7 @@ unit rather than by code point.
 ## Check yourself
 
 <details>
-<summary>Why does `zFindAll` need no separator between the pattern and the text?</summary>
+<summary>Why does <code>zFindAll</code> need no separator between the pattern and the text?</summary>
 
 A match is read only as "z at `p + i` is at least `p`", never as an exact length,
 so a z-value that runs past the pattern into the text cannot cause a false match.
@@ -214,7 +214,7 @@ The pattern's own prefix is what the z-value compares against.
 </details>
 
 <details>
-<summary>Text `aeaecbagab`, pattern `bagab`: two windows share the pattern's hash. What does `rabinKarpFindAll` return?</summary>
+<summary>Text <code>aeaecbagab</code>, pattern <code>bagab</code>: two windows share the pattern's hash. What does <code>rabinKarpFindAll</code> return?</summary>
 
 `[5]`. Both window 0 and window 5 trigger a comparison, but window 0 differs from
 the pattern at its first unit (`a` against `b`) and is rejected; only window 5
@@ -223,7 +223,7 @@ equals the pattern.
 </details>
 
 <details>
-<summary>In `cabacabad`, why is the radius at center 6 equal to 2 although its mirror's radius is 3?</summary>
+<summary>In <code>cabacabad</code>, why is the radius at center 6 equal to 2 although its mirror's radius is 3?</summary>
 
 The current palindrome ends at index 7, so only 2 units to the right of center 6
 are known to mirror. The algorithm starts at 2, then compares `c` (index 4) with

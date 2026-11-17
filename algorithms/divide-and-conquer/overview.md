@@ -79,7 +79,8 @@ not reordered. That is the same promise a merge makes when it takes the left
 element on ties. For primitive arrays stability cannot be observed, which is why
 the library's `int[]` sort does not claim it. (OpenJDK implementation note: the
 object sort is a merge sort and `Arrays.sort(int[])` is a dual-pivot quicksort;
-the API documents the stability guarantee, not the algorithm.)
+the specification guarantees stability for the object sort, and the algorithms are
+named only in non-normative Implementation Notes.)
 
 ```java
 import java.util.Arrays;
@@ -113,7 +114,7 @@ assert Arrays.binarySearch(sorted, 4) == -3;
 ## Check yourself
 
 <details>
-<summary>Why does `T(n) = 2T(n/2) + O(n)` give O(n log n) for merge sort?</summary>
+<summary>Why does <code>T(n) = 2T(n/2) + O(n)</code> give O(n log n) for merge sort?</summary>
 
 Each of the `log2(n)` levels merges disjoint ranges that together hold `n`
 values, so every level costs O(n). Levels times work per level gives O(n log n).

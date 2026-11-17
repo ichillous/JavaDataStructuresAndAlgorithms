@@ -160,7 +160,7 @@ assert Arrays.equals(input, restored);
 | `huffmanCodeLengths` | O(n log n) with a priority queue | O(n) | merged weights use checked addition; `ArithmeticException` if the total frequency exceeds `Long.MAX_VALUE` |
 | `canonicalCodes` | O(n log n + sum of lengths) | O(sum of lengths) for the output | the Kraft check is exact integer arithmetic, so no overflow |
 
-Lengths are at most the number of used symbols minus one. See the
+With two or more used symbols, lengths are at most the number of used symbols minus one. See the
 [complexity guide](../../docs/complexity.md) for how these bounds are stated.
 
 ## Pitfalls and limits
@@ -195,7 +195,7 @@ Rare symbols belong deepest, so they must be siblings at the bottom; merging the
 </details>
 
 <details>
-<summary>What does `huffmanCodeLengths` return for frequencies `{0, 7, 0}`, and why?</summary>
+<summary>What does <code>huffmanCodeLengths</code> return for frequencies <code>{0, 7, 0}</code>, and why?</summary>
 
 `{0, 1, 0}`. Zero-frequency symbols are unused and get length 0, and a single used symbol still needs one bit.
 

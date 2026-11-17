@@ -126,7 +126,7 @@ That swapping any optimal schedule's first activity for the earliest-finishing o
 </details>
 
 <details>
-<summary>Why are `[1, 2)` and `[2, 3)` both selected?</summary>
+<summary>Why are <code>[1, 2)</code> and <code>[2, 3)</code> both selected?</summary>
 
 Intervals are half-open, so one ending at 2 does not occupy time 2 and the next may start there.
 

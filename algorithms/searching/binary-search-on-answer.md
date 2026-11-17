@@ -26,7 +26,8 @@ empty range returns its bound without calling the predicate.
 
 The invariant matches [lower bound](binary-search.md): every value below `low` is false, every
 value at or above `high` is true or is the original upper bound, and only `[low, high)` is
-undecided. Each probe tests the middle and moves one bound past it. The predicate is called
+undecided. Each probe tests the middle: a true result moves `high` to it, a false result moves
+`low` just past it. The predicate is called
 O(log(high - low)) times and never with a value outside the range. If the predicate is not
 monotone the returned boundary is unspecified. The midpoint is
 `low + ((high - low) >>> 1)`, which does not overflow even for
@@ -45,7 +46,11 @@ total weight (16) always works, so the range is `[4, 17)`.
 
 Monotonicity has to be proved, not assumed. If capacity `c` ships everything in at most 3 days,
 so does any `c' > c`: take the same daily groups; each still fits within `c'`. The test
-"needs at most 3 days" is therefore false, then true.
+"needs at most 3 days" is therefore false, then true. This argument is about any grouping, while
+the predicate counts the greedy loop's days; the two agree because greedy uses the fewest days
+for a fixed capacity: by induction, after each day greedy has shipped at least as many packages
+as any valid grouping has after the same number of days, since it only closes a day when the
+next package does not fit.
 
 ```text
 low high mid  days needed  fits?  action
@@ -181,7 +186,7 @@ the range; the exclusive bound is one past it. If none qualified, `firstTrue` re
 </details>
 
 <details>
-<summary>Why does "ships in exactly 3 days" break `firstTrue`?</summary>
+<summary>Why does "ships in exactly 3 days" break <code>firstTrue</code>?</summary>
 
 It is false for capacities 4 and 5, true for 6 to 8, and false again from 9, so it changes more
 than once. A probe at 10 sees false and discards the lower half, which holds the real answer 6.
@@ -189,7 +194,7 @@ than once. A probe at 10 sees false and discards the lower half, which holds the
 </details>
 
 <details>
-<summary>About how many predicate calls does `firstTrue` make on a range of a billion candidates?</summary>
+<summary>About how many predicate calls does <code>firstTrue</code> make on a range of a billion candidates?</summary>
 
 About 30, since each call halves the undecided range and 2^30 is just over a billion.
 

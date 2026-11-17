@@ -66,7 +66,8 @@ extra state. Describe the implementation being used.
 so an application can minimize the storage of a list. `List.subList` returns a
 view that is backed by the original list, so a small window can keep a large list
 reachable and sees later non-structural changes. `List.copyOf` takes a detached
-copy instead.
+copy instead. The example checks the view and the copy; capacity is not observable
+through the `ArrayList` API, so for `trimToSize` it checks only that the contents survive.
 
 ```java
 import java.util.ArrayList;
@@ -82,7 +83,8 @@ assert copy.get(0) == 10;
 ArrayList<Integer> grown = new ArrayList<>(1_000);
 grown.add(1);
 grown.trimToSize();
-assert grown.equals(List.of(1)); // trimming changes capacity, never contents
+// ArrayList exposes no capacity getter, so only the contents can be checked here.
+assert grown.equals(List.of(1));
 ```
 
 ## Search trees and returned solutions

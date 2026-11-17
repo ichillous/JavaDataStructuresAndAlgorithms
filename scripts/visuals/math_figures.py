@@ -327,8 +327,11 @@ def bitmask_subsets(c, fixtures):
     y = c.grid(grid_x, top, rows, cell_w=56, cell_h=40, row_labels=labels,
                col_labels=[f"bit {i}" for i in high_first], states=states)
     for index in range(len(minus_one)):
+        # Spell out sub - 1 so the row reads as the step heading: (10 - 1) & 10 = 8, i.e. 9 & 10.
+        if minus_one[index] != subsets[index] - 1:
+            raise ValueError("math.bits.minusOne must list each subset minus one")
         c.text(grid_x + width * 56 + 14, top + index * 40 + 27,
-               f"{minus_one[index]} & {mask} = {subsets[index + 1]}", size=18, color="muted")
+               f"({subsets[index]}{MINUS}1) & {mask} = {subsets[index + 1]}", size=18, color="muted")
     c.text(grid_x + width * 56 + 14, top + len(minus_one) * 40 + 27, "0: stop", size=18, color="muted")
     y = c.legend(y + 34, [("focus", "1: in the subset"), ("muted", "not in the mask")])
     c.note(y + 14, BITS_IDEA)

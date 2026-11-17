@@ -158,7 +158,7 @@ for (int vertex = 0; vertex < 6; vertex++) {
 ## Common mistakes
 
 1. **Marking on dequeue.** On the diamond `0 -> 1, 0 -> 2, 1 -> 3, 2 -> 3`, vertex 3 is queued twice. This breaks "each vertex enters the queue at most once", so work and parent writes repeat.
-2. **Using Dijkstra with a negative edge.** On `0 -> 1` (4), `0 -> 2` (5) and `1 -> 2` (-3), the settled-vertex argument fails; this repository's `dijkstra` rejects the graph with `IllegalArgumentException` rather than answer, and `bellmanFord` gives the correct distance 1 to vertex 2.
+2. **Using Dijkstra with a negative edge.** On `0 -> 1` (2), `0 -> 2` (1) and `1 -> 2` (-2), textbook Dijkstra settles vertex 2 at distance 1 before it processes vertex 1, but the true distance is 0 along `0, 1, 2`: the settled-vertex argument fails. This repository's `dijkstra` rejects the graph with `IllegalArgumentException` rather than answer, and `bellmanFord` gives distance 0 and path `[0, 1, 2]`.
 3. **Giving Bellman–Ford an undirected negative edge.** `WeightedGraph.undirected(2).addEdge(0, 1, -1)` contains the closed walk 0, 1, 0 of total weight -2, a negative cycle, so `bellmanFord(graph, 0)` throws `IllegalArgumentException`. Distances are only defined without a reachable negative cycle.
 
 ## Practice
@@ -172,7 +172,7 @@ for (int vertex = 0; vertex < 6; vertex++) {
 ## Check yourself
 
 <details>
-<summary>What does `shortestPath(graph, 0, 4)` return when 4 cannot be reached?</summary>
+<summary>What does <code>shortestPath(graph, 0, 4)</code> return when 4 cannot be reached?</summary>
 
 An empty list. A reachable target always yields a path that includes both endpoints, and `shortestPath(graph, 2, 2)` is `[2]`.
 
@@ -181,12 +181,12 @@ An empty list. A reachable target always yields a path that includes both endpoi
 <details>
 <summary>Why is the first discovery of a vertex enough to give its shortest edge count?</summary>
 
-The queue processes layer d completely before layer d + 1, so the first vertex to discover a new neighbor is one edge closer to the source than any later one.
+The queue processes layer d completely before layer d + 1, so the vertex that first discovers a new neighbor lies in the earliest layer adjacent to it; no later discoverer is closer to the source, so its distance + 1 is the fewest edges.
 
 </details>
 
 <details>
-<summary>Dijkstra returns `OptionalLong.empty()` for some vertex. What does that mean, and what does it not mean?</summary>
+<summary>Dijkstra returns <code>OptionalLong.empty()</code> for some vertex. What does that mean, and what does it not mean?</summary>
 
 The vertex is unreachable from the source. It does not mean distance 0 or a missing graph vertex; a reachable `Long.MAX_VALUE` is still a valid distance.
 
