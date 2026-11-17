@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 900" width="520" height="900" role="img" aria-labelledby="title desc">
+<title id="title">31  Aho-Corasick links</title>
+<desc id="desc">The trie of he, she, his and hers has failure links, labelled beside their nodes, sh to h, she to he, his to s and hers to s; scanning ushers keeps s, sh, she, her, hers and reports she at 1, he at 2 and hers at 2.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="aho-corasick-links-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#111827"/></marker><marker id="aho-corasick-links-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#eef2f8"/></marker><marker id="aho-corasick-links-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bec9da"/></marker><marker id="aho-corasick-links-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8291aa"/></marker><marker id="aho-corasick-links-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#9cbcff"/></marker><marker id="aho-corasick-links-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#203455"/></marker><marker id="aho-corasick-links-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#302a18"/></marker><marker id="aho-corasick-links-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f4cf70"/></marker><marker id="aho-corasick-links-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffaaa1"/></marker><marker id="aho-corasick-links-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#192333"/></marker><marker id="aho-corasick-links-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#86dca2"/></marker><marker id="aho-corasick-links-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#173527"/></marker><marker id="aho-corasick-links-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#cdb6ff"/></marker><marker id="aho-corasick-links-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2a2346"/></marker><marker id="aho-corasick-links-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#3d1f22"/></marker></defs>
+<rect x="0" y="0" width="520" height="900" rx="16" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#eef2f8" text-anchor="start" font-weight="700">31  Aho-Corasick links</text>
+<text x="28" y="74" font-size="20" fill="#bec9da" text-anchor="start" font-weight="400">Strings · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8291aa" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Trie of he, she, his, hers</text>
+<line x1="282.88" y1="228.92" x2="307.12" y2="251.08" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="305.79" y1="291.37" x2="274.21" y2="316.63" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="250.0" y1="367.0" x2="250.0" y2="369.0" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="250.0" y1="431.0" x2="250.0" y2="433.0" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="354.21" y1="291.37" x2="385.79" y2="316.63" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="410.0" y1="367.0" x2="410.0" y2="369.0" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="230.79" y1="218.39" x2="109.21" y2="261.61" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="80.0" y1="303.0" x2="80.0" y2="305.0" stroke="#8291aa" stroke-width="2.5"/>
+<line x1="80.0" y1="367.0" x2="80.0" y2="369.0" stroke="#8291aa" stroke-width="2.5"/>
+<circle cx="260" cy="208" r="27" fill="#111827" stroke="#8291aa" stroke-width="3" stroke-dasharray="6 5"/>
+<text x="260" y="215" font-size="20" fill="#bec9da" text-anchor="middle" font-weight="700">root</text>
+<circle cx="330" cy="272" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="330" y="279" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">h</text>
+<circle cx="250" cy="336" r="27" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="250" y="343" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">he</text>
+<circle cx="250" cy="400" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="250" y="407" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">her</text>
+<circle cx="250" cy="464" r="27" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="250" y="471" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">hers</text>
+<circle cx="410" cy="336" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="410" y="343" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">hi</text>
+<circle cx="410" cy="400" r="27" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="410" y="407" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">his</text>
+<circle cx="80" cy="272" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="80" y="279" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">s</text>
+<circle cx="80" cy="336" r="27" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="80" y="343" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="700">sh</text>
+<circle cx="80" cy="400" r="27" fill="#173527" stroke="#86dca2" stroke-width="3"/>
+<text x="80" y="407" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">she</text>
+<rect x="115" y="321" width="74" height="30" rx="15" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="152.0" y="342" font-size="18" fill="#cdb6ff" text-anchor="middle" font-weight="700">link h</text>
+<rect x="115" y="385" width="85" height="30" rx="15" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="157.5" y="406" font-size="18" fill="#cdb6ff" text-anchor="middle" font-weight="700">link he</text>
+<rect x="370" y="433" width="74" height="30" rx="15" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="407.0" y="454" font-size="18" fill="#cdb6ff" text-anchor="middle" font-weight="700">link s</text>
+<rect x="285" y="449" width="74" height="30" rx="15" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="322.0" y="470" font-size="18" fill="#cdb6ff" text-anchor="middle" font-weight="700">link s</text>
+<circle cx="42" cy="512" r="14" fill="#9cbcff" stroke="#9cbcff" stroke-width="2"/>
+<text x="42" y="518" font-size="18" fill="#111827" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="519" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="700">Scan ushers, keep the longest prefix</text>
+<rect x="28" y="541" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="58.0" y="572.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">u</text>
+<rect x="98" y="541" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="128.0" y="572.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">s</text>
+<rect x="168" y="541" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="198.0" y="572.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">h</text>
+<rect x="238" y="541" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="268.0" y="572.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">e</text>
+<rect x="308" y="541" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="338.0" y="572.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">r</text>
+<rect x="378" y="541" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="408.0" y="572.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">s</text>
+<rect x="28" y="597" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="58.0" y="628.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">root</text>
+<rect x="98" y="597" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="128.0" y="628.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">s</text>
+<rect x="168" y="597" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="198.0" y="628.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">sh</text>
+<rect x="238" y="597" width="60" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="268.0" y="628.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">she</text>
+<rect x="308" y="597" width="60" height="48" rx="8" fill="#111827" stroke="#8291aa" stroke-width="2"/>
+<text x="338.0" y="628.0" font-size="20" fill="#eef2f8" text-anchor="middle" font-weight="400">her</text>
+<rect x="378" y="597" width="60" height="48" rx="8" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="408.0" y="628.0" font-size="20" fill="#86dca2" text-anchor="middle" font-weight="700">hers</text>
+<rect x="28" y="685" width="94" height="30" rx="15" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="75.0" y="706" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">she at 1</text>
+<rect x="132" y="685" width="87" height="30" rx="15" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="175.5" y="706" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">he at 2</text>
+<rect x="229" y="685" width="106" height="30" rx="15" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="282.0" y="706" font-size="18" fill="#86dca2" text-anchor="middle" font-weight="700">hers at 2</text>
+<rect x="28" y="729" width="26" height="20" rx="4" fill="#173527" stroke="#86dca2" stroke-width="2"/>
+<text x="62" y="745" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">pattern ends</text>
+<rect x="197.18399999999997" y="729" width="26" height="20" rx="4" fill="#2a2346" stroke="#cdb6ff" stroke-width="2"/>
+<text x="231.18399999999997" y="745" font-size="18" fill="#eef2f8" text-anchor="start" font-weight="400">failure link; rest go to root</text>
+<rect x="28" y="769" width="464" height="109" rx="8" fill="#302a18" stroke="#f4cf70" stroke-width="2"/>
+<text x="44" y="800" font-size="18" fill="#f4cf70" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="829" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">Failure links keep the scan moving</text>
+<text x="44" y="856" font-size="20" fill="#eef2f8" text-anchor="start" font-weight="400">forward: no text unit is read twice.</text>
+</svg>

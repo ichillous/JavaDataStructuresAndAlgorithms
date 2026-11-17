@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 890" width="520" height="890" role="img" aria-labelledby="title desc">
+<title id="title">28  Z-array and the Z-box</title>
+<desc id="desc">The Z-array of aabxaabxaab is 11, 1, 0, 0, 7, 1, 0, 0, 3, 1, 0; the match at index 4 is a Z-box [4, 11), index 5 copies z[1] = 1 from it, and index 8 starts at 3 because z[4] = 7 overruns the box.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="z-box-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="z-box-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="z-box-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="z-box-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="z-box-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="z-box-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="z-box-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="z-box-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="z-box-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="z-box-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="z-box-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="z-box-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="z-box-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="z-box-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="z-box-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="890" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">28  Z-array and the Z-box</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Strings · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Z-array of aabxaabxaab</text>
+<path d="M 28 206 Q 28 198 36 198 H 165.0 Q 173.0 198 173.0 190 Q 173.0 198 181.0 198 H 310 Q 318 198 318 206" fill="none" stroke="#1c6b3c" stroke-width="2"/>
+<text x="173.0" y="182" font-size="18" fill="#1c6b3c" text-anchor="middle" font-weight="700">prefix [0, 7)</text>
+<rect x="28" y="210" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="47.0" y="236.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">a</text>
+<text x="47.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="70" y="210" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="89.0" y="236.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">a</text>
+<text x="89.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="112" y="210" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="131.0" y="236.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">b</text>
+<text x="131.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="154" y="210" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="173.0" y="236.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">x</text>
+<text x="173.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="196" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="215.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="215.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="238" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="257.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="257.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="280" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="299.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="299.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="322" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="341.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">x</text>
+<text x="341.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<rect x="364" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="383.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="383.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<rect x="406" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="425.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="425.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">9</text>
+<rect x="448" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="467.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="467.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">10</text>
+<rect x="28" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="47.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">11</text>
+<rect x="70" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="89.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="112" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="131.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="154" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="173.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="196" y="284" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="215.0" y="310.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">7</text>
+<rect x="238" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="257.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="280" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="299.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="322" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="341.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<rect x="364" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="383.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3</text>
+<rect x="406" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="425.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="448" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="467.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">0</text>
+<circle cx="42" cy="347" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="353" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="354" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Index 5 reads its mirror 1</text>
+<path d="M 257 404 Q 173 376 89 404" fill="none" stroke="#6b3fb8" stroke-width="2.5" marker-end="url(#z-box-violet-arrow)"/>
+<rect x="28" y="406" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="47.0" y="432.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">a</text>
+<text x="47.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="70" y="406" width="38" height="38" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="89.0" y="432.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">a</text>
+<text x="89.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="112" y="406" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="131.0" y="432.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">b</text>
+<text x="131.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="154" y="406" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="173.0" y="432.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">x</text>
+<text x="173.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="196" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="215.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="215.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="238" y="406" width="38" height="38" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="257.0" y="432.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">a</text>
+<text x="257.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="280" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="299.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="299.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="322" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="341.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">x</text>
+<text x="341.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<rect x="364" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="383.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="383.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<rect x="406" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="425.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="425.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">9</text>
+<rect x="448" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="467.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="467.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">10</text>
+<text x="28" y="498" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">z[1] = 1 fits in 6 left, so z[5] = 1.</text>
+<circle cx="42" cy="523" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="529" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="530" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Index 8 reads its mirror 4</text>
+<path d="M 383 580 Q 299 552 215 580" fill="none" stroke="#6b3fb8" stroke-width="2.5" marker-end="url(#z-box-violet-arrow)"/>
+<rect x="28" y="582" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="47.0" y="608.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">a</text>
+<text x="47.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="70" y="582" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="89.0" y="608.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">a</text>
+<text x="89.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="112" y="582" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="131.0" y="608.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">b</text>
+<text x="131.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="154" y="582" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="173.0" y="608.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">x</text>
+<text x="173.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="196" y="582" width="38" height="38" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="215.0" y="608.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">a</text>
+<text x="215.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="238" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="257.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="257.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="280" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="299.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="299.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="322" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="341.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">x</text>
+<text x="341.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<rect x="364" y="582" width="38" height="38" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="383.0" y="608.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">a</text>
+<text x="383.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<rect x="406" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="425.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="425.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">9</text>
+<rect x="448" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="467.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="467.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">10</text>
+<text x="28" y="674" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">z[4] = 7 exceeds 3 left, so z[8] starts at 3.</text>
+<rect x="28" y="690" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="706" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">Z-box, z[4] = 7</text>
+<rect x="215.32799999999997" y="690" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="249.32799999999997" y="706" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">current index</text>
+<rect x="390.55999999999995" y="690" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="424.55999999999995" y="706" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">mirror</text>
+<rect x="28" y="730" width="464" height="136" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="761" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="790" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Inside a Z-box, z[i] comes from its</text>
+<text x="44" y="817" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">mirror; only the edge costs</text>
+<text x="44" y="844" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">comparisons.</text>
+</svg>

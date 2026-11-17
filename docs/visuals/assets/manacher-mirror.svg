@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 895" width="520" height="895" role="img" aria-labelledby="title desc">
+<title id="title">30  Manacher: reuse the mirror</title>
+<desc id="desc">In cabacabad the palindrome abacaba around index 4 spans [1, 7]; index 5 copies radius 1 from index 3 and index 6 caps radius 3 from index 2 at the 2 units left, giving odd radii 1, 1, 3, 1, 4, 1, 2, 1, 1.</desc>
+<style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} line,path{stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><marker id="manacher-mirror-paper-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ffffff"/></marker><marker id="manacher-mirror-ink-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1f2430"/></marker><marker id="manacher-mirror-muted-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#505b6b"/></marker><marker id="manacher-mirror-line-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8994a5"/></marker><marker id="manacher-mirror-blue-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#2451b7"/></marker><marker id="manacher-mirror-soft-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#edf2fc"/></marker><marker id="manacher-mirror-note-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fff3c4"/></marker><marker id="manacher-mirror-gold-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#8a5e00"/></marker><marker id="manacher-mirror-red-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#bd3026"/></marker><marker id="manacher-mirror-panel-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f6f8fb"/></marker><marker id="manacher-mirror-green-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#1c6b3c"/></marker><marker id="manacher-mirror-mint-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#e3f4e8"/></marker><marker id="manacher-mirror-violet-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#6b3fb8"/></marker><marker id="manacher-mirror-lilac-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#f0eafb"/></marker><marker id="manacher-mirror-rose-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#fde9e7"/></marker></defs>
+<rect x="0" y="0" width="520" height="895" rx="16" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="28" y="42" font-size="26" fill="#1f2430" text-anchor="start" font-weight="700">30  Manacher: reuse the mirror</text>
+<text x="28" y="74" font-size="20" fill="#505b6b" text-anchor="start" font-weight="400">Strings · Worked example</text>
+<line x1="28" y1="118" x2="492" y2="118" stroke="#8994a5" stroke-width="1"/>
+<circle cx="42" cy="149" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="155" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">1</text>
+<text x="66" y="156" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Odd radii of cabacabad</text>
+<path d="M 70 206 Q 70 198 78 198 H 207.0 Q 215.0 198 215.0 190 Q 215.0 198 223.0 198 H 352 Q 360 198 360 206" fill="none" stroke="#2451b7" stroke-width="2"/>
+<text x="215.0" y="182" font-size="18" fill="#2451b7" text-anchor="middle" font-weight="700">palindrome [1, 7]</text>
+<rect x="28" y="210" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="47.0" y="236.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">c</text>
+<text x="47.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="70" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="89.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="89.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="112" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="131.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="131.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="154" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="173.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="173.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="196" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="215.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">c</text>
+<text x="215.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="238" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="257.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="257.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="280" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="299.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="299.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="322" y="210" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="341.0" y="236.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="341.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<rect x="364" y="210" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="383.0" y="236.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">d</text>
+<text x="383.0" y="274" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<rect x="28" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="47.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="70" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="89.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="112" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="131.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">3</text>
+<rect x="154" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="173.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="196" y="284" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="215.0" y="310.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">4</text>
+<rect x="238" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="257.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="280" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="299.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">2</text>
+<rect x="322" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="341.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<rect x="364" y="284" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="383.0" y="310.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">1</text>
+<circle cx="42" cy="347" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="353" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">2</text>
+<text x="66" y="354" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Center 5 reads its mirror 3</text>
+<path d="M 257 404 Q 215 376 173 404" fill="none" stroke="#6b3fb8" stroke-width="2.5" marker-end="url(#manacher-mirror-violet-arrow)"/>
+<rect x="28" y="406" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="47.0" y="432.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">c</text>
+<text x="47.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="70" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="89.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="89.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="112" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="131.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="131.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="154" y="406" width="38" height="38" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="173.0" y="432.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">a</text>
+<text x="173.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="196" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="215.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">c</text>
+<text x="215.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="238" y="406" width="38" height="38" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="257.0" y="432.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">a</text>
+<text x="257.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="280" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="299.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">b</text>
+<text x="299.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="322" y="406" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="341.0" y="432.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="341.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<rect x="364" y="406" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="383.0" y="432.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">d</text>
+<text x="383.0" y="470" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<text x="28" y="498" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">radius 1 fits in 3 left, so r = 1.</text>
+<circle cx="42" cy="523" r="14" fill="#2451b7" stroke="#2451b7" stroke-width="2"/>
+<text x="42" y="529" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+<text x="66" y="530" font-size="20" fill="#1f2430" text-anchor="start" font-weight="700">Center 6 reads its mirror 2</text>
+<path d="M 299 580 Q 215 552 131 580" fill="none" stroke="#6b3fb8" stroke-width="2.5" marker-end="url(#manacher-mirror-violet-arrow)"/>
+<rect x="28" y="582" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="47.0" y="608.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">c</text>
+<text x="47.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">0</text>
+<rect x="70" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="89.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="89.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">1</text>
+<rect x="112" y="582" width="38" height="38" rx="8" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="131.0" y="608.0" font-size="20" fill="#1c6b3c" text-anchor="middle" font-weight="700">b</text>
+<text x="131.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">2</text>
+<rect x="154" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="173.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="173.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">3</text>
+<rect x="196" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="215.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">c</text>
+<text x="215.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">4</text>
+<rect x="238" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="257.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="257.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">5</text>
+<rect x="280" y="582" width="38" height="38" rx="8" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="299.0" y="608.0" font-size="20" fill="#6b3fb8" text-anchor="middle" font-weight="700">b</text>
+<text x="299.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">6</text>
+<rect x="322" y="582" width="38" height="38" rx="8" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="341.0" y="608.0" font-size="20" fill="#2451b7" text-anchor="middle" font-weight="700">a</text>
+<text x="341.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">7</text>
+<rect x="364" y="582" width="38" height="38" rx="8" fill="#ffffff" stroke="#8994a5" stroke-width="2"/>
+<text x="383.0" y="608.0" font-size="20" fill="#1f2430" text-anchor="middle" font-weight="400">d</text>
+<text x="383.0" y="646" font-size="18" fill="#505b6b" text-anchor="middle" font-weight="400">8</text>
+<text x="28" y="674" font-size="18" fill="#505b6b" text-anchor="start" font-weight="400">radius 3 exceeds 2 left, so start at 2.</text>
+<rect x="28" y="690" width="26" height="20" rx="4" fill="#edf2fc" stroke="#2451b7" stroke-width="2"/>
+<text x="62" y="706" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">palindrome, radius 4 at 4</text>
+<rect x="307.77599999999995" y="690" width="26" height="20" rx="4" fill="#f0eafb" stroke="#6b3fb8" stroke-width="2"/>
+<text x="341.77599999999995" y="706" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">current center</text>
+<rect x="28" y="722" width="26" height="20" rx="4" fill="#e3f4e8" stroke="#1c6b3c" stroke-width="2"/>
+<text x="62" y="738" font-size="18" fill="#1f2430" text-anchor="start" font-weight="400">mirror</text>
+<rect x="28" y="762" width="464" height="109" rx="8" fill="#fff3c4" stroke="#8a5e00" stroke-width="2"/>
+<text x="44" y="793" font-size="18" fill="#8a5e00" text-anchor="start" font-weight="700">KEY IDEA</text>
+<text x="44" y="822" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">Inside a palindrome a center copies its</text>
+<text x="44" y="849" font-size="20" fill="#1f2430" text-anchor="start" font-weight="400">mirror&#x27;s radius, capped at the edge.</text>
+</svg>
